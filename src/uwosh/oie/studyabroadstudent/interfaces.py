@@ -12,17 +12,17 @@ from plone.supermodel import model
 
 yes_no_none_vocabulary = SimpleVocabulary(
     [
+        SimpleTerm(value=''),
         SimpleTerm(value='Yes'), 
         SimpleTerm(value='No'),
-        SimpleTerm(value='')
     ]
 )
 
 yes_no_na_vocabulary = SimpleVocabulary(
     [
+        SimpleTerm(value='n/a'),
         SimpleTerm(value='Yes'), 
         SimpleTerm(value='No'),
-        SimpleTerm(value='n/a')
     ]
 )
 
@@ -595,7 +595,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         description=_(u'Are you taking or have you ever taken medication related to your physical health?'),
         #schemata="Medical III",
         vocabulary=yes_no_none_vocabulary,
-        required=False,
+        required=True,
     )
 
     medicalHealthProblems_medications = schema.Text(
@@ -609,14 +609,14 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Are you stable on this medication?'),
         #schemata="Medical III",
         vocabulary=yes_no_na_vocabulary,
-        required=False,
+        required=True,
     )
 
     medicalHealthProblems_underCare = schema.Choice(
         title=_(u'Are you currently under the care of a doctor or other health care professional?'),
         #schemata="Medical III",
         vocabulary=yes_no_none_vocabulary,
-        required=False,
+        required=True,
     )
 
     medicalHealthProblems_whatCondition = schema.Text(
@@ -630,7 +630,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         description=_(u'Is your current physician willing to prescribe enough medication to last throughout your planned program abroad?'),
         #schemata="Medical III",
         vocabulary=yes_no_na_vocabulary,
-        required=False,
+        required=True,
     )
 
     medicalHealthProblems_additionalInfo = schema.Text(
@@ -650,7 +650,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Are you taking/have you ever taken medication related to your mental health?  '),
         #schemata="Medical III",
         vocabulary=yes_no_none_vocabulary,
-        required=False,
+        required=True,
     )
 
     medicalMentalProblems_medications = schema.Text(
@@ -669,14 +669,14 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Are you stable on this medication?'),
         #schemata="Medical III",
         vocabulary=yes_no_na_vocabulary,
-        required=False,
+        required=True,
     )
 
     medicalMentalProblems_underCare = schema.Choice(
         description=_(u'Are you currently or have you ever been under the care of a psychiatrist or other medical provider, substance abuse counselor or other mental health professional?'),
         #schemata="Medical III",
         vocabulary=yes_no_none_vocabulary,
-        required=False,
+        required=True,
     )
 
     medicalMentalProblems_condition = schema.Text(
@@ -689,7 +689,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         description=_(u'Is your current medical provider willing to prescribe enough medication to last for the duration of your planned program abroad?'),
         #schemata="Medical III",
         vocabulary=yes_no_na_vocabulary,
-        required=False,
+        required=True,
     )
 
     medicalMentalProblems_additionalInfo = schema.Text(
@@ -702,7 +702,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         description=_(u'Are you currently registered with the University of Wisconsin Oshkosh (with offices such as the Dean of Students office or Project Success) or with your university for medical or mental-health related accommodations?'),
         #schemata="Medical III",
         vocabulary=yes_no_none_vocabulary,
-        required=False,
+        required=True,
     )
 
     medicalRegistered_office = schema.TextLine(
@@ -744,7 +744,8 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Are you vegetarian?'),
         #schemata="Preferences",
         vocabulary=yes_no_none_vocabulary,
-        default="No",
+        #default="No",
+        required=True,
     )
 
     additionalNeeds = schema.Text(
@@ -1477,7 +1478,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     UWOshkoshRelease = schema.Choice(
         title=_(u'Release of Liability'),
         description=_(u'I hereby agree to hold harmless and indemnify the Board of Regents of the University of Wisconsin System and the University of Wisconsin Oshkosh, their officers, agents and employees, from any and all liability, loss, damages, costs or expenses which are sustained, incurred or required arising out of my actions.'),
-        required=False,
+        required=True,
         vocabulary=yes_no_none_vocabulary,
         #schemata="Verification",
         #write_permission="UWOshOIE: Modify normal fields",
@@ -1563,7 +1564,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     programSpecificMaterialsRequired = schema.Choice(
         title=_(u'Program-Specific Materials Required(Step II)?'),
-        required=True,
+        required=False,
         vocabulary=yes_no_none_vocabulary
     )
 
@@ -1574,7 +1575,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     specialStudentFormRequired = schema.Choice(
         title=_(u'Special Student Form Required'),
-        required=True,
+        required=False,
         vocabulary=yes_no_none_vocabulary
     )
 
@@ -1585,7 +1586,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     creditOverloadFormRequired = schema.Choice(
         title=_(u'Credit Overload Form Required'),
-        required=True,
+        required=False,
         vocabulary=yes_no_none_vocabulary
     )
 
@@ -1611,13 +1612,13 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     metPassportDeadline = schema.Choice(
         title=_(u'Passport Deadline Met'),
-        required=True,
+        required=False,
         vocabulary=yes_no_none_vocabulary
     )
 
     programSpecificMaterialsRequiredStepIII = schema.Choice(
         title=_(u'Program-Specific Materials Required(Step III)?'),
-        required=True,
+        required=False,
         vocabulary=yes_no_none_vocabulary
     )
 
@@ -1628,7 +1629,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     attendedOrientation = schema.Choice(
         title=_(u'Attended Orientation'),
-        required=True,
+        required=False,
         vocabulary=yes_no_none_vocabulary
     )
 
