@@ -301,7 +301,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         'demographics',
         label=_(u"Demographics"),
         fields=['citizenship', 'citizenshipOther', 'stateResidency', 'stateResidencyOther', 
-                'dateOfBirth_year', 'dateOfBirth_month', 'dateOfBirth_day', 'placeOfBirth', 
+                'dateOfBirth', 'placeOfBirth', 
                 'gender', 'marriageStatus', 'ethnicity', ]
     )
       
@@ -335,26 +335,9 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=False,
     )
 
-    dateOfBirth_year = schema.Int(
-        title=_(u'Birthday (Year)'),
-        description=_(u'Birthday (Year, YYYY)'),
+    dateOfBirth = schema.Date(
+        title=_(u'Birthday'),
         #schemata="Demographics",
-        required=True,
-    )
-
-    dateOfBirth_month = schema.Choice(
-        title=_(u'Birthday (Month)'),
-        description=_(u'Birthday (Month)'),
-        #schemata="Demographics",
-        vocabulary=month_vocabulary,
-        required=True,
-    )
-
-    dateOfBirth_day = schema.Choice(
-        title=_(u'Birthday (Day)'),
-        description=_(u'Birthday (Day)'),
-        #schemata="Demographics",
-        vocabulary=dayofmonth_vocabulary,
         required=True,
     )
 
@@ -392,8 +375,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     model.fieldset(
         'passport',
         label=_(u"Passport"),
-        fields=['passportName', 'passportNumber', 'passportIssueOffice', 'passportExpDate_year', 
-                'passportExpDate_month', 'passportExpDate_day']
+        fields=['passportName', 'passportNumber', 'passportIssueOffice', 'passportExpDate']
     )
       
     passportName = schema.TextLine(
@@ -417,23 +399,9 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=False,
     )
 
-    passportExpDate_year = schema.TextLine(
-        title=_(u'Passport Expiry Year'),
+    passportExpDate = schema.Date(
+        title=_(u'Passport Expiry'),
         #schemata="Passport",
-        required=False,
-    )
-
-    passportExpDate_month = schema.Choice(
-        title=_(u'Passport Expiry Month'),
-        #schemata="Passport",
-        vocabulary=month_vocabulary,
-        required=False,
-    )
-
-    passportExpDate_day = schema.Choice(
-        title=_(u'Passport Expiry Day'),
-        #schemata="Passport",
-        vocabulary=dayofmonth_vocabulary,
         required=False,
     )
 
