@@ -8,6 +8,8 @@ from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
+from plone.supermodel import model
+
 subjects_vocabulary = SimpleVocabulary(
     [
         SimpleTerm(value='History'),
@@ -157,8 +159,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     middleName = schema.TextLine(
-        title=_(u'UWOshOIE_label_middleName'),
-        description=_(u'Middle Name'),
+        title=_(u'Middle Name'),
         required=False,
     )
 
@@ -173,6 +174,14 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=True,
     )
 
+    model.fieldset(
+        'addresses',
+        label=_(u"Addresses"),
+        fields=['localAddr1', 'localAddr2', 'localCity', 'localState', 'localZip', 
+                'localCountry', 'localPhone', 'mobilePhone', 'homeAddr1', 'homeAddr2', 
+                'homeCity', 'homeState', 'homeZip', 'homeCountry', 'homePhone', ]
+    )
+      
     localAddr1 = schema.TextLine(
         title=_(u'Local Address Line 1'),
         #schemata="Addresses",
@@ -207,7 +216,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     localCountry = schema.TextLine(
         title=_(u'Local Country'),
-        description=_(u'tringWidge'),
         default=_(u'USA'),
         #schemata="Addresses",
         required=True,
@@ -262,7 +270,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     homeCountry = schema.TextLine(
         title=_(u'Home Country'),
-        description=_(u'tringWidge'),
         #schemata="Addresses",
         required=True,
     )
@@ -274,6 +281,14 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=True,
     )
 
+    model.fieldset(
+        'demographics',
+        label=_(u"Demographics"),
+        fields=['citizenship', 'citizenshipOther', 'stateResidency', 'stateResidencyOther', 
+                'dateOfBirth_year', 'dateOfBirth_month', 'dateOfBirth_day', 'placeOfBirth', 
+                'gender', 'marriageStatus', 'ethnicity', ]
+    )
+      
     citizenship = schema.Choice(
         title=_(u'Citizenship'),
         description=_(u'field description'),
@@ -358,6 +373,13 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=False,
     )
 
+    model.fieldset(
+        'passport',
+        label=_(u"Passport"),
+        fields=['passportName', 'passportNumber', 'passportIssueOffice', 'passportExpDate_year', 
+                'passportExpDate_month', 'passportExpDate_day']
+    )
+      
     passportName = schema.TextLine(
         title=_(u'Passport Full Name'),
         description=_(u'Enter your full name EXACTLY as it appears on your passport or passport application'),
@@ -374,33 +396,38 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     passportIssueOffice = schema.TextLine(
         title=_(u'Passport Issuing Office'),
-        description=_(u'E.g. New Orleans or U.S. Department of State'),
+        description=_(u'e.g. New Orleans or U.S. Department of State'),
         #schemata="Passport",
         required=False,
     )
 
     passportExpDate_year = schema.TextLine(
         title=_(u'Passport Expiry Year'),
-        description=_(u'UWOshOIE_label_passportExpDate_year'),
-        #schemata="Demographics",
+        #schemata="Passport",
         required=False,
     )
 
     passportExpDate_month = schema.Choice(
         title=_(u'Passport Expiry Month'),
-        description=_(u'UWOshOIE_label_passportExpDate_month'),
-        #schemata="Demographics",
+        #schemata="Passport",
         vocabulary=month_vocabulary,
         required=False,
     )
 
     passportExpDate_day = schema.Choice(
         title=_(u'Passport Expiry Day'),
-        #schemata="Demographics",
+        #schemata="Passport",
         vocabulary=dayofmonth_vocabulary,
         required=False,
     )
 
+    model.fieldset(
+        'additional_questions',
+        label=_(u"Additional Questions"),
+        fields=['questionAcadCareerPlan', 'questionLangCulturalSkills', 'questionPrevTravel', 
+                'questionWorkExp', 'questionEuroBizTravSem', 'questionStuExchComp', ]
+    )
+      
     questionAcadCareerPlan = schema.Text(
         title=_(u'Academic and Career Plan'),
         description=_(u'a) Briefly, what are your short- and long-term academic and career goals? <br> b) Why would you like to participate in this program? <br> c) What do you expect to gain from your experience?'),
@@ -443,6 +470,14 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=False,
     )
 
+    model.fieldset(
+        'medical',
+        label=_(u"Medical"),
+        fields=['doctorLastname', 'doctorFirstname', 'doctorPhone', 'medicalInsuranceCompany', 
+                'medicalPolicyHolder', 'medicalPolicyGroupNumber', 'foodAllergies', 
+                'hasDifficultyWalking', 'maxWalkingDistance']
+    )
+      
     doctorLastname = schema.TextLine(
         title=_(u'Last Name of your Family Doctor'),
         #schemata="Medical",
@@ -470,7 +505,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     medicalPolicyHolder = schema.TextLine(
         title=_(u'Name of Policy Holder'),
-        description=_(u'UWOshOIE_label_medicalPolicyHolder'),
         #schemata="Medical",
         required=True,
     )
@@ -497,12 +531,18 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     maxWalkingDistance = schema.Int(
-        description=_(u'Max Walking Distance'),
-        title=_(u'If so, what is the maximum number of minutes you can walk?'),
+        title=_(u'Max Walking Distance'),
+        description=_(u'If so, what is the maximum number of minutes you can walk?'),
         #schemata="Medical",
         required=False,
     )
 
+    model.fieldset(
+        'medical2',
+        label=_(u"Medical II"),
+        fields=['medicalReadStatement']
+    )
+      
     medicalReadStatement = schema.Choice(
         title=_(u'I have read the statement below and understand.'),
         description=_(u'""Pre-existing medical and mental health conditions are often intensified by travel to or living in a foreign environment.  Before committing to a study abroad program, consider how your new environment may affect your personal health both physically and mentally.  For example, your new environment may introduce you to new diseases, such as malaria or yellow fever, or new stresses which may cause additional complications for a person with a preexisting condition.<br> <br> The OIE strongly recommends that you have a physical, talk with a medical provider about any preexisting conditions and recommended and/or required immunizations, talk with a psychiatrist or counselor about any preexisting conditions and take care of any dental work before departure.<br> <br> If you choose not to complete this section before program acceptance, you must forward information related to the following to the OIE within one week of the application deadline for your program.  Failure to disclose medical or mental health conditions will make it extremely difficult for staff at UW Oshkosh and abroad to assist you in an emergency and may cause health professionals abroad to take actions which could lead to serious medical consequences, including death.<br> <br> NOTE ON MEDICATIONS: You are responsible for ensuring that your medications can be carried into the foreign country.  If your medical status changes after completing this application, you must inform the OIE.""'),
@@ -511,6 +551,22 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=True,
     )
 
+    model.fieldset(
+        'medical3',
+        label=_(u"Medical III"),
+        fields=['medicalHealthProblems', 'medicalHealthProblems_takenMedication', 
+                'medicalHealthProblems_medications', 'medicalHealthProblems_stable', 
+                'medicalHealthProblems_underCare', 'medicalHealthProblems_whatCondition', 
+                'medicalHealthProblems_willingToPrescribe', 
+                'medicalHealthProblems_additionalInfo', 'medicalMentalProblems', 
+                'medicalMentalProblems_takenMedication', 'medicalMentalProblems_medications', 
+                'medicalMentalProblems_currentDose', 'medicalMentalProblems_stable', 
+                'medicalMentalProblems_underCare', 'medicalMentalProblems_condition', 
+                'medicalMentalProblems_enoughMedication', 'medicalMentalProblems_additionalInfo', 
+                'medicalRegistered', 'medicalRegistered_office', 
+                'medicalRegistered_accommodations', 'medicalAccessOK', ]
+    )
+      
     medicalHealthProblems = schema.Text(
         title=_(u'Health Problems'),
         description=_(u'List and describe any recent (within the past five years) or continuing health problems, including physical disabilities or medical conditions; learning disabilities; drug, plant, food, animal, or insect sting allergies (include information pertaining to reactions); and/or surgeries that should be brought to the attention of the lead faculty members, liaison abroad and/or host family abroad. Complete this section now or by the Friday following the application deadline.  Write ''n/a'' in blanks where appropriate.'),
@@ -575,7 +631,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     medicalMentalProblems_takenMedication = schema.Choice(
-        description=_(u'UWOshOIE_label_medicalMentalProblems_takenMedication'),
         title=_(u'Are you taking/have you ever taken medication related to your mental health?  '),
         #schemata="Medical III",
         vocabulary=SimpleVocabulary([SimpleTerm(value='Yes'),SimpleTerm(value='No')]),
@@ -595,7 +650,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     medicalMentalProblems_stable = schema.Choice(
-        description=_(u'UWOshOIE_label_medicalMentalProblems_stable'),
+        title=_(u'Are you stable on this medication?'),
         #schemata="Medical III",
         vocabulary=SimpleVocabulary([SimpleTerm(value='Yes'),SimpleTerm(value='No'),SimpleTerm(value= 'n/a')]),
         required=False,
@@ -655,6 +710,12 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=True,
     )
 
+    model.fieldset(
+        'preferences',
+        label=_(u"Preferences"),
+        fields=['smokingPreferred', 'isVegetarian', 'additionalNeeds', ]
+    )
+      
     smokingPreferred = schema.Choice(
         title=_(u'Smoking Preference'),
         #schemata="Preferences",
@@ -677,6 +738,19 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=False,
     )
 
+    model.fieldset(
+        'emergency_contacts',
+        label=_(u"Emergency Contacts"),
+        fields=['emerg1name', 'emerg1addr1', 'emerg1addr2', 'emerg1city', 'emerg1state', 
+                'emerg1zip', 'emerg1country', 'emerg1homePhone', 'emerg1workPhone', 
+                'emerg1mobilePhone', 'emerg1email', 'emerg2name', 'emerg2addr1', 'emerg2addr2', 
+                'emerg2city', 'emerg2state', 'emerg2zip', 'emerg2country', 'emerg2homePhone', 
+                'emerg2workPhone', 'emerg2mobilePhone', 'emerg2email', 'emerg3name', 
+                'emerg3addr1', 'emerg3addr2', 'emerg3city', 'emerg3state', 'emerg3zip', 
+                'emerg3country', 'emerg3homePhone', 'emerg3workPhone', 'emerg3mobilePhone', 
+                'emerg3email', ]
+    )
+      
     emerg1name = schema.TextLine(
         title=_(u'Emergency Contact 1 Name'),
         #schemata="Emergency Contacts",
@@ -913,6 +987,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     programName = schema.Choice(
         title=_(u'Program Name'),
         vocabulary=program_vocabulary,
+        #schemata="default",
         required=True,
         #write_permission="UWOshOIE: Modify normal fields", 
     )
@@ -933,6 +1008,13 @@ class IOIEStudyAbroadStudentApplication(Interface):
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
+    model.fieldset(
+        'education',
+        label=_(u"Education"),
+        fields=['studentType', 'universityEnrolled', 'graduationMonth', 'graduationYear', 
+                'cumulativeGPA', 'major1', 'major2', 'minor1', 'minor2', 'emphasis1', 'emphasis2', ]
+    )
+      
     studentType = schema.Choice(
         title=_(u'Student Type'),
         #schemata="Education",
@@ -1019,6 +1101,12 @@ class IOIEStudyAbroadStudentApplication(Interface):
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
+    model.fieldset(
+        'transportation',
+        label=_(u"Transportation"),
+        fields=['willTakeBus', 'willFlyWithGroup', 'departureDate', 'returnDate', 'agreeToCosts']
+    )
+
     willTakeBus = schema.Choice(
         title=_(u'Bus'),
         description=_(u'Please note: while a group bus is an option for most programs, not all programs offer this option.'),
@@ -1058,6 +1146,13 @@ class IOIEStudyAbroadStudentApplication(Interface):
         #schemata="Transportation",
         required=True,
         #write_permission="UWOshOIE: Modify normal fields",
+    )
+
+    model.fieldset(
+        'orientation',
+        label=_(u"Orientation"),
+        fields=['orientationDate1', 'orientationHours1', 'orientationDate2', 'orientationHours2', 
+                'numberOfGuests', 'orientationConflict', 'conflictDate']
     )
 
     orientationDate1 = schema.Date(
@@ -1116,6 +1211,14 @@ class IOIEStudyAbroadStudentApplication(Interface):
         #schemata="Orientation",
         required=False,
         #write_permission="UWOshOIE: Modify normal fields",
+    )
+
+    model.fieldset(
+        'courses',
+        label=_(u"Courses"),
+        fields=['subject1', 'course1', 'credits1', 'subject2', 'course2', 'credits2', 'subject3', 
+                'course3', 'credits3', 'subject4', 'course4', 'credits4', 'subject5', 'course5', 
+                'credits5', 'subject6', 'course6', 'credits6', 'readSyllabus', 'enrolledIS333', ]
     )
 
     subject1 = schema.Choice(
@@ -1266,6 +1369,12 @@ class IOIEStudyAbroadStudentApplication(Interface):
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
+    model.fieldset(
+        'financial_aid',
+        label=_(u"Financial Aid"),
+        fields=['applyForAid', 'holdApplication', 'financialAidGranted']
+    )
+
     applyForAid = schema.Choice(
         title=_(u'Are you applying for financial aid?'),
         description=_(u'If you are not applying for financial aid, skip to the next section.'),
@@ -1292,9 +1401,14 @@ class IOIEStudyAbroadStudentApplication(Interface):
         #write_permission="UWOshOIE: Modify Financial Aid fields",
     )
 
+    model.fieldset(
+        'accommodation_preferences',
+        label=_(u"Accommodation Preferences"),
+        fields=['roomType', 'roommateName1', 'roommateName2', ]
+    )
+
     roomType = schema.Choice(
         title=_(u'Room Type'),
-        description=_(u'UWOshOIE_label_roomType'),
         required=True,
         vocabulary=SimpleVocabulary([SimpleTerm(value='Single Room'),SimpleTerm(value='Double Room'),SimpleTerm(value='Triple Room')]),
         #schemata="Accommodation Preferences",
@@ -1315,12 +1429,24 @@ class IOIEStudyAbroadStudentApplication(Interface):
         #write_permission="UWOshOIE: Modify revisable fields",
     )
 
+    model.fieldset(
+        'expectations',
+        label=_(u"Expectations"),
+        fields=['questionExpectations', ]
+    )
+
     questionExpectations = schema.Text(
         title=_(u'Your Expectations For'),
         description=_(u'a) this program as a whole? <br> b) the pre-travel general orientation session? <br> c) the pre-travel academic sessions? <br> d) your hosts (host institution, family, etc.) in the foreign country (if applicable)?'),
         required=True,
         #schemata="Expectations",
         #write_permission="UWOshOIE: Modify normal fields",
+    )
+
+    model.fieldset(
+        'verification',
+        label=_(u"Verification"),
+        fields=['awareOfAllMaterials', 'UWOshkoshRelease', 'certification', ]
     )
 
     awareOfAllMaterials = schema.Choice(
@@ -1351,528 +1477,247 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
 
-# #########################
-# #OFFICE USE ONLY SECTION
-# #########################
+#########################
+#OFFICE USE ONLY SECTION
+#########################
 
-#     StringField('seatNumber',
-#         widget=StringWidget(
-#             label='Seat Number',
-#             label_msgid='UWOshOIE_label_seatNumber',
-#             description_msgid='UWOshOIE_help_seatNumber',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         searchable=True
-#     ),
-    
-#     DateTimeField('completionDate',
-#         widget=CalendarWidget(
-#             label="Date Application Was Completed",
-#             description="This is the date in which the application was completed.",
-#             show_hm="0",
-#             label_msgid='UWOshOIE_label_completionDate',
-#             description_msgid='UWOshOIE_help_completionDate',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         required_by_state=['needsDirectorReview'],
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         searchable=True
-#     ),
+    model.fieldset(
+        'office_use_only',
+        label=_(u"OFFICE USE ONLY"),
+        fields=['seatNumber', 'completionDate', 'applicationIsComplete', 
+                'comments', 'applicationFeeOK', 'UWSystemStatementOK', 'UWOshkoshStatementOK', 
+                'withdrawalRefund', 'transcriptsOK', 'programSpecificMaterialsRequired', 
+                'programSpecificMaterialsOK', 'specialStudentFormRequired', 
+                'specialStudentFormOK', 'creditOverloadFormRequired', 'creditOverloadFormOK', 
+                'medicalOK', 'medicalForm', 'passportOK', 'metPassportDeadline', 
+                'programSpecificMaterialsRequiredStepIII', 'programSpecificMaterialsOKStepIII', 
+                'attendedOrientation', 'cisiDates', 'cisiNumberOfMonths', 'programFee', 
+                'tuitionPayment', 'depositOnTime', 'payment2OnTime', 'applicationFeeRefund', 
+                'foreignCourse1', 'foreignCourse2', 'foreignCourse3', 'foreignCourse4', 
+                'foreignCourse5', 'foreignCourse6', 'papersOK', 'noMoreMaterials', 
+                'programMaterials', 'programFee2', ]
+    )
 
-#     BooleanField('applicationIsComplete',
-#         widget=BooleanWidget(
-#             label="Application is Complete",
-#             label_msgid='UWOshOIE_label_applicationIsComplete',
-#             description_msgid='UWOshOIE_help_applicationIsComplete',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#     ),
-    
-#     TextField('comments',
-#         allowable_content_types=('text/plain',),
-#         widget=TextAreaWidget(
-#             label='Comments',
-#             label_msgid='UWOshOIE_label_comments',
-#             description_msgid='UWOshOIE_help_comments',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         default_output_type='text/plain',
-#         schemata="OFFICE USE ONLY",
-#         read_permission="UWOshOIE: Modify Office Use Only fields",
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
-    
-#     BooleanField('applicationFeeOK',
-#         widget=BooleanWidget(
-#             label="Application Fee Submitted",
-#             label_msgid='UWOshOIE_label_applicationFeeOK',
-#             description_msgid='UWOshOIE_help_applicationFeeOK',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         required_by_state=['needsDirectorReview'],
-#         must_not_be=False
-#     ),
+    seatNumber = schema.TextLine(
+        title=_(u'Seat Number'),
+        required=False,
+    )
 
-#     BooleanField('UWSystemStatementOK',
-#         widget=BooleanWidget(
-#             label="UW System Statement of Responsibility Submitted",
-#             label_msgid='UWOshOIE_label_UWSystemStatementOK',
-#             description_msgid='UWOshOIE_help_UWSystemStatementOK',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         required_by_state=['needsDirectorReview'],
-#         must_not_be=False
-#     ),
+    completionDate = schema.Date(
+        title=_(u'Date Application Was Completed'),
+        description=_(u'This is the date in which the application was completed.'),
+        required=False,
+    )
 
-#     BooleanField('UWOshkoshStatementOK',
-#         widget=BooleanWidget(
-#             label="UW Oshkosh Statement of Responsibility Submitted",
-#             label_msgid='UWOshOIE_label_UWOshkoshStatementOK',
-#             description_msgid='UWOshOIE_help_UWOshkoshStatementOK',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         required_by_state=['needsDirectorReview'],
-#         must_not_be=False
-#     ),
-    
-#     BooleanField('withdrawalRefund',
-#         widget=BooleanWidget(
-#             label="Withdrawal and Refund Form Submitted",
-#             label_msgid='UWOshOIE_label_withdrawalRefund',
-#             description_msgid='UWOshOIE_help_withdrawalRefund',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         required_by_state=['needsDirectorReview'],
-#         must_not_be=False
-#     ),
-    
-#     BooleanField('transcriptsOK',
-#         widget=BooleanWidget(
-#             label="Transcripts Submitted",
-#             label_msgid='UWOshOIE_label_transcriptsOK',
-#             description_msgid='UWOshOIE_help_transcriptsOK',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         required_by_state=['needsDirectorReview'],
-#         must_not_be=False
-#     ),
-        
-#     StringField('programSpecificMaterialsRequired',
-#         widget=SelectionWidget(
-#             label="Program-Specific Materials Required(Step II)?",
-#             label_msgid='UWOshOIE_label_programSpecificMaterialsRequired',
-#             description_msgid='UWOshOIE_help_programSpecificMaterialsRequired',
-#             i18n_domain='UWOshOIE',
-#             macro="selectioninline"
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         vocabulary=["Yes", "No", ''],
-#         required_by_state=['needsDirectorReview'],
-#         must_not_be=None,
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
-    
-#     BooleanField('programSpecificMaterialsOK',
-#         widget=BooleanWidget(
-#             label="Program-Specific Materials Submitted(Step II)",
-#             label_msgid='UWOshOIE_label_programSpecificMaterialsOK',
-#             description_msgid='UWOshOIE_help_programSpecificMaterialsOK',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
-    
-#     StringField('specialStudentFormRequired',
-#         widget=SelectionWidget(
-#             label="Special Student Form Required",
-#             label_msgid='UWOshOIE_label_specialStudentFormRequired',
-#             description_msgid='UWOshOIE_help_specialStudentFormRequired',
-#             i18n_domain='UWOshOIE',
-#             macro="selectioninline"
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         vocabulary=["Yes", "No", ''],
-#         required_by_state=['needsDirectorReview'],
-#         must_not_be=None,
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
-    
-#     BooleanField('specialStudentFormOK',
-#         widget=BooleanWidget(
-#             label="Special Student Form Submitted",
-#             label_msgid='UWOshOIE_label_specialStudentFormOK',
-#             description_msgid='UWOshOIE_help_specialStudentFormOK',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
+    applicationIsComplete = schema.Bool(
+        title=_(u'Application is Complete'),
+        required=False,
+    )
 
-#     StringField('creditOverloadFormRequired',
-#         widget=SelectionWidget(
-#             label="Credit Overload Form Required",
-#             label_msgid='UWOshOIE_label_creditOverloadFormRequired',
-#             description_msgid='UWOshOIE_help_creditOverloadFormRequired',
-#             i18n_domain='UWOshOIE',
-#             macro="selectioninline"
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         vocabulary=['Yes', 'No', ''],
-#         required_by_state=['needsDirectorReview'],
-#         must_not_be=None,
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
+    comments = schema.Text(
+        title=_(u'Comments'),
+        required=False,
+    )
 
-#     BooleanField('creditOverloadFormOK',
-#         widget=BooleanWidget(
-#             label="Credit Overload Form Submitted",
-#             label_msgid='UWOshOIE_label_creditOverloadFormOK',
-#             description_msgid='UWOshOIE_help_creditOverloadFormOK',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
+    applicationFeeOK = schema.Bool(
+        title=_(u'Application Fee Submitted'),
+        required=False,
+    )
 
-#     BooleanField('medicalOK',
-#         widget=BooleanWidget(
-#             label="Medical information is Submitted/Updated",
-#             label_msgid='UWOshOIE_label_medicalOK',
-#             description_msgid='UWOshOIE_help_medicalOK',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         required_by_state=['seatAssigned'],
-#         must_be=True
-#     ),
-    
-#     TextField('medicalForm',
-#         allowable_content_types=('text/plain',),
-#         widget=TextAreaWidget(
-#             label='Medical Form',
-#             label_msgid='UWOshOIE_label_medicalForm',
-#             description_msgid='UWOshOIE_help_medicalForm',
-#             i18n_domain='UWOshOIE',
-#             ),
-#         default_output_type='text/plain',
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         searchable=True
-#     ),
-    
-#     BooleanField('passportOK',
-#         widget=BooleanWidget(
-#             label="Passport information or receipt Submitted",
-#             label_msgid='UWOshOIE_label_passportOK',
-#             description_msgid='UWOshOIE_help_passportOK',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         required_by_state=['seatAssigned'],
-#         must_be=True
-#     ),
+    UWSystemStatementOK = schema.Bool(
+        title=_(u'UW System Statement of Responsibility Submitted'),
+        required=False,
+    )
 
-#     StringField('metPassportDeadline',
-#         widget=SelectionWidget(
-#             label="Passport Deadline Met",
-#             label_msgid='UWOshOIE_label_metPassportDeadline',
-#             description_msgid='UWOshOIE_help_metPassportDeadline',
-#             i18n_domain='UWOshOIE',
-#             macro="selectioninline"
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         vocabulary=["Yes", "No", ""],
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
+    UWOshkoshStatementOK = schema.Bool(
+        title=_(u'UW Oshkosh Statement of Responsibility Submitted'),
+        description=_(u'This is the date in which the application was completed.'),
+        required=False,
+    )
 
-#     StringField('programSpecificMaterialsRequiredStepIII',
-#         widget=SelectionWidget(
-#             label="Program-Specific Materials Required(Step III)?",
-#             label_msgid='UWOshOIE_label_programSpecificMaterialsRequired',
-#             description_msgid='UWOshOIE_help_programSpecificMaterialsRequired',
-#             i18n_domain='UWOshOIE',
-#             macro="selectioninline"
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         vocabulary=["Yes", "No", ""],
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
+    withdrawalRefund = schema.Bool(
+        title=_(u'Withdrawal and Refund Form Submitted'),
+        required=False,
+    )
 
-#     BooleanField('programSpecificMaterialsOKStepIII',
-#         widget=BooleanWidget(
-#             label="Program-Specific Materials Submitted(Step III)",
-#             label_msgid='UWOshOIE_label_programSpecificMaterialsOK',
-#             description_msgid='UWOshOIE_help_programSpecificMaterialsOK',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
-    
-#     StringField('attendedOrientation',
-#         widget=SelectionWidget(
-#             label="Attended Orientation",
-#             label_msgid='UWOshOIE_label_attendedOrientation',
-#             description_msgid='UWOshOIE_help_attendedOrientation',
-#             i18n_domain='UWOshOIE',
-#             macro="selectioninline"
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         vocabulary=["Yes", "No", ""],
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
-    
-#     StringField('cisiDates',
-#         widget=StringWidget(
-#             label="Health Insurance Dates",
-#             description="Cultural Insurance Services International",
-#             label_msgid='UWOshOIE_label_cisiDates',
-#             description_msgid='UWOshOIE_help_cisiDates',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
+    transcriptsOK = schema.Bool(
+        title=_(u'Transcripts Submitted'),
+        required=False,
+    )
 
-#     IntegerField('cisiNumberOfMonths',
-#         widget=IntegerWidget(
-#             label="Health Insurance Number of Months",
-#             description="Cultural Insurance Services International",
-#             label_msgid='UWOshOIE_label_cisiNumberOfMonths',
-#             description_msgid='UWOshOIE_help_cisiNumberOfMonths',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
-    
-#     FloatField('programFee',
-#         widget=DecimalWidget(
-#             label="Program Fee",
-#             label_msgid='UWOshOIE_label_programFee',
-#             description_msgid='UWOshOIE_help_programFee',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
-    
-#     FloatField('tuitionPayment',
-#         widget=DecimalWidget(
-#             label="Tuition Payment(student exchange only)",
-#             label_msgid='UWOshOIE_label_tuitionPayment',
-#             description_msgid='UWOshOIE_help_tuitionPayment',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
-    
-#     StringField('depositOnTime',
-#         widget=SelectionWidget(
-#             label="Deposit Paid on Time",
-#             label_msgid='UWOshOIE_label_depositOnTime',
-#             description_msgid='UWOshOIE_help_depositOnTime',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         vocabulary=['Yes','No'],
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         must_be="Yes"
-#     ),
+    programSpecificMaterialsRequired = schema.Choice(
+        title=_(u'Program-Specific Materials Required(Step II)?'),
+        required=True,
+        vocabulary=SimpleVocabulary([SimpleTerm(value='Yes'), SimpleTerm(value='No'), SimpleTerm(value='')])
+    )
 
-#     StringField('payment2OnTime',
-#         widget=SelectionWidget(
-#             label="Final Payment Made on Time(except exchange students)",
-#             label_msgid='UWOshOIE_label_payment2OnTime',
-#             description_msgid='UWOshOIE_help_payment2OnTime',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         vocabulary=['Yes','No'],
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
+    programSpecificMaterialsOK = schema.Bool(
+        title=_(u'Program-Specific Materials Submitted(Step II)'),
+        required=False,
+    )
 
-#     StringField('applicationFeeRefund',
-#         widget=SelectionWidget(
-#             label="Application Fee Refunded",
-#             label_msgid='UWOshOIE_label_applicationFeeRefund',
-#             description_msgid='UWOshOIE_help_applicationFeeRefund',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         vocabulary=['Yes','No'],
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
-    
-#     StringField('foreignCourse1',
-#         widget=StringWidget(
-#             label="Foreign institution course 1",
-#             label_msgid='UWOshOIE_label_foreignCourse1',
-#             description_msgid='UWOshOIE_help_foreignCourse1',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         searchable=True
-#     ),
+    specialStudentFormRequired = schema.Choice(
+        title=_(u'Special Student Form Required'),
+        required=True,
+        vocabulary=SimpleVocabulary([SimpleTerm(value='Yes'), SimpleTerm(value='No'), SimpleTerm(value='')])
+    )
 
-#     StringField('foreignCourse2',
-#         widget=StringWidget(
-#             label="Foreign institution course 2",
-#             label_msgid='UWOshOIE_label_foreignCourse2',
-#             description_msgid='UWOshOIE_help_foreignCourse2',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         searchable=True
-#     ),
+    specialStudentFormOK = schema.Bool(
+        title=_(u'Special Student Form Submitted'),
+        required=False,
+    )
 
-#     StringField('foreignCourse3',
-#         widget=StringWidget(
-#             label="Foreign institution course 3",
-#             label_msgid='UWOshOIE_label_foreignCourse3',
-#             description_msgid='UWOshOIE_help_foreignCourse3',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         searchable=True
-#     ),
+    creditOverloadFormRequired = schema.Choice(
+        title=_(u'Credit Overload Form Required'),
+        required=True,
+        vocabulary=SimpleVocabulary([SimpleTerm(value='Yes'), SimpleTerm(value='No'), SimpleTerm(value='')])
+    )
 
-#     StringField('foreignCourse4',
-#         widget=StringWidget(
-#             label="Foreign institution course 4",
-#             label_msgid='UWOshOIE_label_foreignCourse4',
-#             description_msgid='UWOshOIE_help_foreignCourse4',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         searchable=True
-#     ),
+    creditOverloadFormOK = schema.Bool(
+        title=_(u'Credit Overload Form Submitted'),
+        required=False,
+    )
 
-#     StringField('foreignCourse5',
-#         widget=StringWidget(
-#             label="Foreign institution course 5",
-#             label_msgid='UWOshOIE_label_foreignCourse5',
-#             description_msgid='UWOshOIE_help_foreignCourse5',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         searchable=True
-#     ),
+    medicalOK = schema.Bool(
+        title=_(u'Medical information is Submitted/Updated'),
+        required=False,
+    )
 
-#     StringField('foreignCourse6',
-#         widget=StringWidget(
-#             label="Foreign institution course 6",
-#             label_msgid='UWOshOIE_label_foreignCourse6',
-#             description_msgid='UWOshOIE_help_foreignCourse6',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields",
-#         searchable=True
-#     ),
-    
-#     BooleanField('papersOK',
-#         widget=BooleanWidget(
-#             label="Papers information is OK",
-#             label_msgid='UWOshOIE_label_papersOK',
-#             description_msgid='UWOshOIE_help_papersOK',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
+    medicalForm = schema.Text(
+        title=_(u'Medical Form'),
+        required=False,
+    )
 
-#     BooleanField('noMoreMaterials',
-#         widget=BooleanWidget(
-#             label='No More Materials',
-#             label_msgid='UWOshOIE_label_noMoreMaterials',
-#             description_msgid='UWOshOIE_help_noMoreMaterials',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
+    passportOK = schema.Bool(
+        title=_(u'Passport information or receipt submitted'),
+        required=False,
+    )
 
-#     BooleanField('programMaterials',
-#         widget=BooleanWidget(
-#             label='Program Materials',
-#             label_msgid='UWOshOIE_label_programMaterials',
-#             description_msgid='UWOshOIE_help_programMaterials',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
+    metPassportDeadline = schema.Choice(
+        title=_(u'Passport Deadline Met'),
+        required=True,
+        vocabulary=SimpleVocabulary([SimpleTerm(value='Yes'), SimpleTerm(value='No'), SimpleTerm(value='')])
+    )
 
-#     IntegerField('programFee2',
-#         widget=IntegerWidget(
-#             label='Program Fee 2',
-#             label_msgid='UWOshOIE_label_programFee2',
-#             description_msgid='UWOshOIE_help_programFee2',
-#             i18n_domain='UWOshOIE',
-#         ),
-#         schemata="OFFICE USE ONLY",
-#         read_permission="View",
-#         write_permission="UWOshOIE: Modify Office Use Only fields"
-#     ),
+    programSpecificMaterialsRequiredStepIII = schema.Choice(
+        title=_(u'Program-Specific Materials Required(Step III)?'),
+        required=True,
+        vocabulary=SimpleVocabulary([SimpleTerm(value='Yes'), SimpleTerm(value='No'), SimpleTerm(value='')])
+    )
+
+    programSpecificMaterialsOKStepIII = schema.Bool(
+        title=_(u'Program-Specific Materials Submitted(Step III)'),
+        required=False,
+    )
+
+    attendedOrientation = schema.Choice(
+        title=_(u'Attended Orientation'),
+        required=True,
+        vocabulary=SimpleVocabulary([SimpleTerm(value='Yes'), SimpleTerm(value='No'), SimpleTerm(value='')])
+    )
+
+    cisiDates = schema.TextLine(
+        title=_(u'Health Insurance Dates'),
+        description=_(u'Cultural Insurance Services International'),
+        required=False,
+    )
+
+    cisiNumberOfMonths = schema.Int(
+        title=_(u'Health Insurance Number of Months'),
+        description=_(u'Cultural Insurance Services International'),
+        required=False,
+    )
+
+    programFee = schema.Float(
+        title=_(u'Program Fee'),
+        description=_(u''),
+        required=False,
+    )
+
+    tuitionPayment = schema.Float(
+        title=_(u'Tuition Payment (student exchange only)'),
+        description=_(u''),
+        required=False,
+    )
+
+    depositOnTime = schema.Choice(
+        title=_(u'Deposit Paid on Time'),
+        description=_(u''),
+        vocabulary=SimpleVocabulary([SimpleTerm(value='Yes'), SimpleTerm(value='No'), SimpleTerm(value='')]),
+        required=False,
+    )
+
+    payment2OnTime = schema.Choice(
+        title=_(u'Final Payment Made on Time (except exchange students)'),
+        description=_(u''),
+        vocabulary=SimpleVocabulary([SimpleTerm(value='Yes'), SimpleTerm(value='No'), SimpleTerm(value='')]),
+        required=False,
+    )
+
+    applicationFeeRefund = schema.Choice(
+        title=_(u'Application Fee Refunded'),
+        description=_(u''),
+        vocabulary=SimpleVocabulary([SimpleTerm(value='Yes'), SimpleTerm(value='No'), SimpleTerm(value='')]),
+        required=False,
+    )
+
+    foreignCourse1 = schema.TextLine(
+        title=_(u'Foreign institution course 1'),
+        description=_(u''),
+        required=False,
+    )
+
+    foreignCourse2 = schema.TextLine(
+        title=_(u'Foreign institution course 2'),
+        description=_(u''),
+        required=False,
+    )
+
+    foreignCourse3 = schema.TextLine(
+        title=_(u'Foreign institution course 3'),
+        description=_(u''),
+        required=False,
+    )
+
+    foreignCourse4 = schema.TextLine(
+        title=_(u'Foreign institution course 4'),
+        description=_(u''),
+        required=False,
+    )
+
+    foreignCourse5 = schema.TextLine(
+        title=_(u'Foreign institution course 5'),
+        description=_(u''),
+        required=False,
+    )
+
+    foreignCourse6 = schema.TextLine(
+        title=_(u'Foreign institution course 6'),
+        description=_(u''),
+        required=False,
+    )
+
+    papersOK = schema.Bool(
+        title=_(u'Papers information is OK'),
+        description=_(u''),
+        required=False,
+    )
+
+    noMoreMaterials = schema.Bool(
+        title=_(u'No More Materials'),
+        description=_(u''),
+        required=False,
+    )
+
+    programMaterials = schema.Bool(
+        title=_(u'Program Materials'),
+        description=_(u''),
+        required=False,
+    )
+
+    programFee2 = schema.Int(
+        title=_(u'Program Fee 2'),
+        description=_(u''),
+        required=False,
+    )
+
