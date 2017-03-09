@@ -307,7 +307,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
       
     citizenship = schema.Choice(
         title=_(u'Citizenship'),
-        description=_(u'field description'),
         vocabulary=citizenship_vocabulary,
         #schemata="Demographics",
         required=True,
