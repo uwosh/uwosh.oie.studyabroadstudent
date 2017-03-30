@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="UWOshOIEProgramWorkflow"
+             title="UWOshOIE Program Workflow"
+             state_variable="review_state"
+             initial_state="Created">
+ <permission>Access contents information</permission>
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <permission>UWOshOIE: Modify Office Use Only fields</permission>
+ <permission>list</permission>
+ <permission>Add portal content</permission>
+ <state state_id="Created"
+        title="State it will always be in">
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>Authenticated</permission-role>
+   <permission-role>Member</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Add portal content" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>Authenticated</permission-role>
+   <permission-role>Member</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>Authenticated</permission-role>
+   <permission-role>Member</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <worklist worklist_id="program_list" title="">
+  <description>List of programs</description>
+  <action url="%(portal_url)s/search?review_state=pending"
+          category="global">Count (%(count)d)</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+  <match name="review_state" values="pending"/>
+ </worklist>
+ <variable variable_id="action" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The last transition</description>
+  <default>
+   
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The ID of the user who performed the last transition</description>
+  <default>
+   
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Comments about the last transition</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False"
+           for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Time of the last transition</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+</dc-workflow>

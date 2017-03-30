@@ -1,0 +1,1806 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="OIEStudentApplicationWorkflow"
+             title="OIEStudentApplicationWorkflow"
+             state_variable="review_state"
+             initial_state="private">
+ <permission>list</permission>
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <permission>Access contents information</permission>
+ <permission>UWOshOIE: Review OIE Application</permission>
+ <permission>UWOshOIE: Modify revisable fields</permission>
+ <permission>UWOshOIE: Modify Financial Aid fields</permission>
+ <permission>UWOshOIE: Modify Office Use Only fields</permission>
+ <permission>UWOshOIE: Modify normal fields</permission>
+ <permission>Undo changes</permission>
+ <permission>List undoable changes</permission>
+ <state state_id="FAHeldIncomplete"
+        title="Financial Aid Held Incomplete">
+  <description>You will only study abroad if financial aid is available; you do not have a seat on this study abroad program.  This application can not be processed further until you release your Financial Aid HOLD.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="approveForFA"/>
+  <exit-transition transition_id="decline"/>
+  <exit-transition transition_id="withdraw"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="archived" title="Archived">
+  <description>Archived applications are stored indefinitely and cannot be altered.</description>
+  <exit-transition transition_id="addComment"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="conditionallyAdmitted"
+        title="Conditionally Admitted">
+  <description>You have now been conditionally accepted to participate on a UW Oshkosh-sponsored study abroad program. Official acceptance (an assigned seat) will be given pending a successful disciplinary record check (currently in progress) AND *on the condition that* you complete STEP III of the study abroad application process by the STEP III deadline.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="decline"/>
+  <exit-transition transition_id="manageDeadlines"/>
+  <exit-transition transition_id="withdraw"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="deadlineManagement"
+        title="Deadline Management">
+  <description>You have been conditionally admitted but you do not yet have a seat on a study abroad program. ----- For most programs, seats are assigned in the order in which qualified applicants have completed their applications to this point PROVIDED the applicant ALSO completes all remaining requirements by the Friday following the application deadline. Therefore, applicants on the waiting list may receive seats if applicants who have been conditionally admitted have not completed all requirements. ----- For competetive programs, seats are assigned to the most qualified applicants provided STEP III has also been completed by the Friday following the application deadline.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="assignSeat"/>
+  <exit-transition transition_id="decline"/>
+  <exit-transition transition_id="withdraw"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="declined" title="Declined">
+  <description>The study abroad application has been declined.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="archive"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="True">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="Undo changes" acquired="True">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="facApprovedNeedsProgramManagerReview"
+        title="Faculty Approved and Now Needs Program Manager Review">
+  <description>The faculty reviewer has reviewed this application.  Your application is pending further review by the OIE Program Manager; you do not yet have a seat on this study abroad program.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="addToWaitlist"/>
+  <exit-transition transition_id="assertReadyForConditionalAdmit"/>
+  <exit-transition transition_id="decline"/>
+  <exit-transition transition_id="withdraw"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="facultyReview" title="Faculty Review">
+  <description>Your application is pending faculty review; you do not yet have a seat on this study abroad program.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="declineFromFacultyReview"/>
+  <exit-transition transition_id="facultyApproves"/>
+  <exit-transition transition_id="withdraw"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+   <permission-role>UWOshOIEFacReview</permission-role>
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="incomplete" title="Incomplete">
+  <description>You have completed part of the application process but must submit additional materials to the Office of International Education.  This application cannot be processed further until these materials have been submitted; you do not yet have a seat on this study abroad program.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="decline"/>
+  <exit-transition transition_id="holdForFAIncomplete"/>
+  <exit-transition transition_id="recheckForFAHold"/>
+  <exit-transition transition_id="waitForPrintedMaterials"/>
+  <exit-transition transition_id="withdraw"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="needsDirectorReview"
+        title="Needs Director Review">
+  <description>Your application is pending review by the OIE Director; you do not yet have a seat on this study abroad program.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="decline"/>
+  <exit-transition transition_id="sendForProgramManagerReview"/>
+  <exit-transition transition_id="withdraw"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="needsProgramManagerReview"
+        title="Needs Program Manager Review">
+  <description>Your application is pending review by the OIE Program Manager; you do not yet have a seat on this study abroad program.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="addToWaitlist"/>
+  <exit-transition transition_id="assertReadyForConditionalAdmit"/>
+  <exit-transition transition_id="decline"/>
+  <exit-transition transition_id="sendForFacultyReview"/>
+  <exit-transition transition_id="withdraw"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="private" title="Private">
+  <description>The Office of International Education does not currently have access to your application.  You MUST submit your application using the purple "SUBMIT APP" button below.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="submit"/>
+  <exit-transition transition_id="withdraw"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="True">
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="Undo changes" acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="readyForConditionalAdmit"
+        title="Ready For Conditionally Admit">
+  <description>The OIE is sorting applications by completion date &amp; time in order to determine conditional admission.  You do not yet have a seat on this study abroad program.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="admitConditionally"/>
+  <exit-transition transition_id="decline"/>
+  <exit-transition transition_id="withdraw"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="seatAssigned" title="Seat Assigned">
+  <description>The application process is complete and a seat has been assigned on a study abroad program. Welcome to the program!</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="archive"/>
+  <exit-transition transition_id="decline"/>
+  <exit-transition transition_id="withdraw"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="waitingForPrintMaterials"
+        title="Waiting For Printed Materials">
+  <description>You have completed part of the application process but must submit additional materials to the Office of International Education.  This application cannot be processed further until these materials have been submitted; you do not yet have a seat on this study abroad program.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="decline"/>
+  <exit-transition transition_id="sendForDirectorReview"/>
+  <exit-transition transition_id="withdraw"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="waitlist" title="Waitlist">
+  <description>You are on the waiting list.  You do not yet have a seat on this study abroad program.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="assertReadyForConditionalAdmit"/>
+  <exit-transition transition_id="decline"/>
+  <exit-transition transition_id="withdraw"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="withdrawn" title="Withdrawn">
+  <description>You have withdrawn your on-line study abroad application only.  You must officially withdraw from the study abroad program by contacting the OIE IN WRITING.  See your email in-box for details.</description>
+  <exit-transition transition_id="addComment"/>
+  <exit-transition transition_id="archive"/>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="List undoable changes"
+                  acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Financial Aid fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify Office Use Only fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify normal fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Modify revisable fields"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="UWOshOIE: Review OIE Application"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="Undo changes" acquired="False">
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+  <permission-map name="list" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>UWOshOIEDirector</permission-role>
+   <permission-role>UWOshOIEFacReview</permission-role>
+   <permission-role>UWOshOIEFinAid</permission-role>
+   <permission-role>UWOshOIEFrontLineAdvisor</permission-role>
+   <permission-role>UWOshOIEProgramManager</permission-role>
+  </permission-map>
+ </state>
+ <transition transition_id="addComment"
+             title="Add a Comment" new_state=""
+             trigger="USER" before_script="pre_addComment"
+             after_script="post_addComment">
+  <description>Add Comment</description>
+  <action url="" category="workflow">addComment</action>
+  <guard>
+   <guard-role>Owner</guard-role>
+   <guard-role>UWOshOIEFinAid</guard-role>
+   <guard-role>UWOshOIEExtReview</guard-role>
+   <guard-role>UWOshOIEFacReview</guard-role>
+   <guard-role>UWOshOIEFrontLineAdvisor</guard-role>
+   <guard-role>UWOshOIEProgramManager</guard-role>
+   <guard-role>UWOshOIEDirector</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="addToWaitlist"
+             title="Add this Student to the Waitlist"
+             new_state="waitlist" trigger="USER"
+             before_script="pre_addToWaitlist"
+             after_script="post_addToWaitlist">
+  <description>Add To Waitlist</description>
+  <action url="" category="workflow">addToWaitlist</action>
+  <guard>
+   <guard-role>UWOshOIEProgramManager</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="admitConditionally"
+             title="Admit this Student Conditionally"
+             new_state="conditionallyAdmitted"
+             trigger="USER"
+             before_script="pre_admitConditionally"
+             after_script="post_admitConditionally">
+  <description>Admit Conditionally</description>
+  <action url="" category="workflow">admitConditionally</action>
+  <guard>
+   <guard-role>UWOshOIEProgramManager</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="approveForFA"
+             title="Approve for Financial Aid"
+             new_state="waitingForPrintMaterials"
+             trigger="USER" before_script="pre_approveForFA"
+             after_script="post_approveForFA">
+  <description>Approve For Fin Aid</description>
+  <action url="" category="workflow">approveForFA</action>
+  <guard>
+   <guard-role>UWOshOIEFrontLineAdvisor</guard-role>
+   <guard-role>UWOshOIEProgramManager</guard-role>
+   <guard-role>UWOshOIEFinAid</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="archive"
+             title="Archive the Application"
+             new_state="archived" trigger="USER"
+             before_script="pre_archive"
+             after_script="post_archive">
+  <description>Archive App</description>
+  <action url="" category="workflow">archive</action>
+  <guard>
+   <guard-role>UWOshOIEFrontLineAdvisor</guard-role>
+   <guard-role>UWOshOIEProgramManager</guard-role>
+   <guard-role>UWOshOIEDirector</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="assertReadyForConditionalAdmit"
+             title="Assert Applicant Is Ready to be Conditionally Admitted"
+             new_state="readyForConditionalAdmit"
+             trigger="USER"
+             before_script="pre_assertReadyForConditionalAdmit"
+             after_script="post_assertReadyForConditionalAdmit">
+  <description>Assert App For Con. Admit</description>
+  <action url="" category="workflow">assertReadyForConditionalAdmit</action>
+  <guard>
+   <guard-role>UWOshOIEProgramManager</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="assignSeat"
+             title="Assign a Seat to the Applicant and Complete the Application."
+             new_state="seatAssigned" trigger="USER"
+             before_script="pre_assignSeat"
+             after_script="post_assignSeat">
+  <description>Assign Seat</description>
+  <action url="" category="workflow">assignSeat</action>
+  <guard>
+   <guard-role>UWOshOIEFrontLineAdvisor</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="decline"
+             title="Decline This Application"
+             new_state="declined" trigger="USER"
+             before_script="pre_decline"
+             after_script="post_decline">
+  <description>Decline</description>
+  <action url="" category="workflow">decline</action>
+  <guard>
+   <guard-role>UWOshOIEFrontLineAdvisor</guard-role>
+   <guard-role>UWOshOIEProgramManager</guard-role>
+   <guard-role>UWOshOIEDirector</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="declineFromFacultyReview"
+             title="Decline This Application From Faculty Review"
+             new_state="declined" trigger="USER"
+             before_script="pre_declineFromFacultyReview"
+             after_script="post_declineFromFacultyReview">
+  <description>Faculty Decline</description>
+  <action url="" category="workflow">declinedFromFacultyReview</action>
+  <guard>
+   <guard-role>UWOshOIEFacReview</guard-role>
+   <guard-role>UWOshOIEFrontLineAdvisor</guard-role>
+   <guard-role>UWOshOIEProgramManager</guard-role>
+   <guard-role>UWOshOIEDirector</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="facultyApproves"
+             title="Approve This Application From Faculty Review"
+             new_state="facApprovedNeedsProgramManagerReview"
+             trigger="USER"
+             before_script="pre_facultyApproves"
+             after_script="post_facultyApproves">
+  <description>Faculty Approve</description>
+  <action url="" category="workflow">facultyApproves</action>
+  <guard>
+   <guard-role>UWOshOIEFacReview</guard-role>
+   <guard-role>UWOshOIEFrontLineAdvisor</guard-role>
+   <guard-role>UWOshOIEProgramManager</guard-role>
+   <guard-role>UWOshOIEDirector</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="holdForFAIncomplete"
+             title="Hold For Financial Aid - incomplete"
+             new_state="FAHeldIncomplete" trigger="USER"
+             before_script="pre_holdForFAIncomplete"
+             after_script="post_holdForFAIncomplete">
+  <description>Hold For Fin Aid</description>
+  <action url="" category="workflow">holdForFAIncomplete</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="manageDeadlines"
+             title="Begin Managing Deadlines For This Application"
+             new_state="deadlineManagement" trigger="USER"
+             before_script="pre_manageDeadlines"
+             after_script="post_manageDeadlines">
+  <description>Manage Deadlines</description>
+  <action url="" category="workflow">manageDeadlines</action>
+  <guard>
+   <guard-role>UWOshOIEFrontLineAdvisor</guard-role>
+   <guard-role>UWOshOIEProgramManager</guard-role>
+   <guard-role>UWOshOIEDirector</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="recheckForFAHold"
+             title="Check If HOLD Has Been Set for Financial Aid"
+             new_state="incomplete" trigger="USER"
+             before_script="pre_recheckForFAHold"
+             after_script="post_recheckForFAHold">
+  <description>Recheck For FA Hold</description>
+  <action url="" category="workflow">recheckForFAHold</action>
+  <guard>
+   <guard-role>UWOshOIEFrontLineAdvisor</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="sendForDirectorReview"
+             title="Send to OIE Director For Review"
+             new_state="needsDirectorReview" trigger="USER"
+             before_script="pre_sendForDirectorReview"
+             after_script="post_sendForDirectorReview">
+  <description>Send For Director Rev</description>
+  <action url="" category="workflow">sendForDirectorReview</action>
+  <guard>
+   <guard-role>UWOshOIEFrontLineAdvisor</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="sendForFacultyReview"
+             title="Send to Faculty For Review"
+             new_state="facultyReview" trigger="USER"
+             before_script="pre_sendForFacultyReview"
+             after_script="post_sendForFacultyReview">
+  <description>Send For Fac Rev</description>
+  <action url="" category="workflow">sendForFacultyReview</action>
+  <guard>
+   <guard-role>UWOshOIEProgramManager</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="sendForProgramManagerReview"
+             title="Send To OIE Program Manager For Review"
+             new_state="needsProgramManagerReview"
+             trigger="USER"
+             before_script="pre_sendForProgramManagerReview"
+             after_script="post_sendForProgramManagerReview">
+  <description>Send For Pgm Mgr Rev</description>
+  <action url="" category="workflow">sendForProgramManagerReview</action>
+  <guard>
+   <guard-role>UWOshOIEDirector</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="submit"
+             title="Submit Application To OIE"
+             new_state="incomplete" trigger="USER"
+             before_script="pre_submit"
+             after_script="post_submit">
+  <description>Submit App</description>
+  <action url="" category="workflow">submit</action>
+  <guard>
+   <guard-role>Owner</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="waitForPrintedMaterials"
+             title="Wait For Printed Materials From Student"
+             new_state="waitingForPrintMaterials"
+             trigger="USER"
+             before_script="pre_waitForPrintedMaterials"
+             after_script="post_waitForPrintedMaterials">
+  <description>Wait For Printed Materials</description>
+  <action url="" category="workflow">waitForPrintedMaterials</action>
+  <guard>
+   <guard-role>UWOshOIEFrontLineAdvisor</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="withdraw"
+             title="Withdraw This Application From Consideration"
+             new_state="withdrawn" trigger="USER"
+             before_script="pre_withdraw"
+             after_script="post_withdraw">
+  <description>Withdraw App</description>
+  <action url="" category="workflow">withdraw</action>
+  <guard>
+   <guard-role>Owner</guard-role>
+  </guard>
+ </transition>
+ <worklist worklist_id="uwosh_oie_worklist_archived"
+           title="">
+  <action url="%(portal_url)s/search?review_state=archived"
+          category="global">archived (%(count)d)</action>
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state" values="archived"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_conditionallyadmitted"
+           title="">
+  <action url="%(portal_url)s/search?review_state=conditionallyAdmitted"
+          category="global">conditionallyAdmitted (%(count)d)</action>
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state" values="conditionallyAdmitted"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_deadlinemanagement"
+           title="">
+  
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state" values="deadlineManagement"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_declined"
+           title="">
+  <action url="%(portal_url)s/search?review_state=declined"
+          category="global">declined (%(count)d)</action>
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state" values="declined"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_facapprovedneedsprogrammanagerreview"
+           title="">
+  <action url="%(portal_url)s/search?review_state=facApprovedNeedsProgramManagerReview"
+          category="global">facApprovedNeedsProgramManagerReview (%(count)d)</action>
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state"
+         values="facApprovedNeedsProgramManagerReview"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_facultyreview"
+           title="">
+  <action url="%(portal_url)s/search?review_state=facultyReview"
+          category="global">facultyReview (%(count)d)</action>
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state" values="facultyReview"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_faheldincomplete"
+           title="">
+  <action url="%(portal_url)s/search?review_state=FAHeldIncomplete"
+          category="global">FAHeldIncomplete (%(count)d)</action>
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state" values="FAHeldIncomplete"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_incomplete"
+           title="">
+  <action url="%(portal_url)s/search?review_state=incomplete"
+          category="global">incomplete (%(count)d)</action>
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state" values="incomplete"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_needsdirectorreview"
+           title="">
+  
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state" values="needsDirectorReview"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_needsprogrammanagerreview"
+           title="">
+  
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state"
+         values="needsProgramManagerReview"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_private" title="">
+  <action url="%(portal_url)s/search?review_state=private"
+          category="global">private (%(count)d)</action>
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state" values="private"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_readyforconditionaladmit"
+           title="">
+  
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state"
+         values="readyForConditionalAdmit"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_seatassigned"
+           title="">
+  
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state" values="seatAssigned"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_waitingforprintmaterials"
+           title="">
+  <action url="%(portal_url)s/search?review_state=waitingForPrintMaterials"
+          category="global">waitingForPrintMaterials (%(count)d)</action>
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state"
+         values="waitingForPrintMaterials"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_waitlist"
+           title="">
+  <action url="%(portal_url)s/search?review_state=waitlist"
+          category="global">waitlist (%(count)d)</action>
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state" values="waitlist"/>
+ </worklist>
+ <worklist worklist_id="uwosh_oie_worklist_withdrawn"
+           title="">
+  <action url="%(portal_url)s/search?review_state=withdrawn"
+          category="global">withdrawn (%(count)d)</action>
+  <guard>
+   <guard-permission>UWOshOIE: Review OIE Application</guard-permission>
+  </guard>
+  <match name="review_state" values="withdrawn"/>
+ </worklist>
+ <variable variable_id="action" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The last transition</description>
+  <default>
+   
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The ID of the user who performed the last transition</description>
+  <default>
+   
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Comments about the last transition</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('comment','')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False"
+           for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+   <guard-permission>View</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Time of the last transition</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+
+ <!--
+ <script script_id="attempt_transition_to_FAHeld"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="attempt_transition_to_FAHeld"/>
+ <script script_id="post_addComment" type="External Method"
+         filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_addComment"/>
+ <script script_id="post_addToWaitlist"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_addToWaitlist"/>
+ <script script_id="post_admitConditionally"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_admitConditionally"/>
+ <script script_id="post_approveForFA"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_approveForFA"/>
+ <script script_id="post_archive" type="External Method"
+         filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_archive"/>
+ <script script_id="post_assertReadyForConditionalAdmit"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_assertReadyForConditionalAdmit"/>
+ <script script_id="post_assignSeat" type="External Method"
+         filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_assignSeat"/>
+ <script script_id="post_decline" type="External Method"
+         filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_decline"/>
+ <script script_id="post_declineFromFacultyReview"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_declineFromFacultyReview"/>
+ <script script_id="post_facultyApproves"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_facultyApproves"/>
+ <script script_id="post_holdForFAIncomplete"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_holdForFAIncomplete"/>
+ <script script_id="post_manageDeadlines"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_manageDeadlines"/>
+ <script script_id="post_recheckForFAHold"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_recheckForFAHold"/>
+ <script script_id="post_sendForDirectorReview"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_sendForDirectorReview"/>
+ <script script_id="post_sendForFacultyReview"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_sendForFacultyReview"/>
+ <script script_id="post_sendForProgramManagerReview"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_sendForProgramManagerReview"/>
+ <script script_id="post_submit" type="External Method"
+         filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_submit"/>
+ <script script_id="post_waitForPrintedMaterials"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_waitForPrintedMaterials"/>
+ <script script_id="post_withdraw" type="External Method"
+         filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="post_withdraw"/>
+ <script script_id="pre_addComment" type="External Method"
+         filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_addComment"/>
+ <script script_id="pre_addToWaitlist"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_addToWaitlist"/>
+ <script script_id="pre_admitConditionally"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_admitConditionally"/>
+ <script script_id="pre_approveForFA" type="External Method"
+         filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_approveForFA"/>
+ <script script_id="pre_archive" type="External Method"
+         filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_archive"/>
+ <script script_id="pre_assertReadyForConditionalAdmit"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_assertReadyForConditionalAdmit"/>
+ <script script_id="pre_assignSeat" type="External Method"
+         filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_assignSeat"/>
+ <script script_id="pre_decline" type="External Method"
+         filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_decline"/>
+ <script script_id="pre_declineFromFacultyReview"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_declineFromFacultyReview"/>
+ <script script_id="pre_facultyApproves"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_facultyApproves"/>
+ <script script_id="pre_holdForFAIncomplete"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_holdForFAIncomplete"/>
+ <script script_id="pre_manageDeadlines"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_manageDeadlines"/>
+ <script script_id="pre_recheckForFAHold"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_recheckForFAHold"/>
+ <script script_id="pre_sendForDirectorReview"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_sendForDirectorReview"/>
+ <script script_id="pre_sendForFacultyReview"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_sendForFacultyReview"/>
+ <script script_id="pre_sendForProgramManagerReview"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_sendForProgramManagerReview"/>
+ <script script_id="pre_submit" type="External Method"
+         filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_submit"/>
+ <script script_id="pre_waitForPrintedMaterials"
+         type="External Method" filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_waitForPrintedMaterials"/>
+ <script script_id="pre_withdraw" type="External Method"
+         filename=""
+         module="UWOshOIE.OIEStudentApplicationWorkflow_scripts"
+         function="pre_withdraw"/>
+-->
+</dc-workflow>
