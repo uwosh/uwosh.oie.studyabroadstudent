@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<object name="portal_controlpanel">
+  <configlet
+      title="OIE Study Abroad Student Settings"
+      action_id="oiestudyabroadstudent-controlpanel"
+      appId="oiestudyabroadstudent-controlpanel"
+      category="Products"
+      condition_expr=""
+      icon_expr=""
+      url_expr="string:${portal_url}/@@oiestudyabroadstudent-controlpanel"
+      visible="True">
+    <permission>Manage portal</permission>
+  </configlet>
+</object>

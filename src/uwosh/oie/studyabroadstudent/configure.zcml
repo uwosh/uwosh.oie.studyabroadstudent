@@ -29,9 +29,44 @@
       post_handler=".setuphandlers.uninstall"
       />
 
-
   <utility
       factory=".setuphandlers.HiddenProfiles"
       name="uwosh.oie.studyabroadstudent-hiddenprofiles" />
 
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.subjects"
+    component="uwosh.oie.studyabroadstudent.vocabularies.SubjectsVocabulary" />
+  
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.majors"
+    component="uwosh.oie.studyabroadstudent.vocabularies.MajorsVocabulary" />
+  
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.programs"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ProgramsVocabulary" />
+  
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.session_hours"
+    component="uwosh.oie.studyabroadstudent.vocabularies.SessionHoursVocabulary" />
+  
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.ethnicities"
+    component="uwosh.oie.studyabroadstudent.vocabularies.EthnicitiesVocabulary" />
+  
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.marriage_statuses"
+    component="uwosh.oie.studyabroadstudent.vocabularies.MarriageStatusesVocabulary" />
+  
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.genders"
+    component="uwosh.oie.studyabroadstudent.vocabularies.GendersVocabulary" />
+  
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.states_for_residency"
+    component="uwosh.oie.studyabroadstudent.vocabularies.StatesForResidencyVocabulary" />
+  
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.citizenship"
+    component="uwosh.oie.studyabroadstudent.vocabularies.CitizenshipVocabulary" />
+  
 </configure>

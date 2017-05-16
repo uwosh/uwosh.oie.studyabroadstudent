@@ -18,4 +18,12 @@
       directory="static"
       />
 
+  <!-- control panel -->
+  <browser:page
+      name="oiestudyabroadstudent-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".controlpanel.OIEStudyAbroadStudentControlPanelView"
+      permission="cmf.ManagePortal"
+      />
+
 </configure>
