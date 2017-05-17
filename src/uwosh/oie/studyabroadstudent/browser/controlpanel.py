@@ -151,7 +151,6 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             u'Hessen - Hochschule für Musik und Darstellende Kunst Frankfurt - academic year',
             u'Hessen - Hochschule für Musik und Darstellende Kunst Frankfurt - semester',
             u'Hessen - Johann Wolfgang Goethe-Universität Frankfurt - academic year',
-            u'Hessen - Johann Wolfgang Goethe-Universität Frankfurt - academic year',
             u'Hessen - Johann Wolfgang Goethe-Universität Frankfurt - semester',
             u'Hessen - Justus-Liebig-Universität Gießen - academic year',
             u'Hessen - Justus-Liebig-Universität Gießen - semester',
