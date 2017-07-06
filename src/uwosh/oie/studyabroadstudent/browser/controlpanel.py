@@ -427,6 +427,183 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         value_type=schema.TextLine()
     )
 
+    first_day_of_spring_semester_classes = schema.Date(
+        title=u'First day of Spring Semester Classes',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    last_day_of_spring_semester_classes = schema.Date(
+        title=u'Last day of Spring Semester Classes',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    first_day_of_spring_interim_classes = schema.Date(
+        title=u'First day of Spring Interim Classes',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    last_day_of_spring_interim_classes = schema.Date(
+        title=u'Last day of Spring Interim Classes',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    official_spring_graduation_date = schema.Date(
+        title=u'official spring graduation date',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    first_day_of_summer_i_classes = schema.Date(
+        title=u'First day of Spring Interim Classes',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    last_day_of_summer_i_classes = schema.Date(
+        title=u'Last day of Summer I Classes',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    first_day_of_summer_ii_classes = schema.Date(
+        title=u'First day of Summer II Classes',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    last_day_of_summer_ii_classes = schema.Date(
+        title=u'Last day of Summer II Classes',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    official_summer_graduation_date = schema.Date(
+        title=u'Official Summer Graduation Date',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    first_day_of_fall_semester_classes = schema.Date(
+        title=u'First day of Fall Semester Classes',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    last_day_of_fall_semester_classes = schema.Date(
+        title=u'Last day of Fall Semester Classes',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    first_day_of_winter_interim_classes = schema.Date(
+        title=u'First day of Winter Interim Classes',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    last_day_of_winter_interim_classes = schema.Date(
+        title=u'Last day of Winter Interim Classes',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    official_fall_graduation_date = schema.Date(
+        title=u'Official Fall Graduation Date',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    spring_interim_summer_fall_semester_participant_orientation_deadline = schema.Date(
+        title=u'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    spring_interim_summer_fall_semester_in_person_orientation = schema.Date(
+        title=u'Spring Interim, Summer & Fall Semester In-person Orientation',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    winter_interim_spring_semester_participant_orientation_deadline = schema.Date(
+        title=u'Winter Interim & Spring Semester Participant Orientation Deadline',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    winter_interim_spring_semester_in_person_orientation = schema.Date(
+        title=u'Winter Interim & Spring Semester In-person Orientation',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    spring_interim_summer_fall_semester_payment_deadline_1 = schema.Date(
+        title=u'Spring Interim, Summer & Fall Semester Payment Deadline 1',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    spring_interim_payment_deadline_2 = schema.Date(
+        title=u'Spring Interim Payment Deadline 2',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    sunmmer_payment_deadline_2 = schema.Date(
+        title=u'Sunmmer Payment Deadline 2',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    fall_semester_payment_deadline_2 = schema.Date(
+        title=u'Fall Semester Payment Deadline 2',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    winter_interim_spring_payment_deadline_1 = schema.Date(
+        title=u'Winter Interim & Spring Semester Payment Deadline 1',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+    winter_interim_spring_payment_deadline_2 = schema.Date(
+        title=u'Winter Interim & Spring Semester Payment Deadline 2',
+        required=True,
+        default=date(2017,01,01),
+#        value_type=schema.Date()
+    )
+
+
+
 
 class OIEStudyAbroadStudentControlPanelForm(RegistryEditForm):
     schema = IOIEStudyAbroadStudentControlPanel
