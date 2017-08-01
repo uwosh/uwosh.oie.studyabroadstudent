@@ -68,5 +68,25 @@
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.citizenship"
     component="uwosh.oie.studyabroadstudent.vocabularies.CitizenshipVocabulary" />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.countries"
+    component="uwosh.oie.studyabroadstudent.vocabularies.CountriesVocabulary" />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.program_type"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ProgramTypeVocabulary" />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.program_component"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ProgramComponentVocabulary" />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.equipment_and_space"
+    component="uwosh.oie.studyabroadstudent.vocabularies.EquipmentAndSpaceVocabulary" />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.guest_lectures"
+    component="uwosh.oie.studyabroadstudent.vocabularies.GuestLecturesVocabulary" />
   
 </configure>

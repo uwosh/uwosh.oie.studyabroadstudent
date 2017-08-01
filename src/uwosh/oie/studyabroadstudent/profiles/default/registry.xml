@@ -21,6 +21,14 @@
     </field>
     <value>2016-10-17</value>
   </record>
-  -->
   
+  <record name="oiestudyabroadstudent.last_day_of_fall_semester_classes">
+    <field type="plone.registry.field.Date">
+      <title>Last day of Fall Semester Classes</title>
+      <required>True</required>
+    </field>
+    <value>2017-01-01</value>
+  </record>
+  -->
+
  </registry>
