@@ -76,6 +76,23 @@ To verify the import:
 - create and run the script `extractApplicationsLocally.py` and save its output to a file, like this: `bin/instance run extractApplicationsLocally.py > extractlocallyoutput.out`
 - compare the contents of that file to that of the one you created remotely before, e.g. `diff extractoutput.out extractlocallyoutput.out`
 
+Legacy Time Zones
+-----------------
+
+Since Plone 2.5, the time zones database has changed: the time zones 'GMT-5' and 'GMT-6' have since been renamed 'Etc/GMT-5' and 'Etc/GMT-6'. Some DateTime values in legacy data use the old time zone designations, which causes an error in the unpickler() method in the file tzinfo.py, part of the pytz-2015.7-py2.7.egg. This error prevents viewing of legacy (migrated) OIEStudentApplication objects. 
+
+For the moment, the only way to get around this error is to patch the unpickler() method in tzinfo.py and add the following lines right after line 525 (the comment "Raises a KeyError if zone no longer exists, which should never happen and would be a bug.")::
+
+    # Raises a KeyError if zone no longer exists, which should never happen
+    # and would be a bug.
+    if zone == 'GMT-5':
+        logger.warn('fixing nonexistent timezone %s' % zone)
+        zone = 'Etc/GMT-5'
+    elif zone == 'GMT-6':
+        logger.warn('fixing nonexistent timezone %s' % zone)
+        zone = 'Etc/GMT-6'
+    tz = pytz.timezone(zone)
+
 
 Contribute
 ----------
