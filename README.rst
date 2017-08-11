@@ -69,10 +69,7 @@ On the new site:
 
 - run the script `extractApplicationsRemotely.py` and save its output to a file, like this: `bin/instance run extractApplicationsRemotely.py > extractoutput.out`; this will take hours (to extract 8600 student applications it took over 3.5 hours over the internet)
 - tweak that output file to create Python code: `./pythonify_extract.sh extractoutput.out > extractoutput.py`
-- manually tweak `extractoutput.py` to comment out (prefix line with '#') the handful of lines complaining about 'too many query results' or 'no such ID found'
 - run the script `importApplications.py` to import the applications locally, like this: `bin/instance run importApplications.py` (this took almost one hour on a MacBook Air)
-
-You should inspect the query errors in the file `extractoutput.out` ('too many query results' or 'no such ID found') to figure out why they occurred. 
 
 To verify the import:
 
