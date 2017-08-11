@@ -7,10 +7,6 @@ import DateTime
 wtool = context.portal_workflow
 catalog = context.portal_catalog
 results = catalog.searchResults(portal_type='OIEStudentApplication', id=id)
-if len(results) < 1:
-    return "no such ID found", id
-if len(results) > 1:
-    return "too many query results %s for id %s" % (len(results), id)
 for r in results:
     o = r.getObject()
     (created, modified, getDepartureDate, getReturnDate, getOrientationDate1, getOrientationDate2, getConflictDate, getCompletionDate) = (o.created(), o.modified(), o.getDepartureDate(), o.getReturnDate(), o.getOrientationDate1(), o.getOrientationDate2(), o.getConflictDate(), o.getCompletionDate())
