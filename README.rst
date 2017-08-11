@@ -83,9 +83,9 @@ To verify the import:
 Contribute
 ----------
 
-- Issue Tracker: https://github.com/collective/uwosh.oie.studyabroadstudent/issues
-- Source Code: https://github.com/collective/uwosh.oie.studyabroadstudent
-- Documentation: https://github.com/collective/uwosh.oie.studyabroadstudent/docs
+- Issue Tracker: https://github.com/uwosh/uwosh.oie.studyabroadstudent/issues
+- Source Code: https://github.com/uwosh/uwosh.oie.studyabroadstudent
+- Documentation: https://github.com/uwosh/uwosh.oie.studyabroadstudent/docs
 
 
 Credits
