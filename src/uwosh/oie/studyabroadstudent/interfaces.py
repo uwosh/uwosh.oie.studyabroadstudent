@@ -11,6 +11,8 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from plone.supermodel import model
 from plone.namedfile import field
 
+from collective import dexteritytextindexer
+
 yes_no_none_vocabulary = SimpleVocabulary(
     [
         SimpleTerm(value=''),
@@ -82,37 +84,44 @@ class IUwoshOieStudyabroadstudentLayer(IDefaultBrowserLayer):
 
 class IOIEStudyAbroadStudentApplication(Interface):
 
+    dexteritytextindexer.searchable('title')
     title = schema.TextLine(
         title=_(u'Title'),
         required=True,
     )
 
+    dexteritytextindexer.searchable('description')
     description = schema.Text(
         title=_(u'Description'),
         required=False,
     )
 
+    dexteritytextindexer.searchable('studentID')
     studentID = schema.TextLine(
         title=_(u'UW Oshkosh Student ID'),
         description=_(u'(if applicable)'),
         required=False,
     )
 
+    dexteritytextindexer.searchable('firstName')
     firstName = schema.TextLine(
         title=_(u'First Name'),
         required=True,
     )
 
+    dexteritytextindexer.searchable('middleName')
     middleName = schema.TextLine(
         title=_(u'Middle Name'),
         required=False,
     )
 
+    dexteritytextindexer.searchable('lastName')
     lastName = schema.TextLine(
         title=_(u'Last Name'),
         required=True,
     )
 
+    dexteritytextindexer.searchable('email')
     email = schema.TextLine(
         title=_(u'Email Address'),
         description=_(u'UW Oshkosh students must use a @uwosh.edu email address.  Acceptable email addresses for other applicants include school and company addresses.'),
@@ -244,10 +253,10 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=False,
     )
 
-#    dateOfBirth = schema.Date(
-#        title=_(u'Birthday'),
-#        required=True,
-#    )
+    dateOfBirth = schema.Date(
+        title=_(u'Birthday'),
+        required=True,
+    )
 
     dateOfBirth_year = schema.TextLine(
         title=_(u'Birthday year'),
@@ -294,7 +303,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     model.fieldset(
         'passport',
         label=_(u"Passport"),
-        fields=['passportName', 'passportNumber', 'passportIssueOffice', 'passportExpDate']
+        fields=['passportName', 'passportNumber', 'passportIssueOffice', 'passportExpDate', 'passportExpDate_year', 'passportExpDate_month', 'passportExpDate_day']
     )
       
     passportName = schema.TextLine(
@@ -317,7 +326,22 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     passportExpDate = schema.Date(
         title=_(u'Passport Expiry'),
-        required=False,
+        required=True,
+    )
+
+    passportExpDate_year = schema.TextLine(
+        title=_(u'Passport Expiry Year'),
+        required=True,
+    )
+
+    passportExpDate_month = schema.TextLine(
+        title=_(u'Passport Expiry Month'),
+        required=True,
+    )
+
+    passportExpDate_day = schema.TextLine(
+        title=_(u'Passport Expiry Day'),
+        required=True,
     )
 
     model.fieldset(
@@ -842,6 +866,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         #write_permission="UWOshOIE: Modify revisable fields",
     )
 
+    dexteritytextindexer.searchable('programName')
     programName = schema.Choice(
         title=_(u'Program Name'),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.programs',
@@ -850,6 +875,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         #write_permission="UWOshOIE: Modify normal fields", 
     )
 
+    dexteritytextindexer.searchable('programYear')
     programYear = schema.TextLine(
 #    programYear = schema.Int(
         title=_(u'Program Year'),
