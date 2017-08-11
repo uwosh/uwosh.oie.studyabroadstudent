@@ -37,12 +37,14 @@ setSite(app[site_id])
 site = getSite()
 
 # ensure folder exists 
-folder = api.content.create(
-    container=site,
-    type='Folder',
-    id=folder_id,
-    title='Applications',
-)
+toplevel_items = site.items() 
+if 'applications' not in [id for id, obj in toplevel_items]:
+    folder = api.content.create(
+        container=site,
+        type='Folder',
+        id=folder_id,
+        title='Applications',
+    )
 
 # Enable the context manager to switch the user
 with api.env.adopt_user(username="admin"):
