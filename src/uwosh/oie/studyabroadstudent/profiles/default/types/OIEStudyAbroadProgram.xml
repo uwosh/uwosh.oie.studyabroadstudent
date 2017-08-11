@@ -37,6 +37,10 @@
     <element value="plone.app.content.interfaces.INameFromTitle" />
   </property>
 
+  <property name="behaviors">
+    <element value="collective.dexteritytextindexer.behavior.IDexterityTextIndexer" />
+  </property>
+
   <!-- View information -->
   <property name="add_view_expr">string:${folder_url}/++add++OIEStudyAbroadProgram</property>
   <property name="immediate_view">view</property>
