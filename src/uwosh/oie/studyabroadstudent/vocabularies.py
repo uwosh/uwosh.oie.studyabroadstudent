@@ -14,7 +14,7 @@ class SubjectsVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.subjects')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 SubjectsVocabulary = SubjectsVocabularyFactory()
@@ -25,7 +25,7 @@ class MajorsVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.majors')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 MajorsVocabulary = MajorsVocabularyFactory()
@@ -36,7 +36,7 @@ class ProgramsVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.programs')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 ProgramsVocabulary = ProgramsVocabularyFactory()
@@ -47,7 +47,7 @@ class SessionHoursVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.session_hours')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 SessionHoursVocabulary = SessionHoursVocabularyFactory()
@@ -58,7 +58,7 @@ class EthnicitiesVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.ethnicities')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 EthnicitiesVocabulary = EthnicitiesVocabularyFactory()
@@ -69,7 +69,7 @@ class MarriageStatusesVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.marriage_statuses')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 MarriageStatusesVocabulary = MarriageStatusesVocabularyFactory()
@@ -80,7 +80,7 @@ class GendersVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.genders')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 GendersVocabulary = GendersVocabularyFactory()
@@ -91,7 +91,7 @@ class StatesForResidencyVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.states_for_residency')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 StatesForResidencyVocabulary = StatesForResidencyVocabularyFactory()
@@ -102,7 +102,7 @@ class CitizenshipVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.citizenship')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 CitizenshipVocabulary = CitizenshipVocabularyFactory()
@@ -113,7 +113,7 @@ class CountriesVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.countries')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 CountriesVocabulary = CountriesVocabularyFactory()
@@ -124,7 +124,7 @@ class ProgramTypeVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.program_type')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 ProgramTypeVocabulary = ProgramTypeVocabularyFactory()
@@ -135,7 +135,7 @@ class ProgramComponentVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.program_component')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 ProgramComponentVocabulary = ProgramComponentVocabularyFactory()
@@ -146,7 +146,7 @@ class EquipmentAndSpaceVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.equipment_and_space')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 EquipmentAndSpaceVocabulary = EquipmentAndSpaceVocabularyFactory()
@@ -157,7 +157,7 @@ class GuestLecturesVocabularyFactory(object):
     def __call__(self, context):
         values = api.portal.get_registry_record('oiestudyabroadstudent.guest_lectures')
         normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, title=i) for i in values]
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
 GuestLecturesVocabulary = GuestLecturesVocabularyFactory()
