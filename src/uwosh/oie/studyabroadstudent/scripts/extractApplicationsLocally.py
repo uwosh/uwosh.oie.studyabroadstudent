@@ -18,9 +18,17 @@ local_passwd = os.environ['LOCALPASSWD']
 if not local_passwd:
     print "missing environment variable value 'LOCALPASSWD'"
     exit (1)
+local_site_id = os.environ['LOCALSITEID']
+if not local_site_id:
+    print "missing environment variable value 'LOCALSITEID'"
+    exit (1)
 
 # ok to use HTTP for localhost
-server=xmlrpclib.ServerProxy('https://%s:%s@localhost:8080' % (local_user, local_passwd))
+server=xmlrpclib.ServerProxy('http://%s:%s@localhost:8080/%s' % (local_user, local_passwd, local_site_id))
+
+print "app_data = ["
 
 for id in application_ids:
     print server.extractApplication(id)
+
+print "]"
