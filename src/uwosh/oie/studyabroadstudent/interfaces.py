@@ -258,21 +258,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=True,
     )
 
-    dateOfBirth_year = schema.TextLine(
-        title=_(u'Birthday year'),
-        required=True,
-    )
-
-    dateOfBirth_month = schema.TextLine(
-        title=_(u'Birthday month'),
-        required=True,
-    )
-
-    dateOfBirth_day = schema.TextLine(
-        title=_(u'Birthday day'),
-        required=True,
-    )
-
     placeOfBirth = schema.TextLine(
         title=_(u'Place of Birth'),
         description=_(u'Enter city, state, and country'),
@@ -303,7 +288,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     model.fieldset(
         'passport',
         label=_(u"Passport"),
-        fields=['passportName', 'passportNumber', 'passportIssueOffice', 'passportExpDate', 'passportExpDate_year', 'passportExpDate_month', 'passportExpDate_day']
+        fields=['passportName', 'passportNumber', 'passportIssueOffice', 'passportExpDate']
     )
       
     passportName = schema.TextLine(
@@ -326,21 +311,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     passportExpDate = schema.Date(
         title=_(u'Passport Expiry'),
-        required=True,
-    )
-
-    passportExpDate_year = schema.TextLine(
-        title=_(u'Passport Expiry Year'),
-        required=True,
-    )
-
-    passportExpDate_month = schema.TextLine(
-        title=_(u'Passport Expiry Month'),
-        required=True,
-    )
-
-    passportExpDate_day = schema.TextLine(
-        title=_(u'Passport Expiry Day'),
         required=True,
     )
 
