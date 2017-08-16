@@ -64,6 +64,7 @@ On the legacy site:
 - using the Management Interface, e.g. http://localhost:8080/OIE/manage_main, navigate to portal_skins/custom and create a Script (Python) called `listApplicationIDs` containing the code in the file `listApplicationIDs.py` 
 - run the Script (Python) `listApplicationIDs`
 - save the output to a local file with the `.py` Python filename extension, e.g. `listApplicationIDsoutput.py`
+- using the Management Interface, create a Script (Python) in portal_skins/custom called `extractApplication` containing the code in the file `extractApplication.py` and add `id` to its parameter list
 
 On the new site:
 
@@ -71,26 +72,32 @@ On the new site:
 - tweak that output file to create Python code: `./pythonify_extract.sh extractoutput.out > extractoutput.py`
 - run the script `importApplications.py` to import the applications locally, like this: `bin/instance run importApplications.py` (this took almost one hour on a MacBook Air)
 
-To verify the import:
+To verify the import, on the new site:
 
+- using the Management Interface, create a Script (Python) in portal_skins/custom called `extractApplication` containing the code in the file `extractApplication.py` and add `id` to its parameter list
 - create and run the script `extractApplicationsLocally.py` and save its output to a file, like this: `bin/instance run extractApplicationsLocally.py > extractlocallyoutput.out`
 - compare the contents of that file to that of the one you created remotely before, e.g. `diff extractoutput.out extractlocallyoutput.out`
 
 Legacy Time Zones
 -----------------
 
-Since Plone 2.5, the time zones database has changed: the time zones 'GMT-5' and 'GMT-6' have since been renamed 'Etc/GMT-5' and 'Etc/GMT-6'. Some DateTime values in legacy data use the old time zone designations, which causes an error in the unpickler() method in the file tzinfo.py, part of the pytz-2015.7-py2.7.egg. This error prevents viewing of legacy (migrated) OIEStudentApplication objects. 
+Since Plone 2.5, the time zones database has changed: the time zones 'GMT-5' and 'GMT-6' have since been renamed 'Etc/GMT+5' and 'Etc/GMT+6' (see https://community.plone.org/t/unknowntimezoneerror-pytz-quirks/4255/4 for why the sign change). Some DateTime values in legacy data use the old time zone designations, which causes an error in the unpickler() method in the file tzinfo.py, part of the pytz-2015.7-py2.7.egg. This error prevents viewing of legacy (migrated) OIEStudentApplication objects. 
 
 For the moment, the only way to get around this error is to patch the unpickler() method in tzinfo.py and add the following lines right after line 525 (the comment "Raises a KeyError if zone no longer exists, which should never happen and would be a bug.")::
 
     # Raises a KeyError if zone no longer exists, which should never happen
     # and would be a bug.
-    if zone == 'GMT-5':
-        logger.warn('fixing nonexistent timezone %s' % zone)
-        zone = 'Etc/GMT-5'
-    elif zone == 'GMT-6':
-        logger.warn('fixing nonexistent timezone %s' % zone)
-        zone = 'Etc/GMT-6'
+    newzone = zone
+    if zone.find('GMT-') != -1:
+        newzone = zone.replace('GMT-','Etc/GMT+')
+    if zone.find('GMT+') != -1:
+        import pdb;pdb.set_trace()
+        newzone = zone.replace('GMT+','Etc/GMT-')
+    if zone == 'GMT':
+        newzone = 'Etc/GMT'
+    if zone != newzone:
+        logger.warn('fixing nonexistent timezone %s to %s' % (zone, newzone))
+        zone = newzone
     tz = pytz.timezone(zone)
 
 
