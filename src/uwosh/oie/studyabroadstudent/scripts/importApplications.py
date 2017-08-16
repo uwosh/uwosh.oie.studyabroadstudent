@@ -281,21 +281,21 @@ with api.env.adopt_user(username="admin"):
          ProgramFee2,
          review_history) = values
 
-        if created and len(created):
+        if created is not None and len(created):
             created = (DateTime.DateTime(created)).asdatetime()
-        if modified and len(modified):
+        if modified is not None and len(modified):
             modified = (DateTime.DateTime(modified)).asdatetime()
-        if DepartureDate and len(DepartureDate):
+        if DepartureDate is not None and len(DepartureDate):
             DepartureDate = (DateTime.DateTime(DepartureDate)).asdatetime().date()
-        if ReturnDate and len(ReturnDate):
+        if ReturnDate is not None and len(ReturnDate):
             ReturnDate = (DateTime.DateTime(ReturnDate)).asdatetime().date()
-        if OrientationDate1 and len(OrientationDate1):
+        if OrientationDate1 is not None and len(OrientationDate1):
             OrientationDate1 = (DateTime.DateTime(OrientationDate1)).asdatetime().date()
-        if OrientationDate2 and len(OrientationDate2):
+        if OrientationDate2 is not None and len(OrientationDate2):
             OrientationDate2 = (DateTime.DateTime(OrientationDate2)).asdatetime().date()
-        if ConflictDate and len(ConflictDate):
+        if ConflictDate is not None and len(ConflictDate):
             ConflictDate = (DateTime.DateTime(ConflictDate)).asdatetime().date()
-        if CompletionDate and len(CompletionDate):
+        if CompletionDate is not None and len(CompletionDate):
             CompletionDate = (DateTime.DateTime(CompletionDate)).asdatetime().date()
 
         # # skip if object with that ID already exists (commented out because it doesn't work right)
@@ -304,6 +304,38 @@ with api.env.adopt_user(username="admin"):
         #     print "Skipping existing object with ID", id
         #     next
 
+        if DateOfBirth_year == '11201972':
+            DateOfBirth_year = '19721'
+        if DateOfBirth_year == '5191995':
+            DateOfBirth_year = '1995'
+        if DateOfBirth_year == '19991':
+            DateOfBirth_year = '1991'
+        if DateOfBirth_year == '4141989':
+            DateOfBirth_year = '1989'
+        if DateOfBirth_year == '101389':
+            DateOfBirth_year = '1989'
+        if DateOfBirth_year == '19997':
+            DateOfBirth_year = '1997'
+        if DateOfBirth_year == '2171991':
+            DateOfBirth_year = '1991'
+        if DateOfBirth_year == '5131997':
+            DateOfBirth_year = '1997'
+        if DateOfBirth_year == '19992':
+            DateOfBirth_year = '1992'
+        if DateOfBirth_year == '19996':
+            DateOfBirth_year = '1996'
+        if PassportExpDate_month == 'April' and PassportExpDate_day == '31':
+            PassportExpDate_day = '30'
+        try:
+            dateOfBirth=date(int((DateOfBirth_year is not None) and DateOfBirth_year or '1900'), month_values[((DateOfBirth_month is not None) and (DateOfBirth_month != '-- choose one --')) and DateOfBirth_month or 'January'], int(((DateOfBirth_day is not None) and (DateOfBirth_day != '-- choose one --') and DateOfBirth_day or 1)))
+        except:
+            import pdb;pdb.set_trace()
+
+        try:
+            passportExpDate=date(int((PassportExpDate_year is not None and PassportExpDate_year is not '') and PassportExpDate_year or '1900'), month_values[(PassportExpDate_month == '-- choose one --' or PassportExpDate_month == '') and 'January' or PassportExpDate_month], int((PassportExpDate_day == '-- choose one --' or PassportExpDate_day == '') and 1 or PassportExpDate_day))
+        except:
+            import pdb;pdb.set_trace()
+            
         obj = api.content.create(
             safe_id=True,
             container=folder,
@@ -334,7 +366,7 @@ with api.env.adopt_user(username="admin"):
             citizenshipOther=CitizenshipOther,
             stateResidency=StateResidency,
             stateResidencyOther=StateResidencyOther,
-            dateOfBirth=date(int(DateOfBirth_year), month_values[DateOfBirth_month], int(DateOfBirth_day)),
+            dateOfBirth=dateOfBirth,
             placeOfBirth=PlaceOfBirth,
             gender=Gender,
             marriageStatus=MarriageStatus,
@@ -343,7 +375,7 @@ with api.env.adopt_user(username="admin"):
             passportName=PassportName,
             passportNumber=PassportNumber,
             passportIssueOffice=PassportIssueOffice,
-            passportExpDate=date(int(PassportExpDate_year), month_values[PassportExpDate_month], int(PassportExpDate_day)),
+            passportExpDate=passportExpDate,
             questionAcadCareerPlan=QuestionAcadCareerPlan,
             questionLangCulturalSkills=QuestionLangCulturalSkills,
             questionPrevTravel=QuestionPrevTravel,
