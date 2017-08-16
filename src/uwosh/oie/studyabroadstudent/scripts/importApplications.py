@@ -46,6 +46,21 @@ if 'applications' not in [id for id, obj in toplevel_items]:
         title='Applications',
     )
 
+month_values = {
+    'January' : 1,
+    'February' : 2,
+    'March' : 3,
+    'April' : 4,
+    'May' : 5,
+    'June' : 6,
+    'July' : 7,
+    'August' : 8,
+    'September' : 9,
+    'October' : 10,
+    'November' : 11,
+    'December' : 12,
+}
+
 # Enable the context manager to switch the user
 with api.env.adopt_user(username="admin"):
     # You're now posing as admin!
@@ -319,9 +334,7 @@ with api.env.adopt_user(username="admin"):
             citizenshipOther=CitizenshipOther,
             stateResidency=StateResidency,
             stateResidencyOther=StateResidencyOther,
-            dateOfBirth_year=DateOfBirth_year,
-            dateOfBirth_month=DateOfBirth_month,
-            dateOfBirth_day=DateOfBirth_day,
+            dateOfBirth=date(int(DateOfBirth_year), month_values[DateOfBirth_month], int(DateOfBirth_day)),
             placeOfBirth=PlaceOfBirth,
             gender=Gender,
             marriageStatus=MarriageStatus,
@@ -330,9 +343,7 @@ with api.env.adopt_user(username="admin"):
             passportName=PassportName,
             passportNumber=PassportNumber,
             passportIssueOffice=PassportIssueOffice,
-            passportExpDate_year=PassportExpDate_year,
-            passportExpDate_month=PassportExpDate_month,
-            passportExpDate_day=PassportExpDate_day,
+            passportExpDate=date(int(PassportExpDate_year), month_values[PassportExpDate_month], int(PassportExpDate_day)),
             questionAcadCareerPlan=QuestionAcadCareerPlan,
             questionLangCulturalSkills=QuestionLangCulturalSkills,
             questionPrevTravel=QuestionPrevTravel,
