@@ -13,6 +13,8 @@ from plone.namedfile import field
 
 from collective import dexteritytextindexer
 
+from plone.app.textfield import RichText
+
 yes_no_none_vocabulary = SimpleVocabulary(
     [
         SimpleTerm(value=''),
@@ -43,6 +45,21 @@ month_vocabulary = SimpleVocabulary(
      SimpleTerm(value=u'11', title=_(u'November')),
      SimpleTerm(value=u'12', title=_(u'December'))]
 )
+
+# month_vocabulary = SimpleVocabulary(
+#     [SimpleTerm(value=u'January', title=_(u'January')),
+#      SimpleTerm(value=u'February', title=_(u'February')),
+#      SimpleTerm(value=u'March', title=_(u'March')),
+#      SimpleTerm(value=u'April', title=_(u'April')),
+#      SimpleTerm(value=u'May', title=_(u'May')),
+#      SimpleTerm(value=u'June', title=_(u'June')),
+#      SimpleTerm(value=u'July', title=_(u'July')),
+#      SimpleTerm(value=u'August', title=_(u'August')),
+#      SimpleTerm(value=u'September', title=_(u'September')),
+#      SimpleTerm(value=u'October', title=_(u'October')),
+#      SimpleTerm(value=u'November', title=_(u'November')),
+#      SimpleTerm(value=u'December', title=_(u'December'))]
+# )
 
 dayofmonth_vocabulary = SimpleVocabulary(
     [SimpleTerm(value=u'01'),
@@ -78,6 +95,80 @@ dayofmonth_vocabulary = SimpleVocabulary(
      SimpleTerm(value=u'31'), ]
 )
 
+room_type_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'Single Room', title=_(u'Single Room')),
+        SimpleTerm(value=u'Double Room', title=_(u'Double Room')),
+        SimpleTerm(value=u'Triple Room', title=_(u'Triple Room')),
+    ]
+)
+
+smoking_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'Smoking', title=_(u'Smoking')),
+        SimpleTerm(value=u'Non-smoking', title=_(u'Non-smoking')),
+        SimpleTerm(value=u'No Preference', title=_(u'No Preference')),
+    ]
+)
+
+semester_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'Fall', title=_(u'Fall')),
+        SimpleTerm(value=u'Fall Interim', title=_(u'Fall Interim')),
+        SimpleTerm(value=u'Spring', title=_(u'Spring')),
+        SimpleTerm(value=u'Spring Interim', title=_(u'Spring Interim')),
+        SimpleTerm(value=u'Summer', title=_(u'Summer')),
+    ]
+)
+
+student_type_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'UW Oshkosh Freshman', title=_(u'UW Oshkosh Freshman')),
+        SimpleTerm(value=u'UW Oshkosh Sophomore', title=_(u'UW Oshkosh Sophomore')),
+        SimpleTerm(value=u'UW Oshkosh Junior', title=_(u'UW Oshkosh Junior')),
+        SimpleTerm(value=u'UW Oshkosh Senior', title=_(u'UW Oshkosh Senior')),
+        SimpleTerm(value=u'UW Oshkosh Graduate Student', title=_(u'UW Oshkosh Graduate Student')),
+        SimpleTerm(value=u'Student at another University (please complete and submit the "Special Student" form)', title=_(u'Student at another University (please complete and submit the "Special Student" form)')),
+        SimpleTerm(value=u'I am not a Student (please complete and submit the "Special Student" form)', title=_(u'I am not a Student (please complete and submit the "Special Student" form)')),
+    ]
+)
+
+bus_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'I will take the group bus from Oshkosh to the airport', title=_(u'I will take the group bus from Oshkosh to the airport')),
+        SimpleTerm(value=u'I will arrange for my own transportation from Oshkosh to the airport.', title=_(u'I will arrange for my own transportation from Oshkosh to the airport.')),
+    ]
+)
+
+fly_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'I will fly with the group', title=_(u'I will fly with the group')),
+        SimpleTerm(value=u'I will deviate from the group itinerary', title=_(u'I will deviate from the group itinerary')),
+    ]
+)
+
+orientation_conflict_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'No', title=_(u'No')),
+        SimpleTerm(value=u'Yes, I have a conflict on (enter the date next):', title=_(u'Yes, I have a conflict on (enter the date next):')),
+        SimpleTerm(value=u'No dates are listed', title=_(u'No dates are listed')),
+    ]
+)
+
+hold_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'HOLD', title=_(u'HOLD')),
+        SimpleTerm(value=u'PROCESS', title=_(u'PROCESS')),
+    ]
+)
+
+aware_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'Yes, I am aware of the application requirements for my program', title=_(u'Yes, I am aware of the application requirements for my program')),
+        SimpleTerm(value=u'There are no additional application requirements for my program', title=_(u'There are no additional application requirements for my program')),
+    ]
+)
+
 class IUwoshOieStudyabroadstudentLayer(IDefaultBrowserLayer):
     """Marker interface that defines a browser layer."""
 
@@ -88,6 +179,8 @@ class IOIEStudyAbroadStudentApplication(Interface):
     title = schema.TextLine(
         title=_(u'Title'),
         required=True,
+        readonly=True,
+        default=_(u'will be auto-generated'),
     )
 
     dexteritytextindexer.searchable('description')
@@ -492,12 +585,13 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     medicalHealthProblems_whatCondition = schema.Text(
-        title=_(u''),
+        title=_(u'Medical Conditions'),
         description=_(u'If you are currently under the care of a doctor or other health care professional, for what condition? Write ''n/a'' in blanks where appropriate.'),
         required=False,
     )
 
     medicalHealthProblems_willingToPrescribe = schema.Choice(
+        title=_(u'Enough Medication'),
         description=_(u'Is your current physician willing to prescribe enough medication to last throughout your planned program abroad?'),
         vocabulary=yes_no_na_vocabulary,
 #        required=True,
@@ -511,6 +605,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     medicalMentalProblems = schema.Text(
+        title=_(u'Mental Health Problems'),
         description=_(u'List and describe any recent or continuing mental health problems, including anxiety, depression, bipolar disorder, substance abuse (alcohol or drugs), eating disorders (anorexia/bulimia), etc. that should be brought to the attention of the lead faculty members, liaison abroad and/or host family abroad.  Include the following information: diagnosis, dates of treatment, names & locations of treating professionals, and recovery status.'),
         required=False,
     )
@@ -523,11 +618,13 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     medicalMentalProblems_medications = schema.Text(
+        title=_(u'Mental Health Medications'),
         description=_(u'If so, list the medications taken over the past year. Write ''n/a'' in blanks where appropriate.'),
         required=False,
     )
 
     medicalMentalProblems_currentDose = schema.Text(
+        title=_(u'Mental Health Medications Dosage'),
         description=_(u'What is the current dose? Write ''n/a'' in text area when appropriate.'),
         required=False,
     )
@@ -540,6 +637,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     medicalMentalProblems_underCare = schema.Choice(
+        title=_(u'Mental Health Care'),
         description=_(u'Are you currently or have you ever been under the care of a psychiatrist or other medical provider, substance abuse counselor or other mental health professional?'),
         vocabulary=yes_no_none_vocabulary,
 #        required=True,
@@ -547,11 +645,13 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     medicalMentalProblems_condition = schema.Text(
+        title=_(u'Mental Health Care Conditions'),
         description=_(u'If yes, for what condition? Write ''n/a'' in text area when appropriate.'),
         required=False,
     )
 
     medicalMentalProblems_enoughMedication = schema.Choice(
+        title=_(u'Sufficient Mental Health Medication'),
         description=_(u'Is your current medical provider willing to prescribe enough medication to last for the duration of your planned program abroad?'),
         vocabulary=yes_no_na_vocabulary,
 #        required=True,
@@ -559,11 +659,13 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     medicalMentalProblems_additionalInfo = schema.Text(
+        title=_(u'Mental Health Additional Information'),
         description=_(u'Is there any additional information related to your mental health which may be helpful for program organizers, liaisons and host families to know? Write ''none'' in text area if there isn''t any.'),
         required=False,
     )
 
     medicalRegistered = schema.Choice(
+        title=_(u'Registered with UW Oshkosh for Accommodations'),
         description=_(u'Are you currently registered with the University of Wisconsin Oshkosh (with offices such as the Dean of Students office or Project Success) or with your university for medical or mental-health related accommodations?'),
         vocabulary=yes_no_none_vocabulary,
 #        required=True,
@@ -571,12 +673,13 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     medicalRegistered_office = schema.TextLine(
+        title=_(u'UW Oshkosh Office Accommodations'),
         description=_(u'If so, with which office have you registered? Write ''none'' in text area if you have not registered.'),
         required=False,
     )
 
     medicalRegistered_accommodations = schema.Text(
-        title=_(u'Medical Authorized Accomodations'),
+        title=_(u'Medical Authorized Accommodations'),
         description=_(u'What accommodations have been authorized for you? Write ''n/a'' in text area when appropriate.'),
         required=False,
     )
@@ -597,7 +700,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
       
     smokingPreferred = schema.Choice(
         title=_(u'Smoking Preference'),
-        vocabulary=SimpleVocabulary([SimpleTerm(value='Smoking'),SimpleTerm(value='Non-smoking'),SimpleTerm(value='No Preference')]),
+        vocabulary=smoking_vocabulary,
         default= 'No Preference',
         required=False,
     )
@@ -857,7 +960,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     programSemester = schema.Choice(
         title=_(u'Semester'),
-        vocabulary=SimpleVocabulary([SimpleTerm(value='Fall'),SimpleTerm(value='Fall Interim'),SimpleTerm(value='Spring'),SimpleTerm(value='Spring Interim'),SimpleTerm(value='Summer')]),
+        vocabulary=semester_vocabulary,
 #        required=True,
         required=False,
         #write_permission="UWOshOIE: Modify normal fields",
@@ -872,7 +975,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
       
     studentType = schema.Choice(
         title=_(u'Student Type'),
-        vocabulary=SimpleVocabulary([SimpleTerm(value='UW Oshkosh Freshman'),SimpleTerm(value='UW Oshkosh Sophomore'),SimpleTerm(value='UW Oshkosh Junior'),SimpleTerm(value='UW Oshkosh Senior'),SimpleTerm(value='UW Oshkosh Graduate Student'),SimpleTerm(value='Student at another University (please complete and submit the "Special Student" form)'),SimpleTerm(value='I am not a Student (please complete and submit the "Special Student" form)')]),
+        vocabulary=student_type_vocabulary,
 #        required=True,
         required=False,
         #write_permission="UWOshOIE: Modify normal fields",
@@ -961,15 +1064,14 @@ class IOIEStudyAbroadStudentApplication(Interface):
 #        required=True,
         required=False,
         #write_permission="UWOshOIE: Modify revisable fields",
-        vocabulary=SimpleVocabulary([SimpleTerm(value='I will take the group bus from Oshkosh to the airport'),SimpleTerm(value=
-                                                                                                                          'I will arrange for my own transportation from Oshkosh to the airport.')]),
+        vocabulary=bus_vocabulary,
     )
 
     willFlyWithGroup = schema.Choice(
         title=_(u'Flights'),
 #        required=True,
         required=False,
-        vocabulary=SimpleVocabulary([SimpleTerm(value='I will fly with the group'),SimpleTerm(value='I will deviate from the group itinerary')]),
+        vocabulary=fly_vocabulary,
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
@@ -988,6 +1090,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     agreeToCosts = schema.TextLine(
+        title=_(u'Agree to Costs'),
         description=_(u'I understand that if I choose not to fly on dates recommended by the OIE or by my hosts abroad, I remain responsible for the full program cost, regardless of whether I participate in all events or make use of all services. Enter your initials'),
 #        required=True,
         required=False,
@@ -1042,11 +1145,11 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     orientationConflict = schema.Choice(
-        title=_(u''),
+        title=_(u'Schedule Conflict'),
         description=_(u'Do you have a conflict with any of the other pre-travel academic and/or orientation sessions?'),
 #        required=True,
         required=False,
-        vocabulary=SimpleVocabulary([SimpleTerm(value='No'),SimpleTerm(value='Yes, I have a conflict on (enter the date next):'),SimpleTerm(value='No dates are listed')]),
+        vocabulary=orientation_conflict_vocabulary,
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
@@ -1232,7 +1335,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         description=_(u'HOLD your Study Abroad Application (i.e. you will only study abroad IF financial aid is available; at this point the application fee is still refundable but the OIE is not reserving a seat for you), or PROCESS your Study Abroad Applciation (i.e. you will study abroad regardless of your aid package; at this point the application fee is non-refundable and the OIE will reserve your seat.'),
 #        required=True,
         required=False,
-        vocabulary=SimpleVocabulary([SimpleTerm(value='HOLD'),SimpleTerm(value='PROCESS')]),
+        vocabulary=hold_vocabulary,
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
@@ -1253,7 +1356,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Room Type'),
 #        required=True,
         required=False,
-        vocabulary=SimpleVocabulary([SimpleTerm(value='Single Room'),SimpleTerm(value='Double Room'),SimpleTerm(value='Triple Room')]),
+        vocabulary=room_type_vocabulary,
         #write_permission="UWOshOIE: Modify revisable fields",
     )
 
@@ -1294,7 +1397,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         description=_(u'Additional application requirements for select programs are listed on individual program web pages.  Not all programs have additional requirements.'),
 #        required=True,
         required=False,
-        vocabulary=SimpleVocabulary([SimpleTerm(value='Yes, I am aware of the application requirements for my program'),SimpleTerm(value='There are no additional application requirements for my program')]),
+        vocabulary=aware_vocabulary,
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
@@ -1572,7 +1675,7 @@ class IOIEStudyAbroadProgram(Interface):
         required=True,
     )
 
-    description = schema.Text(
+    description = RichText(
         title=_(u'Description'),
         description=_(u'This is the description that will be used to promote your program.  Your description should capture the purpose of your program, include an overview of what students will be engaged in while abroad/away, and capture students’ interest! '),
         required=False,
@@ -1598,7 +1701,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     comments_oie_all = schema.Text(
         title=_(u'Comments for all OIE users'),
-        description=_(u'Comments entered here are visible by all OIE users.'),
+        description=_(u'Comments entered here are visible by all OIE professional staff.'),
         required=False,
     )
 
@@ -1614,41 +1717,51 @@ class IOIEStudyAbroadProgram(Interface):
         required=True,
     )
 
-    term = schema.TextLine(
+    term = schema.Choice(
         title=_(u'Term'),
         description=_(u''),
         required=True,
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.term',
     )
 
-    college_or_unit = schema.TextLine(
+    college_or_unit = schema.Choice(
         title=_(u'College or Unit'),
         description=_(u''),
         required=True,
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.college_or_unit',
     )
 
-    countries = schema.Choice(
+    countries = schema.List(
         title=_(u'Country or Countries'),
         description=_(u''),
         required=True,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.countries',
+        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.countries')
     )
 
     program_code = schema.TextLine(
         title=_(u'Program Code'),
         description=_(u'(auto-generated)'),
         required=True,
+        default=_(u'will be auto-generated'),
+        readonly=True
     )
 
+    # @property
+    # def program_code(self):
+    #     return self.calendar_year + self.term + self.college_or_unit + [c for c in countries]
+
+    
     model.fieldset(
         'academic_program_fieldset',
         label=_(u"Academic Program"),
         fields=[]
     )
 
-    sponsoring_unit_or_department = schema.TextLine(
+    sponsoring_unit_or_department = schema.List(
         title=_(u'Sponsoring Unit or Department'),
         description=_(u'Select all that apply.'),
         required=True,
+        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.sponsoring_unit_or_department'),
     )
 
     program_type = schema.Choice(
@@ -1689,15 +1802,36 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.guest_lectures',
     )
 
-
     initial_draft_program_schedule = field.NamedFile(
         title=_(u'Initial Draft Program Schedule'),
         description=_(u'Complete the OIE itinerary form and upload here.'),
         required=False,
     )
 
+    syllabus_and_supporting_docs = field.NamedFile(
+        title=_(u'Syllabus & Other Supporting Documents'),
+        description=_(u'Upload your syllabus plus other related documents (if any).  If you update your syllabus, replace this copy with the updated copy.  This field will remain editable until just prior to travel.'),
+        required=False,
+    )
 
+    min_credits_earned = schema.TextLine(
+        title=_(u'Minimum Number of Credits to be Earned by Each Applicant'),
+        description=_(u''),
+        required=False,
+    )
 
+    max_credits_earned = schema.TextLine(
+        title=_(u'Maximum Number of Credits to be Earned by Each Applicant'),
+        description=_(u''),
+        required=False,
+    )
+
+    language_of_study = schema.List(
+        title=_(u'Language of Study'),
+        description=_(u'Select all that apply.  Contact the Office of International Education to add a language (abroad@uwosh.edu).'),
+        required=True,
+        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.language'),
+    )
 
 #"Syllabus & Other Supporting Documents
 #Upload your syllabus plus other related documents (if any).  If you update your syllabus, replace this copy with the updated copy.  This field will remain editable until just prior to travel."
