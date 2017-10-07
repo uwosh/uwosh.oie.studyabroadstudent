@@ -162,4 +162,47 @@ class GuestLecturesVocabularyFactory(object):
 
 GuestLecturesVocabulary = GuestLecturesVocabularyFactory()
 
+@implementer(IVocabularyFactory)
+class TermVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.term')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+TermVocabulary = TermVocabularyFactory()
+
+@implementer(IVocabularyFactory)
+class CollegeOrUnitVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.college_or_unit')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+CollegeOrUnitVocabulary = CollegeOrUnitVocabularyFactory()
+
+@implementer(IVocabularyFactory)
+class SponsoringUnitOrDepartmentVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.sponsoring_unit_or_department')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+SponsoringUnitOrDepartmentVocabulary = SponsoringUnitOrDepartmentVocabularyFactory()
+
+@implementer(IVocabularyFactory)
+class LanguageVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.language')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+LanguageVocabulary = LanguageVocabularyFactory()
 
