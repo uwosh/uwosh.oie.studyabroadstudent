@@ -1789,7 +1789,7 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.equipment_and_space',
     )
 
-    equipment_and_space_needs = schema.Text(
+    equipment_and_space_needs = RichText(
         title=_(u'Equipment & Space details'),
         description=_(u'if needed'),
         required=False,
