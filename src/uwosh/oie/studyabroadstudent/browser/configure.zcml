@@ -26,4 +26,14 @@
       permission="cmf.ManagePortal"
       />
 
+  <!-- customized view templates -->
+
+  <browser:page
+      name="view"
+      for="..interfaces.IOIEStudyAbroadStudentApplication"
+      class=".views.ApplicationView"
+      template="applicationview.pt"
+      permission="zope2.View"
+      />  
+
 </configure>
