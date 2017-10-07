@@ -776,10 +776,8 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             '1',
             '1.5',
             '2',
-            '2',
-            '2',
-            '4',
             '3',
+            '4',
             '5',
             '6',
             '7',
@@ -1769,7 +1767,6 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         required=True,
         value_type=schema.TextLine()
     )
-
 
     first_day_of_spring_semester_classes = schema.Date(
         title=u'First day of Spring Semester Classes',

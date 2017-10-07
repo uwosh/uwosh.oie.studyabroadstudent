@@ -1814,16 +1814,18 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    min_credits_earned = schema.TextLine(
+    min_credits_earned = schema.Choice(
         title=_(u'Minimum Number of Credits to be Earned by Each Applicant'),
         description=_(u''),
         required=False,
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.credits',
     )
 
-    max_credits_earned = schema.TextLine(
+    max_credits_earned = schema.Choice(
         title=_(u'Maximum Number of Credits to be Earned by Each Applicant'),
         description=_(u''),
         required=False,
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.credits',
     )
 
     language_of_study = schema.List(

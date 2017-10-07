@@ -206,3 +206,14 @@ class LanguageVocabularyFactory(object):
 
 LanguageVocabulary = LanguageVocabularyFactory()
 
+@implementer(IVocabularyFactory)
+class CreditsVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.credits')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+CreditsVocabulary = CreditsVocabularyFactory()
+

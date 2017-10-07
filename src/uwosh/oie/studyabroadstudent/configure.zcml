@@ -132,4 +132,8 @@
     name="uwosh.oie.studyabroadstudent.vocabularies.language"
     component="uwosh.oie.studyabroadstudent.vocabularies.LanguageVocabulary" />
   
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.credits"
+    component="uwosh.oie.studyabroadstudent.vocabularies.CreditsVocabulary" />
+  
 </configure>
