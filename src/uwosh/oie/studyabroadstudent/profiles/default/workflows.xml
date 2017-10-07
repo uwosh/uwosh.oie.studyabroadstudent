@@ -2,9 +2,14 @@
 <object name="portal_workflow" meta_type="Plone Workflow Tool">
  <object name="OIEStudentApplicationWorkflow" meta_type="Workflow"/>
  <object name="UWOshOIEProgramWorkflow" meta_type="Workflow"/>
+ <object name="participant" meta_type="Workflow"/>
+ <object name="programmanagement" meta_type="Workflow"/>
  <bindings>
   <type type_id="OIEStudyAbroadStudentApplication">
    <bound-workflow workflow_id="OIEStudentApplicationWorkflow"/>
+  </type>
+  <type type_id="OIEStudyAbroadProgram">
+   <bound-workflow workflow_id="programmanagement"/>
   </type>
  </bindings>
 </object>
