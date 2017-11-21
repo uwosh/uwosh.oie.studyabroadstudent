@@ -54,6 +54,18 @@
     handler=".events.program_modified"
     />
 
+  <subscriber
+    for=".interfaces.IOIEContact
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.contact_created"
+    />
+
+  <subscriber
+    for=".interfaces.IOIEContact
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.contact_modified"
+    />
+
   <utility
       factory=".setuphandlers.HiddenProfiles"
       name="uwosh.oie.studyabroadstudent-hiddenprofiles" />
@@ -63,35 +75,35 @@
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.subjects"
     component="uwosh.oie.studyabroadstudent.vocabularies.SubjectsVocabulary" />
-  
+
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.majors"
     component="uwosh.oie.studyabroadstudent.vocabularies.MajorsVocabulary" />
-  
+
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.programs"
     component="uwosh.oie.studyabroadstudent.vocabularies.ProgramsVocabulary" />
-  
+
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.session_hours"
     component="uwosh.oie.studyabroadstudent.vocabularies.SessionHoursVocabulary" />
-  
+
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.ethnicities"
     component="uwosh.oie.studyabroadstudent.vocabularies.EthnicitiesVocabulary" />
-  
+
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.marriage_statuses"
     component="uwosh.oie.studyabroadstudent.vocabularies.MarriageStatusesVocabulary" />
-  
+
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.genders"
     component="uwosh.oie.studyabroadstudent.vocabularies.GendersVocabulary" />
-  
+
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.states_for_residency"
     component="uwosh.oie.studyabroadstudent.vocabularies.StatesForResidencyVocabulary" />
-  
+
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.citizenship"
     component="uwosh.oie.studyabroadstudent.vocabularies.CitizenshipVocabulary" />
@@ -115,25 +127,29 @@
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.guest_lectures"
     component="uwosh.oie.studyabroadstudent.vocabularies.GuestLecturesVocabulary" />
-  
+
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.term"
     component="uwosh.oie.studyabroadstudent.vocabularies.TermVocabulary" />
-  
+
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.college_or_unit"
     component="uwosh.oie.studyabroadstudent.vocabularies.CollegeOrUnitVocabulary" />
-  
+
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.sponsoring_unit_or_department"
     component="uwosh.oie.studyabroadstudent.vocabularies.SponsoringUnitOrDepartmentVocabulary" />
-  
+
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.language"
     component="uwosh.oie.studyabroadstudent.vocabularies.LanguageVocabulary" />
-  
+
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.credits"
     component="uwosh.oie.studyabroadstudent.vocabularies.CreditsVocabulary" />
-  
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.contacts"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ContactsVocabulary" />
+
 </configure>

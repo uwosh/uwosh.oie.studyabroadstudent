@@ -5,20 +5,19 @@ from uwosh.oie.studyabroadstudent import _
 from zope import schema
 from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
-
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-
 from plone.supermodel import model
 from plone.namedfile import field
-
 from collective import dexteritytextindexer
-
 from plone.app.textfield import RichText
+from z3c.relationfield.schema import RelationChoice
+from plone.autoform.directives import widget
+from plone.app.z3cform.widget import RelatedItemsFieldWidget
 
 yes_no_none_vocabulary = SimpleVocabulary(
     [
         SimpleTerm(value=''),
-        SimpleTerm(value='Yes'), 
+        SimpleTerm(value='Yes'),
         SimpleTerm(value='No'),
     ]
 )
@@ -26,7 +25,7 @@ yes_no_none_vocabulary = SimpleVocabulary(
 yes_no_na_vocabulary = SimpleVocabulary(
     [
         SimpleTerm(value='n/a'),
-        SimpleTerm(value='Yes'), 
+        SimpleTerm(value='Yes'),
         SimpleTerm(value='No'),
     ]
 )
@@ -45,21 +44,6 @@ month_vocabulary = SimpleVocabulary(
      SimpleTerm(value=u'11', title=_(u'November')),
      SimpleTerm(value=u'12', title=_(u'December'))]
 )
-
-# month_vocabulary = SimpleVocabulary(
-#     [SimpleTerm(value=u'January', title=_(u'January')),
-#      SimpleTerm(value=u'February', title=_(u'February')),
-#      SimpleTerm(value=u'March', title=_(u'March')),
-#      SimpleTerm(value=u'April', title=_(u'April')),
-#      SimpleTerm(value=u'May', title=_(u'May')),
-#      SimpleTerm(value=u'June', title=_(u'June')),
-#      SimpleTerm(value=u'July', title=_(u'July')),
-#      SimpleTerm(value=u'August', title=_(u'August')),
-#      SimpleTerm(value=u'September', title=_(u'September')),
-#      SimpleTerm(value=u'October', title=_(u'October')),
-#      SimpleTerm(value=u'November', title=_(u'November')),
-#      SimpleTerm(value=u'December', title=_(u'December'))]
-# )
 
 dayofmonth_vocabulary = SimpleVocabulary(
     [SimpleTerm(value=u'01'),
@@ -224,11 +208,11 @@ class IOIEStudyAbroadStudentApplication(Interface):
     model.fieldset(
         'addresses',
         label=_(u"Addresses"),
-        fields=['localAddr1', 'localAddr2', 'localCity', 'localState', 'localZip', 
-                'localCountry', 'localPhone', 'mobilePhone', 'homeAddr1', 'homeAddr2', 
+        fields=['localAddr1', 'localAddr2', 'localCity', 'localState', 'localZip',
+                'localCountry', 'localPhone', 'mobilePhone', 'homeAddr1', 'homeAddr2',
                 'homeCity', 'homeState', 'homeZip', 'homeCountry', 'homePhone', ]
     )
-      
+
     localAddr1 = schema.TextLine(
         title=_(u'Local Address Line 1'),
         required=True,
@@ -316,11 +300,11 @@ class IOIEStudyAbroadStudentApplication(Interface):
     model.fieldset(
         'demographics',
         label=_(u"Demographics"),
-        fields=['citizenship', 'citizenshipOther', 'stateResidency', 'stateResidencyOther', 
-                'dateOfBirth', 'placeOfBirth', 
+        fields=['citizenship', 'citizenshipOther', 'stateResidency', 'stateResidencyOther',
+                'dateOfBirth', 'placeOfBirth',
                 'gender', 'marriageStatus', 'ethnicity', ]
     )
-      
+
     citizenship = schema.Choice(
         title=_(u'Citizenship'),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.citizenship',
@@ -383,7 +367,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         label=_(u"Passport"),
         fields=['passportName', 'passportNumber', 'passportIssueOffice', 'passportExpDate']
     )
-      
+
     passportName = schema.TextLine(
         title=_(u'Passport Full Name'),
         description=_(u'Enter your full name EXACTLY as it appears on your passport or passport application'),
@@ -410,10 +394,10 @@ class IOIEStudyAbroadStudentApplication(Interface):
     model.fieldset(
         'additional_questions',
         label=_(u"Additional Questions"),
-        fields=['questionAcadCareerPlan', 'questionLangCulturalSkills', 'questionPrevTravel', 
+        fields=['questionAcadCareerPlan', 'questionLangCulturalSkills', 'questionPrevTravel',
                 'questionWorkExp', 'questionEuroBizTravSem', 'questionStuExchComp', ]
     )
-      
+
     questionAcadCareerPlan = schema.Text(
         title=_(u'Academic and Career Plan'),
         description=_(u'a) Briefly, what are your short- and long-term academic and career goals? <br> b) Why would you like to participate in this program? <br> c) What do you expect to gain from your experience?'),
@@ -457,11 +441,11 @@ class IOIEStudyAbroadStudentApplication(Interface):
     model.fieldset(
         'medical',
         label=_(u"Medical"),
-        fields=['doctorLastname', 'doctorFirstname', 'doctorPhone', 'medicalInsuranceCompany', 
-                'medicalPolicyHolder', 'medicalPolicyGroupNumber', 'foodAllergies', 
+        fields=['doctorLastname', 'doctorFirstname', 'doctorPhone', 'medicalInsuranceCompany',
+                'medicalPolicyHolder', 'medicalPolicyGroupNumber', 'foodAllergies',
                 'hasDifficultyWalking', 'maxWalkingDistance']
     )
-      
+
     doctorLastname = schema.TextLine(
         title=_(u'Last Name of your Family Doctor'),
 #        required=True,
@@ -525,7 +509,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         label=_(u"Medical II"),
         fields=['medicalReadStatement']
     )
-      
+
     medicalReadStatement = schema.Choice(
         title=_(u'I have read the statement below and understand.'),
         description=_(u'""Pre-existing medical and mental health conditions are often intensified by travel to or living in a foreign environment.  Before committing to a study abroad program, consider how your new environment may affect your personal health both physically and mentally.  For example, your new environment may introduce you to new diseases, such as malaria or yellow fever, or new stresses which may cause additional complications for a person with a preexisting condition.<br> <br> The OIE strongly recommends that you have a physical, talk with a medical provider about any preexisting conditions and recommended and/or required immunizations, talk with a psychiatrist or counselor about any preexisting conditions and take care of any dental work before departure.<br> <br> If you choose not to complete this section before program acceptance, you must forward information related to the following to the OIE within one week of the application deadline for your program.  Failure to disclose medical or mental health conditions will make it extremely difficult for staff at UW Oshkosh and abroad to assist you in an emergency and may cause health professionals abroad to take actions which could lead to serious medical consequences, including death.<br> <br> NOTE ON MEDICATIONS: You are responsible for ensuring that your medications can be carried into the foreign country.  If your medical status changes after completing this application, you must inform the OIE.""'),
@@ -537,19 +521,19 @@ class IOIEStudyAbroadStudentApplication(Interface):
     model.fieldset(
         'medical3',
         label=_(u"Medical III"),
-        fields=['medicalHealthProblems', 'medicalHealthProblems_takenMedication', 
-                'medicalHealthProblems_medications', 'medicalHealthProblems_stable', 
-                'medicalHealthProblems_underCare', 'medicalHealthProblems_whatCondition', 
-                'medicalHealthProblems_willingToPrescribe', 
-                'medicalHealthProblems_additionalInfo', 'medicalMentalProblems', 
-                'medicalMentalProblems_takenMedication', 'medicalMentalProblems_medications', 
-                'medicalMentalProblems_currentDose', 'medicalMentalProblems_stable', 
-                'medicalMentalProblems_underCare', 'medicalMentalProblems_condition', 
-                'medicalMentalProblems_enoughMedication', 'medicalMentalProblems_additionalInfo', 
-                'medicalRegistered', 'medicalRegistered_office', 
+        fields=['medicalHealthProblems', 'medicalHealthProblems_takenMedication',
+                'medicalHealthProblems_medications', 'medicalHealthProblems_stable',
+                'medicalHealthProblems_underCare', 'medicalHealthProblems_whatCondition',
+                'medicalHealthProblems_willingToPrescribe',
+                'medicalHealthProblems_additionalInfo', 'medicalMentalProblems',
+                'medicalMentalProblems_takenMedication', 'medicalMentalProblems_medications',
+                'medicalMentalProblems_currentDose', 'medicalMentalProblems_stable',
+                'medicalMentalProblems_underCare', 'medicalMentalProblems_condition',
+                'medicalMentalProblems_enoughMedication', 'medicalMentalProblems_additionalInfo',
+                'medicalRegistered', 'medicalRegistered_office',
                 'medicalRegistered_accommodations', 'medicalAccessOK', ]
     )
-      
+
     medicalHealthProblems = schema.Text(
         title=_(u'Health Problems'),
         description=_(u'List and describe any recent (within the past five years) or continuing health problems, including physical disabilities or medical conditions; learning disabilities; drug, plant, food, animal, or insect sting allergies (include information pertaining to reactions); and/or surgeries that should be brought to the attention of the lead faculty members, liaison abroad and/or host family abroad. Complete this section now or by the Friday following the application deadline.  Write ''n/a'' in blanks where appropriate.'),
@@ -697,7 +681,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         label=_(u"Preferences"),
         fields=['smokingPreferred', 'isVegetarian', 'additionalNeeds', ]
     )
-      
+
     smokingPreferred = schema.Choice(
         title=_(u'Smoking Preference'),
         vocabulary=smoking_vocabulary,
@@ -722,16 +706,16 @@ class IOIEStudyAbroadStudentApplication(Interface):
     model.fieldset(
         'emergency_contacts',
         label=_(u"Emergency Contacts"),
-        fields=['emerg1name', 'emerg1addr1', 'emerg1addr2', 'emerg1city', 'emerg1state', 
-                'emerg1zip', 'emerg1country', 'emerg1homePhone', 'emerg1workPhone', 
-                'emerg1mobilePhone', 'emerg1email', 'emerg2name', 'emerg2addr1', 'emerg2addr2', 
-                'emerg2city', 'emerg2state', 'emerg2zip', 'emerg2country', 'emerg2homePhone', 
-                'emerg2workPhone', 'emerg2mobilePhone', 'emerg2email', 'emerg3name', 
-                'emerg3addr1', 'emerg3addr2', 'emerg3city', 'emerg3state', 'emerg3zip', 
-                'emerg3country', 'emerg3homePhone', 'emerg3workPhone', 'emerg3mobilePhone', 
+        fields=['emerg1name', 'emerg1addr1', 'emerg1addr2', 'emerg1city', 'emerg1state',
+                'emerg1zip', 'emerg1country', 'emerg1homePhone', 'emerg1workPhone',
+                'emerg1mobilePhone', 'emerg1email', 'emerg2name', 'emerg2addr1', 'emerg2addr2',
+                'emerg2city', 'emerg2state', 'emerg2zip', 'emerg2country', 'emerg2homePhone',
+                'emerg2workPhone', 'emerg2mobilePhone', 'emerg2email', 'emerg3name',
+                'emerg3addr1', 'emerg3addr2', 'emerg3city', 'emerg3state', 'emerg3zip',
+                'emerg3country', 'emerg3homePhone', 'emerg3workPhone', 'emerg3mobilePhone',
                 'emerg3email', ]
     )
-      
+
     emerg1name = schema.TextLine(
         title=_(u'Emergency Contact 1 Name'),
 #        required=True,
@@ -945,7 +929,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.programs',
 #        required=True,
         required=False,
-        #write_permission="UWOshOIE: Modify normal fields", 
+        #write_permission="UWOshOIE: Modify normal fields",
     )
 
     dexteritytextindexer.searchable('programYear')
@@ -969,10 +953,10 @@ class IOIEStudyAbroadStudentApplication(Interface):
     model.fieldset(
         'education',
         label=_(u"Education"),
-        fields=['studentType', 'universityEnrolled', 'graduationMonth', 'graduationYear', 
+        fields=['studentType', 'universityEnrolled', 'graduationMonth', 'graduationYear',
                 'cumulativeGPA', 'major1', 'major2', 'minor1', 'minor2', 'emphasis1', 'emphasis2', ]
     )
-      
+
     studentType = schema.Choice(
         title=_(u'Student Type'),
         vocabulary=student_type_vocabulary,
@@ -1100,7 +1084,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     model.fieldset(
         'orientation',
         label=_(u"Orientation"),
-        fields=['orientationDate1', 'orientationHours1', 'orientationDate2', 'orientationHours2', 
+        fields=['orientationDate1', 'orientationHours1', 'orientationDate2', 'orientationHours2',
                 'numberOfGuests', 'orientationConflict', 'conflictDate']
     )
 
@@ -1163,8 +1147,8 @@ class IOIEStudyAbroadStudentApplication(Interface):
     model.fieldset(
         'courses',
         label=_(u"Courses"),
-        fields=['subject1', 'course1', 'credits1', 'subject2', 'course2', 'credits2', 'subject3', 
-                'course3', 'credits3', 'subject4', 'course4', 'credits4', 'subject5', 'course5', 
+        fields=['subject1', 'course1', 'credits1', 'subject2', 'course2', 'credits2', 'subject3',
+                'course3', 'credits3', 'subject4', 'course4', 'credits4', 'subject5', 'course5',
                 'credits5', 'subject6', 'course6', 'credits6', 'readSyllabus', 'enrolledIS333', ]
     )
 
@@ -1427,17 +1411,17 @@ class IOIEStudyAbroadStudentApplication(Interface):
     model.fieldset(
         'office_use_only',
         label=_(u"OFFICE USE ONLY"),
-        fields=['seatNumber', 'completionDate', 'applicationIsComplete', 
-                'comments', 'applicationFeeOK', 'UWSystemStatementOK', 'UWOshkoshStatementOK', 
-                'withdrawalRefund', 'transcriptsOK', 'programSpecificMaterialsRequired', 
-                'programSpecificMaterialsOK', 'specialStudentFormRequired', 
-                'specialStudentFormOK', 'creditOverloadFormRequired', 'creditOverloadFormOK', 
-                'medicalOK', 'medicalForm', 'passportOK', 'metPassportDeadline', 
-                'programSpecificMaterialsRequiredStepIII', 'programSpecificMaterialsOKStepIII', 
-                'attendedOrientation', 'cisiDates', 'cisiNumberOfMonths', 'programFee', 
-                'tuitionPayment', 'depositOnTime', 'payment2OnTime', 'applicationFeeRefund', 
-                'foreignCourse1', 'foreignCourse2', 'foreignCourse3', 'foreignCourse4', 
-                'foreignCourse5', 'foreignCourse6', 'papersOK', 'noMoreMaterials', 
+        fields=['seatNumber', 'completionDate', 'applicationIsComplete',
+                'comments', 'applicationFeeOK', 'UWSystemStatementOK', 'UWOshkoshStatementOK',
+                'withdrawalRefund', 'transcriptsOK', 'programSpecificMaterialsRequired',
+                'programSpecificMaterialsOK', 'specialStudentFormRequired',
+                'specialStudentFormOK', 'creditOverloadFormRequired', 'creditOverloadFormOK',
+                'medicalOK', 'medicalForm', 'passportOK', 'metPassportDeadline',
+                'programSpecificMaterialsRequiredStepIII', 'programSpecificMaterialsOKStepIII',
+                'attendedOrientation', 'cisiDates', 'cisiNumberOfMonths', 'programFee',
+                'tuitionPayment', 'depositOnTime', 'payment2OnTime', 'applicationFeeRefund',
+                'foreignCourse1', 'foreignCourse2', 'foreignCourse3', 'foreignCourse4',
+                'foreignCourse5', 'foreignCourse6', 'papersOK', 'noMoreMaterials',
                 'programMaterials', 'programFee2', ]
     )
 
@@ -1750,7 +1734,7 @@ class IOIEStudyAbroadProgram(Interface):
     # def program_code(self):
     #     return self.calendar_year + self.term + self.college_or_unit + [c for c in countries]
 
-    
+
     model.fieldset(
         'academic_program_fieldset',
         label=_(u"Academic Program"),
@@ -1844,3 +1828,135 @@ class IOIEStudyAbroadProgram(Interface):
 #Select all that apply.  Contact the Office of International Education to add a language (abroad@uwosh.edu)."
 #"Cooperating Partners
 #Only entities listed on the UW System Preferred Provider List or academic institutions with a current affiliation agreement with UWO may be selected here.  All other cooperating partners must be selected by following UW System procurement policies."
+
+
+class IOIEAirline(Interface):
+
+    dexteritytextindexer.searchable('luggage_general')
+    luggage_general = schema.URI(
+        title=_(u'General luggage'),
+        description=_(u'website address (URL)'),
+        required=False,
+    )
+
+    dexteritytextindexer.searchable('luggage_carryon')
+    luggage_carryon = schema.URI(
+        title=_(u'Carry on luggage'),
+        description=_(u'website address (URL)'),
+        required=False,
+    )
+
+    dexteritytextindexer.searchable('luggage_checked')
+    luggage_checked = schema.URI(
+        title=_(u'Checked luggage'),
+        description=_(u'website address (URL)'),
+        required=False,
+    )
+
+
+class IOIEContact(Interface):
+    dexteritytextindexer.searchable('title')
+    title = schema.TextLine(
+        title=_(u'Full Name'),
+        required=True,
+        readonly=True,
+        default=_(u'will be auto-generated'),
+    )
+    dexteritytextindexer.searchable('first_name')
+    first_name = schema.TextLine(
+        title=_(u'First Name'),
+        required=True,
+    )
+    dexteritytextindexer.searchable('middle_name')
+    middle_name = schema.TextLine(
+        title=_(u'Middle Name'),
+        required=False,
+    )
+    dexteritytextindexer.searchable('last_name')
+    last_name = schema.TextLine(
+        title=_(u'Last Name'),
+        required=True,
+    )
+    dexteritytextindexer.searchable('job_title')
+    job_title = schema.TextLine(
+        title=_(u'Job Title'),
+        required=False,
+    )
+    dexteritytextindexer.searchable('telephone')
+    telephone = schema.TextLine(
+        title=_(u'Telephone'),
+        required=False,
+    )
+    dexteritytextindexer.searchable('mobile')
+    mobile = schema.TextLine(
+        title=_(u'Mobile'),
+        required=False,
+    )
+    dexteritytextindexer.searchable('email')
+    email = schema.TextLine(
+        title=_(u'Email'),
+        required=False,
+    )
+    dexteritytextindexer.searchable('other')
+    other  = schema.TextLine(
+        title=_(u'e.g., Line, Skype, Viber, WeChat, WhatsApp'),
+        required=False,
+    )
+
+class IOIECooperatingPartner(Interface):
+
+    widget(
+        'primary_contact',
+        RelatedItemsFieldWidget,
+        pattern_options={
+            'selectableTypes': ['OIEContact']
+        }
+    )
+    primary_contact = RelationChoice(
+        title=_('Primary Contact'),
+        vocabulary='plone.app.vocabularies.Catalog',
+        required=True,
+    )
+
+    dexteritytextindexer.searchable('website')
+    website = schema.URI(
+        title=_(u'Partner Web Address'),
+        required=True,
+    )
+    dexteritytextindexer.searchable('hq_address_1')
+    hq_address_1 = schema.TextLine(
+        title=_(u'Address 1'),
+        description=_(u'must be a real address, not a post office box or similar'),
+        required=True,
+    )
+    dexteritytextindexer.searchable('hq_address_2')
+    hq_address_2 = schema.TextLine(
+        title=_(u'Address 2'),
+        description=_(u'must be a real address, not a post office box or similar'),
+        required=False,
+    )
+    dexteritytextindexer.searchable('hq_city')
+    hq_city = schema.TextLine(
+        title=_(u'City'),
+        description=_(u''),
+        required=True,
+    )
+    dexteritytextindexer.searchable('hq_state')
+    hq_state = schema.TextLine(
+        title=_(u'State'),
+        description=_(u'(or province or equivalent)'),
+        required=True,
+    )
+    dexteritytextindexer.searchable('hq_mailing_code')
+    hq_mailing_code = schema.TextLine(
+        title=_(u'Mailing Code'),
+        description=_(u'Zip or Postal Code or equivalent'),
+        required=True,
+    )
+    dexteritytextindexer.searchable('hq_country')
+    hq_country = schema.TextLine(
+        title=_(u'Country'),
+        description=_(u''),
+        required=True,
+    )
+

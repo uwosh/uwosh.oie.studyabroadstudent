@@ -34,7 +34,7 @@
       class=".views.ApplicationView"
       template="applicationview.pt"
       permission="zope2.View"
-      />  
+      />
 
   <browser:page
       name="view"
@@ -42,6 +42,22 @@
       class=".views.ProgramView"
       template="programview.pt"
       permission="zope2.View"
-      />  
+      />
+
+  <browser:page
+      name="view"
+      for="..interfaces.IOIECooperatingPartner"
+      class=".views.CooperatingPartnerView"
+      template="cooperatingpartnerview.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="view"
+      for="..interfaces.IOIEContact"
+      class=".views.ContactView"
+      template="contactview.pt"
+      permission="zope2.View"
+      />
 
 </configure>
