@@ -13,6 +13,7 @@ from plone.app.textfield import RichText
 from z3c.relationfield.schema import RelationChoice
 from plone.autoform.directives import widget
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
+from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
 
 yes_no_none_vocabulary = SimpleVocabulary(
     [
@@ -1651,6 +1652,10 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
 
+class ILearningObjectiveRowSchema(Interface):
+    learning_objective = schema.TextLine(title=u"Enter one objective per row. Click on the \'+\' to add a row.")
+
+
 class IOIEStudyAbroadProgram(Interface):
 
     title = schema.TextLine(
@@ -1760,10 +1765,20 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.program_component',
     )
 
-    learning_objectives = schema.Text(
+    # learning_objectives = schema.Text(
+    #     title=_(u'Learning Objectives'),
+    #     description=_(u'State the learning objectives for this program.  Include only one learning objective per text field. These learning objectives will be included in end-of-program assessment and may be used to support Higher Learning Commission and other accreditation processes.'),
+    #     required=False,
+    # )
+    widget(
+        'learning_objectives',
+        DataGridFieldFactory,
+    )
+    learning_objectives = schema.List(
         title=_(u'Learning Objectives'),
         description=_(u'State the learning objectives for this program.  Include only one learning objective per text field. These learning objectives will be included in end-of-program assessment and may be used to support Higher Learning Commission and other accreditation processes.'),
         required=False,
+        value_type=DictRow(title=u"learning objective row", schema=ILearningObjectiveRowSchema)
     )
 
     equipment_and_space = schema.Choice(
