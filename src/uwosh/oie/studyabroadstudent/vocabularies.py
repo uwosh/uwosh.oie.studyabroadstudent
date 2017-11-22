@@ -236,3 +236,35 @@ class ContactsVocabularyFactory(object):
         return SimpleVocabulary(terms)
 
 ContactsVocabulary = ContactsVocabularyFactory()
+
+@implementer(IVocabularyFactory)
+class AccommodationVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.accommodation')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+AccommodationVocabulary = AccommodationVocabularyFactory()
+
+
+@implementer(IVocabularyFactory)
+class CalendarYearVocabularyFactory(object):
+
+    def __call__(self, context):
+        catalog = api.portal.get_tool('portal_catalog')
+        contact_brains = catalog(portal_type='OIECalendarYear',
+                                sort_on='sortable_title',
+                                sort_order='ascending')
+        terms = []
+        for brain in contact_brains:
+            token = brain.getPath()
+            terms.append(SimpleTerm(
+                value=brain.UID,
+                token=token,
+                title=brain.Title.decode('utf8')
+            ))
+        return SimpleVocabulary(terms)
+
+CalendarYearVocabulary = CalendarYearVocabularyFactory()
