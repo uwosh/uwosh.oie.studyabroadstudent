@@ -1701,9 +1701,10 @@ class IOIEStudyAbroadProgram(Interface):
         fields=['calendar_year', 'term', 'college_or_unit', 'countries', 'program_code',]
     )
 
-    calendar_year = schema.TextLine(
+    calendar_year = schema.Choice(
         title=_(u'Calendar Year'),
         description=_(u'Use the year during which the program runs; this is not the year that is associated with the term of study.  For example, a January interim program running from Jan 2-28, 2017 will be associated with "2017".   A program running Dec 28, 2016-Jan 28, 2017 will also be associated with "2017".'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.calendar_year',
         required=True,
     )
 
@@ -1736,11 +1737,6 @@ class IOIEStudyAbroadProgram(Interface):
         readonly=True
     )
 
-    # @property
-    # def program_code(self):
-    #     return self.calendar_year + self.term + self.college_or_unit + [c for c in countries]
-
-
     model.fieldset(
         'academic_program_fieldset',
         label=_(u"Academic Program"),
@@ -1766,11 +1762,6 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.program_component',
     )
 
-    # learning_objectives = schema.Text(
-    #     title=_(u'Learning Objectives'),
-    #     description=_(u'State the learning objectives for this program.  Include only one learning objective per text field. These learning objectives will be included in end-of-program assessment and may be used to support Higher Learning Commission and other accreditation processes.'),
-    #     required=False,
-    # )
     widget(
         'learning_objectives',
         DataGridFieldFactory,
@@ -1834,6 +1825,176 @@ class IOIEStudyAbroadProgram(Interface):
         required=True,
         value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.language'),
     )
+
+    model.fieldset(
+        'program_dates_fieldset',
+        label=_(u"Program Dates"),
+        fields=['first_day_of_spring_semester_classes', 'last_day_of_spring_semester_classes',
+              'first_day_of_spring_interim_classes', 'last_day_of_spring_interim_classes',
+              'official_spring_graduation_date', 'first_day_of_summer_i_classes', 'last_day_of_summer_i_classes',
+              'first_day_of_summer_ii_classes', 'last_day_of_summer_ii_classes',
+              'official_summer_graduation_date', 'first_day_of_fall_semester_classes',
+              'last_day_of_fall_semester_classes', 'first_day_of_winter_interim_classes',
+              'last_day_of_winter_interim_classes', 'official_fall_graduation_date',
+              'spring_interim_summer_fall_semester_participant_orientation_deadline',
+              'spring_interim_summer_fall_semester_in_person_orientation',
+              'winter_interim_spring_semester_participant_orientation_deadline',
+              'winter_interim_spring_semester_in_person_orientation',
+              'spring_interim_summer_fall_semester_payment_deadline_1', 'spring_interim_payment_deadline_2',
+              'sunmmer_payment_deadline_2', 'fall_semester_payment_deadline_2',
+              'winter_interim_spring_payment_deadline_1', 'winter_interim_spring_payment_deadline_2']
+    )
+
+    first_day_of_spring_semester_classes = schema.Date(
+        title=u'First day of Spring Semester Classes',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    last_day_of_spring_semester_classes = schema.Date(
+        title=u'Last day of Spring Semester Classes',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    first_day_of_spring_interim_classes = schema.Date(
+        title=u'First day of Spring Interim Classes',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    last_day_of_spring_interim_classes = schema.Date(
+        title=u'Last day of Spring Interim Classes',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    official_spring_graduation_date = schema.Date(
+        title=u'official spring graduation date',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    first_day_of_summer_i_classes = schema.Date(
+        title=u'First day of Spring Interim Classes',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    last_day_of_summer_i_classes = schema.Date(
+        title=u'Last day of Summer I Classes',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    first_day_of_summer_ii_classes = schema.Date(
+        title=u'First day of Summer II Classes',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    last_day_of_summer_ii_classes = schema.Date(
+        title=u'Last day of Summer II Classes',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    official_summer_graduation_date = schema.Date(
+        title=u'Official Summer Graduation Date',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    first_day_of_fall_semester_classes = schema.Date(
+        title=u'First day of Fall Semester Classes',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    last_day_of_fall_semester_classes = schema.Date(
+        title=u'Last day of Fall Semester Classes',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    first_day_of_winter_interim_classes = schema.Date(
+        title=u'First day of Winter Interim Classes',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    last_day_of_winter_interim_classes = schema.Date(
+        title=u'Last day of Winter Interim Classes',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    official_fall_graduation_date = schema.Date(
+        title=u'Official Fall Graduation Date',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    spring_interim_summer_fall_semester_participant_orientation_deadline = schema.Date(
+        title=u'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    spring_interim_summer_fall_semester_in_person_orientation = schema.Date(
+        title=u'Spring Interim, Summer & Fall Semester In-person Orientation',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    winter_interim_spring_semester_participant_orientation_deadline = schema.Date(
+        title=u'Winter Interim & Spring Semester Participant Orientation Deadline',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    winter_interim_spring_semester_in_person_orientation = schema.Date(
+        title=u'Winter Interim & Spring Semester In-person Orientation',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    spring_interim_summer_fall_semester_payment_deadline_1 = schema.Date(
+        title=u'Spring Interim, Summer & Fall Semester Payment Deadline 1',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    spring_interim_payment_deadline_2 = schema.Date(
+        title=u'Spring Interim Payment Deadline 2',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    sunmmer_payment_deadline_2 = schema.Date(
+        title=u'Sunmmer Payment Deadline 2',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    fall_semester_payment_deadline_2 = schema.Date(
+        title=u'Fall Semester Payment Deadline 2',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    winter_interim_spring_payment_deadline_1 = schema.Date(
+        title=u'Winter Interim & Spring Semester Payment Deadline 1',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
+    winter_interim_spring_payment_deadline_2 = schema.Date(
+        title=u'Winter Interim & Spring Semester Payment Deadline 2',
+        required=False,
+        default=date(2017, 01, 01),
+    )
+
 
 #"Syllabus & Other Supporting Documents
 #Upload your syllabus plus other related documents (if any).  If you update your syllabus, replace this copy with the updated copy.  This field will remain editable until just prior to travel."
