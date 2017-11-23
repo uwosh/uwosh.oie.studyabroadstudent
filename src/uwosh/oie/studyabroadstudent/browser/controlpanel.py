@@ -1840,6 +1840,19 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         value_type=schema.TextLine()
     )
 
+    eligibility_requirement = schema.Tuple(
+        title=u'Eligibility Requirement',
+        default=(
+            'Undergraduate students must have a minimum G.P.A. of 2.0, be in good standing, and meet course prerequisites. As part of the application process, your disciplinary file will be reviewed. If you have a campus disciplinary file, this will be taken into consideration when determining your eligibility. Undergraduates who do not meet minimum GPA and course requirements should contact the program leader prior to applying to determine course eligibility.',
+            'Undergraduate students must have a minimum G.P.A. of 2.0, be in good standing, and meet course prerequisites. Undergraduate students who are required to complete a Quest III course to fulfill graduation requirements may apply. Students must have a minimum G.P.A. of 2.0, be in good standing, meet course prerequisites, and meet Quest III prerequisites. As part of the application process, your disciplinary file will be reviewed. If you have a campus disciplinary file, this will be taken into consideration when determining your eligibility. Undergraduates who are not required to complete a Quest III course to graduate are not eligible; however, they may apply for consideration on a space-available basis along with USP & instructor consent. Seats will be assigned to these applicants only after all applicants who are required to complete Quest III to graduate and who have met the STEP III deadline have been awarded a seat.',
+            'Students must have a minimum G.P.A. of 3.25, be accepted into the Professional Counseling Graduate program, be in good standing, and meet course prerequisites. As part of the application process, your disciplinary file will be reviewed. If you have a campus disciplinary file, this will be taken into consideration when determining your eligibility. Undergraduates who do not meet minimum GPA and course requirements should contact the program leader prior to applying to determine course eligibility.',
+            'Students must have a minimum G.P.A. of 3.25, be accepted into the Professional Counseling Graduate program, be in good standing, and meet course prerequisites. As part of the application process, your disciplinary file will be reviewed. If you have a campus disciplinary file, this will be taken into consideration when determining your eligibility. Undergraduates who do not meet minimum GPA and course requirements should contact the program leader prior to applying to determine course eligibility.',
+        ),
+        missing_value=None,
+        required=False,
+        value_type=schema.TextLine()
+    )
+
 
 class OIEStudyAbroadStudentControlPanelForm(RegistryEditForm):
     schema = IOIEStudyAbroadStudentControlPanel
