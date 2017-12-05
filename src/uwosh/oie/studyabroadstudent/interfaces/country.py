@@ -8,22 +8,27 @@ from collective import dexteritytextindexer
 
 class IOIECountry(Interface):
 
-    dexteritytextindexer.searchable('timezone')
-    # TODO vocabulary of time zones
-    timezone = schema.Choice(
-        title=_(u'Time Zone'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.timezone',
-        required=True,
+    dexteritytextindexer.searchable('timezone_url')
+    timezone_url = schema.URI(
+        title=_(u'Time Zone URL'),
+        required=False,
     )
-    dexteritytextindexer.searchable('cdc_info')
-    cdc_info = schema.URI(
+
+    # or use vocabulary of time zones
+    dexteritytextindexer.searchable('timezone')
+    timezone = schema.List(
+        title=_(u'Time Zone(s)'),
+        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.timezone'),
+    )
+    dexteritytextindexer.searchable('cdc_info_url')
+    cdc_info_url = schema.URI(
         title=_(u'Centers for Disease Control Country Information URL'),
         description=_(u''),
-        required=True,
+        required=False,
     )
-    dexteritytextindexer.searchable('state_dept_info')
-    state_dept_info = schema.URI(
+    dexteritytextindexer.searchable('state_dept_info_url')
+    state_dept_info_url = schema.URI(
         title=_(u'US State Department Country Information URL'),
         description=_(u''),
-        required=True,
+        required=False,
     )
