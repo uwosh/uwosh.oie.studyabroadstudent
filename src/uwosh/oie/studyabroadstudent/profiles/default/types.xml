@@ -6,4 +6,5 @@
   <object name="OIEContact" meta_type="Dexterity FTI"/>
   <object name="OIECooperatingPartner" meta_type="Dexterity FTI"/>
   <object name="OIECalendarYear" meta_type="Dexterity FTI"/>
+  <object name="OIECountry" meta_type="Dexterity FTI"/>
 </object>
