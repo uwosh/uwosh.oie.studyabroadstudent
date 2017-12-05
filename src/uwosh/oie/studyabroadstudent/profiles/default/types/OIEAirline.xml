@@ -30,7 +30,7 @@
   <property name="klass">plone.dexterity.content.Item</property>
   <property name="model_file"></property>
   <property name="model_source"></property>
-  <property name="schema">uwosh.oie.studyabroadstudent.interfaces.IOIEAirline</property>
+  <property name="schema">uwosh.oie.studyabroadstudent.interfaces.airline.IOIEAirline</property>
 
   <!-- Enabled behaviors -->
   <property name="behaviors">

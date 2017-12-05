@@ -38,7 +38,7 @@
 
   <browser:page
       name="view"
-      for="..interfaces.IOIEStudyAbroadProgram"
+      for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"
       class=".views.ProgramView"
       template="programview.pt"
       permission="zope2.View"
@@ -46,7 +46,7 @@
 
   <browser:page
       name="view"
-      for="..interfaces.IOIECooperatingPartner"
+      for="..interfaces.cooperatingpartner.IOIECooperatingPartner"
       class=".views.CooperatingPartnerView"
       template="cooperatingpartnerview.pt"
       permission="zope2.View"
@@ -54,7 +54,7 @@
 
   <browser:page
       name="view"
-      for="..interfaces.IOIEContact"
+      for="..interfaces.contact.IOIEContact"
       class=".views.ContactView"
       template="contactview.pt"
       permission="zope2.View"

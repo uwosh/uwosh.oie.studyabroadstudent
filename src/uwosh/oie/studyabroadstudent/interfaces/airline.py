@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-"""Module where all interfaces, events and exceptions live."""
-
 from datetime import date
 from uwosh.oie.studyabroadstudent import _
 from zope import schema
@@ -18,5 +15,25 @@ from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, month_vocabulary, dayofmonth_vocabulary, room_type_vocabulary, smoking_vocabulary, semester_vocabulary, student_type_vocabulary, bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary
 
 
-class IUwoshOieStudyabroadstudentLayer(IDefaultBrowserLayer):
-    """Marker interface that defines a browser layer."""
+class IOIEAirline(Interface):
+
+    dexteritytextindexer.searchable('luggage_general')
+    luggage_general = schema.URI(
+        title=_(u'General luggage'),
+        description=_(u'website address (URL)'),
+        required=False,
+    )
+
+    dexteritytextindexer.searchable('luggage_carryon')
+    luggage_carryon = schema.URI(
+        title=_(u'Carry on luggage'),
+        description=_(u'website address (URL)'),
+        required=False,
+    )
+
+    dexteritytextindexer.searchable('luggage_checked')
+    luggage_checked = schema.URI(
+        title=_(u'Checked luggage'),
+        description=_(u'website address (URL)'),
+        required=False,
+    )
