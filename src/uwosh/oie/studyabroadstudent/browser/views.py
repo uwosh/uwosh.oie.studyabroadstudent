@@ -1,5 +1,5 @@
 from Acquisition import aq_inner
-from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadStudentApplication
+from uwosh.oie.studyabroadstudent.interfaces.studyabroadstudentapplication import IOIEStudyAbroadStudentApplication
 from plone import api
 from plone.dexterity.browser.view import DefaultView
 
