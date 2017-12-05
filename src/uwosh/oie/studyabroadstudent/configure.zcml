@@ -31,13 +31,13 @@
   <!-- event subscribers, to auto-generate field values -->
 
   <subscriber
-    for=".interfaces.IOIEStudyAbroadStudentApplication
+    for=".interfaces.studyabroadstudentapplication.IOIEStudyAbroadStudentApplication
          zope.lifecycleevent.IObjectCreatedEvent"
     handler=".events.application_created"
     />
 
   <subscriber
-    for=".interfaces.IOIEStudyAbroadStudentApplication
+    for=".interfaces.studyabroadstudentapplication.IOIEStudyAbroadStudentApplication
          zope.lifecycleevent.IObjectModifiedEvent"
     handler=".events.application_modified"
     />

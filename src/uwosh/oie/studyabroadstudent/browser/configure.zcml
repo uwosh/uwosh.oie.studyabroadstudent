@@ -30,7 +30,7 @@
 
   <browser:page
       name="view"
-      for="..interfaces.IOIEStudyAbroadStudentApplication"
+      for="..interfaces.studyabroadstudentapplication.IOIEStudyAbroadStudentApplication"
       class=".views.ApplicationView"
       template="applicationview.pt"
       permission="zope2.View"
