@@ -362,11 +362,11 @@ class ContactsVocabularyFactory(object):
 
     def __call__(self, context):
         catalog = api.portal.get_tool('portal_catalog')
-        contact_brains = catalog(portal_type='OIEContact',
+        brains = catalog(portal_type='OIEContact',
                                 sort_on='sortable_title',
                                 sort_order='ascending')
         terms = []
-        for brain in contact_brains:
+        for brain in brains:
             token = brain.getPath()
             terms.append(SimpleTerm(
                 value=brain.UID,
@@ -394,11 +394,11 @@ class CalendarYearVocabularyFactory(object):
 
     def __call__(self, context):
         catalog = api.portal.get_tool('portal_catalog')
-        contact_brains = catalog(portal_type='OIECalendarYear',
+        brains = catalog(portal_type='OIECalendarYear',
                                 sort_on='sortable_title',
                                 sort_order='ascending')
         terms = []
-        for brain in contact_brains:
+        for brain in brains:
             token = brain.getPath()
             terms.append(SimpleTerm(
                 value=brain.UID,
@@ -419,4 +419,24 @@ class TimezoneVocabularyFactory(object):
         return SimpleVocabulary(items)
 
 TimezoneVocabulary = TimezoneVocabularyFactory()
+
+@implementer(IVocabularyFactory)
+class CooperatingPartnerVocabularyFactory(object):
+
+    def __call__(self, context):
+        catalog = api.portal.get_tool('portal_catalog')
+        brains = catalog(portal_type='OIECooperatingPartner',
+                                sort_on='sortable_title',
+                                sort_order='ascending')
+        terms = []
+        for brain in brains:
+            token = brain.getPath()
+            terms.append(SimpleTerm(
+                value=brain.UID,
+                token=token,
+                title=brain.Title.decode('utf8')
+            ))
+        return SimpleVocabulary(terms)
+
+CooperatingPartnerVocabulary = CooperatingPartnerVocabularyFactory()
 

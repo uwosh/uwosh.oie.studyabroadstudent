@@ -35,6 +35,13 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
+    cooperating_partners = schema.List(
+        title=_(u'Cooperating Partners'),
+        description=_(u''),
+        required=False,
+        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.cooperatingpartner')
+    )
+
     model.fieldset(
         'comments_fieldset',
         label=_(u"Comments"),
