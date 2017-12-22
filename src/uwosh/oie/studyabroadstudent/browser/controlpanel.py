@@ -1734,7 +1734,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     percentage_or_lump_sum = schema.Tuple(
-        title=u'Percentage or Lump Sum',
+        title=u'Compensation Percentage or Lump Sum',
         default=(
             '2.5% per credit (faculty rate)',
             '3.33% per credit (academic staff rate)',
