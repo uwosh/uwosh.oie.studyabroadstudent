@@ -13,32 +13,45 @@
       i18n:translate=""
       name="description"></property>
 
-  <property name="allow_discussion">False</property>
+  <property name="allow_discussion">True</property>
   <property name="factory">OIEStudyAbroadProgram</property>
-  <property name="icon_expr"></property>
+  <property name="icon_expr">string:${portal_url}/document_icon.png</property>
   <property name="link_target"></property>
 
   <!-- Hierarchy control -->
+  <property name="filter_content_types">False</property>
   <property name="allowed_content_types">
-    <!-- <element value="" />-->
+    <element value="File" />
   </property>
-  <property name="filter_content_types">True</property>
   <property name="global_allow">True</property>
 
   <!-- Schema, class and security -->
   <property name="add_permission">cmf.AddPortalContent</property>
-  <property name="klass">plone.dexterity.content.Item</property>
+  <property name="klass">plone.dexterity.content.Container</property>
   <property name="model_file"></property>
   <property name="model_source"></property>
   <property name="schema">uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram.IOIEStudyAbroadProgram</property>
 
   <!-- Enabled behaviors -->
   <property name="behaviors">
+    <!--<element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>-->
     <element value="plone.app.content.interfaces.INameFromTitle" />
-  </property>
-
-  <property name="behaviors">
     <element value="collective.dexteritytextindexer.behavior.IDexterityTextIndexer" />
+    <element value="plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation"/>
+    <element value="Products.CMFPlone.interfaces.constrains.ISelectableConstrainTypes"/>
+    <element value="plone.app.contenttypes.behaviors.leadimage.ILeadImage"/>
+    <element value="plone.app.lockingbehavior.behaviors.ILocking"/>
+    <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousEnabled"/>
+    <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousToggle"/>
+    <element value="plone.app.dexterity.behaviors.id.IShortName"/>
+    <element value="plone.app.contenttypes.behaviors.tableofcontents.ITableOfContents"/>
+    <element value="plone.app.versioningbehavior.behaviors.IVersionable"/>
+    <element value="plone.app.dexterity.behaviors.metadata.ICategorization"/>
+    <element value="plone.app.dexterity.behaviors.metadata.IPublication"/>
+    <element
+       value="plone.app.multilingual.dx.interfaces.IDexterityTranslatable"/>
+    <element value="plone.app.dexterity.behaviors.metadata.IOwnership"/>
+    <element value="plone.app.relationfield.behavior.IRelatedItems"/>
   </property>
 
   <!-- View information -->
