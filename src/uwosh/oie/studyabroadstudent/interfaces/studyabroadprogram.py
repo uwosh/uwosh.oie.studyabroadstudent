@@ -14,7 +14,10 @@ from z3c.relationfield.schema import RelationChoice
 from plone.autoform.directives import widget
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, month_vocabulary, dayofmonth_vocabulary, room_type_vocabulary, smoking_vocabulary, semester_vocabulary, student_type_vocabulary, bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary
+from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, month_vocabulary, \
+    dayofmonth_vocabulary, room_type_vocabulary, smoking_vocabulary, semester_vocabulary, student_type_vocabulary, \
+    bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary, \
+    load_or_overload, replacement_costs, paid_by, rate_or_lump_sum
 
 
 class ILearningObjectiveRowSchema(Interface):
@@ -32,6 +35,8 @@ class IOIEStudyAbroadProgram(Interface):
     description = RichText(
         title=_(u'Description'),
         description=_(u'This is the description that will be used to promote your program.  Your description should capture the purpose of your program, include an overview of what students will be engaged in while abroad/away, and capture students’ interest! '),
+        default_mime_type='text/plain',
+        allowed_mime_types=('text/plain', 'text/html',),
         required=False,
     )
 
@@ -195,6 +200,46 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(u'Select all that apply.  Contact the Office of International Education to add a language (abroad@uwosh.edu).'),
         required=True,
         value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.language'),
+    )
+
+    model.fieldset(
+        'compensation',
+        label=_(u"Compensation"),
+        fields=['load_or_overload', 'replacement_costs', 'paid_by', 'rate_or_lump_sum', 'lump_sum_amount'],
+    ),
+
+    load_or_overload = schema.Choice(
+        title=_(u'Load or Overload'),
+        description=_(u'Choose whether payment is part of load or is overload'),
+        required=True,
+        vocabulary=load_or_overload,
+    )
+
+    replacement_costs = schema.Choice(
+        title=_(u'Replacement Costs'),
+        description=_(u'Are replacement costs due to the College?'),
+        required=True,
+        vocabulary=replacement_costs,
+    )
+
+    paid_by = schema.Choice(
+        title=_(u'Costs are paid by'),
+        description=_(u'Choose who pays'),
+        required=True,
+        vocabulary=paid_by,
+    )
+
+    rate_or_lump_sum = schema.Choice(
+        title=_(u'Payment Rate or Lump Sum'),
+        description=_(u'Choose a payment rate or lump sum'),
+        required=True,
+        vocabulary=rate_or_lump_sum,
+    )
+
+    lump_sum_amount = schema.TextLine(
+        title=_(u'Lump sum amount'),
+        description=_(u'Enter the lump sum to be paid'),
+        required=False,
     )
 
     model.fieldset(

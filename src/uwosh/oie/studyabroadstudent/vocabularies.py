@@ -148,6 +148,36 @@ aware_vocabulary = SimpleVocabulary(
     ]
 )
 
+load_or_overload = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'Part of load', title=_(u'Part of load'), token='load'),
+        SimpleTerm(value=u'Overload', title=_(u'Overload'), token='overload'),
+    ]
+)
+
+replacement_costs = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'No replacement costs due to the College', title=_(u'No replacement costs due to the College'), token='due'),
+        SimpleTerm(value=u'Replacement costs due to the College', title=_(u'Replacement costs due to the College'), token='not-due'),
+    ]
+)
+
+paid_by = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'Paid by the College', title=_(u'Paid by the College'), token='college'),
+        SimpleTerm(value=u'Paid by external partner', title=_(u'Paid by external partner'), token='external'),
+        SimpleTerm(value=u'Paid by study away students', title=_(u'Paid by study away students'), token='students')
+    ]
+)
+
+rate_or_lump_sum = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'2.5% per credit (faculty rate)', title=_(u'2.5% per credit (faculty rate)'), token='2.5'),
+        SimpleTerm(value=u'3.33% per credit (academic staff rate)', title=_(u'3.33% per credit (academic staff rate)'), token='3.33'),
+        SimpleTerm(value=u'Lump sum', title=_(u'Lump sum'), token='lumpsum'),
+    ]
+)
+
 @implementer(IVocabularyFactory)
 class SubjectsVocabularyFactory(object):
 
