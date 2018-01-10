@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  if($('.template-edit')) {
-    // alert('Editing!');
+  if($('body').hasClass('template-edit') && $('body').hasClass('portaltype-oiestudyabroadprogram')) {
+    // alert('Editing a program');
 
     function disable_replacement_costs() {
         $('select#form-widgets-replacement_costs').attr('disabled', true);
