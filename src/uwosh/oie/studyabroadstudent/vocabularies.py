@@ -157,8 +157,8 @@ load_or_overload = SimpleVocabulary(
 
 replacement_costs = SimpleVocabulary(
     [
-        SimpleTerm(value=u'No replacement costs due to the College', title=_(u'No replacement costs due to the College'), token='due'),
-        SimpleTerm(value=u'Replacement costs due to the College', title=_(u'Replacement costs due to the College'), token='not-due'),
+        SimpleTerm(value=u'No replacement costs due to the College', title=_(u'No replacement costs due to the College'), token='not-due'),
+        SimpleTerm(value=u'Replacement costs due to the College', title=_(u'Replacement costs due to the College'), token='due'),
     ]
 )
 
@@ -174,7 +174,7 @@ rate_or_lump_sum = SimpleVocabulary(
     [
         SimpleTerm(value=u'2.5% per credit (faculty rate)', title=_(u'2.5% per credit (faculty rate)'), token='2.5'),
         SimpleTerm(value=u'3.33% per credit (academic staff rate)', title=_(u'3.33% per credit (academic staff rate)'), token='3.33'),
-        SimpleTerm(value=u'Lump sum', title=_(u'Lump sum'), token='lumpsum'),
+        SimpleTerm(value=u'Lump sum', title=_(u'Lump sum'), token='lump-sum'),
     ]
 )
 
