@@ -37,6 +37,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(u'This is the description that will be used to promote your program.  Your description should capture the purpose of your program, include an overview of what students will be engaged in while abroad/away, and capture students’ interest! '),
         default_mime_type='text/plain',
         allowed_mime_types=('text/plain', 'text/html',),
+        max_length=600,
         required=False,
     )
 
