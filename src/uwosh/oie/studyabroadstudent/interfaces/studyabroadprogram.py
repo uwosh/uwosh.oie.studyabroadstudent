@@ -218,21 +218,21 @@ class IOIEStudyAbroadProgram(Interface):
     replacement_costs = schema.Choice(
         title=_(u'Replacement Costs'),
         description=_(u'Are replacement costs due to the College?'),
-        required=True,
+        required=False,
         vocabulary=replacement_costs,
     )
 
     paid_by = schema.Choice(
         title=_(u'Costs are paid by'),
         description=_(u'Choose who pays'),
-        required=True,
+        required=False,
         vocabulary=paid_by,
     )
 
     rate_or_lump_sum = schema.Choice(
         title=_(u'Payment Rate or Lump Sum'),
         description=_(u'Choose a payment rate or lump sum'),
-        required=True,
+        required=False,
         vocabulary=rate_or_lump_sum,
     )
 
