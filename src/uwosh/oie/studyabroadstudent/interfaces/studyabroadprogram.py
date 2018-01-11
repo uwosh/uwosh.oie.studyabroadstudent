@@ -28,13 +28,14 @@ class IOIEStudyAbroadProgram(Interface):
 
     title = schema.TextLine(
         title=_(u'Program Title'),
-        description=_(u'The full Program Title will be displayed in all OIE print and on-line marketing and in all official OIE program-related materials.  To avoid confusion and increase "brand" awareness for your program, consistently use this program name in full, exactly as it appears here, in your print and electronic media.  Do not include country or city names in this field.'),
+        description=_(u'The full Program Title will be displayed in all OIE print and on-line marketing and in all official OIE program-related materials.  To avoid confusion and increase "brand" awareness for your program, consistently use this program name in full, exactly as it appears here, in your print and electronic media.  Do not include country or city names in this field. (max length 45 chars)'),
         required=True,
+        max_length=45,
     )
 
     description = RichText(
         title=_(u'Description'),
-        description=_(u'This is the description that will be used to promote your program.  Your description should capture the purpose of your program, include an overview of what students will be engaged in while abroad/away, and capture students’ interest! '),
+        description=_(u'This is the description that will be used to promote your program.  Your description should capture the purpose of your program, include an overview of what students will be engaged in while abroad/away, and capture students’ interest! (max length 600 chars)'),
         default_mime_type='text/plain',
         allowed_mime_types=('text/plain', 'text/html',),
         max_length=600,
