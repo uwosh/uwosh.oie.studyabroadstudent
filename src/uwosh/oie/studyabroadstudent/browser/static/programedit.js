@@ -85,5 +85,26 @@ $(document).ready(function() {
     $('select#form-widgets-replacement_costs').change(handle_replacement_costs);
     $('select#form-widgets-paid_by').change(handle_paid_by);
     $('select#form-widgets-rate_or_lump_sum').change(handle_rate_or_lump_sum);
+
+    // equipment and space
+
+    function disable_equipment_and_space_details() {
+      $('div#formfield-form-widgets-equipment_and_space_needs').hide(400);
+    }
+    function enable_equipment_and_space_details() {
+      $('div#formfield-form-widgets-equipment_and_space_needs').show(400);
+    }
+
+    function handle_equipment_and_space() {
+      var equipment_and_space_needed = $('select#form-widgets-equipment_and_space').val();
+      if (equipment_and_space_needed == 'i-do-not-need-teaching-space-or-equipment') {
+        disable_equipment_and_space_details();
+      } else {
+        enable_equipment_and_space_details();
+      }
+    }
+
+    handle_equipment_and_space();
+    $('select#form-widgets-equipment_and_space').change(handle_equipment_and_space);
   }
 });
