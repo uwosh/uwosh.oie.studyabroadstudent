@@ -25,6 +25,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, ye
 class ILearningObjectiveRowSchema(Interface):
     learning_objective = schema.TextLine(title=u"Enter one objective per row. Click on the \'+\' to add a row.")
 
+
 class IPreTravelDatesRowSchema(Interface):
     # pretravel_date = schema.Date(title=_(u'Date'))
     pretravel_start_datetime = schema.Datetime(title=_(u'Start'))
@@ -35,6 +36,14 @@ class IPreTravelDatesRowSchema(Interface):
     pretravel_building = schema.Choice(title=_(u'Building'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.building')
     pretravel_room = schema.TextLine(title=_(u'Room'))
     pretravel_attendance_required = schema.Choice(title=_(u'Attendance Required?'), vocabulary=yes_no_na_vocabulary)
+
+
+class ITravelDatesTransitionsDestinationsRowSchema(Interface):
+    transitionDate = schema.Date(title=_(u'Transition Date'))
+    destinationCity = schema.TextLine(title=_(u'Destination City'))
+    destinationCountry = schema.Choice(title=_(u'Destination Country'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.countries')
+    transitionType = schema.Choice(title=_(u'Transition Type'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.transition_type')
+
 
 class IOIEStudyAbroadProgram(Interface):
 
@@ -252,6 +261,85 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(u'Students expect to meet group members and their program leader or program advisor in a formal group setting at least once prior to travel.  Check with your department chair and/or College administration on pre-travel requirements specific to your unit. Students are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during your pre-travel class dates.  Students with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the student on the program.  For this reason, after we advertise these dates to students as mandatory, the dates shouldn''t be changed!'),
         required=False,
         value_type=DictRow(title=u"Pre-Travel Dates", schema=IPreTravelDatesRowSchema)
+    )
+
+    #######################################################
+    # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
+    #
+    model.fieldset(
+        'DeparturefromOshkosh',
+        label=_(u'Departure from Oshkosh'),
+        fields=['transportationFromOshkoshToDepartureAirport', 'oshkoshDepartureLocation', 'oshkoshMeetingDateTime',
+                'oshkoshDepartureDateTime', 'milwaukeeDepartureDateTime', 'airportArrivalDateTime']
+    )
+
+    transportationFromOshkoshToDepartureAirport = schema.Choice(
+        title=_(u'Transportation from Oshkosh to departure airport'),
+        vocabulary=yes_no_none_vocabulary,
+    )
+
+    oshkoshDepartureLocation = schema.Choice(
+        title=_('Oshkosh Departure Location'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.departure_location',
+        # TODO dropdown  [display only if "Transportation from Oshkosh to departure airport is "yes"]
+    )
+
+    oshkoshMeetingDateTime = schema.Datetime(
+        title=_(u'Oshkosh Meeting Date & Time'),
+        # TODO =departure flight date/time minus 7.75 hours [display only if "Transportation from Oshkosh to departure airport is "yes"]
+    )
+
+    oshkoshDepartureDateTime = schema.Datetime(
+        title=_(u'Oshkosh Departure Date & Time'),
+        # TODO [display only if "Transportation from Oshkosh to departure airport is "yes"]
+    )
+
+    milwaukeeDepartureDateTime = schema.Datetime(
+        title=_('Milwaukee Departure Date & Time'),
+        # TODO [display only if "Transportation from Milwaukee to departure airport is "yes"]
+    )
+
+    airportArrivalDateTime = schema.Datetime(
+        title=_('Airport Arrival Date & Time'),
+        # TODO '=departure flight date/time minus 3.5 hours [display only if "Transportation from Oshkosh to departure airport is "yes"]
+    )
+
+    #######################################################
+    # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
+    #
+    model.fieldset(
+        'Departure Flight',
+        label=_('Departure Flight'),
+        fields=['airline', 'flightNumber', 'airport', 'departureDateTime', 'arrivalAtDestinationAndInsuranceStartDate',
+                'travelDatesTransitionsAndDestinations']
+    )
+
+    airline = schema.Choice(
+        title=_(u'Airline'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airline'
+    )
+
+    flightNumber = schema.TextLine(
+        title=_(u'Flight Number'),
+    )
+
+    airport = schema.Choice(
+        title=_(u'Airport'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airport'
+    )
+
+    departureDateTime = schema.Datetime(
+        title=_(u'Departure Date and Time'),
+    )
+
+    arrivalAtDestinationAndInsuranceStartDate = schema.Datetime(
+        title=_(u'Arrival at Destination & Insurance Start Date')
+    )
+
+    widget('travelDatesTransitionsAndDestinations', DataGridFieldFactory)
+    travelDatesTransitionsAndDestinations = schema.List(
+        title=_(u'Travel Dates, Transitions & Destinations'),
+        value_type=DictRow(title=u"learning objective row", schema=ITravelDatesTransitionsDestinationsRowSchema)
     )
 
     #######################################################

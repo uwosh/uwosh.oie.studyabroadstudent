@@ -835,6 +835,16 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         value_type=schema.TextLine()
     )
 
+    airport = schema.Tuple(
+        title=u'Airports',
+        default=(
+            'Milwaukee',
+            'Appleton',
+            'O''Hare',
+        ),
+        value_type=schema.TextLine()
+    )
+
     credits = schema.Tuple(
         title=u'Credits',
         default=(
@@ -1758,7 +1768,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         value_type=schema.TextLine()
     )
 
-    Airline = schema.Tuple(
+    airline = schema.Tuple(
         title=u'Airline',
         default=(
             'British Airways',

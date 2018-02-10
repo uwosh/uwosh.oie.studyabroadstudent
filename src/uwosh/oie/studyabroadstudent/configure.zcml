@@ -192,4 +192,20 @@
     name="uwosh.oie.studyabroadstudent.vocabularies.building"
     component="uwosh.oie.studyabroadstudent.vocabularies.CampusBuildingVocabulary" />
 
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.departure_location"
+    component="uwosh.oie.studyabroadstudent.vocabularies.DepartureLocationVocabulary" />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.transition_type"
+    component="uwosh.oie.studyabroadstudent.vocabularies.TransitionTypeVocabulary" />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.airline"
+    component="uwosh.oie.studyabroadstudent.vocabularies.AirlineVocabulary" />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.airport"
+    component="uwosh.oie.studyabroadstudent.vocabularies.AirportVocabulary" />
+
 </configure>

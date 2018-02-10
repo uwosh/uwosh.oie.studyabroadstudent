@@ -113,29 +113,35 @@ student_type_vocabulary = SimpleVocabulary(
         SimpleTerm(value=u'UW Oshkosh Junior', title=_(u'UW Oshkosh Junior')),
         SimpleTerm(value=u'UW Oshkosh Senior', title=_(u'UW Oshkosh Senior')),
         SimpleTerm(value=u'UW Oshkosh Graduate Student', title=_(u'UW Oshkosh Graduate Student')),
-        SimpleTerm(value=u'Student at another University (please complete and submit the "Special Student" form)', title=_(u'Student at another University (please complete and submit the "Special Student" form)')),
-        SimpleTerm(value=u'I am not a Student (please complete and submit the "Special Student" form)', title=_(u'I am not a Student (please complete and submit the "Special Student" form)')),
+        SimpleTerm(value=u'Student at another University (please complete and submit the "Special Student" form)',
+                   title=_(u'Student at another University (please complete and submit the "Special Student" form)')),
+        SimpleTerm(value=u'I am not a Student (please complete and submit the "Special Student" form)',
+                   title=_(u'I am not a Student (please complete and submit the "Special Student" form)')),
     ]
 )
 
 bus_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value=u'I will take the group bus from Oshkosh to the airport', title=_(u'I will take the group bus from Oshkosh to the airport')),
-        SimpleTerm(value=u'I will arrange for my own transportation from Oshkosh to the airport.', title=_(u'I will arrange for my own transportation from Oshkosh to the airport.')),
+        SimpleTerm(value=u'I will take the group bus from Oshkosh to the airport',
+                   title=_(u'I will take the group bus from Oshkosh to the airport')),
+        SimpleTerm(value=u'I will arrange for my own transportation from Oshkosh to the airport.',
+                   title=_(u'I will arrange for my own transportation from Oshkosh to the airport.')),
     ]
 )
 
 fly_vocabulary = SimpleVocabulary(
     [
         SimpleTerm(value=u'I will fly with the group', title=_(u'I will fly with the group')),
-        SimpleTerm(value=u'I will deviate from the group itinerary', title=_(u'I will deviate from the group itinerary')),
+        SimpleTerm(value=u'I will deviate from the group itinerary',
+                   title=_(u'I will deviate from the group itinerary')),
     ]
 )
 
 orientation_conflict_vocabulary = SimpleVocabulary(
     [
         SimpleTerm(value=u'No', title=_(u'No')),
-        SimpleTerm(value=u'Yes, I have a conflict on (enter the date next):', title=_(u'Yes, I have a conflict on (enter the date next):')),
+        SimpleTerm(value=u'Yes, I have a conflict on (enter the date next):',
+                   title=_(u'Yes, I have a conflict on (enter the date next):')),
         SimpleTerm(value=u'No dates are listed', title=_(u'No dates are listed')),
     ]
 )
@@ -149,8 +155,10 @@ hold_vocabulary = SimpleVocabulary(
 
 aware_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value=u'Yes, I am aware of the application requirements for my program', title=_(u'Yes, I am aware of the application requirements for my program')),
-        SimpleTerm(value=u'There are no additional application requirements for my program', title=_(u'There are no additional application requirements for my program')),
+        SimpleTerm(value=u'Yes, I am aware of the application requirements for my program',
+                   title=_(u'Yes, I am aware of the application requirements for my program')),
+        SimpleTerm(value=u'There are no additional application requirements for my program',
+                   title=_(u'There are no additional application requirements for my program')),
     ]
 )
 
@@ -163,8 +171,10 @@ load_or_overload = SimpleVocabulary(
 
 replacement_costs = SimpleVocabulary(
     [
-        SimpleTerm(value=u'No replacement costs due to the College', title=_(u'No replacement costs due to the College'), token='not-due'),
-        SimpleTerm(value=u'Replacement costs due to the College', title=_(u'Replacement costs due to the College'), token='due'),
+        SimpleTerm(value=u'No replacement costs due to the College',
+                   title=_(u'No replacement costs due to the College'), token='not-due'),
+        SimpleTerm(value=u'Replacement costs due to the College', title=_(u'Replacement costs due to the College'),
+                   token='due'),
     ]
 )
 
@@ -179,7 +189,8 @@ paid_by = SimpleVocabulary(
 rate_or_lump_sum = SimpleVocabulary(
     [
         SimpleTerm(value=u'2.5% per credit (faculty rate)', title=_(u'2.5% per credit (faculty rate)'), token='2.5'),
-        SimpleTerm(value=u'3.33% per credit (academic staff rate)', title=_(u'3.33% per credit (academic staff rate)'), token='3.33'),
+        SimpleTerm(value=u'3.33% per credit (academic staff rate)', title=_(u'3.33% per credit (academic staff rate)'),
+                   token='3.33'),
         SimpleTerm(value=u'Lump sum', title=_(u'Lump sum'), token='lump-sum'),
     ]
 )
@@ -256,6 +267,7 @@ program_cycle_vocabulary = SimpleVocabulary(
     ]
 )
 
+
 @implementer(IVocabularyFactory)
 class SubjectsVocabularyFactory(object):
 
@@ -265,7 +277,9 @@ class SubjectsVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 SubjectsVocabulary = SubjectsVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class MajorsVocabularyFactory(object):
@@ -276,7 +290,9 @@ class MajorsVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 MajorsVocabulary = MajorsVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class ProgramsVocabularyFactory(object):
@@ -287,7 +303,9 @@ class ProgramsVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 ProgramsVocabulary = ProgramsVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class SessionHoursVocabularyFactory(object):
@@ -298,7 +316,9 @@ class SessionHoursVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 SessionHoursVocabulary = SessionHoursVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class EthnicitiesVocabularyFactory(object):
@@ -309,7 +329,9 @@ class EthnicitiesVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 EthnicitiesVocabulary = EthnicitiesVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class MarriageStatusesVocabularyFactory(object):
@@ -320,7 +342,9 @@ class MarriageStatusesVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 MarriageStatusesVocabulary = MarriageStatusesVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class GendersVocabularyFactory(object):
@@ -331,7 +355,9 @@ class GendersVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 GendersVocabulary = GendersVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class StatesForResidencyVocabularyFactory(object):
@@ -342,7 +368,9 @@ class StatesForResidencyVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 StatesForResidencyVocabulary = StatesForResidencyVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class CitizenshipVocabularyFactory(object):
@@ -353,7 +381,9 @@ class CitizenshipVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 CitizenshipVocabulary = CitizenshipVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class CountriesVocabularyFactory(object):
@@ -364,7 +394,9 @@ class CountriesVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 CountriesVocabulary = CountriesVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class ProgramTypeVocabularyFactory(object):
@@ -375,7 +407,9 @@ class ProgramTypeVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 ProgramTypeVocabulary = ProgramTypeVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class ProgramComponentVocabularyFactory(object):
@@ -386,7 +420,9 @@ class ProgramComponentVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 ProgramComponentVocabulary = ProgramComponentVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class EquipmentAndSpaceVocabularyFactory(object):
@@ -397,7 +433,9 @@ class EquipmentAndSpaceVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 EquipmentAndSpaceVocabulary = EquipmentAndSpaceVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class GuestLecturesVocabularyFactory(object):
@@ -408,7 +446,9 @@ class GuestLecturesVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 GuestLecturesVocabulary = GuestLecturesVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class TermVocabularyFactory(object):
@@ -419,7 +459,9 @@ class TermVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 TermVocabulary = TermVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class CollegeOrUnitVocabularyFactory(object):
@@ -430,7 +472,9 @@ class CollegeOrUnitVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 CollegeOrUnitVocabulary = CollegeOrUnitVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class SponsoringUnitOrDepartmentVocabularyFactory(object):
@@ -441,7 +485,9 @@ class SponsoringUnitOrDepartmentVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 SponsoringUnitOrDepartmentVocabulary = SponsoringUnitOrDepartmentVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class LanguageVocabularyFactory(object):
@@ -452,7 +498,9 @@ class LanguageVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 LanguageVocabulary = LanguageVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class CreditsVocabularyFactory(object):
@@ -463,7 +511,9 @@ class CreditsVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 CreditsVocabulary = CreditsVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class ContactsVocabularyFactory(object):
@@ -471,8 +521,8 @@ class ContactsVocabularyFactory(object):
     def __call__(self, context):
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(portal_type='OIEContact',
-                                sort_on='sortable_title',
-                                sort_order='ascending')
+                         sort_on='sortable_title',
+                         sort_order='ascending')
         terms = []
         for brain in brains:
             token = brain.getPath()
@@ -483,7 +533,9 @@ class ContactsVocabularyFactory(object):
             ))
         return SimpleVocabulary(terms)
 
+
 ContactsVocabulary = ContactsVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class AccommodationVocabularyFactory(object):
@@ -494,6 +546,7 @@ class AccommodationVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 AccommodationVocabulary = AccommodationVocabularyFactory()
 
 
@@ -503,8 +556,8 @@ class CalendarYearVocabularyFactory(object):
     def __call__(self, context):
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(portal_type='OIECalendarYear',
-                                sort_on='sortable_title',
-                                sort_order='ascending')
+                         sort_on='sortable_title',
+                         sort_order='ascending')
         terms = []
         for brain in brains:
             token = brain.getPath()
@@ -515,7 +568,9 @@ class CalendarYearVocabularyFactory(object):
             ))
         return SimpleVocabulary(terms)
 
+
 CalendarYearVocabulary = CalendarYearVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class TimezoneVocabularyFactory(object):
@@ -526,7 +581,9 @@ class TimezoneVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 TimezoneVocabulary = TimezoneVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class CooperatingPartnerVocabularyFactory(object):
@@ -534,8 +591,8 @@ class CooperatingPartnerVocabularyFactory(object):
     def __call__(self, context):
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(portal_type='OIECooperatingPartner',
-                                sort_on='sortable_title',
-                                sort_order='ascending')
+                         sort_on='sortable_title',
+                         sort_order='ascending')
         terms = []
         for brain in brains:
             token = brain.getPath()
@@ -546,7 +603,9 @@ class CooperatingPartnerVocabularyFactory(object):
             ))
         return SimpleVocabulary(terms)
 
+
 CooperatingPartnerVocabulary = CooperatingPartnerVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class NewProgramsVocabularyFactory(object):
@@ -554,8 +613,8 @@ class NewProgramsVocabularyFactory(object):
     def __call__(self, context):
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(portal_type='OIEStudyAbroadPrograms',
-                                sort_on='sortable_title',
-                                sort_order='ascending')
+                         sort_on='sortable_title',
+                         sort_order='ascending')
         terms = []
         for brain in brains:
             token = brain.getPath()
@@ -566,7 +625,9 @@ class NewProgramsVocabularyFactory(object):
             ))
         return SimpleVocabulary(terms)
 
+
 NewProgramsVocabulary = NewProgramsVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class ImmigrationStatusVocabularyFactory(object):
@@ -577,7 +638,9 @@ class ImmigrationStatusVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 ImmigrationStatusVocabulary = ImmigrationStatusVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class CourseVocabularyFactory(object):
@@ -588,7 +651,9 @@ class CourseVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 CourseVocabulary = CourseVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class EducationLevelVocabularyFactory(object):
@@ -599,7 +664,9 @@ class EducationLevelVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 EducationLevelVocabulary = EducationLevelVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class USStatesAndTerritoriesVocabularyFactory(object):
@@ -610,7 +677,9 @@ class USStatesAndTerritoriesVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 USStatesAndTerritoriesVocabulary = USStatesAndTerritoriesVocabularyFactory()
+
 
 @implementer(IVocabularyFactory)
 class CampusBuildingVocabularyFactory(object):
@@ -621,5 +690,57 @@ class CampusBuildingVocabularyFactory(object):
         items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
         return SimpleVocabulary(items)
 
+
 CampusBuildingVocabulary = CampusBuildingVocabularyFactory()
 
+
+@implementer(IVocabularyFactory)
+class DepartureLocationVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.locations')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+
+DepartureLocationVocabulary = DepartureLocationVocabularyFactory()
+
+
+@implementer(IVocabularyFactory)
+class TransitionTypeVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.transition_type')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+
+TransitionTypeVocabulary = TransitionTypeVocabularyFactory()
+
+
+@implementer(IVocabularyFactory)
+class AirlineVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.airline')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+
+AirlineVocabulary = AirlineVocabularyFactory()
+
+
+@implementer(IVocabularyFactory)
+class AirportVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.airport')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+
+AirportVocabulary = AirportVocabularyFactory()
