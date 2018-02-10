@@ -744,3 +744,16 @@ class AirportVocabularyFactory(object):
 
 
 AirportVocabulary = AirportVocabularyFactory()
+
+
+@implementer(IVocabularyFactory)
+class RoomSizeVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.room_size')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+
+RoomSizeVocabulary = RoomSizeVocabularyFactory()

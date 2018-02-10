@@ -42,7 +42,19 @@ class ITravelDatesTransitionsDestinationsRowSchema(Interface):
     transitionDate = schema.Date(title=_(u'Transition Date'))
     destinationCity = schema.TextLine(title=_(u'Destination City'))
     destinationCountry = schema.Choice(title=_(u'Destination Country'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.countries')
+    accommodation = schema.Choice(title=_(u'Accommodation'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.accommodation')
+    # accommodationRoomSizes = schema.Choice(title=_(u'Room Size(s)'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.room_size')
+    # TODO multi select widget doesn't respond to arrow clicks
+    accommodationRoomSizes = schema.List(title=_(u'Room Size(s)'), value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.room_size'))
     transitionType = schema.Choice(title=_(u'Transition Type'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.transition_type')
+
+
+class IPostTravelClassDatesRowSchema(Interface):
+    posttravel_start_datetime = schema.Datetime(title=_(u'Start'))
+    posttravel_end_datetime = schema.Datetime(title=_(u'End'))
+    posttravel_building = schema.Choice(title=_(u'Building'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.building')
+    posttravel_room = schema.TextLine(title=_(u'Room'))
+    posttravel_attendance_required = schema.Choice(title=_(u'Attendance Required?'), vocabulary=yes_no_na_vocabulary)
 
 
 class IOIEStudyAbroadProgram(Interface):
@@ -311,7 +323,7 @@ class IOIEStudyAbroadProgram(Interface):
         'Departure Flight',
         label=_('Departure Flight'),
         fields=['airline', 'flightNumber', 'airport', 'departureDateTime', 'arrivalAtDestinationAndInsuranceStartDate',
-                'travelDatesTransitionsAndDestinations']
+                'travelDatesTransitionsAndDestinations', 'firstChoiceDatesFlexible', 'postTravelClassDates']
     )
 
     airline = schema.Choice(
@@ -340,6 +352,19 @@ class IOIEStudyAbroadProgram(Interface):
     travelDatesTransitionsAndDestinations = schema.List(
         title=_(u'Travel Dates, Transitions & Destinations'),
         value_type=DictRow(title=u"learning objective row", schema=ITravelDatesTransitionsDestinationsRowSchema)
+    )
+
+    firstChoiceDatesFlexible = schema.Choice(
+        title=_(u'Are your first-choice dates flexible?'),
+        description=_(u'If yes, your OIE Program Manager will meet with you to discuss transition dates'),
+        vocabulary=yes_no_none_vocabulary
+    )
+
+    widget('postTravelClassDates', DataGridFieldFactory)
+    postTravelClassDates = schema.List(
+        title=_(u'Post-travel Class Dates'),
+        description=_(u'Participants are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during your post-travel class dates.  Participants with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the participant on the program.  For this reason, after we advertise these dates to participants as mandatory, the dates shouldn’t be changed!'),
+        value_type=DictRow(title=u'Post-travel Class Dates', schema=IPostTravelClassDatesRowSchema)
     )
 
     #######################################################

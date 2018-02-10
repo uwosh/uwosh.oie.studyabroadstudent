@@ -208,4 +208,8 @@
     name="uwosh.oie.studyabroadstudent.vocabularies.airport"
     component="uwosh.oie.studyabroadstudent.vocabularies.AirportVocabulary" />
 
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.room_size"
+    component="uwosh.oie.studyabroadstudent.vocabularies.RoomSizeVocabulary" />
+
 </configure>
