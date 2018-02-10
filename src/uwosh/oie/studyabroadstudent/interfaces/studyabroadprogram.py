@@ -19,12 +19,22 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, ye
     bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary, \
     load_or_overload, replacement_costs, paid_by, rate_or_lump_sum, socialmediaservice, contactrelationship, \
     graduation_month_vocabulary, departure_transfer_vocabulary, departure_mode_transportation_vocabulary, \
-    return_mode_transportation_vocabulary, return_transfer_vocabulary
+    return_mode_transportation_vocabulary, return_transfer_vocabulary, program_cycle_vocabulary
 
 
 class ILearningObjectiveRowSchema(Interface):
     learning_objective = schema.TextLine(title=u"Enter one objective per row. Click on the \'+\' to add a row.")
 
+class IPreTravelDatesRowSchema(Interface):
+    # pretravel_date = schema.Date(title=_(u'Date'))
+    pretravel_start_datetime = schema.Datetime(title=_(u'Start'))
+    # pretravel_start_time = schema.Time(title=_(u'Start Time'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.timeofday')
+    # pretravel_end_time = schema.Time(title=_(u'End Time'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.timeofday')
+    # pretravel_end_datetime = schema.DateTime(title=_(u'End Time'))
+    pretravel_end_datetime = schema.Datetime(title=_(u'End'))
+    pretravel_building = schema.Choice(title=_(u'Building'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.building')
+    pretravel_room = schema.TextLine(title=_(u'Room'))
+    pretravel_attendance_required = schema.Choice(title=_(u'Attendance Required?'), vocabulary=yes_no_na_vocabulary)
 
 class IOIEStudyAbroadProgram(Interface):
 
@@ -44,13 +54,14 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    cooperating_partners = schema.List(
-        title=_(u'Cooperating Partners'),
-        description=_(u''),
-        required=False,
-        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.cooperatingpartner')
+    #######################################################
+    model.fieldset(
+        'unorganized',
+        label=_(u"Unorganized"),
+        fields=[]
     )
 
+    #######################################################
     model.fieldset(
         'comments_fieldset',
         label=_(u"Comments"),
@@ -75,6 +86,7 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
+    #######################################################
     model.fieldset(
         'program_code_fieldset',
         label=_(u"Program Code"),
@@ -117,10 +129,14 @@ class IOIEStudyAbroadProgram(Interface):
         readonly=True
     )
 
+    #######################################################
     model.fieldset(
         'academic_program_fieldset',
         label=_(u"Academic Program"),
-        fields=[]
+        fields=['sponsoring_unit_or_department', 'program_type', 'program_component', 'title', 'description',
+                'learning_objectives', 'equipment_and_space', 'equipment_and_space_needs', 'guest_lectures',
+                'initial_draft_program_schedule', 'syllabus_and_supporting_docs', 'min_credits_earned',
+                'max_credits_earned', 'language_of_study', 'cooperating_partners']
     )
 
     sponsoring_unit_or_department = schema.List(
@@ -201,11 +217,44 @@ class IOIEStudyAbroadProgram(Interface):
 
     language_of_study = schema.List(
         title=_(u'Language of Study'),
-        description=_(u'Select all that apply.  Contact the Office of International Education to add a language (abroad@uwosh.edu).'),
+        description=_(u'Select all that apply. Contact the Office of International Education to add a language (abroad@uwosh.edu).'),
         required=True,
         value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.language'),
     )
 
+    cooperating_partners = schema.List(
+        title=_(u'Cooperating Partners'),
+        description=_(u''),
+        required=False,
+        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.cooperatingpartner')
+    )
+
+    #######################################################
+    model.fieldset(
+        'dates_destinations',
+        label=_(u"Dates and Destinations"),
+        fields=['program_cycle', 'pretravel_dates'],
+    ),
+
+    program_cycle = schema.Choice(
+        title=_(u'Program Cycle'),
+        description=_(u'How often will this program be offered?  This information will display in some marketing materials.  If it isn''t possible to predict, leave this blank.'),
+        vocabulary=program_cycle_vocabulary,
+    )
+
+    widget(
+        'pretravel_dates',
+        DataGridFieldFactory,
+    )
+
+    pretravel_dates = schema.List(
+        title=_(u'Pre-Travel Class & Orientation Dates'),
+        description=_(u'Students expect to meet group members and their program leader or program advisor in a formal group setting at least once prior to travel.  Check with your department chair and/or College administration on pre-travel requirements specific to your unit. Students are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during your pre-travel class dates.  Students with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the student on the program.  For this reason, after we advertise these dates to students as mandatory, the dates shouldn''t be changed!'),
+        required=False,
+        value_type=DictRow(title=u"Pre-Travel Dates", schema=IPreTravelDatesRowSchema)
+    )
+
+    #######################################################
     model.fieldset(
         'compensation',
         label=_(u"Compensation"),
@@ -246,6 +295,7 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
+    #######################################################
     model.fieldset(
         'program_dates_fieldset',
         label=_(u"Program Dates"),

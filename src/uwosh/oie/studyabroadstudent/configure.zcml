@@ -188,4 +188,8 @@
     name="uwosh.oie.studyabroadstudent.vocabularies.us_states_territories"
     component="uwosh.oie.studyabroadstudent.vocabularies.USStatesAndTerritoriesVocabulary" />
 
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.building"
+    component="uwosh.oie.studyabroadstudent.vocabularies.CampusBuildingVocabulary" />
+
 </configure>

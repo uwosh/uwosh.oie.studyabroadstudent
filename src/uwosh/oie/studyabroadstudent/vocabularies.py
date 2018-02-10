@@ -247,7 +247,14 @@ return_transfer_vocabulary = SimpleVocabulary(
     ]
 )
 
-
+program_cycle_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(token=u'once', value=u'once', title=_(u'once')),
+        SimpleTerm(token=u'annually', value=u'annually', title=_(u'annually')),
+        SimpleTerm(token=u'every-2-years', value=u'every 2 years', title=_(u'every 2 years')),
+        SimpleTerm(token=u'every-3-years', value=u'every 3 years', title=_(u'every 3 years')),
+    ]
+)
 
 @implementer(IVocabularyFactory)
 class SubjectsVocabularyFactory(object):
@@ -604,4 +611,15 @@ class USStatesAndTerritoriesVocabularyFactory(object):
         return SimpleVocabulary(items)
 
 USStatesAndTerritoriesVocabulary = USStatesAndTerritoriesVocabularyFactory()
+
+@implementer(IVocabularyFactory)
+class CampusBuildingVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.building')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+CampusBuildingVocabulary = CampusBuildingVocabularyFactory()
 
