@@ -11,5 +11,8 @@
   <type type_id="OIEStudyAbroadProgram">
    <bound-workflow workflow_id="programmanagement"/>
   </type>
+  <type type_id="OIEStudyAbroadParticipant">
+   <bound-workflow workflow_id="participant"/>
+  </type>
  </bindings>
 </object>

@@ -410,6 +410,73 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         value_type=schema.TextLine()
     )
 
+    us_states_territories = schema.Tuple(
+        title=u'U.S. States and Territories',
+        default=(
+            'Wisconsin',
+            'Alaska',
+            'Alabama',
+            'Arkansas',
+            'American Samoa',
+            'Arizona',
+            'California',
+            'Colorado',
+            'Connecticut',
+            'District of Columbia',
+            'Delaware',
+            'Florida',
+            'Georgia',
+            'Guam',
+            'Hawaii',
+            'Iowa',
+            'Idaho',
+            'Illinois',
+            'Indiana',
+            'Kansas',
+            'Kentucky',
+            'Louisiana',
+            'Massachusetts',
+            'Maryland',
+            'Maine',
+            'Michigan',
+            'Minnesota',
+            'Missouri',
+            'Northern Mariana Islands',
+            'Mississippi',
+            'Montana',
+            'National',
+            'North Carolina',
+            'North Dakota',
+            'Nebraska',
+            'New Hampshire',
+            'New Jersey',
+            'New Mexico',
+            'Nevada',
+            'New York',
+            'Ohio',
+            'Oklahoma',
+            'Oregon',
+            'Pennsylvania',
+            'Puerto Rico',
+            'Rhode Island',
+            'South Carolina',
+            'South Dakota',
+            'Tennessee',
+            'Texas',
+            'Utah',
+            'Virginia',
+            'Virgin Islands',
+            'Vermont',
+            'Washington',
+            'West Virginia',
+            'Wyoming',
+            'none'
+        ),
+        missing_value=None,
+        required=True,
+        value_type=schema.TextLine()
+    )
+
     citizenship = schema.Tuple(
         title=u'Citizenship',
         default=(u'U.S. Citizen', u'Permanent U.S. Resident', u'Other Citizenship'),
@@ -429,9 +496,11 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     countries = schema.Tuple(
         title=u'Countries',
         default=(
+            'United States',
             'Abkhazia',
             'Afghanistan',
             'Akrotiri and Dhekelia',
+            'Åland',
             'Albania',
             'Algeria',
             'American Samoa',
@@ -669,7 +738,6 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Ukraine',
             'United Arab Emirates',
             'United Kingdom',
-            'United States',
             'Uruguay',
             'USSR',
             'Uzbekistan',
@@ -687,7 +755,6 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Yugoslavia',
             'Zambia',
             'Zimbabwe',
-            'Åland',
         ),
         missing_value=None,
         required=True,
@@ -1304,7 +1371,6 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'BUS 462',
             'BUS 486',
             'BUS 492',
-            'BUS 492',
             'BUS 494',
             'BUS 694',
             'BUS 740',
@@ -1353,7 +1419,6 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'ENGLISH 226',
             'ENGLISH 247',
             'ENGLISH 294',
-            'ENGLISH 294',
             'ENGLISH 302',
             'ENGLISH 305',
             'ENGLISH 306',
@@ -1381,7 +1446,6 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'ENGLISH 709',
             'ENVT STDS 300',
             'ENVT STDS 390',
-            'ENVT STDS 395',
             'ENVT STDS 395',
             'EXT STDS 082',
             'EXT STDS 083',
@@ -1797,7 +1861,6 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'F4',
             'G1-G5, NATO',
             'H-1B',
-            'H-1B',
             'H-1B1 - Chile',
             'H-1B1 - Singapore',
             'H-2A',
@@ -1968,6 +2031,19 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         value_type=schema.TextLine()
     )
 
+    education_level = schema.Tuple(
+        title=u'Education Levels',
+        default=(
+            'High School Junior',
+            'High School Senior',
+            'University Freshman',
+            'University Sophomore',
+            'University Junior',
+            'University Senior',
+            'Graduate School',
+        ),
+        value_type = schema.TextLine(),
+    )
 
 class OIEStudyAbroadStudentControlPanelForm(RegistryEditForm):
     schema = IOIEStudyAbroadStudentControlPanel

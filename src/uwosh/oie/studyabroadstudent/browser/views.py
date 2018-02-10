@@ -1,14 +1,17 @@
-from Acquisition import aq_inner
-from uwosh.oie.studyabroadstudent.interfaces.studyabroadstudentapplication import IOIEStudyAbroadStudentApplication
-from plone import api
+# from Acquisition import aq_inner
+# from uwosh.oie.studyabroadstudent.interfaces.studyabroadstudentapplication import IOIEStudyAbroadStudentApplication
+# from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plone.app.contenttypes.browser.folder import FolderView
+
 
 class ApplicationView(DefaultView):
     pass
 
+
 class ProgramView(DefaultView, FolderView):
     pass
+
 
 class CooperatingPartnerView(DefaultView):
     def primary_contact(self):
@@ -23,5 +26,10 @@ class CooperatingPartnerView(DefaultView):
             contact.other,
         )
 
+
 class ContactView(DefaultView):
+    pass
+
+
+class ParticipantView(DefaultView):
     pass

@@ -40,6 +40,12 @@ month_vocabulary = SimpleVocabulary(
      SimpleTerm(value=u'12', title=_(u'December'))]
 )
 
+graduation_month_vocabulary = SimpleVocabulary(
+    [SimpleTerm(value=u'05', title=_(u'May')),
+     SimpleTerm(value=u'08', title=_(u'August')),
+     SimpleTerm(value=u'12', title=_(u'December'))]
+)
+
 dayofmonth_vocabulary = SimpleVocabulary(
     [SimpleTerm(value=u'01'),
      SimpleTerm(value=u'02'),
@@ -177,6 +183,71 @@ rate_or_lump_sum = SimpleVocabulary(
         SimpleTerm(value=u'Lump sum', title=_(u'Lump sum'), token='lump-sum'),
     ]
 )
+
+socialmediaservice = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'Skype', title=_(u'Skype'), token='skype'),
+        SimpleTerm(value=u'Viber', title=_(u'Viber'), token='viber'),
+        SimpleTerm(value=u'WeChat', title=_(u'WeChat'), token='wechat'),
+        SimpleTerm(value=u'WhatsApp', title=_(u'WhatsApp'), token='whatsapp'),
+        SimpleTerm(value=u'Facebook', title=_(u'Facebook'), token='facebook'),
+        SimpleTerm(value=u'Twitter', title=_(u'Twitter'), token='twitter'),
+    ]
+)
+
+contactrelationship = SimpleVocabulary(
+    [
+        SimpleTerm(value=u'father', title=_(u'father'), token='father'),
+        SimpleTerm(value=u'mother', title=_(u'mother'), token='mother'),
+        SimpleTerm(value=u'grandfather', title=_(u'grandfather'), token='grandfather'),
+        SimpleTerm(value=u'grandmother', title=_(u'grandmother'), token='grandmother'),
+        SimpleTerm(value=u'uncle', title=_(u'uncle'), token='uncle'),
+        SimpleTerm(value=u'aunt', title=_(u'aunt'), token='aunt'),
+        SimpleTerm(value=u'brother', title=_(u'brother'), token='brother'),
+        SimpleTerm(value=u'sister', title=_(u'sister'), token='sister'),
+        SimpleTerm(value=u'spouse', title=_(u'spouse'), token='spouse'),
+        SimpleTerm(value=u'adult child', title=_(u'adult child'), token='adult-child'),
+        SimpleTerm(value=u'other relative', title=_(u'other relative'), token='other-relative'),
+    ]
+)
+
+departure_transfer_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(u'-- choose one --'),
+        SimpleTerm(u'I will transfer from Oshkosh to the airport with the group'),
+        SimpleTerm(u'I will transfer from Milwaukee to the airport with the group'),
+        SimpleTerm(u'I will arrange my own transportation to the airport'),
+        SimpleTerm(u'I will drive to my destination city (U.S. & Canada programs only)'),
+    ]
+)
+
+departure_mode_transportation_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(u'I will fly with the group'),
+        SimpleTerm(u'I will apply for permission to arrange my own flight'),
+        SimpleTerm(u'I will drive to my destination city (U.S. & Canada programs only)')
+    ]
+)
+
+return_mode_transportation_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(u'I will fly with the group'),
+        SimpleTerm(u'I will apply for permission to arrange my own flight'),
+        SimpleTerm(u'I will drive back to my home at the end of my program (U.S. and Canada programs only)')
+    ]
+)
+
+return_transfer_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(u'-- choose one --'),
+        SimpleTerm(u'I will transfer from the airport to Oshkosh with the group'),
+        SimpleTerm(u'I will transfer from the airport to Milwaukee with the group'),
+        SimpleTerm(u'I will arrange my own transportation home from the airport'),
+        SimpleTerm(u'I will drive back to my home at the end of my program (U.S. and Canada programs only)'),
+    ]
+)
+
+
 
 @implementer(IVocabularyFactory)
 class SubjectsVocabularyFactory(object):
@@ -469,4 +540,68 @@ class CooperatingPartnerVocabularyFactory(object):
         return SimpleVocabulary(terms)
 
 CooperatingPartnerVocabulary = CooperatingPartnerVocabularyFactory()
+
+@implementer(IVocabularyFactory)
+class NewProgramsVocabularyFactory(object):
+
+    def __call__(self, context):
+        catalog = api.portal.get_tool('portal_catalog')
+        brains = catalog(portal_type='OIEStudyAbroadPrograms',
+                                sort_on='sortable_title',
+                                sort_order='ascending')
+        terms = []
+        for brain in brains:
+            token = brain.getPath()
+            terms.append(SimpleTerm(
+                value=brain.UID,
+                token=token,
+                title=brain.Title.decode('utf8')
+            ))
+        return SimpleVocabulary(terms)
+
+NewProgramsVocabulary = NewProgramsVocabularyFactory()
+
+@implementer(IVocabularyFactory)
+class ImmigrationStatusVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.immigration_status')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+ImmigrationStatusVocabulary = ImmigrationStatusVocabularyFactory()
+
+@implementer(IVocabularyFactory)
+class CourseVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.course_subject_and_number')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+CourseVocabulary = CourseVocabularyFactory()
+
+@implementer(IVocabularyFactory)
+class EducationLevelVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.education_level')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+EducationLevelVocabulary = EducationLevelVocabularyFactory()
+
+@implementer(IVocabularyFactory)
+class USStatesAndTerritoriesVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.us_states_territories')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+USStatesAndTerritoriesVocabulary = USStatesAndTerritoriesVocabularyFactory()
 

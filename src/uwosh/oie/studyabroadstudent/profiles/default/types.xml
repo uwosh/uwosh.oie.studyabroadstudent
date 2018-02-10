@@ -2,6 +2,7 @@
 <object name="portal_types" meta_type="Plone Types Tool">
   <object name="OIEStudyAbroadStudentApplication" meta_type="Dexterity FTI"/>
   <object name="OIEStudyAbroadProgram" meta_type="Dexterity FTI"/>
+  <object name="OIEStudyAbroadParticipant" meta_type="Dexterity FTI"/>
   <object name="OIEAirline" meta_type="Dexterity FTI"/>
   <object name="OIEContact" meta_type="Dexterity FTI"/>
   <object name="OIECooperatingPartner" meta_type="Dexterity FTI"/>
