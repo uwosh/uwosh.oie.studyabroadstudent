@@ -267,6 +267,12 @@ program_cycle_vocabulary = SimpleVocabulary(
     ]
 )
 
+seat_assignment_protocol = SimpleVocabulary(
+    [
+        SimpleTerm(token=u'in-order', value=u'in-order', title=_(u'Seats are assigned in the order in which qualified applicants have completed STEPS I & II of the application process, provided STEP III has also been completed by the STEP III application deadline.  This means that you may be conditionally admitted following completion of steps I & II, but NOT receive a seat if you then fail to complete STEP III on time.  If you are on the waiting list, you may receive a seat if applicants who have been conditionally admitted have not completed STEP III by the deadline.  In the rare event that applications can be accepted after deadlines, seats are assigned in the order in which qualified applicants have completed all three steps.')),
+        SimpleTerm(token=u'competitive', value=u'competitive', title=_(u'Seat assignments on this program are competitive.  Applicants who meet the STEP II application deadilne are placed in a pool for consideration.  Selections will take place just after the STEP II deadline & prior to the STEP III deadline.  Selection is conditional upon completion of STEP III by the STEP III application deadline.  This means that you may be conditionally selected following completion of steps I & II, but NOT receive a seat if you then fail to complete STEP III on time.  If you are on the waiting list, you may receive a seat if applicants who have been conditionally selected have not completed STEP III by the deadline.  In the rare event that applications can be accepted after deadlines, applicants are considered in the order in which they have completed all three steps.')),
+    ]
+)
 
 @implementer(IVocabularyFactory)
 class SubjectsVocabularyFactory(object):
@@ -757,3 +763,16 @@ class RoomSizeVocabularyFactory(object):
 
 
 RoomSizeVocabulary = RoomSizeVocabularyFactory()
+
+
+@implementer(IVocabularyFactory)
+class StudentStatusVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.student_status')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+
+StudentStatusVocabulary = StudentStatusVocabularyFactory()

@@ -2055,6 +2055,17 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         value_type = schema.TextLine(),
     )
 
+    student_status = schema.Tuple(
+        title=u'Student Status',
+        default=(
+            '1) UWO students making progress toward a degree may apply.',
+            '2) UW System students making progress toward a degree may apply.',
+            '3) Students making progress toward a degree at an institution of higher education may apply. (This includes exchange students and visiting students from abroad currently studying at UW Oshkosh.)',
+            '4) Students making progress toward a degree at an institution of higher education and community members may apply.  Community members require approval by the Program Liaison."',
+        ),
+        value_type = schema.TextLine(),
+    )
+
 class OIEStudyAbroadStudentControlPanelForm(RegistryEditForm):
     schema = IOIEStudyAbroadStudentControlPanel
     schema_prefix = "oiestudyabroadstudent"

@@ -19,7 +19,8 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, ye
     bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary, \
     load_or_overload, replacement_costs, paid_by, rate_or_lump_sum, socialmediaservice, contactrelationship, \
     graduation_month_vocabulary, departure_transfer_vocabulary, departure_mode_transportation_vocabulary, \
-    return_mode_transportation_vocabulary, return_transfer_vocabulary, program_cycle_vocabulary
+    return_mode_transportation_vocabulary, return_transfer_vocabulary, program_cycle_vocabulary, \
+    seat_assignment_protocol
 
 
 class ILearningObjectiveRowSchema(Interface):
@@ -55,6 +56,14 @@ class IPostTravelClassDatesRowSchema(Interface):
     posttravel_building = schema.Choice(title=_(u'Building'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.building')
     posttravel_room = schema.TextLine(title=_(u'Room'))
     posttravel_attendance_required = schema.Choice(title=_(u'Attendance Required?'), vocabulary=yes_no_na_vocabulary)
+
+
+# class IApplicantQuestionsRowSchema(Interface):
+#     question1 = schema.Text(title=_(u'Question 1'))
+#     question2 = schema.Text(title=_(u'Question 2'))
+#     question3 = schema.Text(title=_(u'Question 3'))
+#     question4 = schema.Text(title=_(u'Question 4'))
+#     question5 = schema.Text(title=_(u'Question 5'))
 
 
 class IOIEStudyAbroadProgram(Interface):
@@ -365,6 +374,168 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Post-travel Class Dates'),
         description=_(u'Participants are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during your post-travel class dates.  Participants with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the participant on the program.  For this reason, after we advertise these dates to participants as mandatory, the dates shouldn’t be changed!'),
         value_type=DictRow(title=u'Post-travel Class Dates', schema=IPostTravelClassDatesRowSchema)
+    )
+
+    #######################################################
+    # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
+    #
+    model.fieldset(
+        'Return Flight',
+        label=_('Return Flight'),
+        fields=['airlineReturn', 'flightNumberReturn', 'airportReturn', 'returnDateTime', 'arrivalInWisconsinDate',
+                'insuranceEndDate',]
+    )
+
+    airlineReturn = schema.Choice(
+        title=_(u'Airline'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airline'
+    )
+
+    flightNumberReturn = schema.TextLine(
+        title=_(u'Flight Number'),
+    )
+
+    airportReturn = schema.Choice(
+        title=_(u'Airport'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airport'
+    )
+
+    returnDateTime = schema.Datetime(
+        title=_(u'Return Date and Time'),
+    )
+
+    arrivalInWisconsinDate = schema.Datetime(
+        title=_(u'Arrival in Wisconsin')
+    )
+
+    insuranceEndDate = schema.Datetime(
+        title=_(u'Insurance End Date')
+    )
+
+    #######################################################
+    # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
+    #
+    model.fieldset(
+        'Return to Oshkosh',
+        label=_(u'Return to Oshkosh'),
+        fields=['transportationFromArrivalAirportToOshkosh', 'milwaukeeArrivalDateTime', 'oshkoshArrivalDateTime']
+    )
+
+    transportationFromArrivalAirportToOshkosh = schema.Choice(
+        title=_(u'Transportation from arrival airport to Oshkosh'),
+        vocabulary=yes_no_none_vocabulary,
+    )
+
+    milwaukeeArrivalDateTime = schema.Datetime(
+        title=_('Milwaukee Arrival Date & Time'),
+        # TODO '=arrival flight date/time plus 2.5 hours [display only if "Transportation from Arrival airport to Oshkosh is "yes"]
+    )
+
+    oshkoshArrivalDateTime = schema.Datetime(
+    title=_(u'Oshkosh Arrival Date & Time'),
+        # TODO '=arrival flight date/time plus 4 hours [display only if "Transportation from Arrival airport to Oshkosh is "yes"]
+    )
+
+    #######################################################
+    model.fieldset(
+        'Participant Selection',
+        label=_(u"Participant Selection"),
+        fields=['studentStatus', 'seatAssignmentProtocol', 'liaisonReviewOfIndividualApplicants', 'approvalCriteria',
+                'individualInterview', 'firstRecommendationRequired', 'secondRecommendationRequired',
+                'applicantQuestion1', 'applicantQuestion2', 'applicantQuestion3', 'applicantQuestion4',
+                'applicantQuestion5', 'cvRequired', 'letterOfMotivationRequired'],
+    ),
+
+    studentStatus = schema.Choice(
+        title=_(u'Student Status'),
+        description=_(u'Choose one'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.student_status',
+    )
+
+    seatAssignmentProtocol = schema.Choice(
+        title=_(u'Seat Assignment Protocol'),
+        vocabulary=seat_assignment_protocol,
+    )
+
+    liaisonReviewOfIndividualApplicants = schema.Choice(
+        title=_(u'Liaison Review of Individual Applicants'),
+        description=_(u'For competitive programs or for progarms that require each applicant to have specific background in addition to meeting course pre-requisites, indicate criteria to be used and select the method or methods to be employed to determine whether criteria have been met.  Do not include or duplicate course pre-requisites here.'),
+        vocabulary=yes_no_none_vocabulary,
+    )
+
+    approvalCriteria = schema.Text(
+        title=_(u'Criteria to be used in the approval process include the following'),
+    )
+
+    individualInterview = schema.Choice(
+        title=_(u'The Program Liaison, Program Leader or Program Co-leader will interview each applicant'),
+        vocabulary=yes_no_none_vocabulary,
+        # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
+    )
+
+    firstRecommendationRequired = schema.Choice(
+        title=_(u'1st Recommendation is required'),
+        description=_(u'If "yes", this item appears in the Applicant Portal as an application item'),
+        vocabulary=yes_no_na_vocabulary
+        # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
+    )
+
+    secondRecommendationRequired = schema.Choice(
+        title=_(u'2nd Recommendation is required'),
+        description=_(u'If "yes", this item appears in the Applicant Portal as an application item'),
+        vocabulary=yes_no_na_vocabulary
+        # TODO "yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in). This cannot be ""yes"" if ""A 1st Recommendation is required"" is ""no""."
+    )
+
+    # widget('applicantQuestions', DataGridFieldFactory)
+    # applicantQuestions = schema.List(
+    #     title=_(u'All applicants must respond to these questions'),
+    #     description = _(u'Type one question per text box.  These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+    #     value_type = DictRow(title=u'applicantQuestions', schema=IApplicantQuestionsRowSchema),
+    # )
+
+    applicantQuestion1 = schema.Text(
+        title=_(u'All applicants must respond to this question 1'),
+        description = _(u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+    )
+
+    applicantQuestion2 = schema.Text(
+        title=_(u'All applicants must respond to this question 2'),
+        description = _(u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+    )
+
+    applicantQuestion3 = schema.Text(
+        title=_(u'All applicants must respond to this question 3'),
+        description = _(u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+    )
+
+    applicantQuestion4 = schema.Text(
+        title=_(u'All applicants must respond to this question 4'),
+        description = _(u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+    )
+
+    applicantQuestion5 = schema.Text(
+        title=_(u'All applicants must respond to this question 5'),
+        description = _(u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+    )
+
+    cvRequired = schema.Choice(
+        title=_(u'CV Required'),
+        description=_(u'Complete this in English if studying in English; complete this in German if studying in German'),
+        vocabulary=yes_no_na_vocabulary
+        # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
+    )
+
+    letterOfMotivationRequired = schema.Choice(
+        title=_(u'Letter of Motivation Required'),
+        description=_(u'This must be typed'),
+        vocabulary=yes_no_na_vocabulary
+        # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
+    )
+
+    otherRequired = schema.Text(
+        title=_(u'Other Requirement(s)'),
+        # TODO "this question should be unavailable/greyed out if the text box above is not filled in"
     )
 
     #######################################################

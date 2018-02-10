@@ -212,4 +212,8 @@
     name="uwosh.oie.studyabroadstudent.vocabularies.room_size"
     component="uwosh.oie.studyabroadstudent.vocabularies.RoomSizeVocabulary" />
 
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.student_status"
+    component="uwosh.oie.studyabroadstudent.vocabularies.StudentStatusVocabulary" />
+
 </configure>
