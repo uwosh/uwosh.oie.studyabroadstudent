@@ -70,6 +70,41 @@ class ICoLeadersRowSchema(Interface):
     coleader = schema.Choice(title=_(u'On-site Program Co-leader'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.program_leader')
 
 
+class ICourseRowSchema(Interface):
+    course = schema.Choice(
+        title=_(u'UW Oshkosh Course Subject & Number'),
+        description=_(u'Add all courses associated with your program, including courses that will be taught partially at UW Oshkosh and partially while away on the program.  Do not include courses that will be taught entirely at UWO, even when these courses are offered in preparation for the program away.  Contact the OIE to add a course (abroad@uwosh.edu).'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.course'
+    )
+    credits_earned = schema.Int(
+        title=_(u'UW Oshkosh Credits Earned'),
+        description=_(u'Enter the number of credits that participants will earn for each individual course.  If you are offering a course that can be taught for a range of credits on your program (e.g. 3-5 credits), you must enter the course into this system multiple times, giving the course a different credit value each time that you enter it.')
+    )
+    class_start_date = schema.Date(
+        title=_(u'Class Start Date')
+        # TODO Auto-generate the first day of the term in which this program runs from the calendar?????  Maybe this isn't possible.
+    )
+    class_end_date = schema.Date(
+        title=_(u'Class End Date')
+        # TODO If the "PeopleSoft Class End Date" is AFTER the Official Graduation Date, prompt the coursebuilder to complete the "Course End Date Extension Form".
+    )
+    min_credits = schema.Int(
+        title=_(u'Course Prerequisites: minimum number of credits'),
+        description=_(u'If this course requires a minimum number of completed credits prior to the course start date, indicate this here'),
+        min=0,
+        max=999
+    )
+    gpa = schema.Int(
+        title=_(u'Course Prerequisites: GPA'),
+        description=_(u'If this course requires a minimum GPA prior to the course start date, indicate this here.'),
+        min=0,
+        max=999
+    )
+    completed_courses = schema.Text(
+        title=_(u'Course Prerequisites: completed courses'),
+        description=_(u'If this course requires that other courses be completed, or that a particular grade be earned in an earlier course, prior to the course start date, indicate this here.')
+    )
+
 class IOIEStudyAbroadProgram(Interface):
 
     title = schema.TextLine(
@@ -564,6 +599,19 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(u'The On-site Program Leader is responsible for providing leadership for the group and for overseeing group health and safety.  The On-site Program Leader may also teach one or more of the program courses.'),
         value_type=DictRow(title=u"co-leaders", schema=ICoLeadersRowSchema),
         required=False,
+    )
+
+    #######################################################
+    model.fieldset(
+        'Courses',
+        label=_(u"Courses"),
+        fields=[],
+    )
+    widget('courses', DataGridFieldFactory)
+    courses = schema.List(
+        title=_(u'Courses'),
+        description=_(u'List existing courses only.  If the course you intend to use is not an existing course, your department must submit the course for formal approval through normal university channels prior to applying to use the course abroad/away.  UW Oshkosh Curriculum Policies and Procedures do not allow the use of a contractual course, i.e. independent study or related readings, for an organized, off-campus course.'),
+        value_type=DictRow(title=u'Course', schema=ICourseRowSchema),
     )
 
     #######################################################
