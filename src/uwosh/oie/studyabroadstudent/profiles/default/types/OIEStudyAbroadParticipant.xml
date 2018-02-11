@@ -30,7 +30,7 @@
   <property name="klass">plone.dexterity.content.Container</property>
   <property name="model_file"></property>
   <property name="model_source"></property>
-  <property name="schema">uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram.IOIEStudyAbroadParticipant</property>
+  <property name="schema">uwosh.oie.studyabroadstudent.interfaces.participant.IOIEStudyAbroadParticipant</property>
 
   <!-- Enabled behaviors -->
   <property name="behaviors">
@@ -39,7 +39,7 @@
     <element value="collective.dexteritytextindexer.behavior.IDexterityTextIndexer" />
     <element value="plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation"/>
     <element value="Products.CMFPlone.interfaces.constrains.ISelectableConstrainTypes"/>
-    <element value="plone.app.contenttypes.behaviors.leadimage.ILeadImage"/>
+    <!--<element value="plone.app.contenttypes.behaviors.leadimage.ILeadImage"/>-->
     <element value="plone.app.lockingbehavior.behaviors.ILocking"/>
     <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousEnabled"/>
     <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousToggle"/>

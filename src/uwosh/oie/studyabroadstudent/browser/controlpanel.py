@@ -4,12 +4,13 @@ from plone.app.registry.browser.controlpanel import RegistryEditForm
 from plone.z3cform import layout
 from zope import schema
 from zope.interface import Interface
+from uwosh.oie.studyabroadstudent import _
 
 
 class IOIEStudyAbroadStudentControlPanel(Interface):
 
     majors = schema.Tuple(
-        title=u'Majors',
+        title=_(u'Majors'),
         default=(
             u'-- choose one --',
             u'Accounting',
@@ -91,7 +92,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     programs = schema.Tuple(
-        title=u'Programs',
+        title=_(u'Programs'),
         default=(
             u'20th Century British Philosophy in Cambridge, UK',
             u'20th Century Eastern Europe and the Holocaust',
@@ -284,7 +285,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     subjects = schema.Tuple(
-        title=u'Subjects',
+        title=_(u'Subjects'),
         default=(
             u'-- choose one --',
             u'AF AM ST',
@@ -372,7 +373,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     ethnicities = schema.Tuple(
-        title=u'Ethnicities',
+        title=_(u'Ethnicities'),
         default=(
             u'no answer',
             u'African-American',
@@ -387,7 +388,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     marriage_statuses = schema.Tuple(
-        title=u'Marriage Statuses',
+        title=_(u'Marriage Statuses'),
         default=(u'Married', u'Single'),
         missing_value=None,
         required=True,
@@ -395,7 +396,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     genders = schema.Tuple(
-        title=u'Genders',
+        title=_(u'Genders'),
         default=(u'Male', u'Female', u'Other'),
         missing_value=None,
         required=True,
@@ -403,7 +404,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     states_for_residency = schema.Tuple(
-        title=u'States for Residency',
+        title=_(u'States for Residency'),
         default=(u'Wisconsin', u'Minnesota', u'Other'),
         missing_value=None,
         required=True,
@@ -411,7 +412,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     us_states_territories = schema.Tuple(
-        title=u'U.S. States and Territories',
+        title=_(u'U.S. States and Territories'),
         default=(
             'Wisconsin',
             'Alaska',
@@ -478,7 +479,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     citizenship = schema.Tuple(
-        title=u'Citizenship',
+        title=_(u'Citizenship'),
         default=(u'U.S. Citizen', u'Permanent U.S. Resident', u'Other Citizenship'),
         missing_value=None,
         required=True,
@@ -486,7 +487,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     session_hours = schema.Tuple(
-        title=u'Session hours',
+        title=_(u'Session hours'),
         default=(u'09:00-11:00', u'15:00-17:00'),
         missing_value=None,
         required=True,
@@ -494,7 +495,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     countries = schema.Tuple(
-        title=u'Countries',
+        title=_(u'Countries'),
         default=(
             'United States',
             'Abkhazia',
@@ -762,7 +763,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     program_type = schema.Tuple(
-        title=u'Program Type',
+        title=_(u'Program Type'),
         default=(
             'Exchange-United States',
             'Exchange-International',
@@ -779,7 +780,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     program_component = schema.Tuple(
-        title=u'Program Component',
+        title=_(u'Program Component'),
         default=(
             'Clinicals',
             'Field Research',
@@ -794,7 +795,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     accommodation = schema.Tuple(
-        title=u'Accommodation',
+        title=_(u'Accommodation'),
         default=(
             'Host Family',
             'Hostel',
@@ -811,7 +812,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     room_size = schema.Tuple(
-        title=u'Room Size',
+        title=_(u'Room Size'),
         default=(
             'Single Rooms',
             'Double Rooms',
@@ -824,7 +825,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     locations = schema.Tuple(
-        title=u'Locations',
+        title=_(u'Locations'),
         default=(
             'UW Oshkosh Parking Lot 6; corner of Osceola & Pearl Ave.',
             'Chicago O''Hare International Airport',
@@ -836,7 +837,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     airport = schema.Tuple(
-        title=u'Airports',
+        title=_(u'Airports'),
         default=(
             'Milwaukee',
             'Appleton',
@@ -846,7 +847,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     credits = schema.Tuple(
-        title=u'Credits',
+        title=_(u'Credits'),
         default=(
             '0',
             '1',
@@ -878,7 +879,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     travel_document = schema.Tuple(
-        title=u'Travel Document',
+        title=_(u'Travel Document'),
         default=(
             'Passport',
             'Driver''s License',
@@ -889,7 +890,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     provider_type = schema.Tuple(
-        title=u'Provider Type',
+        title=_(u'Provider Type'),
         default=(
             'Accommodation',
             'Air',
@@ -911,7 +912,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     course_subject = schema.Tuple(
-        title=u'Course Subject',
+        title=_(u'Course Subject'),
         default=(
             'ACAD',
             'ACCT',
@@ -996,7 +997,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     tuition_and_fees = schema.Tuple(
-        title=u'Tuition and Fees',
+        title=_(u'Tuition and Fees'),
         default=(
             '$0 Tuition; $0 Seg Fees',
             '$0 Tuition; $0 Seg Fees; relevant tuition equivalent to be charged',
@@ -1027,7 +1028,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     flyer = schema.Tuple(
-        title=u'Flyer',
+        title=_(u'Flyer'),
         default=(
             'Anthropology',
             'Art',
@@ -1082,7 +1083,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     oie_staff = schema.Tuple(
-        title=u'OIE Staff',
+        title=_(u'OIE Staff'),
         default=(
             'Application Intake Specialist',
             'Director',
@@ -1101,7 +1102,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     payment_forms = schema.Tuple(
-        title=u'Payment Forms',
+        title=_(u'Payment Forms'),
         default=(
             'Foundation',
             'PTF',
@@ -1116,7 +1117,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     salary_terms = schema.Tuple(
-        title=u'Salary Terms',
+        title=_(u'Salary Terms'),
         default=(
             'Overload 1.25%',
             'Overload 10%',
@@ -1137,7 +1138,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     salary_form_type = schema.Tuple(
-        title=u'Salary Form Type',
+        title=_(u'Salary Form Type'),
         default=(
             'Payment to Individual Form (PTF) - Direct Payment',
             'Transaction Transfer Request (TTR) - Replacement Costs',
@@ -1150,7 +1151,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     visa_delivery_options = schema.Tuple(
-        title=u'Visa Delivery Options',
+        title=_(u'Visa Delivery Options'),
         default=(
             'OIE Mails',
             'OIE hand delivers',
@@ -1164,7 +1165,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     university = schema.Tuple(
-        title=u'University',
+        title=_(u'University'),
         default=(
             'UW-Oshkosh',
             'UW–Baraboo/Sauk County',
@@ -1200,7 +1201,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     term = schema.Tuple(
-        title=u'Term',
+        title=_(u'Term'),
         default=(
             '1 Fall Interim',
             '2 Spring Semester',
@@ -1215,7 +1216,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     sponsoring_unit_or_department = schema.Tuple(
-        title=u'Sponsoring Unit or Department',
+        title=_(u'Sponsoring Unit or Department'),
         default=(
             'African American Studies',
             'Anthropology',
@@ -1283,7 +1284,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     college_or_unit = schema.Tuple(
-        title=u'College or Unit',
+        title=_(u'College or Unit'),
         default=(
             'B College of Business',
             'L College of Letters & Science',
@@ -1301,7 +1302,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     language = schema.Tuple(
-        title=u'Language',
+        title=_(u'Language'),
         default=(
             'American Sign Language',
             'Arabic',
@@ -1320,7 +1321,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     cooperating_partners = schema.Tuple(
-        title=u'Cooperating Partners',
+        title=_(u'Cooperating Partners'),
         default=(
             'Academic Programs International (API)',
             'Accent International',
@@ -1364,7 +1365,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     course_subject_and_number = schema.Tuple(
-        title=u'Course Subject & Number',
+        title=_(u'Course Subject & Number'),
         default=(
             'ANTHRO 362',
             'ANTHRO 394',
@@ -1617,7 +1618,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     requirements_met = schema.Tuple(
-        title=u'Requirements Met',
+        title=_(u'Requirements Met'),
         default=(
             'CS',
             'Culture (XC)',
@@ -1646,7 +1647,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     course_enrollment_at = schema.Tuple(
-        title=u'Course Enrollment at',
+        title=_(u'Course Enrollment at'),
         default=(
             'UW Oshkosh Only',
             'UW Oshkosh & Host (concurrent enrollment)',
@@ -1659,7 +1660,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     program_cycle = schema.Tuple(
-        title=u'Program Cycle',
+        title=_(u'Program Cycle'),
         default=(
             'once',
             'annually',
@@ -1672,7 +1673,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     building = schema.Tuple(
-        title=u'Building',
+        title=_(u'Building'),
         default=(
             'Albee Hall',
             'Alumni Welcome & Conference Center',
@@ -1705,7 +1706,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     transition_type = schema.Tuple(
-        title=u'Transition Type',
+        title=_(u'Transition Type'),
         default=(
             'Arrival in first host city',
             'Day trip',
@@ -1718,7 +1719,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     leadership_role = schema.Tuple(
-        title=u'Leadership Role',
+        title=_(u'Leadership Role'),
         default=(
             'On-site Program Leader',
             'On-site Program Co-leader',
@@ -1730,7 +1731,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     title = schema.Tuple(
-        title=u'Title',
+        title=_(u'Title'),
         default=(
             'Dr.',
             'Professor',
@@ -1742,7 +1743,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     approving_as = schema.Tuple(
-        title=u'Approving as',
+        title=_(u'Approving as'),
         default=(
             'Chair',
             'Dean',
@@ -1755,7 +1756,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     class_standing = schema.Tuple(
-        title=u'Class Standing',
+        title=_(u'Class Standing'),
         default=(
             '0+ credits',
             '30+ credits',
@@ -1769,7 +1770,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     airline = schema.Tuple(
-        title=u'Airline',
+        title=_(u'Airline'),
         default=(
             'British Airways',
             'American Airlines',
@@ -1783,7 +1784,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     compensation_type = schema.Tuple(
-        title=u'Compensation Type',
+        title=_(u'Compensation Type'),
         default=(
             'Part of load',
             'Overload',
@@ -1794,7 +1795,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     compensation_payment_or_replacement = schema.Tuple(
-        title=u'Compensation Payment or Replacement',
+        title=_(u'Compensation Payment or Replacement'),
         default=(
             'No replacement costs due to the College',
             'Replacement costs due to the College',
@@ -1808,7 +1809,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     percentage_or_lump_sum = schema.Tuple(
-        title=u'Compensation Percentage or Lump Sum',
+        title=_(u'Compensation Percentage or Lump Sum'),
         default=(
             '2.5% per credit (faculty rate)',
             '3.33% per credit (academic staff rate)',
@@ -1820,7 +1821,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     equipment_and_space = schema.Tuple(
-        title=u'Equipment & Space',
+        title=_(u'Equipment & Space'),
         default=(
             'I do not need teaching space or equipment.',
             'I have the following space/equipment needs: (if checked, please describe).',
@@ -1831,7 +1832,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     guest_lectures = schema.Tuple(
-        title=u'Guest Lectures',
+        title=_(u'Guest Lectures'),
         default=(
             'I do not need guest lecturers.',
             'I do need guest lecturers and will include details within the daily itinerary in this application.',
@@ -1842,7 +1843,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     immigration_status = schema.Tuple(
-        title=u'Immigration Status',
+        title=_(u'Immigration Status'),
         default=(
             'Green Card Holder (US Permanent Resident)',
             'A',
@@ -1914,7 +1915,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     eligibility_requirement = schema.Tuple(
-        title=u'Eligibility Requirement',
+        title=_(u'Eligibility Requirement'),
         default=(
             'Undergraduate students must have a minimum G.P.A. of 2.0, be in good standing, and meet course prerequisites. As part of the application process, your disciplinary file will be reviewed. If you have a campus disciplinary file, this will be taken into consideration when determining your eligibility. Undergraduates who do not meet minimum GPA and course requirements should contact the program leader prior to applying to determine course eligibility.',
             'Undergraduate students must have a minimum G.P.A. of 2.0, be in good standing, and meet course prerequisites. Undergraduate students who are required to complete a Quest III course to fulfill graduation requirements may apply. Students must have a minimum G.P.A. of 2.0, be in good standing, meet course prerequisites, and meet Quest III prerequisites. As part of the application process, your disciplinary file will be reviewed. If you have a campus disciplinary file, this will be taken into consideration when determining your eligibility. Undergraduates who are not required to complete a Quest III course to graduate are not eligible; however, they may apply for consideration on a space-available basis along with USP & instructor consent. Seats will be assigned to these applicants only after all applicants who are required to complete Quest III to graduate and who have met the STEP III deadline have been awarded a seat.',
@@ -1927,7 +1928,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     timezone= schema.Tuple(
-        title=u'Time Zones',
+        title=_(u'Time Zones'),
         default=(
         'Africa/Abidjan', 'Africa/Accra', 'Africa/Addis_Ababa', 'Africa/Algiers', 'Africa/Asmara', 'Africa/Asmera',
         'Africa/Bamako', 'Africa/Bangui', 'Africa/Banjul', 'Africa/Bissau', 'Africa/Blantyre', 'Africa/Brazzaville',
@@ -2042,7 +2043,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     education_level = schema.Tuple(
-        title=u'Education Levels',
+        title=_(u'Education Levels'),
         default=(
             'High School Junior',
             'High School Senior',
@@ -2056,7 +2057,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     student_status = schema.Tuple(
-        title=u'Student Status',
+        title=_(u'Student Status'),
         default=(
             '1) UWO students making progress toward a degree may apply.',
             '2) UW System students making progress toward a degree may apply.',
@@ -2065,6 +2066,27 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         ),
         value_type = schema.TextLine(),
     )
+
+    program_of_study = schema.Tuple(
+        title=_(u'Program of Study'),
+        default=(
+            'Honors College',
+            'College of Business',
+            'College of Nursing',
+            'MBA - Executive Path',
+            'MBA - Professional Path',
+        )
+    )
+
+    enrollment_institution = schema.Tuple(
+        title=_(u'Course Enrollment Institutions'),
+        default=(
+            'UW Oshkosh only',
+            'Foreign Cooperating Partner only',
+            'Simultaneous enrollment at UW Oshkosh and Foreign Cooperating Partner',
+        )
+    )
+
 
 class OIEStudyAbroadStudentControlPanelForm(RegistryEditForm):
     schema = IOIEStudyAbroadStudentControlPanel

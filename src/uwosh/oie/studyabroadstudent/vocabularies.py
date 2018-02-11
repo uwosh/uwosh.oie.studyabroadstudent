@@ -829,3 +829,31 @@ class LiaisonVocabularyFactory(object):
 
 
 LiaisonVocabulary = LiaisonVocabularyFactory()
+
+
+@implementer(IVocabularyFactory)
+class ProgramOfStudyVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.program_of_study')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+
+ProgramOfStudyVocabulary = ProgramOfStudyVocabularyFactory()
+
+
+@implementer(IVocabularyFactory)
+class EnrollmentInstitutionVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.enrollment_institution')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+
+EnrollmentInstitutionVocabulary = EnrollmentInstitutionVocabularyFactory()
+
+
