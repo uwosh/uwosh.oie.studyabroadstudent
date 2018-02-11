@@ -232,6 +232,20 @@ class IContributingEntityRowSchema(Interface):
     )
 
 
+class IReviewerEmailRowSchema(Interface):
+    reviewer_email_row = schema.TextLine(
+        title=_(u'Reviewer Email Address'),
+        #TODO validate email format
+        #TODO autocomplete from campus email addresses? Or commonly entered email addresses? Rely on browser?
+    )
+
+
+class IHealthSafetySecurityDocumentRowSchema(Interface):
+    health_safety_security_document = field.NamedFile(
+        title=_(u'Health, Safety, Security Document'),
+    )
+
+
 class IOIEStudyAbroadProgram(Interface):
     title = schema.TextLine(
         title=_(u'Program Title'),
@@ -379,6 +393,8 @@ class IOIEStudyAbroadProgram(Interface):
     equipment_and_space_needs = RichText(
         title=_(u'Equipment & Space details'),
         description=_(u'if needed'),
+        default_mime_type='text/plain',
+        allowed_mime_types=('text/plain', 'text/html',),
         required=False,
     )
 
@@ -779,6 +795,51 @@ class IOIEStudyAbroadProgram(Interface):
         value_type=DictRow(title=u'Contributing Entity', schema=IContributingEntityRowSchema),
     )
 
+    #######################################################
+    model.fieldset(
+        'Reviewers',
+        label=_(u"Reviewers"),
+        fields=['reviewers_label', 'reviewer_emails'],
+    )
+    form.mode(reviewers_label='display')
+    reviewers_label = schema.TextLine(
+        description=_(u'Type an email address for every Committee Chair, Department Chair and Dean: •  who supervises a Liaison, On-site Program Leader or On-site Program Co-leader listed in this application and/or •  is associated with a course offered through this program. Do not include email addresses for committee members who review applications.'),
+        #TODO Each program may have a different number of "Chair reviewers" and "Dean/Unit Director reviewers".  Who reviews an application will change depending on who is leading the program and which courses are offered.  How can this be handled?
+    )
+    widget('reviewer_emails', DataGridFieldFactory)
+    reviewer_emails = schema.List(
+        title=_(u'Reviewer Emails'),
+        description=_(u'(max: 6)'),
+        required=False,
+        value_type=DictRow(title=u'Reviewer Emails', schema=IReviewerEmailRowSchema),
+    )
+
+    #######################################################
+    model.fieldset(
+        'OIE Review',
+        label=_(u"OIE Review"),
+        fields=['program_schedule', 'director_recommendations', 'health_safety_security_documents'],
+    )
+    program_schedule = schema.Choice(
+        title=_(u'Program Schedule'),
+        description=_(u'?'), #TODO description?
+        vocabulary=yes_no_none_vocabulary,
+        #TODO check box or workflow?
+    )
+    director_recommendations = RichText(
+        title=_(u'OIE Director Recommendation'),
+        description=_(u'including site-specific Health, Safety & Security  remarks'),
+        default_mime_type='text/plain',
+        allowed_mime_types=('text/plain', 'text/html',),
+        max_length=2500,
+    )
+    widget('health_safety_security_documents', DataGridFieldFactory)
+    health_safety_security_documents = schema.List(
+        title=_(u'Health, Safety & Security Documents'),
+        description=_(u'For all sites, upload Department of State Country Information and CDC country-specific information.  For sites with a U.S. Travel Warning, or when otherwise warranted, upload OIE travel recommendation and supporting documents'),
+        required=False,
+        value_type=DictRow(title=_(u'File'), schema=IHealthSafetySecurityDocumentRowSchema),
+    )
     #######################################################
     model.fieldset(
         'program_dates_fieldset',
