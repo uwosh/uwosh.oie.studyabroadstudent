@@ -274,6 +274,15 @@ seat_assignment_protocol = SimpleVocabulary(
     ]
 )
 
+salary_form = SimpleVocabulary(
+    [
+        SimpleTerm(u'Payment to Individual Form (PTF) - Direct Payment'),
+        SimpleTerm(u'Transaction Transfer Request (TTR) - Replacement Costs'),
+        SimpleTerm(u'Foundation'),
+        SimpleTerm(u'Not Applicable'),
+    ]
+)
+
 @implementer(IVocabularyFactory)
 class SubjectsVocabularyFactory(object):
 

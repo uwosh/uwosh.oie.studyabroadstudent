@@ -540,43 +540,9 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'compensation',
-        label=_(u"Compensation"),
-        fields=['load_or_overload', 'replacement_costs', 'paid_by', 'rate_or_lump_sum', 'lump_sum_amount'],
-    ),
-
-    load_or_overload = schema.Choice(
-        title=_(u'Load or Overload'),
-        description=_(u'Choose whether payment is part of load or is overload'),
-        required=True,
-        vocabulary=load_or_overload,
-    )
-
-    replacement_costs = schema.Choice(
-        title=_(u'Replacement Costs'),
-        description=_(u'Are replacement costs due to the College?'),
-        required=False,
-        vocabulary=replacement_costs,
-    )
-
-    paid_by = schema.Choice(
-        title=_(u'Costs are paid by'),
-        description=_(u'Choose who pays'),
-        required=False,
-        vocabulary=paid_by,
-    )
-
-    rate_or_lump_sum = schema.Choice(
-        title=_(u'Payment Rate or Lump Sum'),
-        description=_(u'Choose a payment rate or lump sum'),
-        required=False,
-        vocabulary=rate_or_lump_sum,
-    )
-
-    lump_sum_amount = schema.TextLine(
-        title=_(u'Lump sum amount'),
-        description=_(u'Enter the lump sum to be paid'),
-        required=False,
+        'Liaison & Leadership',
+        label=_(u"Liaison & Leadership"),
+        fields=[],
     )
 
     #######################################################

@@ -12,7 +12,10 @@ from z3c.relationfield.schema import RelationChoice
 from plone.autoform.directives import widget
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, month_vocabulary, dayofmonth_vocabulary, room_type_vocabulary, smoking_vocabulary, semester_vocabulary, student_type_vocabulary, bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary
+from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, month_vocabulary, \
+    dayofmonth_vocabulary, room_type_vocabulary, smoking_vocabulary, semester_vocabulary, student_type_vocabulary, \
+    bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary, \
+    socialmediaservice
 
 
 class IOIEContact(Interface):
@@ -43,23 +46,32 @@ class IOIEContact(Interface):
         title=_(u'Job Title'),
         required=False,
     )
-    dexteritytextindexer.searchable('telephone')
-    telephone = schema.TextLine(
-        title=_(u'Telephone'),
+    dexteritytextindexer.searchable('phone')
+    phone = schema.TextLine(
+        title=_(u'Phone'),
+        description=_(u'Please include country code (if outside US) and area code'),
         required=False,
     )
-    dexteritytextindexer.searchable('mobile')
-    mobile = schema.TextLine(
-        title=_(u'Mobile'),
+    dexteritytextindexer.searchable('mobile_phone')
+    mobile_phone = schema.TextLine(
+        title=_(u'Mobile Phone'),
+        description=_(u'Please include country code (if outside US) and area code'),
         required=False,
     )
     dexteritytextindexer.searchable('email')
     email = schema.TextLine(
         title=_(u'Email'),
+        # TODO validate email
         required=False,
     )
-    dexteritytextindexer.searchable('other')
-    other  = schema.TextLine(
+    dexteritytextindexer.searchable('other_service')
+    other_service = schema.Choice(
         title=_(u'e.g., Line, Skype, Viber, WeChat, WhatsApp'),
+        required=False,
+        vocabulary=socialmediaservice,
+    )
+    dexteritytextindexer.searchable('other_username')
+    other_username = schema.TextLine(
+        title=_(u'username or ID for the above service'),
         required=False,
     )
