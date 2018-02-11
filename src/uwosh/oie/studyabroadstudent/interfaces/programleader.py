@@ -143,6 +143,7 @@ class IOIEProgramLeader(Interface):
     )
 
     #######################################################
+    # TODO move JavaScript over for compensation fields
     model.fieldset(
         'compensation',
         label=_(u"Compensation"),
@@ -228,7 +229,7 @@ class IOIEProgramLeader(Interface):
     travel_document_middle_name = schema.TextLine(
         title=_(u'Travel Document: Middle Name'),
         description=_(u'If you are flying to your destination, the name on your airline ticket must match the name on your ID exactly.  IF YOUR MIDDLE NAME APPEARS ON YOUR ID, you must type your middle name in this field exactly as it appears on the ID.  IF YOUR MIDDLE INITIAL APPEARS ON YOUR ID, you must type only your middle initial in this field.  IF MULTIPLE MIDDLE NAMES APPEAR ON YOUR ID, you must type all middle names that appear on your ID in this field.  IF YOUR MIDDLE NAME DOES NOT APPEAR ON YOUR ID, do not include your middle name in this field.  If typed incorrectly, you will be responsible for any name change fee charged by the airline or by the travel agency.'),
-        required=True,
+        required=False,
     )
     travel_document_last_name = schema.TextLine(
         title=_(u'Travel Document: Last Name'),
@@ -265,33 +266,39 @@ class IOIEProgramLeader(Interface):
     orientation_completed_date = schema.Date(
         title=_(u'Program Leader Orientation Completed'),
         description=_(u'Confirm attendance at orientation'),
+        required=False,
         # TODO Applicant should not see this field.  This is for OIE.  It would be better to put this on the "Orientation" tab, but this field is specific to each Program Leader rather than to the program.
     )
     cash_advance_request = field.NamedFile(
         title=_(u'Cash Advance Request'),
         description=_(u'Upload the signed Cash Advance Form'),
+        required=False,
         # TODO Applicant should not see this field.  This is for OIE.  It would be better to put this on the "Program Finances" tab, but this field is specific to each Program Leader rather than to the program.
     )
     cash_advance_distribution = schema.Date(
         title=_(u'Cash Advance Distribution'),
         description=_(u'Enter the date on which the cash advance was distributed to the Program Leader/Program Co-leader'),
+        required=False,
         # TODO Applicant should not see this field.  This is for OIE.  It would be better to put this on the "Program Finances" tab, but this field is specific to each Program Leader rather than to the program.
     )
     hr_review_ok = schema.Choice(
         title=_(u'HR Review'),
         description=_(u'There are no actions pending that may affect the Provost''s decision to approve this applicant as a Leader or Co-leader for a study abroad/away program'),
         vocabulary=yes_no_none_vocabulary,
+        required=False,
         # TODO Or, is this its own workflow?
     )
     administrative_services_review_ok = schema.Choice(
         title=_(u'Administrative Services Review'),
         description=_(u'This applicant does not have any past due travel or cash advances'),
         vocabulary=yes_no_none_vocabulary,
+        required=False,
         # TODO Or, is this its own workflow?
     )
     equal_opportunity_review_ok = schema.Choice(
         title=_(u'Office of Equal Opportunity & Access Review'),
         description=_(u'There are no actions pending that may affect the Provost''s decision to approve this applicant as a Leader or Co-leader for a study abroad/away program.'),
         vocabulary=yes_no_none_vocabulary,
+        required=False,
         # TODO Or, is this its own workflow?
     )

@@ -66,6 +66,10 @@ class IPostTravelClassDatesRowSchema(Interface):
 #     question5 = schema.Text(title=_(u'Question 5'))
 
 
+class ICoLeadersRowSchema(Interface):
+    coleader = schema.Choice(title=_(u'On-site Program Co-leader'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.program_leader')
+
+
 class IOIEStudyAbroadProgram(Interface):
 
     title = schema.TextLine(
@@ -542,7 +546,24 @@ class IOIEStudyAbroadProgram(Interface):
     model.fieldset(
         'Liaison & Leadership',
         label=_(u"Liaison & Leadership"),
-        fields=[],
+        fields=['liaison', 'program_leader', 'program_coleaders'],
+    )
+    liaison = schema.Choice(
+        title=_(u'Program Liaison to the OIE'),
+        description=_(u'The Liaison to the OIE communicates decisions related to program development and delivery to the Program Manager in the OIE and communicates program changes and updates to his/her unit administration. There is only one Liaison per program;  all decision-making at the unit level must be communicated to the OIE through the designated liaison. The Liaison may also include the OIE Program Manager and/or other OIE staff in conversations or seek input when appropriate. The Liaison may also serve as the On-site Program Leader and may also teach one or more of the program courses.'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.liaison',
+    )
+    program_leader = schema.Choice(
+        title=_(u'On-site Program Leader'),
+        description=_(u'The On-site Program Leader is responsible for providing leadership for the group and for overseeing group health and safety.  The On-site Program Leader may also teach one or more of the program courses.'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.program_leader',
+    )
+    widget('program_coleaders', DataGridFieldFactory)
+    program_coleaders = schema.List(
+        title=_(u'On-site Program Leader (choose 0-4)'),
+        description=_(u'The On-site Program Leader is responsible for providing leadership for the group and for overseeing group health and safety.  The On-site Program Leader may also teach one or more of the program courses.'),
+        value_type=DictRow(title=u"co-leaders", schema=ICoLeadersRowSchema),
+        required=False,
     )
 
     #######################################################

@@ -785,3 +785,47 @@ class StudentStatusVocabularyFactory(object):
 
 
 StudentStatusVocabulary = StudentStatusVocabularyFactory()
+
+
+@implementer(IVocabularyFactory)
+class ProgramLeaderVocabularyFactory(object):
+
+    def __call__(self, context):
+        catalog = api.portal.get_tool('portal_catalog')
+        brains = catalog(portal_type='OIEProgramLeader',
+                         sort_on='sortable_title',
+                         sort_order='ascending')
+        terms = []
+        for brain in brains:
+            token = brain.getPath()
+            terms.append(SimpleTerm(
+                value=brain.UID,
+                token=token,
+                title=brain.Title.decode('utf8')
+            ))
+        return SimpleVocabulary(terms)
+
+
+ProgramLeaderVocabulary = ProgramLeaderVocabularyFactory()
+
+
+@implementer(IVocabularyFactory)
+class LiaisonVocabularyFactory(object):
+
+    def __call__(self, context):
+        catalog = api.portal.get_tool('portal_catalog')
+        brains = catalog(portal_type='OIELiaison',
+                         sort_on='sortable_title',
+                         sort_order='ascending')
+        terms = []
+        for brain in brains:
+            token = brain.getPath()
+            terms.append(SimpleTerm(
+                value=brain.UID,
+                token=token,
+                title=brain.Title.decode('utf8')
+            ))
+        return SimpleVocabulary(terms)
+
+
+LiaisonVocabulary = LiaisonVocabularyFactory()

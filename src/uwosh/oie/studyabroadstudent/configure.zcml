@@ -216,4 +216,12 @@
     name="uwosh.oie.studyabroadstudent.vocabularies.student_status"
     component="uwosh.oie.studyabroadstudent.vocabularies.StudentStatusVocabulary" />
 
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.program_leader"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ProgramLeaderVocabulary" />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.liaison"
+    component="uwosh.oie.studyabroadstudent.vocabularies.LiaisonVocabulary" />
+
 </configure>
