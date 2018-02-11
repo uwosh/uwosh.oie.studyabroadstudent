@@ -6,6 +6,8 @@ from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from uwosh.oie.studyabroadstudent import _
+from currencies import Currency
+
 
 MAX_LENGTH = 250
 
@@ -857,3 +859,16 @@ class EnrollmentInstitutionVocabularyFactory(object):
 EnrollmentInstitutionVocabulary = EnrollmentInstitutionVocabularyFactory()
 
 
+@implementer(IVocabularyFactory)
+class CurrencyVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = [v for v in Currency.money_formats.keys() if v != 'USD']
+        values.sort()
+        values.insert(0, 'USD')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+
+CurrencyVocabulary = CurrencyVocabularyFactory()

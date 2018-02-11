@@ -11,10 +11,8 @@ from z3c.relationfield.schema import RelationChoice
 from plone.autoform.directives import widget
 from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, \
-    dayofmonth_vocabulary, hold_vocabulary, aware_vocabulary, \
-    program_cycle_vocabulary, \
-    seat_assignment_protocol
-
+    dayofmonth_vocabulary, hold_vocabulary, aware_vocabulary, program_cycle_vocabulary, seat_assignment_protocol
+from plone.directives import form
 
 class ILearningObjectiveRowSchema(Interface):
     learning_objective = schema.TextLine(title=u"Enter one objective per row. Click on the \'+\' to add a row.")
@@ -209,6 +207,29 @@ class ICourseRowSchema(Interface):
         #TODO This field must be associated with each Ext Studies Course listed in "Course Subject & Number".
     )
 
+
+class IContributingEntityRowSchema(Interface):
+    contributing_entity_contact_name = schema.TextLine(
+        title=_(u'Contributing Entity Contact Name'),
+    )
+    contributing_entity_contact_phone_us = schema.TextLine(
+        title=_(u'Contact Tel (US number)'),
+    )
+    contributing_entity_contact_phone_other = schema.TextLine(
+        title=_(u'Contact Tel (other)'),
+    )
+    contributing_entity_contact_email = schema.TextLine(
+        title=_(u'Contact Email'),
+        #TODO validate email format
+    )
+    contributing_entity_contribution_amount = schema.Float(
+        title=_(u'Contribution Amount'),
+        min=0.0,
+    )
+    contributing_entity_contribution_currency = schema.Choice(
+        title=_(u'Contribution Currency'),
+        vocabulary = 'uwosh.oie.studyabroadstudent.vocabularies.currency',
+    )
 
 
 class IOIEStudyAbroadProgram(Interface):
@@ -597,7 +618,7 @@ class IOIEStudyAbroadProgram(Interface):
         fields=['studentStatus', 'seatAssignmentProtocol', 'liaisonReviewOfIndividualApplicants', 'approvalCriteria',
                 'individualInterview', 'firstRecommendationRequired', 'secondRecommendationRequired',
                 'applicantQuestion1', 'applicantQuestion2', 'applicantQuestion3', 'applicantQuestion4',
-                'applicantQuestion5', 'cvRequired', 'letterOfMotivationRequired'],
+                'applicantQuestion5', 'cvRequired', 'letterOfMotivationRequired', 'otherRequired'],
     ),
 
     studentStatus = schema.Choice(
@@ -730,7 +751,7 @@ class IOIEStudyAbroadProgram(Interface):
     model.fieldset(
         'Courses',
         label=_(u"Courses"),
-        fields=[],
+        fields=['courses'],
     )
     widget('courses', DataGridFieldFactory)
     courses = schema.List(
@@ -738,6 +759,24 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             u'List existing courses only.  If the course you intend to use is not an existing course, your department must submit the course for formal approval through normal university channels prior to applying to use the course abroad/away.  UW Oshkosh Curriculum Policies and Procedures do not allow the use of a contractual course, i.e. independent study or related readings, for an organized, off-campus course.'),
         value_type=DictRow(title=u'Course', schema=ICourseRowSchema),
+    )
+
+    #######################################################
+    model.fieldset(
+        'Contributions',
+        label=_(u"Contributions"),
+        fields=['contributions_label', 'contributing_entity'],
+    )
+    form.mode(contributions_label='display')
+    contributions_label = schema.TextLine(
+        description=_('If the College, Department, an external agency, external partner, or grant will contribute financially to the program, list the official name of the entity that is contributing, contributor contact details, and the amount of the contribution.'),
+    )
+    widget('contributing_entity', DataGridFieldFactory)
+    contributing_entity = schema.List(
+        title=_(u'Specify Contributing Entity or Entities'),
+        description=_(u'(max: 5)'),
+        required=False,
+        value_type=DictRow(title=u'Contributing Entity', schema=IContributingEntityRowSchema),
     )
 
     #######################################################

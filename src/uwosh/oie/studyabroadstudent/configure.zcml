@@ -232,4 +232,8 @@
     name="uwosh.oie.studyabroadstudent.vocabularies.enrollment_institution"
     component="uwosh.oie.studyabroadstudent.vocabularies.EnrollmentInstitutionVocabulary" />
 
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.currency"
+    component="uwosh.oie.studyabroadstudent.vocabularies.CurrencyVocabulary" />
+
 </configure>
