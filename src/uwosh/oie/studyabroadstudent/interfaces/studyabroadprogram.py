@@ -1018,6 +1018,75 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
+    #######################################################
+    model.fieldset(
+        'Finances',
+        label=_(u"Finances"),
+        fields=['finances_label', 'anticipated_number_of_applicants_min', 'anticipated_number_of_applicants_max',
+                'budget_spreadsheet', 'fecop_worksheet', 'required_prior_to_publishing_initial_fee_label',
+                'program_fee', 'required_prior_to_confirming_to_run_label', 'first_participant_fee_statement_',
+                'first_participant_fee_spreadsheet', 'required_prior_to_publishing_initial_fee_label_2',
+                'final_participant_fee_spreadsheet'],
+    )
+    form.mode(finances_label='display')
+    finances_label = schema.TextLine(
+        description=_(u'Required to Determine Program Fee'),
+    )
+    anticipated_number_of_applicants_min = schema.Int(
+        title=_('Anticipated Number of Applicants (Minimum)'),
+        min=0,
+        max=999,
+    )
+    anticipated_number_of_applicants_max = schema.Int(
+        title=_('Anticipated Number of Applicants (Maximum)'),
+        min=0,
+        max=999,
+    )
+    budget_spreadsheet = field.NamedFile(
+        title=_(u'Budget Spreadsheet'),
+        description=_(u'Upload a draft budget spreadsheet for review.  Replace this draft with updated budget spreadsheets until the review process is complete.  The budget spreadsheet in place as of the end of the review process must be maintained as a reference for the published program fee estimated.  Do not replace the final budget spreadsheet after the review process has ended.'),
+    )
+    fecop_worksheet = field.NamedFile(
+        title=_(u'Full Estimated Cost of Participation (FECOP) Worksheet'),
+        description=_(u'Upload a draft FECOP worksheets for review.  Replace this draft with updated FECOPs until the review process is complete.  The FECOP in place as of the "Application Intake in Progress" state will be the one shared with participants for application purposes.  Therefore, do not replace this FECOP after the review process has ended.'),
+    )
+    form.mode(required_prior_to_publishing_initial_fee_label='display')
+    required_prior_to_publishing_initial_fee_label = schema.TextLine(
+        description=_(u'Required Prior to Publishing Initial Fee'),
+    )
+    program_fee = schema.Text(
+        title=_(u'Add the official Program Fee estimate from the FECOP ($XXXX based on a minimum of XX participants).  If the official estimate on the FECOP is a fee range, the fee at the top end of the range must be used here.  Information in this field will display as the official fee, or the official fee range, on the OIE website upon transition to "Application Intake in Progress".'),
+        default=u'TBA'
+    )
+    form.mode(required_prior_to_confirming_to_run_label='display')
+    required_prior_to_confirming_to_run_label = schema.TextLine(
+        description=_(u'Required Prior to Confirming to Run'),
+    )
+    first_participant_fee_statement_= field.NamedFile(
+        title=_(u'First Participant Fee Statement'),
+        description=_('Upload the first fee statement for participants.  This statement will display in the participant portal upon transition to "Pending Final Program Fee".  Participants deviating from the advertised program may require an alternative fee statement.'),
+        #TODO Display this fee statement in the particpant portal.
+    )
+    first_participant_fee_spreadsheet = field.NamedFile(
+        title=_(u'First Participant Fee Spreadsheet'),
+        description=_('Upload the first fee spreadsheet.  This spreadsheet will be accessed by student accounts for billing purposes.'),
+        #TODO Phase XXX: the system could generate this spreadsheet, with access in student accounts.
+    )
+    form.mode(required_prior_to_publishing_initial_fee_label_2='display')
+    required_prior_to_publishing_initial_fee_label_2 = schema.TextLine(
+        description=_(u'"Required Prior to Publishing Final Fee: Provider proposals and flight proposals on ""Proposals"" tab must also be complete."'),
+    )
+    first_participant_fee_spreadsheet = field.NamedFile(
+        title=_(u'Final Participant Fee Statement'),
+        description=_('Upload the final fee statement for participants.  This statement will display in the participant portal upon transition to "Final Payment Billing in Progress".  Participants deviating from the advertised program may require an alternative fee statement.'),
+        #TODO Display this fee statement in the particpant portal.
+    )
+    final_participant_fee_spreadsheet = field.NamedFile(
+        title=_(u'Final Participant Fee Spreadsheet'),
+        description=_('Upload the final fee spreadsheet.  This spreadsheet will be accessed by student accounts for billing purposes.'),
+        #TODO Phase XXX: the system could generate this spreadsheet, with access in student accounts.
+    )
+
 
     #######################################################
     model.fieldset(
