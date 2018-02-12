@@ -2075,7 +2075,8 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'College of Nursing',
             'MBA - Executive Path',
             'MBA - Professional Path',
-        )
+        ),
+        value_type = schema.TextLine(),
     )
 
     enrollment_institution = schema.Tuple(
@@ -2084,7 +2085,8 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'UW Oshkosh only',
             'Foreign Cooperating Partner only',
             'Simultaneous enrollment at UW Oshkosh and Foreign Cooperating Partner',
-        )
+        ),
+        value_type = schema.TextLine(),
     )
 
 

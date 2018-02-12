@@ -44,6 +44,8 @@ setup(
         'z3c.jbot',
         'plone.app.dexterity',
         'currencies',
+        'collective.dexteritytextindexer',
+        'collective.z3cform.datagridfield',
     ],
     extras_require={
         'test': [

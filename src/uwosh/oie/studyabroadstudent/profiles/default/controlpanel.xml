@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <object name="portal_controlpanel">
   <configlet
-      title="OIE Study Abroad Student Settings"
+      title="OIE Study Abroad Settings"
       action_id="oiestudyabroadstudent-controlpanel"
       appId="oiestudyabroadstudent-controlpanel"
       category="Products"
