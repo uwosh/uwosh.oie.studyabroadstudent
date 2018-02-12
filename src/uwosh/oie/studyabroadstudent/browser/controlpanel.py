@@ -2053,6 +2053,8 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'University Senior',
             'Graduate School',
         ),
+        missing_value=None,
+        required=True,
         value_type = schema.TextLine(),
     )
 
@@ -2064,6 +2066,8 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             '3) Students making progress toward a degree at an institution of higher education may apply. (This includes exchange students and visiting students from abroad currently studying at UW Oshkosh.)',
             '4) Students making progress toward a degree at an institution of higher education and community members may apply.  Community members require approval by the Program Liaison."',
         ),
+        missing_value=None,
+        required=True,
         value_type = schema.TextLine(),
     )
 
@@ -2076,6 +2080,8 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'MBA - Executive Path',
             'MBA - Professional Path',
         ),
+        missing_value=None,
+        required=True,
         value_type = schema.TextLine(),
     )
 
@@ -2086,6 +2092,8 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Foreign Cooperating Partner only',
             'Simultaneous enrollment at UW Oshkosh and Foreign Cooperating Partner',
         ),
+        missing_value=None,
+        required=True,
         value_type = schema.TextLine(),
     )
 
@@ -2093,7 +2101,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
 class OIEStudyAbroadStudentControlPanelForm(RegistryEditForm):
     schema = IOIEStudyAbroadStudentControlPanel
     schema_prefix = "oiestudyabroadstudent"
-    label = u'OIE Study Abroad Student Settings'
+    label = u'OIE Study Abroad Settings'
 
 
 OIEStudyAbroadStudentControlPanelView = layout.wrap_form(
