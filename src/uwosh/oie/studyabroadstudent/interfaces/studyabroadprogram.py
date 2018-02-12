@@ -951,8 +951,73 @@ class IOIEStudyAbroadProgram(Interface):
     model.fieldset(
         'Proposals',
         label=_(u"Proposals"),
-        fields=[]
+        fields=['proposals_label', 'request_for_proposal', 'request_for_proposal_due_date', 'provider_proposals_label',
+                'provider_01', 'provider_01_awarded_contract', 'proposal_01', 'provider_02',
+                'provider_02_awarded_contract', 'proposal_02', 'provider_03', 'provider_03_awarded_contract',
+                'proposal_03']
     )
+    form.mode(proposals_label='display')
+    proposals_label = schema.TextLine(
+        description=_(u'Required prior to submitting for Liaison review'),
+    )
+    request_for_proposal = field.NamedFile(
+        title=_('Request for Proposals (RFP)'),
+        description=_(u'Upload a draft RFP for review.  Replace draft with updated RFPs until the review process is completed.  The RFP in place as of the "Pending Receipt of Provider Proposals" state will be the one shared with providers in the formal Request for Proposals.  Therefore, do not replace the final RFP after the review process has ended.'),
+        #TODO Project Phase XXX: we would like to be able to upload the RFP here, type in the names & email addresses of the vendors to whom the proposal will be sent, and require that the vendors upload their proposals to our system (rather than send them by email).  If selected, the vendor should be able to type in contact details for two references, upload their business license and insurance certificate into our system, and type in validty dates for their insurance.  We'd like to be able to track vendors by Program, add insurance certificates annually, and use the system in a way that wouldn't allow us to contract with a vendor who has an expired insurance certificate.
+    )
+    request_for_proposal_due_date = schema.Date(
+        title=_(u'Request for Proposals Due')
+    )
+    form.mode(provider_proposals_label='display')
+    provider_proposals_label = schema.TextLine(
+        description=_(u'"Provider Proposals: At least 1 provider proposal must be selected and uploaded plus 1 flight proposal uploaded prior to using the ""Review Provider Proposal"" function. A yes/no contracting decision must be made for every provider and flight proposal prior to using the ""publish fee"" function.'),
+    )
+    provider_01 = schema.Choice(
+        title=_(u'Provider 01'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.provider',
+        #TODO NOTE: in order to "add new" provider, OIE must complete a secondary vetting process.  PHASE XX of this project: add a workflow and associated fields (provider contact info, upload field for insurance docs, upload field for business license, etc.) that allows us to track our vetting progress and make a provider "available" in the system only after vetting and only while insurance certificates are valid.
+    )
+    provider_01_awarded_contract = schema.Choice(
+        title=_(u'Provider 01 Awarded Contract'),
+        vocabulary=yes_no_none_vocabulary,
+    )
+    proposal_01 = field.NamedFile(
+        title=_('Proposal 01'),
+        description=_(u'Upload a clean copy of proposal 01.  Proposal notes may be included by attaching these to the end of the clean proposal document.'),
+    )
+    provider_02 = schema.Choice(
+        title=_(u'Provider 02'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.provider',
+        #TODO NOTE: in order to "add new" provider, OIE must complete a secondary vetting process.  PHASE XX of this project: add a workflow and associated fields (provider contact info, upload field for insurance docs, upload field for business license, etc.) that allows us to track our vetting progress and make a provider "available" in the system only after vetting and only while insurance certificates are valid.
+        required=False,
+    )
+    provider_02_awarded_contract = schema.Choice(
+        title=_(u'Provider 02 Awarded Contract'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+    )
+    proposal_02 = field.NamedFile(
+        title=_('Proposal 02'),
+        description=_(u'Upload a clean copy of proposal 03.  Proposal notes may be included by attaching these to the end of the clean proposal document.'),
+        required=False,
+    )
+    provider_03 = schema.Choice(
+        title=_(u'Provider 03'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.provider',
+        #TODO NOTE: in order to "add new" provider, OIE must complete a secondary vetting process.  PHASE XX of this project: add a workflow and associated fields (provider contact info, upload field for insurance docs, upload field for business license, etc.) that allows us to track our vetting progress and make a provider "available" in the system only after vetting and only while insurance certificates are valid.
+        required=False,
+    )
+    provider_03_awarded_contract = schema.Choice(
+        title=_(u'Provider 03 Awarded Contract'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+    )
+    proposal_03 = field.NamedFile(
+        title=_('Proposal 03'),
+        description=_(u'Upload a clean copy of proposal 03.  Proposal notes may be included by attaching these to the end of the clean proposal document.'),
+        required=False,
+    )
+
 
     #######################################################
     model.fieldset(

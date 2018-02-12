@@ -236,4 +236,8 @@
     name="uwosh.oie.studyabroadstudent.vocabularies.currency"
     component="uwosh.oie.studyabroadstudent.vocabularies.CurrencyVocabulary" />
 
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.provider"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ProviderVocabulary" />
+
 </configure>
