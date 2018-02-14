@@ -16,6 +16,17 @@ from plone.autoform.directives import widget
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, month_vocabulary, dayofmonth_vocabulary, room_type_vocabulary, smoking_vocabulary, semester_vocabulary, student_type_vocabulary, bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary
+from uwosh.oie.studyabroadstudent.interfaces.airline import IOIEAirline
+from uwosh.oie.studyabroadstudent.interfaces.calendaryear import IOIECalendarYear
+from uwosh.oie.studyabroadstudent.interfaces.contact import IOIEContact
+from uwosh.oie.studyabroadstudent.interfaces.cooperatingpartner import IOIECooperatingPartner
+from uwosh.oie.studyabroadstudent.interfaces.country import IOIECountry
+from uwosh.oie.studyabroadstudent.interfaces.liaison import IOIELiaison
+from uwosh.oie.studyabroadstudent.interfaces.participant import IOIEStudyAbroadParticipant
+from uwosh.oie.studyabroadstudent.interfaces.programleader import IOIEProgramLeader
+from uwosh.oie.studyabroadstudent.interfaces.provider import IOIEProvider
+from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import IOIEStudyAbroadProgram
+from uwosh.oie.studyabroadstudent.interfaces.studyabroadstudentapplication import IOIEStudyAbroadStudentApplication
 
 
 class IUwoshOieStudyabroadstudentLayer(IDefaultBrowserLayer):

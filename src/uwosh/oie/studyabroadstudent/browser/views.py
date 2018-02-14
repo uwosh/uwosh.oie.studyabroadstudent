@@ -16,14 +16,15 @@ class ProgramView(DefaultView, FolderView):
 class CooperatingPartnerView(DefaultView):
     def primary_contact(self):
         contact = self.context.primary_contact.to_object
-        return '<a href="%s">%s, %s, %s, %s, %s, %s</a>' % (
+        return '<a href="%s">%s, %s, %s, %s, %s, %s : %s</a>' % (
             contact.absolute_url(),
-            contact.title,
-            contact.job_title,
-            contact.telephone,
-            contact.mobile,
-            contact.email,
-            contact.other,
+            getattr(contact, 'title', None),
+            getattr(contact, 'job_title', None),
+            getattr(contact, 'telephone', None),
+            getattr(contact, 'mobile', None),
+            getattr(contact, 'email', None),
+            getattr(contact, 'other_service', None),
+            getattr(contact, 'other_username', None),
         )
 
 
