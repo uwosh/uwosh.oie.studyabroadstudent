@@ -59,12 +59,13 @@ def post_install(context):
         api.content.create(type='OIECountry', container=country_folder, title='United Kingdom', timezone_url='https://www.timeanddate.com/worldclock/uk', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-kingdom', state_dept_info_url='https://travel.state.gov/content/passports/en/country/united-kingdom.html')
         api.content.create(type='OIECountry', container=country_folder, title='United States', timezone_url='https://www.timeanddate.com/worldclock/usa', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-states', state_dept_info_url='')
         api.content.create(type='OIECountry', container=country_folder, title='Virgin Islands (U.S.)', timezone_url='https://www.timeanddate.com/worldclock/us-virgin', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/usvirgin-islands', state_dept_info_url='')
-    # TODO hide Users
+    # TODO retract and hide Users
     # TODO change front page text
-    # TODO add folders: Applications, Countries, Participants, Programs, People, Partners, Years, Airlines
+    # TODO add folders: Applications, Countries, Participants, Programs, People, Partners, Years, Airlines, Providers
     # TODO add Link to http://localhost:8089/OIE/@@oiestudyabroadstudent-controlpanel using ${navigation_root_url}/@@oiestudyabroadstudent-controlpanel
     # TODO restrict addable types for the new folders
     # TODO add content rules that move OIE content items to the appropriate folder
+    # TODO add tests for content type creation and reading
 
 
 
