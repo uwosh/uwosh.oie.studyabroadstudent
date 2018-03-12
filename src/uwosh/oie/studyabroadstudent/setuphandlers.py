@@ -19,7 +19,9 @@ def post_install(context):
     # populate countries
     portal = api.portal.get()
     # if needed, add countries folder and populate it
-    if 'countries' not in [id for id, obj in portal.items()]:
+    portal_items = portal.items()
+    portal_ids = [id for id, obj in portal_items]
+    if 'countries' not in portal_ids:
         country_folder = api.content.create(type='Folder', title='Countries', id='countries', container=portal)
         api.content.create(type='OIECountry', container=country_folder, title='Australia', timezone_url='https://www.timeanddate.com/worldclock/results.html?query=australia', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/australia', state_dept_info_url='https://travel.state.gov/content/passports/en/country/australia.html')
         api.content.create(type='OIECountry', container=country_folder, title='Austria', timezone_url='https://www.timeanddate.com/worldclock/austria', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/austria', state_dept_info_url='https://travel.state.gov/content/passports/en/country/austria.html')
@@ -59,12 +61,35 @@ def post_install(context):
         api.content.create(type='OIECountry', container=country_folder, title='United Kingdom', timezone_url='https://www.timeanddate.com/worldclock/uk', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-kingdom', state_dept_info_url='https://travel.state.gov/content/passports/en/country/united-kingdom.html')
         api.content.create(type='OIECountry', container=country_folder, title='United States', timezone_url='https://www.timeanddate.com/worldclock/usa', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-states', state_dept_info_url='')
         api.content.create(type='OIECountry', container=country_folder, title='Virgin Islands (U.S.)', timezone_url='https://www.timeanddate.com/worldclock/us-virgin', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/usvirgin-islands', state_dept_info_url='')
-    # TODO retract and hide Users
-    # TODO change front page text
-    # TODO add folders: Applications, Countries, Participants, Programs, People, Partners, Years, Airlines, Providers
-    # TODO add Link to http://localhost:8089/OIE/@@oiestudyabroadstudent-controlpanel using ${navigation_root_url}/@@oiestudyabroadstudent-controlpanel
-    # TODO restrict addable types for the new folders
-    # TODO add content rules that move OIE content items to the appropriate folder
+
+    # retract and hide Users
+    if 'Members' in portal_ids:
+        user_folder = portal['Members']
+        api.content.transition(obj=user_folder, transition='retract')
+        user_folder.exclude_from_nav = True
+
+    # change front page text
+    # if 'front-page' in portal_ids:
+    #     frontpage = portal['front-page']
+    #     frontpage.title = 'Welcome to OIE'
+    #     frontpage.description = 'You have reached the UW Oshkosh Office of International Education'
+    #     frontpage.reindexObject()
+
+    # add folders
+    applications_folder = api.content.create(type='Folder', title='Applications', id='applications', container=portal)
+    # participants_folder = api.content.create(type='Folder', title='Participants', id='participants', container=portal)
+    programs_folder = api.content.create(type='Folder', title='Programs', id='programs', container=portal)
+    people_folder = api.content.create(type='Folder', title='People', id='people', container=portal)
+    partners_folder = api.content.create(type='Folder', title='Partners', id='partners', container=portal)
+    years_folder = api.content.create(type='Folder', title='Years', id='years', container=portal)
+    airlines_folder = api.content.create(type='Folder', title='Airlines', id='airlines', container=portal)
+    providers_folder = api.content.create(type='Folder', title='Providers', id='providers', container=portal)
+    # TODO restrict addable types
+
+    # add Link to OIE control panel
+    link = api.content.create(type='Link', title='OIE Settings', id='oie-settings', container=portal)
+    link.remoteUrl = '${navigation_root_url}/@@oiestudyabroadstudent-controlpanel'
+
     # TODO add tests for content type creation and reading
 
 
