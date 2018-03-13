@@ -6,28 +6,44 @@
         <policy name="version_on_revert"/>
       </type>
       <type name="OIECalendarYear">
-          <policy name="at_edit_autoversion"/>
-          <policy name="version_on_revert"/>
-        </type>
-        <type name="OIEContact">
-            <policy name="at_edit_autoversion"/>
-            <policy name="version_on_revert"/>
-        </type>
-        <type name="OIECooperatingPartner">
-            <policy name="at_edit_autoversion"/>
-            <policy name="version_on_revert"/>
-        </type>
-        <type name="OIECountry">
-            <policy name="at_edit_autoversion"/>
-            <policy name="version_on_revert"/>
-        </type>
-        <type name="OIEStudyAbroadProgram">
-            <policy name="at_edit_autoversion"/>
-            <policy name="version_on_revert"/>
-        </type>
-        <type name="OIEStudyAbroadStudentApplication">
-            <policy name="at_edit_autoversion"/>
-            <policy name="version_on_revert"/>
-        </type>
+        <policy name="at_edit_autoversion"/>
+        <policy name="version_on_revert"/>
+      </type>
+      <type name="OIEContact">
+        <policy name="at_edit_autoversion"/>
+        <policy name="version_on_revert"/>
+      </type>
+      <type name="OIECooperatingPartner">
+        <policy name="at_edit_autoversion"/>
+        <policy name="version_on_revert"/>
+      </type>
+      <type name="OIECountry">
+        <policy name="at_edit_autoversion"/>
+        <policy name="version_on_revert"/>
+      </type>
+      <type name="OIELiaison">
+        <policy name="at_edit_autoversion"/>
+        <policy name="version_on_revert"/>
+      </type>
+      <type name="OIEProgramLeader">
+        <policy name="at_edit_autoversion"/>
+        <policy name="version_on_revert"/>
+      </type>
+      <type name="OIEProvider">
+        <policy name="at_edit_autoversion"/>
+        <policy name="version_on_revert"/>
+      </type>
+      <type name="OIEParticipant">
+        <policy name="at_edit_autoversion"/>
+        <policy name="version_on_revert"/>
+      </type>
+      <type name="OIEStudyAbroadProgram">
+        <policy name="at_edit_autoversion"/>
+        <policy name="version_on_revert"/>
+      </type>
+      <type name="OIEStudyAbroadStudentApplication">
+        <policy name="at_edit_autoversion"/>
+        <policy name="version_on_revert"/>
+      </type>
     </policymap>
 </repositorytool>
