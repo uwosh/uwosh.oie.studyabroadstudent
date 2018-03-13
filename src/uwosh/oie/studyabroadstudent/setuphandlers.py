@@ -2,6 +2,8 @@
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.interface import implementer
 from plone import api
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from plone.app.textfield.value import RichTextValue
 
 
 @implementer(INonInstallable)
@@ -12,6 +14,13 @@ class HiddenProfiles(object):
         return [
             'uwosh.oie.studyabroadstudent:uninstall',
         ]
+
+
+def constrain_types(context, folder, ftis):
+    aspect = ISelectableConstrainTypes(folder)
+    aspect.setConstrainTypesMode(1)
+    aspect.setLocallyAllowedTypes(ftis)
+    aspect.setImmediatelyAddableTypes(ftis)
 
 
 def post_install(context):
@@ -61,34 +70,82 @@ def post_install(context):
         api.content.create(type='OIECountry', container=country_folder, title='United Kingdom', timezone_url='https://www.timeanddate.com/worldclock/uk', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-kingdom', state_dept_info_url='https://travel.state.gov/content/passports/en/country/united-kingdom.html')
         api.content.create(type='OIECountry', container=country_folder, title='United States', timezone_url='https://www.timeanddate.com/worldclock/usa', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-states', state_dept_info_url='')
         api.content.create(type='OIECountry', container=country_folder, title='Virgin Islands (U.S.)', timezone_url='https://www.timeanddate.com/worldclock/us-virgin', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/usvirgin-islands', state_dept_info_url='')
+    else:
+        country_folder = portal['countries']
+    constrain_types(context, country_folder, ['OIECountry'])
 
     # retract and hide Users
     if 'Members' in portal_ids:
         user_folder = portal['Members']
-        api.content.transition(obj=user_folder, transition='retract')
+        wf_state = api.content.get_state(user_folder)
+        if wf_state != 'private':
+            api.content.transition(obj=user_folder, transition='retract')
         user_folder.exclude_from_nav = True
 
     # change front page text
-    # if 'front-page' in portal_ids:
-    #     frontpage = portal['front-page']
-    #     frontpage.title = 'Welcome to OIE'
-    #     frontpage.description = 'You have reached the UW Oshkosh Office of International Education'
-    #     frontpage.reindexObject()
+    if 'front-page' in portal_ids:
+        frontpage = portal['front-page']
+        frontpage.title = 'Welcome to OIE'
+        frontpage.description = 'You have reached the UW Oshkosh Office of International Education'
+        frontpage.text = RichTextValue(
+            u'Lorem ipsum',
+            'text/plain',
+            'text/html',
+        )
 
-    # add folders
-    applications_folder = api.content.create(type='Folder', title='Applications', id='applications', container=portal)
-    # participants_folder = api.content.create(type='Folder', title='Participants', id='participants', container=portal)
-    programs_folder = api.content.create(type='Folder', title='Programs', id='programs', container=portal)
-    people_folder = api.content.create(type='Folder', title='People', id='people', container=portal)
-    partners_folder = api.content.create(type='Folder', title='Partners', id='partners', container=portal)
-    years_folder = api.content.create(type='Folder', title='Years', id='years', container=portal)
-    airlines_folder = api.content.create(type='Folder', title='Airlines', id='airlines', container=portal)
-    providers_folder = api.content.create(type='Folder', title='Providers', id='providers', container=portal)
-    # TODO restrict addable types
+    # add folders and restrict addable types
+    if 'applications' not in portal_ids:
+        applications_folder = api.content.create(type='Folder', title='Applications', id='applications', container=portal)
+    else:
+        applications_folder = portal['applications']
+    constrain_types(context, applications_folder, ['OIEStudyAbroadStudentApplication'])
+
+    if 'participants' not in portal_ids:
+        participants_folder = api.content.create(type='Folder', title='Participants', id='participants', container=portal)
+    else:
+        participants_folder = portal['participants']
+    constrain_types(context, participants_folder, ['OIEStudyAbroadParticipant'])
+
+    if 'programs' not in portal_ids:
+        programs_folder = api.content.create(type='Folder', title='Programs', id='programs', container=portal)
+    else:
+        programs_folder = portal['programs']
+    constrain_types(context, programs_folder, ['OIEStudyAbroadProgram'])
+
+    if 'people' not in portal_ids:
+        people_folder = api.content.create(type='Folder', title='People', id='people', container=portal)
+    else:
+        people_folder = portal['people']
+    constrain_types(context, people_folder, ['OIEContact', 'OIELiaison', 'OIEProgramLeader'])
+
+    if 'partners' not in portal_ids:
+        partners_folder = api.content.create(type='Folder', title='Partners', id='partners', container=portal)
+    else:
+        partners_folder = portal['partners']
+    constrain_types(context, partners_folder, ['OIECooperatingPartner'])
+
+    if 'years' not in portal_ids:
+        years_folder = api.content.create(type='Folder', title='Years', id='years', container=portal)
+    else:
+        years_folder = portal['years']
+    constrain_types(context, years_folder, ['OIECalendarYear'])
+
+    if 'airlines' not in portal_ids:
+        airlines_folder = api.content.create(type='Folder', title='Airlines', id='airlines', container=portal)
+    else:
+        airlines_folder = portal['airlines']
+    constrain_types(context, airlines_folder, ['OIEAirline'])
+
+    if 'providers' not in portal_ids:
+        providers_folder = api.content.create(type='Folder', title='Providers', id='providers', container=portal)
+    else:
+        providers_folder = portal['providers']
+    constrain_types(context, providers_folder, ['OIEProvider'])
 
     # add Link to OIE control panel
-    link = api.content.create(type='Link', title='OIE Settings', id='oie-settings', container=portal)
-    link.remoteUrl = '${navigation_root_url}/@@oiestudyabroadstudent-controlpanel'
+    if 'oie-settings' not in portal_ids:
+        link = api.content.create(type='Link', title='OIE Settings', id='oie-settings', container=portal)
+        link.remoteUrl = '${navigation_root_url}/@@oiestudyabroadstudent-controlpanel'
 
     # TODO add tests for content type creation and reading
 
