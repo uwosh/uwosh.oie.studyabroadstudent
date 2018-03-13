@@ -16,11 +16,19 @@ class HiddenProfiles(object):
         ]
 
 
-def constrain_types(context, folder, ftis):
+def constrain_types(folder, ftis):
     aspect = ISelectableConstrainTypes(folder)
     aspect.setConstrainTypesMode(1)
     aspect.setLocallyAllowedTypes(ftis)
     aspect.setImmediatelyAddableTypes(ftis)
+
+
+def create_toplevel_folder(portal, portal_ids, title, id, ftis):
+    if id not in portal_ids:
+        folder = api.content.create(type='Folder', title=title, id=id, container=portal)
+    else:
+        folder = portal[id]
+    constrain_types(folder, ftis)
 
 
 def post_install(context):
@@ -72,7 +80,7 @@ def post_install(context):
         api.content.create(type='OIECountry', container=country_folder, title='Virgin Islands (U.S.)', timezone_url='https://www.timeanddate.com/worldclock/us-virgin', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/usvirgin-islands', state_dept_info_url='')
     else:
         country_folder = portal['countries']
-    constrain_types(context, country_folder, ['OIECountry'])
+    constrain_types(country_folder, ['OIECountry'])
 
     # retract and hide Users
     if 'Members' in portal_ids:
@@ -94,53 +102,14 @@ def post_install(context):
         )
 
     # add folders and restrict addable types
-    if 'applications' not in portal_ids:
-        applications_folder = api.content.create(type='Folder', title='Applications', id='applications', container=portal)
-    else:
-        applications_folder = portal['applications']
-    constrain_types(context, applications_folder, ['OIEStudyAbroadStudentApplication'])
-
-    if 'participants' not in portal_ids:
-        participants_folder = api.content.create(type='Folder', title='Participants', id='participants', container=portal)
-    else:
-        participants_folder = portal['participants']
-    constrain_types(context, participants_folder, ['OIEStudyAbroadParticipant'])
-
-    if 'programs' not in portal_ids:
-        programs_folder = api.content.create(type='Folder', title='Programs', id='programs', container=portal)
-    else:
-        programs_folder = portal['programs']
-    constrain_types(context, programs_folder, ['OIEStudyAbroadProgram'])
-
-    if 'people' not in portal_ids:
-        people_folder = api.content.create(type='Folder', title='People', id='people', container=portal)
-    else:
-        people_folder = portal['people']
-    constrain_types(context, people_folder, ['OIEContact', 'OIELiaison', 'OIEProgramLeader'])
-
-    if 'partners' not in portal_ids:
-        partners_folder = api.content.create(type='Folder', title='Partners', id='partners', container=portal)
-    else:
-        partners_folder = portal['partners']
-    constrain_types(context, partners_folder, ['OIECooperatingPartner'])
-
-    if 'years' not in portal_ids:
-        years_folder = api.content.create(type='Folder', title='Years', id='years', container=portal)
-    else:
-        years_folder = portal['years']
-    constrain_types(context, years_folder, ['OIECalendarYear'])
-
-    if 'airlines' not in portal_ids:
-        airlines_folder = api.content.create(type='Folder', title='Airlines', id='airlines', container=portal)
-    else:
-        airlines_folder = portal['airlines']
-    constrain_types(context, airlines_folder, ['OIEAirline'])
-
-    if 'providers' not in portal_ids:
-        providers_folder = api.content.create(type='Folder', title='Providers', id='providers', container=portal)
-    else:
-        providers_folder = portal['providers']
-    constrain_types(context, providers_folder, ['OIEProvider'])
+    create_toplevel_folder(portal, portal_ids, 'Applications', 'applications', ['OIEStudyAbroadStudentApplication'])
+    create_toplevel_folder(portal, portal_ids, 'Participants', 'participants', ['OIEStudyAbroadParticipant'])
+    create_toplevel_folder(portal, portal_ids, 'Programs', 'programs', ['OIEStudyAbroadProgram'])
+    create_toplevel_folder(portal, portal_ids, 'People', 'people', ['OIEContact', 'OIELiaison', 'OIEProgramLeader'])
+    create_toplevel_folder(portal, portal_ids, 'Partners', 'partners', ['OIECooperatingPartner'])
+    create_toplevel_folder(portal, portal_ids, 'Years', 'years', ['OIECalendarYear'])
+    create_toplevel_folder(portal, portal_ids, 'Airlines', 'airlines', ['OIEAirline'])
+    create_toplevel_folder(portal, portal_ids, 'Providers', 'providers', ['OIEProvider'])
 
     # add Link to OIE control panel
     if 'oie-settings' not in portal_ids:
@@ -148,7 +117,6 @@ def post_install(context):
         link.remoteUrl = '${navigation_root_url}/@@oiestudyabroadstudent-controlpanel'
 
     # TODO add tests for content type creation and reading
-
 
 
 def uninstall(context):
