@@ -438,7 +438,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Language of Study'),
         description=_(
             u'Select all that apply. Contact the Office of International Education to add a language (abroad@uwosh.edu).'),
-        required=True,
+        required=False,
         value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.language'),
     )
 
