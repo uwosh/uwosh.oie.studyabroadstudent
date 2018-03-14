@@ -629,7 +629,7 @@ class NewProgramsVocabularyFactory(object):
 
     def __call__(self, context):
         catalog = api.portal.get_tool('portal_catalog')
-        brains = catalog(portal_type='OIEStudyAbroadPrograms',
+        brains = catalog(portal_type='OIEStudyAbroadProgram',
                          sort_on='sortable_title',
                          sort_order='ascending')
         terms = []
