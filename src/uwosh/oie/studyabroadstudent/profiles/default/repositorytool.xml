@@ -33,7 +33,7 @@
         <policy name="at_edit_autoversion"/>
         <policy name="version_on_revert"/>
       </type>
-      <type name="OIEParticipant">
+      <type name="OIEStudyAbroadParticipant">
         <policy name="at_edit_autoversion"/>
         <policy name="version_on_revert"/>
       </type>
