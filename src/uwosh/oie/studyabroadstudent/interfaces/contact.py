@@ -18,6 +18,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, ye
     socialmediaservice
 from zope.schema import ValidationError
 from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
+from plone.directives import form
 
 
 class InvalidEmailAddress(ValidationError):
@@ -34,11 +35,11 @@ def validate_email(value):
 
 class IOIEContact(Interface):
     dexteritytextindexer.searchable('title')
+    form.mode(title="display")
     title = schema.TextLine(
         title=_(u'Full Name'),
-        required=True,
-        readonly=True,
-        default=_(u'will be auto-generated'),
+        required=False,
+        default=_(u'will be auto-generated on save'),
     )
     dexteritytextindexer.searchable('first_name')
     first_name = schema.TextLine(
