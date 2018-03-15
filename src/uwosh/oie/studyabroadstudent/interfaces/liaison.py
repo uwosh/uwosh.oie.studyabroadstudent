@@ -16,6 +16,21 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, ye
     dayofmonth_vocabulary, room_type_vocabulary, smoking_vocabulary, semester_vocabulary, student_type_vocabulary, \
     bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary, \
     socialmediaservice
+from zope.schema import ValidationError
+from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
+from plone.directives import form
+
+
+class InvalidEmailAddress(ValidationError):
+    "Invalid email address"
+
+
+def validate_email(value):
+    try:
+        checkEmailAddress(value)
+    except EmailAddressInvalid:
+        raise InvalidEmailAddress(value)
+    return True
 
 
 class IOIELiaison(Interface):
@@ -28,11 +43,12 @@ class IOIELiaison(Interface):
     # TODO Some of these fields also need to be matched to "participant" fields so that we can pull a roster that includes all participants, leaders and co-leaders.
     # TODO Would it be possible for Liaisons and Leaders to log into the system to set up a profile, to include the data with the * in this section, before the application is completed?  This kind of information remains the same over time and wouldn't have to be repeated for each program.  It would also make things less complicated for the Liaison to complete this application if the Leader/Co-leader details were already in the system.
     dexteritytextindexer.searchable('title')
+
+    form.mode(title="display")
     title = schema.TextLine(
         title=_(u'Full Name'),
-        required=True,
-        readonly=True,
-        default=_(u'will be auto-generated'),
+        required=False,
+        default=_(u'will be auto-generated on save'),
     )
     dexteritytextindexer.searchable('first_name')
     first_name = schema.TextLine(
@@ -69,8 +85,8 @@ class IOIELiaison(Interface):
     dexteritytextindexer.searchable('email')
     email = schema.TextLine(
         title=_(u'Email'),
-        # TODO validate email
         required=True,
+        constraint=validate_email,
     )
     dexteritytextindexer.searchable('other_service')
     other_service = schema.Choice(

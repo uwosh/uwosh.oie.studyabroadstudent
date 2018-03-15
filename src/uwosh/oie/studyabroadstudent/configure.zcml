@@ -72,6 +72,12 @@
     handler=".events.participant_created"
     />
 
+  <subscriber
+    for=".interfaces.liaison.IOIELiaison
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.liaison_created"
+    />
+
   <utility
       factory=".setuphandlers.HiddenProfiles"
       name="uwosh.oie.studyabroadstudent-hiddenprofiles" />

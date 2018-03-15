@@ -94,3 +94,12 @@ def participant_created(o, event):
             new_id = o.title.lower().replace(' ', '-')
             o.id = str(new_id)
     o.reindexObject()
+
+
+def liaison_created(o, event):
+    o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
+    new_id = o.title.lower().replace(' ', '-')
+    o.id = str(new_id)
+    o.reindexObject()
+
+
