@@ -17,10 +17,15 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, ye
 from collective import dexteritytextindexer
 from plone.directives import form
 from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
+from zope.schema import ValidationError
 
 
 class InvalidEmailAddress(ValidationError):
     "Invalid email address"
+
+
+class InvalidStudentID(ValidationError):
+    "Invalid UW Oshkosh student ID format"
 
 
 def validate_email(value):
@@ -30,7 +35,10 @@ def validate_email(value):
         raise InvalidEmailAddress(value)
     return True
 
-
+def validate_student_id(value):
+    if not isinstance(value, int) and len(value) != 7:
+        raise InvalidEmailAddress(value)
+    return True
 
 
 class IOIEStudyAbroadParticipant(Interface):
@@ -127,7 +135,7 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'UW Oshkosh Student ID'),
         description=_(u'(if applicable)'),
         required=False,
-        # TODO validate format
+        constraint=validate_student_id,
     )
 
     #######################################################
