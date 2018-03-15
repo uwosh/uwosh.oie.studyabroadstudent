@@ -16,6 +16,19 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, ye
     dayofmonth_vocabulary, room_type_vocabulary, smoking_vocabulary, semester_vocabulary, student_type_vocabulary, \
     bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary, \
     socialmediaservice, salary_form, load_or_overload, replacement_costs, paid_by, rate_or_lump_sum
+from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
+
+
+class InvalidEmailAddress(ValidationError):
+    "Invalid email address"
+
+
+def validate_email(value):
+    try:
+        checkEmailAddress(value)
+    except EmailAddressInvalid:
+        raise InvalidEmailAddress(value)
+    return True
 
 
 class IOIEProgramLeader(Interface):
@@ -78,7 +91,7 @@ class IOIEProgramLeader(Interface):
     email = schema.TextLine(
         title=_(u'Email'),
         required=True,
-        # TODO validate email
+        constraint=validate_email,
     )
     dexteritytextindexer.searchable('other_service')
     other_service = schema.Choice(
@@ -139,7 +152,7 @@ class IOIEProgramLeader(Interface):
     emergency_contact_email = schema.TextLine(
         title=_(u'Emergency Contact Email'),
         required=True,
-        # TODO validate email
+        constraint=validate_email,
     )
 
     #######################################################

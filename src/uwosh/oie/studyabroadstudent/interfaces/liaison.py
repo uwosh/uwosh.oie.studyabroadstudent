@@ -17,8 +17,8 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, ye
     bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary, \
     socialmediaservice
 from zope.schema import ValidationError
-from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
 from plone.directives import form
+from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
 
 
 class InvalidEmailAddress(ValidationError):

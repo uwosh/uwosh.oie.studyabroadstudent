@@ -16,6 +16,21 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, ye
     return_mode_transportation_vocabulary, departure_mode_transportation_vocabulary, departure_transfer_vocabulary
 from collective import dexteritytextindexer
 from plone.directives import form
+from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
+
+
+class InvalidEmailAddress(ValidationError):
+    "Invalid email address"
+
+
+def validate_email(value):
+    try:
+        checkEmailAddress(value)
+    except EmailAddressInvalid:
+        raise InvalidEmailAddress(value)
+    return True
+
+
 
 
 class IOIEStudyAbroadParticipant(Interface):
@@ -75,7 +90,7 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_(
             u'UW Oshkosh students must use a @uwosh.edu email address.  Acceptable email addresses for other applicants include school and company addresses.'),
         required=True,
-        # TODO validate email format
+        constraint=validate_email,
     )
 
     dexteritytextindexer.searchable('programName')

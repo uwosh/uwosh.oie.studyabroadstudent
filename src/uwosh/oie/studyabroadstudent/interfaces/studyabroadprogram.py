@@ -13,6 +13,19 @@ from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, \
     dayofmonth_vocabulary, hold_vocabulary, aware_vocabulary, program_cycle_vocabulary, seat_assignment_protocol
 from plone.directives import form
+from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
+
+
+class InvalidEmailAddress(ValidationError):
+    "Invalid email address"
+
+
+def validate_email(value):
+    try:
+        checkEmailAddress(value)
+    except EmailAddressInvalid:
+        raise InvalidEmailAddress(value)
+    return True
 
 
 class ILearningObjectiveRowSchema(Interface):
@@ -166,7 +179,7 @@ class ICourseRowSchema(Interface):
         title=_(u'PeopleSoft Course Builder'),
         description=_(
             u'Enter the email address of the person in your department who will build your course/s in PeopleSoft.  If instruction is provided by the host institution, with no concurrent enrollment at UWO, enter OIE@uwosh.edu into the email address field.'),
-        # TODO validate email format
+        constraint=validate_email,
         # TODO "A message should be generated to the course builder email addresses associated with each course.  Course builders should have access to all ""Course Subject & Number"" related fields and must have permission to edit greyed out fields in this section only.
         # TODO Course builders may request instructions on how to build study abroad/away sections in PeopleSoft by emailing OIE@uwosh.edu.  Course builders enter the data requested below; Financial Services uses this data to properly set tuition & fees for each course."
     )
@@ -222,7 +235,7 @@ class IContributingEntityRowSchema(Interface):
     )
     contributing_entity_contact_email = schema.TextLine(
         title=_(u'Contact Email'),
-        # TODO validate email format
+        constraint=validate_email,
     )
     contributing_entity_contribution_amount = schema.Float(
         title=_(u'Contribution Amount'),
@@ -237,7 +250,7 @@ class IContributingEntityRowSchema(Interface):
 class IReviewerEmailRowSchema(Interface):
     reviewer_email_row = schema.TextLine(
         title=_(u'Reviewer Email Address'),
-        # TODO validate email format
+        constraint=validate_email,
         # TODO autocomplete from campus email addresses? Or commonly entered email addresses? Rely on browser?
     )
 
