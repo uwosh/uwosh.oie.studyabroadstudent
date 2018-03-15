@@ -15,16 +15,34 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, ye
     socialmediaservice, contactrelationship, graduation_month_vocabulary, return_transfer_vocabulary, \
     return_mode_transportation_vocabulary, departure_mode_transportation_vocabulary, departure_transfer_vocabulary
 from collective import dexteritytextindexer
-
+from plone.directives import form
 
 
 class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('title')
     title = schema.TextLine(
         title=_(u'Title'),
-        required=True,
+        required=False,
         readonly=True,
         default=_(u'will be auto-generated'),
+    )
+
+    dexteritytextindexer.searchable('firstName')
+    firstName = schema.TextLine(
+        title=_(u'First Name'),
+        required=True,
+    )
+
+    dexteritytextindexer.searchable('middleName')
+    middleName = schema.TextLine(
+        title=_(u'Middle Name'),
+        required=False,
+    )
+
+    dexteritytextindexer.searchable('lastName')
+    lastName = schema.TextLine(
+        title=_(u'Last Name'),
+        required=True,
     )
 
     #######################################################
@@ -610,7 +628,72 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'shortanswerquestions',
         label=_(u"Short Answer Questions"),
-        fields=[]
+        fields=['applicant_question_text1', 'applicant_question_answer1', 'applicant_question_text2',
+                'applicant_question_answer2', 'applicant_question_text3', 'applicant_question_answer3',
+                'applicant_question_text4', 'applicant_question_answer4', 'applicant_question_text5',
+                'applicant_question_answer5', ]
+    )
+
+    form.mode(applicant_question_text1="display")
+    applicant_question_text1 = schema.Text(
+        title=u'Applicant Question 1',
+        description=u'',
+        default=u'(this will be filled in after you press Save)',
+        required=False,
+    )
+    applicant_question_answer1 = schema.Text(
+        title=u'Answer 1',
+        description=u'Please answer here',
+        required=False,
+    )
+    form.mode(applicant_question_text2="display")
+    applicant_question_text2 = schema.Text(
+        title=u'Applicant Question 2',
+        description=u'',
+        default=u'(this will be filled in after you press Save)',
+        required=False,
+    )
+    applicant_question_answer2 = schema.Text(
+        title=u'Answer 2',
+        description=u'Please answer here',
+        required=False,
+    )
+    form.mode(applicant_question_text3="display")
+    applicant_question_text3 = schema.Text(
+        title=u'Applicant Question 3',
+        description=u'',
+        default=u'(this will be filled in after you press Save)',
+        required=False,
+    )
+    applicant_question_answer3 = schema.Text(
+        title=u'Answer 3',
+        description=u'Please answer here',
+        required=False,
+    )
+    form.mode(applicant_question_text4="display")
+    applicant_question_text4 = schema.Text(
+        title=u'Applicant Question 4',
+        description=u'',
+        default=u'(this will be filled in after you press Save)',
+        required=False,
+    )
+    applicant_question_answer4 = schema.Text(
+        title=u'Answer 4',
+        description=u'Please answer here',
+        required=False,
+    )
+    form.mode(applicant_question_text5="display")
+    applicant_question_text5 = schema.Text(
+        title=u'Applicant Question 5',
+        description=u'',
+        default=u'(this will be filled in after you press Save)',
+        required=False,
+    )
+    applicant_question_answer5 = schema.Text(
+        title=u'Answer 5',
+        description=u'Please answer here',
+        required=False,
+        # TODO copy from program object
     )
 
 #     emerg1workPhone = schema.TextLine(

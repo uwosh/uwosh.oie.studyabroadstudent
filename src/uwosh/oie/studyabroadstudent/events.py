@@ -1,4 +1,5 @@
 from plone import api
+from plone.app.uuid.utils import uuidToObject
 
 def application_created(o, event):
     o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, o.programName, o.programYear)
@@ -6,8 +7,10 @@ def application_created(o, event):
     o.id = str(new_id)
     o.reindexObject()
 
+
 def application_modified(o, event):
     o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, o.programName, o.programYear)
+
 
 def program_created(o, event):
     calendar_year_obj = api.content.get(UID=o.calendar_year)
@@ -36,6 +39,7 @@ def program_created(o, event):
         setattr(o, d, getattr(calendar_year_obj, d))
     o.reindexObject()
 
+
 def program_modified(o, event):
     calendar_year_obj = api.content.get(UID=o.calendar_year)
     calendar_year = calendar_year_obj.title
@@ -60,13 +64,33 @@ def program_modified(o, event):
               'winter_interim_spring_payment_deadline_1', 'winter_interim_spring_payment_deadline_2']:
         setattr(o, d, getattr(calendar_year_obj, d))
 
+
 def contact_created(o, event):
     o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     new_id = o.title.lower().replace(' ', '-')
     o.id = str(new_id)
     o.reindexObject()
 
+
 def contact_modified(o, event):
     o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
 
 
+def participant_created(o, event):
+    program_uid = o.programName
+    if program_uid:
+        program = uuidToObject(program_uid)
+        if program:
+            programName = program.title
+            # copy questions from program object
+            o.applicant_question_text1 = program.applicantQuestion1
+            o.applicant_question_text2 = program.applicantQuestion2
+            o.applicant_question_text3 = program.applicantQuestion3
+            o.applicant_question_text4 = program.applicantQuestion4
+            o.applicant_question_text5 = program.applicantQuestion5
+            year_obj = uuidToObject(program.calendar_year)
+            programYear = year_obj.title
+            o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, programName, programYear)
+            new_id = o.title.lower().replace(' ', '-')
+            o.id = str(new_id)
+    o.reindexObject()
