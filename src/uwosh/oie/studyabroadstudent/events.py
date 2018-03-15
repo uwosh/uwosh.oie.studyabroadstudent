@@ -47,7 +47,7 @@ def program_modified(o, event):
     for c in o.countries:
         program_code += c[0:3].upper()
     o.program_code = program_code
-    # TODO copy all the dates
+    # copy all the dates
     for d in ['first_day_of_spring_semester_classes', 'last_day_of_spring_semester_classes',
               'first_day_of_spring_interim_classes', 'last_day_of_spring_interim_classes',
               'official_spring_graduation_date', 'first_day_of_summer_i_classes', 'last_day_of_summer_i_classes',
