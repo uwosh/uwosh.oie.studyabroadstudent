@@ -18,7 +18,7 @@ from collective import dexteritytextindexer
 from plone.directives import form
 from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
 from zope.schema import ValidationError
-
+import re
 
 class InvalidEmailAddress(ValidationError):
     "Invalid email address"
@@ -35,11 +35,13 @@ def validate_email(value):
         raise InvalidEmailAddress(value)
     return True
 
-def validate_student_id(value):
-    if not isinstance(value, int) and len(value) != 7:
-        raise InvalidEmailAddress(value)
-    return True
 
+STUDENT_ID_RE = re.compile(r'^\d\d\d\d\d\d\d$')
+
+def validate_student_id(value):
+    if len(value) != 7 or not STUDENT_ID_RE.match(value):
+        raise InvalidStudentID(value)
+    return True
 
 class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('title')
