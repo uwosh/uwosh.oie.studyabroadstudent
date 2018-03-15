@@ -73,9 +73,33 @@
     />
 
   <subscriber
+    for=".interfaces.participant.IOIEStudyAbroadParticipant
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.participant_modified"
+    />
+
+  <subscriber
     for=".interfaces.liaison.IOIELiaison
          zope.lifecycleevent.IObjectCreatedEvent"
     handler=".events.liaison_created"
+    />
+
+  <subscriber
+    for=".interfaces.liaison.IOIELiaison
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.liaison_modified"
+    />
+
+  <subscriber
+    for=".interfaces.programleader.IOIEProgramLeader
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.program_leader_created"
+    />
+
+  <subscriber
+    for=".interfaces.programleader.IOIEProgramLeader
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.program_leader_modified"
     />
 
   <utility

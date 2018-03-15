@@ -95,11 +95,32 @@ def participant_created(o, event):
             o.id = str(new_id)
     o.reindexObject()
 
+def participant_modified(o, event):
+    program_uid = o.programName
+    if program_uid:
+        program = uuidToObject(program_uid)
+        if program:
+            programName = program.title
+            year_obj = uuidToObject(program.calendar_year)
+            programYear = year_obj.title
+            o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, programName, programYear)
 
 def liaison_created(o, event):
     o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     new_id = o.title.lower().replace(' ', '-')
     o.id = str(new_id)
     o.reindexObject()
+
+def liaison_modified(o, event):
+    o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
+
+def program_leader_created(o, event):
+    o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
+    new_id = o.title.lower().replace(' ', '-')
+    o.id = str(new_id)
+    o.reindexObject()
+
+def program_leader_modified(o, event):
+    o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
 
 

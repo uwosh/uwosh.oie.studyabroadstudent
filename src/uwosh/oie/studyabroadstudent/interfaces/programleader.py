@@ -18,6 +18,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, ye
     socialmediaservice, salary_form, load_or_overload, replacement_costs, paid_by, rate_or_lump_sum
 from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
 from zope.schema import ValidationError
+from plone.directives import form
 
 
 class InvalidEmailAddress(ValidationError):
@@ -39,11 +40,11 @@ class IOIEProgramLeader(Interface):
     # TODO The Program Leader may also be the Program Liaison or one of the Program Co-leaders.
     # TODO Some of these fields also need to be matched to ""participant"" fields so that we can pull a roster that includes all participants, leaders and co-leaders. "
     dexteritytextindexer.searchable('title')
+    form.mode(title="display")
     title = schema.TextLine(
         title=_(u'Full Name'),
-        required=True,
-        readonly=True,
-        default=_(u'will be auto-generated'),
+        required=False,
+        default=_(u'will be auto-generated on save'),
     )
     dexteritytextindexer.searchable('first_name')
     first_name = schema.TextLine(
