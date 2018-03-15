@@ -718,7 +718,6 @@ class IOIEStudyAbroadParticipant(Interface):
         title=u'Answer 5',
         description=u'Please answer here',
         required=False,
-        # TODO copy from program object
     )
 
 #     emerg1workPhone = schema.TextLine(
