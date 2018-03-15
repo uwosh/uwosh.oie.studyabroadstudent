@@ -21,7 +21,7 @@ def program_created(o, event):
     o.program_code = program_code
     new_id = o.title.lower().replace(' ', '-')
     o.id = str(new_id)
-    # TODO copy all the dates
+    # copy all the dates
     for d in ['first_day_of_spring_semester_classes', 'last_day_of_spring_semester_classes',
               'first_day_of_spring_interim_classes', 'last_day_of_spring_interim_classes',
               'official_spring_graduation_date', 'first_day_of_summer_i_classes', 'last_day_of_summer_i_classes',
