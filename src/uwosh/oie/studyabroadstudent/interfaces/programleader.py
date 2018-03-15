@@ -17,6 +17,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, ye
     bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary, \
     socialmediaservice, salary_form, load_or_overload, replacement_costs, paid_by, rate_or_lump_sum
 from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
+from zope.schema import ValidationError
 
 
 class InvalidEmailAddress(ValidationError):
