@@ -24,7 +24,6 @@ from uwosh.oie.studyabroadstudent.interfaces.country import IOIECountry
 from uwosh.oie.studyabroadstudent.interfaces.liaison import IOIELiaison
 from uwosh.oie.studyabroadstudent.interfaces.participant import IOIEStudyAbroadParticipant
 from uwosh.oie.studyabroadstudent.interfaces.programleader import IOIEProgramLeader
-from uwosh.oie.studyabroadstudent.interfaces.provider import IOIEProvider
 from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import IOIEStudyAbroadProgram
 from uwosh.oie.studyabroadstudent.interfaces.studyabroadstudentapplication import IOIEStudyAbroadStudentApplication
 

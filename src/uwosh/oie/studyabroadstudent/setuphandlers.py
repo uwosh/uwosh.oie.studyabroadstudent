@@ -109,7 +109,6 @@ def post_install(context):
     create_toplevel_folder(portal, portal_ids, 'Partners', 'partners', ['OIECooperatingPartner'])
     create_toplevel_folder(portal, portal_ids, 'Years', 'years', ['OIECalendarYear'])
     create_toplevel_folder(portal, portal_ids, 'Airlines', 'airlines', ['OIEAirline'])
-    create_toplevel_folder(portal, portal_ids, 'Providers', 'providers', ['OIEProvider'])
     create_toplevel_folder(portal, portal_ids, 'Forms', 'forms', ['File'])
 
     # add Link to OIE control panel
