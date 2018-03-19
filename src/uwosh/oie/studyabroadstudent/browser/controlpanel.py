@@ -1769,20 +1769,6 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         value_type=schema.TextLine()
     )
 
-    airline = schema.Tuple(
-        title=_(u'Airline'),
-        default=(
-            'British Airways',
-            'American Airlines',
-            'United',
-            'Delta',
-            'Lufthansa',
-        ),
-        missing_value=None,
-        required=True,
-        value_type=schema.TextLine()
-    )
-
     compensation_type = schema.Tuple(
         title=_(u'Compensation Type'),
         default=(

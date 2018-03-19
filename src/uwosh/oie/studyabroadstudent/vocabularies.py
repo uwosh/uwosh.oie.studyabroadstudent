@@ -728,10 +728,19 @@ TransitionTypeVocabulary = TransitionTypeVocabularyFactory()
 class AirlineVocabularyFactory(object):
 
     def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.airline')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
+        catalog = api.portal.get_tool('portal_catalog')
+        brains = catalog(portal_type='OIEAirline',
+                         sort_on='sortable_title',
+                         sort_order='ascending')
+        terms = []
+        for brain in brains:
+            token = brain.getPath()
+            terms.append(SimpleTerm(
+                value=brain.UID,
+                token=token,
+                title=brain.Title.decode('utf8')
+            ))
+        return SimpleVocabulary(terms)
 
 
 AirlineVocabulary = AirlineVocabularyFactory()
