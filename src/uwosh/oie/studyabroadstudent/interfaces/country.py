@@ -13,13 +13,6 @@ class IOIECountry(Interface):
         title=_(u'Time Zone URL'),
         required=False,
     )
-
-    # or use vocabulary of time zones
-    dexteritytextindexer.searchable('timezone')
-    timezone = schema.List(
-        title=_(u'Time Zone(s)'),
-        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.timezone'),
-    )
     dexteritytextindexer.searchable('cdc_info_url')
     cdc_info_url = schema.URI(
         title=_(u'Centers for Disease Control Country Information URL'),

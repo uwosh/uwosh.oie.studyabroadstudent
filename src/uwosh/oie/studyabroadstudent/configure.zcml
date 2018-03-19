@@ -197,10 +197,6 @@
     component="uwosh.oie.studyabroadstudent.vocabularies.CalendarYearVocabulary" />
 
   <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.timezone"
-    component="uwosh.oie.studyabroadstudent.vocabularies.TimezoneVocabulary" />
-
-  <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.cooperatingpartner"
     component="uwosh.oie.studyabroadstudent.vocabularies.CooperatingPartnerVocabulary" />
 

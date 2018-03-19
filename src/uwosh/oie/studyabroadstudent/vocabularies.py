@@ -590,19 +590,6 @@ CalendarYearVocabulary = CalendarYearVocabularyFactory()
 
 
 @implementer(IVocabularyFactory)
-class TimezoneVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.timezone')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-TimezoneVocabulary = TimezoneVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
 class CooperatingPartnerVocabularyFactory(object):
 
     def __call__(self, context):
