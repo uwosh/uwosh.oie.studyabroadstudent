@@ -1,6 +1,6 @@
 # from Acquisition import aq_inner
 # from uwosh.oie.studyabroadstudent.interfaces.studyabroadstudentapplication import IOIEStudyAbroadStudentApplication
-# from plone import api
+from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plone.app.contenttypes.browser.folder import FolderView
 
@@ -10,7 +10,15 @@ class ApplicationView(DefaultView):
 
 
 class ProgramView(DefaultView, FolderView):
-    pass
+    def can_edit(self):
+        """Determine whether to show the 'public' information only or the actual contents of the Program"""
+        if api.user.is_anonymous():
+            return False
+        current = api.user.get_current()
+        roles = api.user.get_roles(username=current.id)
+        if 'Manager' in roles or 'Site Administrator' in roles:
+            return True
+        return not False
 
 
 class CooperatingPartnerView(DefaultView):

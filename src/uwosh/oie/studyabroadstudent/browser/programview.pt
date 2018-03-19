@@ -10,7 +10,7 @@
 <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
         <div tal:replace="structure provider:plone.abovecontenttitle" />
-        <h1 class="documentFirstHeading" tal:content="context/title" />
+        <h1 class="documentFirstHeading" tal:content="python: context.title + ' [MANAGEMENT VIEW]'" />
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 	<tal:block repeat="widget view/widgets/values">
 	    <div class="field" tal:condition="python:widget.__name__ in ('IBasic.description', 'description',)">
@@ -19,30 +19,39 @@
 	</tal:block>
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
-	<tal:block repeat="widget view/widgets/values">
-	    <div class="field" tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description',)">
-		<label tal:content="widget/label" />
-		<br />
-		<div tal:content="structure widget/render" />
-	    </div>
-	</tal:block>
+  <div:management tal:condition="view/can_edit">
 
-	<fieldset tal:repeat="group view/groups"
-		  tal:attributes="id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')">
-	    <legend tal:content="group/label" />
-	    <div class="field" tal:repeat="widget group/widgets/values">
-		<label tal:content="widget/label" />
-		<br />
-		<div tal:content="structure widget/render" />
-	    </div>
-	</fieldset>
+    <tal:block repeat="widget view/widgets/values">
+        <div class="field" tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description',)">
+      <label tal:content="widget/label" />
+      <br />
+      <div tal:content="structure widget/render" />
+        </div>
+    </tal:block>
 
-	<fieldset id="folder-listing">
-	    <legend>Contents</legend>
-	    <tal:block define="listing_macro context/folder_listing/macros/listing">
-		<metal:use_macro use-macro="listing_macro" />
-	    </tal:block>
-	</fieldset>
+    <fieldset tal:repeat="group view/groups"
+        tal:attributes="id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')">
+        <legend tal:content="group/label" />
+        <div class="field" tal:repeat="widget group/widgets/values">
+      <label tal:content="widget/label" />
+      <br />
+      <div tal:content="structure widget/render" />
+        </div>
+    </fieldset>
+
+    <fieldset id="folder-listing">
+        <legend>Contents</legend>
+        <tal:block define="listing_macro context/folder_listing/macros/listing">
+      <metal:use_macro use-macro="listing_macro" />
+        </tal:block>
+    </fieldset>
+
+  </div:management>
+
+  <div:viewonly tal:condition="not: view/can_edit">
+    <h2>PUBLIC VIEW</h2>
+
+  </div:viewonly>
 
 	      <div tal:replace="structure provider:plone.belowcontentbody" />
 	  </tal:main-macro>
