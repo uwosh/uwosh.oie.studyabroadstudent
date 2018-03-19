@@ -19,6 +19,19 @@
 	</tal:block>
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
+  <!--?<div:viewonly tal:condition="not: view/can_edit">-->
+  <div:viewonly>
+    <h2>PUBLIC VIEW</h2>
+
+    <div:country_info class="country_info">
+      <div class="country_info_header">Countries</div>
+      <div class="country_info_details" tal:content="structure view/country_info">
+        [country_info]
+      </div>
+    </div:country_info>
+
+  </div:viewonly>
+
   <div:management tal:condition="view/can_edit">
 
     <tal:block repeat="widget view/widgets/values">
@@ -47,11 +60,6 @@
     </fieldset>
 
   </div:management>
-
-  <div:viewonly tal:condition="not: view/can_edit">
-    <h2>PUBLIC VIEW</h2>
-
-  </div:viewonly>
 
 	      <div tal:replace="structure provider:plone.belowcontentbody" />
 	  </tal:main-macro>
