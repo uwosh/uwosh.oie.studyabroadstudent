@@ -9,7 +9,7 @@
    <property name="url_expr">string:$object_url/++add++File</property>
    <property name="link_target"></property>
    <property name="icon_expr"></property>
-   <property name="available_expr"></property>
+   <property name="available_expr">python: context.portal_type == 'OIEStudyAbroadParticipant'</property>
    <property name="permissions">
     <element value="Modify portal content"/>
    </property>
