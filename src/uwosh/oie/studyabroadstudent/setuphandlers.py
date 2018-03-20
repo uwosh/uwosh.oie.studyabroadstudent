@@ -4,6 +4,8 @@ from zope.interface import implementer
 from plone import api
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from plone.app.textfield.value import RichTextValue
+from zope.component import queryUtility
+from plone.i18n.normalizer.interfaces import IIDNormalizer
 
 
 @implementer(INonInstallable)
@@ -33,54 +35,61 @@ def create_toplevel_folder(portal, portal_ids, title, id, ftis):
 
 def post_install(context):
     """Post install script"""
-    # populate countries
     portal = api.portal.get()
-    # if needed, add countries folder and populate it
     portal_items = portal.items()
     portal_ids = [id for id, obj in portal_items]
-    if 'countries' not in portal_ids:
-        country_folder = api.content.create(type='Folder', title='Countries', id='countries', container=portal)
-        api.content.create(type='OIECountry', container=country_folder, title='Australia', timezone_url='https://www.timeanddate.com/worldclock/results.html?query=australia', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/australia', state_dept_info_url='https://travel.state.gov/content/passports/en/country/australia.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Austria', timezone_url='https://www.timeanddate.com/worldclock/austria', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/austria', state_dept_info_url='https://travel.state.gov/content/passports/en/country/austria.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Belgium', timezone_url='https://www.timeanddate.com/worldclock/belgium', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/belgium', state_dept_info_url='https://travel.state.gov/content/passports/en/country/belgium.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Belize', timezone_url='https://www.timeanddate.com/worldclock/belize', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/belize', state_dept_info_url='https://travel.state.gov/content/passports/en/country/belize.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Bermuda', timezone_url='https://www.timeanddate.com/worldclock/bermuda', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/bermuda', state_dept_info_url='https://travel.state.gov/content/passports/en/country/bermuda.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Canada', timezone_url='https://www.timeanddate.com/worldclock/canada', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/canada', state_dept_info_url='https://travel.state.gov/content/passports/en/country/canada.html')
-        api.content.create(type='OIECountry', container=country_folder, title='China', timezone_url='https://www.timeanddate.com/worldclock/results.html?query=china', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/china', state_dept_info_url='https://travel.state.gov/content/passports/en/country/china.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Costa Rica', timezone_url='https://www.timeanddate.com/worldclock/costa-rica', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/costa-rica', state_dept_info_url='https://travel.state.gov/content/passports/en/country/costa-rica.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Czech Rep.', timezone_url='https://www.timeanddate.com/worldclock/czech-republic', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/czech-republic', state_dept_info_url='https://travel.state.gov/content/passports/en/country/czech-republic.html')
-        api.content.create(type='OIECountry', container=country_folder, title='France', timezone_url='https://www.timeanddate.com/worldclock/france', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/france', state_dept_info_url='https://travel.state.gov/content/passports/en/country/france.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Germany', timezone_url='https://www.timeanddate.com/worldclock/germany', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/germany', state_dept_info_url='https://travel.state.gov/content/passports/en/country/germany.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Greece', timezone_url='https://www.timeanddate.com/worldclock/greece', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/greece', state_dept_info_url='https://travel.state.gov/content/passports/en/country/greece.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Honduras', timezone_url='https://www.timeanddate.com/worldclock/honduras', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/honduras', state_dept_info_url='https://travel.state.gov/content/passports/en/country/honduras.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Hong Kong, China', timezone_url='https://www.timeanddate.com/worldclock/hong-kong', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/hong-kong-sar', state_dept_info_url='https://travel.state.gov/content/passports/en/country/hongkong.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Hungary', timezone_url='https://www.timeanddate.com/worldclock/hungary', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/hungary', state_dept_info_url='https://travel.state.gov/content/passports/en/country/hungary.html')
-        api.content.create(type='OIECountry', container=country_folder, title='India', timezone_url='https://www.timeanddate.com/worldclock/india', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/india', state_dept_info_url='https://travel.state.gov/content/passports/en/country/india.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Ireland', timezone_url='https://www.timeanddate.com/worldclock/ireland', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/ireland', state_dept_info_url='https://travel.state.gov/content/passports/en/country/ireland.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Italy', timezone_url='https://www.timeanddate.com/worldclock/italy', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/italy', state_dept_info_url='https://travel.state.gov/content/passports/en/country/italy.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Jamaica', timezone_url='https://www.timeanddate.com/worldclock/jamaica', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/jamaica', state_dept_info_url='https://travel.state.gov/content/passports/en/country/jamaica.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Japan', timezone_url='https://www.timeanddate.com/worldclock/japan', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/japan', state_dept_info_url='https://travel.state.gov/content/passports/en/country/japan.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Kenya', timezone_url='https://www.timeanddate.com/worldclock/kenya', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/kenya', state_dept_info_url='https://travel.state.gov/content/passports/en/country/kenya.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Korea, Rep.', timezone_url='https://www.timeanddate.com/worldclock/south-korea', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/south-korea', state_dept_info_url='https://travel.state.gov/content/passports/en/country/korea-south.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Malaysia', timezone_url='https://www.timeanddate.com/worldclock/malaysia', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/malaysia', state_dept_info_url='https://travel.state.gov/content/passports/en/country/malaysia.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Netherlands', timezone_url='https://www.timeanddate.com/worldclock/netherlands', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/netherlands', state_dept_info_url='https://travel.state.gov/content/passports/en/country/netherlands.html')
-        api.content.create(type='OIECountry', container=country_folder, title='New Zealand', timezone_url='https://www.timeanddate.com/worldclock/new-zealand', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/new-zealand', state_dept_info_url='https://travel.state.gov/content/passports/en/country/new-zealand.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Nicaragua', timezone_url='https://www.timeanddate.com/worldclock/nicaragua', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/nicaragua', state_dept_info_url='https://travel.state.gov/content/passports/en/country/nicaragua.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Oman', timezone_url='https://www.timeanddate.com/worldclock/oman', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/oman', state_dept_info_url='https://travel.state.gov/content/passports/en/country/oman.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Peru', timezone_url='https://www.timeanddate.com/worldclock/peru', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/peru', state_dept_info_url='https://travel.state.gov/content/passports/en/country/peru.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Poland', timezone_url='https://www.timeanddate.com/worldclock/poland', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/poland', state_dept_info_url='https://travel.state.gov/content/passports/en/country/poland.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Portugal', timezone_url='https://www.timeanddate.com/worldclock/portugal', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/portugal', state_dept_info_url='https://travel.state.gov/content/passports/en/country/Portugal.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Puerto Rico', timezone_url='https://www.timeanddate.com/worldclock/puerto-rico', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/puerto-rico', state_dept_info_url='')
-        api.content.create(type='OIECountry', container=country_folder, title='Spain', timezone_url='https://www.timeanddate.com/worldclock/spain', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/spain', state_dept_info_url='https://travel.state.gov/content/passports/en/country/spain.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Switzerland', timezone_url='https://www.timeanddate.com/worldclock/switzerland', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/switzerland', state_dept_info_url='https://travel.state.gov/content/passports/en/country/switzerland-and-liechtenstein.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Tanzania', timezone_url='https://www.timeanddate.com/worldclock/tanzania', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/tanzania', state_dept_info_url='https://travel.state.gov/content/passports/en/country/tanzania.html')
-        api.content.create(type='OIECountry', container=country_folder, title='Uganda', timezone_url='https://www.timeanddate.com/worldclock/uganda', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/uganda', state_dept_info_url='https://travel.state.gov/content/passports/en/country/uganda.html')
-        api.content.create(type='OIECountry', container=country_folder, title='United Kingdom', timezone_url='https://www.timeanddate.com/worldclock/uk', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-kingdom', state_dept_info_url='https://travel.state.gov/content/passports/en/country/united-kingdom.html')
-        api.content.create(type='OIECountry', container=country_folder, title='United States', timezone_url='https://www.timeanddate.com/worldclock/usa', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-states', state_dept_info_url='')
-        api.content.create(type='OIECountry', container=country_folder, title='Virgin Islands (U.S.)', timezone_url='https://www.timeanddate.com/worldclock/us-virgin', cdc_info_url='https://wwwnc.cdc.gov/travel/destinations/traveler/none/usvirgin-islands', state_dept_info_url='')
-    else:
-        country_folder = portal['countries']
-    constrain_types(country_folder, ['OIECountry'])
+
+    # add folders and restrict addable types
+    create_toplevel_folder(portal, portal_ids, 'Applications', 'applications', ['OIEStudyAbroadStudentApplication'])
+    create_toplevel_folder(portal, portal_ids, 'Countries', 'countries', ['OIECountry'])
+    create_toplevel_folder(portal, portal_ids, 'Participants', 'participants', ['OIEStudyAbroadParticipant'])
+    create_toplevel_folder(portal, portal_ids, 'Programs', 'programs', ['OIEStudyAbroadProgram'])
+    create_toplevel_folder(portal, portal_ids, 'People', 'people', ['OIEContact', 'OIELiaison', 'OIEProgramLeader'])
+    create_toplevel_folder(portal, portal_ids, 'Partners', 'partners', ['OIECooperatingPartner'])
+    create_toplevel_folder(portal, portal_ids, 'Years', 'years', ['OIECalendarYear'])
+    create_toplevel_folder(portal, portal_ids, 'Airlines', 'airlines', ['OIEAirline'])
+    create_toplevel_folder(portal, portal_ids, 'Forms', 'forms', ['File'])
+
+    # populate countries
+    country_folder = portal['countries']
+    create_country('Australia', 'https://www.timeanddate.com/worldclock/results.html?query=australia', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/australia', 'https://travel.state.gov/content/passports/en/country/australia.html', country_folder)
+    create_country('Austria', 'https://www.timeanddate.com/worldclock/austria', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/austria', 'https://travel.state.gov/content/passports/en/country/austria.html', country_folder)
+    create_country('Belgium', 'https://www.timeanddate.com/worldclock/belgium', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/belgium', 'https://travel.state.gov/content/passports/en/country/belgium.html', country_folder)
+    create_country('Belize', 'https://www.timeanddate.com/worldclock/belize', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/belize', 'https://travel.state.gov/content/passports/en/country/belize.html', country_folder)
+    create_country('Bermuda', 'https://www.timeanddate.com/worldclock/bermuda', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/bermuda', 'https://travel.state.gov/content/passports/en/country/bermuda.html', country_folder)
+    create_country('Canada', 'https://www.timeanddate.com/worldclock/canada', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/canada', 'https://travel.state.gov/content/passports/en/country/canada.html', country_folder)
+    create_country('China', 'https://www.timeanddate.com/worldclock/results.html?query=china', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/china', 'https://travel.state.gov/content/passports/en/country/china.html', country_folder)
+    create_country('Costa Rica', 'https://www.timeanddate.com/worldclock/costa-rica', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/costa-rica', 'https://travel.state.gov/content/passports/en/country/costa-rica.html', country_folder)
+    create_country('Czech Rep.', 'https://www.timeanddate.com/worldclock/czech-republic', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/czech-republic', 'https://travel.state.gov/content/passports/en/country/czech-republic.html', country_folder)
+    create_country('France', 'https://www.timeanddate.com/worldclock/france', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/france', 'https://travel.state.gov/content/passports/en/country/france.html', country_folder)
+    create_country('Germany', 'https://www.timeanddate.com/worldclock/germany', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/germany', 'https://travel.state.gov/content/passports/en/country/germany.html', country_folder)
+    create_country('Greece', 'https://www.timeanddate.com/worldclock/greece', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/greece', 'https://travel.state.gov/content/passports/en/country/greece.html', country_folder)
+    create_country('Honduras', 'https://www.timeanddate.com/worldclock/honduras', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/honduras', 'https://travel.state.gov/content/passports/en/country/honduras.html', country_folder)
+    create_country('Hong Kong, China', 'https://www.timeanddate.com/worldclock/hong-kong', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/hong-kong-sar', 'https://travel.state.gov/content/passports/en/country/hongkong.html', country_folder)
+    create_country('Hungary', 'https://www.timeanddate.com/worldclock/hungary', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/hungary', 'https://travel.state.gov/content/passports/en/country/hungary.html', country_folder)
+    create_country('India', 'https://www.timeanddate.com/worldclock/india', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/india', 'https://travel.state.gov/content/passports/en/country/india.html', country_folder)
+    create_country('Ireland', 'https://www.timeanddate.com/worldclock/ireland', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/ireland', 'https://travel.state.gov/content/passports/en/country/ireland.html', country_folder)
+    create_country('Italy', 'https://www.timeanddate.com/worldclock/italy', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/italy', 'https://travel.state.gov/content/passports/en/country/italy.html', country_folder)
+    create_country('Jamaica', 'https://www.timeanddate.com/worldclock/jamaica', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/jamaica', 'https://travel.state.gov/content/passports/en/country/jamaica.html', country_folder)
+    create_country('Japan', 'https://www.timeanddate.com/worldclock/japan', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/japan', 'https://travel.state.gov/content/passports/en/country/japan.html', country_folder)
+    create_country('Kenya', 'https://www.timeanddate.com/worldclock/kenya', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/kenya', 'https://travel.state.gov/content/passports/en/country/kenya.html', country_folder)
+    create_country('Korea, Rep.', 'https://www.timeanddate.com/worldclock/south-korea', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/south-korea', 'https://travel.state.gov/content/passports/en/country/korea-south.html', country_folder)
+    create_country('Malaysia', 'https://www.timeanddate.com/worldclock/malaysia', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/malaysia', 'https://travel.state.gov/content/passports/en/country/malaysia.html', country_folder)
+    create_country('Netherlands', 'https://www.timeanddate.com/worldclock/netherlands', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/netherlands', 'https://travel.state.gov/content/passports/en/country/netherlands.html', country_folder)
+    create_country('New Zealand', 'https://www.timeanddate.com/worldclock/new-zealand', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/new-zealand', 'https://travel.state.gov/content/passports/en/country/new-zealand.html', country_folder)
+    create_country('Nicaragua', 'https://www.timeanddate.com/worldclock/nicaragua', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/nicaragua', 'https://travel.state.gov/content/passports/en/country/nicaragua.html', country_folder)
+    create_country('Oman', 'https://www.timeanddate.com/worldclock/oman', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/oman', 'https://travel.state.gov/content/passports/en/country/oman.html', country_folder)
+    create_country('Peru', 'https://www.timeanddate.com/worldclock/peru', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/peru', 'https://travel.state.gov/content/passports/en/country/peru.html', country_folder)
+    create_country('Poland', 'https://www.timeanddate.com/worldclock/poland', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/poland', 'https://travel.state.gov/content/passports/en/country/poland.html', country_folder)
+    create_country('Portugal', 'https://www.timeanddate.com/worldclock/portugal', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/portugal', 'https://travel.state.gov/content/passports/en/country/Portugal.html', country_folder)
+    create_country('Puerto Rico', 'https://www.timeanddate.com/worldclock/puerto-rico', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/puerto-rico', '', country_folder)
+    create_country('Spain', 'https://www.timeanddate.com/worldclock/spain', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/spain', 'https://travel.state.gov/content/passports/en/country/spain.html', country_folder)
+    create_country('Switzerland', 'https://www.timeanddate.com/worldclock/switzerland', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/switzerland', 'https://travel.state.gov/content/passports/en/country/switzerland-and-liechtenstein.html', country_folder)
+    create_country('Tanzania', 'https://www.timeanddate.com/worldclock/tanzania', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/tanzania', 'https://travel.state.gov/content/passports/en/country/tanzania.html', country_folder)
+    create_country('Uganda', 'https://www.timeanddate.com/worldclock/uganda', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/uganda', 'https://travel.state.gov/content/passports/en/country/uganda.html', country_folder)
+    create_country('United Kingdom', 'https://www.timeanddate.com/worldclock/uk', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-kingdom', 'https://travel.state.gov/content/passports/en/country/united-kingdom.html', country_folder)
+    create_country('United States', 'https://www.timeanddate.com/worldclock/usa', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-states', '', country_folder)
+    create_country('Virgin Islands (U.S.)', 'https://www.timeanddate.com/worldclock/us-virgin', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/usvirgin-islands', '', country_folder)
 
     # retract and hide Users
     if 'Members' in portal_ids:
@@ -100,16 +109,6 @@ def post_install(context):
             'text/plain',
             'text/html',
         )
-
-    # add folders and restrict addable types
-    create_toplevel_folder(portal, portal_ids, 'Applications', 'applications', ['OIEStudyAbroadStudentApplication'])
-    create_toplevel_folder(portal, portal_ids, 'Participants', 'participants', ['OIEStudyAbroadParticipant'])
-    create_toplevel_folder(portal, portal_ids, 'Programs', 'programs', ['OIEStudyAbroadProgram'])
-    create_toplevel_folder(portal, portal_ids, 'People', 'people', ['OIEContact', 'OIELiaison', 'OIEProgramLeader'])
-    create_toplevel_folder(portal, portal_ids, 'Partners', 'partners', ['OIECooperatingPartner'])
-    create_toplevel_folder(portal, portal_ids, 'Years', 'years', ['OIECalendarYear'])
-    create_toplevel_folder(portal, portal_ids, 'Airlines', 'airlines', ['OIEAirline'])
-    create_toplevel_folder(portal, portal_ids, 'Forms', 'forms', ['File'])
 
     # add Link to OIE control panel
     if 'oie-settings' not in portal_ids:
@@ -312,15 +311,27 @@ def post_install(context):
 
 
 def create_airline(name, folder):
-    brains = api.content.find(portal_type='OIEAirline', sortable_title=name.lower())
+    util = queryUtility(IIDNormalizer)
+    id = util.normalize(name)
+    brains = api.content.find(portal_type='OIEAirline', id=id)
     if len(brains) < 1:
         api.content.create(type='OIEAirline', container=folder, title=name)
 
 
 def create_partner(name, folder):
-    brains = api.content.find(portal_type='OIECooperatingPartner', sortable_title=name.lower())
+    util = queryUtility(IIDNormalizer)
+    id = util.normalize(name)
+    brains = api.content.find(portal_type='OIECooperatingPartner', id=id)
     if len(brains) < 1:
         api.content.create(type='OIECooperatingPartner', container=folder, title=name)
+
+
+def create_country(name, timezone_url, cdc_info_url, state_dept_info_url, folder):
+    util = queryUtility(IIDNormalizer)
+    id = util.normalize(name)
+    brains = api.content.find(portal_type='OIECountry', id=id)
+    if len(brains) < 1:
+        api.content.create(type='OIECountry', container=folder, title=name)
 
 
 def uninstall(context):
