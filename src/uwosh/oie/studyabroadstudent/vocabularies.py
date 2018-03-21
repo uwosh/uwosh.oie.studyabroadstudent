@@ -892,3 +892,25 @@ class ProviderVocabularyFactory(object):
 ProviderVocabulary = ProviderVocabularyFactory()
 
 
+@implementer(IVocabularyFactory)
+class FileVocabularyFactory(object):
+
+    def __call__(self, context):
+        catalog = api.portal.get_tool('portal_catalog')
+        brains = catalog(portal_type='File',
+                         sort_on='sortable_title',
+                         sort_order='ascending')
+        terms = []
+        for brain in brains:
+            token = brain.getPath()
+            terms.append(SimpleTerm(
+                value=brain.UID,
+                token=token,
+                title=brain.Title.decode('utf8')
+            ))
+        return SimpleVocabulary(terms)
+
+
+FileVocabulary = FileVocabularyFactory()
+
+

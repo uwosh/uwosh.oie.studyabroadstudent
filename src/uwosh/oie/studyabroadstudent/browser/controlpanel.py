@@ -1968,6 +1968,31 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         value_type = schema.TextLine(),
     )
 
+    state_of_wisconsin_need_based_travel_grant_form = schema.Choice(
+        title=u'State of Wisconsin Need-based Travel Grant Form',
+        description=u'select the PDF for this form',
+        required=False,
+        missing_value=None,
+        default=None,
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.file',
+    )
+    special_student_form_for_undergraduate_admissions = schema.Choice(
+        title=u'Special Student Form for Undergraduate Admissions',
+        description=u'select the PDF for this form',
+        required=False,
+        missing_value=None,
+        default=None,
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.file',
+    )
+    disciplinary_clearance_form = schema.Choice(
+        title=u'Disciplinary Clearance Form',
+        description=u'select the PDF for this form',
+        required=False,
+        missing_value=None,
+        default=None,
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.file',
+    )
+
 
 class OIEStudyAbroadStudentControlPanelForm(RegistryEditForm):
     schema = IOIEStudyAbroadStudentControlPanel

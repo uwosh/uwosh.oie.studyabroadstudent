@@ -19,6 +19,9 @@ from plone.directives import form
 from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
 from zope.schema import ValidationError
 import re
+from plone import api
+from plone.app.textfield.value import RichTextValue
+
 
 class InvalidEmailAddress(ValidationError):
     "Invalid email address"
@@ -42,6 +45,30 @@ def validate_student_id(value):
     if len(value) != 7 or not STUDENT_ID_RE.match(value):
         raise InvalidStudentID(value)
     return True
+
+def get_url_special_student_form():
+    form = api.portal.get_registry_record('oiestudyabroadstudent.state_of_wisconsin_need_based_travel_grant_form')
+    obj = api.content.get(UID=form)
+    url = obj.absolute_url()
+    html = '<a href="%s">Download this form</a>' % url
+    return RichTextValue(html, 'text/html', 'text/html')
+
+
+def get_url_special_student_form_for_undergraduate_admissions_form():
+    form = api.portal.get_registry_record('oiestudyabroadstudent.special_student_form_for_undergraduate_admissions')
+    obj = api.content.get(UID=form)
+    url = obj.absolute_url()
+    html = '<a href="%s">Download this form</a>' % url
+    return RichTextValue(html, 'text/html', 'text/html')
+
+
+def get_url_disciplinary_clearance_form():
+    form = api.portal.get_registry_record('oiestudyabroadstudent.disciplinary_clearance_form')
+    obj = api.content.get(UID=form)
+    url = obj.absolute_url()
+    html = '<a href="%s">Download this form</a>' % url
+    return RichTextValue(html, 'text/html', 'text/html')
+
 
 class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('title')
@@ -719,6 +746,56 @@ class IOIEStudyAbroadParticipant(Interface):
         description=u'Please answer here',
         required=False,
     )
+
+    #######################################################
+    model.fieldset(
+        'forms',
+        label=_(u"Forms"),
+        fields=['state_of_wisconsin_need_based_travel_grant_form_link',
+                'state_of_wisconsin_need_based_travel_grant_form_uploaded_file',
+                'special_student_form_for_undergraduate_admissions_form_link',
+                'special_student_form_for_undergraduate_admissions_uploaded_file',
+                'disciplinary_clearance_form_link',
+                'disciplinary_clearance_form_uploaded_file']
+    )
+    form.mode(state_of_wisconsin_need_based_travel_grant_form_link="display")
+    state_of_wisconsin_need_based_travel_grant_form_link = RichText(
+        title=u'State of Wisconsin Need-based Travel Grant Form',
+        description=u'Download this PDF, fill it out, and upload it below',
+        required=False,
+        defaultFactory=get_url_special_student_form,
+    )
+    state_of_wisconsin_need_based_travel_grant_form_uploaded_file = field.NamedFile(
+        title=u'State of Wisconsin Need-based Travel Grant Form',
+        description=u'Upload your filled-out copy of the form',
+        required=False,
+    )
+    form.mode(special_student_form_for_undergraduate_admissions_form_link="display")
+    special_student_form_for_undergraduate_admissions_form_link = RichText(
+        title=u'Special Student Form for Undergraduate Admissions',
+        description=u'Download this PDF, fill it out, and upload it below',
+        required=False,
+        defaultFactory=get_url_special_student_form_for_undergraduate_admissions_form,
+    )
+    special_student_form_for_undergraduate_admissions_uploaded_file = field.NamedFile(
+        title=u'Special Student Form for Undergraduate Admissions',
+        description=u'Upload your filled-out copy of the form',
+        required=False,
+    )
+    form.mode(disciplinary_clearance_form_link="display")
+    disciplinary_clearance_form_link = RichText(
+        title=u'Disciplinary Clearance Form',
+        description=u'Download this PDF, fill it out, and upload it below',
+        required=False,
+        defaultFactory=get_url_disciplinary_clearance_form,
+    )
+    disciplinary_clearance_form_uploaded_file = field.NamedFile(
+        title=u'Disciplinary Clearance Form',
+        description=u'Upload your filled-out copy of the form',
+        required=False,
+    )
+
+
 
 #     emerg1workPhone = schema.TextLine(
 #         title=_(u'Emergency Contact 1 Work Phone'),

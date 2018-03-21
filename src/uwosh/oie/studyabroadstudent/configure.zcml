@@ -272,4 +272,8 @@
     name="uwosh.oie.studyabroadstudent.vocabularies.provider"
     component="uwosh.oie.studyabroadstudent.vocabularies.ProviderVocabulary" />
 
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.file"
+    component="uwosh.oie.studyabroadstudent.vocabularies.FileVocabulary" />
+
 </configure>
