@@ -172,7 +172,7 @@ class ICourseRowSchema(Interface):
         title=_(u'Foreign Course Reviewer Name, Title & College'),
         description=_(u'')
     )
-    foreign_course_syllabus = field.NamedFile(
+    foreign_course_syllabus = field.NamedBlobFile(
         title=_(u'Foreign Course Syllabus'),
         description=_(u'Upload the syllabus that corresponds to the most recent date of review'),
     )
@@ -257,7 +257,7 @@ class IReviewerEmailRowSchema(Interface):
 
 
 class IHealthSafetySecurityDocumentRowSchema(Interface):
-    health_safety_security_document = field.NamedFile(
+    health_safety_security_document = field.NamedBlobFile(
         title=_(u'Health, Safety, Security Document'),
     )
 
@@ -421,13 +421,13 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.guest_lectures',
     )
 
-    initial_draft_program_schedule = field.NamedFile(
+    initial_draft_program_schedule = field.NamedBlobFile(
         title=_(u'Initial Draft Program Schedule'),
         description=_(u'Complete the OIE itinerary form and upload here.'),
         required=False,
     )
 
-    syllabus_and_supporting_docs = field.NamedFile(
+    syllabus_and_supporting_docs = field.NamedBlobFile(
         title=_(u'Syllabus & Other Supporting Documents'),
         description=_(
             u'Upload your syllabus plus other related documents (if any).  If you update your syllabus, replace this copy with the updated copy.  This field will remain editable until just prior to travel.'),
@@ -1058,7 +1058,7 @@ class IOIEStudyAbroadProgram(Interface):
     proposals_label = schema.TextLine(
         description=_(u'Required prior to submitting for Liaison review'),
     )
-    request_for_proposal = field.NamedFile(
+    request_for_proposal = field.NamedBlobFile(
         title=_('Request for Proposals (RFP)'),
         description=_(
             u'Upload a draft RFP for review.  Replace draft with updated RFPs until the review process is completed.  The RFP in place as of the "Pending Receipt of Provider Proposals" state will be the one shared with providers in the formal Request for Proposals.  Therefore, do not replace the final RFP after the review process has ended.'),
@@ -1085,7 +1085,7 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary=yes_no_none_vocabulary,
         required=False,
     )
-    proposal_01 = field.NamedFile(
+    proposal_01 = field.NamedBlobFile(
         title=_('Proposal 01'),
         description=_(
             u'Upload a clean copy of proposal 01.  Proposal notes may be included by attaching these to the end of the clean proposal document.'),
@@ -1102,7 +1102,7 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary=yes_no_none_vocabulary,
         required=False,
     )
-    proposal_02 = field.NamedFile(
+    proposal_02 = field.NamedBlobFile(
         title=_('Proposal 02'),
         description=_(
             u'Upload a clean copy of proposal 03.  Proposal notes may be included by attaching these to the end of the clean proposal document.'),
@@ -1119,7 +1119,7 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary=yes_no_none_vocabulary,
         required=False,
     )
-    proposal_03 = field.NamedFile(
+    proposal_03 = field.NamedBlobFile(
         title=_('Proposal 03'),
         description=_(
             u'Upload a clean copy of proposal 03.  Proposal notes may be included by attaching these to the end of the clean proposal document.'),
@@ -1156,13 +1156,13 @@ class IOIEStudyAbroadProgram(Interface):
         max=999,
         required=False,
     )
-    budget_spreadsheet = field.NamedFile(
+    budget_spreadsheet = field.NamedBlobFile(
         title=_(u'Budget Spreadsheet'),
         description=_(
             u'Upload a draft budget spreadsheet for review.  Replace this draft with updated budget spreadsheets until the review process is complete.  The budget spreadsheet in place as of the end of the review process must be maintained as a reference for the published program fee estimated.  Do not replace the final budget spreadsheet after the review process has ended.'),
         required=False,
     )
-    fecop_worksheet = field.NamedFile(
+    fecop_worksheet = field.NamedBlobFile(
         title=_(u'Full Estimated Cost of Participation (FECOP) Worksheet'),
         description=_(
             u'Upload a draft FECOP worksheets for review.  Replace this draft with updated FECOPs until the review process is complete.  The FECOP in place as of the "Application Intake in Progress" state will be the one shared with participants for application purposes.  Therefore, do not replace this FECOP after the review process has ended.'),
@@ -1184,14 +1184,14 @@ class IOIEStudyAbroadProgram(Interface):
     required_prior_to_confirming_to_run_label = schema.TextLine(
         description=_(u'Required Prior to Confirming to Run'),
     )
-    first_participant_fee_statement_ = field.NamedFile(
+    first_participant_fee_statement_ = field.NamedBlobFile(
         title=_(u'First Participant Fee Statement'),
         description=_(
             'Upload the first fee statement for participants.  This statement will display in the participant portal upon transition to "Pending Final Program Fee".  Participants deviating from the advertised program may require an alternative fee statement.'),
         required=False,
         # TODO Display this fee statement in the particpant portal.
     )
-    first_participant_fee_spreadsheet = field.NamedFile(
+    first_participant_fee_spreadsheet = field.NamedBlobFile(
         title=_(u'First Participant Fee Spreadsheet'),
         description=_(
             'Upload the first fee spreadsheet.  This spreadsheet will be accessed by student accounts for billing purposes.'),
@@ -1204,14 +1204,14 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             u'"Required Prior to Publishing Final Fee: Provider proposals and flight proposals on ""Proposals"" tab must also be complete."'),
     )
-    final_participant_fee_statement = field.NamedFile(
+    final_participant_fee_statement = field.NamedBlobFile(
         title=_(u'Final Participant Fee Statement'),
         description=_(
             'Upload the final fee statement for participants.  This statement will display in the participant portal upon transition to "Final Payment Billing in Progress".  Participants deviating from the advertised program may require an alternative fee statement.'),
         required=False,
         # TODO Display this fee statement in the particpant portal.
     )
-    final_participant_fee_spreadsheet = field.NamedFile(
+    final_participant_fee_spreadsheet = field.NamedBlobFile(
         title=_(u'Final Participant Fee Spreadsheet'),
         description=_(
             'Upload the final fee spreadsheet.  This spreadsheet will be accessed by student accounts for billing purposes.'),
@@ -1223,7 +1223,7 @@ class IOIEStudyAbroadProgram(Interface):
     required_prior_to_confirming_ter_received_label = schema.TextLine(
         description=_(u'Required Prior to Confirming that TER has been Received'),
     )
-    travel_expense_report = field.NamedFile(
+    travel_expense_report = field.NamedBlobFile(
         title=_(u'Travel Expense Report'),
         description=_(
             'Upload OIE Travel Expense Report Accounting forms plus all related receipts.  Receipts must be numbered to match line items on the accounting form and must be organized in number order.'),
@@ -1240,13 +1240,13 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary=yes_no_none_vocabulary,
         required=False,
     )
-    compensation_paperwork = field.NamedFile(
+    compensation_paperwork = field.NamedBlobFile(
         title=_(u'Compensation Paperwork'),
         description=_('Upload compensation paperwork'),
         required=False,
         # TODO "This field must be associated with each individual Program Leader & Program Co-leader.
     )
-    participant_refund_spreadsheet = field.NamedFile(
+    participant_refund_spreadsheet = field.NamedBlobFile(
         title=_(u'Participant Refund Spreadsheet'),
         description=_(
             'Upload the participant refund spreadsheet.  This spreadsheet will be accessed by student accounts for account adjustment purposes'),
@@ -1270,13 +1270,13 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary=yes_no_none_vocabulary,
         required=False,
     )
-    final_budget_documentation = field.NamedFile(
+    final_budget_documentation = field.NamedBlobFile(
         title=_(u'Final Budget Documentation'),
         description=_(
             'Upload the final budget spreadsheet & supporting financial documents.  Do not upload Travel Expense Report or related receipts here'),
         required=False,
     )
-    close_account = field.NamedFile(
+    close_account = field.NamedBlobFile(
         title=_(u'Close Account'),
         description=_('Upload request to close the account'),
         required=False,
@@ -1296,12 +1296,12 @@ class IOIEStudyAbroadProgram(Interface):
     orientation_label = schema.TextLine(
         description=_(u'Orientation'),
     )
-    program_leader_orientation_packet = field.NamedFile(
+    program_leader_orientation_packet = field.NamedBlobFile(
         title=_(u'Program Leader Orientation Packet'),
         description=_('Upload the Program Leader/Co-leader Orientation packet'),
         required=False,
     )
-    partner_orientation = field.NamedFile(
+    partner_orientation = field.NamedBlobFile(
         title=_(u'Partner Orientation'),
         description=_('Upload partner pre-arrival documents, waiver forms, emergency protocols, etc., if any'),
         required=False,
@@ -1321,44 +1321,44 @@ class IOIEStudyAbroadProgram(Interface):
     proof_of_service_label = schema.TextLine(
         description=_(u'Proof of Service. Required prior to scheduling the operational briefing.'),
     )
-    final_itinerary = field.NamedFile(
+    final_itinerary = field.NamedBlobFile(
         title=_(u'Final Itinerary'),
         description=_('Upload a clean copy of the official, final program itinerary'),
         required=False,
     )
-    bus_contract_departure = field.NamedFile(
+    bus_contract_departure = field.NamedBlobFile(
         title=_(u'Bus Contract (departure)'),
         description=_('Upload the bus contract'),
         required=False,
     )
-    bus_contract_return = field.NamedFile(
+    bus_contract_return = field.NamedBlobFile(
         title=_(u'Bus Contract (return)'),
         description=_('Upload the bus contract'),
         required=False,
     )
-    e_tickets = field.NamedFile(
+    e_tickets = field.NamedBlobFile(
         title=_(u'E-tickets'),
         description=_(
             'Upload group e-tickets.  Individual traveler tickets are uploaded by the individual through the participant portal'),
         required=False,
     )
-    vouchers = field.NamedFile(
+    vouchers = field.NamedBlobFile(
         title=_(u'Vouchers'),
         description=_('Upload payment vouchers'),
         required=False,
     )
-    insurance_invoice = field.NamedFile(
+    insurance_invoice = field.NamedBlobFile(
         title=_(u'Insurance Invoice'),
         description=_(
             'Upload the insurance invoice (the document that includes the partricipant ID) for all Program Leaders, Program Co-leaders and program participants'),
         required=False,
     )
-    visas = field.NamedFile(
+    visas = field.NamedBlobFile(
         title=_(u'Visas'),
         description=_('Upload visa copies'),
         required=False,
     )
-    other = field.NamedFile(
+    other = field.NamedBlobFile(
         title=_(u'Other'),
         description=_(''),
         required=False,
@@ -1376,17 +1376,17 @@ class IOIEStudyAbroadProgram(Interface):
                 'total_number_of_other_university_graduate_students', 'total_number_of_uw_oshkosh_program_leaders',
                 'total_number_of_community_members']
     )
-    participant_evaluations = field.NamedFile(
+    participant_evaluations = field.NamedBlobFile(
         title=_(u'Participant Evaluations'),
         description=_('Upload participant evaluations'),
         required=False,
     )
-    post_program_evaluation = field.NamedFile(
+    post_program_evaluation = field.NamedBlobFile(
         title=_(u'Post-program Evaluation'),
         description=_('Upload Liaison and/or Program Leader and/or Program Co-leader program evaluation'),
         required=False,
     )
-    incident_report = field.NamedFile(
+    incident_report = field.NamedBlobFile(
         title=_(u'Incident Report'),
         description=_('Upload incident report'),
         required=False,

@@ -5,7 +5,6 @@ from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from plone.supermodel import model
-from plone.namedfile import field
 from collective import dexteritytextindexer
 from plone.app.textfield import RichText
 from z3c.relationfield.schema import RelationChoice

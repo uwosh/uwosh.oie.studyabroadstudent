@@ -117,7 +117,7 @@ class IOIELiaison(Interface):
         required=True,
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.college_or_unit',
     )
-    role_and_responsibility = field.NamedFile(
+    role_and_responsibility = field.NamedBlobFile(
         title=_('Role & Responsibility'),
         description=_(u'Upload a signed Program Liaison Role & Responsibilities form'),
     )
