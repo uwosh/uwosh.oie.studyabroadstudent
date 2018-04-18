@@ -27,17 +27,20 @@ class ProgramView(DefaultView, FolderView):
         portal = api.portal.get()
         for country_name in countries:
             brains = api.content.find(portal_type='OIECountry', Title=country_name)
-            country = brains[0].getObject()
-            country_url = country.absolute_url()
-            timezone_url = country.timezone_url
-            cdc_info_url = country.cdc_info_url
-            state_dept_info_url = country.state_dept_info_url
-            country_info_html += \
-                '<dt><a href="%s">%s</a></dt>' \
-                '<dd><a href="%s">CDC</a>, '\
-                '<a href="%s">State Dept.</a>, '\
-                '<a href="%s">time zone</a></dd>' % \
-                (country_url, country_name, cdc_info_url, state_dept_info_url, timezone_url)
+            if brains:
+                country = brains[0].getObject()
+                country_url = country.absolute_url()
+                timezone_url = country.timezone_url
+                cdc_info_url = country.cdc_info_url
+                state_dept_info_url = country.state_dept_info_url
+                country_info_html += \
+                    '<dt><a href="%s">%s</a></dt>' \
+                    '<dd><a href="%s">CDC</a>, '\
+                    '<a href="%s">State Dept.</a>, '\
+                    '<a href="%s">time zone</a></dd>' % \
+                    (country_url, country_name, cdc_info_url, state_dept_info_url, timezone_url)
+            else:
+                country_info_html += '<dt>%s (missing country info)</dt>' % country_name
         country_info_html += '</dl>'
         return country_info_html
 
