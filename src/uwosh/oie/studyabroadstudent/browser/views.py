@@ -30,15 +30,28 @@ class ProgramView(DefaultView, FolderView):
             if brains:
                 country = brains[0].getObject()
                 country_url = country.absolute_url()
+                if country_url is None:
+                    country_url_atag = '(missing country URL)'
+                else:
+                    country_url_atag = '<a href="%s">%s</a>' % (country_url, country_name)
                 timezone_url = country.timezone_url
+                if timezone_url is None:
+                    timezone_url_atag = '(missing timezone URL)'
+                else:
+                    timezone_url_atag = '<a href="%s">time zone</a>' % timezone_url
                 cdc_info_url = country.cdc_info_url
+                if cdc_info_url is None:
+                    cdc_info_url_atag = '(missing CDC URL)'
+                else:
+                    cdc_info_url_atag = '<a href="%s">CDC</a>' % cdc_info_url
                 state_dept_info_url = country.state_dept_info_url
+                if state_dept_info_url is None:
+                    state_dept_info_url_atag = '(missing State Dept URL)'
+                else:
+                    state_dept_info_url_atag = '<a href="%s">State Dept.</a>' % state_dept_info_url
                 country_info_html += \
-                    '<dt><a href="%s">%s</a></dt>' \
-                    '<dd><a href="%s">CDC</a>, '\
-                    '<a href="%s">State Dept.</a>, '\
-                    '<a href="%s">time zone</a></dd>' % \
-                    (country_url, country_name, cdc_info_url, state_dept_info_url, timezone_url)
+                    '<dt>%s</dt><dd>%s, %s, %s</dd>' % \
+                    (country_url_atag, cdc_info_url_atag, state_dept_info_url_atag, timezone_url_atag)
             else:
                 country_info_html += '<dt>%s (missing country info)</dt>' % country_name
         country_info_html += '</dl>'
