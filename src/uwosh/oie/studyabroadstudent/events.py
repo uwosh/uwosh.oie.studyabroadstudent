@@ -1,5 +1,7 @@
 from plone import api
 from plone.app.uuid.utils import uuidToObject
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from plone.app.dexterity.behaviors.constrains import DISABLED
 
 def application_created(o, event):
     o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, o.programName, o.programYear)
@@ -13,12 +15,14 @@ def application_modified(o, event):
 
 
 def program_created(o, event):
+    # set the program code
     calendar_year_obj = api.content.get(UID=o.calendar_year)
     calendar_year = calendar_year_obj.title
     program_code = (calendar_year)[2:4] + (o.term)[0] + (o.college_or_unit)[0]
     for c in o.countries:
         program_code += c[0:3].upper()
     o.program_code = program_code
+    # set the ID
     new_id = o.title.lower().replace(' ', '-')
     o.id = str(new_id)
     # copy all the dates from selected calendar year into the new Program object
@@ -38,6 +42,16 @@ def program_created(o, event):
               'winter_interim_spring_payment_deadline_1', 'winter_interim_spring_payment_deadline_2']:
         setattr(o, d, getattr(calendar_year_obj, d))
     o.reindexObject()
+
+
+def program_added(o, event):
+    # doesn't work in the IObjectCreatedEvent
+    # fix which types can be contained in a Program
+    aspect = ISelectableConstrainTypes(o)
+    # immediately_addable = ['Event', 'File', 'Folder', 'Image', 'Link', 'News Item', 'Document']
+    # import pdb;pdb.set_trace()
+    # aspect.setImmediatelyAddableTypes(immediately_addable)
+    aspect.setConstrainTypesMode(DISABLED)
 
 
 def program_modified(o, event):

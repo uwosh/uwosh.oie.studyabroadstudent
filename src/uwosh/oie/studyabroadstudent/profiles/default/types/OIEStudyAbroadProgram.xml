@@ -19,8 +19,14 @@
   <property name="link_target"></property>
 
   <!-- Hierarchy control -->
-  <property name="filter_content_types">False</property>
+  <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
+    <element value="Event" />
+    <element value="News Item" />
+    <element value="Folder" />
+    <element value="Link" />
+    <element value="Document" />
+    <element value="Image" />
     <element value="File" />
   </property>
   <property name="global_allow">True</property>
