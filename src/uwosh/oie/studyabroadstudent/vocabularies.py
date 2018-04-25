@@ -949,3 +949,16 @@ class EligibilityRequirementVocabularyFactory(object):
 EligibilityRequirementVocabulary = EligibilityRequirementVocabularyFactory()
 
 
+@implementer(IVocabularyFactory)
+class AirportTransferVocabularyFactory(object):
+
+    def __call__(self, context):
+        values = api.portal.get_registry_record('oiestudyabroadstudent.airport_transfer')
+        normalizer = queryUtility(IIDNormalizer)
+        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
+        return SimpleVocabulary(items)
+
+
+AirportTransferVocabulary = AirportTransferVocabularyFactory()
+
+

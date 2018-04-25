@@ -503,13 +503,20 @@ class IOIEStudyAbroadProgram(Interface):
     model.fieldset(
         'DeparturefromOshkosh',
         label=_(u'Departure from Oshkosh'),
-        fields=['transportationFromOshkoshToDepartureAirport', 'oshkoshDepartureLocation', 'oshkoshMeetingDateTime',
-                'oshkoshDepartureDateTime', 'milwaukeeDepartureDateTime', 'airportArrivalDateTime']
+        fields=['transportationFromOshkoshToDepartureAirport', 'airport_transfer', 'oshkoshDepartureLocation',
+                'oshkoshMeetingDateTime', 'oshkoshDepartureDateTime', 'milwaukeeDepartureDateTime',
+                'airportArrivalDateTime']
     )
 
     transportationFromOshkoshToDepartureAirport = schema.Choice(
         title=_(u'Transportation from Oshkosh to departure airport'),
         vocabulary=yes_no_none_vocabulary,
+        required=False,
+    )
+
+    airport_transfer = schema.Choice(
+        title=_(u'Airport Transfer Mode'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airport_transfer',
         required=False,
     )
 

@@ -2008,6 +2008,18 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         missing_value=None,
         default=None,
     )
+    airport_transfer = schema.Tuple(
+        title=_(u'Airport Transfer Modes'),
+        default=(
+            'School Bus',
+            'Coach',
+            'Limo',
+        ),
+        missing_value=None,
+        required=True,
+        value_type=schema.TextLine()
+    )
+
 
 
 class OIEStudyAbroadStudentControlPanelForm(RegistryEditForm):

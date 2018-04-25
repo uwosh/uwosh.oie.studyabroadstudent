@@ -290,4 +290,8 @@
     name="uwosh.oie.studyabroadstudent.vocabularies.eligibility_requirement"
     component="uwosh.oie.studyabroadstudent.vocabularies.EligibilityRequirementVocabulary" />
 
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.airport_transfer"
+    component="uwosh.oie.studyabroadstudent.vocabularies.AirportTransferVocabulary" />
+
 </configure>

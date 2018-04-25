@@ -103,6 +103,11 @@
       </div>
     </div>
 
+    <div class="airport-transfer">
+      <h4>Airport Transfer:</h4>
+      <span tal:content="here/airport_transfer">[airport transfer]</span>
+    </div>
+
   <!--?<tal:block repeat="widget view/widgets/values">-->
 	    <!--?<div class="field" tal:condition="python:widget.__name__ in ('liaison', 'program_leader', 'program_coleaders',)">-->
 		<!--?<div tal:content="structure widget/render" />-->
