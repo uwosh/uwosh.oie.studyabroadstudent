@@ -89,7 +89,11 @@
         <span tal:content="start">[start date]</span> – <span tal:content="end">[end date]</span>
       </div>
       <div tal:condition="python: not (start and end)">TBA</div>
+    </div>
 
+    <div class="term">
+      <h4>Program Type:</h4>
+      <span tal:content="here/program_type">[program type]</span>
     </div>
 
   <!--?<tal:block repeat="widget view/widgets/values">-->
