@@ -87,6 +87,13 @@ class ProgramView(DefaultView, FolderView):
             coleaders = [uuidToObject(coleader['coleader']) for coleader in self.context.program_coleaders]
         return coleaders
 
+    def calendar_year(self):
+        year_uid = self.context.calendar_year
+        if year_uid:
+            year = api.content.get(UID=year_uid)
+            if year:
+                return year
+
 
 class CooperatingPartnerView(DefaultView):
     def primary_contact(self):

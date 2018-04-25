@@ -77,6 +77,11 @@
       <span tal:content="view/footer_info"></span>
     </div>
 
+    <div class="term">
+      <span tal:define="term here/term" tal:content="python: term[2:]">[term]</span>
+      <span tal:define="year view/calendar_year" tal:content="year/Title">[year]</span>
+    </div>
+
   <!--?<tal:block repeat="widget view/widgets/values">-->
 	    <!--?<div class="field" tal:condition="python:widget.__name__ in ('liaison', 'program_leader', 'program_coleaders',)">-->
 		<!--?<div tal:content="structure widget/render" />-->
