@@ -10,7 +10,7 @@
 <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
         <div tal:replace="structure provider:plone.abovecontenttitle" />
-        <h1 class="documentFirstHeading" tal:content="python: context.title + ' [MANAGEMENT VIEW]'" />
+        <h1 class="documentFirstHeading" tal:content="here/title" />
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 	<tal:block repeat="widget view/widgets/values">
 	    <div class="field" tal:condition="python:widget.__name__ in ('IBasic.description', 'description',)">
@@ -23,6 +23,63 @@
   <div:viewonly>
     <h2>PUBLIC VIEW</h2>
 
+    <tal:block repeat="widget view/widgets/values">
+        <div class="field" tal:condition="python:widget.__name__ in ('ILeadImage.image',)">
+      <label tal:content="widget/label" />
+      <br />
+      <div tal:content="structure widget/render" />
+        </div>
+    </tal:block>
+
+    <h2 class="documentFirstHeading" tal:content="python: context.title" />
+
+  <tal:block repeat="widget view/widgets/values">
+	    <div class="field" tal:condition="python:widget.__name__ in ('IBasic.description', 'description',)">
+		<div tal:content="structure widget/render" />
+	    </div>
+	</tal:block>
+
+		<div tal:condition="python: context.description is not None and hasattr(context.description, 'output')"
+      	 tal:content="structure here/description/output" />
+
+    <p>
+      For information on the application process, program fees and total estimated spending, see the Application Guide for this program.
+    </p>
+
+    <p>
+      <a href="">APPLY NOW</a>
+    </p>
+
+    <tal:block repeat="widget view/widgets/values">
+        <div class="field" tal:condition="python:widget.__name__ in ('eligibility_requirement',)">
+      <label tal:content="widget/label" />
+      <br />
+      <div tal:content="structure widget/render" />
+        </div>
+    </tal:block>
+
+    <div class="uwologo" tal:content="structure view/uwo_logo" />
+
+    <div class="program-contacts">
+      Program Contact(s):
+      <div class="liaison" tal:define="contact view/liaison">
+        <a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact name]</a> (liaison)
+      </div>
+      <div class="leader" tal:define="contact view/leader">
+        <a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact name]</a> (leader)
+      </div>
+      <div class="coleaders" tal:repeat="contact view/coleaders">
+        <a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact name]</a> (coleader)
+      </div>
+    </div>
+
+
+  <tal:block repeat="widget view/widgets/values">
+	    <div class="field" tal:condition="python:widget.__name__ in ('liaison', 'program_leader', 'program_coleaders',)">
+		<div tal:content="structure widget/render" />
+	    </div>
+	</tal:block>
+
     <div:country_info class="country_info">
       <div class="country_info_header">Countries</div>
       <div class="country_info_details" tal:content="structure view/country_info">
@@ -33,6 +90,7 @@
   </div:viewonly>
 
   <div:management tal:condition="view/can_edit">
+    <h2>EDIT VIEW</h2>
 
     <tal:block repeat="widget view/widgets/values">
         <div class="field" tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description',)">

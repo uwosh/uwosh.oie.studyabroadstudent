@@ -287,6 +287,13 @@ class IOIEStudyAbroadProgram(Interface):
         label=_(u"Unorganized"),
         fields=[]
     )
+    eligibility_requirement = schema.Choice(
+        title=u'Eligibility Requirement',
+        description=u'Select the eligibility requirement for this program',
+        required=False,
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.eligibility_requirement',
+        default=None,
+    )
 
     #######################################################
     model.fieldset(

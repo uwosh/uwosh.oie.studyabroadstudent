@@ -3,6 +3,7 @@
 from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plone.app.contenttypes.browser.folder import FolderView
+from plone.app.uuid.utils import uuidToObject
 
 
 class ApplicationView(DefaultView):
@@ -56,6 +57,31 @@ class ProgramView(DefaultView, FolderView):
                 country_info_html += '<dt>%s (missing country info)</dt>' % country_name
         country_info_html += '</dl>'
         return country_info_html
+
+    def uwo_logo(self):
+        uwo_logo_uid = api.portal.get_registry_record('oiestudyabroadstudent.uwo_logo')
+        uwo_logo = uuidToObject(uwo_logo_uid)
+        url = uwo_logo.absolute_url()
+        html = '<img src="%s" title="UWO wordmark" alt="UWO wordmark"/>' % url
+        return html
+
+    def liaison (self):
+        liaison = None
+        if self.context.liaison:
+            liaison = uuidToObject(self.context.liaison)
+        return liaison
+
+    def leader(self):
+        leader = None
+        if self.context.program_leader:
+            leader = uuidToObject(self.context.program_leader)
+        return leader
+
+    def coleaders(self):
+        coleaders = []
+        if self.context.program_coleaders and len(self.context.program_coleaders) > 0:
+            coleaders = [uuidToObject(coleader['coleader']) for coleader in self.context.program_coleaders]
+        return coleaders
 
 
 class CooperatingPartnerView(DefaultView):

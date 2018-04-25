@@ -282,4 +282,12 @@
     name="uwosh.oie.studyabroadstudent.vocabularies.file"
     component="uwosh.oie.studyabroadstudent.vocabularies.FileVocabulary" />
 
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.image"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ImageVocabulary" />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.eligibility_requirement"
+    component="uwosh.oie.studyabroadstudent.vocabularies.EligibilityRequirementVocabulary" />
+
 </configure>
