@@ -140,7 +140,7 @@
           <ul>
             <li tal:repeat="course here/pretravel_dates">
               <b><span tal:content="course/pretravel_start_datetime">[pretravel_start_datetime]</span></b>,
-              <span tal:content="course/pretravel_building">[pretravel_building]</span>, 
+              <span tal:content="course/pretravel_building">[pretravel_building]</span>,
               <span tal:content="course/pretravel_room">[pretravel_room]</span>,
               <b>Attendance required:</b> <span tal:content="course/pretravel_attendance_required">[pretravel_attendance_required]</span>
             </li>
@@ -149,50 +149,16 @@
       </ul>
     </div>
 
-  <!--?<tal:block repeat="widget view/widgets/values">-->
-	    <!--?<div class="field" tal:condition="python:widget.__name__ in ('liaison', 'program_leader', 'program_coleaders',)">-->
-		<!--?<div tal:content="structure widget/render" />-->
-	    <!--?</div>-->
-	<!--?</tal:block>-->
+    <div class="orientation">
+      <h4>Orientation:</h4>
+      <ul>
+        <li><b>Orientation Quiz Due:</b> <span tal:content="string: 'TODO'">[orientation quiz due date]</span></li>
+        <li><b>In-person orientation (optional):</b> <span tal:content="string: 'TODO'">[In-person orientation (optional)]</span></li>
+      </ul>
+    </div>
 
-    <!--?<div:country_info class="country_info">-->
-      <!--?<div class="country_info_header">Countries</div>-->
-      <!--?<div class="country_info_details" tal:content="structure view/country_info">-->
-        <!--?[country_info]-->
-      <!--?</div>-->
-    <!--?</div:country_info>-->
 
   </div:viewonly>
-
-  <!--?<div:management tal:condition="view/can_edit">-->
-    <!--?<h2>EDIT VIEW</h2>-->
-
-    <!--?<tal:block repeat="widget view/widgets/values">-->
-        <!--?<div class="field" tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description',)">-->
-      <!--?<label tal:content="widget/label" />-->
-      <!--?<br />-->
-      <!--?<div tal:content="structure widget/render" />-->
-        <!--?</div>-->
-    <!--?</tal:block>-->
-
-    <!--?<fieldset tal:repeat="group view/groups"-->
-        <!--?tal:attributes="id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')">-->
-        <!--?<legend tal:content="group/label" />-->
-        <!--?<div class="field" tal:repeat="widget group/widgets/values">-->
-      <!--?<label tal:content="widget/label" />-->
-      <!--?<br />-->
-      <!--?<div tal:content="structure widget/render" />-->
-        <!--?</div>-->
-    <!--?</fieldset>-->
-
-    <!--?<fieldset id="folder-listing">-->
-        <!--?<legend>Contents</legend>-->
-        <!--?<tal:block define="listing_macro context/folder_listing/macros/listing">-->
-      <!--?<metal:use_macro use-macro="listing_macro" />-->
-        <!--?</tal:block>-->
-    <!--?</fieldset>-->
-
-  <!--?</div:management>-->
 
 	      <div tal:replace="structure provider:plone.belowcontentbody" />
 	  </tal:main-macro>
