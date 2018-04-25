@@ -113,6 +113,15 @@
       <span tal:content="here/program_fee">[program fee]</span>
     </div>
 
+    <div class="application-deadlines">
+      <h4>Application Deadlines:</h4>
+      <ol>
+        <li>Steps I & II deadline: <span tal:content="here/step_1_and_2_application_deadline">[step_1_and_2_application_deadline]</span></li>
+        <li>Step III deadline: <span tal:content="here/step_3_application_deadline">[step_3_application_deadline]</span></li>
+        <li>Step IV deadline: <span tal:content="here/step_4_application_deadline">[step_4_application_deadline]</span></li>
+      </ol>
+    </div>
+
   <!--?<tal:block repeat="widget view/widgets/values">-->
 	    <!--?<div class="field" tal:condition="python:widget.__name__ in ('liaison', 'program_leader', 'program_coleaders',)">-->
 		<!--?<div tal:content="structure widget/render" />-->
