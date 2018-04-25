@@ -6,6 +6,7 @@ from zope import schema
 from zope.interface import Interface
 from uwosh.oie.studyabroadstudent import _
 from plone.namedfile import field
+from plone.app.textfield import RichText
 
 
 class IOIEStudyAbroadStudentControlPanel(Interface):
@@ -1999,6 +2000,13 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         missing_value=None,
         default=None,
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.image',
+    )
+    program_view_footer = schema.Text(
+        title=_(u'Program Footer Text'),
+        description=_(u'will appear at bottom of public program view'),
+        required=False,
+        missing_value=None,
+        default=None,
     )
 
 

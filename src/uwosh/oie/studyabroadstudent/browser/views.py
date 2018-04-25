@@ -65,6 +65,10 @@ class ProgramView(DefaultView, FolderView):
         html = '<img src="%s" title="UWO wordmark" alt="UWO wordmark"/>' % url
         return html
 
+    def footer_info(self):
+        footer_text = api.portal.get_registry_record('oiestudyabroadstudent.program_view_footer')
+        return footer_text
+
     def liaison (self):
         liaison = None
         if self.context.liaison:
