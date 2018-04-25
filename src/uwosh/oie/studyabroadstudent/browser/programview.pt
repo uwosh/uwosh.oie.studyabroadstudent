@@ -91,12 +91,12 @@
       <div tal:condition="python: not (start and end)">TBA</div>
     </div>
 
-    <div class="term">
+    <div class="program-type">
       <h4>Program Type:</h4>
       <span tal:content="here/program_type">[program type]</span>
     </div>
 
-    <div class="term">
+    <div class="housing">
       <h4>Housing:</h4>
       <div tal:repeat="housing view/housing">
         <span tal:content="housing">[accommodation]</span>;
