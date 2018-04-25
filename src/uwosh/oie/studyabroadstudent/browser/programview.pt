@@ -108,6 +108,11 @@
       <span tal:content="here/airport_transfer">[airport transfer]</span>
     </div>
 
+    <div class="program-fee">
+      <h4>Financial:</h4>
+      <span tal:content="here/program_fee">[program fee]</span>
+    </div>
+
   <!--?<tal:block repeat="widget view/widgets/values">-->
 	    <!--?<div class="field" tal:condition="python:widget.__name__ in ('liaison', 'program_leader', 'program_coleaders',)">-->
 		<!--?<div tal:content="structure widget/render" />-->
