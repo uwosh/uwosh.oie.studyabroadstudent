@@ -283,20 +283,6 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'unorganized',
-        label=_(u"Unorganized"),
-        fields=[]
-    )
-    eligibility_requirement = schema.Choice(
-        title=u'Eligibility Requirement',
-        description=u'Select the eligibility requirement for this program',
-        required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.eligibility_requirement',
-        default=None,
-    )
-
-    #######################################################
-    model.fieldset(
         'comments_fieldset',
         label=_(u"Comments"),
         fields=['comments_all', 'comments_oie_leaders', 'comments_oie_all']
@@ -370,9 +356,9 @@ class IOIEStudyAbroadProgram(Interface):
         'academic_program_fieldset',
         label=_(u"Academic Program"),
         fields=['sponsoring_unit_or_department', 'program_type', 'program_component', 'title', 'description',
-                'learning_objectives', 'equipment_and_space', 'equipment_and_space_needs', 'guest_lectures',
-                'initial_draft_program_schedule', 'syllabus_and_supporting_docs', 'min_credits_earned',
-                'max_credits_earned', 'language_of_study', 'cooperating_partners']
+                'eligibility_requirement', 'learning_objectives', 'equipment_and_space', 'equipment_and_space_needs',
+                'guest_lectures', 'initial_draft_program_schedule', 'syllabus_and_supporting_docs',
+                'min_credits_earned', 'max_credits_earned', 'language_of_study', 'cooperating_partners']
     )
 
     sponsoring_unit_or_department = schema.List(
@@ -392,6 +378,14 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Program Component'),
         required=True,
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.program_component',
+    )
+
+    eligibility_requirement = schema.Choice(
+        title=u'Eligibility Requirement',
+        description=u'Select the eligibility requirement for this program',
+        required=False,
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.eligibility_requirement',
+        default=None,
     )
 
     widget(
