@@ -19,19 +19,11 @@
 	</tal:block>
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
-  <!--?<div:viewonly tal:condition="not: view/can_edit">-->
   <div:viewonly>
-    <!--?<h2>PUBLIC VIEW</h2>-->
 
-    <tal:block repeat="widget view/widgets/values">
-        <div class="field" tal:condition="python:widget.__name__ in ('ILeadImage.image',)">
-      <label tal:content="widget/label" />
-      <br />
-      <div tal:content="structure widget/render" />
-        </div>
-    </tal:block>
-
-    <h2 class="documentFirstHeading" tal:content="python: context.title" />
+    <div class="lead-image" tal:define="base_url here/absolute_url">
+      <img tal:attributes="src python: base_url+'/@@images/image'" title="program lead image" alt="program lead image"/>
+    </div>
 
   <tal:block repeat="widget view/widgets/values">
 	    <div class="field" tal:condition="python:widget.__name__ in ('IBasic.description', 'description',)">
