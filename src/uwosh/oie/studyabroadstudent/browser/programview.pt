@@ -46,9 +46,9 @@
       For information on the application process, program fees and total estimated spending, see the Application Guide for this program.
     </p>
 
-    <p>
+    <h3>
       <a href="">APPLY NOW</a>
-    </p>
+    </h3>
 
     <tal:block repeat="widget view/widgets/values">
         <div class="field" tal:condition="python:widget.__name__ in ('eligibility_requirement',)">
@@ -61,7 +61,7 @@
     <div class="uwologo" tal:content="structure view/uwo_logo" />
 
     <div class="program-contacts">
-      Program Contact(s):
+      <h4>Program Contact(s):</h4>
       <div class="liaison" tal:define="contact view/liaison">
         <a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact name]</a> (liaison)
       </div>
@@ -78,8 +78,18 @@
     </div>
 
     <div class="term">
+      <h4>Term:</h4>
       <span tal:define="term here/term" tal:content="python: term[2:]">[term]</span>
       <span tal:define="year view/calendar_year" tal:content="year/Title">[year]</span>
+    </div>
+
+    <div class="program-dates"  tal:define="start here/airportArrivalDateTime; end here/returnDateTime">
+      <h4>Program Dates:</h4>
+      <div tal:condition="python: start and end">
+        <span tal:content="start">[start date]</span> – <span tal:content="end">[end date]</span>
+      </div>
+      <div tal:condition="python: not (start and end)">TBA</div>
+
     </div>
 
   <!--?<tal:block repeat="widget view/widgets/values">-->
