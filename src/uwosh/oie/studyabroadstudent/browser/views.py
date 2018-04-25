@@ -94,6 +94,9 @@ class ProgramView(DefaultView, FolderView):
             if year:
                 return year
 
+    def housing(self):
+        travelDatesTransitionsAndDestinations = self.context.travelDatesTransitionsAndDestinations
+        return [location['accommodation'] for location in travelDatesTransitionsAndDestinations]
 
 class CooperatingPartnerView(DefaultView):
     def primary_contact(self):

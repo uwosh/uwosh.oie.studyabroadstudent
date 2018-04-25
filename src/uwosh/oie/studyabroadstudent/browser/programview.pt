@@ -96,6 +96,13 @@
       <span tal:content="here/program_type">[program type]</span>
     </div>
 
+    <div class="term">
+      <h4>Housing:</h4>
+      <div tal:repeat="housing view/housing">
+        <span tal:content="housing">[accommodation]</span>;
+      </div>
+    </div>
+
   <!--?<tal:block repeat="widget view/widgets/values">-->
 	    <!--?<div class="field" tal:condition="python:widget.__name__ in ('liaison', 'program_leader', 'program_coleaders',)">-->
 		<!--?<div tal:content="structure widget/render" />-->
