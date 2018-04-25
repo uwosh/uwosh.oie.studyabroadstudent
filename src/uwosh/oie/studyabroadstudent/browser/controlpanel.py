@@ -2011,9 +2011,9 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     airport_transfer = schema.Tuple(
         title=_(u'Airport Transfer Modes'),
         default=(
+            'No US airport transfer provided',
             'School Bus',
-            'Coach',
-            'Limo',
+            'Coach Bus',
         ),
         missing_value=None,
         required=True,

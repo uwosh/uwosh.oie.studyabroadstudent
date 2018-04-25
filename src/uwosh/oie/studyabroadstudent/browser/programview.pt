@@ -105,7 +105,7 @@
 
     <div class="airport-transfer">
       <h4>Airport Transfer:</h4>
-      <span tal:content="here/airport_transfer">[airport transfer]</span>
+      <span tal:content="here/transportationFromOshkoshToDepartureAirport">[airport transfer]</span>
     </div>
 
     <div class="program-fee">
