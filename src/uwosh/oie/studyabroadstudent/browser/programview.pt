@@ -115,11 +115,38 @@
 
     <div class="application-deadlines">
       <h4>Application Deadlines:</h4>
-      <ol>
-        <li>Steps I & II deadline: <span tal:content="here/step_1_and_2_application_deadline">[step_1_and_2_application_deadline]</span></li>
-        <li>Step III deadline: <span tal:content="here/step_3_application_deadline">[step_3_application_deadline]</span></li>
-        <li>Step IV deadline: <span tal:content="here/step_4_application_deadline">[step_4_application_deadline]</span></li>
-      </ol>
+      <ul>
+        <li><b>Steps I & II deadline:</b> <span tal:content="here/step_1_and_2_application_deadline">[step_1_and_2_application_deadline]</span></li>
+        <li><b>Step III deadline:</b> <span tal:content="here/step_3_application_deadline">[step_3_application_deadline]</span></li>
+        <li><b>Step IV deadline:</b> <span tal:content="here/step_4_application_deadline">[step_4_application_deadline]</span></li>
+      </ul>
+    </div>
+
+    <div class="academics">
+      <h4>Academics</h4>
+      <ul>
+        <li>
+          Required Courses:
+          <ul>
+            <li tal:repeat="course here/courses">
+              <b><span tal:content="course/course">[course subject and number]</span></b>,
+              <span tal:content="course/credits_earned">[credits_earned]</span> <em>credits</em>.
+              <em>Prerequisites:</em> <span tal:content="course/completed_courses">[prerequisites]</span>
+            </li>
+          </ul>
+        </li>
+        <li>
+          Required Pre-Travel Courses:
+          <ul>
+            <li tal:repeat="course here/pretravel_dates">
+              <b><span tal:content="course/pretravel_start_datetime">[pretravel_start_datetime]</span></b>,
+              <span tal:content="course/pretravel_building">[pretravel_building]</span>, 
+              <span tal:content="course/pretravel_room">[pretravel_room]</span>,
+              <b>Attendance required:</b> <span tal:content="course/pretravel_attendance_required">[pretravel_attendance_required]</span>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
 
   <!--?<tal:block repeat="widget view/widgets/values">-->
