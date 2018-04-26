@@ -1554,25 +1554,25 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    spring_interim_summer_fall_semester_participant_orientation_deadline = schema.Date(
+    spring_interim_summer_fall_semester_participant_orientation_deadline = schema.Datetime(
         title=u'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',
         description=u'will be copied from the selected calendar year on first save',
         required=False,
     )
 
-    spring_interim_summer_fall_semester_in_person_orientation = schema.Date(
+    spring_interim_summer_fall_semester_in_person_orientation = schema.Datetime(
         title=u'Spring Interim, Summer & Fall Semester In-person Orientation',
         description=u'will be copied from the selected calendar year on first save',
         required=False,
     )
 
-    winter_interim_spring_semester_participant_orientation_deadline = schema.Date(
+    winter_interim_spring_semester_participant_orientation_deadline = schema.Datetime(
         title=u'Winter Interim & Spring Semester Participant Orientation Deadline',
         description=u'will be copied from the selected calendar year on first save',
         required=False,
     )
 
-    winter_interim_spring_semester_in_person_orientation = schema.Date(
+    winter_interim_spring_semester_in_person_orientation = schema.Datetime(
         title=u'Winter Interim & Spring Semester In-person Orientation',
         description=u'will be copied from the selected calendar year on first save',
         required=False,

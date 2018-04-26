@@ -144,8 +144,15 @@
     <div class="orientation">
       <h4>Orientation:</h4>
       <ul>
-        <li><b>Orientation Quiz Due:</b> <span tal:content="string: 'TODO'">[orientation quiz due date]</span></li>
-        <li><b>In-person orientation (optional):</b> <span tal:content="string: 'TODO'">[In-person orientation (optional)]</span></li>
+        <li><b>Orientation Quiz Due:</b>
+          <span tal:define="date here/winter_interim_spring_semester_participant_orientation_deadline" tal:condition="date" tal:content="date">[quiz due]</span>
+          <span tal:define="date here/spring_interim_summer_fall_semester_participant_orientation_deadline" tal:condition="date" tal:content="date">[quiz due]</span>
+        </li>
+        <li>
+          <b>In-person orientation (optional):</b>
+          <span tal:define="date here/winter_interim_spring_semester_in_person_orientation" tal:condition="date" tal:content="date">[winter, spring in-person orientation (optional)]</span>
+          <span tal:define="date here/spring_interim_summer_fall_semester_in_person_orientation" tal:condition="date" tal:content="date">[spring, summer, fall in-person orientation (optional)]</span>
+        </li>
       </ul>
     </div>
 
