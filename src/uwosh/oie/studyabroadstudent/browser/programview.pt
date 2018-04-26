@@ -10,7 +10,7 @@
 <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
         <div tal:replace="structure provider:plone.abovecontenttitle" />
-        <h1 class="documentFirstHeading" tal:content="here/title" />
+        <h1 class="documentFirstHeading" style="background-color: darkviolet; color: white; padding: 5px" tal:content="here/title" />
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 	<tal:block repeat="widget view/widgets/values">
 	    <div class="field" tal:condition="python:widget.__name__ in ('IBasic.description', 'description',)">
@@ -101,7 +101,7 @@
           </div>
 
           <div class="application-deadlines">
-            <h4>Application Deadlines:</h4>
+            <h4 style="background-color: green; color: white; padding: 5px">Application Deadlines:</h4>
             <ul>
               <li><b>Steps I & II deadline:</b> <span tal:content="here/step_1_and_2_application_deadline">[step_1_and_2_application_deadline]</span></li>
               <li><b>Step III deadline:</b> <span tal:content="here/step_3_application_deadline">[step_3_application_deadline]</span></li>
@@ -110,7 +110,7 @@
           </div>
 
           <div class="academics">
-            <h4>Academics</h4>
+            <h4 style="background-color: orange; color: white; padding: 5px">Academics</h4>
             <ul>
               <li>
                 Required Courses:
@@ -137,7 +137,7 @@
           </div>
 
           <div class="orientation">
-            <h4>Orientation:</h4>
+            <h4 style="background-color: dodgerblue; color: white; padding: 5px">Orientation:</h4>
             <ul>
               <li><b>Orientation Quiz Due:</b>
                 <span tal:define="date here/winter_interim_spring_semester_participant_orientation_deadline" tal:condition="date" tal:content="date">[quiz due]</span>
