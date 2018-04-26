@@ -652,7 +652,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     transportationFromArrivalAirportToOshkosh = schema.Choice(
         title=_(u'Transportation from arrival airport to Oshkosh'),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airport_transfer',
         required=False,
     )
 
