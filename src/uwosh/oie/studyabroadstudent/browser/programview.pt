@@ -22,7 +22,7 @@
   <div:viewonly>
 
     <div class="lead-image" tal:define="base_url here/absolute_url">
-      <img tal:attributes="src python: base_url+'/@@images/image'" title="program lead image" alt="program lead image"/>
+      <img tal:attributes="src python: base_url+'/@@images/image'" style="max-width:100%;height:auto" title="program lead image" alt="program lead image"/>
     </div>
 
   <tal:block repeat="widget view/widgets/values">
