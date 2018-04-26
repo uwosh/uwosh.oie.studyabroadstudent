@@ -38,9 +38,22 @@
       For information on the application process, program fees and total estimated spending, see the Application Guide for this program.
     </p>
 
-    <h3>
-      <a href="">APPLY NOW</a>
-    </h3>
+    <style media="screen" type="text/css">
+      .button {
+        font: bold 24px Arial;
+        text-decoration: none;
+        background-color: #0095ff;
+        color: white;
+        padding: 2px 6px 2px 6px;
+        border-top: 1px solid #CCCCCC;
+        border-right: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+        border-left: 1px solid #CCCCCC;
+      }
+    </style>
+    <div class="apply-now">
+      <h3><a class="button" href="">APPLY NOW</a></h3>
+    </div>
 
     <tal:block repeat="widget view/widgets/values">
         <div class="field" tal:condition="python:widget.__name__ in ('eligibility_requirement',)">
@@ -50,23 +63,24 @@
         </div>
     </tal:block>
 
-    <div class="uwologo" tal:content="structure view/uwo_logo" />
+    <div class="logo-and-contacts" style="padding-top:50px">
+      <div style="display:inline-block" class="uwologo" tal:content="structure view/uwo_logo" />
 
-    <div class="program-contacts">
-      <h4>Program Contact(s):</h4>
-      <div class="liaison" tal:define="contact view/liaison">
-        <a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact name]</a> (liaison)
-      </div>
-      <div class="leader" tal:define="contact view/leader">
-        <a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact name]</a> (leader)
-      </div>
-      <div class="coleaders" tal:repeat="contact view/coleaders">
-        <a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact name]</a> (coleader)
-      </div>
-    </div>
-
-    <div class="oie-footer">
-      <span tal:content="view/footer_info"></span>
+        <div class="program-contacts" style="display:inline-block;float:right">
+          <h4>Program Contact(s):</h4>
+          <div class="liaison" tal:define="contact view/liaison">
+            <a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact name]</a> (liaison)
+          </div>
+          <div class="leader" tal:define="contact view/leader">
+            <a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact name]</a> (leader)
+          </div>
+          <div class="coleaders" tal:repeat="contact view/coleaders">
+            <a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact name]</a> (coleader)
+          </div>
+          <div class="oie-footer" style="padding-top: 10px">
+            <span tal:content="view/footer_info"></span>
+          </div>
+        </div>
     </div>
 
     <div class="term">
