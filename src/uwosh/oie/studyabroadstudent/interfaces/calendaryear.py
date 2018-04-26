@@ -96,22 +96,22 @@ class IOIECalendarYear(Interface):
         required=True,
     )
 
-    spring_interim_summer_fall_semester_participant_orientation_deadline = schema.Date(
+    spring_interim_summer_fall_semester_participant_orientation_deadline = schema.Datetime(
         title=u'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',
         required=True,
     )
 
-    spring_interim_summer_fall_semester_in_person_orientation = schema.Date(
+    spring_interim_summer_fall_semester_in_person_orientation = schema.Datetime(
         title=u'Spring Interim, Summer & Fall Semester In-person Orientation',
         required=True,
     )
 
-    winter_interim_spring_semester_participant_orientation_deadline = schema.Date(
+    winter_interim_spring_semester_participant_orientation_deadline = schema.Datetime(
         title=u'Winter Interim & Spring Semester Participant Orientation Deadline',
         required=True,
     )
 
-    winter_interim_spring_semester_in_person_orientation = schema.Date(
+    winter_interim_spring_semester_in_person_orientation = schema.Datetime(
         title=u'Winter Interim & Spring Semester In-person Orientation',
         required=True,
     )
