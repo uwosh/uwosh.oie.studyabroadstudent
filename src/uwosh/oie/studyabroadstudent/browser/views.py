@@ -58,12 +58,10 @@ class ProgramView(DefaultView, FolderView):
         country_info_html += '</dl>'
         return country_info_html
 
-    def uwo_logo(self):
+    def uwo_logo_url(self):
         uwo_logo_uid = api.portal.get_registry_record('oiestudyabroadstudent.uwo_logo')
         uwo_logo = uuidToObject(uwo_logo_uid)
-        url = uwo_logo.absolute_url()
-        html = '<img src="%s" title="UWO wordmark" alt="UWO wordmark"/>' % url
-        return html
+        return uwo_logo.absolute_url()
 
     def footer_info(self):
         footer_text = api.portal.get_registry_record('oiestudyabroadstudent.program_view_footer')
