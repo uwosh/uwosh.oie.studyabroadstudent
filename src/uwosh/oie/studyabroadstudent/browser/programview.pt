@@ -57,13 +57,9 @@
             <h3><a class="button" href="">APPLY NOW</a></h3>
           </div>
 
-          <tal:block repeat="widget view/widgets/values">
-              <div class="field" tal:condition="python:widget.__name__ in ('eligibility_requirement',)">
-            <label tal:content="widget/label" />
-            <br />
-            <div tal:content="structure widget/render" />
-              </div>
-          </tal:block>
+          <div class="eligibility">
+            <span tal:content="here/eligibility_requirement">[eligibility]</span>
+          </div>
 
       </div>
 
