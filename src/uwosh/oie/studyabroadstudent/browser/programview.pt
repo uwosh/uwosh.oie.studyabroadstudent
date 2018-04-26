@@ -46,14 +46,19 @@
               text-decoration: none;
               background-color: #0095ff;
               color: white;
-              padding: 2px 6px 2px 6px;
+              padding: 15px;
               border-top: 1px solid #CCCCCC;
               border-right: 1px solid #333333;
               border-bottom: 1px solid #333333;
               border-left: 1px solid #CCCCCC;
             }
+            .center {
+              margin: auto;
+              width: 50%;
+              padding: 10px;
+            }
           </style>
-          <div class="apply-now">
+          <div class="apply-now center">
             <h3><a class="button" href="">APPLY NOW</a></h3>
           </div>
 
