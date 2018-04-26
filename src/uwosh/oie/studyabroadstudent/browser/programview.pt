@@ -158,9 +158,9 @@
       </div>
     </div>
 
-    <div class="logo-and-contacts" style="padding-top:50px">
+    <div class="logo-and-contacts col-md-12" style="padding-top:50px">
       <div class="uwologo col-md-3">
-        <img  tal:define="url view/uwo_logo_url" tal:attributes="src url" height="75px" title="UWO wordmark" alt="UWO wordmark"/>
+        <img tal:condition="url" tal:define="url view/uwo_logo_url" tal:attributes="src url" height="75px" title="UWO wordmark" alt="UWO wordmark"/>
       </div>
 
       <div class="program-contacts col-md-9">
