@@ -40,7 +40,7 @@ def post_install(context):
     portal_ids = [id for id, obj in portal_items]
 
     # add folders and restrict addable types
-    create_toplevel_folder(portal, portal_ids, 'Applications', 'applications', ['OIEStudyAbroadStudentApplication'])
+    create_toplevel_folder(portal, portal_ids, 'Legacy Applications', 'legacy-applications', ['OIEStudyAbroadStudentApplication'])
     create_toplevel_folder(portal, portal_ids, 'Countries', 'countries', ['OIECountry'])
     create_toplevel_folder(portal, portal_ids, 'Participants', 'participants', ['OIEStudyAbroadParticipant'])
     create_toplevel_folder(portal, portal_ids, 'Programs', 'programs', ['OIEStudyAbroadProgram'])
