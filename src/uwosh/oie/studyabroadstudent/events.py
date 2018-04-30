@@ -80,7 +80,7 @@ def program_modified(o, event):
 
 
 def contact_created(o, event):
-    if o.middle_name.strip() != '':
+    if o.middle_name and o.middle_name.strip() != '':
         o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     else:
         o.title = '%s %s' % (o.first_name, o.last_name)
@@ -90,7 +90,7 @@ def contact_created(o, event):
 
 
 def contact_modified(o, event):
-    if o.middle_name.strip() != '':
+    if o.middle_name and o.middle_name.strip() != '':
         o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     else:
         o.title = '%s %s' % (o.first_name, o.last_name)
@@ -113,7 +113,7 @@ def participant_created(o, event):
             o.applicant_question_text5 = program.applicantQuestion5
             year_obj = uuidToObject(program.calendar_year)
             programYear = year_obj.title
-            if o.middle_name.strip() != '':
+            if o.middle_name and o.middle_name.strip() != '':
                 o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, programName, programYear)
             else:
                 o.title = '%s %s %s %s' % (o.firstName, o.lastName, programName, programYear)
@@ -129,13 +129,13 @@ def participant_modified(o, event):
             programName = program.title
             year_obj = uuidToObject(program.calendar_year)
             programYear = year_obj.title
-            if o.middle_name.strip() != '':
+            if o.middle_name and o.middle_name.strip() != '':
                 o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, programName, programYear)
             else:
                 o.title = '%s %s %s %s' % (o.firstName, o.lastName, programName, programYear)
 
 def liaison_created(o, event):
-    if o.middle_name.strip() != '':
+    if o.middle_name and o.middle_name.strip() != '':
         o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     else:
         o.title = '%s %s' % (o.first_name, o.last_name)
@@ -144,13 +144,13 @@ def liaison_created(o, event):
     o.reindexObject()
 
 def liaison_modified(o, event):
-    if o.middle_name.strip() != '':
+    if o.middle_name and o.middle_name.strip() != '':
         o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     else:
         o.title = '%s %s' % (o.first_name, o.last_name)
 
 def program_leader_created(o, event):
-    if o.middle_name.strip() != '':
+    if o.middle_name and o.middle_name.strip() != '':
         o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     else:
         o.title = '%s %s' % (o.first_name, o.last_name)
@@ -159,7 +159,7 @@ def program_leader_created(o, event):
     o.reindexObject()
 
 def program_leader_modified(o, event):
-    if o.middle_name.strip() != '':
+    if o.middle_name and o.middle_name.strip() != '':
         o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     else:
         o.title = '%s %s' % (o.first_name, o.last_name)
