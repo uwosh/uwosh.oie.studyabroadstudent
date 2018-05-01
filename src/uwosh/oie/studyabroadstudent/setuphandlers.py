@@ -50,6 +50,14 @@ def post_install(context):
     create_toplevel_folder(portal, portal_ids, 'Airlines', 'airlines', ['OIEAirline'])
     create_toplevel_folder(portal, portal_ids, 'Forms', 'forms', ['File'])
 
+    # create and hide repositories
+    create_toplevel_folder(portal, portal_ids, 'Images', 'image-repository', ['Image'])
+    create_toplevel_folder(portal, portal_ids, 'Files', 'file-repository', ['File'])
+    images = portal['image-repository']
+    images.exclude_from_nav = True
+    files = portal['file-repository']
+    files.exclude_from_nav = True
+
     # populate countries
     country_folder = portal['countries']
     create_country('Australia', 'https://www.timeanddate.com/worldclock/results.html?query=australia', 'https://wwwnc.cdc.gov/travel/destinations/traveler/none/australia', 'https://travel.state.gov/content/passports/en/country/australia.html', country_folder)
