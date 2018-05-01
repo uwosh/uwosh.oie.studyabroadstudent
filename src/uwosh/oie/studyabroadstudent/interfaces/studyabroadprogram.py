@@ -15,6 +15,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, ye
 from plone.directives import form
 from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
 from zope.schema import ValidationError
+from collective import dexteritytextindexer
 
 
 class InvalidEmailAddress(ValidationError):
@@ -263,6 +264,7 @@ class IHealthSafetySecurityDocumentRowSchema(Interface):
 
 
 class IOIEStudyAbroadProgram(Interface):
+    dexteritytextindexer.searchable('title')
     title = schema.TextLine(
         title=_(u'Program Title'),
         description=_(
@@ -271,14 +273,24 @@ class IOIEStudyAbroadProgram(Interface):
         max_length=45,
     )
 
-    description = RichText(
+    dexteritytextindexer.searchable('description')
+    description = schema.Text(
         title=_(u'Description'),
+        description=_(
+            u'A brief description that will show up in search results'),
+        required=True,
+    )
+
+    dexteritytextindexer.searchable('rich_description')
+    rich_description = RichText(
+        title=_(u'Rich Text Description'),
         description=_(
             u'This is the description that will be used to promote your program.  Your description should capture the purpose of your program, include an overview of what students will be engaged in while abroad/away, and capture students’ interest! (max length 600 chars)'),
         default_mime_type='text/plain',
         allowed_mime_types=('text/plain', 'text/html',),
-        max_length=600,
-        required=False,
+        max_length=1000,
+        # TODO: create a custom validator that renders text without HTML tags to count words accurately
+        required=True,
     )
 
     #######################################################
@@ -356,9 +368,10 @@ class IOIEStudyAbroadProgram(Interface):
         'academic_program_fieldset',
         label=_(u"Academic Program"),
         fields=['sponsoring_unit_or_department', 'program_type', 'program_component', 'title', 'description',
-                'eligibility_requirement', 'learning_objectives', 'equipment_and_space', 'equipment_and_space_needs',
-                'guest_lectures', 'initial_draft_program_schedule', 'syllabus_and_supporting_docs',
-                'min_credits_earned', 'max_credits_earned', 'language_of_study', 'cooperating_partners']
+                'rich_description', 'eligibility_requirement', 'learning_objectives', 'equipment_and_space',
+                'equipment_and_space_needs', 'guest_lectures', 'initial_draft_program_schedule',
+                'syllabus_and_supporting_docs', 'min_credits_earned', 'max_credits_earned', 'language_of_study',
+                'cooperating_partners']
     )
 
     sponsoring_unit_or_department = schema.List(
