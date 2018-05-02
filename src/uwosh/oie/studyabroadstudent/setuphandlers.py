@@ -52,11 +52,18 @@ def post_install(context):
 
     # create and hide repositories
     create_toplevel_folder(portal, portal_ids, 'Images', 'image-repository', ['Image'])
-    create_toplevel_folder(portal, portal_ids, 'Files', 'file-repository', ['File'])
     images = portal['image-repository']
     images.exclude_from_nav = True
+    wf_state = api.content.get_state(images)
+    if wf_state != 'published':
+        api.content.transition(obj=images, transition='publish')
+
+    create_toplevel_folder(portal, portal_ids, 'Files', 'file-repository', ['File'])
     files = portal['file-repository']
     files.exclude_from_nav = True
+    wf_state = api.content.get_state(files)
+    if wf_state != 'published':
+        api.content.transition(obj=files, transition='publish')
 
     # populate countries
     country_folder = portal['countries']
