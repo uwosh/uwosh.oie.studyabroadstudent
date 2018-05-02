@@ -2,11 +2,15 @@ from plone import api
 from plone.app.uuid.utils import uuidToObject
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from plone.app.dexterity.behaviors.constrains import DISABLED
+from zope.component import getUtility
+from plone.i18n.normalizer.interfaces import IIDNormalizer
+
 
 def application_created(o, event):
     o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, o.programName, o.programYear)
-    new_id = o.title.lower().replace(' ', '-')
-    o.id = str(new_id)
+    if not o.id:
+        normalizer = getUtility(IIDNormalizer)
+        o.id = normalizer.normalize(o.title)
     o.reindexObject()
 
 
@@ -22,9 +26,9 @@ def program_created(o, event):
     for c in o.countries:
         program_code += c[0:3].upper()
     o.program_code = program_code
-    # set the ID
-    new_id = o.title.lower().replace(' ', '-')
-    o.id = str(new_id)
+    if not o.id:
+        normalizer = getUtility(IIDNormalizer)
+        o.id = normalizer.normalize(o.title)
     # copy all the dates from selected calendar year into the new Program object
     for d in ['first_day_of_spring_semester_classes', 'last_day_of_spring_semester_classes',
               'first_day_of_spring_interim_classes', 'last_day_of_spring_interim_classes',
@@ -84,8 +88,9 @@ def contact_created(o, event):
         o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     else:
         o.title = '%s %s' % (o.first_name, o.last_name)
-    new_id = o.title.lower().replace(' ', '-')
-    o.id = str(new_id)
+    if not o.id:
+        normalizer = getUtility(IIDNormalizer)
+        o.id = normalizer.normalize(o.title)
     o.reindexObject()
 
 
@@ -94,8 +99,9 @@ def contact_modified(o, event):
         o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     else:
         o.title = '%s %s' % (o.first_name, o.last_name)
-    new_id = o.title.lower().replace(' ', '-')
-    o.id = str(new_id)
+    if not o.id:
+        normalizer = getUtility(IIDNormalizer)
+        o.id = normalizer.normalize(o.title)
     o.reindexObject()
 
 
@@ -117,8 +123,9 @@ def participant_created(o, event):
                 o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, programName, programYear)
             else:
                 o.title = '%s %s %s %s' % (o.firstName, o.lastName, programName, programYear)
-            new_id = o.title.lower().replace(' ', '-')
-            o.id = str(new_id)
+            if not o.id:
+                normalizer = getUtility(IIDNormalizer)
+                o.id = normalizer.normalize(o.title)
     o.reindexObject()
 
 def participant_modified(o, event):
@@ -139,8 +146,9 @@ def liaison_created(o, event):
         o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     else:
         o.title = '%s %s' % (o.first_name, o.last_name)
-    new_id = o.title.lower().replace(' ', '-')
-    o.id = str(new_id)
+    if not o.id:
+        normalizer = getUtility(IIDNormalizer)
+        o.id = normalizer.normalize(o.title)
     o.reindexObject()
 
 def liaison_modified(o, event):
@@ -154,8 +162,9 @@ def program_leader_created(o, event):
         o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     else:
         o.title = '%s %s' % (o.first_name, o.last_name)
-    new_id = o.title.lower().replace(' ', '-')
-    o.id = str(new_id)
+    if not o.id:
+        normalizer = getUtility(IIDNormalizer)
+        o.id = normalizer.normalize(o.title)
     o.reindexObject()
 
 def program_leader_modified(o, event):
