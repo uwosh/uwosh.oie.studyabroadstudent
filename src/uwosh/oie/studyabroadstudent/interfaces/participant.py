@@ -765,7 +765,7 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
         defaultFactory=get_url_special_student_form,
     )
-    state_of_wisconsin_need_based_travel_grant_form_uploaded_file = field.NamedBlobFile(
+    state_of_wisconsin_need_based_travel_grant_form_uploaded_file = field.NamedFile(
         title=u'State of Wisconsin Need-based Travel Grant Form',
         description=u'Upload your filled-out copy of the form',
         required=False,
@@ -777,7 +777,7 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
         defaultFactory=get_url_special_student_form_for_undergraduate_admissions_form,
     )
-    special_student_form_for_undergraduate_admissions_uploaded_file = field.NamedBlobFile(
+    special_student_form_for_undergraduate_admissions_uploaded_file = field.NamedFile(
         title=u'Special Student Form for Undergraduate Admissions',
         description=u'Upload your filled-out copy of the form',
         required=False,
@@ -789,7 +789,7 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
         defaultFactory=get_url_disciplinary_clearance_form,
     )
-    disciplinary_clearance_form_uploaded_file = field.NamedBlobFile(
+    disciplinary_clearance_form_uploaded_file = field.NamedFile(
         title=u'Disciplinary Clearance Form',
         description=u'Upload your filled-out copy of the form',
         required=False,

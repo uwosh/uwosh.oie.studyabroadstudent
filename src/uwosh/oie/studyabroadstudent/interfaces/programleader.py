@@ -124,7 +124,7 @@ class IOIEProgramLeader(Interface):
         required=True,
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.college_or_unit',
     )
-    role_and_responsibility = field.NamedBlobFile(
+    role_and_responsibility = field.NamedFile(
         title=_('Role & Responsibility'),
         description=_(u'Upload a signed Program Liaison Role & Responsibilities form'),
     )
@@ -284,7 +284,7 @@ class IOIEProgramLeader(Interface):
         required=False,
         # TODO Applicant should not see this field.  This is for OIE.  It would be better to put this on the "Orientation" tab, but this field is specific to each Program Leader rather than to the program.
     )
-    cash_advance_request = field.NamedBlobFile(
+    cash_advance_request = field.NamedFile(
         title=_(u'Cash Advance Request'),
         description=_(u'Upload the signed Cash Advance Form'),
         required=False,
