@@ -689,7 +689,7 @@ class IOIEStudyAbroadProgram(Interface):
     model.fieldset(
         'Courses',
         label=_(u"Courses"),
-        fields=['courses'],
+        fields=['courses', 'add_course_link'],
     )
     form.mode(courses="display")
     courses = RichText(
@@ -697,6 +697,11 @@ class IOIEStudyAbroadProgram(Interface):
         description=u'All courses associated with your program, including courses that will be taught partially at UW Oshkosh and partially while away on the program.  Do not include courses that will be taught entirely at UWO, even when these courses are offered in preparation for the program away.  Contact the OIE to add a course (abroad@uwosh.edu).',
         required=False,
         default=u'',
+    )
+    form.mode(add_course_link="display")
+    add_course_link = RichText(
+        required=False,
+        default=u'<a href="++add++OIECourse" target="_blank">Add a course</a>',
     )
 
     #######################################################
