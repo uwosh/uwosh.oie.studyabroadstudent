@@ -21,6 +21,12 @@ from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import validate_
 
 
 class IOIECourse(Interface):
+    form.mode(title="display")
+    title = schema.TextLine(
+        title=_(u'Course Title'),
+        required=False,
+        default=_(u'will be auto-generated on save'),
+    )
     course = schema.Choice(
         title=_(u'UW Oshkosh Course Subject & Number'),
         description=_(

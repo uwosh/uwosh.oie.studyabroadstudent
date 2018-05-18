@@ -156,6 +156,14 @@ def liaison_modified(o, event):
     else:
         o.title = '%s %s' % (o.first_name, o.last_name)
 
+def course_created(o, event):
+    if o.title != o.course:
+        o.title = o.course
+        o.reindexObject()
+
+def course_modified(o, event):
+    course_created(o, event)
+
 def program_leader_created(o, event):
     if o.middle_name and o.middle_name.strip() != '':
         o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
