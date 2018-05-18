@@ -67,7 +67,10 @@ def program_modified(o, event):
         program_code += c[0:3].upper()
     if o.program_code != program_code:
         o.program_code = program_code
-    # update course field
+    update_course_field(o)
+
+
+def update_course_field(o):
     brains = api.content.find(
         context=o,
         portal_type='OIECourse',
@@ -149,6 +152,10 @@ def course_created(o, event):
     if o.title != o.course:
         o.title = o.course
         o.reindexObject()
+    # update containing Program's course field which lists contained courses
+    parent = o.aq_parent
+    if parent.portal_type == 'OIEStudyAbroadProgram':
+        update_course_field(parent)
 
 def course_modified(o, event):
     course_created(o, event)
