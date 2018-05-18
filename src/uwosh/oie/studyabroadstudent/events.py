@@ -94,14 +94,7 @@ def contact_created(o, event):
 
 
 def contact_modified(o, event):
-    if o.middle_name and o.middle_name.strip() != '':
-        o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
-    else:
-        o.title = '%s %s' % (o.first_name, o.last_name)
-    if not o.id:
-        normalizer = getUtility(IIDNormalizer)
-        o.id = normalizer.normalize(o.title)
-    o.reindexObject()
+    contact_created(o, event)
 
 
 def participant_created(o, event):
@@ -142,19 +135,15 @@ def participant_modified(o, event):
 
 def liaison_created(o, event):
     if o.middle_name and o.middle_name.strip() != '':
-        o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
+        title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     else:
-        o.title = '%s %s' % (o.first_name, o.last_name)
-    if not o.id:
-        normalizer = getUtility(IIDNormalizer)
-        o.id = normalizer.normalize(o.title)
-    o.reindexObject()
+        title = '%s %s' % (o.first_name, o.last_name)
+    if o.title != title:
+        o.title = title
+        o.reindexObject()
 
 def liaison_modified(o, event):
-    if o.middle_name and o.middle_name.strip() != '':
-        o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
-    else:
-        o.title = '%s %s' % (o.first_name, o.last_name)
+    liaison_created(o, event)
 
 def course_created(o, event):
     if o.title != o.course:
@@ -166,18 +155,14 @@ def course_modified(o, event):
 
 def program_leader_created(o, event):
     if o.middle_name and o.middle_name.strip() != '':
-        o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
+        title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     else:
-        o.title = '%s %s' % (o.first_name, o.last_name)
-    if not o.id:
-        normalizer = getUtility(IIDNormalizer)
-        o.id = normalizer.normalize(o.title)
-    o.reindexObject()
+        title = '%s %s' % (o.first_name, o.last_name)
+    if o.title != title:
+        o.title = title
+        o.reindexObject()
 
 def program_leader_modified(o, event):
-    if o.middle_name and o.middle_name.strip() != '':
-        o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
-    else:
-        o.title = '%s %s' % (o.first_name, o.last_name)
+    program_leader_created(o, event)
 
 
