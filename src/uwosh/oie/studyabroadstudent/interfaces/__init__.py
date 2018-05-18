@@ -21,6 +21,7 @@ from uwosh.oie.studyabroadstudent.interfaces.calendaryear import IOIECalendarYea
 from uwosh.oie.studyabroadstudent.interfaces.contact import IOIEContact
 from uwosh.oie.studyabroadstudent.interfaces.cooperatingpartner import IOIECooperatingPartner
 from uwosh.oie.studyabroadstudent.interfaces.country import IOIECountry
+from uwosh.oie.studyabroadstudent.interfaces.course import IOIECourse
 from uwosh.oie.studyabroadstudent.interfaces.liaison import IOIELiaison
 from uwosh.oie.studyabroadstudent.interfaces.participant import IOIEStudyAbroadParticipant
 from uwosh.oie.studyabroadstudent.interfaces.programleader import IOIEProgramLeader

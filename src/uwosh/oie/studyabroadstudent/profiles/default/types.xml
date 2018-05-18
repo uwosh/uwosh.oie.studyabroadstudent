@@ -5,6 +5,7 @@
   <object name="OIEStudyAbroadParticipant" meta_type="Dexterity FTI"/>
   <object name="OIEAirline" meta_type="Dexterity FTI"/>
   <object name="OIEContact" meta_type="Dexterity FTI"/>
+  <object name="OIECourse" meta_type="Dexterity FTI"/>
   <object name="OIELiaison" meta_type="Dexterity FTI"/>
   <object name="OIEProgramLeader" meta_type="Dexterity FTI"/>
   <object name="OIECooperatingPartner" meta_type="Dexterity FTI"/>

@@ -119,13 +119,7 @@
             <ul>
               <li>
                 Required Courses:
-                <ul>
-                  <li tal:repeat="course here/courses">
-                    <b><span tal:content="course/course">[course subject and number]</span></b>,
-                    <span tal:content="course/credits_earned">[credits_earned]</span> <em>credits</em>.
-                    <em>Prerequisites:</em> <span tal:content="course/completed_courses">[prerequisites]</span>
-                  </li>
-                </ul>
+                <span tal:content="structure here/courses">[courses]</span>
               </li>
               <li>
                 Required Pre-Travel Courses:

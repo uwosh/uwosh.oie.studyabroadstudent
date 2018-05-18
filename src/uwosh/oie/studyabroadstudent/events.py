@@ -59,28 +59,27 @@ def program_added(o, event):
 
 
 def program_modified(o, event):
+    # update the program code if needed
     calendar_year_obj = api.content.get(UID=o.calendar_year)
     calendar_year = calendar_year_obj.title
     program_code = (calendar_year)[2:4] + (o.term)[0] + (o.college_or_unit)[0]
     for c in o.countries:
         program_code += c[0:3].upper()
-    o.program_code = program_code
-    # copy all the dates
-    for d in ['first_day_of_spring_semester_classes', 'last_day_of_spring_semester_classes',
-              'first_day_of_spring_interim_classes', 'last_day_of_spring_interim_classes',
-              'official_spring_graduation_date', 'first_day_of_summer_i_classes', 'last_day_of_summer_i_classes',
-              'first_day_of_summer_ii_classes', 'last_day_of_summer_ii_classes',
-              'official_summer_graduation_date', 'first_day_of_fall_semester_classes',
-              'last_day_of_fall_semester_classes', 'first_day_of_winter_interim_classes',
-              'last_day_of_winter_interim_classes', 'official_fall_graduation_date',
-              'spring_interim_summer_fall_semester_participant_orientation_deadline',
-              'spring_interim_summer_fall_semester_in_person_orientation',
-              'winter_interim_spring_semester_participant_orientation_deadline',
-              'winter_interim_spring_semester_in_person_orientation',
-              'spring_interim_summer_fall_semester_payment_deadline_1', 'spring_interim_payment_deadline_2',
-              'sunmmer_payment_deadline_2', 'fall_semester_payment_deadline_2',
-              'winter_interim_spring_payment_deadline_1', 'winter_interim_spring_payment_deadline_2']:
-        setattr(o, d, getattr(calendar_year_obj, d))
+    if o.program_code != program_code:
+        o.program_code = program_code
+    # update course field
+    brains = api.content.find(
+        context=o,
+        portal_type='OIECourse',
+        sort_on='sortable_title',
+        sort_order='ascending',
+    )
+    richtext = u'<ul>'
+    for b in brains:
+        richtext += '<li><a href="%s">%s</a></li>' % (b.getURL(), b.getObject().course)
+    richtext += u'</ul>'
+    if o.courses != richtext:
+        o.courses = richtext
 
 
 def contact_created(o, event):
