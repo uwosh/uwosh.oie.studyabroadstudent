@@ -23,8 +23,9 @@
     <div class="columns-one-and-two">
 
       <div class="column-one col-md-7 col-sm-12" >
-        <div class="lead-image" tal:define="base_url here/absolute_url">
-            <img tal:attributes="src python: base_url+'/@@images/image'" style="max-width:100%;height:auto" title="program lead image" alt="program lead image"/>
+        <div class="lead-image" tal:define="base_url here/absolute_url; has_lead_image view/has_lead_image">
+            <img tal:condition="has_lead_image" tal:attributes="src python: base_url+'/@@images/image'" style="max-width:100%;height:auto" title="program lead image" alt="program lead image"/>
+            <span tal:condition="not: has_lead_image">[lead image not specified]</span>
           </div>
 
         <tal:block repeat="widget view/widgets/values">

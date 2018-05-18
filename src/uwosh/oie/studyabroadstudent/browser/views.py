@@ -4,7 +4,7 @@ from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plone.app.contenttypes.browser.folder import FolderView
 from plone.app.uuid.utils import uuidToObject
-
+from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 
 class ApplicationView(DefaultView):
     pass
@@ -95,6 +95,11 @@ class ProgramView(DefaultView, FolderView):
     def housing(self):
         travelDatesTransitionsAndDestinations = self.context.travelDatesTransitionsAndDestinations
         return [location['accommodation'] for location in travelDatesTransitionsAndDestinations]
+
+    def has_lead_image(self):
+        bdata = ILeadImage(self.context)
+        if hasattr(bdata, 'image') and bdata.image is not None and bdata.image.size > 0:
+            return True
 
 class CooperatingPartnerView(DefaultView):
     def primary_contact(self):
