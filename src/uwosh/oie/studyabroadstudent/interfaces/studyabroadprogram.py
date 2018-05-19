@@ -108,12 +108,6 @@ class IReviewerEmailRowSchema(Interface):
     )
 
 
-class IHealthSafetySecurityDocumentRowSchema(Interface):
-    health_safety_security_document = field.NamedFile(
-        title=_(u'Health, Safety, Security Document'),
-    )
-
-
 class IOIEStudyAbroadProgram(Interface):
     dexteritytextindexer.searchable('title')
     title = schema.TextLine(
@@ -748,16 +742,16 @@ class IOIEStudyAbroadProgram(Interface):
         'OIE Review',
         label=_(u"OIE Review"),
         fields=['program_schedule', 'director_recommendations', 'health_safety_security_documents',
-                'application_deadlines_label', 'step_1_and_2_application_deadline', 'step_3_application_deadline',
-                'step_4_application_deadline', 'application_items_label', 'credit_overload_form',
-                'flight_deviation_request_return_flight_only', 'flight_deviation_request_roundtrip_or_outbound_flight',
+                'add_health_document_link', 'application_deadlines_label', 'step_1_and_2_application_deadline',
+                'step_3_application_deadline', 'step_4_application_deadline', 'application_items_label',
+                'credit_overload_form', 'flight_deviation_request_return_flight_only',
+                'flight_deviation_request_roundtrip_or_outbound_flight',
                 'graduate_registration_form_and_graduate_special_non_degree_information_form',
                 'biographical_page_of_your_signed_passport', 'visa_required_for_us_citizens', 'original_passport',
                 'official_passport_photo_for_india_visa_application', 'drivers_license_copy_for_india_visa_application',
                 'indian_visa_application', 'yellow_fever_vaccination_certificate', 'passport_size_photo',
                 'digital_passport_photo', 'transfer_credit_prior_approval_form', 'hessen_isu_application',
-                'hessen_iwu_application'],
-    )
+                'hessen_iwu_application'], )
     program_schedule = schema.Choice(
         title=_(u'Program Schedule'),
         description=_(u''),  # TODO description?
@@ -773,13 +767,18 @@ class IOIEStudyAbroadProgram(Interface):
         max_length=2500,
         required=False,
     )
-    widget('health_safety_security_documents', DataGridFieldFactory)
-    health_safety_security_documents = schema.List(
+    form.mode(health_safety_security_documents='display')
+    health_safety_security_documents = RichText(
         title=_(u'Health, Safety & Security Documents'),
         description=_(
             u'For all sites, upload Department of State Country Information and CDC country-specific information.  For sites with a U.S. Travel Warning, or when otherwise warranted, upload OIE travel recommendation and supporting documents'),
         required=False,
-        value_type=DictRow(title=_(u'File'), schema=IHealthSafetySecurityDocumentRowSchema),
+        default=u'',
+    )
+    form.mode(add_health_document_link='display')
+    add_health_document_link = RichText(
+        required=False,
+        default=u'<a href="++add++OIEHealthSafetySecurityDocument" target="_blank">Add a health document</a>',
     )
     form.mode(application_deadlines_label='display')
     application_deadlines_label = schema.TextLine(

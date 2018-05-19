@@ -98,6 +98,12 @@
 
   <subscriber
     for=".interfaces.course.IOIECourse
+         zope.lifecycleevent.IObjectAddedEvent"
+    handler=".events.course_added"
+    />
+
+  <subscriber
+    for=".interfaces.course.IOIECourse
          zope.lifecycleevent.IObjectCreatedEvent"
     handler=".events.course_created"
     />
@@ -106,6 +112,24 @@
     for=".interfaces.course.IOIECourse
          zope.lifecycleevent.IObjectModifiedEvent"
     handler=".events.course_modified"
+    />
+
+  <subscriber
+    for=".interfaces.healthdocument.IOIEHealthSafetySecurityDocument
+         zope.lifecycleevent.IObjectAddedEvent"
+    handler=".events.health_document_added"
+    />
+
+  <subscriber
+    for=".interfaces.healthdocument.IOIEHealthSafetySecurityDocument
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.health_document_created"
+    />
+
+  <subscriber
+    for=".interfaces.healthdocument.IOIEHealthSafetySecurityDocument
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.health_document_modified"
     />
 
   <subscriber

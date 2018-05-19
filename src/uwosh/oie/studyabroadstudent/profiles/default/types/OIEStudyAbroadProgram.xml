@@ -29,6 +29,7 @@
     <element value="Image" />
     <element value="File" />
     <element value="OIECourse" />
+    <element value="OIEHealthSafetySecurityDocument" />
   </property>
   <property name="global_allow">True</property>
 
