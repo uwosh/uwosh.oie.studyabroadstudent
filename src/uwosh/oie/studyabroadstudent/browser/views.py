@@ -5,6 +5,9 @@ from plone.dexterity.browser.view import DefaultView
 from plone.app.contenttypes.browser.folder import FolderView
 from plone.app.uuid.utils import uuidToObject
 from plone.app.contenttypes.behaviors.leadimage import ILeadImage
+from plone.formwidget.namedfile.converter import b64decode_file
+from plone.namedfile.file import NamedImage
+
 
 class ApplicationView(DefaultView):
     pass
@@ -58,10 +61,13 @@ class ProgramView(DefaultView, FolderView):
         country_info_html += '</dl>'
         return country_info_html
 
-    def uwo_logo_url(self):
-        uwo_logo_uid = api.portal.get_registry_record('oiestudyabroadstudent.uwo_logo')
-        uwo_logo = uuidToObject(uwo_logo_uid)
-        return uwo_logo.absolute_url()
+    def uwo_logo(self):
+        uwo_logo_data = api.portal.get_registry_record('oiestudyabroadstudent.uwo_logo')
+        if uwo_logo_data is None or len(uwo_logo_data) == 0:
+            return None
+        filename, data = b64decode_file(uwo_logo_data)
+        image = NamedImage(data=data, filename=filename)
+        return image
 
     def footer_info(self):
         footer_text = api.portal.get_registry_record('oiestudyabroadstudent.program_view_footer')

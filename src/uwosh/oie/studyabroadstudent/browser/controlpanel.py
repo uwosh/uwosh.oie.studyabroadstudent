@@ -7,6 +7,8 @@ from zope.interface import Interface
 from uwosh.oie.studyabroadstudent import _
 from plone.namedfile import field
 from plone.app.textfield import RichText
+from plone.autoform.directives import widget
+from plone.formwidget.namedfile.widget import NamedImageFieldWidget
 
 
 class IOIEStudyAbroadStudentControlPanel(Interface):
@@ -1993,13 +1995,13 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         default=None,
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.file',
     )
-    uwo_logo = schema.Choice(
+    widget('uwo_logo', NamedImageFieldWidget)
+    uwo_logo = schema.ASCII(
         title=_(u'UWO Logo'),
         description=_(u'will appear on program description view'),
         required=False,
         missing_value=None,
         default=None,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.image',
     )
     program_view_footer = schema.Text(
         title=_(u'Program Footer Text'),

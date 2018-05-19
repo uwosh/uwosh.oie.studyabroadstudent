@@ -26,7 +26,7 @@
         <div class="lead-image" tal:define="base_url here/absolute_url; has_lead_image view/has_lead_image">
             <img tal:condition="has_lead_image" tal:attributes="src python: base_url+'/@@images/image'" style="max-width:100%;height:auto" title="program lead image" alt="program lead image"/>
             <span tal:condition="not: has_lead_image">[lead image not specified]</span>
-          </div>
+        </div>
 
         <tal:block repeat="widget view/widgets/values">
             <div class="field" tal:condition="python:widget.__name__ in ('IBasic.description', 'description',)">
@@ -155,7 +155,7 @@
 
     <div class="logo-and-contacts col-md-12" style="padding-top:50px">
       <div class="uwologo col-md-3">
-        <img tal:condition="url" tal:define="url view/uwo_logo_url" tal:attributes="src url" height="75px" title="UWO wordmark" alt="UWO wordmark"/>
+        <img tal:condition="image" tal:define="image view/uwo_logo" src="data:${python: image.contentType};base64, ${python: image.data.encode('base64')}" height="75px" title="UWO wordmark" alt="UWO wordmark"/>
       </div>
 
       <div class="program-contacts col-md-9">
