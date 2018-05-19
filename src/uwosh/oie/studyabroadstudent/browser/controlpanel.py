@@ -9,9 +9,59 @@ from plone.namedfile import field
 from plone.app.textfield import RichText
 from plone.autoform.directives import widget
 from plone.formwidget.namedfile.widget import NamedImageFieldWidget
+from plone.supermodel import model
 
 
 class IOIEStudyAbroadStudentControlPanel(Interface):
+
+    model.fieldset(
+        'Academic',
+        fields=['majors', 'programs', 'subjects', 'credits', 'course_subject', 'enrollment_institution',
+                'program_of_study', 'student_status', 'education_level', 'requirements_met',
+                'course_subject_and_number', 'college_or_unit', 'sponsoring_unit_or_department', 'term', 'university',
+                'title', 'building'],
+    )
+    model.fieldset(
+        'Demographic',
+        fields=['ethnicities', 'marriage_statuses','genders', 'immigration_status'],
+    )
+    model.fieldset(
+        'Geography',
+        fields=['countries', 'states_for_residency', 'us_states_territories', 'citizenship', 'language', ],
+    )
+    model.fieldset(
+        'Housing',
+        fields=['room_size', 'accommodation'],
+    )
+    model.fieldset(
+        'Travel',
+        fields=['airport', 'locations', 'airport_transfer', 'transition_type'],
+    )
+    model.fieldset(
+        'Travel Documents',
+        fields=['travel_document', 'visa_delivery_options']
+    )
+    model.fieldset(
+        'Programs',
+        fields=['eligibility_requirement', 'guest_lectures', 'equipment_and_space',
+                'class_standing', 'approving_as', 'leadership_role', 'program_cycle', 'course_enrollment_at',
+                'cooperating_partners', 'flyer', 'tuition_and_fees', 'provider_type', 'program_component',
+                'program_type', ]
+    )
+    model.fieldset(
+        'Compensation',
+        fields=['percentage_or_lump_sum', 'compensation_payment_or_replacement', 'compensation_type',
+                'salary_form_type', 'salary_terms', 'payment_forms']
+    )
+    model.fieldset(
+        'OIE',
+        fields=['oie_staff', 'session_hours', 'program_view_footer', 'uwo_logo', ]
+    )
+    model.fieldset(
+        'Forms',
+        fields=['state_of_wisconsin_need_based_travel_grant_form', 'special_student_form_for_undergraduate_admissions',
+                'disciplinary_clearance_form']
+    )
 
     majors = schema.Tuple(
         title=_(u'Majors'),
