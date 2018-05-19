@@ -56,10 +56,14 @@ class ITravelDatesTransitionsDestinationsRowSchema(Interface):
                                   vocabulary='uwosh.oie.studyabroadstudent.vocabularies.accommodation')
     # accommodationRoomSizes = schema.Choice(title=_(u'Room Size(s)'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.room_size')
     # TODO multi select widget doesn't respond to arrow clicks
-    accommodationRoomSizes = schema.List(title=_(u'Room Size(s)'), value_type=schema.Choice(
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.room_size'))
-    transitionType = schema.Choice(title=_(u'Transition Type'),
-                                   vocabulary='uwosh.oie.studyabroadstudent.vocabularies.transition_type')
+    accommodationRoomSizes = schema.List(
+        title=_(u'Room Size(s)'),
+        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.room_size')
+    )
+    transitionType = schema.Choice(
+        title=_(u'Transition Type'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.transition_type'
+    )
 
 
 class IPostTravelClassDatesRowSchema(Interface):
@@ -336,11 +340,7 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary=program_cycle_vocabulary,
     )
 
-    widget(
-        'pretravel_dates',
-        DataGridFieldFactory,
-    )
-
+    widget(pretravel_dates=DataGridFieldFactory)
     pretravel_dates = schema.List(
         title=_(u'Pre-Travel Class & Orientation Dates'),
         description=_(
@@ -695,7 +695,7 @@ class IOIEStudyAbroadProgram(Interface):
     form.mode(add_course_link="display")
     add_course_link = RichText(
         required=False,
-        default=u'<a href="++add++OIECourse" target="_blank">Add a course</a>',
+        default=u'<em>You can add courses after saving this program</em>',
     )
 
     #######################################################
@@ -778,7 +778,7 @@ class IOIEStudyAbroadProgram(Interface):
     form.mode(add_health_document_link='display')
     add_health_document_link = RichText(
         required=False,
-        default=u'<a href="++add++OIEHealthSafetySecurityDocument" target="_blank">Add a health document</a>',
+        default=u'<em>You can add health documents after saving this program</em>',
     )
     form.mode(application_deadlines_label='display')
     application_deadlines_label = schema.TextLine(
