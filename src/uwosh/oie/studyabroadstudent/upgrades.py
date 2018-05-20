@@ -1,5 +1,7 @@
 from plone import api
 import logging
+from plone.app.textfield import RichText, RichTextValue
+
 
 PROFILE_ID = 'profile-convert_datagridfields:default'
 
@@ -18,13 +20,22 @@ def reset_datagridfields(context, logger=None):
     count = 0
     for brain in brains:
         obj = brain.getObject()
-        obj.courses = u'<em>There are currently no courses</em>'
-        obj.add_course_link = u'<em>You can add courses after saving this program</em>'
-        obj.health_safety_security_documents = u'<em>There are currently no documents</em>'
-        obj.add_health_document_link = '<em>You can add health documents after saving this program</em>'
-        obj.travelDatesTransitionsAndDestinations = u'<em>There are currently no transitions</em>'
-        obj.add_transition_link = u'<em>You can add transitions after saving this program</em>'
-        logger.info('updating %s' % obj.title)
+        if not isinstance(obj.courses, RichText):
+            obj.courses = RichTextValue(raw='<em>There are currently no courses</em>')
+        if (hasattr(obj.add_course_link, 'raw') and len(obj.add_course_link.raw) == 0) or \
+            (not hasattr(obj.add_course_link, 'raw') and len(obj.add_course_link) == 0):
+            obj.add_course_link = RichTextValue(raw='<em>You can add courses after saving this program</em>')
+        if not isinstance(obj.health_safety_security_documents, RichText):
+            obj.health_safety_security_documents = RichTextValue(raw='<em>There are currently no documents</em>')
+        if (hasattr(obj.add_health_document_link, 'raw') and len(obj.add_health_document_link.raw) == 0) or \
+            (not hasattr(obj.add_health_document_link, 'raw') and len(obj.add_health_document_link) == 0):
+            obj.add_health_document_link = RichTextValue(raw='<em>You can add health documents after saving this program</em>')
+        if not isinstance(obj.travelDatesTransitionsAndDestinations, RichText):
+            obj.travelDatesTransitionsAndDestinations = RichTextValue(raw='<em>There are currently no transitions</em>')
+        if (hasattr(obj.add_transition_link, 'raw') and len(obj.add_transition_link.raw) == 0) or \
+            (not hasattr(obj.add_transition_link, 'raw') and len(obj.add_transition_link) == 0):
+            obj.add_transition_link = RichTextValue(raw='<em>You can add transitions after saving this program</em>')
+        logger.info('updated %s' % obj.title)
         count += 1
 
     logger.info('%s datagridfields reset.' % count)
