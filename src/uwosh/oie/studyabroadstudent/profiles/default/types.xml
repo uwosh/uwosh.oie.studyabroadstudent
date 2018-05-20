@@ -9,6 +9,7 @@
   <object name="OIEHealthSafetySecurityDocument" meta_type="Dexterity FTI"/>
   <object name="OIELiaison" meta_type="Dexterity FTI"/>
   <object name="OIEProgramLeader" meta_type="Dexterity FTI"/>
+  <object name="OIETransition" meta_type="Dexterity FTI"/>
   <object name="OIECooperatingPartner" meta_type="Dexterity FTI"/>
   <object name="OIECalendarYear" meta_type="Dexterity FTI"/>
   <object name="OIECountry" meta_type="Dexterity FTI"/>

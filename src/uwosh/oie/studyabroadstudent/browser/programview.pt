@@ -25,7 +25,7 @@
       <div class="column-one col-md-7 col-sm-12" >
         <div class="lead-image" tal:define="base_url here/absolute_url; has_lead_image view/has_lead_image">
             <img tal:condition="has_lead_image" tal:attributes="src python: base_url+'/@@images/image'" style="max-width:100%;height:auto" title="program lead image" alt="program lead image"/>
-            <span tal:condition="not: has_lead_image">[lead image not specified]</span>
+          <span tal:condition="not: has_lead_image"><em>[lead image not specified]</em></span>
         </div>
 
         <tal:block repeat="widget view/widgets/values">
@@ -91,9 +91,9 @@
 
           <div class="housing">
             <h4>Housing:</h4>
-            <div tal:repeat="housing view/housing">
-              <span tal:content="housing">[accommodation]</span>;
-            </div>
+            <span tal:repeat="housing view/housing">
+              <span tal:replace="housing">[accommodation]</span>;
+            </span>
           </div>
 
           <div class="airport-transfer">
@@ -120,7 +120,9 @@
             <ul>
               <li>
                 Required Courses:
-                <span tal:content="structure here/courses">[courses]</span>
+                <span tal:define="courses here/courses" tal:condition="courses" tal:content="structure courses">
+                  [courses]
+                </span>
               </li>
               <li>
                 Required Pre-Travel Courses:

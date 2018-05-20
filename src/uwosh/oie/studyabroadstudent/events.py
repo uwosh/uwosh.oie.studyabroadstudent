@@ -18,6 +18,7 @@ def application_modified(o, event):
     o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, o.programName, o.programYear)
 
 
+###############################################################
 def program_created(o, event):
     # set the program code
     calendar_year_obj = api.content.get(UID=o.calendar_year)
@@ -64,12 +65,16 @@ def program_modified(o, event):
         program_code += c[0:3].upper()
     if o.program_code != program_code:
         o.program_code = program_code
+    # update fields that show contained objects and related 'add object' link fields
     update_course_field(o)
     update_add_course_link(o)
     update_health_document_field(o)
     update_add_health_document_link(o)
+    update_transition_field(o)
+    update_add_transition_link(o)
 
 
+###############################################################
 def contact_created(o, event):
     if o.middle_name and o.middle_name.strip() != '':
         o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
@@ -85,6 +90,7 @@ def contact_modified(o, event):
     contact_created(o, event)
 
 
+###############################################################
 def participant_created(o, event):
     program_uid = o.programName
     if program_uid:
@@ -123,6 +129,7 @@ def participant_modified(o, event):
                 o.title = '%s %s %s %s' % (o.firstName, o.lastName, programName, programYear)
 
 
+###############################################################
 def liaison_created(o, event):
     if o.middle_name and o.middle_name.strip() != '':
         title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
@@ -137,6 +144,7 @@ def liaison_modified(o, event):
     liaison_created(o, event)
 
 
+###############################################################
 def update_course_field(o):
     brains = api.content.find(
         context=o,
@@ -182,6 +190,55 @@ def course_modified(o, event):
     course_created(o, event)
 
 
+###############################################################
+def update_transition_field(o):
+    brains = api.content.find(
+        context=o,
+        portal_type='OIETransition',
+        sort_on='sortable_title',
+        sort_order='ascending',
+    )
+    richtext = u'<ul>'
+    for b in brains:
+        richtext += '<li><a href="%s">%s</a></li>' % (b.getURL(), b.Title)
+    richtext += u'</ul>'
+    if o.travelDatesTransitionsAndDestinations != richtext:
+        o.travelDatesTransitionsAndDestinations = richtext
+
+
+def update_add_transition_link(o):
+    richtext = u'<a href="%s/++add++OIETransition" target="_blank">Add a transition</a>' % o.absolute_url()
+    if o.add_transition_link != richtext:
+        o.add_transition_link = richtext
+
+
+def transition_added(o, event):
+    # update containing Program's travelDatesTransitionsAndDestinations field
+    if hasattr(o, 'aq_parent'):
+        parent = o.aq_parent
+        if parent.portal_type == 'OIEStudyAbroadProgram':
+            update_transition_field(parent)
+            update_add_transition_link(parent)
+
+
+def transition_created(o, event):
+    new_title = "%s %s" % (o.transitionDate, o.destinationCity)
+    if o.title != new_title:
+        o.title = new_title
+        o.reindexObject()
+    # update containing Program's travelDatesTransitionsAndDestinations field
+    if hasattr(o, 'aq_parent'):
+        parent = o.aq_parent
+        if parent.portal_type == 'OIEStudyAbroadProgram':
+            update_transition_field(parent)
+            update_add_transition_link(parent)
+
+
+def transition_modified(o, event):
+    transition_created(o, event)
+
+
+###############################################################
 def update_health_document_field(o):
     brains = api.content.find(
         context=o,
@@ -228,6 +285,7 @@ def health_document_modified(o, event):
     health_document_created(o, event)
 
 
+###############################################################
 def program_leader_created(o, event):
     if o.middle_name and o.middle_name.strip() != '':
         title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)

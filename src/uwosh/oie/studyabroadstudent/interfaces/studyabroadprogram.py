@@ -47,25 +47,6 @@ class IPreTravelDatesRowSchema(Interface):
     pretravel_attendance_required = schema.Choice(title=_(u'Attendance Required?'), vocabulary=yes_no_na_vocabulary)
 
 
-class ITravelDatesTransitionsDestinationsRowSchema(Interface):
-    transitionDate = schema.Date(title=_(u'Transition Date'))
-    destinationCity = schema.TextLine(title=_(u'Destination City'))
-    destinationCountry = schema.Choice(title=_(u'Destination Country'),
-                                       vocabulary='uwosh.oie.studyabroadstudent.vocabularies.countries')
-    accommodation = schema.Choice(title=_(u'Accommodation'),
-                                  vocabulary='uwosh.oie.studyabroadstudent.vocabularies.accommodation')
-    # accommodationRoomSizes = schema.Choice(title=_(u'Room Size(s)'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.room_size')
-    # TODO multi select widget doesn't respond to arrow clicks
-    accommodationRoomSizes = schema.List(
-        title=_(u'Room Size(s)'),
-        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.room_size')
-    )
-    transitionType = schema.Choice(
-        title=_(u'Transition Type'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.transition_type'
-    )
-
-
 class IPostTravelClassDatesRowSchema(Interface):
     posttravel_start_datetime = schema.Datetime(title=_(u'Start'))
     posttravel_end_datetime = schema.Datetime(title=_(u'End'))
@@ -404,7 +385,8 @@ class IOIEStudyAbroadProgram(Interface):
         'Departure Flight',
         label=_('Departure Flight'),
         fields=['airline', 'flightNumber', 'airport', 'departureDateTime', 'arrivalAtDestinationAndInsuranceStartDate',
-                'travelDatesTransitionsAndDestinations', 'firstChoiceDatesFlexible', 'postTravelClassDates']
+                'travelDatesTransitionsAndDestinations', 'add_transition_link', 'firstChoiceDatesFlexible',
+                'postTravelClassDates',]
     )
 
     airline = schema.Choice(
@@ -434,11 +416,17 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    widget('travelDatesTransitionsAndDestinations', DataGridFieldFactory)
-    travelDatesTransitionsAndDestinations = schema.List(
+    form.mode(travelDatesTransitionsAndDestinations='display')
+    travelDatesTransitionsAndDestinations = RichText(
         title=_(u'Travel Dates, Transitions & Destinations'),
-        value_type=DictRow(title=u"learning objective row", schema=ITravelDatesTransitionsDestinationsRowSchema),
+        description=_(u'All transitions for this program are listed here.'),
         required=False,
+        default=u'<em>There are currently no transitions</em>',
+    )
+    form.mode(add_transition_link="display")
+    add_transition_link = RichText(
+        required=False,
+        default=u'<em>You can add transitions after saving this program</em>',
     )
 
     firstChoiceDatesFlexible = schema.Choice(
@@ -690,7 +678,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=u'UW Oshkosh Course Subject & Number',
         description=u'All courses associated with your program, including courses that will be taught partially at UW Oshkosh and partially while away on the program.  Do not include courses that will be taught entirely at UWO, even when these courses are offered in preparation for the program away.  Contact the OIE to add a course (abroad@uwosh.edu).',
         required=False,
-        default=u'',
+        default=u'<em>There are currently no courses</em>',
     )
     form.mode(add_course_link="display")
     add_course_link = RichText(
@@ -773,7 +761,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             u'For all sites, upload Department of State Country Information and CDC country-specific information.  For sites with a U.S. Travel Warning, or when otherwise warranted, upload OIE travel recommendation and supporting documents'),
         required=False,
-        default=u'',
+        default=u'<em>There are currently no documents</em>',
     )
     form.mode(add_health_document_link='display')
     add_health_document_link = RichText(

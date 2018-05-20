@@ -99,8 +99,9 @@ class ProgramView(DefaultView, FolderView):
                 return year
 
     def housing(self):
-        travelDatesTransitionsAndDestinations = self.context.travelDatesTransitionsAndDestinations
-        return [location['accommodation'] for location in travelDatesTransitionsAndDestinations]
+        brains = api.content.find(context=self.context, portal_type='OIETransition')
+        locations = [b.getObject() for b in brains]
+        return set([l.accommodation for l in locations])
 
     def has_lead_image(self):
         bdata = ILeadImage(self.context)
