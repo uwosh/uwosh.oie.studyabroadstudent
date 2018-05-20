@@ -120,7 +120,7 @@
             <ul>
               <li>
                 Required Courses:
-                <span tal:define="courses here/courses" tal:condition="courses" tal:content="structure courses">
+                <span tal:define="courses here/courses/output" tal:condition="courses" tal:content="structure courses">
                   [courses]
                 </span>
               </li>
