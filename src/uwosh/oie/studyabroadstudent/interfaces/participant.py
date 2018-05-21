@@ -21,6 +21,8 @@ from zope.schema import ValidationError
 import re
 from plone import api
 from plone.app.textfield.value import RichTextValue
+from plone.formwidget.namedfile.converter import b64decode_file
+from plone.namedfile.file import NamedFile
 
 
 class InvalidEmailAddress(ValidationError):
@@ -48,25 +50,28 @@ def validate_student_id(value):
 
 def get_url_special_student_form():
     form = api.portal.get_registry_record('oiestudyabroadstudent.state_of_wisconsin_need_based_travel_grant_form')
-    obj = api.content.get(UID=form)
-    url = obj.absolute_url()
-    html = '<a href="%s">Download this form</a>' % url
+    filename, data = b64decode_file(form)
+    file = NamedFile(data=data, filename=filename)
+    url = "data:%s;base64, %s" % (file.contentType, file.data.encode('base64'))
+    html = '<a target="_blank" href="%s">Download this form</a>' % url
     return RichTextValue(html, 'text/html', 'text/html')
 
 
 def get_url_special_student_form_for_undergraduate_admissions_form():
     form = api.portal.get_registry_record('oiestudyabroadstudent.special_student_form_for_undergraduate_admissions')
-    obj = api.content.get(UID=form)
-    url = obj.absolute_url()
-    html = '<a href="%s">Download this form</a>' % url
+    filename, data = b64decode_file(form)
+    file = NamedFile(data=data, filename=filename)
+    url = "data:%s;base64, %s" % (file.contentType, file.data.encode('base64'))
+    html = '<a target="_blank" href="%s">Download this form</a>' % url
     return RichTextValue(html, 'text/html', 'text/html')
 
 
 def get_url_disciplinary_clearance_form():
     form = api.portal.get_registry_record('oiestudyabroadstudent.disciplinary_clearance_form')
-    obj = api.content.get(UID=form)
-    url = obj.absolute_url()
-    html = '<a href="%s">Download this form</a>' % url
+    filename, data = b64decode_file(form)
+    file = NamedFile(data=data, filename=filename)
+    url = "data:%s;base64, %s" % (file.contentType, file.data.encode('base64'))
+    html = '<a target="_blank" href="%s">Download this form</a>' % url
     return RichTextValue(html, 'text/html', 'text/html')
 
 
