@@ -358,4 +358,14 @@
       profile="uwosh.oie.studyabroadstudent:default"
       />
 
+  <genericsetup:upgradeStep
+      title="Convert richtext Dublin Core description in Program type"
+      description="Convert richtext description field to text, and move the rich text value to the new rich_description field"
+      source="1000"
+      destination="1002"
+      handler="uwosh.oie.studyabroadstudent.upgrades.handle_richtext_description"
+      sortkey="1"
+      profile="uwosh.oie.studyabroadstudent:default"
+      />
+
 </configure>
