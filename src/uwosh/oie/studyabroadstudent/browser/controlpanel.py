@@ -8,7 +8,7 @@ from uwosh.oie.studyabroadstudent import _
 from plone.namedfile import field
 from plone.app.textfield import RichText
 from plone.autoform.directives import widget
-from plone.formwidget.namedfile.widget import NamedImageFieldWidget
+from plone.formwidget.namedfile.widget import NamedImageFieldWidget, NamedFileFieldWidget
 from plone.supermodel import model
 
 
@@ -2021,29 +2021,29 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         value_type = schema.TextLine(),
     )
 
-    state_of_wisconsin_need_based_travel_grant_form = schema.Choice(
+    widget(state_of_wisconsin_need_based_travel_grant_form=NamedFileFieldWidget)
+    state_of_wisconsin_need_based_travel_grant_form = schema.ASCII(
         title=u'State of Wisconsin Need-based Travel Grant Form',
         description=u'select the PDF for this form',
         required=False,
         missing_value=None,
         default=None,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.file',
     )
-    special_student_form_for_undergraduate_admissions = schema.Choice(
+    widget(special_student_form_for_undergraduate_admissions=NamedFileFieldWidget)
+    special_student_form_for_undergraduate_admissions = schema.ASCII(
         title=u'Special Student Form for Undergraduate Admissions',
         description=u'select the PDF for this form',
         required=False,
         missing_value=None,
         default=None,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.file',
     )
-    disciplinary_clearance_form = schema.Choice(
+    widget(disciplinary_clearance_form=NamedFileFieldWidget)
+    disciplinary_clearance_form = schema.ASCII(
         title=u'Disciplinary Clearance Form',
         description=u'select the PDF for this form',
         required=False,
         missing_value=None,
         default=None,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.file',
     )
     widget('uwo_logo', NamedImageFieldWidget)
     uwo_logo = schema.ASCII(
