@@ -5,8 +5,6 @@ from plone.z3cform import layout
 from zope import schema
 from zope.interface import Interface
 from uwosh.oie.studyabroadstudent import _
-from plone.namedfile import field
-from plone.app.textfield import RichText
 from plone.autoform.directives import widget
 from plone.formwidget.namedfile.widget import NamedImageFieldWidget, NamedFileFieldWidget
 from plone.supermodel import model
@@ -2053,6 +2051,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         missing_value=None,
         default=None,
     )
+    widget('program_view_footer', klass='pat-tinymce' )
     program_view_footer = schema.Text(
         title=_(u'Program Footer Text'),
         description=_(u'will appear at bottom of public program view'),
