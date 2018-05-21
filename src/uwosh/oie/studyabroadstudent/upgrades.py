@@ -50,13 +50,13 @@ def handle_richtext_description(context, logger=None):
         logger = logging.getLogger('uwosh.oie.studyabroadstudent')
     catalog = api.portal.get_tool('portal_catalog')
     brains = catalog(portal_type='OIEStudyAbroadProgram')
-    transformer = ITransformer(context)
     count = 0
     for brain in brains:
         obj = brain.getObject()
         description = obj.description, RichText
         if isinstance(description, RichTextValue):
             obj.rich_description = description
+            transformer = ITransformer(obj)
             obj.description = transformer(obj.description, 'text/plain')
         logger.info('converted rich description for %s' % obj.title)
         count += 1
