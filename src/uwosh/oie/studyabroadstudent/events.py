@@ -103,7 +103,11 @@ def _participant_update(o, event):
         if program:
             answer_changed_str = "This answer requires review because the question has changed: "
             programName = program.title
-            program_changed = event.descriptions[0].attributes[0] == 'programName'
+            program_changed = False
+            for evt_description in event.descriptions:
+                if 'programName' in evt_description.attributes:
+                    program_changed = True
+                    break
             if program_changed:
                 # copy questions from program object
                 o.applicant_question_text1 = program.applicantQuestion1
@@ -112,15 +116,15 @@ def _participant_update(o, event):
                 o.applicant_question_text4 = program.applicantQuestion4
                 o.applicant_question_text5 = program.applicantQuestion5
                 # if needed, mark the answer as being potentially out of date
-                if not o.applicant_question_answer1.startswith(answer_changed_str):
+                if o.applicant_question_answer1 and not o.applicant_question_answer1.startswith(answer_changed_str):
                     o.applicant_question_answer1 = answer_changed_str + o.applicant_question_answer1
-                if not o.applicant_question_answer2.startswith(answer_changed_str):
+                if o.applicant_question_answer2 and not o.applicant_question_answer2.startswith(answer_changed_str):
                     o.applicant_question_answer2 = answer_changed_str + o.applicant_question_answer2
-                if not o.applicant_question_answer3.startswith(answer_changed_str):
+                if o.applicant_question_answer3 and not o.applicant_question_answer3.startswith(answer_changed_str):
                     o.applicant_question_answer3 = answer_changed_str + o.applicant_question_answer3
-                if not o.applicant_question_answer4.startswith(answer_changed_str):
+                if o.applicant_question_answer4 and not o.applicant_question_answer4.startswith(answer_changed_str):
                     o.applicant_question_answer4 = answer_changed_str + o.applicant_question_answer4
-                if not o.applicant_question_answer5.startswith(answer_changed_str):
+                if o.applicant_question_answer5 and not o.applicant_question_answer5.startswith(answer_changed_str):
                     o.applicant_question_answer5 = answer_changed_str + o.applicant_question_answer5
             year_obj = uuidToObject(program.calendar_year)
             programYear = year_obj.title
