@@ -1,18 +1,12 @@
-from datetime import date
 from uwosh.oie.studyabroadstudent import _
 from zope import schema
 from zope.interface import Interface
-from zope.publisher.interfaces.browser import IDefaultBrowserLayer
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from plone.supermodel import model
-from plone.namedfile import field
 from collective import dexteritytextindexer
-from plone.app.textfield import RichText
-from z3c.relationfield.schema import RelationChoice
-from plone.autoform.directives import widget
-from plone.app.z3cform.widget import RelatedItemsFieldWidget
-from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, month_vocabulary, dayofmonth_vocabulary, room_type_vocabulary, smoking_vocabulary, semester_vocabulary, student_type_vocabulary, bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary
+from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, month_vocabulary, \
+    dayofmonth_vocabulary, room_type_vocabulary, smoking_vocabulary, semester_vocabulary, student_type_vocabulary, \
+    bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary, \
+    RegistryValueVocabulary
 
 
 class IOIEStudyAbroadStudentApplication(Interface):
@@ -165,7 +159,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     citizenship = schema.Choice(
         title=_(u'Citizenship'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.citizenship',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.citizenship'),
         required=True,
     )
 
@@ -178,7 +172,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     stateResidency = schema.Choice(
         title=_(u'State Residency'),
         description=_(u''),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.states_for_residency',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.states_for_residency'),
         required=True,
     )
 
@@ -202,21 +196,21 @@ class IOIEStudyAbroadStudentApplication(Interface):
     gender = schema.Choice(
         title=_(u'Gender'),
         description=_(u''),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.genders',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.genders'),
         required=False,
     )
 
     marriageStatus = schema.Choice(
         title=_(u'Marital Status'),
         description=_(u''),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.marriage_statuses',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.marriage_statuses'),
         required=False,
     )
 
     ethnicity = schema.Choice(
         title=_(u'Ethnicity'),
         description=_(u''),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.ethnicities',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.ethnicities'),
         required=False,
     )
 
@@ -784,7 +778,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     dexteritytextindexer.searchable('programName')
     programName = schema.Choice(
         title=_(u'Program Name'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.programs',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.programs'),
 #        required=True,
         required=False,
         #write_permission="UWOshOIE: Modify normal fields",
@@ -859,14 +853,14 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'First Major'),
 #        required=True,
         required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.majors',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.majors'),
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
     major2 = schema.Choice(
         title=_(u'Second Major'),
         required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.majors',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.majors'),
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
@@ -957,7 +951,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     orientationHours1 = schema.Choice(
         title=_(u'Orientation Session 1 \"hours\"'),
         description=_(u''),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.session_hours',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.session_hours'),
 #        required=True,
         required=False,
         #write_permission="UWOshOIE: Modify normal fields",
@@ -1014,7 +1008,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Course 1 subject'),
 #        required=True,
         required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.subjects',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.subjects'),
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
@@ -1036,7 +1030,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Course 2 subject'),
 #        required=True,
         required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.subjects',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.subjects'),
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
@@ -1058,7 +1052,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Course 3 subject'),
 #        required=True,
         required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.subjects',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.subjects'),
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
@@ -1080,7 +1074,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Course 4 subject'),
 #        required=True,
         required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.subjects',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.subjects'),
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
@@ -1102,7 +1096,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Course 5 subject'),
 #        required=True,
         required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.subjects',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.subjects'),
         #write_permission="UWOshOIE: Modify normal fields",
     )
 
@@ -1124,7 +1118,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Course 6 subject'),
 #        required=True,
         required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.subjects',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.subjects'),
         #write_permission="UWOshOIE: Modify normal fields",
     )
 

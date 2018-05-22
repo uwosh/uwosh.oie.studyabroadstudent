@@ -11,7 +11,8 @@ from z3c.relationfield.schema import RelationChoice
 from plone.autoform.directives import widget
 from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, \
-    dayofmonth_vocabulary, hold_vocabulary, aware_vocabulary, program_cycle_vocabulary, seat_assignment_protocol
+    dayofmonth_vocabulary, hold_vocabulary, aware_vocabulary, program_cycle_vocabulary, seat_assignment_protocol, \
+    RegistryValueVocabulary
 from plone.directives import form
 from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
 from zope.schema import ValidationError
@@ -35,14 +36,12 @@ class ILearningObjectiveRowSchema(Interface):
 
 
 class IPreTravelDatesRowSchema(Interface):
-    # pretravel_date = schema.Date(title=_(u'Date'))
     pretravel_start_datetime = schema.Datetime(title=_(u'Start'))
-    # pretravel_start_time = schema.Time(title=_(u'Start Time'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.timeofday')
-    # pretravel_end_time = schema.Time(title=_(u'End Time'), vocabulary='uwosh.oie.studyabroadstudent.vocabularies.timeofday')
-    # pretravel_end_datetime = schema.DateTime(title=_(u'End Time'))
     pretravel_end_datetime = schema.Datetime(title=_(u'End'))
-    pretravel_building = schema.Choice(title=_(u'Building'),
-                                       vocabulary='uwosh.oie.studyabroadstudent.vocabularies.building')
+    pretravel_building = schema.Choice(
+        title=_(u'Building'),
+        source=RegistryValueVocabulary('oiestudyabroadstudent.building'),
+    )
     pretravel_room = schema.TextLine(title=_(u'Room'))
     pretravel_attendance_required = schema.Choice(title=_(u'Attendance Required?'), vocabulary=yes_no_na_vocabulary)
 
@@ -50,8 +49,10 @@ class IPreTravelDatesRowSchema(Interface):
 class IPostTravelClassDatesRowSchema(Interface):
     posttravel_start_datetime = schema.Datetime(title=_(u'Start'))
     posttravel_end_datetime = schema.Datetime(title=_(u'End'))
-    posttravel_building = schema.Choice(title=_(u'Building'),
-                                        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.building')
+    posttravel_building = schema.Choice(
+        title=_(u'Building'),
+        source = RegistryValueVocabulary('oiestudyabroadstudent.building'),
+    )
     posttravel_room = schema.TextLine(title=_(u'Room'))
     posttravel_attendance_required = schema.Choice(title=_(u'Attendance Required?'), vocabulary=yes_no_na_vocabulary)
 
@@ -168,21 +169,21 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Term'),
         description=_(u''),
         required=True,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.term',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.term'),
     )
 
     college_or_unit = schema.Choice(
         title=_(u'College or Unit'),
         description=_(u''),
         required=True,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.college_or_unit',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.college_or_unit'),
     )
 
     countries = schema.List(
         title=_(u'Country or Countries'),
         description=_(u''),
         required=True,
-        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.countries')
+        value_type=schema.Choice(source=RegistryValueVocabulary('oiestudyabroadstudent.countries'))
     )
 
     program_code = schema.TextLine(
@@ -208,26 +209,26 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Sponsoring Unit or Department'),
         description=_(u'Select all that apply.'),
         required=True,
-        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.sponsoring_unit_or_department'),
+        value_type=schema.Choice(source=RegistryValueVocabulary('oiestudyabroadstudent.sponsoring_unit_or_department')),
     )
 
     program_type = schema.Choice(
         title=_(u'Program Type'),
         required=True,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.program_type',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.program_type'),
     )
 
     program_component = schema.Choice(
         title=_(u'Program Component'),
         required=True,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.program_component',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.program_component'),
     )
 
     eligibility_requirement = schema.Choice(
         title=u'Eligibility Requirement',
         description=u'Select the eligibility requirement for this program',
         required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.eligibility_requirement',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.eligibility_requirement'),
         default=None,
     )
 
@@ -247,7 +248,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Equipment & Space'),
         description=_(u''),
         required=True,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.equipment_and_space',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.equipment_and_space'),
     )
 
     equipment_and_space_needs = RichText(
@@ -262,7 +263,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Guest Lectures'),
         description=_(u''),
         required=True,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.guest_lectures',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.guest_lectures'),
     )
 
     initial_draft_program_schedule = field.NamedFile(
@@ -282,14 +283,14 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Minimum Number of Credits to be Earned by Each Applicant'),
         description=_(u''),
         required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.credits',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.credits'),
     )
 
     max_credits_earned = schema.Choice(
         title=_(u'Maximum Number of Credits to be Earned by Each Applicant'),
         description=_(u''),
         required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.credits',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.credits'),
     )
 
     language_of_study = schema.List(
@@ -297,7 +298,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             u'Select all that apply. Contact the Office of International Education to add a language (abroad@uwosh.edu).'),
         required=False,
-        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.language'),
+        value_type=schema.Choice(source=RegistryValueVocabulary('oiestudyabroadstudent.language')),
     )
 
     cooperating_partners = schema.List(
@@ -343,13 +344,13 @@ class IOIEStudyAbroadProgram(Interface):
 
     transportationFromOshkoshToDepartureAirport = schema.Choice(
         title=_(u'Transportation from Oshkosh to departure airport'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airport_transfer',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.airport_transfer'),
         required=False,
     )
 
     oshkoshDepartureLocation = schema.Choice(
         title=_('Oshkosh Departure Location'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.departure_location',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.locations'),
         required=False,
         # TODO dropdown  [display only if "Transportation from Oshkosh to departure airport is "yes"]
     )
@@ -391,7 +392,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     airline = schema.Choice(
         title=_(u'Airline'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airline',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.airline'),
         required=False,
     )
 
@@ -402,7 +403,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     airport = schema.Choice(
         title=_(u'Airport'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airport',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.airport'),
         required=False,
     )
 
@@ -457,7 +458,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     airlineReturn = schema.Choice(
         title=_(u'Airline'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airline',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.airline'),
         required=False,
     )
 
@@ -468,7 +469,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     airportReturn = schema.Choice(
         title=_(u'Airport'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airport',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.airport'),
         required=False,
     )
 
@@ -498,7 +499,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     transportationFromArrivalAirportToOshkosh = schema.Choice(
         title=_(u'Transportation from arrival airport to Oshkosh'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airport_transfer',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.airport_transfer'),
         required=False,
     )
 
@@ -527,7 +528,7 @@ class IOIEStudyAbroadProgram(Interface):
     studentStatus = schema.Choice(
         title=_(u'Student Status'),
         description=_(u'Choose one'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.student_status',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.student_status'),
         required=False,
     )
 
@@ -572,13 +573,6 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
         # TODO "yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in). This cannot be ""yes"" if ""A 1st Recommendation is required"" is ""no""."
     )
-
-    # widget('applicantQuestions', DataGridFieldFactory)
-    # applicantQuestions = schema.List(
-    #     title=_(u'All applicants must respond to these questions'),
-    #     description = _(u'Type one question per text box.  These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
-    #     value_type = DictRow(title=u'applicantQuestions', schema=IApplicantQuestionsRowSchema),
-    # )
 
     applicantQuestion1 = schema.Text(
         title=_(u'All applicants must respond to this question 1'),

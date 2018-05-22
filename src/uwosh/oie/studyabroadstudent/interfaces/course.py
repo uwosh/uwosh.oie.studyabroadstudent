@@ -11,7 +11,7 @@ from z3c.relationfield.schema import RelationChoice
 from plone.autoform.directives import widget
 from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, \
-    dayofmonth_vocabulary, hold_vocabulary, aware_vocabulary, program_cycle_vocabulary, seat_assignment_protocol
+    dayofmonth_vocabulary, hold_vocabulary, aware_vocabulary, program_cycle_vocabulary, seat_assignment_protocol, RegistryValueVocabulary
 from plone.directives import form
 from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
 from zope.schema import ValidationError
@@ -31,7 +31,7 @@ class IOIECourse(Interface):
         title=_(u'UW Oshkosh Course Subject & Number'),
         description=_(
             u'Add all courses associated with your program, including courses that will be taught partially at UW Oshkosh and partially while away on the program.  Do not include courses that will be taught entirely at UWO, even when these courses are offered in preparation for the program away.  Contact the OIE to add a course (abroad@uwosh.edu).'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.course'
+        source=RegistryValueVocabulary('oiestudyabroadstudent.course'),
     )
     credits_earned = schema.Int(
         title=_(u'UW Oshkosh Credits Earned'),
@@ -68,7 +68,7 @@ class IOIECourse(Interface):
         title=_(u'Course Prerequisites: program of study'),
         description=_(
             u'If this course requires admission to a particular program of study prior to the course start date, indicate this here.'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.program_of_study',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.program_of_study'),
     )
     instruction_provided_by_host = schema.Choice(
         title=_(u'Instruction Provided by Host?'),
@@ -87,7 +87,7 @@ class IOIECourse(Interface):
         title=_(u'Course Enrollment at'),
         description=_(
             u'Indicate the institution at which program participants will be enrolled for each individual course.'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.enrollment_institution',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.enrollment_institution'),
         required=True,
     )
     foreign_institution = schema.Choice(

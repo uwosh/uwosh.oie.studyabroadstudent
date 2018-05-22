@@ -7,7 +7,8 @@ from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from uwosh.oie.studyabroadstudent import _
 from currencies import Currency
-
+from plone.app.vocabularies.terms import safe_simplevocabulary_from_values
+from zope.schema.interfaces import IContextSourceBinder
 
 MAX_LENGTH = 250
 
@@ -285,251 +286,15 @@ salary_form = SimpleVocabulary(
     ]
 )
 
-@implementer(IVocabularyFactory)
-class SubjectsVocabularyFactory(object):
+@implementer(IContextSourceBinder)
+class RegistryValueVocabulary(object):
+
+    def __init__(self, value_name):
+        self.value_name = value_name
 
     def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.subjects')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-SubjectsVocabulary = SubjectsVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class MajorsVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.majors')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-MajorsVocabulary = MajorsVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class ProgramsVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.programs')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-ProgramsVocabulary = ProgramsVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class SessionHoursVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.session_hours')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-SessionHoursVocabulary = SessionHoursVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class EthnicitiesVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.ethnicities')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-EthnicitiesVocabulary = EthnicitiesVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class MarriageStatusesVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.marriage_statuses')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-MarriageStatusesVocabulary = MarriageStatusesVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class GendersVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.genders')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-GendersVocabulary = GendersVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class StatesForResidencyVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.states_for_residency')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-StatesForResidencyVocabulary = StatesForResidencyVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class CitizenshipVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.citizenship')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-CitizenshipVocabulary = CitizenshipVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class CountriesVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.countries')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-CountriesVocabulary = CountriesVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class ProgramTypeVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.program_type')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-ProgramTypeVocabulary = ProgramTypeVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class ProgramComponentVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.program_component')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-ProgramComponentVocabulary = ProgramComponentVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class EquipmentAndSpaceVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.equipment_and_space')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-EquipmentAndSpaceVocabulary = EquipmentAndSpaceVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class GuestLecturesVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.guest_lectures')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-GuestLecturesVocabulary = GuestLecturesVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class TermVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.term')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-TermVocabulary = TermVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class CollegeOrUnitVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.college_or_unit')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-CollegeOrUnitVocabulary = CollegeOrUnitVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class SponsoringUnitOrDepartmentVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.sponsoring_unit_or_department')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-SponsoringUnitOrDepartmentVocabulary = SponsoringUnitOrDepartmentVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class LanguageVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.language')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-LanguageVocabulary = LanguageVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class CreditsVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.credits')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-CreditsVocabulary = CreditsVocabularyFactory()
+        values = api.portal.get_registry_record(self.value_name)
+        return safe_simplevocabulary_from_values(values)
 
 
 @implementer(IVocabularyFactory)
@@ -552,19 +317,6 @@ class ContactsVocabularyFactory(object):
 
 
 ContactsVocabulary = ContactsVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class AccommodationVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.accommodation')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-AccommodationVocabulary = AccommodationVocabularyFactory()
 
 
 @implementer(IVocabularyFactory)
@@ -634,97 +386,6 @@ NewProgramsVocabulary = NewProgramsVocabularyFactory()
 
 
 @implementer(IVocabularyFactory)
-class ImmigrationStatusVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.immigration_status')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-ImmigrationStatusVocabulary = ImmigrationStatusVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class CourseVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.course_subject_and_number')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-CourseVocabulary = CourseVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class EducationLevelVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.education_level')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-EducationLevelVocabulary = EducationLevelVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class USStatesAndTerritoriesVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.us_states_territories')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-USStatesAndTerritoriesVocabulary = USStatesAndTerritoriesVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class CampusBuildingVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.building')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-CampusBuildingVocabulary = CampusBuildingVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class DepartureLocationVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.locations')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-DepartureLocationVocabulary = DepartureLocationVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class TransitionTypeVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.transition_type')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-TransitionTypeVocabulary = TransitionTypeVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
 class AirlineVocabularyFactory(object):
 
     def __call__(self, context):
@@ -744,45 +405,6 @@ class AirlineVocabularyFactory(object):
 
 
 AirlineVocabulary = AirlineVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class AirportVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.airport')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-AirportVocabulary = AirportVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class RoomSizeVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.room_size')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-RoomSizeVocabulary = RoomSizeVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class StudentStatusVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.student_status')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-StudentStatusVocabulary = StudentStatusVocabularyFactory()
 
 
 @implementer(IVocabularyFactory)
@@ -827,32 +449,6 @@ class LiaisonVocabularyFactory(object):
 
 
 LiaisonVocabulary = LiaisonVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class ProgramOfStudyVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.program_of_study')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-ProgramOfStudyVocabulary = ProgramOfStudyVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class EnrollmentInstitutionVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.enrollment_institution')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-EnrollmentInstitutionVocabulary = EnrollmentInstitutionVocabularyFactory()
 
 
 @implementer(IVocabularyFactory)
@@ -934,31 +530,3 @@ class ImageVocabularyFactory(object):
 
 
 ImageVocabulary = ImageVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class EligibilityRequirementVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.eligibility_requirement')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-EligibilityRequirementVocabulary = EligibilityRequirementVocabularyFactory()
-
-
-@implementer(IVocabularyFactory)
-class AirportTransferVocabularyFactory(object):
-
-    def __call__(self, context):
-        values = api.portal.get_registry_record('oiestudyabroadstudent.airport_transfer')
-        normalizer = queryUtility(IIDNormalizer)
-        items = [SimpleTerm(value=i, token=normalizer.normalize(i, max_length=MAX_LENGTH), title=i) for i in values]
-        return SimpleVocabulary(items)
-
-
-AirportTransferVocabulary = AirportTransferVocabularyFactory()
-
-

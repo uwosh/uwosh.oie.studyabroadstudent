@@ -169,88 +169,8 @@
   <!-- vocabularies for field values  -->
 
   <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.subjects"
-    component="uwosh.oie.studyabroadstudent.vocabularies.SubjectsVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.majors"
-    component="uwosh.oie.studyabroadstudent.vocabularies.MajorsVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.programs"
-    component="uwosh.oie.studyabroadstudent.vocabularies.ProgramsVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.session_hours"
-    component="uwosh.oie.studyabroadstudent.vocabularies.SessionHoursVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.ethnicities"
-    component="uwosh.oie.studyabroadstudent.vocabularies.EthnicitiesVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.marriage_statuses"
-    component="uwosh.oie.studyabroadstudent.vocabularies.MarriageStatusesVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.genders"
-    component="uwosh.oie.studyabroadstudent.vocabularies.GendersVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.states_for_residency"
-    component="uwosh.oie.studyabroadstudent.vocabularies.StatesForResidencyVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.citizenship"
-    component="uwosh.oie.studyabroadstudent.vocabularies.CitizenshipVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.countries"
-    component="uwosh.oie.studyabroadstudent.vocabularies.CountriesVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.program_type"
-    component="uwosh.oie.studyabroadstudent.vocabularies.ProgramTypeVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.program_component"
-    component="uwosh.oie.studyabroadstudent.vocabularies.ProgramComponentVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.equipment_and_space"
-    component="uwosh.oie.studyabroadstudent.vocabularies.EquipmentAndSpaceVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.guest_lectures"
-    component="uwosh.oie.studyabroadstudent.vocabularies.GuestLecturesVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.term"
-    component="uwosh.oie.studyabroadstudent.vocabularies.TermVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.college_or_unit"
-    component="uwosh.oie.studyabroadstudent.vocabularies.CollegeOrUnitVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.sponsoring_unit_or_department"
-    component="uwosh.oie.studyabroadstudent.vocabularies.SponsoringUnitOrDepartmentVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.language"
-    component="uwosh.oie.studyabroadstudent.vocabularies.LanguageVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.credits"
-    component="uwosh.oie.studyabroadstudent.vocabularies.CreditsVocabulary" />
-
-  <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.contacts"
     component="uwosh.oie.studyabroadstudent.vocabularies.ContactsVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.accommodation"
-    component="uwosh.oie.studyabroadstudent.vocabularies.AccommodationVocabulary" />
 
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.calendar_year"
@@ -265,48 +185,8 @@
     component="uwosh.oie.studyabroadstudent.vocabularies.NewProgramsVocabulary" />
 
   <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.immigrationstatus"
-    component="uwosh.oie.studyabroadstudent.vocabularies.ImmigrationStatusVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.education_level"
-    component="uwosh.oie.studyabroadstudent.vocabularies.EducationLevelVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.course"
-    component="uwosh.oie.studyabroadstudent.vocabularies.CourseVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.us_states_territories"
-    component="uwosh.oie.studyabroadstudent.vocabularies.USStatesAndTerritoriesVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.building"
-    component="uwosh.oie.studyabroadstudent.vocabularies.CampusBuildingVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.departure_location"
-    component="uwosh.oie.studyabroadstudent.vocabularies.DepartureLocationVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.transition_type"
-    component="uwosh.oie.studyabroadstudent.vocabularies.TransitionTypeVocabulary" />
-
-  <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.airline"
     component="uwosh.oie.studyabroadstudent.vocabularies.AirlineVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.airport"
-    component="uwosh.oie.studyabroadstudent.vocabularies.AirportVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.room_size"
-    component="uwosh.oie.studyabroadstudent.vocabularies.RoomSizeVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.student_status"
-    component="uwosh.oie.studyabroadstudent.vocabularies.StudentStatusVocabulary" />
 
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.program_leader"
@@ -315,14 +195,6 @@
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.liaison"
     component="uwosh.oie.studyabroadstudent.vocabularies.LiaisonVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.program_of_study"
-    component="uwosh.oie.studyabroadstudent.vocabularies.ProgramOfStudyVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.enrollment_institution"
-    component="uwosh.oie.studyabroadstudent.vocabularies.EnrollmentInstitutionVocabulary" />
 
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.currency"
@@ -339,14 +211,6 @@
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.image"
     component="uwosh.oie.studyabroadstudent.vocabularies.ImageVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.eligibility_requirement"
-    component="uwosh.oie.studyabroadstudent.vocabularies.EligibilityRequirementVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.airport_transfer"
-    component="uwosh.oie.studyabroadstudent.vocabularies.AirportTransferVocabulary" />
 
   <genericsetup:upgradeStep
       title="Reset some data grid fields to empty rich text fields"

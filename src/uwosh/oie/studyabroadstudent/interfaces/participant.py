@@ -13,7 +13,8 @@ from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, \
     dayofmonth_vocabulary, hold_vocabulary, aware_vocabulary, program_cycle_vocabulary, seat_assignment_protocol, \
     socialmediaservice, contactrelationship, graduation_month_vocabulary, return_transfer_vocabulary, \
-    return_mode_transportation_vocabulary, departure_mode_transportation_vocabulary, departure_transfer_vocabulary
+    return_mode_transportation_vocabulary, departure_mode_transportation_vocabulary, departure_transfer_vocabulary, \
+    RegistryValueVocabulary
 from collective import dexteritytextindexer
 from plone.directives import form
 from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
@@ -264,7 +265,7 @@ class IOIEStudyAbroadParticipant(Interface):
     homeCountry = schema.Choice(
         title=_(u'Home Country'),
         required=True,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.countries',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.countries'),
     )
 
     #######################################################
@@ -459,32 +460,32 @@ class IOIEStudyAbroadParticipant(Interface):
     stateResidency = schema.Choice(
         title=_(u'State Residency'),
         description=_(u''),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.us_states_territories',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.us_states_territories'),
         required=True,
     )
 
     countrycitizenship = schema.Choice(
         title=_(u'Country of Citizenship'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.countries',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.countries'),
         required=True,
     )
 
     immigrationStatus = schema.Choice(
         title=_(u'Immigration Status'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.immigrationstatus',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.immigration_status'),
         required=True,
     )
 
     countryBirth = schema.Choice(
         title=_(u'Country of Birth'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.countries',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.countries'),
         required=True,
     )
 
     ethnicity = schema.Choice(
         title=_(u'Ethnicity'),
         description=_(u''),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.ethnicities',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.ethnicities'),
         required=False,
     )
 
@@ -504,7 +505,7 @@ class IOIEStudyAbroadParticipant(Interface):
 
     educationLevel = schema.Choice(
         title=_(u'Education Level'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.education_level',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.education_level'),
         required=False,
     )
 
@@ -530,13 +531,13 @@ class IOIEStudyAbroadParticipant(Interface):
     major1 = schema.Choice(
         title=_(u'First Major'),
         required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.majors',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.majors'),
     )
 
     major2 = schema.Choice(
         title=_(u'Second Major'),
         required=False,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.majors',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.majors'),
     )
 
     minor1 = schema.TextLine(
@@ -548,13 +549,6 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Minor 2'),
         required=False,
     )
-
-    # graduationYear = schema.Choice(
-    #     title=_(u'Expected Graduation Year'),
-    #     description=_(u''),
-    #     required=False,
-    #     vocabulary='uwosh.oie.studyabroadstudent.vocabularies.calendar_year',
-    # )
 
     graduationYear = schema.Int(
         title=_(u'Expected Graduation Year'),
@@ -580,7 +574,7 @@ class IOIEStudyAbroadParticipant(Interface):
     courses = schema.List(
         title=_(u'Course Selection'),
         description=_(u'Request enrollment in these courses'),
-        value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.course')
+        value_type=schema.Choice(source=RegistryValueVocabulary('oiestudyabroadstudent.course_subject_and_number'))
     )
 
     #######################################################
@@ -695,7 +689,7 @@ class IOIEStudyAbroadParticipant(Interface):
     applicant_question_text1 = schema.Text(
         title=u'Applicant Question 1',
         description=u'',
-        default=u'(this will be filled in after you press Save)',
+        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
         required=False,
     )
     applicant_question_answer1 = schema.Text(
@@ -707,7 +701,7 @@ class IOIEStudyAbroadParticipant(Interface):
     applicant_question_text2 = schema.Text(
         title=u'Applicant Question 2',
         description=u'',
-        default=u'(this will be filled in after you press Save)',
+        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
         required=False,
     )
     applicant_question_answer2 = schema.Text(
@@ -719,7 +713,7 @@ class IOIEStudyAbroadParticipant(Interface):
     applicant_question_text3 = schema.Text(
         title=u'Applicant Question 3',
         description=u'',
-        default=u'(this will be filled in after you press Save)',
+        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
         required=False,
     )
     applicant_question_answer3 = schema.Text(
@@ -731,7 +725,7 @@ class IOIEStudyAbroadParticipant(Interface):
     applicant_question_text4 = schema.Text(
         title=u'Applicant Question 4',
         description=u'',
-        default=u'(this will be filled in after you press Save)',
+        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
         required=False,
     )
     applicant_question_answer4 = schema.Text(
@@ -743,7 +737,7 @@ class IOIEStudyAbroadParticipant(Interface):
     applicant_question_text5 = schema.Text(
         title=u'Applicant Question 5',
         description=u'',
-        default=u'(this will be filled in after you press Save)',
+        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
         required=False,
     )
     applicant_question_answer5 = schema.Text(
