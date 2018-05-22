@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from datetime import date
 from uwosh.oie.studyabroadstudent import _
 from zope import schema
 from zope.interface import Interface
 from plone.supermodel import model
 from plone.namedfile import field
 from plone.app.textfield import RichText
-from z3c.relationfield.schema import RelationChoice
-from plone.autoform.directives import widget
-from collective.z3cform.datagridfield import DataGridFieldFactory, DictRow
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, \
-    dayofmonth_vocabulary, hold_vocabulary, aware_vocabulary, program_cycle_vocabulary, seat_assignment_protocol, \
+from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, \
     socialmediaservice, contactrelationship, graduation_month_vocabulary, return_transfer_vocabulary, \
     return_mode_transportation_vocabulary, departure_mode_transportation_vocabulary, departure_transfer_vocabulary, \
     RegistryValueVocabulary

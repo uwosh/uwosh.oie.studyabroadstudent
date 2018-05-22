@@ -1,5 +1,4 @@
-# from Acquisition import aq_inner
-# from uwosh.oie.studyabroadstudent.interfaces.studyabroadstudentapplication import IOIEStudyAbroadStudentApplication
+# -*- coding: utf-8 -*-
 from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plone.app.contenttypes.browser.folder import FolderView

@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 from uwosh.oie.studyabroadstudent import _
 from zope import schema
 from zope.interface import Interface
 from plone.supermodel import model
 from collective import dexteritytextindexer
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, yes_no_na_vocabulary, month_vocabulary, \
-    dayofmonth_vocabulary, room_type_vocabulary, smoking_vocabulary, semester_vocabulary, student_type_vocabulary, \
+    room_type_vocabulary, smoking_vocabulary, semester_vocabulary, student_type_vocabulary, \
     bus_vocabulary, fly_vocabulary, orientation_conflict_vocabulary, hold_vocabulary, aware_vocabulary, \
     RegistryValueVocabulary
 

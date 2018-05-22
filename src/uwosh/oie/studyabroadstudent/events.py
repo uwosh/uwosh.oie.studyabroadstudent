@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from plone import api
 from plone.app.uuid.utils import uuidToObject
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
