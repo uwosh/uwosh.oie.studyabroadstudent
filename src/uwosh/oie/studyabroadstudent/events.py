@@ -7,15 +7,18 @@ from plone.i18n.normalizer.interfaces import IIDNormalizer
 
 
 def application_created(o, event):
-    o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, o.programName, o.programYear)
+    title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, o.programName, o.programYear)
+    if o.title != title:
+        o.title = title
     if not o.id:
         normalizer = getUtility(IIDNormalizer)
         o.id = normalizer.normalize(o.title)
-    o.reindexObject()
 
 
 def application_modified(o, event):
-    o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, o.programName, o.programYear)
+    title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, o.programName, o.programYear)
+    if o.title != title:
+        o.title = title
 
 
 ###############################################################
@@ -26,7 +29,8 @@ def program_created(o, event):
     program_code = (calendar_year)[2:4] + (o.term)[0] + (o.college_or_unit)[0]
     for c in o.countries:
         program_code += c[0:3].upper()
-    o.program_code = program_code
+    if o.program_code != program_code:
+        o.program_code = program_code
     if not o.id:
         normalizer = getUtility(IIDNormalizer)
         o.id = normalizer.normalize(o.title)
@@ -46,7 +50,6 @@ def program_created(o, event):
               'sunmmer_payment_deadline_2', 'fall_semester_payment_deadline_2',
               'winter_interim_spring_payment_deadline_1', 'winter_interim_spring_payment_deadline_2']:
         setattr(o, d, getattr(calendar_year_obj, d))
-    o.reindexObject()
 
 
 def program_added(o, event):
@@ -77,13 +80,14 @@ def program_modified(o, event):
 ###############################################################
 def contact_created(o, event):
     if o.middle_name and o.middle_name.strip() != '':
-        o.title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
+        title = '%s %s %s' % (o.first_name, o.middle_name, o.last_name)
     else:
-        o.title = '%s %s' % (o.first_name, o.last_name)
+        title = '%s %s' % (o.first_name, o.last_name)
+    if o.title != title:
+        o.title = title
     if not o.id:
         normalizer = getUtility(IIDNormalizer)
         o.id = normalizer.normalize(o.title)
-    o.reindexObject()
 
 
 def contact_modified(o, event):
@@ -91,42 +95,51 @@ def contact_modified(o, event):
 
 
 ###############################################################
-def participant_created(o, event):
+def _participant_update(o, event):
     program_uid = o.programName
     if program_uid:
         program = uuidToObject(program_uid)
         if program:
+            answer_changed_str = "This answer requires review because the question has changed: "
             programName = program.title
-            # copy questions from program object
-            o.applicant_question_text1 = program.applicantQuestion1
-            o.applicant_question_text2 = program.applicantQuestion2
-            o.applicant_question_text3 = program.applicantQuestion3
-            o.applicant_question_text4 = program.applicantQuestion4
-            o.applicant_question_text5 = program.applicantQuestion5
+            program_changed = event.descriptions[0].attributes[0] == 'programName'
+            if program_changed:
+                # copy questions from program object
+                o.applicant_question_text1 = program.applicantQuestion1
+                o.applicant_question_text2 = program.applicantQuestion2
+                o.applicant_question_text3 = program.applicantQuestion3
+                o.applicant_question_text4 = program.applicantQuestion4
+                o.applicant_question_text5 = program.applicantQuestion5
+                # if needed, mark the answer as being potentially out of date
+                if not o.applicant_question_answer1.startswith(answer_changed_str):
+                    o.applicant_question_answer1 = answer_changed_str + o.applicant_question_answer1
+                if not o.applicant_question_answer2.startswith(answer_changed_str):
+                    o.applicant_question_answer2 = answer_changed_str + o.applicant_question_answer2
+                if not o.applicant_question_answer3.startswith(answer_changed_str):
+                    o.applicant_question_answer3 = answer_changed_str + o.applicant_question_answer3
+                if not o.applicant_question_answer4.startswith(answer_changed_str):
+                    o.applicant_question_answer4 = answer_changed_str + o.applicant_question_answer4
+                if not o.applicant_question_answer5.startswith(answer_changed_str):
+                    o.applicant_question_answer5 = answer_changed_str + o.applicant_question_answer5
             year_obj = uuidToObject(program.calendar_year)
             programYear = year_obj.title
-            if o.middle_name and o.middle_name.strip() != '':
-                o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, programName, programYear)
+            if o.middleName and o.middleName.strip() != '':
+                title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, programName, programYear)
             else:
-                o.title = '%s %s %s %s' % (o.firstName, o.lastName, programName, programYear)
-            if not o.id:
-                normalizer = getUtility(IIDNormalizer)
-                o.id = normalizer.normalize(o.title)
-    o.reindexObject()
+                title = '%s %s %s %s' % (o.firstName, o.lastName, programName, programYear)
+            if o.title != title:
+                o.title = title
+
+
+def participant_created(o, event):
+    _participant_update(o, event)
+    if not o.id:
+        normalizer = getUtility(IIDNormalizer)
+        o.id = normalizer.normalize(o.title)
 
 
 def participant_modified(o, event):
-    program_uid = o.programName
-    if program_uid:
-        program = uuidToObject(program_uid)
-        if program:
-            programName = program.title
-            year_obj = uuidToObject(program.calendar_year)
-            programYear = year_obj.title
-            if o.middle_name and o.middle_name.strip() != '':
-                o.title = '%s %s %s %s %s' % (o.firstName, o.middleName, o.lastName, programName, programYear)
-            else:
-                o.title = '%s %s %s %s' % (o.firstName, o.lastName, programName, programYear)
+    _participant_update(o, event)
 
 
 ###############################################################
@@ -137,7 +150,6 @@ def liaison_created(o, event):
         title = '%s %s' % (o.first_name, o.last_name)
     if o.title != title:
         o.title = title
-        o.reindexObject()
 
 
 def liaison_modified(o, event):
@@ -225,7 +237,6 @@ def transition_created(o, event):
     new_title = "%s %s" % (o.transitionDate, o.destinationCity)
     if o.title != new_title:
         o.title = new_title
-        o.reindexObject()
     # update containing Program's travelDatesTransitionsAndDestinations field
     if hasattr(o, 'aq_parent'):
         parent = o.aq_parent
@@ -269,7 +280,6 @@ def health_document_added(o, event):
 
 
 def health_document_created(o, event):
-    import pdb;pdb.set_trace()
     if o.title != o.file.filename:
         o.title = o.file.filename
         o.reindexObject()
@@ -293,7 +303,6 @@ def program_leader_created(o, event):
         title = '%s %s' % (o.first_name, o.last_name)
     if o.title != title:
         o.title = title
-        o.reindexObject()
 
 
 def program_leader_modified(o, event):
