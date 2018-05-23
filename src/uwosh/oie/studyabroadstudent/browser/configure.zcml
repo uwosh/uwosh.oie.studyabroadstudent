@@ -44,6 +44,14 @@
       permission="zope2.View"
       />
 
+    <browser:page
+      name="manager_view"
+      for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"
+      class=".programview_manager.ProgramManagerView"
+      template="container.pt"
+      permission="cmf.ManagePortal"
+      />
+
   <browser:page
       name="view"
       for="..interfaces.cooperatingpartner.IOIECooperatingPartner"
