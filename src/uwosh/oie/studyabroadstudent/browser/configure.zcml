@@ -49,7 +49,7 @@
       for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"
       class=".programview_manager.ProgramManagerView"
       template="container.pt"
-      permission="cmf.ManagePortal"
+      permission="cmf.ModifyPortalContent"
       />
 
   <browser:page
