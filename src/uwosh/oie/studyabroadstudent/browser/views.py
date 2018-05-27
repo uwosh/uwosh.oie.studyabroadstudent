@@ -107,6 +107,10 @@ class ProgramView(DefaultView, FolderView):
         if hasattr(bdata, 'image') and bdata.image is not None and bdata.image.size > 0:
             return True
 
+    def get_detailed_view_link(self):
+        return self.context.absolute_url() + '/manager_view'
+
+
 class CooperatingPartnerView(DefaultView):
     def primary_contact(self):
         primary_contact = getattr(self.context, 'primary_contact', None)

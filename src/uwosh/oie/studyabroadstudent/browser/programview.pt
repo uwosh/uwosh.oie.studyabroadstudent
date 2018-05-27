@@ -12,9 +12,10 @@
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
         <h1 class="documentFirstHeading" style="background-color: darkviolet; color: white; padding: 5px" tal:content="here/title" />
-        <a tal:define="pm here/portal_membership; roles_in_context python: pm.getAuthenticatedMember().getRolesInContext(context)"
-           tal:condition="python: 'Manager' in roles_in_context or 'Site Administrator' in roles_in_context"
-          href="manager_view">Detailed View</a>
+
+        <a tal:condition="view/can_edit"
+          tal:attributes="href view/get_detailed_view_link">Detailed View</a>
+
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 
 	<tal:block repeat="widget view/widgets/values">
