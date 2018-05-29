@@ -338,8 +338,7 @@ def post_install(context):
     if not settings.moderator_notification_enabled:
         settings.moderator_notification_enabled = True
     if not settings.moderator_email:
-        # TODO: set moderator_email to something sensible
-        settings.moderator_email = 'kim.nguyen@wildcardcorp.com'
+        settings.moderator_email = 'oie@uwosh.edu'
     if not settings.user_notification_enabled:
         settings.user_notification_enabled = True
 
