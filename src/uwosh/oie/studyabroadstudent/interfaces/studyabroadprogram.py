@@ -14,7 +14,12 @@ from plone.directives import form
 from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
 from zope.schema import ValidationError
 from collective import dexteritytextindexer
-
+from plone.autoform.directives import read_permission, write_permission
+# from zope.interface import Invalid
+# from zope.interface import invariant
+# from plone import api
+# from z3c.form.interfaces import WidgetActionExecutionError
+# from z3c.form import validator
 
 class InvalidEmailAddress(ValidationError):
     "Invalid email address"
@@ -90,8 +95,30 @@ class IReviewerEmailRowSchema(Interface):
         # TODO autocomplete from campus email addresses? Or commonly entered email addresses? Rely on browser?
     )
 
+class ILeadershipCommentsRowSchema(Interface):
+    comment = schema.Text(
+        title=_(u'Add a comment'),
+    )
+
+
+class IOIEUserCommentsRowSchema(Interface):
+    comment = schema.Text(
+        title=_(u'Add a comment'),
+    )
+
 
 class IOIEStudyAbroadProgram(Interface):
+
+    # @invariant
+    # def verify_per_state_requiredness(data):
+    #     """This works but displays the same error in every field set except the default one, and does not
+    #     indicate where the field is that violated the requiredness"""
+    #     state = api.content.get_state(obj=data.__context__)
+    #     if state == 'initial':
+    #         # raise WidgetActionExecutionError('title', Invalid(_(u'Title is required in the ''%s'' state' % state)))
+    #         if not data.title:
+    #             raise Invalid(_(u'Title is required in the ''%s'' state' % state))
+
     dexteritytextindexer.searchable('title')
     title = schema.TextLine(
         title=_(u'Program Title'),
@@ -125,26 +152,28 @@ class IOIEStudyAbroadProgram(Interface):
     model.fieldset(
         'comments_fieldset',
         label=_(u"Comments"),
-        fields=['comments_all', 'comments_oie_leaders', 'comments_oie_all']
+        fields=['comments_oie_leaders', 'comments_oie_all']
     )
 
-    comments_all = schema.Text(
-        title=_(u'Public Comments'),
-        description=_(u'Comments entered here are visible by all system users.'),
-        required=False,
-    )
-
-    comments_oie_leaders = schema.Text(
+    read_permission(comments_oie_leaders='OIE: View OIE leadership comments')
+    write_permission(comments_oie_leaders='OIE: Modify OIE leadership comments')
+    widget(comments_oie_leaders=DataGridFieldFactory)
+    comments_oie_leaders = schema.List(
         title=_(u'Comments for OIE leadership'),
         description=_(
             u'Comments entered here are visible by the OIE Program Manager, Program Liaison, Program Leaders/Co-leaders and site administrators.'),
         required=False,
+        value_type=DictRow(title=u"comments", schema=ILeadershipCommentsRowSchema)
     )
 
-    comments_oie_all = schema.Text(
+    read_permission(comments_oie_all='OIE: View all OIE user comments')
+    write_permission(comments_oie_all='OIE: Modify all OIE user comments')
+    widget(comments_oie_all=DataGridFieldFactory)
+    comments_oie_all = schema.List(
         title=_(u'Comments for all OIE users'),
         description=_(u'Comments entered here are visible by all OIE professional staff.'),
         required=False,
+        value_type=DictRow(title=u"comments", schema=IOIEUserCommentsRowSchema)
     )
 
     #######################################################
@@ -1459,6 +1488,24 @@ class IOIEStudyAbroadProgram(Interface):
         description=u'will be copied from the selected calendar year on first save',
         required=False,
     )
+
+
+# class TitleRequiredValidator(validator.SimpleFieldValidator):
+#     def validate(self, value):
+#         state = api.content.get_state(obj=self.context)
+#         if state == 'initial':
+#             if not value or not value.strip():
+#                 raise Invalid(_(u'Title is required in state ''%s''' % state))
+# validator.WidgetValidatorDiscriminators(TitleRequiredValidator, field=IOIEStudyAbroadProgram['title'])
+#
+# class DescriptionRequiredValidator(validator.SimpleFieldValidator):
+#     def validate(self, value):
+#         state = api.content.get_state(obj=self.context)
+#         if state == 'initial':
+#             if not value or not value.strip():
+#                 raise Invalid(_(u'Description is required in state ''%s''' % state))
+# validator.WidgetValidatorDiscriminators(DescriptionRequiredValidator, field=IOIEStudyAbroadProgram['description'])
+
 
 # "Syllabus & Other Supporting Documents
 # Upload your syllabus plus other related documents (if any).  If you update your syllabus, replace this copy with the updated copy.  This field will remain editable until just prior to travel."
