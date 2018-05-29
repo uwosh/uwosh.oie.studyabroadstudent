@@ -6,6 +6,8 @@ from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from plone.app.textfield.value import RichTextValue
 from zope.component import queryUtility
 from plone.i18n.normalizer.interfaces import IIDNormalizer
+from plone.registry.interfaces import IRegistry
+from plone.app.discussion.interfaces import IDiscussionSettings
 
 
 @implementer(INonInstallable)
@@ -322,7 +324,27 @@ def post_install(context):
     create_partner('World Endeavors', partner_folder)
     create_partner('Worldstrides Capstone', partner_folder)
 
-    # TODO add tests for content type creation and reading
+    # enable commenting/discussion
+    registry = queryUtility(IRegistry)
+    settings = registry.forInterface(IDiscussionSettings, check=False)
+    if not settings.globally_enabled:
+        settings.globally_enabled = True
+    if not settings.moderation_enabled:
+        settings.moderation_enabled = True
+    if not settings.edit_comment_enabled:
+        settings.edit_comment_enabled = True
+    if not settings.delete_own_comment_enabled:
+        settings.delete_own_comment_enabled = True
+    if not settings.moderator_notification_enabled:
+        settings.moderator_notification_enabled = True
+    if not settings.moderator_email:
+        # TODO: set moderator_email to something sensible
+        settings.moderator_email = 'kim.nguyen@wildcardcorp.com'
+    if not settings.user_notification_enabled:
+        settings.user_notification_enabled = True
+
+
+# TODO add tests for content type creation and reading
 
 
 def create_airline(name, folder):
