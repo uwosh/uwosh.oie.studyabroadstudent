@@ -16,26 +16,39 @@ class IOIETransition(Interface):
         default=_(u'will be auto-generated on save'),
     )
 
-    transitionDate = schema.Date(title=_(u'Transition Date'))
+    transitionDate = schema.Date(
+        title=_(u'Transition Date'),
+        required=True,
+    )
 
     dexteritytextindexer.searchable('destinationCity')
-    destinationCity = schema.TextLine(title=_(u'Destination City'))
+    destinationCity = schema.TextLine(
+        title=_(u'Destination City'),
+        required=True,
+    )
 
     dexteritytextindexer.searchable('destinationCountry')
-    destinationCountry = schema.Choice(title=_(u'Destination Country'),
-                                       source=RegistryValueVocabulary('oiestudyabroadstudent.countries'))
+    destinationCountry = schema.Choice(
+        title=_(u'Destination Country'),
+        required=True,
+        source=RegistryValueVocabulary('oiestudyabroadstudent.countries')
+    )
 
-    accommodation = schema.Choice(title=_(u'Accommodation'),
-                                  source=RegistryValueVocabulary('oiestudyabroadstudent.accommodation'))
+    transitionType = schema.Choice(
+        title=_(u'Transition Type'),
+        required=True,
+        source=RegistryValueVocabulary('oiestudyabroadstudent.transition_type'),
+    )
+
+    accommodation = schema.Choice(
+        title=_(u'Accommodation'),
+        source=RegistryValueVocabulary('oiestudyabroadstudent.accommodation')
+    )
 
     accommodationRoomSizes = schema.List(
         title=_(u'Room Size(s)'),
         value_type=schema.Choice(source=RegistryValueVocabulary('oiestudyabroadstudent.room_size'))
     )
 
-    transitionType = schema.Choice(
-        title=_(u'Transition Type'),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.transition_type'),
-    )
 
 
