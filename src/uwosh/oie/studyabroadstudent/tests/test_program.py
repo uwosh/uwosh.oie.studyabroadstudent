@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from AccessControl import Unauthorized
+from AccessControl import Unauthorized, getSecurityManager
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.app.testing import setRoles, TEST_USER_ID, TEST_USER_NAME, login, logout
@@ -64,7 +64,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
         obj = api.content.create(
             container=self.portal,
             type='OIEStudyAbroadProgram',
-            id='sample-program-test_adding',
+            id='sample-program-test-can-add-a-program',
             calendar_year=self.calendar_year_uid,
             term='1 Fall Interim',
             college_or_unit='B College of Business',
@@ -105,12 +105,118 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
 
     # all workflow transitions by manager
 
+    # 1. Manager: Check that manager can execute this transition
+    # 2. Authorized transitioners: Check each other role that can execute this transition
+    # 3. Unauthorized transitions: Check that every other role CANNOT execute this transition
+    # 4. Authorized viewers of the item
+    # 5. Unauthorized viewers of the item
+    # 6. Authorized viewers of the field values (list viewable fields)
+    # 7. Unuthorized viewers of the field values (list viewable fields)
+    # 8. Authorized editors of the field values (list editable fields)
+    # 9. Unuthorized editors of the field values (list editable fields)
     def test_can_transition_by_manager_submit_to_chair(self):
-        """from initial"""
+        """from initial
+        1. Manager can transition
+        2. authorized to transition: Mgmt_Admin; Mgmt_Liaison; Manager
+        3. unauthorized to transition: everyone else!
+        4. authorized item viewers
+        5. unauthorized item viewers
+        6. authorized field viewers (which fields?)
+        7. unauthorized field viewers
+        8. authorized field editors (which fields?)
+        9. unauthorized field editors
+        """
+        # by default, roles will be ['Manager', 'Authenticated']
+        self.assertTrue('Manager' in getSecurityManager().getUser().getRolesInContext(self.portal))
         obj = self.program
+        self.transition_to_state(obj, 'submit-to-chair', 'pending-chair-review')
+
+        # send it back to the previous state
+        self.transition_to_state(obj, 'return-to-initial', 'initial')
+        # change to another authorized role, verify new role can execute the same transition: Mgmt_Admin
+        self.switch_role(obj, 'Mgmt_Admin')
         api.content.transition(obj=obj, transition='submit-to-chair')
-        state = api.content.get_state(obj=obj)
-        self.assertEqual(state, 'pending-chair-review')
+        self.assertEqual(api.content.get_state(obj=obj), 'pending-chair-review')
+
+        # send it back to the previous state
+        self.transition_to_state(obj, 'return-to-initial', 'initial')
+        # change to another authorized role, verify new role can execute the same transition: Mgmt_Liaison
+        self.switch_role(obj, 'Mgmt_Liaison')
+        api.content.transition(obj=obj, transition='submit-to-chair')
+        self.assertEqual(api.content.get_state(obj=obj), 'pending-chair-review')
+
+        self.transition_to_state(obj, 'return-to-initial', 'initial')
+
+        # verify can view the item
+        # verify can view all viewable fields
+        # verify can edit all editable fields
+
+        # change to an unauthorized role: Mgmt_Manager
+
+        # change to an unauthorized role: Mgmt_Coordinator
+        self.switch_role(obj, 'Mgmt_Coordinator')
+
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
+        # change to an unauthorized role: Mgmt_Financial
+        # change to an unauthorized role: Mgmt_OIEProfessional
+        # change to an unauthorized role: Mgmt_Intern
+        # change to an unauthorized role: Mgmt_Liaison
+        # change to an unauthorized role: Mgmt_ProgramLeader
+        # change to an unauthorized role: Mgmt_Dean
+        # change to an unauthorized role: Mgmt_Chair
+        # change to an unauthorized role: Mgmt_Provost
+        # change to an unauthorized role: Mgmt_LeaderReview
+        # change to an unauthorized role: Mgmt_CourseBuilder
+        # change to an unauthorized role: Mgmt_RiskMgmt
+        # change to an unauthorized role: Participant_Director
+        # change to an unauthorized role: Participant_Manager
+        # change to an unauthorized role: Participant_Coordinator
+        # change to an unauthorized role: Participant_Financial
+        # change to an unauthorized role: Participant_OIEProfessional
+        # change to an unauthorized role: Participant_Intern
+        # change to an unauthorized role: Participant_Liaison
+        # change to an unauthorized role: Participant_ProgramLeader
+        # change to an unauthorized role: Participant_FinancialAid
+        # change to an unauthorized role: Participant_Provost
+        # change to an unauthorized role: Participant_DeanOfStudents
+        # change to an unauthorized role: Participant_Health
+        # change to an unauthorized role: Participant_StudentAccounts
+        # change to an unauthorized role: Participant_Reference
+        # change to an unauthorized role: Participant_RiskMgmt
+        # change to an unauthorized role: Participant_Applicant
+
+        # verify cannot view item
+        # verify cannot view certain fields
+        # verify cannot edit certain fields
+        # repeat for all authorized roles
+        #
+        # send it back to the previous state
+        # change to an unauthorized transitioning role
+        # verify cannot execute the same transition
+        # repeat for all unauthorized transitioning roles
+
+        # and finally return it to the intended state
+        self.transition_to_state(obj, 'submit-to-chair', 'pending-chair-review')
+
+    def attempt_invalid_transition(self, obj, transition, state):
+        error_str = ''
+        try:
+            api.content.transition(obj=obj, transition=transition)
+        except InvalidParameterError as e:
+            error_str = e.message
+        self.assertTrue('Invalid transition' in error_str)
+        self.assertEqual(api.content.get_state(obj=obj), state)
+
+    def switch_role(self, obj, role):
+        setRoles(self.portal, TEST_USER_ID, [role])
+        self.assertTrue(role in getSecurityManager().getUser().getRolesInContext(obj))
+
+    def transition_to_state(self, obj, transition, state):
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.assertTrue('Manager' in getSecurityManager().getUser().getRolesInContext(obj))
+        api.content.transition(obj=obj, transition=transition)
+        self.assertEqual(api.content.get_state(obj=obj), state)
 
     def test_can_transition_by_manager_cancel_from_initial(self):
         """from initial"""
