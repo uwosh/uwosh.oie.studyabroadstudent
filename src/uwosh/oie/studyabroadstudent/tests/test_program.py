@@ -125,44 +125,55 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
         8. authorized field editors (which fields?)
         9. unauthorized field editors
         """
-        # by default, roles will be ['Manager', 'Authenticated']
-        self.assertTrue('Manager' in getSecurityManager().getUser().getRolesInContext(self.portal))
         obj = self.program
-        self._transition_to_state(obj, transition='submit-to-chair', state='pending-chair-review')
-        # send it back to the previous state
-        self._transition_to_state(obj, transition='return-to-initial', state='initial')
+        # by default, roles will be ['Manager', 'Authenticated'] so verify that we have Manager role
+        self.assertTrue('Manager' in getSecurityManager().getUser().getRolesInContext(self.portal))
 
-        self._verify_allowed_transition_by_roles(obj=obj, initial_state='initial', roles=['Mgmt_Admin', 'Mgmt_Liaison'],
-                                                 transition='submit-to-chair', destination_state='pending-chair-review',
-                                                 return_transition='return-to-initial', end_state='initial')
-
-        # verify can view the item
-        # verify can view all viewable fields
-        # verify can edit all editable fields
-
-        self._verify_unauthorized_transition_by_roles(obj=obj, initial_state='initial',
-                                                      roles=['Mgmt_Manager', 'Mgmt_Coordinator', 'Mgmt_Financial',
-                                                             'Mgmt_OIEProfessional', 'Mgmt_Intern',
-                                                             'Mgmt_ProgramLeader', 'Mgmt_Dean', 'Mgmt_Chair',
-                                                             'Mgmt_Provost', 'Mgmt_LeaderReview', 'Mgmt_CourseBuilder',
-                                                             'Mgmt_RiskMgmt', 'Participant_Director',
-                                                             'Participant_Manager', 'Participant_Coordinator',
-                                                             'Participant_Financial', 'Participant_Financial',
-                                                             'Participant_Intern', 'Participant_Liaison',
-                                                             'Participant_ProgramLeader', 'Participant_FinancialAid',
-                                                             'Participant_Provost', 'Participant_DeanOfStudents',
-                                                             'Participant_Health', 'Participant_Health',
-                                                             'Participant_Reference', 'Participant_RiskMgmt',
-                                                             'Participant_Applicant', 'Anonymous'],
-                                                      transition='submit-to-chair', end_state='initial')
-
-        # verify cannot view item
-        # verify cannot view certain fields
-        # verify cannot edit certain fields
-        # repeat for all authorized roles
+        self._verify_transition_by_all_roles(obj=obj, initial_state='initial',
+                                             authorized_roles=['Manager', 'Mgmt_Admin', 'Mgmt_Liaison'],
+                                             unauthorized_roles=['Mgmt_Manager', 'Mgmt_Coordinator', 'Mgmt_Financial',
+                                                'Mgmt_OIEProfessional', 'Mgmt_Intern',
+                                                'Mgmt_ProgramLeader', 'Mgmt_Dean', 'Mgmt_Chair',
+                                                'Mgmt_Provost', 'Mgmt_LeaderReview', 'Mgmt_CourseBuilder',
+                                                'Mgmt_RiskMgmt', 'Participant_Director',
+                                                'Participant_Manager', 'Participant_Coordinator',
+                                                'Participant_Financial', 'Participant_Financial',
+                                                'Participant_Intern', 'Participant_Liaison',
+                                                'Participant_ProgramLeader', 'Participant_FinancialAid',
+                                                'Participant_Provost', 'Participant_DeanOfStudents',
+                                                'Participant_Health', 'Participant_Health',
+                                                'Participant_Reference', 'Participant_RiskMgmt',
+                                                'Participant_Applicant', 'Anonymous'],
+                                             transition='submit-to-chair', destination_state='pending-chair-review',
+                                             return_transition='return-to-initial', end_state='initial')
 
         # and finally return it to the intended state
         self._transition_to_state(obj, 'submit-to-chair', 'pending-chair-review')
+
+    def _verify_transition_by_all_roles(self, obj=None, initial_state=None, authorized_roles=None,
+                                        unauthorized_roles=None, transition=None, destination_state=None,
+                                        return_transition=None, end_state=None):
+        self.assertIsNotNone(obj)
+        self.assertIsNotNone(initial_state)
+        self.assertIsNotNone(authorized_roles)
+        self.assertIsNotNone(unauthorized_roles)
+        self.assertIsNotNone(transition)
+        self.assertIsNotNone(destination_state)
+        self.assertIsNotNone(return_transition)
+        self.assertIsNotNone(end_state)
+        self._verify_allowed_transition_by_roles(obj=obj, initial_state=initial_state, roles=authorized_roles,
+                                                 transition=transition, destination_state=destination_state,
+                                                 return_transition=return_transition, end_state=end_state)
+        # verify can view the item
+        # verify can view viewable fields
+        # verify can edit editable fields
+
+        self._verify_unauthorized_transition_by_roles(obj=obj, initial_state=initial_state, roles=unauthorized_roles,
+                                                      transition=transition, end_state=end_state)
+        # verify cannot view item
+        # verify cannot view certain fields
+        # verify cannot edit certain fields
+
 
     def _verify_allowed_transition_by_roles(self, obj=None, initial_state=None, roles=None, transition=None, destination_state=None,
                                             return_transition=None, end_state=None):
