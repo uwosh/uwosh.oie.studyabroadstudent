@@ -129,158 +129,77 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
         # by default, roles will be ['Manager', 'Authenticated']
         self.assertTrue('Manager' in getSecurityManager().getUser().getRolesInContext(self.portal))
         obj = self.program
-        self.transition_to_state(obj, 'submit-to-chair', 'pending-chair-review')
-
+        self._transition_to_state(obj, transition='submit-to-chair', state='pending-chair-review')
         # send it back to the previous state
-        self.transition_to_state(obj, 'return-to-initial', 'initial')
-        # change to another authorized role, verify new role can execute the same transition: Mgmt_Admin
-        self.switch_role(obj, 'Mgmt_Admin')
-        api.content.transition(obj=obj, transition='submit-to-chair')
-        self.assertEqual(api.content.get_state(obj=obj), 'pending-chair-review')
+        self._transition_to_state(obj, transition='return-to-initial', state='initial')
 
-        # send it back to the previous state
-        self.transition_to_state(obj, 'return-to-initial', 'initial')
-        # change to another authorized role, verify new role can execute the same transition: Mgmt_Liaison
-        self.switch_role(obj, 'Mgmt_Liaison')
-        api.content.transition(obj=obj, transition='submit-to-chair')
-        self.assertEqual(api.content.get_state(obj=obj), 'pending-chair-review')
-
-        self.transition_to_state(obj, 'return-to-initial', 'initial')
+        self._verify_allowed_transition_by_role(obj=obj, role='Mgmt_Admin', transition='submit-to-chair', destination_state='pending-chair-review', return_transition='return-to-initial', return_state='initial')
+        self._verify_allowed_transition_by_role(obj=obj, role='Mgmt_Liaison', transition='submit-to-chair', destination_state='pending-chair-review', return_transition='return-to-initial', return_state='initial')
 
         # verify can view the item
         # verify can view all viewable fields
         # verify can edit all editable fields
 
-        # change to an unauthorized role: Mgmt_Manager
-        self.switch_role(obj, 'Mgmt_Manager')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Mgmt_Manager', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Mgmt_Coordinator', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Mgmt_Financial', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Mgmt_OIEProfessional', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Mgmt_Intern', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Mgmt_ProgramLeader', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Mgmt_Dean', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Mgmt_Chair', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Mgmt_Provost', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Mgmt_LeaderReview', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Mgmt_CourseBuilder', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Mgmt_RiskMgmt', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_Director', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_Manager', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_Coordinator', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_Financial', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_OIEProfessional', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_Intern', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_Liaison', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_ProgramLeader', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_FinancialAid', transition='submit-to-chair', same_state='initial')
 
-        # change to an unauthorized role: Mgmt_Coordinator
-        self.switch_role(obj, 'Mgmt_Coordinator')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Mgmt_Financial
-        self.switch_role(obj, 'Mgmt_Financial')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Mgmt_OIEProfessional
-        self.switch_role(obj, 'Mgmt_OIEProfessional')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Mgmt_Intern
-        self.switch_role(obj, 'Mgmt_Intern')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Mgmt_ProgramLeader
-        self.switch_role(obj, 'Mgmt_ProgramLeader')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Mgmt_Dean
-        self.switch_role(obj, 'Mgmt_Dean')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Mgmt_Chair
-        self.switch_role(obj, 'Mgmt_Chair')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Mgmt_Provost
-        self.switch_role(obj, 'Mgmt_Provost')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Mgmt_LeaderReview
-        self.switch_role(obj, 'Mgmt_LeaderReview')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Mgmt_CourseBuilder
-        self.switch_role(obj, 'Mgmt_CourseBuilder')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Mgmt_RiskMgmt
-        self.switch_role(obj, 'Mgmt_RiskMgmt')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_Director
-        self.switch_role(obj, 'Participant_Director')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_Manager
-        self.switch_role(obj, 'Participant_Manager')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_Coordinator
-        self.switch_role(obj, 'Participant_Coordinator')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_Financial
-        self.switch_role(obj, 'Participant_Financial')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_OIEProfessional
-        self.switch_role(obj, 'Participant_OIEProfessional')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_Intern
-        self.switch_role(obj, 'Participant_Intern')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_Liaison
-        self.switch_role(obj, 'Participant_Liaison')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_ProgramLeader
-        self.switch_role(obj, 'Participant_ProgramLeader')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_FinancialAid
-        self.switch_role(obj, 'Participant_FinancialAid')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_Provost
-        self.switch_role(obj, 'Participant_Provost')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_DeanOfStudents
-        self.switch_role(obj, 'Participant_DeanOfStudents')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_Health
-        self.switch_role(obj, 'Participant_Health')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_StudentAccounts
-        self.switch_role(obj, 'Participant_StudentAccounts')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_Reference
-        self.switch_role(obj, 'Participant_Reference')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_RiskMgmt
-        self.switch_role(obj, 'Participant_RiskMgmt')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Participant_Applicant
-        self.switch_role(obj, 'Participant_Applicant')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
-
-        # change to an unauthorized role: Anonymous
-        self.switch_role(obj, 'Anonymous')
-        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_Provost', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_DeanOfStudents', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_Health', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_StudentAccounts', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_Reference', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_RiskMgmt', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Participant_Applicant', transition='submit-to-chair', same_state='initial')
+        self._verify_unauthorized_transition_by_role(obj=obj, role='Anonymous', transition='submit-to-chair', same_state='initial')
 
         # verify cannot view item
         # verify cannot view certain fields
         # verify cannot edit certain fields
         # repeat for all authorized roles
-        #
-        # send it back to the previous state
-        # change to an unauthorized transitioning role
-        # verify cannot execute the same transition
-        # repeat for all unauthorized transitioning roles
 
         # and finally return it to the intended state
-        self.transition_to_state(obj, 'submit-to-chair', 'pending-chair-review')
+        self._transition_to_state(obj, 'submit-to-chair', 'pending-chair-review')
 
-    def attempt_invalid_transition(self, obj, transition, state):
+    def _verify_unauthorized_transition_by_role(self, obj=None, role=None, transition=None, same_state=None):
+        self._switch_role(obj, role)
+        self._attempt_invalid_transition(obj, transition=transition, state=same_state)
+
+    def _verify_allowed_transition_by_role(self, obj=None, role=None, transition=None, destination_state=None,
+                                           return_transition=None, return_state=None):
+        self.assertIsNotNone(obj)
+        self.assertIsNotNone(role)
+        self.assertIsNotNone(transition)
+        self.assertIsNotNone(destination_state)
+        self.assertIsNotNone(return_state)
+        self._switch_role(obj, role)
+        api.content.transition(obj=obj, transition=transition)
+        self.assertEqual(api.content.get_state(obj=obj), destination_state)
+        # send it back to the previous state
+        self._transition_to_state(obj, transition=return_transition, state=return_state)
+
+    def _attempt_invalid_transition(self, obj=None, transition=None, state=None):
+        self.assertIsNotNone(obj)
+        self.assertIsNotNone(transition)
+        self.assertIsNotNone(state)
         error_str = ''
         try:
             api.content.transition(obj=obj, transition=transition)
@@ -289,11 +208,16 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
         self.assertTrue('Invalid transition' in error_str)
         self.assertEqual(api.content.get_state(obj=obj), state)
 
-    def switch_role(self, obj, role):
+    def _switch_role(self, obj=None, role=None):
+        self.assertIsNotNone(obj)
+        self.assertIsNotNone(role)
         setRoles(self.portal, TEST_USER_ID, [role])
         self.assertTrue(role in getSecurityManager().getUser().getRolesInContext(obj))
 
-    def transition_to_state(self, obj, transition, state):
+    def _transition_to_state(self, obj=None, transition=None, state=None):
+        self.assertIsNotNone(obj)
+        self.assertIsNotNone(transition)
+        self.assertIsNotNone(state)
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.assertTrue('Manager' in getSecurityManager().getUser().getRolesInContext(obj))
         api.content.transition(obj=obj, transition=transition)
