@@ -152,39 +152,120 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
         # verify can edit all editable fields
 
         # change to an unauthorized role: Mgmt_Manager
+        self.switch_role(obj, 'Mgmt_Manager')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
 
         # change to an unauthorized role: Mgmt_Coordinator
         self.switch_role(obj, 'Mgmt_Coordinator')
-
         self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
 
         # change to an unauthorized role: Mgmt_Financial
+        self.switch_role(obj, 'Mgmt_Financial')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Mgmt_OIEProfessional
+        self.switch_role(obj, 'Mgmt_OIEProfessional')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Mgmt_Intern
-        # change to an unauthorized role: Mgmt_Liaison
+        self.switch_role(obj, 'Mgmt_Intern')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Mgmt_ProgramLeader
+        self.switch_role(obj, 'Mgmt_ProgramLeader')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Mgmt_Dean
+        self.switch_role(obj, 'Mgmt_Dean')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Mgmt_Chair
+        self.switch_role(obj, 'Mgmt_Chair')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Mgmt_Provost
+        self.switch_role(obj, 'Mgmt_Provost')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Mgmt_LeaderReview
+        self.switch_role(obj, 'Mgmt_LeaderReview')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Mgmt_CourseBuilder
+        self.switch_role(obj, 'Mgmt_CourseBuilder')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Mgmt_RiskMgmt
+        self.switch_role(obj, 'Mgmt_RiskMgmt')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_Director
+        self.switch_role(obj, 'Participant_Director')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_Manager
+        self.switch_role(obj, 'Participant_Manager')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_Coordinator
+        self.switch_role(obj, 'Participant_Coordinator')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_Financial
+        self.switch_role(obj, 'Participant_Financial')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_OIEProfessional
+        self.switch_role(obj, 'Participant_OIEProfessional')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_Intern
+        self.switch_role(obj, 'Participant_Intern')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_Liaison
+        self.switch_role(obj, 'Participant_Liaison')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_ProgramLeader
+        self.switch_role(obj, 'Participant_ProgramLeader')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_FinancialAid
+        self.switch_role(obj, 'Participant_FinancialAid')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_Provost
+        self.switch_role(obj, 'Participant_Provost')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_DeanOfStudents
+        self.switch_role(obj, 'Participant_DeanOfStudents')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_Health
+        self.switch_role(obj, 'Participant_Health')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_StudentAccounts
+        self.switch_role(obj, 'Participant_StudentAccounts')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_Reference
+        self.switch_role(obj, 'Participant_Reference')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_RiskMgmt
+        self.switch_role(obj, 'Participant_RiskMgmt')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
         # change to an unauthorized role: Participant_Applicant
+        self.switch_role(obj, 'Participant_Applicant')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
+
+        # change to an unauthorized role: Anonymous
+        self.switch_role(obj, 'Anonymous')
+        self.attempt_invalid_transition(obj, 'submit-to-chair', 'initial')
 
         # verify cannot view item
         # verify cannot view certain fields
