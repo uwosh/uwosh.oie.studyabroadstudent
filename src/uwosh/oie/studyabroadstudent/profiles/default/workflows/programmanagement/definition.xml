@@ -6,6 +6,7 @@
  <permission>Modify portal content</permission>
  <permission>View</permission>
  <state state_id="applicants-considering-change" title="Applicants Considering Change" >
+  <exit-transition transition_id="manager-return-to-program-fee-pending-publication" />
   <exit-transition transition_id="cancel-after-change" />
   <exit-transition transition_id="confirm-to-run" />
   <permission-map name="Access contents information" acquired="True">
@@ -30,6 +31,7 @@
   <exit-transition transition_id="send-for-programmatic-change" />
   <exit-transition transition_id="send-for-fee-change" />
   <exit-transition transition_id="manager-return-to-initial" />
+  <exit-transition transition_id="manager-return-to-program-fee-pending-publication" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -47,6 +49,25 @@
  </state>
  <state state_id="cancelled" title="Cancelled" >
   <exit-transition transition_id="manager-return-to-initial" />
+  <exit-transition transition_id="manager-return-to-applicants-considering-change" />
+  <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
+  <exit-transition transition_id="manager-return-to-final-payment-billing-in-progress" />
+  <exit-transition transition_id="manager-return-to-initial-payment-billing-in-progress" />
+  <exit-transition transition_id="manager-return-to-pending-discussions-with-program-manager" />
+  <exit-transition transition_id="manager-return-to-pending-final-program-fee" />
+  <exit-transition transition_id="manager-return-to-pending-program-departure" />
+  <exit-transition transition_id="manager-return-to-pending-program-fee-determination-by-oie" />
+  <exit-transition transition_id="manager-return-to-pending-program-leader-operational-briefing" />
+  <exit-transition transition_id="manager-return-to-pending-program-leader-orientation" />
+  <exit-transition transition_id="manager-return-to-pending-provider-responses" />
+  <exit-transition transition_id="manager-return-to-pending-travel-advance" />
+  <exit-transition transition_id="manager-return-to-program-fee-pending-publication" />
+  <exit-transition transition_id="manager-return-to-program-fee-under-liaison-review" />
+  <exit-transition transition_id="manager-return-to-provider-proposals-under-liaison-review" />
+  <exit-transition transition_id="manager-return-to-provider-proposals-under-oie-review" />
+  <exit-transition transition_id="manager-return-to-request-for-proposals-under-development" />
+  <exit-transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" />
+  <exit-transition transition_id="manager-return-to-reviewing-final-program-details" />
 
 
 
@@ -60,6 +81,7 @@
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="bill-for-final-payment-programs-with-no-leader" />
+  <exit-transition transition_id="manager-return-to-pending-final-program-fee" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -77,6 +99,7 @@
  </state>
  <state state_id="final-program-accounting-in-progress" title="Final Program Accounting in Progress" >
   <exit-transition transition_id="process-refunds" />
+  <exit-transition transition_id="manager-return-to-travel-expense-report-student-evaluations-due-to" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -95,6 +118,7 @@
  <state state_id="incident-in-progress" title="Incident in Progress" >
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="end-incident" />
+  <exit-transition transition_id="manager-return-to-program-in-progress" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -116,6 +140,14 @@
   <exit-transition transition_id="withdraw-application" />
   <exit-transition transition_id="submit-sponsored-program" />
   <exit-transition transition_id="submit-non-sponsored-program" />
+  <exit-transition transition_id="manager-return-to-pending-chair-review" />
+  <exit-transition transition_id="manager-return-to-pending-dean-unit-director-review" />
+  <exit-transition transition_id="manager-return-to-pending-discussions-with-program-manager" />
+  <exit-transition transition_id="manager-return-to-pending-oie-review" />
+  <exit-transition transition_id="manager-return-to-pending-program-fee-determination-by-oie" />
+  <exit-transition transition_id="manager-return-to-provider-proposals-under-liaison-review" />
+  <exit-transition transition_id="manager-return-to-provider-proposals-under-oie-review" />
+  <exit-transition transition_id="manager-return-to-request-for-proposals-under-development" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -135,6 +167,8 @@
   <exit-transition transition_id="send-bills-for-initial-payment" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
+  <exit-transition transition_id="manager-return-to-applicants-considering-change" />
+  <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -156,6 +190,7 @@
   <exit-transition transition_id="confirm-travel-delay" />
   <exit-transition transition_id="arrive-sponsored-program" />
   <exit-transition transition_id="arrive-non-sponsored-program" />
+  <exit-transition transition_id="manager-return-to-pending-program-departure" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -176,6 +211,7 @@
   <exit-transition transition_id="decline" />
   <exit-transition transition_id="withdraw-application" />
   <exit-transition transition_id="return-to-initial" />
+  <exit-transition transition_id="manager-return-to-initial" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -196,6 +232,7 @@
   <exit-transition transition_id="decline" />
   <exit-transition transition_id="withdraw-application" />
   <exit-transition transition_id="return-to-initial" />
+  <exit-transition transition_id="manager-return-to-pending-chair-review" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -217,6 +254,7 @@
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="pending-provider-proposal" />
+  <exit-transition transition_id="manager-return-to-pending-provost-review" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -236,6 +274,7 @@
   <exit-transition transition_id="publish-final-fee" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
+  <exit-transition transition_id="manager-return-to-initial-payment-billing-in-progress" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -255,6 +294,8 @@
   <exit-transition transition_id="withdraw-application" />
   <exit-transition transition_id="submit-to-provost" />
   <exit-transition transition_id="return-to-initial" />
+  <exit-transition transition_id="manager-return-to-pending-provost-review" />
+  <exit-transition transition_id="manager-return-to-pending-dean-unit-director-review" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -276,6 +317,9 @@
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="depart-sponsored-program" />
   <exit-transition transition_id="depart-non-sponsored-program" />
+  <exit-transition transition_id="manager-return-to-final-payment-billing-in-progress" />
+  <exit-transition transition_id="manager-return-to-pending-program-leader-operational-briefing" />
+  <exit-transition transition_id="manager-return-to-pending-arrival-abroad" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -297,6 +341,10 @@
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="return-to-initial" />
   <exit-transition transition_id="manager-return-to-initial" />
+  <exit-transition transition_id="manager-return-to-provider-proposals-under-liaison-review" />
+  <exit-transition transition_id="manager-return-to-pending-discussions-with-program-manager" />
+  <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
+  <exit-transition transition_id="manager-return-to-initial" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -316,6 +364,7 @@
   <exit-transition transition_id="confirm-briefing-completed" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
+  <exit-transition transition_id="manager-return-to-reviewing-final-program-details" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -335,6 +384,7 @@
   <exit-transition transition_id="confirm-orientation-completed" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
+  <exit-transition transition_id="manager-return-to-final-payment-billing-in-progress" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -354,6 +404,7 @@
   <exit-transition transition_id="review-provider-proposals" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
+  <exit-transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -375,6 +426,7 @@
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="decline" />
   <exit-transition transition_id="withdraw-application" />
+  <exit-transition transition_id="manager-return-to-pending-oie-review" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -394,6 +446,7 @@
   <exit-transition transition_id="travel-advance-ready" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
+  <exit-transition transition_id="manager-return-to-pending-program-leader-orientation" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -411,6 +464,7 @@
  </state>
  <state state_id="process-refunds-budget-transfers" title="Process Refunds &amp;amp; Budget Transfers" >
   <exit-transition transition_id="archive-program" />
+  <exit-transition transition_id="manager-return-to-final-program-accounting-in-progress" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -437,6 +491,7 @@
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="announce-programmatic-for-fee-change" />
+  <exit-transition transition_id="manager-return-to-program-fee-under-liaison-review" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -457,6 +512,7 @@
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="approve-fee" />
+  <exit-transition transition_id="manager-return-to-pending-program-fee-determination-by-oie" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -478,6 +534,8 @@
   <exit-transition transition_id="report-incident" />
   <exit-transition transition_id="returned-sponsored-program" />
   <exit-transition transition_id="returned-non-sponsored-program" />
+  <exit-transition transition_id="manager-return-to-pending-arrival-abroad" />
+  <exit-transition transition_id="manager-return-to-incident-in-progress" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -498,6 +556,7 @@
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="approve-proposal" />
+  <exit-transition transition_id="manager-return-to-provider-proposals-under-oie-review" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -518,6 +577,9 @@
   <exit-transition transition_id="submit-proposal-to-liaison" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
+  <exit-transition transition_id="manager-return-to-pending-provost-review" />
+  <exit-transition transition_id="manager-return-to-pending-provider-responses" />
+  <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -538,6 +600,8 @@
   <exit-transition transition_id="return-to-initial" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
+  <exit-transition transition_id="manager-return-to-pending-discussions-with-program-manager" />
+  <exit-transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -558,6 +622,7 @@
   <exit-transition transition_id="return-rfp-to-program-manager" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
+  <exit-transition transition_id="manager-return-to-request-for-proposals-under-development" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -577,6 +642,7 @@
   <exit-transition transition_id="schedule-operational-briefing" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
+  <exit-transition transition_id="manager-return-to-pending-travel-advance" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -600,6 +666,7 @@
  </state>
  <state state_id="travel-expense-report-student-evaluations-due-to" title="Travel Expense Report &amp;amp; Student Evaluations Due to OIE" >
   <exit-transition transition_id="confirm-ter-received" />
+  <exit-transition transition_id="manager-return-to-program-in-progress" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -617,6 +684,10 @@
  </state>
  <state state_id="withdrawn" title="Withdrawn" >
   <exit-transition transition_id="manager-return-to-initial" />
+  <exit-transition transition_id="manager-return-to-pending-chair-review" />
+  <exit-transition transition_id="manager-return-to-pending-dean-unit-director-review" />
+  <exit-transition transition_id="manager-return-to-pending-oie-review" />
+  <exit-transition transition_id="manager-return-to-pending-provost-review" />
 
 
 
@@ -1166,6 +1237,383 @@
   </guard>
 
  </transition>
+
+ <transition transition_id="manager-return-to-applicants-considering-change" title="(Managers Only) Return to applicants-considering-change" new_state="applicants-considering-change" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-applicants-considering-change" category="workflow" icon="">(Managers Only) Return to applicants-considering-change</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-application-intake-in-progress" title="(Managers Only) Return to application-intake-in-progress" new_state="application-intake-in-progress" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-application-intake-in-progress" category="workflow" icon="">(Managers Only) Return to application-intake-in-progress</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-cancelled" title="(Managers Only) Return to cancelled" new_state="cancelled" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-cancelled" category="workflow" icon="">(Managers Only) Return to cancelled</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-declined" title="(Managers Only) Return to declined" new_state="declined" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-declined" category="workflow" icon="">(Managers Only) Return to declined</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-final-payment-billing-in-progress" title="(Managers Only) Return to final-payment-billing-in-progress" new_state="final-payment-billing-in-progress" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-final-payment-billing-in-progress" category="workflow" icon="">(Managers Only) Return to final-payment-billing-in-progress</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-final-program-accounting-in-progress" title="(Managers Only) Return to final-program-accounting-in-progress" new_state="final-program-accounting-in-progress" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-final-program-accounting-in-progress" category="workflow" icon="">(Managers Only) Return to final-program-accounting-in-progress</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-incident-in-progress" title="(Managers Only) Return to incident-in-progress" new_state="incident-in-progress" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-incident-in-progress" category="workflow" icon="">(Managers Only) Return to incident-in-progress</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-initial-payment-billing-in-progress" title="(Managers Only) Return to initial-payment-billing-in-progress" new_state="initial-payment-billing-in-progress" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-initial-payment-billing-in-progress" category="workflow" icon="">(Managers Only) Return to initial-payment-billing-in-progress</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-pending-arrival-abroad" title="(Managers Only) Return to pending-arrival-abroad" new_state="pending-arrival-abroad" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-arrival-abroad" category="workflow" icon="">(Managers Only) Return to pending-arrival-abroad</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-pending-chair-review" title="(Managers Only) Return to pending-chair-review" new_state="pending-chair-review" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-chair-review" category="workflow" icon="">(Managers Only) Return to pending-chair-review</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-pending-dean-unit-director-review" title="(Managers Only) Return to pending-dean-unit-director-review" new_state="pending-dean-unit-director-review" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-dean-unit-director-review" category="workflow" icon="">(Managers Only) Return to pending-dean-unit-director-review</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-pending-discussions-with-program-manager" title="(Managers Only) Return to pending-discussions-with-program-manager" new_state="pending-discussions-with-program-manager" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-discussions-with-program-manager" category="workflow" icon="">(Managers Only) Return to pending-discussions-with-program-manager</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-pending-final-program-fee" title="(Managers Only) Return to pending-final-program-fee" new_state="pending-final-program-fee" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-final-program-fee" category="workflow" icon="">(Managers Only) Return to pending-final-program-fee</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-pending-oie-review" title="(Managers Only) Return to pending-oie-review" new_state="pending-oie-review" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-oie-review" category="workflow" icon="">(Managers Only) Return to pending-oie-review</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-pending-program-departure" title="(Managers Only) Return to pending-program-departure" new_state="pending-program-departure" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-program-departure" category="workflow" icon="">(Managers Only) Return to pending-program-departure</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-pending-program-fee-determination-by-oie" title="(Managers Only) Return to pending-program-fee-determination-by-oie" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-program-fee-determination-by-oie" category="workflow" icon="">(Managers Only) Return to pending-program-fee-determination-by-oie</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-pending-program-leader-operational-briefing" title="(Managers Only) Return to pending-program-leader-operational-briefing" new_state="pending-program-leader-operational-briefing" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-program-leader-operational-briefing" category="workflow" icon="">(Managers Only) Return to pending-program-leader-operational-briefing</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-pending-program-leader-orientation" title="(Managers Only) Return to pending-program-leader-orientation" new_state="pending-program-leader-orientation" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-program-leader-orientation" category="workflow" icon="">(Managers Only) Return to pending-program-leader-orientation</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-pending-provider-responses" title="(Managers Only) Return to pending-provider-responses" new_state="pending-provider-responses" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-provider-responses" category="workflow" icon="">(Managers Only) Return to pending-provider-responses</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-pending-provost-review" title="(Managers Only) Return to pending-provost-review" new_state="pending-provost-review" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-provost-review" category="workflow" icon="">(Managers Only) Return to pending-provost-review</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-pending-travel-advance" title="(Managers Only) Return to pending-travel-advance" new_state="pending-travel-advance" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-travel-advance" category="workflow" icon="">(Managers Only) Return to pending-travel-advance</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-process-refunds-budget-transfers" title="(Managers Only) Return to process-refunds-budget-transfers" new_state="process-refunds-budget-transfers" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-process-refunds-budget-transfers" category="workflow" icon="">(Managers Only) Return to process-refunds-budget-transfers</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-program-completed" title="(Managers Only) Return to program-completed" new_state="program-completed" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-program-completed" category="workflow" icon="">(Managers Only) Return to program-completed</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-program-fee-pending-publication" title="(Managers Only) Return to program-fee-pending-publication" new_state="program-fee-pending-publication" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-program-fee-pending-publication" category="workflow" icon="">(Managers Only) Return to program-fee-pending-publication</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-program-fee-under-liaison-review" title="(Managers Only) Return to program-fee-under-liaison-review" new_state="program-fee-under-liaison-review" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-program-fee-under-liaison-review" category="workflow" icon="">(Managers Only) Return to program-fee-under-liaison-review</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-program-in-progress" title="(Managers Only) Return to program-in-progress" new_state="program-in-progress" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-program-in-progress" category="workflow" icon="">(Managers Only) Return to program-in-progress</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-provider-proposals-under-liaison-review" title="(Managers Only) Return to provider-proposals-under-liaison-review" new_state="provider-proposals-under-liaison-review" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-provider-proposals-under-liaison-review" category="workflow" icon="">(Managers Only) Return to provider-proposals-under-liaison-review</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-provider-proposals-under-oie-review" title="(Managers Only) Return to provider-proposals-under-oie-review" new_state="provider-proposals-under-oie-review" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-provider-proposals-under-oie-review" category="workflow" icon="">(Managers Only) Return to provider-proposals-under-oie-review</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-request-for-proposals-under-development" title="(Managers Only) Return to request-for-proposals-under-development" new_state="request-for-proposals-under-development" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-request-for-proposals-under-development" category="workflow" icon="">(Managers Only) Return to request-for-proposals-under-development</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" title="(Managers Only) Return to request-for-proposals-under-liaison-review" new_state="request-for-proposals-under-liaison-review" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-request-for-proposals-under-liaison-review" category="workflow" icon="">(Managers Only) Return to request-for-proposals-under-liaison-review</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-reviewing-final-program-details" title="(Managers Only) Return to reviewing-final-program-details" new_state="reviewing-final-program-details" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-reviewing-final-program-details" category="workflow" icon="">(Managers Only) Return to reviewing-final-program-details</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-suspended" title="(Managers Only) Return to suspended" new_state="suspended" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-suspended" category="workflow" icon="">(Managers Only) Return to suspended</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-travel-expense-report-student-evaluations-due-to" title="(Managers Only) Return to travel-expense-report-student-evaluations-due-to" new_state="travel-expense-report-student-evaluations-due-to" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-travel-expense-report-student-evaluations-due-to" category="workflow" icon="">(Managers Only) Return to travel-expense-report-student-evaluations-due-to</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-withdrawn" title="(Managers Only) Return to withdrawn" new_state="withdrawn" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-withdrawn" category="workflow" icon="">(Managers Only) Return to withdrawn</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+
+
  <worklist worklist_id="reviewer_queue" title="" >
   <description>Reviewer tasks</description>
   <action url="%(portal_url)s/search?review_state=pending" category="global" icon="">Pending (%(count)d)</action>
