@@ -45,6 +45,7 @@
 
  </state>
  <state state_id="cancelled" title="Cancelled" >
+  <exit-transition transition_id="return-to-initial-from-cancelled" />
 
 
 
@@ -717,6 +718,16 @@
  </transition>
  <transition transition_id="cancel" title="Cancel" new_state="cancelled" trigger="USER" before_script="" after_script="" >
   <action url="%(content_url)s/content_status_modify?workflow_action=cancel" category="workflow" icon="">Cancel</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="return-to-initial-from-cancelled" title="return-to-initial-from-cancelled" new_state="initial" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=return-to-initial-from-cancelled" category="workflow" icon="">return-to-initial-from-cancelled</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
    <guard-role>Mgmt_Director</guard-role>

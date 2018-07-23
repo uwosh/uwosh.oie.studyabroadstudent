@@ -41,6 +41,116 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
             countries=['Afghanistan'],
         )
 
+    # helper methods
+
+    def _verify_transition_by_all_roles(self, obj=None, initial_state=None, authorized_roles=None,
+                                        unauthorized_roles=None, transition=None, destination_state=None,
+                                        return_transition=None, end_state=None):
+        self.assertIsNotNone(obj)
+        self.assertIsNotNone(initial_state)
+        self.assertIsNotNone(authorized_roles)
+        self.assertIsNotNone(unauthorized_roles)
+        self.assertIsNotNone(transition)
+        self.assertIsNotNone(destination_state)
+        self.assertIsNotNone(return_transition)
+        self.assertIsNotNone(end_state)
+        self._verify_allowed_transition_by_roles(obj=obj, initial_state=initial_state, roles=authorized_roles,
+                                                 transition=transition, destination_state=destination_state,
+                                                 return_transition=return_transition, end_state=end_state)
+        # verify can view the item
+        # verify can view viewable fields
+        # verify can edit editable fields
+
+        self._verify_unauthorized_transition_by_roles(obj=obj, initial_state=initial_state, roles=unauthorized_roles,
+                                                      transition=transition, end_state=end_state)
+        # verify cannot view item
+        # verify cannot view certain fields
+        # verify cannot edit certain fields
+
+    def _verify_allowed_transition_by_roles(self, obj=None, initial_state=None, roles=None, transition=None,
+                                            destination_state=None,
+                                            return_transition=None, end_state=None):
+        self.assertIsNotNone(obj)
+        self.assertIsNotNone(initial_state)
+        self.assertIsNotNone(roles)
+        self.assertIsNotNone(transition)
+        self.assertIsNotNone(destination_state)
+        self.assertIsNotNone(return_transition)
+        self.assertIsNotNone(end_state)
+        for role in roles:
+            self._verify_allowed_transition_by_role(obj=obj, initial_state=initial_state, role=role,
+                                                    transition=transition, destination_state=destination_state,
+                                                    return_transition=return_transition, end_state=end_state)
+
+    def _verify_allowed_transition_by_role(self, obj=None, initial_state=None, role=None, transition=None,
+                                           destination_state=None,
+                                           return_transition=None, end_state=None):
+        self.assertIsNotNone(obj)
+        self.assertIsNotNone(initial_state)
+        self.assertIsNotNone(role)
+        self.assertIsNotNone(transition)
+        self.assertIsNotNone(destination_state)
+        self.assertIsNotNone(return_transition)
+        self.assertIsNotNone(end_state)
+        self.assertEqual(api.content.get_state(obj=obj), initial_state)
+        self._switch_role(obj, role)
+        api.content.transition(obj=obj, transition=transition)
+        self.assertEqual(api.content.get_state(obj=obj), destination_state)
+        # send it back to the previous state
+        self._transition_to_state(obj, transition=return_transition, state=end_state)
+
+    def _verify_unauthorized_transition_by_roles(self, obj=None, initial_state=None, roles=None, transition=None,
+                                                 end_state=None):
+        self.assertIsNotNone(obj)
+        self.assertIsNotNone(initial_state)
+        self.assertIsNotNone(roles)
+        self.assertIsNotNone(transition)
+        self.assertIsNotNone(end_state)
+        for role in roles:
+            self._verify_unauthorized_transition_by_role(obj=obj, initial_state=initial_state, role=role,
+                                                         transition=transition,
+                                                         end_state=end_state)
+
+    def _verify_unauthorized_transition_by_role(self, obj=None, initial_state=None, role=None, transition=None,
+                                                end_state=None):
+        self.assertIsNotNone(obj)
+        self.assertIsNotNone(initial_state)
+        self.assertIsNotNone(role)
+        self.assertIsNotNone(transition)
+        self.assertIsNotNone(end_state)
+        self.assertEqual(api.content.get_state(obj=obj), initial_state)
+        self._switch_role(obj, role)
+        self._attempt_invalid_transition(obj, transition=transition, state=end_state)
+
+    def _attempt_invalid_transition(self, obj=None, transition=None, state=None):
+        self.assertIsNotNone(obj)
+        self.assertIsNotNone(transition)
+        self.assertIsNotNone(state)
+        error_str = ''
+        try:
+            api.content.transition(obj=obj, transition=transition)
+        except InvalidParameterError as e:
+            error_str = e.message
+        self.assertTrue('Invalid transition' in error_str)
+        self.assertEqual(api.content.get_state(obj=obj), state)
+
+    def _switch_role(self, obj=None, role=None):
+        self.assertIsNotNone(obj)
+        self.assertIsNotNone(role)
+        setRoles(self.portal, TEST_USER_ID, [role])
+        self.assertTrue(role in getSecurityManager().getUser().getRolesInContext(obj))
+
+    def _transition_to_state(self, obj=None, transition=None, state=None):
+        self.assertIsNotNone(obj)
+        self.assertIsNotNone(transition)
+        self.assertIsNotNone(state)
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.assertTrue('Manager' in getSecurityManager().getUser().getRolesInContext(obj))
+        api.content.transition(obj=obj, transition=transition)
+        self.assertEqual(api.content.get_state(obj=obj), state)
+
+    # actual tests
+
     def test_is_addon_installed(self):
         self.assertTrue(self.installer.isProductInstalled('uwosh.oie.studyabroadstudent'))
 
@@ -132,132 +242,48 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
         self._verify_transition_by_all_roles(obj=obj, initial_state='initial',
                                              authorized_roles=['Manager', 'Mgmt_Admin', 'Mgmt_Liaison'],
                                              unauthorized_roles=['Mgmt_Manager', 'Mgmt_Coordinator', 'Mgmt_Financial',
-                                                'Mgmt_OIEProfessional', 'Mgmt_Intern',
-                                                'Mgmt_ProgramLeader', 'Mgmt_Dean', 'Mgmt_Chair',
-                                                'Mgmt_Provost', 'Mgmt_LeaderReview', 'Mgmt_CourseBuilder',
-                                                'Mgmt_RiskMgmt', 'Participant_Director',
-                                                'Participant_Manager', 'Participant_Coordinator',
-                                                'Participant_Financial', 'Participant_Financial',
-                                                'Participant_Intern', 'Participant_Liaison',
-                                                'Participant_ProgramLeader', 'Participant_FinancialAid',
-                                                'Participant_Provost', 'Participant_DeanOfStudents',
-                                                'Participant_Health', 'Participant_Health',
-                                                'Participant_Reference', 'Participant_RiskMgmt',
-                                                'Participant_Applicant', 'Anonymous'],
+                                                                 'Mgmt_OIEProfessional', 'Mgmt_Intern',
+                                                                 'Mgmt_ProgramLeader', 'Mgmt_Dean', 'Mgmt_Chair',
+                                                                 'Mgmt_Provost', 'Mgmt_LeaderReview',
+                                                                 'Mgmt_CourseBuilder',
+                                                                 'Mgmt_RiskMgmt', 'Participant_Director',
+                                                                 'Participant_Manager', 'Participant_Coordinator',
+                                                                 'Participant_Financial', 'Participant_Financial',
+                                                                 'Participant_Intern', 'Participant_Liaison',
+                                                                 'Participant_ProgramLeader',
+                                                                 'Participant_FinancialAid',
+                                                                 'Participant_Provost', 'Participant_DeanOfStudents',
+                                                                 'Participant_Health', 'Participant_Health',
+                                                                 'Participant_Reference', 'Participant_RiskMgmt',
+                                                                 'Participant_Applicant', 'Anonymous'],
                                              transition='submit-to-chair', destination_state='pending-chair-review',
                                              return_transition='return-to-initial', end_state='initial')
 
         # and finally return it to the intended state
         self._transition_to_state(obj, 'submit-to-chair', 'pending-chair-review')
 
-    def _verify_transition_by_all_roles(self, obj=None, initial_state=None, authorized_roles=None,
-                                        unauthorized_roles=None, transition=None, destination_state=None,
-                                        return_transition=None, end_state=None):
-        self.assertIsNotNone(obj)
-        self.assertIsNotNone(initial_state)
-        self.assertIsNotNone(authorized_roles)
-        self.assertIsNotNone(unauthorized_roles)
-        self.assertIsNotNone(transition)
-        self.assertIsNotNone(destination_state)
-        self.assertIsNotNone(return_transition)
-        self.assertIsNotNone(end_state)
-        self._verify_allowed_transition_by_roles(obj=obj, initial_state=initial_state, roles=authorized_roles,
-                                                 transition=transition, destination_state=destination_state,
-                                                 return_transition=return_transition, end_state=end_state)
-        # verify can view the item
-        # verify can view viewable fields
-        # verify can edit editable fields
-
-        self._verify_unauthorized_transition_by_roles(obj=obj, initial_state=initial_state, roles=unauthorized_roles,
-                                                      transition=transition, end_state=end_state)
-        # verify cannot view item
-        # verify cannot view certain fields
-        # verify cannot edit certain fields
-
-
-    def _verify_allowed_transition_by_roles(self, obj=None, initial_state=None, roles=None, transition=None, destination_state=None,
-                                            return_transition=None, end_state=None):
-        self.assertIsNotNone(obj)
-        self.assertIsNotNone(initial_state)
-        self.assertIsNotNone(roles)
-        self.assertIsNotNone(transition)
-        self.assertIsNotNone(destination_state)
-        self.assertIsNotNone(return_transition)
-        self.assertIsNotNone(end_state)
-        for role in roles:
-            self._verify_allowed_transition_by_role(obj=obj, initial_state=initial_state, role=role, transition=transition,
-                                                    destination_state=destination_state,
-                                                    return_transition=return_transition, end_state=end_state)
-
-    def _verify_allowed_transition_by_role(self, obj=None, initial_state=None, role=None, transition=None, destination_state=None,
-                                           return_transition=None, end_state=None):
-        self.assertIsNotNone(obj)
-        self.assertIsNotNone(initial_state)
-        self.assertIsNotNone(role)
-        self.assertIsNotNone(transition)
-        self.assertIsNotNone(destination_state)
-        self.assertIsNotNone(return_transition)
-        self.assertIsNotNone(end_state)
-        self.assertEqual(api.content.get_state(obj=obj), initial_state)
-        self._switch_role(obj, role)
-        api.content.transition(obj=obj, transition=transition)
-        self.assertEqual(api.content.get_state(obj=obj), destination_state)
-        # send it back to the previous state
-        self._transition_to_state(obj, transition=return_transition, state=end_state)
-
-    def _verify_unauthorized_transition_by_roles(self, obj=None, initial_state=None, roles=None, transition=None, end_state=None):
-        self.assertIsNotNone(obj)
-        self.assertIsNotNone(initial_state)
-        self.assertIsNotNone(roles)
-        self.assertIsNotNone(transition)
-        self.assertIsNotNone(end_state)
-        for role in roles:
-            self._verify_unauthorized_transition_by_role(obj=obj, initial_state=initial_state, role=role, transition=transition,
-                                                         end_state=end_state)
-
-    def _verify_unauthorized_transition_by_role(self, obj=None, initial_state=None, role=None, transition=None, end_state=None):
-        self.assertIsNotNone(obj)
-        self.assertIsNotNone(initial_state)
-        self.assertIsNotNone(role)
-        self.assertIsNotNone(transition)
-        self.assertIsNotNone(end_state)
-        self.assertEqual(api.content.get_state(obj=obj), initial_state)
-        self._switch_role(obj, role)
-        self._attempt_invalid_transition(obj, transition=transition, state=end_state)
-
-    def _attempt_invalid_transition(self, obj=None, transition=None, state=None):
-        self.assertIsNotNone(obj)
-        self.assertIsNotNone(transition)
-        self.assertIsNotNone(state)
-        error_str = ''
-        try:
-            api.content.transition(obj=obj, transition=transition)
-        except InvalidParameterError as e:
-            error_str = e.message
-        self.assertTrue('Invalid transition' in error_str)
-        self.assertEqual(api.content.get_state(obj=obj), state)
-
-    def _switch_role(self, obj=None, role=None):
-        self.assertIsNotNone(obj)
-        self.assertIsNotNone(role)
-        setRoles(self.portal, TEST_USER_ID, [role])
-        self.assertTrue(role in getSecurityManager().getUser().getRolesInContext(obj))
-
-    def _transition_to_state(self, obj=None, transition=None, state=None):
-        self.assertIsNotNone(obj)
-        self.assertIsNotNone(transition)
-        self.assertIsNotNone(state)
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.assertTrue('Manager' in getSecurityManager().getUser().getRolesInContext(obj))
-        api.content.transition(obj=obj, transition=transition)
-        self.assertEqual(api.content.get_state(obj=obj), state)
-
     def test_can_transition_by_manager_cancel_from_initial(self):
-        """from initial"""
+        """from initial Mgmt_Admin; Mgmt_Director; Manager"""
         obj = self.program
-        api.content.transition(obj=obj, transition='cancel')
-        state = api.content.get_state(obj=obj)
-        self.assertEqual(state, 'cancelled')
+        self._verify_transition_by_all_roles(obj=obj, initial_state='initial',
+                                             authorized_roles=['Manager', 'Mgmt_Admin'],
+                                             unauthorized_roles=['Mgmt_Liaison', 'Mgmt_Manager', 'Mgmt_Coordinator',
+                                                                 'Mgmt_Financial', 'Mgmt_OIEProfessional',
+                                                                 'Mgmt_Intern', 'Mgmt_ProgramLeader', 'Mgmt_Dean',
+                                                                 'Mgmt_Chair', 'Mgmt_Provost', 'Mgmt_LeaderReview',
+                                                                 'Mgmt_CourseBuilder', 'Mgmt_RiskMgmt',
+                                                                 'Participant_Director', 'Participant_Manager',
+                                                                 'Participant_Coordinator', 'Participant_Financial',
+                                                                 'Participant_Financial', 'Participant_Intern',
+                                                                 'Participant_Liaison', 'Participant_ProgramLeader',
+                                                                 'Participant_FinancialAid', 'Participant_Provost',
+                                                                 'Participant_DeanOfStudents', 'Participant_Health',
+                                                                 'Participant_Health', 'Participant_Reference',
+                                                                 'Participant_RiskMgmt', 'Participant_Applicant',
+                                                                 'Anonymous'],
+                                             transition='cancel', destination_state='cancelled',
+                                             return_transition='return-to-initial-from-cancelled',
+                                             end_state='initial')
 
     def test_can_transition_by_manager_withdraw_application_from_initial(self):
         """from initial"""
