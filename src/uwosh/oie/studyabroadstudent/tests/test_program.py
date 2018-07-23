@@ -378,12 +378,28 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
                                              end_state='pending-chair-review')
 
     def test_can_transition_by_manager_decline_from_pending_chair_review(self):
-        """from pending-chair-review"""
+        """from pending-chair-review Requires role: Mgmt_Admin; Mgmt_Dean; Mgmt_Chair; Mgmt_Provost; or Manager"""
         self.test_can_transition_by_manager_submit_to_chair()
-        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-chair-review')
-        api.content.transition(obj=(self.program), transition='decline')
-        state = api.content.get_state(obj=(self.program))
-        self.assertEqual(state, 'declined')
+        self._verify_transition_by_all_roles(obj=(self.program), initial_state='pending-chair-review',
+                                             authorized_roles=['Mgmt_Admin', 'Mgmt_Dean', 'Mgmt_Chair', 'Mgmt_Provost', 'Manager', ],
+                                             unauthorized_roles=['Mgmt_Manager', 'Mgmt_Liaison', 'Mgmt_Coordinator',
+                                                                 'Mgmt_Financial', 'Mgmt_OIEProfessional',
+                                                                 'Mgmt_Intern', 'Mgmt_ProgramLeader',
+                                                                 'Mgmt_LeaderReview',
+                                                                 'Mgmt_CourseBuilder', 'Mgmt_RiskMgmt',
+                                                                 'Participant_Director', 'Participant_Manager',
+                                                                 'Participant_Coordinator', 'Participant_Financial',
+                                                                 'Participant_Financial', 'Participant_Intern',
+                                                                 'Participant_Liaison', 'Participant_ProgramLeader',
+                                                                 'Participant_FinancialAid', 'Participant_Provost',
+                                                                 'Participant_DeanOfStudents', 'Participant_Health',
+                                                                 'Participant_Health', 'Participant_Reference',
+                                                                 'Participant_RiskMgmt', 'Participant_Applicant',
+                                                                 'Anonymous'],
+                                             transition='decline',
+                                             destination_state='declined',
+                                             return_transition='manager-return-to-pending-chair-review',
+                                             end_state='pending-chair-review')
 
     def test_can_transition_by_manager_withdraw_application_from_pending_chair_review(self):
         """from pending-chair-review"""
