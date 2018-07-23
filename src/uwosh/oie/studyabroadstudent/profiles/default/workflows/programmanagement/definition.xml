@@ -75,6 +75,7 @@
  </state>
  <state state_id="declined" title="Declined" >
   <exit-transition transition_id="manager-return-to-pending-chair-review" />
+  <exit-transition transition_id="manager-return-to-pending-dean-unit-director-review" />
 
  </state>
  <state state_id="final-payment-billing-in-progress" title="Final Payment Billing in Progress" >
@@ -234,6 +235,7 @@
   <exit-transition transition_id="withdraw-application" />
   <exit-transition transition_id="return-to-initial" />
   <exit-transition transition_id="manager-return-to-pending-chair-review" />
+  <exit-transition transition_id="manager-return-to-pending-dean-unit-director-review" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>

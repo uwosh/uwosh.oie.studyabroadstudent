@@ -402,52 +402,176 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
                                              end_state='pending-chair-review')
 
     def test_can_transition_by_manager_withdraw_application_from_pending_chair_review(self):
-        """from pending-chair-review"""
+        """from pending-chair-review Requires role: Mgmt_Admin; Mgmt_Liaison; or Manager"""
         self.test_can_transition_by_manager_submit_to_chair()
-        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-chair-review')
-        api.content.transition(obj=(self.program), transition='withdraw-application')
-        state = api.content.get_state(obj=(self.program))
-        self.assertEqual(state, 'withdrawn')
+        # self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-chair-review')
+        # api.content.transition(obj=(self.program), transition='withdraw-application')
+        # state = api.content.get_state(obj=(self.program))
+        # self.assertEqual(state, 'withdrawn')
+        self._verify_transition_by_all_roles(obj=(self.program), initial_state='pending-chair-review',
+                                             authorized_roles=['Mgmt_Admin', 'Mgmt_Liaison', 'Manager', ],
+                                             unauthorized_roles=['Mgmt_Manager', 'Mgmt_Coordinator',
+                                                                 'Mgmt_Dean', 'Mgmt_Chair', 'Mgmt_Provost',
+                                                                 'Mgmt_Financial', 'Mgmt_OIEProfessional',
+                                                                 'Mgmt_Intern', 'Mgmt_ProgramLeader',
+                                                                 'Mgmt_LeaderReview',
+                                                                 'Mgmt_CourseBuilder', 'Mgmt_RiskMgmt',
+                                                                 'Participant_Director', 'Participant_Manager',
+                                                                 'Participant_Coordinator', 'Participant_Financial',
+                                                                 'Participant_Financial', 'Participant_Intern',
+                                                                 'Participant_Liaison', 'Participant_ProgramLeader',
+                                                                 'Participant_FinancialAid', 'Participant_Provost',
+                                                                 'Participant_DeanOfStudents', 'Participant_Health',
+                                                                 'Participant_Health', 'Participant_Reference',
+                                                                 'Participant_RiskMgmt', 'Participant_Applicant',
+                                                                 'Anonymous'],
+                                             transition='withdraw-application',
+                                             destination_state='withdrawn',
+                                             return_transition='manager-return-to-pending-chair-review',
+                                             end_state='pending-chair-review')
 
     def test_can_transition_by_manager_return_to_initial_from_pending_chair_review(self):
-        """from pending-chair-review"""
+        """from pending-chair-review Requires role: Mgmt_Admin; Mgmt_Dean; Mgmt_Director; Mgmt_Chair; Mgmt_Manager; or Manager"""
         self.test_can_transition_by_manager_submit_to_chair()
-        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-chair-review')
-        api.content.transition(obj=(self.program), transition='return-to-initial')
-        state = api.content.get_state(obj=(self.program))
-        self.assertEqual(state, 'initial')
+        # self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-chair-review')
+        # api.content.transition(obj=(self.program), transition='return-to-initial')
+        # state = api.content.get_state(obj=(self.program))
+        # self.assertEqual(state, 'initial')
+        self._verify_transition_by_all_roles(obj=(self.program), initial_state='pending-chair-review',
+                                             authorized_roles=['Mgmt_Admin', 'Mgmt_Dean', 'Mgmt_Chair', 'Mgmt_Manager', 'Manager', ],
+                                             unauthorized_roles=['Mgmt_Liaison', 'Mgmt_Coordinator',
+                                                                 'Mgmt_Financial', 'Mgmt_OIEProfessional',
+                                                                 'Mgmt_Intern', 'Mgmt_ProgramLeader',
+                                                                 'Mgmt_LeaderReview', 'Mgmt_Provost',
+                                                                 'Mgmt_CourseBuilder', 'Mgmt_RiskMgmt',
+                                                                 'Participant_Director', 'Participant_Manager',
+                                                                 'Participant_Coordinator', 'Participant_Financial',
+                                                                 'Participant_Financial', 'Participant_Intern',
+                                                                 'Participant_Liaison', 'Participant_ProgramLeader',
+                                                                 'Participant_FinancialAid', 'Participant_Provost',
+                                                                 'Participant_DeanOfStudents', 'Participant_Health',
+                                                                 'Participant_Health', 'Participant_Reference',
+                                                                 'Participant_RiskMgmt', 'Participant_Applicant',
+                                                                 'Anonymous'],
+                                             transition='return-to-initial',
+                                             destination_state='initial',
+                                             return_transition='manager-return-to-pending-chair-review',
+                                             end_state='pending-chair-review')
 
     def test_can_transition_by_manager_submit_to_oie(self):
-        """from pending-dean-unit-director-review"""
+        """from pending-dean-unit-director-review Requires role: Mgmt_Admin; Mgmt_Dean; or Manager"""
         self.test_can_transition_by_manager_submit_to_dean()
-        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-dean-unit-director-review')
-        api.content.transition(obj=(self.program), transition='submit-to-oie')
-        state = api.content.get_state(obj=(self.program))
-        self.assertEqual(state, 'pending-oie-review')
+        # self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-dean-unit-director-review')
+        # api.content.transition(obj=(self.program), transition='submit-to-oie')
+        # state = api.content.get_state(obj=(self.program))
+        # self.assertEqual(state, 'pending-oie-review')
+        self._verify_transition_by_all_roles(obj=(self.program), initial_state='pending-dean-unit-director-review',
+                                             authorized_roles=['Mgmt_Admin', 'Mgmt_Dean', 'Manager', ],
+                                             unauthorized_roles=['Mgmt_Manager', 'Mgmt_Liaison', 'Mgmt_Coordinator',
+                                                                 'Mgmt_Chair', 'Mgmt_Provost',
+                                                                 'Mgmt_Financial', 'Mgmt_OIEProfessional',
+                                                                 'Mgmt_Intern', 'Mgmt_ProgramLeader',
+                                                                 'Mgmt_LeaderReview',
+                                                                 'Mgmt_CourseBuilder', 'Mgmt_RiskMgmt',
+                                                                 'Participant_Director', 'Participant_Manager',
+                                                                 'Participant_Coordinator', 'Participant_Financial',
+                                                                 'Participant_Financial', 'Participant_Intern',
+                                                                 'Participant_Liaison', 'Participant_ProgramLeader',
+                                                                 'Participant_FinancialAid', 'Participant_Provost',
+                                                                 'Participant_DeanOfStudents', 'Participant_Health',
+                                                                 'Participant_Health', 'Participant_Reference',
+                                                                 'Participant_RiskMgmt', 'Participant_Applicant',
+                                                                 'Anonymous'],
+                                             transition='submit-to-oie',
+                                             destination_state='pending-oie-review',
+                                             return_transition='manager-return-to-pending-dean-unit-director-review',
+                                             end_state='pending-dean-unit-director-review')
 
     def test_can_transition_by_manager_decline_from_pending_dean_unit_director_review(self):
-        """from pending-dean-unit-director-review"""
+        """from pending-dean-unit-director-review Requires role: Mgmt_Admin; Mgmt_Dean; Mgmt_Chair; Mgmt_Provost; or Manager"""
         self.test_can_transition_by_manager_submit_to_dean()
-        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-dean-unit-director-review')
-        api.content.transition(obj=(self.program), transition='decline')
-        state = api.content.get_state(obj=(self.program))
-        self.assertEqual(state, 'declined')
+        # self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-dean-unit-director-review')
+        # api.content.transition(obj=(self.program), transition='decline')
+        # state = api.content.get_state(obj=(self.program))
+        # self.assertEqual(state, 'declined')
+        self._verify_transition_by_all_roles(obj=(self.program), initial_state='pending-dean-unit-director-review',
+                                             authorized_roles=['Mgmt_Admin', 'Mgmt_Dean', 'Mgmt_Chair', 'Mgmt_Provost','Manager', ],
+                                             unauthorized_roles=['Mgmt_Manager', 'Mgmt_Liaison', 'Mgmt_Coordinator',
+                                                                 'Mgmt_Financial', 'Mgmt_OIEProfessional',
+                                                                 'Mgmt_Intern', 'Mgmt_ProgramLeader',
+                                                                 'Mgmt_LeaderReview',
+                                                                 'Mgmt_CourseBuilder', 'Mgmt_RiskMgmt',
+                                                                 'Participant_Director', 'Participant_Manager',
+                                                                 'Participant_Coordinator', 'Participant_Financial',
+                                                                 'Participant_Financial', 'Participant_Intern',
+                                                                 'Participant_Liaison', 'Participant_ProgramLeader',
+                                                                 'Participant_FinancialAid', 'Participant_Provost',
+                                                                 'Participant_DeanOfStudents', 'Participant_Health',
+                                                                 'Participant_Health', 'Participant_Reference',
+                                                                 'Participant_RiskMgmt', 'Participant_Applicant',
+                                                                 'Anonymous'],
+                                             transition='decline',
+                                             destination_state='declined',
+                                             return_transition='manager-return-to-pending-dean-unit-director-review',
+                                             end_state='pending-dean-unit-director-review')
 
     def test_can_transition_by_manager_withdraw_application_from_pending_dean_unit_director_review(self):
-        """from pending-dean-unit-director-review"""
+        """from pending-dean-unit-director-review Requires role: Mgmt_Admin; Mgmt_Liaison; or Manager"""
         self.test_can_transition_by_manager_submit_to_dean()
-        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-dean-unit-director-review')
-        api.content.transition(obj=(self.program), transition='withdraw-application')
-        state = api.content.get_state(obj=(self.program))
-        self.assertEqual(state, 'withdrawn')
+        # self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-dean-unit-director-review')
+        # api.content.transition(obj=(self.program), transition='withdraw-application')
+        # state = api.content.get_state(obj=(self.program))
+        # self.assertEqual(state, 'withdrawn')
+        self._verify_transition_by_all_roles(obj=(self.program), initial_state='pending-dean-unit-director-review',
+                                             authorized_roles=['Mgmt_Admin', 'Mgmt_Liaison', 'Manager', ],
+                                             unauthorized_roles=['Mgmt_Manager', 'Mgmt_Coordinator','Mgmt_Dean',
+                                                                 'Mgmt_Chair', 'Mgmt_Provost',
+                                                                 'Mgmt_Financial', 'Mgmt_OIEProfessional',
+                                                                 'Mgmt_Intern', 'Mgmt_ProgramLeader',
+                                                                 'Mgmt_LeaderReview',
+                                                                 'Mgmt_CourseBuilder', 'Mgmt_RiskMgmt',
+                                                                 'Participant_Director', 'Participant_Manager',
+                                                                 'Participant_Coordinator', 'Participant_Financial',
+                                                                 'Participant_Financial', 'Participant_Intern',
+                                                                 'Participant_Liaison', 'Participant_ProgramLeader',
+                                                                 'Participant_FinancialAid', 'Participant_Provost',
+                                                                 'Participant_DeanOfStudents', 'Participant_Health',
+                                                                 'Participant_Health', 'Participant_Reference',
+                                                                 'Participant_RiskMgmt', 'Participant_Applicant',
+                                                                 'Anonymous'],
+                                             transition='withdraw-application',
+                                             destination_state='withdrawn',
+                                             return_transition='manager-return-to-pending-dean-unit-director-review',
+                                             end_state='pending-dean-unit-director-review')
 
     def test_can_transition_by_manager_return_to_initial_from_pending_dean_unit_director_review(self):
-        """from pending-dean-unit-director-review"""
+        """from pending-dean-unit-director-review Requires role: Mgmt_Admin; Mgmt_Dean; Mgmt_Director; Mgmt_Chair; Mgmt_Manager; or Manager"""
         self.test_can_transition_by_manager_submit_to_dean()
-        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-dean-unit-director-review')
-        api.content.transition(obj=(self.program), transition='return-to-initial')
-        state = api.content.get_state(obj=(self.program))
-        self.assertEqual(state, 'initial')
+        # self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-dean-unit-director-review')
+        # api.content.transition(obj=(self.program), transition='return-to-initial')
+        # state = api.content.get_state(obj=(self.program))
+        # self.assertEqual(state, 'initial')
+        self._verify_transition_by_all_roles(obj=(self.program), initial_state='pending-dean-unit-director-review',
+                                             authorized_roles=['Mgmt_Admin', 'Mgmt_Dean', 'Mgmt_Chair', 'Mgmt_Manager', 'Manager', ],
+                                             unauthorized_roles=['Mgmt_Liaison', 'Mgmt_Coordinator',
+                                                                 'Mgmt_Provost',
+                                                                 'Mgmt_Financial', 'Mgmt_OIEProfessional',
+                                                                 'Mgmt_Intern', 'Mgmt_ProgramLeader',
+                                                                 'Mgmt_LeaderReview',
+                                                                 'Mgmt_CourseBuilder', 'Mgmt_RiskMgmt',
+                                                                 'Participant_Director', 'Participant_Manager',
+                                                                 'Participant_Coordinator', 'Participant_Financial',
+                                                                 'Participant_Financial', 'Participant_Intern',
+                                                                 'Participant_Liaison', 'Participant_ProgramLeader',
+                                                                 'Participant_FinancialAid', 'Participant_Provost',
+                                                                 'Participant_DeanOfStudents', 'Participant_Health',
+                                                                 'Participant_Health', 'Participant_Reference',
+                                                                 'Participant_RiskMgmt', 'Participant_Applicant',
+                                                                 'Anonymous'],
+                                             transition='return-to-initial',
+                                             destination_state='initial',
+                                             return_transition='manager-return-to-pending-dean-unit-director-review',
+                                             end_state='pending-dean-unit-director-review')
 
     def test_can_transition_by_manager_withdraw_application_from_pending_oie_review(self):
         """from pending-oie-review"""
