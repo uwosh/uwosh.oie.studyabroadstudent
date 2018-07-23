@@ -29,6 +29,7 @@
   <exit-transition transition_id="confirm-to-run" />
   <exit-transition transition_id="send-for-programmatic-change" />
   <exit-transition transition_id="send-for-fee-change" />
+  <exit-transition transition_id="manager-return-to-initial" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -45,16 +46,13 @@
 
  </state>
  <state state_id="cancelled" title="Cancelled" >
-  <exit-transition transition_id="return-to-initial-from-cancelled" />
+  <exit-transition transition_id="manager-return-to-initial" />
 
 
 
 
  </state>
  <state state_id="declined" title="Declined" >
-
-
-
 
  </state>
  <state state_id="final-payment-billing-in-progress" title="Final Payment Billing in Progress" >
@@ -298,6 +296,7 @@
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="return-to-initial" />
+  <exit-transition transition_id="manager-return-to-initial" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -617,6 +616,7 @@
 
  </state>
  <state state_id="withdrawn" title="Withdrawn" >
+  <exit-transition transition_id="manager-return-to-initial" />
 
 
 
@@ -718,16 +718,6 @@
  </transition>
  <transition transition_id="cancel" title="Cancel" new_state="cancelled" trigger="USER" before_script="" after_script="" >
   <action url="%(content_url)s/content_status_modify?workflow_action=cancel" category="workflow" icon="">Cancel</action>
-  <guard >
-   <guard-role>Mgmt_Admin</guard-role>
-   <guard-role>Mgmt_Director</guard-role>
-   <guard-role>Manager</guard-role>
-   <guard-role>Site Administrator</guard-role>
-  </guard>
-
- </transition>
- <transition transition_id="return-to-initial-from-cancelled" title="return-to-initial-from-cancelled" new_state="initial" trigger="USER" before_script="" after_script="" >
-  <action url="%(content_url)s/content_status_modify?workflow_action=return-to-initial-from-cancelled" category="workflow" icon="">return-to-initial-from-cancelled</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
    <guard-role>Mgmt_Director</guard-role>
@@ -948,6 +938,17 @@
    <guard-role>Mgmt_Dean</guard-role>
    <guard-role>Mgmt_Director</guard-role>
    <guard-role>Mgmt_Chair</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
+  </guard>
+
+ </transition>
+ <transition transition_id="manager-return-to-initial" title="(Managers Only) Return to Initial" new_state="initial" trigger="USER" before_script="" after_script="" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-initial" category="workflow" icon="">(Managers Only) Return to Initial</action>
+  <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Director</guard-role>
    <guard-role>Mgmt_Manager</guard-role>
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
