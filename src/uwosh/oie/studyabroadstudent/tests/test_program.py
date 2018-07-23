@@ -67,6 +67,11 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
         # verify cannot view certain fields
         # verify cannot edit certain fields
 
+        # check if we have to get to the destination_state
+        if api.content.get_state(obj=obj) != destination_state:
+            self._switch_role(obj, 'Manager')
+            self._transition_to_state(obj, transition=transition, state=destination_state)
+
     def _verify_allowed_transition_by_roles(self, obj=None, initial_state=None, roles=None, transition=None,
                                             destination_state=None,
                                             return_transition=None, end_state=None):
@@ -96,7 +101,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
         self._switch_role(obj, role)
         api.content.transition(obj=obj, transition=transition)
         self.assertEqual(api.content.get_state(obj=obj), destination_state)
-        # send it back to the previous state
+        # send it back to the end state
         self._transition_to_state(obj, transition=return_transition, state=end_state)
 
     def _verify_unauthorized_transition_by_roles(self, obj=None, initial_state=None, roles=None, transition=None,
@@ -120,19 +125,19 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
         self.assertIsNotNone(end_state)
         self.assertEqual(api.content.get_state(obj=obj), initial_state)
         self._switch_role(obj, role)
-        self._attempt_invalid_transition(obj, transition=transition, state=end_state)
+        self._attempt_invalid_transition(obj, transition=transition, end_state=end_state)
 
-    def _attempt_invalid_transition(self, obj=None, transition=None, state=None):
+    def _attempt_invalid_transition(self, obj=None, transition=None, end_state=None):
         self.assertIsNotNone(obj)
         self.assertIsNotNone(transition)
-        self.assertIsNotNone(state)
+        self.assertIsNotNone(end_state)
         error_str = ''
         try:
             api.content.transition(obj=obj, transition=transition)
         except InvalidParameterError as e:
             error_str = e.message
         self.assertTrue('Invalid transition' in error_str)
-        self.assertEqual(api.content.get_state(obj=obj), state)
+        self.assertEqual(api.content.get_state(obj=obj), end_state)
 
     def _switch_role(self, obj=None, role=None):
         self.assertIsNotNone(obj)
@@ -257,9 +262,6 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
                                              transition='submit-to-chair', destination_state='pending-chair-review',
                                              return_transition='return-to-initial', end_state='initial')
 
-        # and finally return it to the intended state
-        self._transition_to_state(self.program, 'submit-to-chair', 'pending-chair-review')
-
     def test_can_transition_by_manager_cancel_from_initial(self):
         """from initial Mgmt_Admin; Mgmt_Director; Manager"""
         self._verify_transition_by_all_roles(obj=(self.program), initial_state='initial',
@@ -351,15 +353,34 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
                                              end_state='initial')
 
     def test_can_transition_by_manager_submit_to_dean(self):
-        """from pending-chair-review"""
+        """from pending-chair-review Requires role: Mgmt_Admin; Mgmt_Chair; or Manager"""
+        # get it to the correct state
         self.test_can_transition_by_manager_submit_to_chair()
-        api.content.transition(obj=(self.program), transition='submit-to-dean')
-        state = api.content.get_state(obj=(self.program))
-        self.assertEqual(state, 'pending-dean-unit-director-review')
+        self._verify_transition_by_all_roles(obj=(self.program), initial_state='pending-chair-review',
+                                             authorized_roles=['Manager', 'Mgmt_Chair', 'Mgmt_Admin', ],
+                                             unauthorized_roles=['Mgmt_Manager', 'Mgmt_Liaison', 'Mgmt_Coordinator',
+                                                                 'Mgmt_Financial', 'Mgmt_OIEProfessional',
+                                                                 'Mgmt_Intern', 'Mgmt_ProgramLeader', 'Mgmt_Dean',
+                                                                 'Mgmt_Provost', 'Mgmt_LeaderReview',
+                                                                 'Mgmt_CourseBuilder', 'Mgmt_RiskMgmt',
+                                                                 'Participant_Director', 'Participant_Manager',
+                                                                 'Participant_Coordinator', 'Participant_Financial',
+                                                                 'Participant_Financial', 'Participant_Intern',
+                                                                 'Participant_Liaison', 'Participant_ProgramLeader',
+                                                                 'Participant_FinancialAid', 'Participant_Provost',
+                                                                 'Participant_DeanOfStudents', 'Participant_Health',
+                                                                 'Participant_Health', 'Participant_Reference',
+                                                                 'Participant_RiskMgmt', 'Participant_Applicant',
+                                                                 'Anonymous'],
+                                             transition='submit-to-dean',
+                                             destination_state='pending-dean-unit-director-review',
+                                             return_transition='manager-return-to-pending-chair-review',
+                                             end_state='pending-chair-review')
 
     def test_can_transition_by_manager_decline_from_pending_chair_review(self):
         """from pending-chair-review"""
         self.test_can_transition_by_manager_submit_to_chair()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-chair-review')
         api.content.transition(obj=(self.program), transition='decline')
         state = api.content.get_state(obj=(self.program))
         self.assertEqual(state, 'declined')
@@ -367,6 +388,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_withdraw_application_from_pending_chair_review(self):
         """from pending-chair-review"""
         self.test_can_transition_by_manager_submit_to_chair()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-chair-review')
         api.content.transition(obj=(self.program), transition='withdraw-application')
         state = api.content.get_state(obj=(self.program))
         self.assertEqual(state, 'withdrawn')
@@ -374,6 +396,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_return_to_initial_from_pending_chair_review(self):
         """from pending-chair-review"""
         self.test_can_transition_by_manager_submit_to_chair()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-chair-review')
         api.content.transition(obj=(self.program), transition='return-to-initial')
         state = api.content.get_state(obj=(self.program))
         self.assertEqual(state, 'initial')
@@ -381,14 +404,15 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_submit_to_oie(self):
         """from pending-dean-unit-director-review"""
         self.test_can_transition_by_manager_submit_to_dean()
-        obj = self.program
-        api.content.transition(obj=obj, transition='submit-to-oie')
-        state = api.content.get_state(obj=obj)
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-dean-unit-director-review')
+        api.content.transition(obj=(self.program), transition='submit-to-oie')
+        state = api.content.get_state(obj=(self.program))
         self.assertEqual(state, 'pending-oie-review')
 
     def test_can_transition_by_manager_decline_from_pending_dean_unit_director_review(self):
         """from pending-dean-unit-director-review"""
         self.test_can_transition_by_manager_submit_to_dean()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-dean-unit-director-review')
         obj = self.program
         api.content.transition(obj=obj, transition='decline')
         state = api.content.get_state(obj=obj)
@@ -397,6 +421,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_withdraw_application_from_pending_dean_unit_director_review(self):
         """from pending-dean-unit-director-review"""
         self.test_can_transition_by_manager_submit_to_dean()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-dean-unit-director-review')
         obj = self.program
         api.content.transition(obj=obj, transition='withdraw-application')
         state = api.content.get_state(obj=obj)
@@ -405,6 +430,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_return_to_initial_from_pending_dean_unit_director_review(self):
         """from pending-dean-unit-director-review"""
         self.test_can_transition_by_manager_submit_to_dean()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-dean-unit-director-review')
         obj = self.program
         api.content.transition(obj=obj, transition='return-to-initial')
         state = api.content.get_state(obj=obj)
@@ -413,6 +439,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_withdraw_application_from_pending_oie_review(self):
         """from pending-oie-review"""
         self.test_can_transition_by_manager_submit_to_oie()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-oie-review')
         obj = self.program
         api.content.transition(obj=obj, transition='withdraw-application')
         state = api.content.get_state(obj=obj)
@@ -421,6 +448,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_submit_to_provost(self):
         """from pending-oie-review"""
         self.test_can_transition_by_manager_submit_to_oie()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-oie-review')
         obj = self.program
         api.content.transition(obj=obj, transition='submit-to-provost')
         state = api.content.get_state(obj=obj)
@@ -429,6 +457,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_return_to_initial_from_pending_oie_review(self):
         """from pending-oie-review"""
         self.test_can_transition_by_manager_submit_to_oie()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-oie-review')
         obj = self.program
         api.content.transition(obj=obj, transition='return-to-initial')
         state = api.content.get_state(obj=obj)
@@ -437,6 +466,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_approve_provosts_office(self):
         """from pending-provost-review"""
         self.test_can_transition_by_manager_submit_to_provost()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-provost-review')
         obj = self.program
         api.content.transition(obj=obj, transition='approve-provosts-office')
         state = api.content.get_state(obj=obj)
@@ -445,6 +475,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_return_to_oie_review(self):
         """from pending-provost-review"""
         self.test_can_transition_by_manager_submit_to_provost()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-provost-review')
         obj = self.program
         api.content.transition(obj=obj, transition='return-to-oie-review')
         state = api.content.get_state(obj=obj)
@@ -453,6 +484,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_pending_provost_review(self):
         """from pending-provost-review"""
         self.test_can_transition_by_manager_submit_to_provost()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-provost-review')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -461,6 +493,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_decline_from_pending_provost_review(self):
         """from pending-provost-review"""
         self.test_can_transition_by_manager_submit_to_provost()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-provost-review')
         obj = self.program
         api.content.transition(obj=obj, transition='decline')
         state = api.content.get_state(obj=obj)
@@ -469,6 +502,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_withdraw_application_from_pending_provost_review(self):
         """from pending-provost-review"""
         self.test_can_transition_by_manager_submit_to_provost()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-provost-review')
         obj = self.program
         api.content.transition(obj=obj, transition='withdraw-application')
         state = api.content.get_state(obj=obj)
@@ -477,6 +511,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_develop_rfp(self):
         """from pending-discussions-with-program-manager"""
         self.test_can_transition_by_manager_approve_provosts_office()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-discussions-with-program-manager')
         obj = self.program
         api.content.transition(obj=obj, transition='develop-rfp')
         state = api.content.get_state(obj=obj)
@@ -485,6 +520,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_return_to_initial_from_pending_discussions_with_program_manager(self):
         """from pending-discussions-with-program-manager"""
         self.test_can_transition_by_manager_approve_provosts_office()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-discussions-with-program-manager')
         obj = self.program
         api.content.transition(obj=obj, transition='return-to-initial')
         state = api.content.get_state(obj=obj)
@@ -493,6 +529,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_pending_discussions_with_program_manager(self):
         """from pending-discussions-with-program-manager"""
         self.test_can_transition_by_manager_approve_provosts_office()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-discussions-with-program-manager')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -501,6 +538,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_pending_discussions_with_program_manager(self):
         """from pending-discussions-with-program-manager"""
         self.test_can_transition_by_manager_approve_provosts_office()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-discussions-with-program-manager')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -509,6 +547,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_pending_provider_proposal(self):
         """from pending-discussions-with-program-manager"""
         self.test_can_transition_by_manager_approve_provosts_office()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-discussions-with-program-manager')
         obj = self.program
         api.content.transition(obj=obj, transition='pending-provider-proposal')
         state = api.content.get_state(obj=obj)
@@ -517,6 +556,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_submit_rfp_for_liaison_review(self):
         """from request-for-proposals-under-development"""
         self.test_can_transition_by_manager_develop_rfp()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'request-for-proposals-under-development')
         obj = self.program
         api.content.transition(obj=obj, transition='submit-rfp-for-liaison-review')
         state = api.content.get_state(obj=obj)
@@ -525,6 +565,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_return_to_initial_from_request_for_proposals_under_development(self):
         """from request-for-proposals-under-development"""
         self.test_can_transition_by_manager_develop_rfp()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'request-for-proposals-under-development')
         obj = self.program
         api.content.transition(obj=obj, transition='return-to-initial')
         state = api.content.get_state(obj=obj)
@@ -533,6 +574,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_request_for_proposals_under_development(self):
         """from request-for-proposals-under-development"""
         self.test_can_transition_by_manager_develop_rfp()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'request-for-proposals-under-development')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -541,6 +583,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_request_for_proposals_under_development(self):
         """from request-for-proposals-under-development"""
         self.test_can_transition_by_manager_develop_rfp()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'request-for-proposals-under-development')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -549,6 +592,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_approve_rfp(self):
         """from request-for-proposals-under-liaison-review"""
         self.test_can_transition_by_manager_submit_rfp_for_liaison_review()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'request-for-proposals-under-liaison-review')
         obj = self.program
         api.content.transition(obj=obj, transition='approve-rfp')
         state = api.content.get_state(obj=obj)
@@ -557,6 +601,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_return_rfp_to_program_manager(self):
         """from request-for-proposals-under-liaison-review"""
         self.test_can_transition_by_manager_submit_rfp_for_liaison_review()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'request-for-proposals-under-liaison-review')
         obj = self.program
         api.content.transition(obj=obj, transition='return-rfp-to-program-manager')
         state = api.content.get_state(obj=obj)
@@ -565,6 +610,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_request_for_proposals_under_liaison_review(self):
         """from request-for-proposals-under-liaison-review"""
         self.test_can_transition_by_manager_submit_rfp_for_liaison_review()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'request-for-proposals-under-liaison-review')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -573,6 +619,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_request_for_proposals_under_liaison_review(self):
         """from request-for-proposals-under-liaison-review"""
         self.test_can_transition_by_manager_submit_rfp_for_liaison_review()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'request-for-proposals-under-liaison-review')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -581,6 +628,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_review_provider_proposals(self):
         """from pending-provider-responses"""
         self.test_can_transition_by_manager_approve_rfp()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-provider-responses')
         obj = self.program
         api.content.transition(obj=obj, transition='review-provider-proposals')
         state = api.content.get_state(obj=obj)
@@ -589,6 +637,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_pending_provider_responses(self):
         """from pending-provider-responses"""
         self.test_can_transition_by_manager_approve_rfp()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-provider-responses')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -597,6 +646,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_pending_provider_responses(self):
         """from pending-provider-responses"""
         self.test_can_transition_by_manager_approve_rfp()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-provider-responses')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -605,6 +655,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_return_to_initial_from_provider_proposals_under_oie_review(self):
         """from provider-proposals-under-oie-review"""
         self.test_can_transition_by_manager_review_provider_proposals()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'provider-proposals-under-oie-review')
         obj = self.program
         api.content.transition(obj=obj, transition='return-to-initial')
         state = api.content.get_state(obj=obj)
@@ -613,6 +664,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_submit_proposal_to_liaison(self):
         """from provider-proposals-under-oie-review"""
         self.test_can_transition_by_manager_review_provider_proposals()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'provider-proposals-under-oie-review')
         obj = self.program
         api.content.transition(obj=obj, transition='submit-proposal-to-liaison')
         state = api.content.get_state(obj=obj)
@@ -621,6 +673,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_provider_proposals_under_oie_review(self):
         """from provider-proposals-under-oie-review"""
         self.test_can_transition_by_manager_review_provider_proposals()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'provider-proposals-under-oie-review')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -629,6 +682,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_provider_proposals_under_oie_review(self):
         """from provider-proposals-under-oie-review"""
         self.test_can_transition_by_manager_review_provider_proposals()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'provider-proposals-under-oie-review')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -637,6 +691,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_return_to_oie(self):
         """from provider-proposals-under-liaison-review"""
         self.test_can_transition_by_manager_submit_proposal_to_liaison()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'provider-proposals-under-liaison-review')
         obj = self.program
         api.content.transition(obj=obj, transition='return-to-oie')
         state = api.content.get_state(obj=obj)
@@ -645,6 +700,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_provider_proposals_under_liaison_review(self):
         """from provider-proposals-under-liaison-review"""
         self.test_can_transition_by_manager_submit_proposal_to_liaison()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'provider-proposals-under-liaison-review')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -653,6 +709,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_provider_proposals_under_liaison_review(self):
         """from provider-proposals-under-liaison-review"""
         self.test_can_transition_by_manager_submit_proposal_to_liaison()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'provider-proposals-under-liaison-review')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -661,6 +718,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_approve_proposal(self):
         """from provider-proposals-under-liaison-review"""
         self.test_can_transition_by_manager_submit_proposal_to_liaison()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'provider-proposals-under-liaison-review')
         obj = self.program
         api.content.transition(obj=obj, transition='approve-proposal')
         state = api.content.get_state(obj=obj)
@@ -669,6 +727,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_submit_fee_for_liaison_review(self):
         """from pending-program-fee-determination-by-oie"""
         self.test_can_transition_by_manager_approve_proposal()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-fee-determination-by-oie')
         obj = self.program
         api.content.transition(obj=obj, transition='submit-fee-for-liaison-review')
         state = api.content.get_state(obj=obj)
@@ -677,6 +736,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_return_to_initial_from_pending_program_fee_determination_by_oie(self):
         """from pending-program-fee-determination-by-oie"""
         self.test_can_transition_by_manager_approve_proposal()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-fee-determination-by-oie')
         obj = self.program
         api.content.transition(obj=obj, transition='return-to-initial')
         state = api.content.get_state(obj=obj)
@@ -685,6 +745,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_pending_program_fee_determination_by_oie(self):
         """from pending-program-fee-determination-by-oie"""
         self.test_can_transition_by_manager_approve_proposal()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-fee-determination-by-oie')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -693,6 +754,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_pending_program_fee_determination_by_oie(self):
         """from pending-program-fee-determination-by-oie"""
         self.test_can_transition_by_manager_approve_proposal()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-fee-determination-by-oie')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -701,6 +763,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_return_to_oie(self):
         """from program-fee-under-liaison-review"""
         self.test_can_transition_by_manager_submit_fee_for_liaison_review()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'program-fee-under-liaison-review')
         obj = self.program
         api.content.transition(obj=obj, transition='return-to-oie')
         state = api.content.get_state(obj=obj)
@@ -709,6 +772,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_program_fee_under_liaison_review(self):
         """from program-fee-under-liaison-review"""
         self.test_can_transition_by_manager_submit_fee_for_liaison_review()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'program-fee-under-liaison-review')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -717,6 +781,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_program_fee_under_liaison_review(self):
         """from program-fee-under-liaison-review"""
         self.test_can_transition_by_manager_submit_fee_for_liaison_review()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'program-fee-under-liaison-review')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -725,6 +790,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_approve_fee(self):
         """from program-fee-under-liaison-review"""
         self.test_can_transition_by_manager_submit_fee_for_liaison_review()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'program-fee-under-liaison-review')
         obj = self.program
         api.content.transition(obj=obj, transition='approve-fee')
         state = api.content.get_state(obj=obj)
@@ -733,6 +799,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_publish_fee(self):
         """from program-fee-pending-publication"""
         self.test_can_transition_by_manager_approve_fee()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'program-fee-pending-publication')
         obj = self.program
         api.content.transition(obj=obj, transition='publish-fee')
         state = api.content.get_state(obj=obj)
@@ -741,6 +808,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_program_fee_pending_publication(self):
         """from program-fee-pending-publication"""
         self.test_can_transition_by_manager_approve_fee()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'program-fee-pending-publication')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -749,6 +817,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_program_fee_pending_publication(self):
         """from program-fee-pending-publication"""
         self.test_can_transition_by_manager_approve_fee()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'program-fee-pending-publication')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -757,6 +826,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_announce_programmatic_for_fee_change(self):
         """from program-fee-pending-publication"""
         self.test_can_transition_by_manager_approve_fee()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'program-fee-pending-publication')
         obj = self.program
         api.content.transition(obj=obj, transition='announce-programmatic-for-fee-change')
         state = api.content.get_state(obj=obj)
@@ -765,6 +835,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_confirm_to_run_from_applicants_considering_change(self):
         """from applicants-considering-change"""
         self.test_can_transition_by_manager_announce_programmatic_for_fee_change()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'applicants-considering-change')
         obj = self.program
         api.content.transition(obj=obj, transition='confirm-to-run')
         state = api.content.get_state(obj=obj)
@@ -773,6 +844,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_after_change(self):
         """from applicants-considering-change"""
         self.test_can_transition_by_manager_announce_programmatic_for_fee_change()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'applicants-considering-change')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel-after-change')
         state = api.content.get_state(obj=obj)
@@ -781,6 +853,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_confirm_to_run(self):
         """from application-intake-in-progress"""
         self.test_can_transition_by_manager_publish_fee()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'application-intake-in-progress')
         obj = self.program
         api.content.transition(obj=obj, transition='confirm-to-run')
         state = api.content.get_state(obj=obj)
@@ -789,6 +862,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_application_intake_in_progress(self):
         """from application-intake-in-progress"""
         self.test_can_transition_by_manager_publish_fee()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'application-intake-in-progress')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -797,6 +871,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_application_intake_in_progress(self):
         """from application-intake-in-progress"""
         self.test_can_transition_by_manager_publish_fee()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'application-intake-in-progress')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -805,6 +880,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_send_for_programmatic_change(self):
         """from application-intake-in-progress"""
         self.test_can_transition_by_manager_publish_fee()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'application-intake-in-progress')
         obj = self.program
         api.content.transition(obj=obj, transition='send-for-programmatic-change')
         state = api.content.get_state(obj=obj)
@@ -813,6 +889,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_send_for_fee_change(self):
         """from application-intake-in-progress"""
         self.test_can_transition_by_manager_publish_fee()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'application-intake-in-progress')
         obj = self.program
         api.content.transition(obj=obj, transition='send-for-fee-change')
         state = api.content.get_state(obj=obj)
@@ -823,6 +900,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_send_bills_for_initial_payment(self):
         """from initial-payment-billing-in-progress"""
         self.test_can_transition_by_manager_confirm_to_run()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'initial-payment-billing-in-progress')
         obj = self.program
         api.content.transition(obj=obj, transition='send-bills-for-initial-payment')
         state = api.content.get_state(obj=obj)
@@ -831,6 +909,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_initial_payment_billing_in_progress(self):
         """from initial-payment-billing-in-progress"""
         self.test_can_transition_by_manager_confirm_to_run()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'initial-payment-billing-in-progress')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -839,6 +918,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_initial_payment_billing_in_progress(self):
         """from initial-payment-billing-in-progress"""
         self.test_can_transition_by_manager_confirm_to_run()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'initial-payment-billing-in-progress')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -847,6 +927,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_publish_final_fee(self):
         """from pending-final-program-fee"""
         self.test_can_transition_by_manager_send_bills_for_initial_payment()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-final-program-fee')
         obj = self.program
         self.assertEqual(api.content.get_state(obj=obj), 'pending-final-program-fee')
         api.content.transition(obj=obj, transition='publish-final-fee')
@@ -856,6 +937,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_pending_final_program_fee(self):
         """from pending-final-program-fee"""
         self.test_can_transition_by_manager_send_bills_for_initial_payment()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-final-program-fee')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -864,6 +946,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_pending_final_program_fee(self):
         """from pending-final-program-fee"""
         self.test_can_transition_by_manager_send_bills_for_initial_payment()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-final-program-fee')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -872,6 +955,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_bill_for_final_payment(self):
         """from final-payment-billing-in-progress"""
         self.test_can_transition_by_manager_publish_final_fee()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'final-payment-billing-in-progress')
         obj = self.program
         # TODO only for programs with leader
         api.content.transition(obj=obj, transition='bill-for-final-payment')
@@ -881,6 +965,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_final_payment_billing_in_progress(self):
         """from final-payment-billing-in-progress"""
         self.test_can_transition_by_manager_publish_final_fee()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'final-payment-billing-in-progress')
         obj = self.program
         # TODO only for programs with leader
         api.content.transition(obj=obj, transition='cancel')
@@ -890,6 +975,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_final_payment_billing_in_progress(self):
         """from final-payment-billing-in-progress"""
         self.test_can_transition_by_manager_publish_final_fee()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'final-payment-billing-in-progress')
         obj = self.program
         # TODO only for programs with leader
         api.content.transition(obj=obj, transition='suspend')
@@ -899,6 +985,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_bill_for_final_payment_programs_with_no_leader(self):
         """from final-payment-billing-in-progress"""
         self.test_can_transition_by_manager_publish_final_fee()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'final-payment-billing-in-progress')
         obj = self.program
         # TODO only for programs with no leader
         api.content.transition(obj=obj, transition='bill-for-final-payment-programs-with-no-leader')
@@ -908,6 +995,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_confirm_orientation_completed(self):
         """from pending-program-leader-orientation"""
         self.test_can_transition_by_manager_bill_for_final_payment()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-leader-orientation')
         obj = self.program
         # TODO only for programs with leader
         api.content.transition(obj=obj, transition='confirm-orientation-completed')
@@ -917,6 +1005,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_pending_program_leader_orientation(self):
         """from pending-program-leader-orientation"""
         self.test_can_transition_by_manager_bill_for_final_payment()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-leader-orientation')
         obj = self.program
         # TODO only for programs with leader
         api.content.transition(obj=obj, transition='cancel')
@@ -926,6 +1015,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_pending_program_leader_orientation(self):
         """from pending-program-leader-orientation"""
         self.test_can_transition_by_manager_bill_for_final_payment()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-leader-orientation')
         obj = self.program
         # TODO only for programs with leader
         api.content.transition(obj=obj, transition='suspend')
@@ -935,6 +1025,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_travel_advance_ready(self):
         """from pending-travel-advance"""
         self.test_can_transition_by_manager_confirm_orientation_completed()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-travel-advance')
         obj = self.program
         # TODO only for programs with leader
         api.content.transition(obj=obj, transition='travel-advance-ready')
@@ -944,6 +1035,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_pending_travel_advance(self):
         """from pending-travel-advance"""
         self.test_can_transition_by_manager_confirm_orientation_completed()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-travel-advance')
         obj = self.program
         # TODO only for programs with leader
         api.content.transition(obj=obj, transition='cancel')
@@ -953,6 +1045,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_pending_travel_advance(self):
         """from pending-travel-advance"""
         self.test_can_transition_by_manager_confirm_orientation_completed()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-travel-advance')
         obj = self.program
         # TODO only for programs with leader
         api.content.transition(obj=obj, transition='suspend')
@@ -962,6 +1055,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_schedule_operational_briefing(self):
         """from reviewing-final-program-details"""
         self.test_can_transition_by_manager_travel_advance_ready()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'reviewing-final-program-details')
         obj = self.program
         # TODO only for programs with leader
         api.content.transition(obj=obj, transition='schedule-operational-briefing')
@@ -971,6 +1065,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_reviewing_final_program_details(self):
         """from reviewing-final-program-details"""
         self.test_can_transition_by_manager_travel_advance_ready()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'reviewing-final-program-details')
         obj = self.program
         # TODO only for programs with leader
         api.content.transition(obj=obj, transition='cancel')
@@ -980,6 +1075,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_reviewing_final_program_details(self):
         """from reviewing-final-program-details"""
         self.test_can_transition_by_manager_travel_advance_ready()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'reviewing-final-program-details')
         obj = self.program
         # TODO only for programs with leader
         api.content.transition(obj=obj, transition='suspend')
@@ -989,6 +1085,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_confirm_briefing_completed(self):
         """from pending-program-leader-operational-briefing"""
         self.test_can_transition_by_manager_schedule_operational_briefing()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-leader-operational-briefing')
         obj = self.program
         # TODO only for programs with leader
         api.content.transition(obj=obj, transition='confirm-briefing-completed')
@@ -998,6 +1095,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_pending_program_leader_operational_briefing(self):
         """from pending-program-leader-operational-briefing"""
         self.test_can_transition_by_manager_schedule_operational_briefing()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-leader-operational-briefing')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -1006,6 +1104,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_pending_program_leader_operational_briefing(self):
         """from pending-program-leader-operational-briefing"""
         self.test_can_transition_by_manager_schedule_operational_briefing()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-leader-operational-briefing')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -1014,6 +1113,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_depart(self):
         """from pending-program-departure"""
         self.test_can_transition_by_manager_confirm_briefing_completed()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-departure')
         obj = self.program
         # TODO only for programs with individuals
         api.content.transition(obj=obj, transition='depart')
@@ -1023,6 +1123,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_cancel_from_pending_program_departure(self):
         """from pending-program-departure"""
         self.test_can_transition_by_manager_confirm_briefing_completed()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-departure')
         obj = self.program
         api.content.transition(obj=obj, transition='cancel')
         state = api.content.get_state(obj=obj)
@@ -1031,6 +1132,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_pending_program_departure(self):
         """from pending-program-departure"""
         self.test_can_transition_by_manager_confirm_briefing_completed()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-departure')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -1039,6 +1141,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_depart_sponsored_program(self):
         """from pending-program-departure"""
         self.test_can_transition_by_manager_confirm_briefing_completed()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-departure')
         obj = self.program
         # TODO only for programs with groups
         api.content.transition(obj=obj, transition='depart-sponsored-program')
@@ -1048,6 +1151,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_depart_non_sponsored_program(self):
         """from pending-program-departure"""
         self.test_can_transition_by_manager_confirm_briefing_completed()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-program-departure')
         obj = self.program
         # TODO only for programs with groups
         api.content.transition(obj=obj, transition='depart-non-sponsored-program')
@@ -1057,6 +1161,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_suspend_from_pending_arrival_abroad(self):
         """from pending-arrival-abroad"""
         self.test_can_transition_by_manager_depart_non_sponsored_program()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-arrival-abroad')
         obj = self.program
         api.content.transition(obj=obj, transition='suspend')
         state = api.content.get_state(obj=obj)
@@ -1065,6 +1170,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_confirm_safe_arrival(self):
         """from pending-arrival-abroad"""
         self.test_can_transition_by_manager_depart_non_sponsored_program()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-arrival-abroad')
         obj = self.program
         # TODO only for programs with individuals
         api.content.transition(obj=obj, transition='confirm-safe-arrival')
@@ -1074,6 +1180,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_confirm_travel_delay(self):
         """from pending-arrival-abroad"""
         self.test_can_transition_by_manager_depart_non_sponsored_program()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-arrival-abroad')
         obj = self.program
         # TODO only for programs with individuals
         api.content.transition(obj=obj, transition='confirm-travel-delay')
@@ -1083,6 +1190,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_arrive_sponsored_program(self):
         """from pending-arrival-abroad"""
         self.test_can_transition_by_manager_depart_non_sponsored_program()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-arrival-abroad')
         obj = self.program
         # TODO only for programs with groups
         api.content.transition(obj=obj, transition='arrive-sponsored-program')
@@ -1092,6 +1200,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_arrive_non_sponsored_program(self):
         """from pending-arrival-abroad"""
         self.test_can_transition_by_manager_depart_non_sponsored_program()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'pending-arrival-abroad')
         obj = self.program
         # TODO only for programs with groups
         api.content.transition(obj=obj, transition='arrive-non-sponsored-program')
@@ -1101,6 +1210,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_confirm_return(self):
         """from program-in-progress"""
         self.test_can_transition_by_manager_confirm_safe_arrival()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'program-in-progress')
         obj = self.program
         api.content.transition(obj=obj, transition='confirm-return')
         state = api.content.get_state(obj=obj)
@@ -1109,6 +1219,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_returned_sponsored_program(self):
         """from program-in-progress"""
         self.test_can_transition_by_manager_confirm_safe_arrival()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'program-in-progress')
         obj = self.program
         # TODO only for programs with groups
         api.content.transition(obj=obj, transition='returned-sponsored-program')
@@ -1118,6 +1229,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_returned_non_sponsored_program(self):
         """from program-in-progress"""
         self.test_can_transition_by_manager_confirm_safe_arrival()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'program-in-progress')
         obj = self.program
         # TODO only for programs with groups
         api.content.transition(obj=obj, transition='returned-non-sponsored-program')
@@ -1127,6 +1239,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_confirm_ter_received(self):
         """from travel-expense-report-student-evaluations-due-to"""
         self.test_can_transition_by_manager_confirm_return()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'travel-expense-report-student-evaluations-due-to')
         obj = self.program
         api.content.transition(obj=obj, transition='confirm-ter-received')
         state = api.content.get_state(obj=obj)
@@ -1135,6 +1248,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_process_refunds(self):
         """from final-program-accounting-in-progress"""
         self.test_can_transition_by_manager_confirm_ter_received()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'final-program-accounting-in-progress')
         obj = self.program
         api.content.transition(obj=obj, transition='process-refunds')
         state = api.content.get_state(obj=obj)
@@ -1143,6 +1257,7 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_archive_program(self):
         """from process-refunds-budget-transfers"""
         self.test_can_transition_by_manager_process_refunds()
+        self.assertEqual(api.content.get_state(obj=(self.program)), 'process-refunds-budget-transfers')
         obj = self.program
         api.content.transition(obj=obj, transition='archive-program')
         state = api.content.get_state(obj=obj)
