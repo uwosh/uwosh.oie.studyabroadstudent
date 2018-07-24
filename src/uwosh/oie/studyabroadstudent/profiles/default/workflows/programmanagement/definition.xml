@@ -76,6 +76,7 @@
  <state state_id="declined" title="Declined" >
   <exit-transition transition_id="manager-return-to-pending-chair-review" />
   <exit-transition transition_id="manager-return-to-pending-dean-unit-director-review" />
+  <exit-transition transition_id="manager-return-to-pending-provost-review" />
 
  </state>
  <state state_id="final-payment-billing-in-progress" title="Final Payment Billing in Progress" >
@@ -662,6 +663,9 @@
 
  </state>
  <state state_id="suspended" title="Suspended" >
+  <exit-transition transition_id="manager-return-to-pending-provost-review" />
+  <exit-transition transition_id="manager-return-to-pending-discussions-with-program-manager" />
+  <exit-transition transition_id="manager-return-to-request-for-proposals-under-development" />
 
 
 
