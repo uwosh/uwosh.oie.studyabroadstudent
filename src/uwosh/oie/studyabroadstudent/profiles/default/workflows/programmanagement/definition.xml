@@ -584,6 +584,7 @@
   <exit-transition transition_id="manager-return-to-pending-provost-review" />
   <exit-transition transition_id="manager-return-to-pending-provider-responses" />
   <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
+  <exit-transition transition_id="manager-return-to-program-fee-under-liaison-review" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
@@ -666,6 +667,15 @@
   <exit-transition transition_id="manager-return-to-pending-provost-review" />
   <exit-transition transition_id="manager-return-to-pending-discussions-with-program-manager" />
   <exit-transition transition_id="manager-return-to-request-for-proposals-under-development" />
+  <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
+  <exit-transition transition_id="manager-return-to-initial-payment-billing-in-progress" />
+  <exit-transition transition_id="manager-return-to-pending-program-fee-determination-by-oie" />
+  <exit-transition transition_id="manager-return-to-pending-provider-responses" />
+  <exit-transition transition_id="manager-return-to-program-fee-pending-publication" />
+  <exit-transition transition_id="manager-return-to-program-fee-under-liaison-review" />
+  <exit-transition transition_id="manager-return-to-provider-proposals-under-liaison-review" />
+  <exit-transition transition_id="manager-return-to-provider-proposals-under-oie-review" />
+  <exit-transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" />
 
 
 
