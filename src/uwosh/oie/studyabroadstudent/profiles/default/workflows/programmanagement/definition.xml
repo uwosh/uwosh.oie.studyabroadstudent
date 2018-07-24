@@ -485,6 +485,8 @@
 
  </state>
  <state state_id="program-completed" title="Program Completed" >
+  <exit-transition transition_id="manager-return-to-process-refunds-budget-transfers" />
+  <exit-transition transition_id="manager-return-to-program-in-progress" />
 
 
 
@@ -676,6 +678,14 @@
   <exit-transition transition_id="manager-return-to-provider-proposals-under-liaison-review" />
   <exit-transition transition_id="manager-return-to-provider-proposals-under-oie-review" />
   <exit-transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" />
+  <exit-transition transition_id="manager-return-to-final-payment-billing-in-progress" />
+  <exit-transition transition_id="manager-return-to-pending-arrival-abroad" />
+  <exit-transition transition_id="manager-return-to-pending-final-program-fee" />
+  <exit-transition transition_id="manager-return-to-pending-program-departure" />
+  <exit-transition transition_id="manager-return-to-pending-program-leader-operational-briefing" />
+  <exit-transition transition_id="manager-return-to-pending-program-leader-orientation" />
+  <exit-transition transition_id="manager-return-to-pending-travel-advance" />
+  <exit-transition transition_id="manager-return-to-reviewing-final-program-details" />
 
 
 
@@ -774,6 +784,9 @@
   <description>TRIGGER=When MGMT PORTAL's "On-site Program Leader", "Program Leadership" = "no"; transition occurs on the 2nd date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=arrive-non-sponsored-program" category="workflow" icon="">Arrive-Non-sponsored Program</action>
   <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
   </guard>
 
  </transition>
@@ -781,6 +794,9 @@
   <description>TRIGGER=When MGMT PORTAL's "On-site Program Leader", "Program Leadership" = "no"; transition occurs on the 2nd date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=arrive-sponsored-program" category="workflow" icon="">Arrive-Sponsored Program</action>
   <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
   </guard>
 
  </transition>
@@ -890,6 +906,9 @@
  <transition transition_id="confirm-travel-delay" title="Confirm Travel Delay" new_state="pending-program-departure" trigger="USER" before_script="" after_script="" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-travel-delay" category="workflow" icon="">Confirm Travel Delay</action>
   <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
   </guard>
 
  </transition>
@@ -921,6 +940,12 @@
   <description>TRIGGER=When MGMT PORTAL's "Sponsoring Unit or Department" = "non-sponsored"; transition occurs on the 1st date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=depart-non-sponsored-program" category="workflow" icon="">Depart-Non-sponsored Program</action>
   <guard >
+   <guard-role>Mgmt_Coordinator</guard-role>
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Mgmt_ProgramLeader</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
   </guard>
 
  </transition>
@@ -928,6 +953,12 @@
   <description>TRIGGER=When MGMT PORTAL's "On-site Program Leader", "Program Leadership" = "no"; transition occurs on the 1st date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=depart-sponsored-program" category="workflow" icon="">Depart-Sponsored Program</action>
   <guard >
+   <guard-role>Mgmt_Coordinator</guard-role>
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Mgmt_Manager</guard-role>
+   <guard-role>Mgmt_ProgramLeader</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
   </guard>
 
  </transition>
@@ -956,6 +987,9 @@
  <transition transition_id="pending-approval-of-alternate-course" title="Pending Approval of Alternate Course" new_state="" trigger="USER" before_script="" after_script="" >
   <action url="%(content_url)s/content_status_modify?workflow_action=pending-approval-of-alternate-course" category="workflow" icon="">Pending Approval of Alternate Course</action>
   <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
   </guard>
 
  </transition>
@@ -1066,6 +1100,9 @@
  <transition transition_id="return-to-rfp-under-development" title="Return to RFP under Development" new_state="" trigger="USER" before_script="" after_script="" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-to-rfp-under-development" category="workflow" icon="">Return to RFP under Development</action>
   <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
   </guard>
 
  </transition>
@@ -1073,6 +1110,9 @@
   <description>TRIGGER=When MGMT PORTAL's "Sponsoring Unit or Department" = "non-sponsored"; transition occurs on the final date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=returned-non-sponsored-program" category="workflow" icon="">Returned-Non-sponsored Program</action>
   <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
   </guard>
 
  </transition>
@@ -1080,6 +1120,9 @@
   <description>TRIGGER=When MGMT PORTAL's "On-site Program Leader", "Program Leadership" = "no"; transition occurs on the final date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=returned-sponsored-program" category="workflow" icon="">Returned-Sponsored Program</action>
   <guard >
+   <guard-role>Mgmt_Admin</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
   </guard>
 
  </transition>

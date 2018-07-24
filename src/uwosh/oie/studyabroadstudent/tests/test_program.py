@@ -26,6 +26,11 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
          'Participant_RiskMgmt', 'Participant_Applicant', 'Anonymous']
     )
 
+    ROLES_BY_TRANSITION = {
+        'cancel': ['Mgmt_Admin', 'Manager'],
+        'suspend' : ['Mgmt_Admin', 'Mgmt_Provost', 'Manager'],
+    }
+
     def setUp(self):
         """Custom shared utility setup for tests."""
         self.portal = self.layer['portal']
@@ -1791,267 +1796,792 @@ class OIEStudyAbroadProgramIntegrationTest(unittest.TestCase):
     def test_can_transition_by_manager_publish_final_fee(self, fast=None):
         """from pending-final-program-fee"""
         self.test_can_transition_by_manager_send_bills_for_initial_payment(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-final-program-fee')
-        api.content.transition(obj=self.program, transition='publish-final-fee')
-        self.assertEqual(api.content.get_state(obj=self.program), 'final-payment-billing-in-progress')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-final-program-fee')
+        # api.content.transition(obj=self.program, transition='publish-final-fee')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'final-payment-billing-in-progress')
+        initial_state = 'pending-final-program-fee'
+        transition = 'publish-final-fee'
+        end_state = 'final-payment-billing-in-progress'
+        authorized_roles = ['Mgmt_Admin', 'Mgmt_Financial', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_cancel_from_pending_final_program_fee(self, fast=None):
         """from pending-final-program-fee Requires role: Mgmt_Admin; Mgmt_Director; or Manager"""
         self.test_can_transition_by_manager_send_bills_for_initial_payment(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-final-program-fee')
-        api.content.transition(obj=self.program, transition='cancel')
-        self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-final-program-fee')
+        # api.content.transition(obj=self.program, transition='cancel')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        initial_state = 'pending-final-program-fee'
+        transition = 'cancel'
+        end_state = 'cancelled'
+        authorized_roles = ['Mgmt_Admin', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_suspend_from_pending_final_program_fee(self, fast=None):
         """from pending-final-program-fee Requires role: Mgmt_Admin; Mgmt_Director; Mgmt_Provost; or Manager"""
         self.test_can_transition_by_manager_send_bills_for_initial_payment(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-final-program-fee')
-        api.content.transition(obj=self.program, transition='suspend')
-        self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-final-program-fee')
+        # api.content.transition(obj=self.program, transition='suspend')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        initial_state = 'pending-final-program-fee'
+        transition = 'suspend'
+        end_state = 'suspended'
+        authorized_roles = ['Mgmt_Admin', 'Mgmt_Provost', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_bill_for_final_payment(self, fast=None):
         """from final-payment-billing-in-progress"""
         self.test_can_transition_by_manager_publish_final_fee(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'final-payment-billing-in-progress')
         # TODO only for programs with leader
-        api.content.transition(obj=self.program, transition='bill-for-final-payment')
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-orientation')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'final-payment-billing-in-progress')
+        # api.content.transition(obj=self.program, transition='bill-for-final-payment')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-orientation')
+        initial_state = 'final-payment-billing-in-progress'
+        transition = 'bill-for-final-payment'
+        end_state = 'pending-program-leader-orientation'
+        authorized_roles = ['Mgmt_Admin', 'Mgmt_Financial', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_cancel_from_final_payment_billing_in_progress(self, fast=None):
         """from final-payment-billing-in-progress Requires role: Mgmt_Admin; Mgmt_Director; or Manager"""
         self.test_can_transition_by_manager_publish_final_fee(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'final-payment-billing-in-progress')
         # TODO only for programs with leader
-        api.content.transition(obj=self.program, transition='cancel')
-        self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'final-payment-billing-in-progress')
+        # api.content.transition(obj=self.program, transition='cancel')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        initial_state = 'final-payment-billing-in-progress'
+        transition = 'cancel'
+        end_state = 'cancelled'
+        authorized_roles = ['Mgmt_Admin', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_suspend_from_final_payment_billing_in_progress(self, fast=None):
         """from final-payment-billing-in-progress Requires role: Mgmt_Admin; Mgmt_Director; Mgmt_Provost; or Manager"""
         self.test_can_transition_by_manager_publish_final_fee(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'final-payment-billing-in-progress')
         # TODO only for programs with leader
-        api.content.transition(obj=self.program, transition='suspend')
-        self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'final-payment-billing-in-progress')
+        # api.content.transition(obj=self.program, transition='suspend')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        initial_state = 'final-payment-billing-in-progress'
+        transition = 'suspend'
+        end_state = 'suspended'
+        authorized_roles = ['Mgmt_Admin', 'Mgmt_Provost', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_bill_for_final_payment_programs_with_no_leader(self, fast=None):
         """from final-payment-billing-in-progress"""
         self.test_can_transition_by_manager_publish_final_fee(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'final-payment-billing-in-progress')
         # TODO only for programs with no leader
-        api.content.transition(obj=self.program, transition='bill-for-final-payment-programs-with-no-leader')
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'final-payment-billing-in-progress')
+        # api.content.transition(obj=self.program, transition='bill-for-final-payment-programs-with-no-leader')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
+        initial_state = 'final-payment-billing-in-progress'
+        transition = 'bill-for-final-payment-programs-with-no-leader'
+        end_state = 'pending-program-departure'
+        authorized_roles = ['Mgmt_Admin', 'Mgmt_Financial', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_confirm_orientation_completed(self, fast=None):
         """from pending-program-leader-orientation"""
         self.test_can_transition_by_manager_bill_for_final_payment(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-orientation')
         # TODO only for programs with leader
-        api.content.transition(obj=self.program, transition='confirm-orientation-completed')
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-travel-advance')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-orientation')
+        # api.content.transition(obj=self.program, transition='confirm-orientation-completed')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-travel-advance')
+        initial_state = 'pending-program-leader-orientation'
+        transition = 'confirm-orientation-completed'
+        end_state = 'pending-travel-advance'
+        authorized_roles = ['Mgmt_Admin', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_cancel_from_pending_program_leader_orientation(self, fast=None):
         """from pending-program-leader-orientation Requires role: Mgmt_Admin; Mgmt_Director; or Manager"""
         self.test_can_transition_by_manager_bill_for_final_payment(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-orientation')
         # TODO only for programs with leader
-        api.content.transition(obj=self.program, transition='cancel')
-        self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-orientation')
+        # api.content.transition(obj=self.program, transition='cancel')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        initial_state = 'pending-program-leader-orientation'
+        transition = 'cancel'
+        end_state = 'cancelled'
+        authorized_roles = ['Mgmt_Admin', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_suspend_from_pending_program_leader_orientation(self, fast=None):
         """from pending-program-leader-orientation Requires role: Mgmt_Admin; Mgmt_Director; Mgmt_Provost; or Manager"""
         self.test_can_transition_by_manager_bill_for_final_payment(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-orientation')
         # TODO only for programs with leader
-        api.content.transition(obj=self.program, transition='suspend')
-        self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-orientation')
+        # api.content.transition(obj=self.program, transition='suspend')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        initial_state = 'pending-program-leader-orientation'
+        transition = 'suspend'
+        end_state = 'suspended'
+        authorized_roles = self.ROLES_BY_TRANSITION[transition]
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_travel_advance_ready(self, fast=None):
         """from pending-travel-advance"""
         self.test_can_transition_by_manager_confirm_orientation_completed(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-travel-advance')
         # TODO only for programs with leader
-        api.content.transition(obj=self.program, transition='travel-advance-ready')
-        self.assertEqual(api.content.get_state(obj=self.program), 'reviewing-final-program-details')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-travel-advance')
+        # api.content.transition(obj=self.program, transition='travel-advance-ready')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'reviewing-final-program-details')
+        initial_state = 'pending-travel-advance'
+        transition = 'travel-advance-ready'
+        end_state = 'reviewing-final-program-details'
+        authorized_roles = ['Mgmt_Admin', 'Mgmt_Financial', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_cancel_from_pending_travel_advance(self, fast=None):
         """from pending-travel-advance Requires role: Mgmt_Admin; Mgmt_Director; or Manager"""
         self.test_can_transition_by_manager_confirm_orientation_completed(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-travel-advance')
         # TODO only for programs with leader
-        api.content.transition(obj=self.program, transition='cancel')
-        self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-travel-advance')
+        # api.content.transition(obj=self.program, transition='cancel')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        initial_state = 'pending-travel-advance'
+        transition = 'cancel'
+        end_state = 'cancelled'
+        authorized_roles = self.ROLES_BY_TRANSITION[transition]
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_suspend_from_pending_travel_advance(self, fast=None):
         """from pending-travel-advance Requires role: Mgmt_Admin; Mgmt_Director; Mgmt_Provost; or Manager"""
         self.test_can_transition_by_manager_confirm_orientation_completed(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-travel-advance')
         # TODO only for programs with leader
-        api.content.transition(obj=self.program, transition='suspend')
-        self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-travel-advance')
+        # api.content.transition(obj=self.program, transition='suspend')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        initial_state = 'pending-travel-advance'
+        transition = 'suspend'
+        end_state = 'suspended'
+        authorized_roles = self.ROLES_BY_TRANSITION[transition]
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_schedule_operational_briefing(self, fast=None):
         """from reviewing-final-program-details"""
         self.test_can_transition_by_manager_travel_advance_ready(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'reviewing-final-program-details')
         # TODO only for programs with leader
-        api.content.transition(obj=self.program, transition='schedule-operational-briefing')
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-operational-briefing')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'reviewing-final-program-details')
+        # api.content.transition(obj=self.program, transition='schedule-operational-briefing')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-operational-briefing')
+        initial_state = 'reviewing-final-program-details'
+        transition = 'schedule-operational-briefing'
+        end_state = 'pending-program-leader-operational-briefing'
+        authorized_roles = ['Mgmt_Admin', 'Mgmt_Manager', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_cancel_from_reviewing_final_program_details(self, fast=None):
         """from reviewing-final-program-details Requires role: Mgmt_Admin; Mgmt_Director; or Manager"""
         self.test_can_transition_by_manager_travel_advance_ready(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'reviewing-final-program-details')
         # TODO only for programs with leader
-        api.content.transition(obj=self.program, transition='cancel')
-        self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'reviewing-final-program-details')
+        # api.content.transition(obj=self.program, transition='cancel')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        initial_state = 'reviewing-final-program-details'
+        transition = 'cancel'
+        end_state = 'cancelled'
+        authorized_roles = self.ROLES_BY_TRANSITION[transition]
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_suspend_from_reviewing_final_program_details(self, fast=None):
         """from reviewing-final-program-details Requires role: Mgmt_Admin; Mgmt_Director; Mgmt_Provost; or Manager"""
         self.test_can_transition_by_manager_travel_advance_ready(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'reviewing-final-program-details')
         # TODO only for programs with leader
-        api.content.transition(obj=self.program, transition='suspend')
-        self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'reviewing-final-program-details')
+        # api.content.transition(obj=self.program, transition='suspend')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        initial_state = 'reviewing-final-program-details'
+        transition = 'suspend'
+        end_state = 'suspended'
+        authorized_roles = self.ROLES_BY_TRANSITION[transition]
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_confirm_briefing_completed(self, fast=None):
         """from pending-program-leader-operational-briefing"""
         self.test_can_transition_by_manager_schedule_operational_briefing(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-operational-briefing')
         # TODO only for programs with leader
-        api.content.transition(obj=self.program, transition='confirm-briefing-completed')
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-operational-briefing')
+        # api.content.transition(obj=self.program, transition='confirm-briefing-completed')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
+        initial_state = 'pending-program-leader-operational-briefing'
+        transition = 'confirm-briefing-completed'
+        end_state = 'pending-program-departure'
+        authorized_roles = ['Mgmt_Admin', 'Mgmt_Manager', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_cancel_from_pending_program_leader_operational_briefing(self, fast=None):
         """from pending-program-leader-operational-briefing Requires role: Mgmt_Admin; Mgmt_Director; or Manager"""
         self.test_can_transition_by_manager_schedule_operational_briefing(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-operational-briefing')
-        api.content.transition(obj=self.program, transition='cancel')
-        self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-operational-briefing')
+        # api.content.transition(obj=self.program, transition='cancel')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        initial_state = 'pending-program-leader-operational-briefing'
+        transition = 'cancel'
+        end_state = 'cancelled'
+        authorized_roles = self.ROLES_BY_TRANSITION[transition]
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_suspend_from_pending_program_leader_operational_briefing(self, fast=None):
         """from pending-program-leader-operational-briefing Requires role: Mgmt_Admin; Mgmt_Director; Mgmt_Provost; or Manager"""
         self.test_can_transition_by_manager_schedule_operational_briefing(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-operational-briefing')
-        api.content.transition(obj=self.program, transition='suspend')
-        self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-leader-operational-briefing')
+        # api.content.transition(obj=self.program, transition='suspend')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        initial_state = 'pending-program-leader-operational-briefing'
+        transition = 'suspend'
+        end_state = 'suspended'
+        authorized_roles = self.ROLES_BY_TRANSITION[transition]
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_depart(self, fast=None):
         """from pending-program-departure"""
         self.test_can_transition_by_manager_confirm_briefing_completed(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
         # TODO only for programs with individuals
-        api.content.transition(obj=self.program, transition='depart')
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
+        # api.content.transition(obj=self.program, transition='depart')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
+        initial_state = 'pending-program-departure'
+        transition = 'depart'
+        end_state = 'pending-arrival-abroad'
+        authorized_roles = ['Mgmt_Coordinator', 'Mgmt_Admin', 'Mgmt_Manager', 'Mgmt_ProgramLeader', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_cancel_from_pending_program_departure(self, fast=None):
         """from pending-program-departure Requires role: Mgmt_Admin; Mgmt_Director; or Manager"""
         self.test_can_transition_by_manager_confirm_briefing_completed(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
-        api.content.transition(obj=self.program, transition='cancel')
-        self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
+        # api.content.transition(obj=self.program, transition='cancel')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'cancelled')
+        initial_state = 'pending-program-departure'
+        transition = 'cancel'
+        end_state = 'cancelled'
+        authorized_roles = self.ROLES_BY_TRANSITION[transition]
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_suspend_from_pending_program_departure(self, fast=None):
         """from pending-program-departure Requires role: Mgmt_Admin; Mgmt_Director; Mgmt_Provost; or Manager"""
         self.test_can_transition_by_manager_confirm_briefing_completed(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
-        api.content.transition(obj=self.program, transition='suspend')
-        self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
+        # api.content.transition(obj=self.program, transition='suspend')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        initial_state = 'pending-program-departure'
+        transition = 'suspend'
+        end_state = 'suspended'
+        authorized_roles = self.ROLES_BY_TRANSITION[transition]
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_depart_sponsored_program(self, fast=None):
         """from pending-program-departure"""
         self.test_can_transition_by_manager_confirm_briefing_completed(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
         # TODO only for programs with groups
-        api.content.transition(obj=self.program, transition='depart-sponsored-program')
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
+        # api.content.transition(obj=self.program, transition='depart-sponsored-program')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
+        initial_state = 'pending-program-departure'
+        transition = 'depart-sponsored-program'
+        end_state = 'pending-arrival-abroad'
+        authorized_roles = ['Mgmt_Coordinator', 'Mgmt_Admin', 'Mgmt_Manager', 'Mgmt_ProgramLeader', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_depart_non_sponsored_program(self, fast=None):
         """from pending-program-departure"""
         self.test_can_transition_by_manager_confirm_briefing_completed(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
         # TODO only for programs with groups
-        api.content.transition(obj=self.program, transition='depart-non-sponsored-program')
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
+        # api.content.transition(obj=self.program, transition='depart-non-sponsored-program')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
+        initial_state = 'pending-program-departure'
+        transition = 'depart-non-sponsored-program'
+        end_state = 'pending-arrival-abroad'
+        authorized_roles = ['Mgmt_Coordinator', 'Mgmt_Admin', 'Mgmt_Manager', 'Mgmt_ProgramLeader', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_suspend_from_pending_arrival_abroad(self, fast=None):
         """from pending-arrival-abroad Requires role: Mgmt_Admin; Mgmt_Director; Mgmt_Provost; or Manager"""
         self.test_can_transition_by_manager_depart_non_sponsored_program(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
-        api.content.transition(obj=self.program, transition='suspend')
-        self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
+        # api.content.transition(obj=self.program, transition='suspend')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'suspended')
+        initial_state = 'pending-arrival-abroad'
+        transition = 'suspend'
+        end_state = 'suspended'
+        authorized_roles = self.ROLES_BY_TRANSITION[transition]
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_confirm_safe_arrival(self, fast=None):
         """from pending-arrival-abroad"""
         self.test_can_transition_by_manager_depart_non_sponsored_program(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
         # TODO only for programs with individuals
-        api.content.transition(obj=self.program, transition='confirm-safe-arrival')
-        self.assertEqual(api.content.get_state(obj=self.program), 'program-in-progress')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
+        # api.content.transition(obj=self.program, transition='confirm-safe-arrival')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'program-in-progress')
+        initial_state = 'pending-arrival-abroad'
+        transition = 'confirm-safe-arrival'
+        end_state = 'program-in-progress'
+        authorized_roles = ['Mgmt_Coordinator', 'Mgmt_Admin', 'Mgmt_Manager', 'Mgmt_ProgramLeader', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_confirm_travel_delay(self, fast=None):
         """from pending-arrival-abroad"""
         self.test_can_transition_by_manager_depart_non_sponsored_program(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
         # TODO only for programs with individuals
-        api.content.transition(obj=self.program, transition='confirm-travel-delay')
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
+        # api.content.transition(obj=self.program, transition='confirm-travel-delay')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-program-departure')
+        initial_state = 'pending-arrival-abroad'
+        transition = 'confirm-travel-delay'
+        end_state = 'pending-program-departure'
+        authorized_roles = ['Mgmt_Admin', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_arrive_sponsored_program(self, fast=None):
         """from pending-arrival-abroad"""
         self.test_can_transition_by_manager_depart_non_sponsored_program(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
         # TODO only for programs with groups
-        api.content.transition(obj=self.program, transition='arrive-sponsored-program')
-        self.assertEqual(api.content.get_state(obj=self.program), 'program-in-progress')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
+        # api.content.transition(obj=self.program, transition='arrive-sponsored-program')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'program-in-progress')
+        initial_state = 'pending-arrival-abroad'
+        transition = 'arrive-sponsored-program'
+        end_state = 'program-in-progress'
+        authorized_roles = ['Mgmt_Admin', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_arrive_non_sponsored_program(self, fast=None):
         """from pending-arrival-abroad"""
         self.test_can_transition_by_manager_depart_non_sponsored_program(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
         # TODO only for programs with groups
-        api.content.transition(obj=self.program, transition='arrive-non-sponsored-program')
-        self.assertEqual(api.content.get_state(obj=self.program), 'program-in-progress')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'pending-arrival-abroad')
+        # api.content.transition(obj=self.program, transition='arrive-non-sponsored-program')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'program-in-progress')
+        initial_state = 'pending-arrival-abroad'
+        transition = 'arrive-non-sponsored-program'
+        end_state = 'program-in-progress'
+        authorized_roles = ['Mgmt_Admin', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_confirm_return(self, fast=None):
         """from program-in-progress"""
         self.test_can_transition_by_manager_confirm_safe_arrival(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'program-in-progress')
-        api.content.transition(obj=self.program, transition='confirm-return')
-        self.assertEqual(api.content.get_state(obj=self.program), 'travel-expense-report-student-evaluations-due-to')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'program-in-progress')
+        # api.content.transition(obj=self.program, transition='confirm-return')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'travel-expense-report-student-evaluations-due-to')
+        initial_state = 'program-in-progress'
+        transition = 'confirm-return'
+        end_state = 'travel-expense-report-student-evaluations-due-to'
+        authorized_roles = ['Mgmt_Admin', 'Mgmt_Coordinator', 'Mgmt_Manager', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_returned_sponsored_program(self, fast=None):
         """from program-in-progress"""
         self.test_can_transition_by_manager_confirm_safe_arrival(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'program-in-progress')
         # TODO only for programs with groups
-        api.content.transition(obj=self.program, transition='returned-sponsored-program')
-        self.assertEqual(api.content.get_state(obj=self.program), 'program-completed')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'program-in-progress')
+        # api.content.transition(obj=self.program, transition='returned-sponsored-program')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'program-completed')
+        initial_state = 'program-in-progress'
+        transition = 'returned-sponsored-program'
+        end_state = 'program-completed'
+        authorized_roles = ['Mgmt_Admin', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_returned_non_sponsored_program(self, fast=None):
         """from program-in-progress"""
         self.test_can_transition_by_manager_confirm_safe_arrival(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'program-in-progress')
         # TODO only for programs with groups
-        api.content.transition(obj=self.program, transition='returned-non-sponsored-program')
-        self.assertEqual(api.content.get_state(obj=self.program), 'program-completed')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'program-in-progress')
+        # api.content.transition(obj=self.program, transition='returned-non-sponsored-program')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'program-completed')
+        initial_state = 'program-in-progress'
+        transition = 'returned-non-sponsored-program'
+        end_state = 'program-completed'
+        authorized_roles = ['Mgmt_Admin', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_confirm_ter_received(self, fast=None):
         """from travel-expense-report-student-evaluations-due-to"""
         self.test_can_transition_by_manager_confirm_return(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'travel-expense-report-student-evaluations-due-to')
-        api.content.transition(obj=self.program, transition='confirm-ter-received')
-        self.assertEqual(api.content.get_state(obj=self.program), 'final-program-accounting-in-progress')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'travel-expense-report-student-evaluations-due-to')
+        # api.content.transition(obj=self.program, transition='confirm-ter-received')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'final-program-accounting-in-progress')
+        initial_state = 'travel-expense-report-student-evaluations-due-to'
+        transition = 'confirm-ter-received'
+        end_state = 'final-program-accounting-in-progress'
+        authorized_roles = ['Mgmt_Admin', 'Mgmt_Financial', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_process_refunds(self, fast=None):
         """from final-program-accounting-in-progress"""
         self.test_can_transition_by_manager_confirm_ter_received(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'final-program-accounting-in-progress')
-        api.content.transition(obj=self.program, transition='process-refunds')
-        self.assertEqual(api.content.get_state(obj=self.program), 'process-refunds-budget-transfers')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'final-program-accounting-in-progress')
+        # api.content.transition(obj=self.program, transition='process-refunds')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'process-refunds-budget-transfers')
+        initial_state = 'final-program-accounting-in-progress'
+        transition = 'process-refunds'
+        end_state = 'process-refunds-budget-transfers'
+        authorized_roles = ['Mgmt_Admin', 'Mgmt_Financial', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
 
     def test_can_transition_by_manager_archive_program(self, fast=None):
         """from process-refunds-budget-transfers"""
         self.test_can_transition_by_manager_process_refunds(fast=True)
-        self.assertEqual(api.content.get_state(obj=self.program), 'process-refunds-budget-transfers')
-        api.content.transition(obj=self.program, transition='archive-program')
-        self.assertEqual(api.content.get_state(obj=self.program), 'program-completed')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'process-refunds-budget-transfers')
+        # api.content.transition(obj=self.program, transition='archive-program')
+        # self.assertEqual(api.content.get_state(obj=self.program), 'program-completed')
+        initial_state = 'process-refunds-budget-transfers'
+        transition = 'archive-program'
+        end_state = 'program-completed'
+        authorized_roles = ['Mgmt_Admin', 'Mgmt_Financial', 'Manager']
+        if fast:
+            self.assertEqual(api.content.get_state(obj=self.program), initial_state)
+            api.content.transition(obj=self.program, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.program), end_state)
+        else:
+            self._verify_transition_by_all_roles(obj=self.program, initial_state=initial_state,
+                                                 authorized_roles=authorized_roles,
+                                                 transition=transition,
+                                                 destination_state=end_state,
+                                                 return_transition='manager-return-to-%s' % initial_state,
+                                                 end_state=initial_state)
