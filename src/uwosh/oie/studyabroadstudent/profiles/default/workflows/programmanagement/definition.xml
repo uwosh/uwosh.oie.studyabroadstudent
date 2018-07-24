@@ -587,6 +587,7 @@
   <exit-transition transition_id="manager-return-to-pending-provider-responses" />
   <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
   <exit-transition transition_id="manager-return-to-program-fee-under-liaison-review" />
+  <exit-transition transition_id="manager-return-to-provider-proposals-under-liaison-review" />
   <permission-map name="Access contents information" acquired="True">
 
   </permission-map>
