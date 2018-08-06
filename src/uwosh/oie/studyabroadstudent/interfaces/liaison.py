@@ -5,7 +5,7 @@ from zope.interface import Interface
 from plone.supermodel import model
 from plone.namedfile import field
 from collective import dexteritytextindexer
-from uwosh.oie.studyabroadstudent.vocabularies import socialmediaservice
+from uwosh.oie.studyabroadstudent.vocabularies import socialmediaservice, RegistryValueVocabulary
 from zope.schema import ValidationError
 from plone.directives import form
 from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
@@ -93,7 +93,7 @@ class IOIELiaison(Interface):
     office_building = schema.Choice(
         title=_(u'Office Building'),
         required=True,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.building',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.building'),
     )
     dexteritytextindexer.searchable('office_room')
     office_room = schema.TextLine(
@@ -105,7 +105,7 @@ class IOIELiaison(Interface):
         title=_(u'College or Unit'),
         description=_(u''),
         required=True,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.college_or_unit',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.college_or_unit'),
     )
     role_and_responsibility = field.NamedFile(
         title=_('Role & Responsibility'),

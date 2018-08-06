@@ -285,8 +285,12 @@ def health_document_added(o, event):
 
 
 def health_document_created(o, event):
-    if o.title != o.file.filename:
-        o.title = o.file.filename
+    if hasattr(o.file, 'filename'):
+        filename = o.file.filename
+    else:
+        filename = o.file.name
+    if o.title != filename:
+        o.title = filename
         o.reindexObject()
     # update containing Program's health_documents field
     if hasattr(o, 'aq_parent'):

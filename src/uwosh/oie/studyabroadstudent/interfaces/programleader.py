@@ -6,7 +6,8 @@ from plone.supermodel import model
 from plone.namedfile import field
 from collective import dexteritytextindexer
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary, \
-    socialmediaservice, salary_form, load_or_overload, replacement_costs, paid_by, rate_or_lump_sum
+    socialmediaservice, salary_form, load_or_overload, replacement_costs, paid_by, rate_or_lump_sum, \
+    RegistryValueVocabulary
 from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
 from zope.schema import ValidationError
 from plone.directives import form
@@ -101,7 +102,7 @@ class IOIEProgramLeader(Interface):
     office_building = schema.Choice(
         title=_(u'Office Building'),
         required=True,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.building'
+        source=RegistryValueVocabulary('oiestudyabroadstudent.building'),
     )
     dexteritytextindexer.searchable('office_room')
     office_room = schema.TextLine(
@@ -113,7 +114,7 @@ class IOIEProgramLeader(Interface):
         title=_(u'College or Unit'),
         description=_(u''),
         required=True,
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.college_or_unit',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.college_or_unit'),
     )
     role_and_responsibility = field.NamedFile(
         title=_('Role & Responsibility'),
@@ -249,7 +250,7 @@ class IOIEProgramLeader(Interface):
     gender = schema.Choice(
         title=_(u'Travel Document: Gender (Sex)'),
         description=_(u'Select the sex that is listed on your travel document.'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.genders',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.genders'),
         required=True,
     )
     document_number = schema.TextLine(

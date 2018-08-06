@@ -59,98 +59,191 @@ def post_install(context):
 
 
 def create_generic_accounts(portal):
-    user = api.user.create(email='kim.nguyen+Site_Admin@wildcardcorp.com', username='Site_Admin', password='secret')
-    api.user.grant_roles(username=user.id, roles=['Site_Admin', 'SiteAdministrator'])
+    try:
+        user = api.user.create(email='kim.nguyen+Site_Admin@wildcardcorp.com', username='Site_Admin', password='secret')
+        api.user.grant_roles(username=user.id, roles=['Site_Admin', 'SiteAdministrator'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_Director@wildcardcorp.com', username='Mgmt_Director')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_Director', 'SiteAdministrator'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_Director@wildcardcorp.com', username='Mgmt_Director')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_Director', 'SiteAdministrator'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_Manager@wildcardcorp.com', username='Mgmt_Manager')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_Manager'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_Manager@wildcardcorp.com', username='Mgmt_Manager')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_Manager'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_Coordinator@wildcardcorp.com', username='Mgmt_Coordinator')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_Coordinator'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_Coordinator@wildcardcorp.com', username='Mgmt_Coordinator')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_Coordinator'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_Financial@wildcardcorp.com', username='Mgmt_Financial')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_Financial'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_Financial@wildcardcorp.com', username='Mgmt_Financial')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_Financial'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_OIEProfessional@wildcardcorp.com', username='Mgmt_OIEProfessional')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_OIEProfessional'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_OIEProfessional@wildcardcorp.com', username='Mgmt_OIEProfessional')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_OIEProfessional'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_Intern@wildcardcorp.com', username='Mgmt_Intern')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_Intern'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_Intern@wildcardcorp.com', username='Mgmt_Intern')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_Intern'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_Liaison@wildcardcorp.com', username='Mgmt_Liaison')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_Liaison'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_Liaison@wildcardcorp.com', username='Mgmt_Liaison')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_Liaison'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_ProgramLeader@wildcardcorp.com', username='Mgmt_ProgramLeader')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_ProgramLeader'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_ProgramLeader@wildcardcorp.com', username='Mgmt_ProgramLeader')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_ProgramLeader'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_Dean@wildcardcorp.com', username='Mgmt_Dean')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_Dean'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_Dean@wildcardcorp.com', username='Mgmt_Dean')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_Dean'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_Chair@wildcardcorp.com', username='Mgmt_Chair')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_Chair'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_Chair@wildcardcorp.com', username='Mgmt_Chair')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_Chair'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_Provost@wildcardcorp.com', username='Mgmt_Provost')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_Provost'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_Provost@wildcardcorp.com', username='Mgmt_Provost')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_Provost'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_LeaderReview@wildcardcorp.com', username='Mgmt_LeaderReview')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_LeaderReview'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_LeaderReview@wildcardcorp.com', username='Mgmt_LeaderReview')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_LeaderReview'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_CourseBuilder@wildcardcorp.com', username='Mgmt_CourseBuilder')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_CourseBuilder'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_CourseBuilder@wildcardcorp.com', username='Mgmt_CourseBuilder')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_CourseBuilder'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Mgmt_RiskMgmt@wildcardcorp.com', username='Mgmt_RiskMgmt')
-    api.user.grant_roles(username=user.id, roles=['Mgmt_RiskMgmt'])
+    try:
+        user = api.user.create(email='kim.nguyen+Mgmt_RiskMgmt@wildcardcorp.com', username='Mgmt_RiskMgmt')
+        api.user.grant_roles(username=user.id, roles=['Mgmt_RiskMgmt'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_Director@wildcardcorp.com', username='Participant_Director')
-    api.user.grant_roles(username=user.id, roles=['Participant_Director'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_Director@wildcardcorp.com', username='Participant_Director')
+        api.user.grant_roles(username=user.id, roles=['Participant_Director'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_Manager@wildcardcorp.com', username='Participant_Manager')
-    api.user.grant_roles(username=user.id, roles=['Participant_Manager'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_Manager@wildcardcorp.com', username='Participant_Manager')
+        api.user.grant_roles(username=user.id, roles=['Participant_Manager'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_Coordinator@wildcardcorp.com', username='Participant_Coordinator')
-    api.user.grant_roles(username=user.id, roles=['Participant_Coordinator'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_Coordinator@wildcardcorp.com', username='Participant_Coordinator')
+        api.user.grant_roles(username=user.id, roles=['Participant_Coordinator'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_Financial@wildcardcorp.com', username='Participant_Financial')
-    api.user.grant_roles(username=user.id, roles=['Participant_Financial'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_Financial@wildcardcorp.com', username='Participant_Financial')
+        api.user.grant_roles(username=user.id, roles=['Participant_Financial'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_OIEProfessional@wildcardcorp.com', username='Participant_OIEProfessional')
-    api.user.grant_roles(username=user.id, roles=['Participant_OIEProfessional'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_OIEProfessional@wildcardcorp.com', username='Participant_OIEProfessional')
+        api.user.grant_roles(username=user.id, roles=['Participant_OIEProfessional'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_Intern@wildcardcorp.com', username='Participant_Intern')
-    api.user.grant_roles(username=user.id, roles=['Participant_Intern'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_Intern@wildcardcorp.com', username='Participant_Intern')
+        api.user.grant_roles(username=user.id, roles=['Participant_Intern'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_Liaison@wildcardcorp.com', username='Participant_Liaison')
-    api.user.grant_roles(username=user.id, roles=['Participant_Liaison'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_Liaison@wildcardcorp.com', username='Participant_Liaison')
+        api.user.grant_roles(username=user.id, roles=['Participant_Liaison'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_ProgramLeader@wildcardcorp.com', username='Participant_ProgramLeader')
-    api.user.grant_roles(username=user.id, roles=['Participant_ProgramLeader'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_ProgramLeader@wildcardcorp.com', username='Participant_ProgramLeader')
+        api.user.grant_roles(username=user.id, roles=['Participant_ProgramLeader'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_FinancialAid@wildcardcorp.com', username='Participant_FinancialAid')
-    api.user.grant_roles(username=user.id, roles=['Participant_FinancialAid'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_FinancialAid@wildcardcorp.com', username='Participant_FinancialAid')
+        api.user.grant_roles(username=user.id, roles=['Participant_FinancialAid'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_Provost@wildcardcorp.com', username='Participant_Provost')
-    api.user.grant_roles(username=user.id, roles=['Participant_Provost'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_Provost@wildcardcorp.com', username='Participant_Provost')
+        api.user.grant_roles(username=user.id, roles=['Participant_Provost'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_DeanOfStudents@wildcardcorp.com', username='Participant_DeanOfStudents')
-    api.user.grant_roles(username=user.id, roles=['Participant_DeanOfStudents'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_DeanOfStudents@wildcardcorp.com', username='Participant_DeanOfStudents')
+        api.user.grant_roles(username=user.id, roles=['Participant_DeanOfStudents'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_Health@wildcardcorp.com', username='Participant_Health')
-    api.user.grant_roles(username=user.id, roles=['Participant_Health'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_Health@wildcardcorp.com', username='Participant_Health')
+        api.user.grant_roles(username=user.id, roles=['Participant_Health'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_StudentAccounts@wildcardcorp.com', username='Participant_StudentAccounts')
-    api.user.grant_roles(username=user.id, roles=['Participant_StudentAccounts'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_StudentAccounts@wildcardcorp.com', username='Participant_StudentAccounts')
+        api.user.grant_roles(username=user.id, roles=['Participant_StudentAccounts'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_Reference@wildcardcorp.com', username='Participant_Reference')
-    api.user.grant_roles(username=user.id, roles=['Participant_Reference'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_Reference@wildcardcorp.com', username='Participant_Reference')
+        api.user.grant_roles(username=user.id, roles=['Participant_Reference'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_RiskMgmt@wildcardcorp.com', username='Participant_RiskMgmt')
-    api.user.grant_roles(username=user.id, roles=['Participant_RiskMgmt'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_RiskMgmt@wildcardcorp.com', username='Participant_RiskMgmt')
+        api.user.grant_roles(username=user.id, roles=['Participant_RiskMgmt'])
+    except:
+        pass
 
-    user = api.user.create(email='kim.nguyen+Participant_Applicant@wildcardcorp.com', username='Participant_Applicant')
-    api.user.grant_roles(username=user.id, roles=['Participant_Applicant'])
+    try:
+        user = api.user.create(email='kim.nguyen+Participant_Applicant@wildcardcorp.com', username='Participant_Applicant')
+        api.user.grant_roles(username=user.id, roles=['Participant_Applicant'])
+    except:
+        pass
 
 def set_front_page_text(portal, portal_ids):
     # change front page text

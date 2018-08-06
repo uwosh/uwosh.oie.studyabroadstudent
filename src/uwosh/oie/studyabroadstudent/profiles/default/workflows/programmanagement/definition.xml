@@ -325,6 +325,8 @@
   <exit-transition transition_id="manager-return-to-pending-program-leader-operational-briefing" />
   <exit-transition transition_id="manager-return-to-pending-arrival-abroad" />
   <permission-map name="Access contents information" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -334,7 +336,8 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
-
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
   </permission-map>
 
 
