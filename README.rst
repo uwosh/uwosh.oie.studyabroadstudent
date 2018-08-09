@@ -57,33 +57,96 @@ and then running ``bin/buildout``
 Export / Import
 ---------------
 
-Quick notes on how to export from the legacy site:
+This is how to export data from the legacy site then import it into a new site:
 
 On the legacy site:
 
-- using the Management Interface, e.g. http://localhost:8080/OIE/manage_main, navigate to portal_skins/custom and create a Script (Python) called `listApplicationIDs` containing the code in the file `listApplicationIDs.py` 
-- run the Script (Python) `listApplicationIDs`
-- save the output to a local file with the `.py` Python filename extension, e.g. `listApplicationIDsoutput.py`
-- using the Management Interface, create a Script (Python) in portal_skins/custom called `extractApplication` containing the code in the file `extractApplication.py` and add `id` to its parameter list
+- Using the Management Interface, e.g. http://localhost:8080/OIE/manage_main, navigate to portal_skins/custom and
+  create a Script (Python) called `listApplicationIDs` containing the code in the file `listApplicationIDs.py`
+
+- Run the Script (Python) `listApplicationIDs`
+
+- Save the output to a local file with the `.py` Python filename extension, e.g. `listApplicationIDsoutput.py`
+
+- Using the Management Interface, create a Script (Python) in portal_skins/custom called `extractApplication`
+  containing the code in the file `extractApplication.py` and add `id` to its parameter list
 
 On the new site:
 
-- run the script `extractApplicationsRemotely.py` and save its output to a file, like this: `bin/instance run extractApplicationsRemotely.py > extractoutput.out`; this will take hours (to extract 8600 student applications it took over 3.5 hours over the internet)
-- tweak that output file to create Python code: `./pythonify_extract.sh extractoutput.out > extractoutput.py`
-- run the script `importApplications.py` to import the applications locally, like this: `bin/instance run importApplications.py` (this took almost one hour on a MacBook Air)
+- Run the script `extractApplicationsRemotely.py` and save its output to a file, like this:
+  `bin/instance run extractApplicationsRemotely.py > extractoutput.out`; this will take hours (to extract 8600 student
+  applications it took over 3.5 hours over the internet)
+
+- If `extractApplicationsRemotely.py` did not finish running and extracted only a subset of the IDs, you can rerun it
+  like this to skip the IDs it had previously read: `bin/instance run
+  ./src/uwosh/oie/studyabroadstudent/scripts/extractApplicationsRemotely.py --http-ok=yes --skip-ids=yes
+  --id-file=extractoutput.out > newextractoutput.out`
+
+- If you ran the script more than once and have more than one output file, combine all the output files into one file,
+  e.g. `cat extractoutput.out newextractoutput.out > combinedextractoutput.out`
+
+- Massage the output file to turn it into a Python file: `./pythonify_extract.sh extractoutput.out > extractoutput.py`
+
+- Run the script `importApplications.py` to import the applications locally into the site, where the add-on must
+  already be installed: `bin/instance run importApplications.py` (this took almost one hour on a MacBook Air). If there
+  is a problem with the data, such as a bad birthdate year, you will be dropped into a PDB prompt where you can inspect
+  the values and make any changes needed before continuing. By default the import will try to create applications in the
+  folder 'applications' of the site 'OIE' but you can override those values with `--site-id=Plone`
+  and `--folder-id=another-folder-id`
+
+    (Pdb) l
+    329  	        try:
+    330  	            dateOfBirth=date(int((DateOfBirth_year is not None) and DateOfBirth_year or '1900'), month_values[((DateOfBirth_month is not None) and (DateOfBirth_month != '-- choose one --')) and DateOfBirth_month or 'January'], int(((DateOfBirth_day is not None) and (DateOfBirth_day != '-- choose one --') and DateOfBirth_day or 1)))
+    331  	        except:
+    332  	            import pdb;pdb.set_trace()
+    333
+    334  ->	        try:
+    335  	            passportExpDate=date(int((PassportExpDate_year is not None and PassportExpDate_year is not '') and PassportExpDate_year or '1900'), month_values[(PassportExpDate_month == '-- choose one --' or PassportExpDate_month == '') and 'January' or PassportExpDate_month], int((PassportExpDate_day == '-- choose one --' or PassportExpDate_day == '') and 1 or PassportExpDate_day))
+    336  	        except:
+    337  	            import pdb;pdb.set_trace()
+    338
+    339  	        obj = api.content.create(
+    (Pdb) DateOfBirth_year
+    19991
+    (Pdb) DateOfBirth_month
+    'January'
+    (Pdb) DateOfBirth_day
+    '8'
+    (Pdb) DateOfBirth_year=1991
+    (Pdb) dateOfBirth=date(int((DateOfBirth_year is not None) and DateOfBirth_year or '1900'), month_values[((DateOfBirth_month is not None) and (DateOfBirth_month != '-- choose one --')) and DateOfBirth_month or 'January'], int(((DateOfBirth_day is not None) and (DateOfBirth_day != '-- choose one --') and DateOfBirth_day or 1)))
+    (Pdb) dateOfBirth
+    datetime.date(1991, 1, 8)
+    (Pdb) id
+    'oiestuapp_howlettj1287342001'
+    (Pdb) c
+
+Using the ID of the application that had the error, you can go to the site, browse to that application (it will be at a
+URL like https://app.oie.uwosh.edu/Members/howlettj12/oiestuapp_howlettj1287342001) and edit and save it to correct the
+data error and prevent this particular data error in future extracts and imports.
 
 To verify the import, on the new site:
 
-- using the Management Interface, create a Script (Python) in portal_skins/custom called `extractApplication` containing the code in the file `extractApplication.py` and add `id` to its parameter list
-- create and run the script `extractApplicationsLocally.py` and save its output to a file, like this: `bin/instance run extractApplicationsLocally.py > extractlocallyoutput.out`
-- compare the contents of that file to that of the one you created remotely before, e.g. `diff extractoutput.out extractlocallyoutput.out`
+- Using the Management Interface, create a Script (Python) in portal_skins/custom called `extractApplication`
+  containing the code in the file `extractApplication.py` and add `id` to its parameter list
+
+- Create and run the script `extractApplicationsLocally.py` and save its output to a file, like this:
+  `bin/instance run extractApplicationsLocally.py > extractlocallyoutput.out`
+
+- Compare the contents of that file to that of the one you created remotely before, e.g.
+  `diff extractoutput.out extractlocallyoutput.out`
 
 Legacy Time Zones
 -----------------
 
-Since Plone 2.5, the time zones database has changed: the time zones 'GMT-5' and 'GMT-6' have since been renamed 'Etc/GMT+5' and 'Etc/GMT+6' (see https://community.plone.org/t/unknowntimezoneerror-pytz-quirks/4255/4 for why the sign change). Some DateTime values in legacy data use the old time zone designations, which causes an error in the unpickler() method in the file tzinfo.py, part of the pytz-2015.7-py2.7.egg. This error prevents viewing of legacy (migrated) OIEStudentApplication objects. 
+Since Plone 2.5, the time zones database has changed: the time zones 'GMT-5' and 'GMT-6' have since been renamed
+'Etc/GMT+5' and 'Etc/GMT+6' (see https://community.plone.org/t/unknowntimezoneerror-pytz-quirks/4255/4 for why the sign
+change). Some DateTime values in legacy data use the old time zone designations, which causes an error in the
+unpickler() method in the file tzinfo.py, part of the pytz-2015.7-py2.7.egg. This error prevents viewing of legacy
+(migrated) OIEStudentApplication objects.
 
-For the moment, the only way to get around this error is to patch the unpickler() method in tzinfo.py and add the following lines right after line 525 (the comment "Raises a KeyError if zone no longer exists, which should never happen and would be a bug.")::
+For the moment, the only way to get around this error is to patch the unpickler() method in tzinfo.py and add the
+following lines right after line 525 (the comment "Raises a KeyError if zone no longer exists, which should never
+happen and would be a bug.")::
 
     # Raises a KeyError if zone no longer exists, which should never happen
     # and would be a bug.
