@@ -21,7 +21,6 @@ from uwosh.oie.studyabroadstudent.extractoutput import app_data
 MAX_COUNT = 100000 # stop after this many records
 
 counter = 0
-site_id = 'OIE'
 folder_id = 'applications'
 workflow_id = 'OIEStudentApplicationWorkflow'
 PORTAL_TYPE = 'OIEStudyAbroadStudentApplication'
@@ -30,11 +29,11 @@ parser = argparse.ArgumentParser(
     description='...')
 parser.add_argument('--site-id', dest='site_id', default='OIE', help='the ID of the site in which to create the applications; defaults to "OIE"')
 parser.add_argument('--folder-id', dest='folder_id', default='applications', help='the ID of the folder within the site in which to create the applications; defaults to "applications"')
-parser.add_argument('--skip-existing', dest='skip_existing', default=False, help='skip creating the application if an application with the same ID already exists in the site; defaults to False')
+parser.add_argument('--skip-existing', dest='skip_existing', default=False, help='set to True to skip creating the application if an application with the same ID already exists in the site; defaults to False')
 args, _ = parser.parse_known_args()
-print args.skip_existing; import pdb;pdb.set_trace()
 
 # Sets the current site as the active site
+site_id = args.site_id
 setSite(app[site_id])
 site = getSite()
 
