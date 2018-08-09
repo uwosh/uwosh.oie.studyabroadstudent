@@ -45,7 +45,12 @@ setup(
         'plone.app.dexterity',
         'currencies',
         'collective.dexteritytextindexer',
-        'collective.z3cform.datagridfield',
+        'collective.z3cform.datagridfield==1.1',
+        'plone.formwidget.autocomplete',
+#        'plone.app.workflowmanager==2.1b1',
+        'plone.app.workflowmanager',
+        'plone.app.widgets',
+        'collective.impersonate',
     ],
     extras_require={
         'test': [
