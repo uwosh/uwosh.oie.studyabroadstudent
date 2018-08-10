@@ -4,7 +4,8 @@
   <dependencies>
     <dependency>profile-plone.app.dexterity:default</dependency>
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
-    <dependency>profile-plone.app.workflowmanager:default</dependency>
-    <dependency>profile-collective.impersonate:default</dependency>
+    <!--the following, if uncommented, cause tests to fail-->
+    <!--<dependency>profile-plone.app.workflowmanager:default</dependency>-->
+    <!--<dependency>profile-collective.impersonate:default</dependency>-->
   </dependencies>
 </metadata>
