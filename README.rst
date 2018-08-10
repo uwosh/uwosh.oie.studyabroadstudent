@@ -75,12 +75,12 @@ On the new site:
 
 - Run the script `extractApplicationsRemotely.py` and save its output to a file, like this:
   `bin/instance run extractApplicationsRemotely.py > extractoutput.out`; this will take hours (to extract 8600 student
-  applications it took over 3.5 hours over the internet)
+  applications it took over 3.5 hours over the internet). You can override default values with `--http-ok=yes`,
+  `--remote-user`, `--remote-password`, `--remote-server`.
 
 - If `extractApplicationsRemotely.py` did not finish running and extracted only a subset of the IDs, you can rerun it
-  like this to skip the IDs it had previously read: `bin/instance run
-  ./src/uwosh/oie/studyabroadstudent/scripts/extractApplicationsRemotely.py --http-ok=yes --skip-ids=yes
-  --id-file=extractoutput.out > newextractoutput.out`
+  like this to skip the IDs it had previously read:
+  `bin/instance run ./src/uwosh/oie/studyabroadstudent/scripts/extractApplicationsRemotely.py --http-ok=yes --skip-ids=yes --id-file=extractoutput.out > newextractoutput.out`
 
 - If you ran the script more than once and have more than one output file, combine all the output files into one file,
   e.g. `cat extractoutput.out newextractoutput.out > combinedextractoutput.out`
@@ -92,7 +92,8 @@ On the new site:
   is a problem with the data, such as a bad birthdate year, you will be dropped into a PDB prompt where you can inspect
   the values and make any changes needed before continuing. By default the import will try to create applications in the
   folder 'applications' of the site 'OIE' but you can override those values with `--site-id=Plone`
-  and `--folder-id=another-folder-id`
+  and `--folder-id=another-folder-id`. The argument `--skip-existing` tells the script to check first if there is
+  already an existing application object with the same ID before creating one.
 
     (Pdb) l
     329  	        try:

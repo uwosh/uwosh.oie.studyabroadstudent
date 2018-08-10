@@ -6,6 +6,7 @@ from plone.app.uuid.utils import uuidToObject
 from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.file import NamedImage
+import logging
 
 
 class ApplicationView(DefaultView):
@@ -21,7 +22,7 @@ class ProgramView(DefaultView, FolderView):
         roles = api.user.get_roles(username=current.id)
         if 'Manager' in roles or 'Site Administrator' in roles:
             return True
-        return not False
+        return False
 
     def country_info(self):
         """Retrieve info for all countries associated with the program"""
@@ -135,3 +136,10 @@ class ContactView(DefaultView):
 
 class ParticipantView(DefaultView):
     pass
+
+class AttemptTransitionsPeriodicallyView(DefaultView):
+
+    def __call__(self, *args, **kwargs):
+        """execute certain workflow transitions which should use their guard expressions before proceeding"""
+        logger = logging.getLogger(__class__)
+        logger.info("'transition has been attempted")

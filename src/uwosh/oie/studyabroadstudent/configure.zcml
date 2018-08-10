@@ -232,4 +232,7 @@
       profile="uwosh.oie.studyabroadstudent:default"
       />
 
+  <adapter factory="uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram.TitleRequiredValidator" />
+  <adapter factory="uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram.DescriptionRequiredValidator" />
+
 </configure>

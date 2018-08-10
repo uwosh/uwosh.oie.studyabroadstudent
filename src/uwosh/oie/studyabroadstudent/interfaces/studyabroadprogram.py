@@ -15,11 +15,11 @@ from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressIn
 from zope.schema import ValidationError
 from collective import dexteritytextindexer
 from plone.autoform.directives import read_permission, write_permission
-# from zope.interface import Invalid
+from zope.interface import Invalid
 # from zope.interface import invariant
-# from plone import api
+from plone import api
 # from z3c.form.interfaces import WidgetActionExecutionError
-# from z3c.form import validator
+from z3c.form import validator
 
 class InvalidEmailAddress(ValidationError):
     "Invalid email address"
@@ -38,14 +38,28 @@ class ILearningObjectiveRowSchema(Interface):
 
 
 class IPreTravelDatesRowSchema(Interface):
-    pretravel_start_datetime = schema.Datetime(title=_(u'Start'))
-    pretravel_end_datetime = schema.Datetime(title=_(u'End'))
+    pretravel_start_datetime = schema.Datetime(
+        title=_(u'Start'),
+        required=True,
+    )
+    pretravel_end_datetime = schema.Datetime(
+        title=_(u'End'),
+        required=True,
+    )
     pretravel_building = schema.Choice(
         title=_(u'Building'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.building'),
+        required=False,
     )
-    pretravel_room = schema.TextLine(title=_(u'Room'))
-    pretravel_attendance_required = schema.Choice(title=_(u'Attendance Required?'), vocabulary=yes_no_na_vocabulary)
+    pretravel_room = schema.TextLine(
+        title=_(u'Room'),
+        required=False,
+    )
+    pretravel_attendance_required = schema.Choice(
+        title=_(u'Attendance Required?'),
+        vocabulary=yes_no_na_vocabulary,
+        required=False,
+    )
 
 
 class IPostTravelClassDatesRowSchema(Interface):
@@ -265,8 +279,8 @@ class IOIEStudyAbroadProgram(Interface):
     learning_objectives = schema.List(
         title=_(u'Learning Objectives'),
         description=_(
-            u'State the learning objectives for this program.  Include only one learning objective per text field. These learning objectives will be included in end-of-program assessment and may be used to support Higher Learning Commission and other accreditation processes.'),
-        required=False,
+            u'State the learning objectives for this program.  Include only one learning objective per text field. These learning objectives will be included in end-of-program assessment and may be used to support Higher Learning Commission and other accreditation processes. (Max: 12 entries)'),
+        required=True,
         value_type=DictRow(title=u"learning objective row", schema=ILearningObjectiveRowSchema)
     )
 
@@ -283,6 +297,7 @@ class IOIEStudyAbroadProgram(Interface):
         default_mime_type='text/plain',
         allowed_mime_types=('text/plain', 'text/html',),
         required=False,
+        # TODO: validator: if equipment_and_space then this must have non empty value
     )
 
     guest_lectures = schema.Choice(
@@ -295,7 +310,7 @@ class IOIEStudyAbroadProgram(Interface):
     initial_draft_program_schedule = field.NamedFile(
         title=_(u'Initial Draft Program Schedule'),
         description=_(u'Complete the OIE itinerary form and upload here.'),
-        required=False,
+        required=True,
     )
 
     syllabus_and_supporting_docs = field.NamedFile(
@@ -308,14 +323,14 @@ class IOIEStudyAbroadProgram(Interface):
     min_credits_earned = schema.Choice(
         title=_(u'Minimum Number of Credits to be Earned by Each Applicant'),
         description=_(u''),
-        required=False,
+        required=True,
         source=RegistryValueVocabulary('oiestudyabroadstudent.credits'),
     )
 
     max_credits_earned = schema.Choice(
         title=_(u'Maximum Number of Credits to be Earned by Each Applicant'),
         description=_(u''),
-        required=False,
+        required=True,
         source=RegistryValueVocabulary('oiestudyabroadstudent.credits'),
     )
 
@@ -323,7 +338,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Language of Study'),
         description=_(
             u'Select all that apply. Contact the Office of International Education to add a language (abroad@uwosh.edu).'),
-        required=False,
+        required=True,
         value_type=schema.Choice(source=RegistryValueVocabulary('oiestudyabroadstudent.language')),
     )
 
@@ -353,7 +368,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Pre-Travel Class & Orientation Dates'),
         description=_(
             u'Students expect to meet group members and their program leader or program advisor in a formal group setting at least once prior to travel.  Check with your department chair and/or College administration on pre-travel requirements specific to your unit. Students are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during your pre-travel class dates.  Students with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the student on the program.  For this reason, after we advertise these dates to students as mandatory, the dates shouldn''t be changed!'),
-        required=False,
+        required=True,
         value_type=DictRow(title=u"Pre-Travel Dates", schema=IPreTravelDatesRowSchema)
     )
 
@@ -460,7 +475,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Are your first-choice dates flexible?'),
         description=_(u'If yes, your OIE Program Manager will meet with you to discuss transition dates'),
         vocabulary=yes_no_none_vocabulary,
-        required=False,
+        required=True,
     )
 
     widget('postTravelClassDates', DataGridFieldFactory)
@@ -555,26 +570,27 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Student Status'),
         description=_(u'Choose one'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.student_status'),
-        required=False,
+        required=True,
     )
 
     seatAssignmentProtocol = schema.Choice(
         title=_(u'Seat Assignment Protocol'),
         vocabulary=seat_assignment_protocol,
-        required=False,
+        required=True,
     )
 
     liaisonReviewOfIndividualApplicants = schema.Choice(
         title=_(u'Liaison Review of Individual Applicants'),
         description=_(
-            u'For competitive programs or for progarms that require each applicant to have specific background in addition to meeting course pre-requisites, indicate criteria to be used and select the method or methods to be employed to determine whether criteria have been met.  Do not include or duplicate course pre-requisites here.'),
+            u'For competitive programs or for programs that require each applicant to have specific background in addition to meeting course pre-requisites, indicate criteria to be used and select the method or methods to be employed to determine whether criteria have been met.  Do not include or duplicate course pre-requisites here.'),
         vocabulary=yes_no_none_vocabulary,
-        required=False,
+        required=True,
     )
 
     approvalCriteria = schema.Text(
         title=_(u'Criteria to be used in the approval process include the following'),
         required=False,
+        # TODO validate that this is non-blank if liaisonReviewOfIndividualApplicants == True
     )
 
     individualInterview = schema.Choice(
@@ -640,7 +656,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             u'Complete this in English if studying in English; complete this in German if studying in German'),
         vocabulary=yes_no_na_vocabulary,
-        required=False,
+        required=True,
         # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
     )
 
@@ -648,7 +664,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Letter of Motivation Required'),
         description=_(u'This must be typed'),
         vocabulary=yes_no_na_vocabulary,
-        required=False,
+        required=True,
         # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
     )
 
@@ -1490,21 +1506,21 @@ class IOIEStudyAbroadProgram(Interface):
     )
 
 
-# class TitleRequiredValidator(validator.SimpleFieldValidator):
-#     def validate(self, value):
-#         state = api.content.get_state(obj=self.context)
-#         if state == 'initial':
-#             if not value or not value.strip():
-#                 raise Invalid(_(u'Title is required in state ''%s''' % state))
-# validator.WidgetValidatorDiscriminators(TitleRequiredValidator, field=IOIEStudyAbroadProgram['title'])
-#
-# class DescriptionRequiredValidator(validator.SimpleFieldValidator):
-#     def validate(self, value):
-#         state = api.content.get_state(obj=self.context)
-#         if state == 'initial':
-#             if not value or not value.strip():
-#                 raise Invalid(_(u'Description is required in state ''%s''' % state))
-# validator.WidgetValidatorDiscriminators(DescriptionRequiredValidator, field=IOIEStudyAbroadProgram['description'])
+class TitleRequiredValidator(validator.SimpleFieldValidator):
+    def validate(self, value):
+        state = api.content.get_state(obj=self.context)
+        if state == 'initial':
+            if not value or not value.strip():
+                raise Invalid(_(u'Title is required in state ''%s''' % state))
+validator.WidgetValidatorDiscriminators(TitleRequiredValidator, field=IOIEStudyAbroadProgram['title'])
+
+class DescriptionRequiredValidator(validator.SimpleFieldValidator):
+    def validate(self, value):
+        state = api.content.get_state(obj=self.context)
+        if state == 'initial':
+            if not value or not value.strip():
+                raise Invalid(_(u'Description is required in state ''%s''' % state))
+validator.WidgetValidatorDiscriminators(DescriptionRequiredValidator, field=IOIEStudyAbroadProgram['description'])
 
 
 # "Syllabus & Other Supporting Documents
