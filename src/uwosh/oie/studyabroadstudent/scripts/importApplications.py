@@ -551,17 +551,18 @@ with api.env.adopt_user(username="admin"):
                 programFee2=ProgramFee2,
             )
 
-            # set some metadata
-            obj.creation_date=created
-            obj.setModificationDate(modified)
-            obj.setCreators(Creators)
-
             # set review_state and review_history
             for h in review_history:
                 wtool.setStatusOf(workflow_id, obj, h)
 
             print "    ", id, Email
 
+            # set some metadata (do this last)
+            obj.setCreators(Creators)
+            obj.creation_date=created
+            obj.setModificationDate(modified)
+            # reindexing these doesn't actually work correctly; instead, do a full catalog clear and rebuild at the end
+            # obj.reindexObject(idxs=['modified', 'created', 'Creator'])
 
             counter += 1
             if counter >= MAX_COUNT:
@@ -582,4 +583,10 @@ transaction.commit()
 # Perform ZEO client synchronization (if running in clustered mode)
 app._p_jar.sync()
 
-
+print "Rebuilding the catalog to update for modified dates, creation dates, and creators. Will take a few minutes:"
+from Products.CMFPlone.utils import getToolByName
+catalog = getToolByName(site, 'portal_catalog', None)
+if catalog:
+    catalog.manage_catalogRebuild()
+print "Catalog rebuild is done."
+print "Import is complete."
