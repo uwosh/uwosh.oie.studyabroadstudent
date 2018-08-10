@@ -305,25 +305,25 @@ with api.env.adopt_user(username="admin"):
         #     print "Skipping existing object with ID", id
         #     next
 
-        if DateOfBirth_year == '11201972':
+        if str(DateOfBirth_year) == '11201972':
             DateOfBirth_year = '19721'
-        if DateOfBirth_year == '5191995':
+        if str(DateOfBirth_year) == '5191995':
             DateOfBirth_year = '1995'
-        if DateOfBirth_year == '19991':
+        if str(DateOfBirth_year) == '19991':
             DateOfBirth_year = '1991'
-        if DateOfBirth_year == '4141989':
+        if str(DateOfBirth_year) == '4141989':
             DateOfBirth_year = '1989'
-        if DateOfBirth_year == '101389':
+        if str(DateOfBirth_year) == '101389':
             DateOfBirth_year = '1989'
-        if DateOfBirth_year == '19997':
+        if str(DateOfBirth_year) == '19997':
             DateOfBirth_year = '1997'
-        if DateOfBirth_year == '2171991':
+        if str(DateOfBirth_year) == '2171991':
             DateOfBirth_year = '1991'
-        if DateOfBirth_year == '5131997':
+        if str(DateOfBirth_year) == '5131997':
             DateOfBirth_year = '1997'
-        if DateOfBirth_year == '19992':
+        if str(DateOfBirth_year) == '19992':
             DateOfBirth_year = '1992'
-        if DateOfBirth_year == '19996':
+        if str(DateOfBirth_year) == '19996':
             DateOfBirth_year = '1996'
         if PassportExpDate_month == 'April' and PassportExpDate_day == '31':
             PassportExpDate_day = '30'
@@ -551,17 +551,18 @@ with api.env.adopt_user(username="admin"):
                 programFee2=ProgramFee2,
             )
 
-            # set some metadata
-            obj.creation_date=created
-            obj.setModificationDate(modified)
-            obj.setCreators(Creators)
-
             # set review_state and review_history
             for h in review_history:
                 wtool.setStatusOf(workflow_id, obj, h)
 
             print "    ", id, Email
 
+            # set some metadata (do this last)
+            obj.setCreators(Creators)
+            obj.creation_date=created
+            obj.setModificationDate(modified)
+            # reindexing these doesn't actually work correctly; instead, do a full catalog clear and rebuild at the end
+            # obj.reindexObject(idxs=['modified', 'created', 'Creator'])
 
             counter += 1
             if counter >= MAX_COUNT:
@@ -582,4 +583,10 @@ transaction.commit()
 # Perform ZEO client synchronization (if running in clustered mode)
 app._p_jar.sync()
 
-
+print "Rebuilding the catalog to update for modified dates, creation dates, and creators. Will take a few minutes:"
+from Products.CMFPlone.utils import getToolByName
+catalog = getToolByName(site, 'portal_catalog', None)
+if catalog:
+    catalog.manage_catalogRebuild()
+print "Catalog rebuild is done."
+print "Import is complete."
