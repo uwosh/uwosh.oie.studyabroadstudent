@@ -18,8 +18,6 @@ import transaction
 
 from uwosh.oie.studyabroadstudent.extractoutput import app_data
 
-import pdb;pdb.set_trace()
-
 MAX_COUNT = 100000 # stop after this many records
 
 counter = 0
@@ -307,25 +305,25 @@ with api.env.adopt_user(username="admin"):
         #     print "Skipping existing object with ID", id
         #     next
 
-        if DateOfBirth_year == '11201972':
+        if str(DateOfBirth_year) == '11201972':
             DateOfBirth_year = '19721'
-        if DateOfBirth_year == '5191995':
+        if str(DateOfBirth_year) == '5191995':
             DateOfBirth_year = '1995'
-        if DateOfBirth_year == '19991':
+        if str(DateOfBirth_year) == '19991':
             DateOfBirth_year = '1991'
-        if DateOfBirth_year == '4141989':
+        if str(DateOfBirth_year) == '4141989':
             DateOfBirth_year = '1989'
-        if DateOfBirth_year == '101389':
+        if str(DateOfBirth_year) == '101389':
             DateOfBirth_year = '1989'
-        if DateOfBirth_year == '19997':
+        if str(DateOfBirth_year) == '19997':
             DateOfBirth_year = '1997'
-        if DateOfBirth_year == '2171991':
+        if str(DateOfBirth_year) == '2171991':
             DateOfBirth_year = '1991'
-        if DateOfBirth_year == '5131997':
+        if str(DateOfBirth_year) == '5131997':
             DateOfBirth_year = '1997'
-        if DateOfBirth_year == '19992':
+        if str(DateOfBirth_year) == '19992':
             DateOfBirth_year = '1992'
-        if DateOfBirth_year == '19996':
+        if str(DateOfBirth_year) == '19996':
             DateOfBirth_year = '1996'
         if PassportExpDate_month == 'April' and PassportExpDate_day == '31':
             PassportExpDate_day = '30'
