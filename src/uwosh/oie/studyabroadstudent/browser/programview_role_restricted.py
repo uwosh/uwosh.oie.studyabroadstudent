@@ -18,7 +18,7 @@ READ = 'r'
 READ_WRITE = 'rw'
 NOTHING = ''
 
-VIEWABILITY = {
+VIEWABILITY = { 
     'Anonymous' : {
         'applicants-considering-change' : READ,
         'application-intake-in-progress' : READ,
