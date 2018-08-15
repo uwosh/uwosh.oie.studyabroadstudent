@@ -10,6 +10,24 @@
   <exit-transition transition_id="cancel-after-change" />
   <exit-transition transition_id="confirm-to-run" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -19,6 +37,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -33,6 +69,24 @@
   <exit-transition transition_id="manager-return-to-initial" />
   <exit-transition transition_id="manager-return-to-program-fee-pending-publication" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -42,6 +96,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -68,6 +140,54 @@
   <exit-transition transition_id="manager-return-to-request-for-proposals-under-development" />
   <exit-transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" />
   <exit-transition transition_id="manager-return-to-reviewing-final-program-details" />
+  <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
+
+  </permission-map>
+  <permission-map name="Change portal events" acquired="True">
+
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="True">
+
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
+
+  </permission-map>
 
 
 
@@ -77,6 +197,54 @@
   <exit-transition transition_id="manager-return-to-pending-chair-review" />
   <exit-transition transition_id="manager-return-to-pending-dean-unit-director-review" />
   <exit-transition transition_id="manager-return-to-pending-provost-review" />
+  <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
+
+  </permission-map>
+  <permission-map name="Change portal events" acquired="True">
+
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="True">
+
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
+
+  </permission-map>
 
  </state>
  <state state_id="final-payment-billing-in-progress" title="Final Payment Billing in Progress" >
@@ -86,6 +254,24 @@
   <exit-transition transition_id="bill-for-final-payment-programs-with-no-leader" />
   <exit-transition transition_id="manager-return-to-pending-final-program-fee" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -95,6 +281,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -104,6 +308,24 @@
   <exit-transition transition_id="process-refunds" />
   <exit-transition transition_id="manager-return-to-travel-expense-report-student-evaluations-due-to" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -113,6 +335,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -123,6 +363,24 @@
   <exit-transition transition_id="end-incident" />
   <exit-transition transition_id="manager-return-to-program-in-progress" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -132,6 +390,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -173,6 +449,24 @@
   <exit-transition transition_id="manager-return-to-applicants-considering-change" />
   <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -182,6 +476,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -195,6 +507,24 @@
   <exit-transition transition_id="arrive-non-sponsored-program" />
   <exit-transition transition_id="manager-return-to-pending-program-departure" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -204,6 +534,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -216,6 +564,24 @@
   <exit-transition transition_id="return-to-initial" />
   <exit-transition transition_id="manager-return-to-initial" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -225,6 +591,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -238,6 +622,24 @@
   <exit-transition transition_id="manager-return-to-pending-chair-review" />
   <exit-transition transition_id="manager-return-to-pending-dean-unit-director-review" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -247,6 +649,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -260,6 +680,8 @@
   <exit-transition transition_id="pending-provider-proposal" />
   <exit-transition transition_id="manager-return-to-pending-provost-review" />
   <permission-map name="Access contents information" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -269,6 +691,8 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
 
   </permission-map>
 
@@ -280,6 +704,24 @@
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="manager-return-to-initial-payment-billing-in-progress" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -289,6 +731,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -301,6 +761,24 @@
   <exit-transition transition_id="manager-return-to-pending-provost-review" />
   <exit-transition transition_id="manager-return-to-pending-dean-unit-director-review" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -310,6 +788,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -353,6 +849,8 @@
   <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
   <exit-transition transition_id="manager-return-to-initial" />
   <permission-map name="Access contents information" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -362,6 +860,8 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
 
   </permission-map>
 
@@ -373,6 +873,24 @@
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="manager-return-to-reviewing-final-program-details" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -382,6 +900,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -393,6 +929,24 @@
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="manager-return-to-final-payment-billing-in-progress" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -402,6 +956,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -413,6 +985,24 @@
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -422,6 +1012,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -435,6 +1043,24 @@
   <exit-transition transition_id="withdraw-application" />
   <exit-transition transition_id="manager-return-to-pending-oie-review" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -444,6 +1070,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -455,6 +1099,24 @@
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="manager-return-to-pending-program-leader-orientation" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -464,6 +1126,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -473,6 +1153,24 @@
   <exit-transition transition_id="archive-program" />
   <exit-transition transition_id="manager-return-to-final-program-accounting-in-progress" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -482,6 +1180,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -502,6 +1218,24 @@
   <exit-transition transition_id="announce-programmatic-for-fee-change" />
   <exit-transition transition_id="manager-return-to-program-fee-under-liaison-review" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -511,6 +1245,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -523,6 +1275,24 @@
   <exit-transition transition_id="approve-fee" />
   <exit-transition transition_id="manager-return-to-pending-program-fee-determination-by-oie" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -532,6 +1302,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -546,6 +1334,24 @@
   <exit-transition transition_id="manager-return-to-pending-arrival-abroad" />
   <exit-transition transition_id="manager-return-to-incident-in-progress" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -555,6 +1361,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -567,6 +1391,24 @@
   <exit-transition transition_id="approve-proposal" />
   <exit-transition transition_id="manager-return-to-provider-proposals-under-oie-review" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -576,6 +1418,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -592,6 +1452,24 @@
   <exit-transition transition_id="manager-return-to-program-fee-under-liaison-review" />
   <exit-transition transition_id="manager-return-to-provider-proposals-under-liaison-review" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -601,6 +1479,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -614,6 +1510,8 @@
   <exit-transition transition_id="manager-return-to-pending-discussions-with-program-manager" />
   <exit-transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" />
   <permission-map name="Access contents information" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -623,6 +1521,8 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
 
   </permission-map>
 
@@ -635,6 +1535,8 @@
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="manager-return-to-request-for-proposals-under-development" />
   <permission-map name="Access contents information" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -644,6 +1546,8 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
 
   </permission-map>
 
@@ -655,6 +1559,24 @@
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="manager-return-to-pending-travel-advance" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -664,6 +1586,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 
@@ -699,6 +1639,24 @@
   <exit-transition transition_id="confirm-ter-received" />
   <exit-transition transition_id="manager-return-to-program-in-progress" />
   <permission-map name="Access contents information" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
   <permission-map name="Change portal events" acquired="True">
@@ -708,6 +1666,24 @@
 
   </permission-map>
   <permission-map name="View" acquired="True">
+   <!--<permission-role>Anonymous</permission-role>-->
+   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Mgmt_Admin</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Mgmt_Manager</permission-role>
+   <permission-role>Mgmt_Coordinator</permission-role>
+   <permission-role>Mgmt_Financial</permission-role>
+   <permission-role>Mgmt_OIE</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_ProgramLeader</permission-role>
+   <permission-role>Mgmt_DeanDirector</permission-role>
+   <permission-role>Mgmt_Chair</permission-role>
+   <permission-role>Mgmt_Provost</permission-role>
+   <permission-role>Mgmt_HR</permission-role>
+   <permission-role>Mgmt_Access</permission-role>
+   <permission-role>Mgmt_AdminServices</permission-role>
+   <permission-role>Mgmt_CourseBuilder</permission-role>
+   <permission-role>Mgmt_Emergency</permission-role>
 
   </permission-map>
 

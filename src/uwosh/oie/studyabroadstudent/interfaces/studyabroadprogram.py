@@ -231,7 +231,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(u'(auto-generated)'),
         required=True,
         default=_(u'will be auto-generated'),
-        readonly=True
+        readonly=True,
     )
 
     #######################################################
@@ -433,7 +433,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     airline = schema.Choice(
         title=_(u'Airline'),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.airline'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airline',
         required=False,
     )
 
@@ -499,7 +499,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     airlineReturn = schema.Choice(
         title=_(u'Airline'),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.airline'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airline',
         required=False,
     )
 
@@ -1351,7 +1351,7 @@ class IOIEStudyAbroadProgram(Interface):
                 'winter_interim_spring_semester_participant_orientation_deadline',
                 'winter_interim_spring_semester_in_person_orientation',
                 'spring_interim_summer_fall_semester_payment_deadline_1', 'spring_interim_payment_deadline_2',
-                'sunmmer_payment_deadline_2', 'fall_semester_payment_deadline_2',
+                'summer_payment_deadline_2', 'fall_semester_payment_deadline_2',
                 'winter_interim_spring_payment_deadline_1', 'winter_interim_spring_payment_deadline_2']
     )
 
@@ -1481,7 +1481,7 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    sunmmer_payment_deadline_2 = schema.Date(
+    summer_payment_deadline_2 = schema.Date(
         title=u'Sunmmer Payment Deadline 2',
         description=u'will be copied from the selected calendar year on first save',
         required=False,

@@ -71,6 +71,7 @@
   <property name="view_methods">
     <element value="view" />
     <element value="manager_view" />
+    <element value="role_restricted_view" />
   </property>
 
   <!-- Method aliases -->

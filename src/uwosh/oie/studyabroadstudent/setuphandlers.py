@@ -318,6 +318,12 @@ def enable_commenting():
         settings.user_notification_enabled = True
 
 
+def populate_years(portal):
+    # populate Calendar Year content items
+    years_folder = portal['years']
+    create_year('2018', years_folder)
+
+
 def populate_partners(portal):
     # populate Cooperating Partners content items
     partner_folder = portal['partners']
@@ -640,6 +646,14 @@ def create_airline(name, folder):
     brains = api.content.find(portal_type='OIEAirline', id=id)
     if len(brains) < 1:
         api.content.create(type='OIEAirline', container=folder, title=name)
+
+
+def create_year(name, folder):
+    util = queryUtility(IIDNormalizer)
+    id = util.normalize(name)
+    brains = api.content.find(portal_type='OIECalendarYear', id=id)
+    if len(brains) < 1:
+        api.content.create(type='OIECalendarYear', container=folder, title=name)
 
 
 def create_partner(name, folder):

@@ -52,6 +52,14 @@
       permission="cmf.ModifyPortalContent"
       />
 
+    <browser:page
+      name="role_restricted_view"
+      for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"
+      class=".programview_role_restricted.ProgramRoleRestrictedView"
+      template="programview_role_restricted.pt"
+      permission="zope2.View"
+      />
+
   <browser:page
       name="view"
       for="..interfaces.cooperatingpartner.IOIECooperatingPartner"

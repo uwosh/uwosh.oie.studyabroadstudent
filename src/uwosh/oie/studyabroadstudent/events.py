@@ -48,7 +48,7 @@ def program_created(o, event):
               'winter_interim_spring_semester_participant_orientation_deadline',
               'winter_interim_spring_semester_in_person_orientation',
               'spring_interim_summer_fall_semester_payment_deadline_1', 'spring_interim_payment_deadline_2',
-              'sunmmer_payment_deadline_2', 'fall_semester_payment_deadline_2',
+              'summer_payment_deadline_2', 'fall_semester_payment_deadline_2',
               'winter_interim_spring_payment_deadline_1', 'winter_interim_spring_payment_deadline_2']:
         setattr(o, d, getattr(calendar_year_obj, d))
 
