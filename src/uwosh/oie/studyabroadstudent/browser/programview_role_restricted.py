@@ -7,8 +7,6 @@ from plone.dexterity.browser.view import DefaultView
 from plone import api
 import logging
 
-FORM_WIDGETS_PREFIX = 'form-widgets-'
-
 LOG = logging.getLogger('viewability')
 
 # set this to True if you want all fields to be visible or editable if the entire object can be edited
@@ -16,9 +14,12 @@ LOG = logging.getLogger('viewability')
 #    visibility or editability
 SIMPLE_METHOD = False
 
+SHOW_CONTENTS = '_SHOW_CONTENTS'
+SHOW_FIELDSETS = '_SHOW_FIELDSETS'
 READ = 'r'
 READ_WRITE = 'rw'
 NOTHING = ''
+FORM_WIDGETS_PREFIX = 'form-widgets-'
 
 VIEWABILITY = {
     'Anonymous' : {
@@ -132,46 +133,9 @@ VIEWABILITY = {
         'travel-expense-report-student-evaluations-due-to' : READ_WRITE,
         'withdrawn' : READ,
     },
-    'Mgmt_Director_prototype' : {
-        'applicants-considering-change' : READ_WRITE,
-        'application-intake-in-progress' : READ_WRITE,
-        'cancelled' : READ,
-        'declined' : READ,
-        'final-payment-billing-in-progress' : READ_WRITE,
-        'final-program-accounting-in-progress' : READ_WRITE,
-        'incident-in-progress' : READ_WRITE,
-        'initial' : READ,
-        'initial-payment-billing-in-progress' : READ_WRITE,
-        'pending-arrival-abroad' : READ_WRITE,
-        'pending-chair-review' : READ_WRITE,
-        'pending-dean-unit-director-review' : READ_WRITE,
-        'pending-discussions-with-program-manager' : READ_WRITE,
-        'pending-final-program-fee' : READ_WRITE,
-        'pending-oie-review' : READ_WRITE,
-        'pending-program-departure' : READ_WRITE,
-        'pending-program-fee-determination-by-oie' : READ_WRITE,
-        'pending-program-leader-operational-briefing' : READ_WRITE,
-        'pending-program-leader-orientation' : READ_WRITE,
-        'pending-provider-responses' : READ_WRITE,
-        'pending-provost-review' : READ_WRITE,
-        'pending-travel-advance' : READ_WRITE,
-        'process-refunds-budget-transfers' : READ_WRITE,
-        'program-completed' : READ_WRITE,
-        'program-fee-pending-publication' : READ_WRITE,
-        'program-fee-under-liaison-review' : READ_WRITE,
-        'program-in-progress' : READ_WRITE,
-        'provider-proposals-under-liaison-review' : READ_WRITE,
-        'provider-proposals-under-oie-review' : READ_WRITE,
-        'request-for-proposals-under-development' : READ_WRITE,
-        'request-for-proposals-under-liaison-review' : READ_WRITE,
-        'reviewing-final-program-details' : READ_WRITE,
-        'suspended' : READ,
-        'travel-expense-report-student-evaluations-due-to' : READ_WRITE,
-        'withdrawn' : READ,
-    },
     'Mgmt_Director' : {
         'applicants-considering-change' : {
-            '_SHOW_CONTENTS' : READ,
+            SHOW_CONTENTS : READ,
             'pretravel_start_datetime' : READ,
             'pretravel_end_datetime' : READ,
             'pretravel_building' : READ,
@@ -390,7 +354,30 @@ VIEWABILITY = {
         'initial-payment-billing-in-progress' : READ_WRITE,
         'pending-arrival-abroad' : READ_WRITE,
         'pending-chair-review' : {
-            '_SHOW_CONTENTS' : NOTHING,
+            SHOW_CONTENTS : NOTHING,
+            SHOW_FIELDSETS : {
+                'comments_fieldset': NOTHING,
+                'program_code_fieldset': NOTHING,
+                'academic_program_fieldset': NOTHING,
+                'dates_destinations_fieldset': NOTHING,
+                'departure_from_oshkosh_fieldset': READ,
+                'departure_flight_fieldset': READ,
+                'return_flight_fieldset': READ,
+                'return_to_oshkosh_fieldset': READ,
+                'participant_selection_fieldset': NOTHING,
+                'liaison_and_leadership_fieldset': NOTHING,
+                'courses_fieldset': NOTHING,
+                'contributions_fieldset': NOTHING,
+                'reviewers_fieldset': NOTHING,
+                'oie_review_fieldset': NOTHING,
+                'proposals_fieldset': NOTHING,
+                'finances_fieldset': NOTHING,
+                'pre_departure_fieldset': NOTHING,
+                'reporting_fieldset': NOTHING,
+                'program_dates_fieldset': NOTHING,
+                'settings' : NOTHING,
+                'categorization' : NOTHING,
+            },
             'pretravel_start_datetime' : NOTHING,
             'pretravel_end_datetime' : NOTHING,
             'pretravel_building' : NOTHING,
@@ -598,216 +585,6 @@ VIEWABILITY = {
             'fall_semester_payment_deadline_2' : NOTHING,
             'winter_interim_spring_payment_deadline_1' : NOTHING,
             'winter_interim_spring_payment_deadline_2' : NOTHING,
-        },
-        'pending-chair-review.KEEP': {
-            '_SHOW_CONTENTS' : READ,
-            'pretravel_start_datetime': READ,
-            'pretravel_end_datetime': READ,
-            'pretravel_building': READ,
-            'pretravel_room': READ,
-            'pretravel_attendance_required': READ,
-            'posttravel_start_datetime': READ,
-            'posttravel_end_datetime': READ,
-            'posttravel_building': READ,
-            'posttravel_room': READ,
-            'posttravel_attendance_required': READ,
-            'coleader': READ,
-            'contributing_entity_contact_name': READ,
-            'contributing_entity_contact_phone_us': READ,
-            'contributing_entity_contact_phone_other': READ,
-            'contributing_entity_contact_email': READ,
-            'contributing_entity_contribution_amount': READ,
-            'contributing_entity_contribution_currency': READ,
-            'reviewer_email_row': READ,
-            'comment': READ,
-            'title': READ,
-            'description': READ,
-            'rich_description': READ,
-            'comments_oie_leaders': READ,
-            'comments_oie_all': READ,
-            'calendar_year': READ,
-            'term': READ,
-            'college_or_unit': READ,
-            'countries': READ,
-            'program_code': READ,
-            'sponsoring_unit_or_department': READ,
-            'program_type': READ,
-            'program_component': READ,
-            'eligibility_requirement': READ,
-            'learning_objectives': READ,
-            'equipment_and_space': READ,
-            'equipment_and_space_needs': READ,
-            'guest_lectures': READ,
-            'initial_draft_program_schedule': READ,
-            'syllabus_and_supporting_docs': READ,
-            'min_credits_earned': READ,
-            'max_credits_earned': READ,
-            'language_of_study': READ,
-            'cooperating_partners': READ,
-            'program_cycle': READ,
-            'pretravel_dates': READ,
-            'transportationFromOshkoshToDepartureAirport': READ,
-            'oshkoshDepartureLocation': READ,
-            'oshkoshMeetingDateTime': READ,
-            'oshkoshDepartureDateTime': READ,
-            'milwaukeeDepartureDateTime': READ,
-            'airportArrivalDateTime': READ,
-            'airline': READ,
-            'flightNumber': READ,
-            'airport': READ,
-            'departureDateTime': READ,
-            'arrivalAtDestinationAndInsuranceStartDate': READ,
-            'travelDatesTransitionsAndDestinations': READ,
-            'add_transition_link': READ,
-            'firstChoiceDatesFlexible': READ,
-            'postTravelClassDates': READ,
-            'airlineReturn': READ,
-            'flightNumberReturn': READ,
-            'airportReturn': READ,
-            'returnDateTime': READ,
-            'arrivalInWisconsinDate': READ,
-            'insuranceEndDate': READ,
-            'transportationFromArrivalAirportToOshkosh': READ,
-            'milwaukeeArrivalDateTime': READ,
-            'oshkoshArrivalDateTime': READ,
-            'studentStatus': READ,
-            'seatAssignmentProtocol': READ,
-            'liaisonReviewOfIndividualApplicants': READ,
-            'approvalCriteria': READ,
-            'individualInterview': READ,
-            'firstRecommendationRequired': READ,
-            'secondRecommendationRequired': READ,
-            'applicantQuestion1': READ,
-            'applicantQuestion2': READ,
-            'applicantQuestion3': READ,
-            'applicantQuestion4': READ,
-            'applicantQuestion5': READ,
-            'cvRequired': READ,
-            'letterOfMotivationRequired': READ,
-            'otherRequired': READ,
-            'liaison': READ,
-            'program_leader': READ,
-            'program_coleaders': READ,
-            'courses': READ,
-            'add_course_link': READ,
-            'contributions_label': READ,
-            'contributing_entity': READ,
-            'reviewers_label': READ,
-            'reviewer_emails': READ,
-            'program_schedule': READ,
-            'director_recommendations': READ,
-            'health_safety_security_documents': READ,
-            'add_health_document_link': READ,
-            'application_deadlines_label': READ,
-            'step_1_and_2_application_deadline': READ,
-            'step_3_application_deadline': READ,
-            'step_4_application_deadline': READ,
-            'application_items_label': READ,
-            'credit_overload_form': READ,
-            'flight_deviation_request_return_flight_only': READ,
-            'flight_deviation_request_roundtrip_or_outbound_flight': READ,
-            'graduate_registration_form_and_graduate_special_non_degree_information_form': READ,
-            'biographical_page_of_your_signed_passport': READ,
-            'visa_required_for_us_citizens': READ,
-            'original_passport': READ,
-            'official_passport_photo_for_india_visa_application': READ,
-            'drivers_license_copy_for_india_visa_application': READ,
-            'indian_visa_application': READ,
-            'yellow_fever_vaccination_certificate': READ,
-            'passport_size_photo': READ,
-            'digital_passport_photo': READ,
-            'transfer_credit_prior_approval_form': READ,
-            'hessen_isu_application': READ,
-            'hessen_iwu_application': READ,
-            'proposals_label': READ,
-            'request_for_proposal': READ,
-            'request_for_proposal_due_date': READ,
-            'provider_proposals_label': READ,
-            'provider_01': READ,
-            'provider_01_awarded_contract': READ,
-            'proposal_01': READ,
-            'provider_02': READ,
-            'provider_02_awarded_contract': READ,
-            'proposal_02': READ,
-            'provider_03': READ,
-            'provider_03_awarded_contract': READ,
-            'proposal_03': READ,
-            'finances_label': READ,
-            'anticipated_number_of_applicants_min': READ,
-            'anticipated_number_of_applicants_max': READ,
-            'budget_spreadsheet': READ,
-            'fecop_worksheet': READ,
-            'required_prior_to_publishing_initial_fee_label': READ,
-            'program_fee': READ,
-            'required_prior_to_confirming_to_run_label': READ,
-            'first_participant_fee_statement_': READ,
-            'first_participant_fee_spreadsheet': READ,
-            'required_prior_to_publishing_initial_fee_label_2': READ,
-            'final_participant_fee_statement': READ,
-            'final_participant_fee_spreadsheet': READ,
-            'required_prior_to_confirming_ter_received_label': READ,
-            'travel_expense_report': READ,
-            'required_prior_to_processing_refunds_label': READ,
-            'participant_fees_paid_in_full': READ,
-            'compensation_paperwork': READ,
-            'participant_refund_spreadsheet': READ,
-            'required_prior_to_archiving_program_label': READ,
-            'account_transfers': READ,
-            'program_revenue': READ,
-            'final_budget_documentation': READ,
-            'close_account': READ,
-            'orientation_label': READ,
-            'program_leader_orientation_packet': READ,
-            'partner_orientation': READ,
-            'required_prior_to_confirming_program_to_run_label': READ,
-            'participant_orientation_url': READ,
-            'proof_of_service_label': READ,
-            'final_itinerary': READ,
-            'bus_contract_departure': READ,
-            'bus_contract_return': READ,
-            'e_tickets': READ,
-            'vouchers': READ,
-            'insurance_invoice': READ,
-            'visas': READ,
-            'other': READ,
-            'participant_evaluations': READ,
-            'post_program_evaluation': READ,
-            'incident_report': READ,
-            'total_number_of_high_school_students': READ,
-            'total_number_of_uw_oshkosh_freshmen': READ,
-            'total_number_of_uw_oshkosh_sophomores': READ,
-            'total_number_of_uw_oshkosh_juniors': READ,
-            'total_number_of_uw_oshkosh_seniors': READ,
-            'total_number_of_uw_oshkosh_graduate_students': READ,
-            'total_number_of_other_university_undergraduate_students': READ,
-            'total_number_of_other_university_graduate_students': READ,
-            'total_number_of_uw_oshkosh_program_leaders': READ,
-            'total_number_of_community_members': READ,
-            'first_day_of_spring_semester_classes': READ,
-            'last_day_of_spring_semester_classes': READ,
-            'first_day_of_spring_interim_classes': READ,
-            'last_day_of_spring_interim_classes': READ,
-            'official_spring_graduation_date': READ,
-            'first_day_of_summer_i_classes': READ,
-            'last_day_of_summer_i_classes': READ,
-            'first_day_of_summer_ii_classes': READ,
-            'last_day_of_summer_ii_classes': READ,
-            'official_summer_graduation_date': READ,
-            'first_day_of_fall_semester_classes': READ,
-            'last_day_of_fall_semester_classes': READ,
-            'first_day_of_winter_interim_classes': READ,
-            'last_day_of_winter_interim_classes': READ,
-            'official_fall_graduation_date': READ,
-            'spring_interim_summer_fall_semester_participant_orientation_deadline': READ,
-            'spring_interim_summer_fall_semester_in_person_orientation': READ,
-            'winter_interim_spring_semester_participant_orientation_deadline': READ,
-            'winter_interim_spring_semester_in_person_orientation': READ,
-            'spring_interim_summer_fall_semester_payment_deadline_1': READ,
-            'spring_interim_payment_deadline_2': READ,
-            'summer_payment_deadline_2': READ,
-            'fall_semester_payment_deadline_2': READ,
-            'winter_interim_spring_payment_deadline_1': READ,
-            'winter_interim_spring_payment_deadline_2': READ,
         },
         'pending-dean-unit-director-review' : READ_WRITE,
         'pending-discussions-with-program-manager' : READ_WRITE,
@@ -1369,20 +1146,35 @@ class ProgramRoleRestrictedView(DefaultView):
     def additionalSchemata(self):
         return getAdditionalSchemata(context=self.context)
 
-    def is_field_viewable(self, widget_id):
-        """return whether a field should be shown or not, or editable or not"""
-        if widget_id.find(FORM_WIDGETS_PREFIX) != -1:
-            field_id = widget_id[len(FORM_WIDGETS_PREFIX):]  # remove prefix
-        else:
-            field_id = widget_id
+    def _get_viewability(self):
         object = self.context
         state = api.content.get_state(object)
         roles = api.user.get_roles(obj=object)
         if len(roles) > 1:
             if 'Manager' in roles:
-                role = 'Mgmt_Director' # takes precedence
+                role = 'Mgmt_Director'  # takes precedence
         else:
-            role = roles[0] # TODO check that this works correctly with test users having other roles
+            role = roles[0]  # TODO check that this works correctly with test users having other roles
+        return VIEWABILITY[role][state]
+
+    def fieldset_level_viewability(self, group_id):
+        """if viewability is defined at the fieldset level for this role and state, return the dict, otherwise False"""
+        viewability = self._get_viewability()
+        if isinstance(viewability, str):
+            # object level viewability
+            return False
+        else:
+            # detailed dict specifying READ or READ_WRITE for all fields or fieldsets
+            if SHOW_FIELDSETS in viewability.keys():
+                return viewability[SHOW_FIELDSETS]
+        return False
+
+    def is_field_viewable(self, widget_id):
+        """return whether an object, fieldset, or field should be viewable or editable"""
+        if widget_id.find(FORM_WIDGETS_PREFIX) != -1:
+            field_id = widget_id[len(FORM_WIDGETS_PREFIX):]  # remove prefix
+        else:
+            field_id = widget_id
         can_edit = api.user.has_permission('Modify portal content')
         if SIMPLE_METHOD and can_edit:
             return True
@@ -1390,13 +1182,13 @@ class ProgramRoleRestrictedView(DefaultView):
             return False
         if field_id in ['IRelatedItems-relatedItems']:
             return True
-        viewability = VIEWABILITY[role][state]
+        viewability = self._get_viewability()
         if isinstance(viewability, str):
             return viewability in [READ, READ_WRITE]
         else:
             # detailed dict specifying READ or READ_WRITE for all fields
             if field_id not in viewability.keys():
-                LOG.warn('not found: field_id %s; defaulting to not viewable/editable' % field_id)
+                LOG.warn('not found: field_id %s for role %s and state %s; defaulting to not viewable/editable' % (field_id, role, state))
                 return False
             field_viewability = viewability[field_id]
             return field_viewability in [READ, READ_WRITE]

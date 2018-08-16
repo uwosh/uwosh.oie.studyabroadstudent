@@ -11,25 +11,38 @@
 <metal:content-core define-macro="content-core">
 
   <tal:block repeat="widget view/widgets/values">
-      <tal:block tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description',)">
+      <tal:block tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description', 'ILeadImage.image', 'ILeadImage.image_caption')">
           <tal:widget tal:replace="structure widget/@@ploneform-render-widget"/>
       </tal:block>
   </tal:block>
 
   <fieldset tal:repeat="group view/groups"
             tal:attributes="id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')">
+
+    <div tal:define="fieldset_id python: group.__name__;
+                     fieldset_level_viewability python: view.fieldset_level_viewability(fieldset_id);
+                     fieldset_viewable python: fieldset_level_viewability and fieldset_level_viewability[fieldset_id] in ['r', 'rw']">
+
       <legend tal:content="group/label" />
-      <tal:block tal:repeat="widget group/widgets/values">
-          <!--?<h3>field:</h3><h3 tal:content="widget/field">[widget field]</h3>-->
-          <!--?<h3>field attributes:</h3><h3 tal:content="python: dir(widget.field)">[widget field attributes]</h3>-->
-          <!--?<h3>name:</h3><h3 tal:content="widget/name">[widget name]</h3>-->
-          <!--?<h3>title:</h3><h3 tal:content="widget/title">[widget title]</h3>-->
-          <!--?<h3 tal:content="widget/update__roles__">[widget update__roles__]</h3>-->
-          <!--?<h4>attributes:</h4><h4 tal:content="python: dir(widget)">[widget attributes]</h4>-->
-          <div tal:define="id widget/id; is_visible python: view.is_field_viewable(id)" tal:condition="is_visible">
-            <tal:widget tal:replace="structure widget/@@ploneform-render-widget"/>
-          </div>
-      </tal:block>
+
+      <div tal:condition="python: fieldset_viewable">
+            <tal:block tal:repeat="widget group/widgets/values">
+                <tal:widget tal:replace="structure widget/@@ploneform-render-widget"/>
+            </tal:block>
+      </div>
+
+      <div tal:condition="python: fieldset_level_viewability == ''">
+      </div>
+
+      <div tal:condition="python: fieldset_level_viewability is None or not isinstance(fieldset_viewable, dict)">
+          <tal:block tal:repeat="widget group/widgets/values">
+              <div tal:define="id widget/id; is_visible python: view.is_field_viewable(id)" tal:condition="is_visible">
+                <tal:widget tal:replace="structure widget/@@ploneform-render-widget"/>
+              </div>
+          </tal:block>
+      </div>
+
+    </div>
   </fieldset>
 
   <fieldset id="folder-listing" tal:condition="python: view.is_field_viewable('_SHOW_CONTENTS')">
