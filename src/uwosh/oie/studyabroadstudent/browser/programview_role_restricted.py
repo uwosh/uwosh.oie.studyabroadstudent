@@ -7,6 +7,8 @@ from plone.dexterity.browser.view import DefaultView
 from plone import api
 import logging
 
+FORM_WIDGETS_PREFIX = 'form-widgets-'
+
 LOG = logging.getLogger('viewability')
 
 # set this to True if you want all fields to be visible or editable if the entire object can be edited
@@ -18,7 +20,7 @@ READ = 'r'
 READ_WRITE = 'rw'
 NOTHING = ''
 
-VIEWABILITY = { 
+VIEWABILITY = {
     'Anonymous' : {
         'applicants-considering-change' : READ,
         'application-intake-in-progress' : READ,
@@ -169,7 +171,7 @@ VIEWABILITY = {
     },
     'Mgmt_Director' : {
         'applicants-considering-change' : {
-            'learning_objective' : READ,
+            '_SHOW_CONTENTS' : READ,
             'pretravel_start_datetime' : READ,
             'pretravel_end_datetime' : READ,
             'pretravel_building' : READ,
@@ -388,7 +390,7 @@ VIEWABILITY = {
         'initial-payment-billing-in-progress' : READ_WRITE,
         'pending-arrival-abroad' : READ_WRITE,
         'pending-chair-review' : {
-            'learning_objective' : NOTHING,
+            '_SHOW_CONTENTS' : NOTHING,
             'pretravel_start_datetime' : NOTHING,
             'pretravel_end_datetime' : NOTHING,
             'pretravel_building' : NOTHING,
@@ -523,22 +525,22 @@ VIEWABILITY = {
             'finances_label' : NOTHING,
             'anticipated_number_of_applicants_min' : NOTHING,
             'anticipated_number_of_applicants_max' : NOTHING,
-            'budget_spNOTHINGsheet' : NOTHING,
+            'budget_spreadsheet' : NOTHING,
             'fecop_worksheet' : NOTHING,
             'required_prior_to_publishing_initial_fee_label' : NOTHING,
             'program_fee' : NOTHING,
             'required_prior_to_confirming_to_run_label' : NOTHING,
             'first_participant_fee_statement_' : NOTHING,
-            'first_participant_fee_spNOTHINGsheet' : NOTHING,
+            'first_participant_fee_spreadsheet' : NOTHING,
             'required_prior_to_publishing_initial_fee_label_2' : NOTHING,
             'final_participant_fee_statement' : NOTHING,
-            'final_participant_fee_spNOTHINGsheet' : NOTHING,
+            'final_participant_fee_spreadsheet' : NOTHING,
             'required_prior_to_confirming_ter_received_label' : NOTHING,
             'travel_expense_report' : NOTHING,
             'required_prior_to_processing_refunds_label' : NOTHING,
             'participant_fees_paid_in_full' : NOTHING,
             'compensation_paperwork' : NOTHING,
-            'participant_refund_spNOTHINGsheet' : NOTHING,
+            'participant_refund_spreadsheet' : NOTHING,
             'required_prior_to_archiving_program_label' : NOTHING,
             'account_transfers' : NOTHING,
             'program_revenue' : NOTHING,
@@ -598,7 +600,7 @@ VIEWABILITY = {
             'winter_interim_spring_payment_deadline_2' : NOTHING,
         },
         'pending-chair-review.KEEP': {
-            'learning_objective': READ,
+            '_SHOW_CONTENTS' : READ,
             'pretravel_start_datetime': READ,
             'pretravel_end_datetime': READ,
             'pretravel_building': READ,
@@ -1354,8 +1356,8 @@ VIEWABILITY = {
 
 
 class ProgramRoleRestrictedView(DefaultView):
-    """The default view for Dexterity content. This uses a WidgetsView and
-    renders all widgets in display mode.
+    """Based on the default view for Dexterity content, but only
+    renders the fields that are set to be viewable or editable per role and workflow state
     """
 
     @property
@@ -1368,36 +1370,34 @@ class ProgramRoleRestrictedView(DefaultView):
         return getAdditionalSchemata(context=self.context)
 
     def is_field_viewable(self, widget_id):
-        field_id = widget_id[13:] # remove prefix 'form-widgets-'
-        # LOG.info('widget_id = %s, field_id = %s' % (widget_id, field_id))
+        """return whether a field should be shown or not, or editable or not"""
+        if widget_id.find(FORM_WIDGETS_PREFIX) != -1:
+            field_id = widget_id[len(FORM_WIDGETS_PREFIX):]  # remove prefix
+        else:
+            field_id = widget_id
         object = self.context
-        # is_anonymous = api.user.is_anonymous()
         state = api.content.get_state(object)
-        # current_user = api.user.get_current()
-        # permissions = api.user.get_permissions(obj=object)
         roles = api.user.get_roles(obj=object)
         if len(roles) > 1:
             if 'Manager' in roles:
                 role = 'Mgmt_Director' # takes precedence
         else:
-            role = roles[0]
-        # can_view = api.user.has_permission('View')
+            role = roles[0] # TODO check that this works correctly with test users having other roles
         can_edit = api.user.has_permission('Modify portal content')
         if SIMPLE_METHOD and can_edit:
             return True
-        if field_id in ['IShortName-id', 'ITableOfContents-table_of_contents', 'IRelatedItems-relatedItems']:
+        if field_id in ['IShortName-id', 'ITableOfContents-table_of_contents']:
+            return False
+        if field_id in ['IRelatedItems-relatedItems']:
             return True
         viewability = VIEWABILITY[role][state]
         if isinstance(viewability, str):
-            LOG.info('role %s, state %s, field %s has viewability %s' % (role, state, field_id, viewability))
             return viewability in [READ, READ_WRITE]
         else:
             # detailed dict specifying READ or READ_WRITE for all fields
-            LOG.info('found dict with %s items for role %s, state %s, field %s'
-                     % (len(viewability), role, state, field_id))
             if field_id not in viewability.keys():
                 LOG.warn('not found: field_id %s; defaulting to not viewable/editable' % field_id)
                 return False
             field_viewability = viewability[field_id]
-            return field_viewability
+            return field_viewability in [READ, READ_WRITE]
 

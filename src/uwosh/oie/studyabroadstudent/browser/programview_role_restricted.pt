@@ -32,7 +32,7 @@
       </tal:block>
   </fieldset>
 
-  <fieldset id="folder-listing">
+  <fieldset id="folder-listing" tal:condition="python: view.is_field_viewable('_SHOW_CONTENTS')">
       <legend i18n:translate="" i18n:domain="plone">Contents</legend>
       <tal:block define="view nocall:context/folder_listing; listing_macro view/macros/listing">
           <metal:use_macro use-macro="listing_macro" />
