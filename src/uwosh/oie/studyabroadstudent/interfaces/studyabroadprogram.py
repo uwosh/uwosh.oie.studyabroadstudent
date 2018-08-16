@@ -351,7 +351,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'dates_destinations',
+        'dates_destinations_fieldset',
         label=_(u"Dates and Destinations"),
         fields=['program_cycle', 'pretravel_dates'],
     ),
@@ -376,7 +376,7 @@ class IOIEStudyAbroadProgram(Interface):
     # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
     #
     model.fieldset(
-        'DeparturefromOshkosh',
+        'departure_from_oshkosh_fieldset',
         label=_(u'Departure from Oshkosh'),
         fields=['transportationFromOshkoshToDepartureAirport', 'airport_transfer', 'oshkoshDepartureLocation',
                 'oshkoshMeetingDateTime', 'oshkoshDepartureDateTime', 'milwaukeeDepartureDateTime',
@@ -424,7 +424,7 @@ class IOIEStudyAbroadProgram(Interface):
     # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
     #
     model.fieldset(
-        'Departure Flight',
+        'departure_flight_fieldset',
         label=_('Departure Flight'),
         fields=['airline', 'flightNumber', 'airport', 'departureDateTime', 'arrivalAtDestinationAndInsuranceStartDate',
                 'travelDatesTransitionsAndDestinations', 'add_transition_link', 'firstChoiceDatesFlexible',
@@ -491,7 +491,7 @@ class IOIEStudyAbroadProgram(Interface):
     # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
     #
     model.fieldset(
-        'Return Flight',
+        'return_flight_fieldset',
         label=_('Return Flight'),
         fields=['airlineReturn', 'flightNumberReturn', 'airportReturn', 'returnDateTime', 'arrivalInWisconsinDate',
                 'insuranceEndDate', ]
@@ -533,7 +533,7 @@ class IOIEStudyAbroadProgram(Interface):
     # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
     #
     model.fieldset(
-        'Return to Oshkosh',
+        'return_to_oshkosh_fieldset',
         label=_(u'Return to Oshkosh'),
         fields=['transportationFromArrivalAirportToOshkosh', 'milwaukeeArrivalDateTime', 'oshkoshArrivalDateTime']
     )
@@ -558,7 +558,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'Participant Selection',
+        'participant_selection_fieldset',
         label=_(u"Participant Selection"),
         fields=['studentStatus', 'seatAssignmentProtocol', 'liaisonReviewOfIndividualApplicants', 'approvalCriteria',
                 'individualInterview', 'firstRecommendationRequired', 'secondRecommendationRequired',
@@ -676,7 +676,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'Liaison & Leadership',
+        'liaison_and_leadership_fieldset',
         label=_(u"Liaison & Leadership"),
         fields=['liaison', 'program_leader', 'program_coleaders'],
     )
@@ -705,7 +705,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'Courses',
+        'courses_fieldset',
         label=_(u"Courses"),
         fields=['courses', 'add_course_link'],
     )
@@ -724,7 +724,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'Contributions',
+        'contributions_fieldset',
         label=_(u"Contributions"),
         fields=['contributions_label', 'contributing_entity'],
     )
@@ -743,7 +743,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'Reviewers',
+        'reviewers_fieldset',
         label=_(u"Reviewers"),
         fields=['reviewers_label', 'reviewer_emails'],
     )
@@ -763,7 +763,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'OIE Review',
+        'oie_review_fieldset',
         label=_(u"OIE Review"),
         fields=['program_schedule', 'director_recommendations', 'health_safety_security_documents',
                 'add_health_document_link', 'application_deadlines_label', 'step_1_and_2_application_deadline',
@@ -940,7 +940,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'Proposals',
+        'proposals_fieldset',
         label=_(u"Proposals"),
         fields=['proposals_label', 'request_for_proposal', 'request_for_proposal_due_date', 'provider_proposals_label',
                 'provider_01', 'provider_01_awarded_contract', 'proposal_01', 'provider_02',
@@ -1021,7 +1021,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'Finances',
+        'finances_fieldset',
         label=_(u"Finances"),
         fields=['finances_label', 'anticipated_number_of_applicants_min', 'anticipated_number_of_applicants_max',
                 'budget_spreadsheet', 'fecop_worksheet', 'required_prior_to_publishing_initial_fee_label',
@@ -1177,7 +1177,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'pre_departure',
+        'pre_departure_fieldset',
         label=_(u"Pre-departure"),
         fields=['orientation_label', 'program_leader_orientation_packet', 'partner_orientation',
                 'required_prior_to_confirming_program_to_run_label', 'participant_orientation_url',
@@ -1259,7 +1259,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'reporting',
+        'reporting_fieldset',
         label=_(u"Reporting"),
         fields=['participant_evaluations', 'post_program_evaluation', 'incident_report',
                 'total_number_of_high_school_students', 'total_number_of_uw_oshkosh_freshmen',
