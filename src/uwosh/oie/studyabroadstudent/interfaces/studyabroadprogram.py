@@ -411,7 +411,7 @@ class IOIEStudyAbroadProgram(Interface):
     milwaukeeDepartureDateTime = schema.Datetime(
         title=_('Milwaukee Departure Date & Time'),
         required=False,
-        # TODO =departure flight date/time minus 6.0 hours [display only if "Transportation from Milwaukee to departure airport is "yes"]
+        # TODO =departure flight date/time minus 6.0 hours [display only if "Milwaukee Departure Location” is not null]
     )
 
     airportArrivalDateTime = schema.Datetime(
