@@ -200,7 +200,7 @@ class IOIEStudyAbroadProgram(Interface):
     calendar_year = schema.Choice(
         title=_(u'Calendar Year'),
         description=_(
-            u'Use the year during which the program runs; this is not the year that is associated with the term of study.  For example, a January interim program running from Jan 2-28, 2017 will be associated with "2017".   A program running Dec 28, 2016-Jan 28, 2017 will also be associated with "2017".'),
+            u'Select the calendar year during which the program will run.  This is not the year associated with the term of study.  For example, a January interim program running from Jan 2-28, 2019 will be associated with "2019".   A program running Dec 28, 2018-Jan 28, 2019 will also be associated with "2019".'),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.calendar_year',
         required=True,
     )
@@ -221,7 +221,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     countries = schema.List(
         title=_(u'Country or Countries'),
-        description=_(u''),
+        description=_(u'Country names will be added to your "Program Title" and used in marketing.'),
         required=True,
         value_type=schema.Choice(source=RegistryValueVocabulary('oiestudyabroadstudent.countries'))
     )
@@ -344,7 +344,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     cooperating_partners = schema.List(
         title=_(u'Cooperating Partners'),
-        description=_(u''),
+        description=_(u'Only entities listed on the UW System Preferred Provider List or academic institutions with a current affiliation agreement with UWO may be selected here.  All other cooperating partners must be selected by following UW System procurement policies.'),
         required=False,
         value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.cooperatingpartner')
     )
@@ -359,7 +359,7 @@ class IOIEStudyAbroadProgram(Interface):
     program_cycle = schema.Choice(
         title=_(u'Program Cycle'),
         description=_(
-            u'How often will this program be offered?  This information will display in some marketing materials.  If it isn''t possible to predict, leave this blank.'),
+            u'How often will this program be offered?  This information will display in some marketing materials.  If it isn't possible to predict, leave this blank.'),
         vocabulary=program_cycle_vocabulary,
     )
 
@@ -367,7 +367,7 @@ class IOIEStudyAbroadProgram(Interface):
     pretravel_dates = schema.List(
         title=_(u'Pre-Travel Class & Orientation Dates'),
         description=_(
-            u'Students expect to meet group members and their program leader or program advisor in a formal group setting at least once prior to travel.  Check with your department chair and/or College administration on pre-travel requirements specific to your unit. Students are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during your pre-travel class dates.  Students with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the student on the program.  For this reason, after we advertise these dates to students as mandatory, the dates shouldn''t be changed!'),
+            u'Students expect to meet group members and their program leader or program advisor in a formal group setting at least once prior to travel. Check with your department chair and/or College administration on pre-travel requirements specific to your unit. OIE recommends holding program orientation dates after the OIE Orientation Materials Submission Deadline. This may allow you to reinforce, rather than fully introduce, information that will be presented in the OIE orientation. Students are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during your pre-travel class dates. Students with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the student on the program. For this reason, after we advertise these dates to students as mandatory, the dates shouldn’t be changed!'),
         required=True,
         value_type=DictRow(title=u"Pre-Travel Dates", schema=IPreTravelDatesRowSchema)
     )
@@ -384,7 +384,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
 
     transportationFromOshkoshToDepartureAirport = schema.Choice(
-        title=_(u'Transportation from Oshkosh to departure airport'),
+        title=_(u'Transportation is provided from Oshkosh'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.airport_transfer'),
         required=False,
     )
@@ -393,31 +393,31 @@ class IOIEStudyAbroadProgram(Interface):
         title=_('Oshkosh Departure Location'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.locations'),
         required=False,
-        # TODO dropdown  [display only if "Transportation from Oshkosh to departure airport is "yes"]
+        # TODO dropdown  [display only if "Transportation is provided from Oshkosh is "yes"]
     )
 
     oshkoshMeetingDateTime = schema.Datetime(
         title=_(u'Oshkosh Meeting Date & Time'),
         required=False,
-        # TODO =departure flight date/time minus 7.75 hours [display only if "Transportation from Oshkosh to departure airport is "yes"]
+        # TODO =departure flight date/time minus 7.75 hours [display only if "Transportation is provided from Oshkosh is "yes"]
     )
 
     oshkoshDepartureDateTime = schema.Datetime(
         title=_(u'Oshkosh Departure Date & Time'),
         required=False,
-        # TODO [display only if "Transportation from Oshkosh to departure airport is "yes"]
+        # TODO =departure flight date/time minus 7.5 hours [display only if "Transportation is provided from Oshkosh is "yes"]
     )
 
     milwaukeeDepartureDateTime = schema.Datetime(
         title=_('Milwaukee Departure Date & Time'),
         required=False,
-        # TODO [display only if "Transportation from Milwaukee to departure airport is "yes"]
+        # TODO =departure flight date/time minus 6.0 hours [display only if "Transportation from Milwaukee to departure airport is "yes"]
     )
 
     airportArrivalDateTime = schema.Datetime(
-        title=_('Airport Arrival Date & Time'),
+        title=_('Destination Arrival Date & Time'),
         required=False,
-        # TODO '=departure flight date/time minus 3.5 hours [display only if "Transportation from Oshkosh to departure airport is "yes"]
+        # TODO '=departure flight date/time minus 3.5 hours [display only if "Transportation is provided from Oshkosh is "yes"]
     )
 
     #######################################################
@@ -425,7 +425,7 @@ class IOIEStudyAbroadProgram(Interface):
     #
     model.fieldset(
         'departure_flight_fieldset',
-        label=_('Departure Flight'),
+        label=_('Departure'),
         fields=['airline', 'flightNumber', 'airport', 'departureDateTime', 'arrivalAtDestinationAndInsuranceStartDate',
                 'travelDatesTransitionsAndDestinations', 'add_transition_link', 'firstChoiceDatesFlexible',
                 'postTravelClassDates',]
@@ -472,8 +472,8 @@ class IOIEStudyAbroadProgram(Interface):
     )
 
     firstChoiceDatesFlexible = schema.Choice(
-        title=_(u'Are your first-choice dates flexible?'),
-        description=_(u'If yes, your OIE Program Manager will meet with you to discuss transition dates'),
+        title=_(u'My first-choice dates are flexible.'),
+        description=_(u'If yes, your OIE Program Manager may recommend changes based on flight availability or program component scheduling.'),
         vocabulary=yes_no_none_vocabulary,
         required=True,
     )
@@ -482,7 +482,7 @@ class IOIEStudyAbroadProgram(Interface):
     postTravelClassDates = schema.List(
         title=_(u'Post-travel Class Dates'),
         description=_(
-            u'Participants are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during your post-travel class dates.  Participants with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the participant on the program.  For this reason, after we advertise these dates to participants as mandatory, the dates shouldn’t be changed!'),
+            u'Participants are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during post-travel class dates.  Participants with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the participant on the program.  For this reason, after we advertise these dates to participants as mandatory, the dates shouldn’t be changed!'),
         value_type=DictRow(title=u'Post-travel Class Dates', schema=IPostTravelClassDatesRowSchema),
         required=False,
     )
@@ -492,7 +492,7 @@ class IOIEStudyAbroadProgram(Interface):
     #
     model.fieldset(
         'return_flight_fieldset',
-        label=_('Return Flight'),
+        label=_('Return'),
         fields=['airlineReturn', 'flightNumberReturn', 'airportReturn', 'returnDateTime', 'arrivalInWisconsinDate',
                 'insuranceEndDate', ]
     )
@@ -520,7 +520,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
 
     arrivalInWisconsinDate = schema.Datetime(
-        title=_(u'Arrival in Wisconsin'),
+        title=_(u'Arrival at Final Destination Airport'),
         required=False,
     )
 
@@ -539,7 +539,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
 
     transportationFromArrivalAirportToOshkosh = schema.Choice(
-        title=_(u'Transportation from arrival airport to Oshkosh'),
+        title=_(u'Transportation is Provided Back to Oshkosh'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.airport_transfer'),
         required=False,
     )
