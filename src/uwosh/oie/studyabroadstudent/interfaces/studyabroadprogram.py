@@ -595,83 +595,88 @@ class IOIEStudyAbroadProgram(Interface):
 
     individualInterview = schema.Choice(
         title=_(u'The Program Liaison, Program Leader or Program Co-leader will interview each applicant'),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
+        # TODO yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in)
     )
 
     firstRecommendationRequired = schema.Choice(
-        title=_(u'1st Recommendation is required'),
+        title=_(u'1st Reference is required'),
         description=_(u'If "yes", this item appears in the Applicant Portal as an application item'),
-        vocabulary=yes_no_na_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
+        # TODO yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in)
     )
 
     secondRecommendationRequired = schema.Choice(
-        title=_(u'2nd Recommendation is required'),
+        title=_(u'2nd Reference is required'),
         description=_(u'If "yes", this item appears in the Applicant Portal as an application item'),
-        vocabulary=yes_no_na_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO "yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in). This cannot be ""yes"" if ""A 1st Recommendation is required"" is ""no""."
+        # TODO "yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in). This cannot be ""yes"" if ""A 1st Recommendation is required"" is ""no""."
     )
 
     applicantQuestion1 = schema.Text(
-        title=_(u'All applicants must respond to this question 1'),
+        title=_(u'Question 1'),
         description=_(
-            u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+            u'You may add up to 5 short-answer questions to the participant application.  If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
         required=False,
+        # TODO max 200 characters; this question should be unavailable/greyed out if "approvalcriteria" is not filled in
     )
 
     applicantQuestion2 = schema.Text(
-        title=_(u'All applicants must respond to this question 2'),
+        title=_(u'Question 2'),
         description=_(
-            u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+            u'If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
         required=False,
+        # TODO max 200 characters; this question should be unavailable/greyed out if "approvalcriteria" is not filled in
     )
 
     applicantQuestion3 = schema.Text(
-        title=_(u'All applicants must respond to this question 3'),
+        title=_(u'Question 3'),
         description=_(
-            u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+            u'If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
         required=False,
+        # TODO max 200 characters; this question should be unavailable/greyed out if "approvalcriteria" is not filled in
     )
 
     applicantQuestion4 = schema.Text(
-        title=_(u'All applicants must respond to this question 4'),
+        title=_(u'Question 4'),
         description=_(
-            u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+            u'If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
         required=False,
+        # TODO max 200 characters; this question should be unavailable/greyed out if "approvalcriteria" is not filled in
     )
 
     applicantQuestion5 = schema.Text(
-        title=_(u'All applicants must respond to this question 5'),
+        title=_(u'Question 5'),
         description=_(
-            u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+            u'If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
         required=False,
+        # TODO max 200 characters; this question should be unavailable/greyed out if "approvalcriteria" is not filled in
     )
 
     cvRequired = schema.Choice(
-        title=_(u'CV Required'),
+        title=_(u'CV or Resume'),
         description=_(
-            u'Complete this in English if studying in English; complete this in German if studying in German'),
-        vocabulary=yes_no_na_vocabulary,
+            u'If "yes", this item appears in the Applicant Portal as an application item.'),
+        vocabulary=yes_no_vocabulary,
         required=True,
-        # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
+        # TODO yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in)
     )
 
     letterOfMotivationRequired = schema.Choice(
-        title=_(u'Letter of Motivation Required'),
-        description=_(u'This must be typed'),
-        vocabulary=yes_no_na_vocabulary,
+        title=_(u'Letter of Motivation'),
+        description=_(u'If "yes", this item appears in the Applicant Portal as an application item.'),
+        vocabulary=yes_no_vocabulary,
         required=True,
-        # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
+        # TODO yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in)
     )
 
     otherRequired = schema.Text(
-        title=_(u'Other Requirement(s)'),
+        title=_(u'Other'),
         required=False,
-        # TODO "this question should be unavailable/greyed out if the text box above is not filled in"
+        # TODO "this question should be unavailable/greyed out if "approvalcriteria" is not filled in"
     )
 
     #######################################################
