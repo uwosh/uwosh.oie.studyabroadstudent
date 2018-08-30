@@ -682,20 +682,20 @@ class IOIEStudyAbroadProgram(Interface):
     #######################################################
     model.fieldset(
         'liaison_and_leadership_fieldset',
-        label=_(u"Liaison & Leadership"),
+        label=_(u"Liaison to the OIE"),
         fields=['liaison', 'program_leader', 'program_coleaders'],
     )
     liaison = schema.Choice(
-        title=_(u'Program Liaison to the OIE'),
+        title=_(u'Liaison to the OIE'),
         description=_(
-            u'The Liaison to the OIE communicates decisions related to program development and delivery to the Program Manager in the OIE and communicates program changes and updates to his/her unit administration. There is only one Liaison per program;  all decision-making at the unit level must be communicated to the OIE through the designated liaison. The Liaison may also include the OIE Program Manager and/or other OIE staff in conversations or seek input when appropriate. The Liaison may also serve as the On-site Program Leader and may also teach one or more of the program courses.'),
+            u'The Liaison to the OIE communicates decisions related to program development and delivery to the Program Manager in the OIE and communicates program changes and updates to his/her unit administration. There is only one Liaison per program;  all decisions made at the unit level must be communicated to the OIE through the designated liaison.  The Liaison may also serve as the On-site Program Leader and may teach one or more of the program courses.'),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.liaison',
         required=False,
     )
     program_leader = schema.Choice(
         title=_(u'On-site Program Leader'),
         description=_(
-            u'The On-site Program Leader is responsible for providing leadership for the group and for overseeing group health and safety.  The On-site Program Leader may also teach one or more of the program courses.'),
+            u'The On-site Program Leader is responsible for providing leadership for the group and for overseeing group health and safety.  The On-site Program Leader may also teach one or more of the program courses.  Select "no" if there will be NO Program Leader from UW Oshkosh accompanying the group.  Select "yes" and complete fields below related to Program Leadership if there will be a Program Leader from UW Oshkosh accompanying the group.'),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.program_leader',
         required=False,
     )
@@ -717,7 +717,7 @@ class IOIEStudyAbroadProgram(Interface):
     form.mode(courses="display")
     courses = RichText(
         title=u'UW Oshkosh Course Subject & Number',
-        description=u'All courses associated with your program, including courses that will be taught partially at UW Oshkosh and partially while away on the program.  Do not include courses that will be taught entirely at UWO, even when these courses are offered in preparation for the program away.  Contact the OIE to add a course (abroad@uwosh.edu).',
+        description=u'Include all courses that will be taught through this program.  Do not include courses that will be taught entirely at UWO, even when these courses are offered in preparation for the program away.  List existing courses only.  If the course you intend to use is not an existing course, your department must submit the course for formal approval through normal university channels prior to applying to use the course abroad/away.  Contact the OIE to add a course (abroad@uwosh.edu).',
         required=False,
         default=u'<em>There are currently no courses</em>',
     )
@@ -790,7 +790,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
     director_recommendations = RichText(
         title=_(u'OIE Director Recommendation'),
-        description=_(u'including site-specific Health, Safety & Security  remarks'),
+        description=_(u'Include site-specific Health, Safety & Security remarks when appropriate.'),
         default_mime_type='text/plain',
         allowed_mime_types=('text/plain', 'text/html',),
         max_length=2500,
@@ -800,7 +800,7 @@ class IOIEStudyAbroadProgram(Interface):
     health_safety_security_documents = RichText(
         title=_(u'Health, Safety & Security Documents'),
         description=_(
-            u'For all sites, upload Department of State Country Information and CDC country-specific information.  For sites with a U.S. Travel Warning, or when otherwise warranted, upload OIE travel recommendation and supporting documents'),
+            u'For all sites, upload the OIE Risk Assessment, Department of State Country Information, and CDC country-specific information.  When warranted, upload additional risk forms and/or supporting documentation.'),
         required=False,
         default=u'<em>There are currently no documents</em>',
     )
@@ -982,6 +982,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Provider 01 Awarded Contract'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     proposal_01 = field.NamedFile(
         title=_('Proposal 01'),
@@ -999,6 +1000,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Provider 02 Awarded Contract'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     proposal_02 = field.NamedFile(
         title=_('Proposal 02'),
@@ -1057,13 +1059,13 @@ class IOIEStudyAbroadProgram(Interface):
     budget_spreadsheet = field.NamedFile(
         title=_(u'Budget Spreadsheet'),
         description=_(
-            u'Upload a draft budget spreadsheet for review.  Replace this draft with updated budget spreadsheets until the review process is complete.  The budget spreadsheet in place as of the end of the review process must be maintained as a reference for the published program fee estimated.  Do not replace the final budget spreadsheet after the review process has ended.'),
+            u'Upload a draft budget spreadsheet for review.  Replace this draft with updated budget spreadsheets until the review process is complete.  The budget spreadsheet in place as of the end of the review process must be maintained as a reference for the published program fee estimate.  Do not replace the final budget spreadsheet after the review process has ended.'),
         required=False,
     )
     fecop_worksheet = field.NamedFile(
         title=_(u'Full Estimated Cost of Participation (FECOP) Worksheet'),
         description=_(
-            u'Upload a draft FECOP worksheets for review.  Replace this draft with updated FECOPs until the review process is complete.  The FECOP in place as of the "Application Intake in Progress" state will be the one shared with participants for application purposes.  Therefore, do not replace this FECOP after the review process has ended.'),
+            u'Upload a draft FECOP worksheet for review.  Replace this draft with updated FECOPs until the review process is complete.  The FECOP in place as of the "Application Intake in Progress" state will be the one shared with participants for application purposes.  Therefore, do not replace this FECOP after the review process has ended.'),
         required=False,
     )
 
@@ -1072,8 +1074,8 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(u'Required Prior to Publishing Initial Fee'),
     )
     program_fee = schema.Text(
-        title=_(
-            u'Add the official Program Fee estimate from the FECOP ($XXXX based on a minimum of XX participants).  If the official estimate on the FECOP is a fee range, the fee at the top end of the range must be used here.  Information in this field will display as the official fee, or the official fee range, on the OIE website upon transition to "Application Intake in Progress".'),
+        title=_(u'Full Estimated Cost of Participation'),
+        description=_(u'Add the official Full Estimated Cost of Participation from the FECOP ($XXXX based on a minimum of XX participants).  If the official estimate on the FECOP is a fee range, the fee at the top end of the range must be used here.  Information in this field will display as the official Full Estimated Cost of Participation on the OIE website upon transition to "Application Intake in Progress".'),
         default=u'TBA',
         required=False,
     )
@@ -1100,7 +1102,7 @@ class IOIEStudyAbroadProgram(Interface):
     form.mode(required_prior_to_publishing_initial_fee_label_2='display')
     required_prior_to_publishing_initial_fee_label_2 = schema.TextLine(
         description=_(
-            u'"Required Prior to Publishing Final Fee: Provider proposals and flight proposals on ""Proposals"" tab must also be complete."'),
+            u'Required Prior to Publishing Final Fee: Provider proposals and flight proposals on "Proposals" tab must also be complete.'),
     )
     final_participant_fee_statement = field.NamedFile(
         title=_(u'Final Participant Fee Statement'),
@@ -1119,12 +1121,12 @@ class IOIEStudyAbroadProgram(Interface):
 
     form.mode(required_prior_to_confirming_ter_received_label='display')
     required_prior_to_confirming_ter_received_label = schema.TextLine(
-        description=_(u'Required Prior to Confirming that TER has been Received'),
+        description=_(u'Required Prior to Confirming that the TER has been Received'),
     )
     travel_expense_report = field.NamedFile(
         title=_(u'Travel Expense Report'),
         description=_(
-            'Upload OIE Travel Expense Report Accounting forms plus all related receipts.  Receipts must be numbered to match line items on the accounting form and must be organized in number order.'),
+            'Upload a digital copy of OIE Travel Expense Report Accounting forms plus all related receipts.  Receipts must be numbered to match line items on the accounting form and must be organized in number order.'),
         required=False,
         # TODO This field must be associated with each individual Program Leader & Program Co-leader.
     )
@@ -1140,14 +1142,14 @@ class IOIEStudyAbroadProgram(Interface):
     )
     compensation_paperwork = field.NamedFile(
         title=_(u'Compensation Paperwork'),
-        description=_('Upload compensation paperwork'),
+        description=_('Upload compensation paperwork.  Include, for example, HR forms, IPAR form, and/or messaging that explains any difference from compensation approval in the “Application to Lead a Group Program Abroad/Away”.'),
         required=False,
         # TODO "This field must be associated with each individual Program Leader & Program Co-leader.
     )
     participant_refund_spreadsheet = field.NamedFile(
         title=_(u'Participant Refund Spreadsheet'),
         description=_(
-            'Upload the participant refund spreadsheet.  This spreadsheet will be accessed by student accounts for account adjustment purposes'),
+            'Upload the participant refund spreadsheet.  This spreadsheet will be accessed by student accounts for account adjustment purposes.'),
         required=False,
     )
 
@@ -1157,26 +1159,26 @@ class IOIEStudyAbroadProgram(Interface):
     )
     account_transfers = schema.Choice(
         title=_(u'Account Transfers'),
-        description=_(u'Confirm that all transfers into and out of the account are complete'),
+        description=_(u'Confirm that all transfers into and out of the account are complete.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
     )
     program_revenue = schema.Choice(
         title=_(u'Program Revenue'),
         description=_(
-            u'Confirm that all program revenue has been received.  Confirm that the correct program revenue amount is in the account'),
+            u'Confirm that all program revenue has been received.  Confirm that the correct program revenue amount is in the account.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
     )
     final_budget_documentation = field.NamedFile(
         title=_(u'Final Budget Documentation'),
         description=_(
-            'Upload the final budget spreadsheet & supporting financial documents.  Do not upload Travel Expense Report or related receipts here'),
+            'Upload the final budget spreadsheet & supporting financial documents.  Do not upload Travel Expense Report or related receipts here.'),
         required=False,
     )
     close_account = field.NamedFile(
         title=_(u'Close Account'),
-        description=_('Upload request to close the account'),
+        description=_('Upload request to close the account.'),
         required=False,
     )
 
@@ -1207,53 +1209,53 @@ class IOIEStudyAbroadProgram(Interface):
 
     form.mode(required_prior_to_confirming_program_to_run_label='display')
     required_prior_to_confirming_program_to_run_label = schema.TextLine(
-        description=_(u'Required prior to confirming program to run'),
+        description=_(u'Required Prior to Confirming Program to Run'),
     )
     participant_orientation_url = schema.URI(
         title=_(u'Participant Orientation'),
-        description=_(u'Insert a link to the participant orientation'),
+        description=_(u'Add detail on how to complete orientation.  Detail will show as participant instructions in the Participant Portal.'),
         required=False,
     )
 
     form.mode(proof_of_service_label='display')
     proof_of_service_label = schema.TextLine(
-        description=_(u'Proof of Service. Required prior to scheduling the operational briefing.'),
+        description=_(u'Required Prior to Scheduling the Operational Briefing'),
     )
     final_itinerary = field.NamedFile(
         title=_(u'Final Itinerary'),
-        description=_('Upload a clean copy of the official, final program itinerary'),
+        description=_('Upload a clean copy of the official, final program itinerary.'),
         required=False,
     )
     bus_contract_departure = field.NamedFile(
         title=_(u'Bus Contract (departure)'),
-        description=_('Upload the bus contract'),
+        description=_('Upload the bus contract.'),
         required=False,
     )
     bus_contract_return = field.NamedFile(
         title=_(u'Bus Contract (return)'),
-        description=_('Upload the bus contract'),
+        description=_('Upload the bus contract.'),
         required=False,
     )
     e_tickets = field.NamedFile(
         title=_(u'E-tickets'),
         description=_(
-            'Upload group e-tickets.  Individual traveler tickets are uploaded by the individual through the participant portal'),
+            'Upload group e-tickets.  Individual traveler tickets are uploaded by the individual through the participant portal.'),
         required=False,
     )
     vouchers = field.NamedFile(
         title=_(u'Vouchers'),
-        description=_('Upload payment vouchers'),
+        description=_('Upload payment vouchers.'),
         required=False,
     )
     insurance_invoice = field.NamedFile(
         title=_(u'Insurance Invoice'),
         description=_(
-            'Upload the insurance invoice (the document that includes the partricipant ID) for all Program Leaders, Program Co-leaders and program participants'),
+            'Upload the insurance invoice (the document that includes the partricipant ID) for all Program Leaders, Program Co-leaders and program participants.'),
         required=False,
     )
     visas = field.NamedFile(
         title=_(u'Visas'),
-        description=_('Upload visa copies'),
+        description=_('Upload visa copies.'),
         required=False,
     )
     other = field.NamedFile(
@@ -1276,17 +1278,17 @@ class IOIEStudyAbroadProgram(Interface):
     )
     participant_evaluations = field.NamedFile(
         title=_(u'Participant Evaluations'),
-        description=_('Upload participant evaluations'),
+        description=_('Upload participant evaluations.'),
         required=False,
     )
     post_program_evaluation = field.NamedFile(
         title=_(u'Post-program Evaluation'),
-        description=_('Upload Liaison and/or Program Leader and/or Program Co-leader program evaluation'),
+        description=_('Upload Liaison and/or Program Leader and/or Program Co-leader program evaluation.'),
         required=False,
     )
     incident_report = field.NamedFile(
         title=_(u'Incident Report'),
-        description=_('Upload incident report'),
+        description=_('Upload incident report.'),
         required=False,
     )
     total_number_of_high_school_students = schema.Int(
