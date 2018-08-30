@@ -875,24 +875,24 @@ class IOIEStudyAbroadProgram(Interface):
         # TODO default=none
     )
     visa_required_for_us_citizens = schema.Choice(
-        title=_(u'Visa'),
-        description=_(u'Is a visa required for U.S. Citizens?'),
+        title=_(u'Visa Application - All U.S. Citizens'),
+        description=_(u'Select 'yes' if a visa is required of U.S. citizens.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
     )
     original_passport = schema.Choice(
-        title=_(u'Original Passport'),
+        title=_(u'Passport-Original SIGNED Passport'),
         description=_(
-            u'You must submit your signed, original passport valid for 6 months from the date of arrival in the foreign country. It must have at least TWO side-by-side blank pages (in addition to the notes pages).   Your passport will be sent to the Consulate, along with your visa application, to apply for a visa.'),
+            u'Select 'yes' if this is required to apply for a visa.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
     )
     official_passport_photo_for_india_visa_application = schema.Choice(
-        title=_(u'Official Passport Photo for India Visa Application'),
+        title=_(u'Photo: Official Paper Passport Photo'),
         description=_(
-            u'Required regardless of whether or not you already have a passport.  Submit 1 passport-size photo (2” x 2”) taken by a professional passport photographer. Write your name on the back of the photo prior to submitting. No glasses, no white shirts, long hair must be behind the shoulders, and you must have a neutral expression (not smiling) in the photo.'),
+            u'Select 'yes' if required by external partners or if required to apply for a visa with photo requirements that are consistent with an official U.S. passport photo.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
@@ -928,9 +928,9 @@ class IOIEStudyAbroadProgram(Interface):
         # TODO default=none
     )
     digital_passport_photo = schema.Choice(
-        title=_(u'Digital Passport Photo'),
+        title=_(u'Photo: Official Digital Passport Photo'),
         description=_(
-            u'When you had your passport photos taken, you probably received two photos but sent only one of these to the passport office with your application. Scan the passport photo you didn''t send.  If you already had a passport, you''ll need to have a new passport photo taken; you may NOT use a photo that is not an official passport photo and you may not scan the photo that is already in your passport.'),
+            u'Select 'yes' if required by external partners or if required to apply for a visa with photo requirements that are consistent with an official U.S. passport photo.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
          # TODO default=none
