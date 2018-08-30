@@ -829,9 +829,10 @@ class IOIEStudyAbroadProgram(Interface):
 
     form.mode(application_items_label='display')
     application_items_label = schema.TextLine(
+        title=_(u'Application Items - Internal Forms'),
         description=_(
-            u'Application Items: If checked "yes", the items below will appear in the Participant Portal as an application item.'),
-        # TODO Let's talk through this one.  Is there a way for us to select the documents that need to be displayed in the application by group and for invidual participants?
+            u'If checked "yes", the items below will appear in the Participant Portal as an application item.'),
+        # TODO Let's talk through this one.  Is there a way for us to select the documents that need to be displayed in the application by group and for individual participants?
     )
     credit_overload_form = schema.Choice(
         title=_(u'Credit Overload Form'),
@@ -839,40 +840,46 @@ class IOIEStudyAbroadProgram(Interface):
             u'Required ONLY IF you will exceed 22 credits total, including study abroad & interim credits, during the semester in which you will study abroad OR if you will exceed 9 credits total, including study abroad credits, during a summer study abroad program.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
-    )
+         # TODO default=none
+   )
     flight_deviation_request_return_flight_only = schema.Choice(
-        title=_(u'Flight Deviation Request-Return Flight Only'),
+        title=_(u'Application for Permission to Follow an Alternative Schedule on the Return Flight Only'),
         description=_(
-            u'Required ONLY IF you plan to travel to your program site following the schedule provided by the UWO OIE, but return to the U.S. following your own schedule.'),
+            u' Select 'yes' for all independent travel programs where OIE does not hold space on a group flight and for all programs on which OIE holds space on a group flight but may allow deviations on the return flight only on a case-by-case basis.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     flight_deviation_request_roundtrip_or_outbound_flight = schema.Choice(
-        title=_(u'Flight Deviation Request-Roundtrip or Outbound flight'),
+        title=_(u'Application for Permission to Follow an Alternative Schedule on the Outbound Flight Only or on My Roundtrip Flights'),
         description=_(
-            u'Required ONLY IF you plan to travel to your program site and return to the U.S. following your own schedule.'),
+            u'Select 'yes' for all independent travel programs where OIE does not hold space on a group flight and for all programs on which OIE holds space on a group flight but may allow deviations on the outbound or roundtrip flights on a case-by-case basis.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     graduate_registration_form_and_graduate_special_non_degree_information_form = schema.Choice(
-        title=_(u'Graduate Registration Form and Graduate Special/Non-Degree Information Form'),
+        title=_(u'Special/Non-Degree Registration - Graduate Level'),
         description=_(
-            u'Required ONLY IF you are not in a Graduate program at UW Oshkosh and want to earn graduate level credit, or if you are in a Graduate program at UW Oshkosh and want to earn undergraduate level credit.'),
+            u'Select 'yes' 1) if the program allows undergraduate level course enrollment by graduate level students or 2) if the program offers graduate level courses and accepts applicants who will not be UW Oshkosh degree-seeking students during the term that the program runs.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     biographical_page_of_your_signed_passport = schema.Choice(
-        title=_(u'Biographical Page of your SIGNED Passport'),
+        title=_(u'Passport-Digital Copy of Biographical Page of Your SIGNED Passport'),
         description=_(
-            u'This is required by our partner abroad.  Make an electronic copy of the pages of your passport that show your signature and your photo and upload the copy.'),
+            u'Select 'yes' if required by external partners.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     visa_required_for_us_citizens = schema.Choice(
         title=_(u'Visa'),
         description=_(u'Is a visa required for U.S. Citizens?'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     original_passport = schema.Choice(
         title=_(u'Original Passport'),
@@ -880,6 +887,7 @@ class IOIEStudyAbroadProgram(Interface):
             u'You must submit your signed, original passport valid for 6 months from the date of arrival in the foreign country. It must have at least TWO side-by-side blank pages (in addition to the notes pages).   Your passport will be sent to the Consulate, along with your visa application, to apply for a visa.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     official_passport_photo_for_india_visa_application = schema.Choice(
         title=_(u'Official Passport Photo for India Visa Application'),
@@ -887,19 +895,22 @@ class IOIEStudyAbroadProgram(Interface):
             u'Required regardless of whether or not you already have a passport.  Submit 1 passport-size photo (2” x 2”) taken by a professional passport photographer. Write your name on the back of the photo prior to submitting. No glasses, no white shirts, long hair must be behind the shoulders, and you must have a neutral expression (not smiling) in the photo.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     drivers_license_copy_for_india_visa_application = schema.Choice(
-        title=_(u'Driver''s License Copy for India Visa Application'),
+        title=_(u'Driver's License - Copy for Visa Application'),
         description=_(
-            u'The address on your driver''s license must match the PRESENT address that you''ll list on your visa application.  If your Driver''s License or State Issued I.D. doesn''t match the PRESENT address you''ll list on your visa application, you must submit a major utility bill (Water, Gas, Electric, Sewage).'),
+            u'Select 'yes' if required by the foreign consulate to apply for a visa.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
-    )
+         # TODO default=none
+   )
     indian_visa_application = schema.Choice(
         title=_(u'Indian Visa Application'),
         description=_(u'The OIE will send instructions on how to complete this'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     yellow_fever_vaccination_certificate = schema.Choice(
         title=_(u'Yellow Fever Vaccination Certificate'),
@@ -907,12 +918,14 @@ class IOIEStudyAbroadProgram(Interface):
             u'Required ONLY IF you will have traveled to any of the countries listed on this website within 90 days of departure to your program site abroad.  A copy of the certificate should be sent in with your visa application as a precaution against visa denial.  wwwnc.cdc.gov/travel/yellowbook/2016/infectious-diseases-related-to-travel/yellow-fever'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
-    )
+         # TODO default=none
+   )
     passport_size_photo = schema.Choice(
         title=_(u'Passport-size Photo'),
         description=_(u'Upload a digital photo.  To be used for your student ID at your host institution.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     digital_passport_photo = schema.Choice(
         title=_(u'Digital Passport Photo'),
@@ -920,27 +933,31 @@ class IOIEStudyAbroadProgram(Interface):
             u'When you had your passport photos taken, you probably received two photos but sent only one of these to the passport office with your application. Scan the passport photo you didn''t send.  If you already had a passport, you''ll need to have a new passport photo taken; you may NOT use a photo that is not an official passport photo and you may not scan the photo that is already in your passport.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
-    )
+         # TODO default=none
+   )
     transfer_credit_prior_approval_form = schema.Choice(
-        title=_(u'Transfer Credit Prior Approval form'),
+        title=_(u'Transfer Credit Prior Approval Form'),
         description=_(
-            u'The OIE recommends choosing twice as many courses as you plan to take per semester and completing the Transfer Credit Prior Approval for all of these courses. In the case that a course you intended to take abroad is full, not offered or is not what you expected, you will then be able to easily make changes to your enrollment while abroad.  If you complete more than one form, combine all of the forms into one file before uploading.'),
+            u'Select 'yes' if one or more applicants may be enrolled in a host institution course that is eligible for transfer back to UW Oshkosh, without simultaneous enrollment at UW Oshkosh.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     hessen_isu_application = schema.Choice(
-        title=_(u'Hessen ISU Application'),
+        title=_(u'Hessen/Wisconsin ISU Student Exchange Application'),
         description=_(
-            u'Type your responses.  Sign by hand before saving an electronic copy of the document to upload.'),
+            u'Select 'yes' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an ISU (International Summer University).'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     hessen_iwu_application = schema.Choice(
-        title=_(u'Hessen IWU Application'),
+        title=_(u'Hessen/Wisconsin IWU Student Exchange Application'),
         description=_(
-            u'Type your responses.  Sign by hand before saving an electronic copy of the document to upload.'),
+            u'Select 'yes' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an IWU (International Winter University).'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
 
     #######################################################
