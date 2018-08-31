@@ -353,7 +353,7 @@ class IOIEStudyAbroadProgram(Interface):
     model.fieldset(
         'dates_destinations_fieldset',
         label=_(u"Dates and Destinations"),
-        fields=['program_cycle', 'pretravel_dates'],
+        fields=['program_cycle', 'pretravel_dates', 'travelDatesTransitionsAndDestinations', 'add_transition_link', 'firstChoiceDatesFlexible', 'postTravelClassDates'],
     ),
 
     program_cycle = schema.Choice(
@@ -370,6 +370,35 @@ class IOIEStudyAbroadProgram(Interface):
             u'Students expect to meet group members and their program leader or program advisor in a formal group setting at least once prior to travel. Check with your department chair and/or College administration on pre-travel requirements specific to your unit. OIE recommends holding program orientation dates after the OIE Orientation Materials Submission Deadline. This may allow you to reinforce, rather than fully introduce, information that will be presented in the OIE orientation. Students are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during your pre-travel class dates. Students with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the student on the program. For this reason, after we advertise these dates to students as mandatory, the dates shouldn’t be changed!'),
         required=True,
         value_type=DictRow(title=u"Pre-Travel Dates", schema=IPreTravelDatesRowSchema)
+    )
+    
+        form.mode(travelDatesTransitionsAndDestinations='display')
+    travelDatesTransitionsAndDestinations = RichText(
+        title=_(u'Travel Dates, Transitions & Destinations'),
+        description=_(u'All transitions for this program are listed here.'),
+        required=False,
+        default=u'<em>There are currently no transitions</em>',
+    )
+    form.mode(add_transition_link="display")
+    add_transition_link = RichText(
+        required=False,
+        default=u'<em>You can add transitions after saving this program</em>',
+    )
+
+    firstChoiceDatesFlexible = schema.Choice(
+        title=_(u'My first-choice dates are flexible.'),
+        description=_(u'If yes, your OIE Program Manager may recommend changes based on flight availability or program component scheduling.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=True,
+    )
+
+    widget('postTravelClassDates', DataGridFieldFactory)
+    postTravelClassDates = schema.List(
+        title=_(u'Post-travel Class Dates'),
+        description=_(
+            u'Participants are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during post-travel class dates.  Participants with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the participant on the program.  For this reason, after we advertise these dates to participants as mandatory, the dates shouldn’t be changed!'),
+        value_type=DictRow(title=u'Post-travel Class Dates', schema=IPostTravelClassDatesRowSchema),
+        required=False,
     )
 
     #######################################################
@@ -426,9 +455,7 @@ class IOIEStudyAbroadProgram(Interface):
     model.fieldset(
         'departure_flight_fieldset',
         label=_('Departure'),
-        fields=['airline', 'flightNumber', 'airport', 'departureDateTime', 'arrivalAtDestinationAndInsuranceStartDate',
-                'travelDatesTransitionsAndDestinations', 'add_transition_link', 'firstChoiceDatesFlexible',
-                'postTravelClassDates',]
+        fields=['airline', 'flightNumber', 'airport', 'departureDateTime', 'arrivalAtDestinationAndInsuranceStartDate',]
     )
 
     airline = schema.Choice(
@@ -455,35 +482,6 @@ class IOIEStudyAbroadProgram(Interface):
 
     arrivalAtDestinationAndInsuranceStartDate = schema.Datetime(
         title=_(u'Arrival at Destination & Insurance Start Date'),
-        required=False,
-    )
-
-    form.mode(travelDatesTransitionsAndDestinations='display')
-    travelDatesTransitionsAndDestinations = RichText(
-        title=_(u'Travel Dates, Transitions & Destinations'),
-        description=_(u'All transitions for this program are listed here.'),
-        required=False,
-        default=u'<em>There are currently no transitions</em>',
-    )
-    form.mode(add_transition_link="display")
-    add_transition_link = RichText(
-        required=False,
-        default=u'<em>You can add transitions after saving this program</em>',
-    )
-
-    firstChoiceDatesFlexible = schema.Choice(
-        title=_(u'My first-choice dates are flexible.'),
-        description=_(u'If yes, your OIE Program Manager may recommend changes based on flight availability or program component scheduling.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=True,
-    )
-
-    widget('postTravelClassDates', DataGridFieldFactory)
-    postTravelClassDates = schema.List(
-        title=_(u'Post-travel Class Dates'),
-        description=_(
-            u'Participants are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during post-travel class dates.  Participants with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the participant on the program.  For this reason, after we advertise these dates to participants as mandatory, the dates shouldn’t be changed!'),
-        value_type=DictRow(title=u'Post-travel Class Dates', schema=IPostTravelClassDatesRowSchema),
         required=False,
     )
 
