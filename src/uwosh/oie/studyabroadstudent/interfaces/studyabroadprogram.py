@@ -405,6 +405,42 @@ class IOIEStudyAbroadProgram(Interface):
     # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
     #
     model.fieldset(
+        'departure_flight_fieldset',
+        label=_('Departure'),
+        fields=['airline', 'flightNumber', 'airport', 'departureDateTime', 'arrivalAtDestinationAndInsuranceStartDate',]
+    )
+
+    airline = schema.Choice(
+        title=_(u'Airline'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airline',
+        required=False,
+    )
+
+    flightNumber = schema.TextLine(
+        title=_(u'Flight Number'),
+        required=False,
+    )
+
+    airport = schema.Choice(
+        title=_(u'Airport'),
+        source=RegistryValueVocabulary('oiestudyabroadstudent.airport'),
+        required=False,
+    )
+
+    departureDateTime = schema.Datetime(
+        title=_(u'Departure Date and Time'),
+        required=False,
+    )
+
+    arrivalAtDestinationAndInsuranceStartDate = schema.Datetime(
+        title=_(u'Arrival at Destination & Insurance Start Date'),
+        required=False,
+    )
+        
+    #######################################################
+    # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
+    #
+    model.fieldset(
         'departure_from_oshkosh_fieldset',
         label=_(u'Departure from Oshkosh'),
         fields=['transportationFromOshkoshToDepartureAirport', 'airport_transfer', 'oshkoshDepartureLocation',
@@ -447,42 +483,6 @@ class IOIEStudyAbroadProgram(Interface):
         title=_('Destination Arrival Date & Time'),
         required=False,
         # TODO '=departure flight date/time minus 3.5 hours [display only if "Transportation is provided from Oshkosh is "yes"]
-    )
-
-    #######################################################
-    # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
-    #
-    model.fieldset(
-        'departure_flight_fieldset',
-        label=_('Departure'),
-        fields=['airline', 'flightNumber', 'airport', 'departureDateTime', 'arrivalAtDestinationAndInsuranceStartDate',]
-    )
-
-    airline = schema.Choice(
-        title=_(u'Airline'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airline',
-        required=False,
-    )
-
-    flightNumber = schema.TextLine(
-        title=_(u'Flight Number'),
-        required=False,
-    )
-
-    airport = schema.Choice(
-        title=_(u'Airport'),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.airport'),
-        required=False,
-    )
-
-    departureDateTime = schema.Datetime(
-        title=_(u'Departure Date and Time'),
-        required=False,
-    )
-
-    arrivalAtDestinationAndInsuranceStartDate = schema.Datetime(
-        title=_(u'Arrival at Destination & Insurance Start Date'),
-        required=False,
     )
 
     #######################################################
