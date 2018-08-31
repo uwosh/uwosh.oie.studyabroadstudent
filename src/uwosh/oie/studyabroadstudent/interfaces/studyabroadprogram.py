@@ -783,10 +783,10 @@ class IOIEStudyAbroadProgram(Interface):
                 'hessen_iwu_application'], )
     program_schedule = schema.Choice(
         title=_(u'Program Schedule'),
-        description=_(u''),  # TODO description?
+        description=_(u'The OIE Program Manager checks this box to confirm that the program schedule has been viewed.  Checking this box does not mean that activities on the schedule have been approved.  Further Risk Assessment will be completed after this initial review.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
-        # TODO check box or workflow?
+        # TODO check box or workflow? (for now, this will be just a check box.  It could become part of the workflow in the future.  The checkbox must be checked to move through the workflow.
     )
     director_recommendations = RichText(
         title=_(u'OIE Director Recommendation'),
@@ -816,14 +816,17 @@ class IOIEStudyAbroadProgram(Interface):
     )
     step_1_and_2_application_deadline = schema.Date(
         title=_(u'STEPs I & II Application Deadline'),
-        required=False,
+        description=_(u'The STEPs I & II application deadline must be the OIE default student application date, or a date that is two weeks prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: Last Friday in February (summer & fall semester programs); 2nd Friday in September (fall interim programs); last Friday in September (spring semester programs); 1st Friday of Spring Semester (spring interim programs).'),
+       required=False,
     )
     step_3_application_deadline = schema.Date(
         title=_(u'STEP III Application Deadline'),
+        description=_(u'The STEP III application deadline must be the OIE default student application date, or a date that is one week prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: 1st Friday in March (summer & fall semester programs); 3rd Friday in September (fall interim programs); 1st Friday in October (spring semester programs); 2nd Friday of Spring Semester (spring interim programs).'),
         required=False,
     )
     step_4_application_deadline = schema.Date(
         title=_(u'STEP IV Application Deadline'),
+        description=_(u'The STEP IV application deadline must take into consideration external deadlines and processing time in the OIE from the point of receiving completed application documents, and the anticipated dates on which documents can be sent to external partners and received by them.'),
         required=False,
     )
 
