@@ -14,7 +14,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     dexteritytextindexer.searchable('title')
     title = schema.TextLine(
-        title=_(u'Title'),
+        title=_(u'Program Title'),
         required=True,
         readonly=True,
         default=_(u'will be auto-generated'),
@@ -29,7 +29,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     dexteritytextindexer.searchable('studentID')
     studentID = schema.TextLine(
         title=_(u'UW Oshkosh Student ID'),
-        description=_(u'(if applicable)'),
+        description=_(u'Do not include the initial "W" in the UW Oshkosh ID.  If you do not have a UW Oshkosh ID (current or past), leave this blank.'),
         required=False,
     )
 
@@ -55,6 +55,24 @@ class IOIEStudyAbroadStudentApplication(Interface):
     email = schema.TextLine(
         title=_(u'Email Address'),
         description=_(u'UW Oshkosh students must use a @uwosh.edu email address.  Acceptable email addresses for other applicants include school and company addresses.'),
+        required=True,
+    )
+
+    mobilePhone = schema.TextLine(
+        title=_(u'Mobile (cell) Phone'),
+        description=_(u'Please include country code (if outside US) and area code'),
+        required=False,
+    )
+
+    homePhone = schema.TextLine(
+        title=_(u'Home Telephone'),
+        description=_(u'Please include country code (if outside US) and area code'),
+        required=True,
+    )
+
+    localPhone = schema.TextLine(
+        title=_(u'Other Phone'),
+        description=_(u'Please include country code (if outside US) and area code'),
         required=True,
     )
 
@@ -99,18 +117,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=True,
     )
 
-    localPhone = schema.TextLine(
-        title=_(u'Local Telephone'),
-        description=_(u'Please include country code (if outside US) and area code'),
-        required=True,
-    )
-
-    mobilePhone = schema.TextLine(
-        title=_(u'Mobile (cell) phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
-        required=False,
-    )
-
     homeAddr1 = schema.TextLine(
         title=_(u'Home Address Line 1'),
         required=True,
@@ -144,12 +150,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=True,
     )
 
-    homePhone = schema.TextLine(
-        title=_(u'Home Telephone'),
-        description=_(u'Please include country code (if outside US) and area code'),
-        required=True,
-    )
-
     model.fieldset(
         'demographics',
         label=_(u"Demographics"),
@@ -158,15 +158,10 @@ class IOIEStudyAbroadStudentApplication(Interface):
                 'gender', 'marriageStatus', 'ethnicity', ]
     )
 
-    citizenship = schema.Choice(
-        title=_(u'Citizenship'),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.citizenship'),
-        required=True,
-    )
-
-    citizenshipOther = schema.TextLine(
-        title=_(u'Other Citizenship Country'),
-        description=_(u'Enter country of citizenship if you selected Other'),
+    ethnicity = schema.Choice(
+        title=_(u'Ethnicity'),
+        description=_(u''),
+        source=RegistryValueVocabulary('oiestudyabroadstudent.ethnicities'),
         required=False,
     )
 
@@ -183,15 +178,247 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=False,
     )
 
+    citizenship = schema.Choice(
+        title=_(u'Country of Citizenship'),
+        source=RegistryValueVocabulary('oiestudyabroadstudent.citizenship'),
+        required=True,
+    )
+
+    citizenshipOther = schema.TextLine(
+        title=_(u'Other Citizenship Country'),
+        description=_(u'Enter country of citizenship if you selected Other.'),
+        required=False,
+    )
+
     dateOfBirth = schema.Date(
-        title=_(u'Birthday'),
+        title=_(u'Date of Birth'),
         required=True,
     )
 
     placeOfBirth = schema.TextLine(
         title=_(u'Place of Birth'),
-        description=_(u'Enter city, state, and country'),
+        description=_(u'Enter city, state, and country.'),
         required=True,
+    )
+
+    model.fieldset(
+        'emergency_contacts',
+        label=_(u"Emergency Contacts"),
+        fields=['emerg1name', 'emerg1addr1', 'emerg1addr2', 'emerg1city', 'emerg1state',
+                'emerg1zip', 'emerg1country', 'emerg1homePhone', 'emerg1workPhone',
+                'emerg1mobilePhone', 'emerg1email', 'emerg2name', 'emerg2addr1', 'emerg2addr2',
+                'emerg2city', 'emerg2state', 'emerg2zip', 'emerg2country', 'emerg2homePhone',
+                'emerg2workPhone', 'emerg2mobilePhone', 'emerg2email', 'emerg3name',
+                'emerg3addr1', 'emerg3addr2', 'emerg3city', 'emerg3state', 'emerg3zip',
+                'emerg3country', 'emerg3homePhone', 'emerg3workPhone', 'emerg3mobilePhone',
+                'emerg3email', ]
+    )
+
+    emerg1name = schema.TextLine(
+        title=_(u'Emergency Contact 1: Full Name'),
+#        required=True,
+        required=False,
+    )
+
+    emerg1addr2 = schema.TextLine(
+        title=_(u'Emergency Contact 1: Relationship to You'),
+        required=False,
+    )
+
+    emerg1email = schema.TextLine(
+        title=_(u'Emergency Contact 1: Email'),
+        description=_(u'Strongly recommended'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg1mobilePhone = schema.TextLine(
+        title=_(u'Emergency Contact 1: Mobile Phone'),
+        description=_(u'Strongly recommended.  Please include country code (if outside US) and area code'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg1homePhone = schema.TextLine(
+        title=_(u'Emergency Contact 1: Home Phone'),
+        description=_(u'Please include country code (if outside US) and area code'),
+#        required=True,
+        required=False,
+    )
+
+    emerg1workPhone = schema.TextLine(
+        title=_(u'Emergency Contact 1: Work Phone'),
+        description=_(u'Strongly recommended.  Please include country code (if outside US) and area code'),
+        #write_permission="UWOshOIE: Modify revisable fields",
+        required=False,
+    )
+
+    emerg1addr1 = schema.TextLine(
+        title=_(u'Emergency Contact 1: Address'),
+#        required=True,
+        required=False,
+    )
+
+    emerg1city = schema.TextLine(
+        title=_(u'Emergency Contact 1: City'),
+#        required=True,
+        required=False,
+    )
+
+    emerg1state = schema.TextLine(
+        title=_(u'Emergency Contact 1: State'),
+#        required=True,
+        required=False,
+    )
+
+    emerg1zip = schema.TextLine(
+        title=_(u'Emergency Contact 1: Zip Code'),
+#        required=True,
+        required=False,
+    )
+
+    emerg1country = schema.TextLine(
+        title=_(u'Emergency Contact 1: Country'),
+#        required=True,
+        required=False,
+    )
+
+    emerg2name = schema.TextLine(
+        title=_(u'Emergency Contact 2: Full Name'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg2addr2 = schema.TextLine(
+        title=_(u'Emergency Contact 2: Relationship to You'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg2email = schema.TextLine(
+        title=_(u'Emergency Contact 2: Email'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg2mobilePhone = schema.TextLine(
+        title=_(u'Emergency Contact 2: Mobile Phone'),
+        description=_(u'Please include country code (if outside US) and area code'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg2homePhone = schema.TextLine(
+        title=_(u'Emergency Contact 2: Home Phone'),
+        description=_(u'Please include country code (if outside US) and area code'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg2workPhone = schema.TextLine(
+        title=_(u'Emergency Contact 2: Work Phone'),
+        description=_(u'Please include country code (if outside US) and area code'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg2addr1 = schema.TextLine(
+        title=_(u'Emergency Contact 2: Address'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg2city = schema.TextLine(
+        title=_(u'Emergency Contact 2: City'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg2state = schema.TextLine(
+        title=_(u'Emergency Contact 2: State'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg2zip = schema.TextLine(
+        title=_(u'Emergency Contact 2: Zip Code'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg2country = schema.TextLine(
+        title=_(u'Emergency Contact 2: Country'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg3name = schema.TextLine(
+        title=_(u'Emergency Contact 3: Full Name'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg3addr2 = schema.TextLine(
+        title=_(u'Emergency Contact 3: Relationship to You'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg3email = schema.TextLine(
+        title=_(u'Emergency Contact 3: Email'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg3mobilePhone = schema.TextLine(
+        title=_(u'Emergency Contact 3: Mobile Phone'),
+        description=_(u'Please include country code (if outside US) and area code'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg3homePhone = schema.TextLine(
+        title=_(u'Emergency Contact 3: Home Phone'),
+        description=_(u'Please include country code (if outside US) and area code'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg3workPhone = schema.TextLine(
+        title=_(u'Emergency Contact 3: Work Phone'),
+        description=_(u'Please include country code (if outside US) and area code'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg3addr1 = schema.TextLine(
+        title=_(u'Emergency Contact 3: Address'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg3city = schema.TextLine(
+        title=_(u'Emergency Contact 3: City'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg3state = schema.TextLine(
+        title=_(u'Emergency Contact 3: State'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg3zip = schema.TextLine(
+        title=_(u'Emergency Contact 3: Zip Code'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
+    )
+
+    emerg3country = schema.TextLine(
+        title=_(u'Emergency Contact 3: Country'),
+        required=False,
+        #write_permission="UWOshOIE: Modify revisable fields",
     )
 
     gender = schema.Choice(
@@ -205,13 +432,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Marital Status'),
         description=_(u''),
         source=RegistryValueVocabulary('oiestudyabroadstudent.marriage_statuses'),
-        required=False,
-    )
-
-    ethnicity = schema.Choice(
-        title=_(u'Ethnicity'),
-        description=_(u''),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.ethnicities'),
         required=False,
     )
 
@@ -554,226 +774,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Additional Needs'),
         description=_(u'Is there anything else your host families or the OIE should know about your accommodation needs?'),
         required=False,
-    )
-
-    model.fieldset(
-        'emergency_contacts',
-        label=_(u"Emergency Contacts"),
-        fields=['emerg1name', 'emerg1addr1', 'emerg1addr2', 'emerg1city', 'emerg1state',
-                'emerg1zip', 'emerg1country', 'emerg1homePhone', 'emerg1workPhone',
-                'emerg1mobilePhone', 'emerg1email', 'emerg2name', 'emerg2addr1', 'emerg2addr2',
-                'emerg2city', 'emerg2state', 'emerg2zip', 'emerg2country', 'emerg2homePhone',
-                'emerg2workPhone', 'emerg2mobilePhone', 'emerg2email', 'emerg3name',
-                'emerg3addr1', 'emerg3addr2', 'emerg3city', 'emerg3state', 'emerg3zip',
-                'emerg3country', 'emerg3homePhone', 'emerg3workPhone', 'emerg3mobilePhone',
-                'emerg3email', ]
-    )
-
-    emerg1name = schema.TextLine(
-        title=_(u'Emergency Contact 1 Name'),
-#        required=True,
-        required=False,
-    )
-
-    emerg1addr1 = schema.TextLine(
-        title=_(u'Emergency Contact 1 Address Line 1'),
-#        required=True,
-        required=False,
-    )
-
-    emerg1addr2 = schema.TextLine(
-        title=_(u'Emergency Contact 1 Address Line 2'),
-        required=False,
-    )
-
-    emerg1city = schema.TextLine(
-        title=_(u'Emergency Contact 1 City'),
-#        required=True,
-        required=False,
-    )
-
-    emerg1state = schema.TextLine(
-        title=_(u'Emergency Contact 1 State'),
-#        required=True,
-        required=False,
-    )
-
-    emerg1zip = schema.TextLine(
-        title=_(u'Emergency Contact 1 Zip Code'),
-#        required=True,
-        required=False,
-    )
-
-    emerg1country = schema.TextLine(
-        title=_(u'Emergency Contact 1 Country'),
-#        required=True,
-        required=False,
-    )
-
-    emerg1homePhone = schema.TextLine(
-        title=_(u'Emergency Contact 1 Home Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
-#        required=True,
-        required=False,
-    )
-
-    emerg1workPhone = schema.TextLine(
-        title=_(u'Emergency Contact 1 Work Phone'),
-        description=_(u'Strongly recommended.  Please include country code (if outside US) and area code'),
-        #write_permission="UWOshOIE: Modify revisable fields",
-        required=False,
-    )
-
-    emerg1mobilePhone = schema.TextLine(
-        title=_(u'Emergency Contact 1 Mobile Phone'),
-        description=_(u'Strongly recommended.  Please include country code (if outside US) and area code'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg1email = schema.TextLine(
-        title=_(u'Emergency Contact 1 Email'),
-        description=_(u'Strongly recommended'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg2name = schema.TextLine(
-        title=_(u'Emergency Contact 2 Name'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg2addr1 = schema.TextLine(
-        title=_(u'Emergency Contact 2 Address Line 1'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg2addr2 = schema.TextLine(
-        title=_(u'Emergency Contact 2 Address Line 2'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg2city = schema.TextLine(
-        title=_(u'Emergency Contact 2 City'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg2state = schema.TextLine(
-        title=_(u'Emergency Contact 2 State'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg2zip = schema.TextLine(
-        title=_(u'Emergency Contact 2 Zip Code'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg2country = schema.TextLine(
-        title=_(u'Emergency Contact 2 Country'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg2homePhone = schema.TextLine(
-        title=_(u'Emergency Contact 2 Home Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg2workPhone = schema.TextLine(
-        title=_(u'Emergency Contact 2 Work Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg2mobilePhone = schema.TextLine(
-        title=_(u'Emergency Contact 2 Mobile Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg2email = schema.TextLine(
-        title=_(u'Emergency Contact 2 Email'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg3name = schema.TextLine(
-        title=_(u'Emergency Contact 3 Name'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg3addr1 = schema.TextLine(
-        title=_(u'Emergency Contact 3 Address Line 1'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg3addr2 = schema.TextLine(
-        title=_(u'Emergency Contact 3 Address Line 2'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg3city = schema.TextLine(
-        title=_(u'Emergency Contact 3 City'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg3state = schema.TextLine(
-        title=_(u'Emergency Contact 3 State'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg3zip = schema.TextLine(
-        title=_(u'Emergency Contact 3 Zip Code'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg3country = schema.TextLine(
-        title=_(u'Emergency Contact 3 Country'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg3homePhone = schema.TextLine(
-        title=_(u'Emergency Contact 3 Home Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg3workPhone = schema.TextLine(
-        title=_(u'Emergency Contact 3 Work Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg3mobilePhone = schema.TextLine(
-        title=_(u'Emergency Contact 3 Mobile Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
-    )
-
-    emerg3email = schema.TextLine(
-        title=_(u'Emergency Contact 3 Email'),
-        required=False,
-        #write_permission="UWOshOIE: Modify revisable fields",
     )
 
     dexteritytextindexer.searchable('programName')
