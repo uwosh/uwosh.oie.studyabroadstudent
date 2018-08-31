@@ -859,6 +859,22 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
         # TODO default=none
     )
+    hessen_isu_application = schema.Choice(
+        title=_(u'Hessen/Wisconsin ISU Student Exchange Application'),
+        description=_(
+            u'Select 'yes' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an ISU (International Summer University).'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+        # TODO default=none
+    )
+    hessen_iwu_application = schema.Choice(
+        title=_(u'Hessen/Wisconsin IWU Student Exchange Application'),
+        description=_(
+            u'Select 'yes' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an IWU (International Winter University).'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+        # TODO default=none
+    )
     graduate_registration_form_and_graduate_special_non_degree_information_form = schema.Choice(
         title=_(u'Special/Non-Degree Registration - Graduate Level'),
         description=_(
@@ -867,17 +883,26 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
         # TODO default=none
     )
-    biographical_page_of_your_signed_passport = schema.Choice(
-        title=_(u'Passport-Digital Copy of Biographical Page of Your SIGNED Passport'),
+    transfer_credit_prior_approval_form = schema.Choice(
+        title=_(u'Transfer Credit Prior Approval Form'),
         description=_(
-            u'Select 'yes' if required by external partners.'),
+            u'Select 'yes' if one or more applicants may be enrolled in a host institution course that is eligible for transfer back to UW Oshkosh, without simultaneous enrollment at UW Oshkosh.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
     )
-    visa_required_for_us_citizens = schema.Choice(
-        title=_(u'Visa Application - All U.S. Citizens'),
-        description=_(u'Select 'yes' if a visa is required of U.S. citizens.'),
+    drivers_license_copy_for_india_visa_application = schema.Choice(
+        title=_(u'Driver's License - Copy for Visa Application'),
+        description=_(
+            u'Select 'yes' if required by the foreign consulate to apply for a visa.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+         # TODO default=none
+   )
+    biographical_page_of_your_signed_passport = schema.Choice(
+        title=_(u'Passport-Digital Copy of Biographical Page of Your SIGNED Passport'),
+        description=_(
+            u'Select 'yes' if required by external partners.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
@@ -898,17 +923,17 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
         # TODO default=none
     )
-    drivers_license_copy_for_india_visa_application = schema.Choice(
-        title=_(u'Driver's License - Copy for Visa Application'),
+    digital_passport_photo = schema.Choice(
+        title=_(u'Photo: Official Digital Passport Photo'),
         description=_(
-            u'Select 'yes' if required by the foreign consulate to apply for a visa.'),
+            u'Select 'yes' if required by external partners or if required to apply for a visa with photo requirements that are consistent with an official U.S. passport photo.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
          # TODO default=none
    )
-    indian_visa_application = schema.Choice(
-        title=_(u'Indian Visa Application'),
-        description=_(u'The OIE will send instructions on how to complete this'),
+    visa_required_for_us_citizens = schema.Choice(
+        title=_(u'Visa Application - All U.S. Citizens'),
+        description=_(u'Select 'yes' if a visa is required of U.S. citizens.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
@@ -921,41 +946,16 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
          # TODO default=none
    )
+    indian_visa_application = schema.Choice(
+        title=_(u'Indian Visa Application'),
+        description=_(u'The OIE will send instructions on how to complete this'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+        # TODO default=none
+    )
     passport_size_photo = schema.Choice(
         title=_(u'Passport-size Photo'),
         description=_(u'Upload a digital photo.  To be used for your student ID at your host institution.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
-        # TODO default=none
-    )
-    digital_passport_photo = schema.Choice(
-        title=_(u'Photo: Official Digital Passport Photo'),
-        description=_(
-            u'Select 'yes' if required by external partners or if required to apply for a visa with photo requirements that are consistent with an official U.S. passport photo.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
-         # TODO default=none
-   )
-    transfer_credit_prior_approval_form = schema.Choice(
-        title=_(u'Transfer Credit Prior Approval Form'),
-        description=_(
-            u'Select 'yes' if one or more applicants may be enrolled in a host institution course that is eligible for transfer back to UW Oshkosh, without simultaneous enrollment at UW Oshkosh.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
-        # TODO default=none
-    )
-    hessen_isu_application = schema.Choice(
-        title=_(u'Hessen/Wisconsin ISU Student Exchange Application'),
-        description=_(
-            u'Select 'yes' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an ISU (International Summer University).'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
-        # TODO default=none
-    )
-    hessen_iwu_application = schema.Choice(
-        title=_(u'Hessen/Wisconsin IWU Student Exchange Application'),
-        description=_(
-            u'Select 'yes' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an IWU (International Winter University).'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
