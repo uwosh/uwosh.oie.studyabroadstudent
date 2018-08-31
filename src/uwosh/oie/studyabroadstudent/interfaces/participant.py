@@ -163,7 +163,7 @@ class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('studentID')
     studentID = schema.TextLine(
         title=_(u'UW Oshkosh Student ID'),
-        description=_(u'(if applicable)'),
+        description=_(u'Do not include the initial "W" in the UW Oshkosh ID.  If you do not have a UW Oshkosh ID (current or past), leave this blank.'),
         required=False,
         constraint=validate_student_id,
     )
@@ -171,7 +171,7 @@ class IOIEStudyAbroadParticipant(Interface):
     #######################################################
     model.fieldset(
         'contact',
-        label=_(u"Contact Information"),
+        label=_(u"My Contact Information"),
         fields=['mainPhone', 'otherPhone', 'otherContactService', 'otherContactID', 'localAddr',
                 'localAddrApt', 'localCity', 'localState', 'localZip', 'homeAddr1', 'homeAddrApt',
                 'homeCity', 'homeState', 'homeZip', 'homeCountry', ]
@@ -179,13 +179,13 @@ class IOIEStudyAbroadParticipant(Interface):
 
     mainPhone = schema.TextLine(
         title=_(u'Main phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         required=True,
     )
 
     otherPhone = schema.TextLine(
         title=_(u'Other phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).),
         required=False,
     )
 
@@ -306,14 +306,14 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg1phone_main = schema.TextLine(
         title=_(u'Emergency Contact 1 Main Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
 
     emerg1phone_other = schema.TextLine(
         title=_(u'Emergency Contact 1 Other Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
@@ -348,14 +348,14 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg2phone_main = schema.TextLine(
         title=_(u'Emergency Contact 2 Main Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
 
     emerg2phone_other = schema.TextLine(
         title=_(u'Emergency Contact 2 Other Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
@@ -390,14 +390,14 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg3phone_main = schema.TextLine(
         title=_(u'Emergency Contact 3 Main Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
 
     emerg3phone_other = schema.TextLine(
         title=_(u'Emergency Contact 3 Other Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
@@ -432,14 +432,14 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg4phone_main = schema.TextLine(
         title=_(u'Emergency Contact 4 Main Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
 
     emerg4phone_other = schema.TextLine(
         title=_(u'Emergency Contact 4 Other Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
