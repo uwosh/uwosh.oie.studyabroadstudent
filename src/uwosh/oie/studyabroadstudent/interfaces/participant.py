@@ -292,21 +292,21 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg1mail_personal = schema.TextLine(
         title=_(u'Emergency Contact 1 Personal Email'),
-        description=_(u'Strongly recommended'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg1mail_work = schema.TextLine(
         title=_(u'Emergency Contact 1 Work Email'),
-        description=_(u'Strongly recommended'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg1phone_main = schema.TextLine(
         title=_(u'Emergency Contact 1 Main Phone'),
-        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
+        description=_(u'Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
@@ -334,21 +334,21 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg2mail_personal = schema.TextLine(
         title=_(u'Emergency Contact 2 Personal Email'),
-        description=_(u'Strongly recommended'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg2mail_work = schema.TextLine(
         title=_(u'Emergency Contact 2 Work Email'),
-        description=_(u'Strongly recommended'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg2phone_main = schema.TextLine(
         title=_(u'Emergency Contact 2 Main Phone'),
-        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
+        description=_(u'Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
@@ -376,21 +376,21 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg3mail_personal = schema.TextLine(
         title=_(u'Emergency Contact 3 Personal Email'),
-        description=_(u'Strongly recommended'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg3mail_work = schema.TextLine(
         title=_(u'Emergency Contact 3 Work Email'),
-        description=_(u'Strongly recommended'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg3phone_main = schema.TextLine(
         title=_(u'Emergency Contact 3 Main Phone'),
-        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
+        description=_(u'Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
@@ -418,21 +418,21 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg4mail_personal = schema.TextLine(
         title=_(u'Emergency Contact 4 Personal Email'),
-        description=_(u'Strongly recommended'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg4mail_work = schema.TextLine(
         title=_(u'Emergency Contact 4 Work Email'),
-        description=_(u'Strongly recommended'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg4phone_main = schema.TextLine(
         title=_(u'Emergency Contact 4 Main Phone'),
-        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
+        description=_(u'Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
