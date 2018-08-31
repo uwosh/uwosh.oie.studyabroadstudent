@@ -593,7 +593,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     individualInterview = schema.Choice(
         title=_(u'The Program Liaison, Program Leader or Program Co-leader will interview each applicant'),
-        vocabulary=yes_no_vocabulary,
+        vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in)
     )
@@ -601,7 +601,7 @@ class IOIEStudyAbroadProgram(Interface):
     firstRecommendationRequired = schema.Choice(
         title=_(u'1st Reference is required'),
         description=_(u'If "yes", this item appears in the Applicant Portal as an application item'),
-        vocabulary=yes_no_vocabulary,
+        vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in)
     )
@@ -609,7 +609,7 @@ class IOIEStudyAbroadProgram(Interface):
     secondRecommendationRequired = schema.Choice(
         title=_(u'2nd Reference is required'),
         description=_(u'If "yes", this item appears in the Applicant Portal as an application item'),
-        vocabulary=yes_no_vocabulary,
+        vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO "yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in). This cannot be ""yes"" if ""A 1st Recommendation is required"" is ""no""."
     )
@@ -658,7 +658,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'CV or Resume'),
         description=_(
             u'If "yes", this item appears in the Applicant Portal as an application item.'),
-        vocabulary=yes_no_vocabulary,
+        vocabulary=yes_no_none_vocabulary,
         required=True,
         # TODO yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in)
     )
@@ -666,7 +666,7 @@ class IOIEStudyAbroadProgram(Interface):
     letterOfMotivationRequired = schema.Choice(
         title=_(u'Letter of Motivation'),
         description=_(u'If "yes", this item appears in the Applicant Portal as an application item.'),
-        vocabulary=yes_no_vocabulary,
+        vocabulary=yes_no_none_vocabulary,
         required=True,
         # TODO yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in)
     )
