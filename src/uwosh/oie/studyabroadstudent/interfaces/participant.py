@@ -499,7 +499,7 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     educationLevel = schema.Choice(
-        title=_(u'Education Level'),
+        title=_(u'Current Education Level'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.education_level'),
         required=False,
     )
@@ -525,28 +525,32 @@ class IOIEStudyAbroadParticipant(Interface):
 
     major1 = schema.Choice(
         title=_(u'First Major'),
+        description=_(u'This must match the intended major on your STAR report.'),
         required=False,
         source=RegistryValueVocabulary('oiestudyabroadstudent.majors'),
     )
 
     major2 = schema.Choice(
         title=_(u'Second Major'),
+        description=_(u'This must match the intended major on your STAR report.  If you don't have a second major, leave this blank.'),
         required=False,
         source=RegistryValueVocabulary('oiestudyabroadstudent.majors'),
     )
 
     minor1 = schema.TextLine(
-        title=_(u'Minor 1'),
+        title=_(u'First Minor'),
+        description=_(u'This must match the intended minor on your STAR report.  If you don't have a minor, leave this blank.'),
         required=False,
     )
 
     minor2 = schema.TextLine(
-        title=_(u'Minor 2'),
+        title=_(u'Second Minor'),
+        description=_(u'This must match the intended minor on your STAR report.  If you don't have a minor, leave this blank.'),
         required=False,
     )
 
     graduationYear = schema.Int(
-        title=_(u'Expected Graduation Year'),
+        title=_(u'Anticipated Graduation Year'),
         description=_(u'enter the full 4-digit year'),
         min=2018,
         max=2100,
@@ -554,7 +558,7 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     graduationMonth = schema.Choice(
-        title=_(u'Expected Graduation Month'),
+        title=_(u'Anticipated Graduation Month'),
         vocabulary=graduation_month_vocabulary,
         required=False,
     )
@@ -585,7 +589,7 @@ class IOIEStudyAbroadParticipant(Interface):
     interviewDate = schema.Date(
         title=_(u'Interview Date'),
         description=_(
-            u'Applicants to this program must contact the Program Leader to schedule an interview. Your interview date may or may not need to occur prior to the STEP II application deadline. You must make your interview appointment prior to submiiting this application. Indicate your interview date here. (For some programs, students choose from a list of dates/times/locations.  For others, they set this up with an individual and report this to OIE. Most programs, however, don''t require an interview).'),
+            u'Contact the Program Liaison to schedule an interview.  Make your interview appointment and type your interview date here prior to submiting this application.  The actual interview date may or may not need to occur prior to the STEP II application deadline; this will be determined by the Program Liaison.'),
         required=False,
     )
 
@@ -684,60 +688,60 @@ class IOIEStudyAbroadParticipant(Interface):
     applicant_question_text1 = schema.Text(
         title=u'Applicant Question 1',
         description=u'',
-        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
+        default=u'The question will appear here after you press Save. If a question does not appear after Saving, it is because your program does not require a response here.',
         required=False,
     )
     applicant_question_answer1 = schema.Text(
         title=u'Answer 1',
-        description=u'Please answer here',
+        description=u'If a question appears under Applicant Question 1 above, type your response here.',
         required=False,
     )
     form.mode(applicant_question_text2="display")
     applicant_question_text2 = schema.Text(
         title=u'Applicant Question 2',
         description=u'',
-        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
+        default=u'The question will appear here after you press Save. If a question does not appear after Saving, it is because your program does not require a response here.',
         required=False,
     )
     applicant_question_answer2 = schema.Text(
         title=u'Answer 2',
-        description=u'Please answer here',
+        description=u'If a question appears under Applicant Question 2 above, type your response here.',
         required=False,
     )
     form.mode(applicant_question_text3="display")
     applicant_question_text3 = schema.Text(
         title=u'Applicant Question 3',
         description=u'',
-        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
+        default=u'The question will appear here after you press Save. If a question does not appear after Saving, it is because your program does not require a response here.',
         required=False,
     )
     applicant_question_answer3 = schema.Text(
         title=u'Answer 3',
-        description=u'Please answer here',
+        description=u'If a question appears under Applicant Question 3 above, type your response here.',
         required=False,
     )
     form.mode(applicant_question_text4="display")
     applicant_question_text4 = schema.Text(
         title=u'Applicant Question 4',
         description=u'',
-        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
+        default=u'The question will appear here after you press Save. If a question does not appear after Saving, it is because your program does not require a response here.',
         required=False,
     )
     applicant_question_answer4 = schema.Text(
         title=u'Answer 4',
-        description=u'Please answer here',
+        description=u'If a question appears under Applicant Question 4 above, type your response here.',
         required=False,
     )
     form.mode(applicant_question_text5="display")
     applicant_question_text5 = schema.Text(
         title=u'Applicant Question 5',
         description=u'',
-        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
+        default=u'The question will appear here after you press Save. If a question does not appear after Saving, it is because your program does not require a response here.',
         required=False,
     )
     applicant_question_answer5 = schema.Text(
         title=u'Answer 5',
-        description=u'Please answer here',
+        description=u'If a question appears under Applicant Question 5 above, type your response here.',
         required=False,
     )
 
