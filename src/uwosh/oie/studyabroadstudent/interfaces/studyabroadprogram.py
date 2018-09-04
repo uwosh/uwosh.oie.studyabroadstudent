@@ -768,7 +768,7 @@ class IOIEStudyAbroadProgram(Interface):
     model.fieldset(
         'oie_review_fieldset',
         label=_(u"OIE Review"),
-        fields=['program_schedule', 'director_recommendations', 'health_safety_security_documents', 'add_health_document_link', 'application_deadlines_label', 'step_1_and_2_application_deadline', 'step_3_application_deadline', 'step_4_application_deadline', 'application_items_label', 'credit_overload_form', 'flight_deviation_request_return_flight_only', 'flight_deviation_request_roundtrip_or_outbound_flight', 'hessen_isu_application', 'hessen_iwu_application', 'graduate_registration_form_and_graduate_special_non_degree_information_form', 'transfer_credit_prior_approval_form', 'drivers_license_copy_for_india_visa_application', 'biographical_page_of_your_signed_passport', 'original_passport', 'official_passport_photo_for_india_visa_application', 'digital_passport_photo', 'visa_required_for_us_citizens', 'yellow_fever_vaccination_certificate', 'indian_visa_application', 'passport_size_photo'], 
+        fields=['program_schedule', 'director_recommendations', 'health_safety_security_documents', 'add_health_document_link', 'application_deadlines_label', 'step_1_and_2_application_deadline', 'step_3_application_deadline', 'step_4_application_deadline', 'application_items_label', 'credit_overload_form', 'flight_deviation_request_return_flight_only', 'flight_deviation_request_roundtrip_or_outbound_flight', 'hessen_isu_application', 'hessen_iwu_application', 'graduate_registration_form_and_graduate_special_non_degree_information_form', 'transfer_credit_prior_approval_form', 'application_items_travel_label', 'drivers_license_copy_for_india_visa_application', 'biographical_page_of_your_signed_passport', 'original_passport', 'official_passport_photo_for_india_visa_application', 'digital_passport_photo', 'visa_required_for_us_citizens', 'yellow_fever_vaccination_certificate', 'indian_visa_application', 'passport_size_photo'], 
     )
     program_schedule = schema.Choice(
         title=_(u'Program Schedule'),
@@ -881,6 +881,12 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
+    )
+    form.mode(application_items_travel_label='display')
+    application_items_travel_label = schema.TextLine(
+        title=_(u'Application Items – Travel & Identification'),
+        description=_(
+            u'If checked "yes", the items below will appear in the Participant Portal as an application item.'),
     )
     drivers_license_copy_for_india_visa_application = schema.Choice(
         title=_(u'Driver's License - Copy for Visa Application'),
