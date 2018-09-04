@@ -881,9 +881,9 @@ class IOIEStudyAbroadProgram(Interface):
             u'If checked "yes", the items below will appear in the Participant Portal as an application item.'),
     )
     drivers_license_copy_for_india_visa_application = schema.Choice(
-        title=_(u'Driver's License - Copy for Visa Application'),
+        title=_(u'Driver's License or State Issued I.D. – Color Copy'),
         description=_(
-            u'Select 'yes' if required by the foreign consulate to apply for a visa.'),
+            u'Select ‘yes’ if required by external partners or by the foreign consulate to apply for a visa.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
          # TODO default=none
