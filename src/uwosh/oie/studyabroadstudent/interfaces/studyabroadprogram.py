@@ -826,14 +826,6 @@ class IOIEStudyAbroadProgram(Interface):
             u'If checked "yes", the items below will appear in the Participant Portal as an application item.'),
         # TODO Let's talk through this one.  Is there a way for us to select the documents that need to be displayed in the application by group and for individual participants?
     )
-    credit_overload_form = schema.Choice(
-        title=_(u'Credit Overload Form'),
-        description=_(
-            u'Required ONLY IF you will exceed 22 credits total, including study abroad & interim credits, during the semester in which you will study abroad OR if you will exceed 9 credits total, including study abroad credits, during a summer study abroad program.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
-         # TODO default=none
-   )
     flight_deviation_request_return_flight_only = schema.Choice(
         title=_(u'Application for Permission to Follow an Alternative Schedule on the Return Flight Only'),
         description=_(
@@ -963,6 +955,14 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             u'If checked "yes", the items below will appear in the Participant Portal as an application item.'),
     )
+    credit_overload_form = schema.Choice(
+        title=_(u'Criminal Background Check'),
+        description=_(
+            u'Select 'yes' if a foreign government requires this as part of the visa application process, if an external partner requires this as part of the visa application process, if participants will work with children who have not yet reached the age of majority in their home country, or if participants will work with children who are 17 years old or younger, whichever is the higher of the two ages. Use this option for a Criminal Background Check only when an FBI report is not specifically required.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+         # TODO default=none
+   )
     form.mode(application_items_other_label='display')
     application_items_other_label = schema.TextLine(
         title=_(u'Application Items – Other'),
