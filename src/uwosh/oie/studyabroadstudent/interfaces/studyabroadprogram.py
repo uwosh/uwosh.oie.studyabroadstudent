@@ -928,7 +928,21 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
          # TODO default=none
    )
-    visa_required_for_us_citizens = schema.Choice(
+    passport_size_photo = schema.Choice(
+        title=_(u'Photo: Paper'),
+        description=_(u'Select 'yes' if required by external partners or if required to apply for a visa with photo requirements that are not consistent with an official U.S. passport photo.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+        # TODO default=none
+    )    
+    indian_visa_application = schema.Choice(
+        title=_(u'Photo: Digital'),
+        description=_(u'Select 'yes' if required by external partners or if required to apply for a visa with photo requirements that are not consistent with an official U.S. passport photo.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+        # TODO default=none
+    ) 
+        visa_required_for_us_citizens = schema.Choice(
         title=_(u'Visa Application - All U.S. Citizens'),
         description=_(u'Select 'yes' if a visa is required of U.S. citizens.'),
         vocabulary=yes_no_none_vocabulary,
@@ -949,19 +963,11 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             u'If checked "yes", the items below will appear in the Participant Portal as an application item.'),
     )
-    indian_visa_application = schema.Choice(
-        title=_(u'Indian Visa Application'),
-        description=_(u'The OIE will send instructions on how to complete this'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
-        # TODO default=none
-    )
-    passport_size_photo = schema.Choice(
-        title=_(u'Passport-size Photo'),
-        description=_(u'Upload a digital photo.  To be used for your student ID at your host institution.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
-        # TODO default=none
+    form.mode(application_items_other_label='display')
+    application_items_other_label = schema.TextLine(
+        title=_(u'Application Items – Other'),
+        description=_(
+            u'If checked "yes", the items below will appear in the Participant Portal as an application item.'),
     )
 
     #######################################################
