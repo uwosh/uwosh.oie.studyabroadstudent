@@ -255,10 +255,10 @@ return_mode_transportation_vocabulary = SimpleVocabulary(
 return_transfer_vocabulary = SimpleVocabulary(
     [
         SimpleTerm(u'-- choose one --'),
-        SimpleTerm(u'I will transfer from the airport to Oshkosh with the group'),
-        SimpleTerm(u'I will transfer from the airport to Milwaukee with the group'),
-        SimpleTerm(u'I will arrange my own transportation home from the airport'),
-        SimpleTerm(u'I will drive back to my home at the end of my program (U.S. and Canada programs only)'),
+        SimpleTerm(u'I will transfer back to Oshkosh with the group.'),
+        SimpleTerm(u'I will transfer back to Fond du Lac with the group.'),
+        SimpleTerm(u'I will transfer back to Milwaukee with the group.'),
+        SimpleTerm(u'I will arrange my own transportation home.'),
     ]
 )
 
