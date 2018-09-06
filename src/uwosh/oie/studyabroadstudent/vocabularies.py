@@ -237,9 +237,10 @@ departure_transfer_vocabulary = SimpleVocabulary(
 
 departure_mode_transportation_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(u'I will fly with the group'),
-        SimpleTerm(u'I will apply for permission to arrange my own flight'),
-        SimpleTerm(u'I will drive to my destination city (U.S. & Canada programs only)')
+        SimpleTerm(u'I will fly to and from my program site with the group.'),
+        SimpleTerm(u'I will fly with the group to my program site but will apply for permission to arrange an alternative flight home.'),
+        SimpleTerm(u'I will apply for permission to fly to my program site on an alternative flight but will return from my program site with the group.')
+        SimpleTerm(u'I will apply for permission to fly to and from my program site on an alternative flight.')
     ]
 )
 
