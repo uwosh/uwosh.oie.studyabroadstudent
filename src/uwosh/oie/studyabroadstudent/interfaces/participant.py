@@ -628,7 +628,7 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     airportTransferDeparture = schema.Choice(
-        title=_(u'Airport Transfer (for Departure)'),
+        title=_(u'Confirm Departure from Oshkosh'),
         description=_(u'Choose one'),
         vocabulary=departure_transfer_vocabulary,
         required=False,
@@ -636,7 +636,7 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     departureModeOfTransportation = schema.Choice(
-        title=_(u'Departure-Mode of Transportation'),
+        title=_(u'Confirm Flight'),
         description=_(u'Choose one'),
         vocabulary=departure_mode_transportation_vocabulary,
         required=False,
