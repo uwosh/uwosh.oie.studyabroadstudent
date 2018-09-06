@@ -1658,8 +1658,8 @@ class IOIEStudyAbroadParticipant(Interface):
 #     )
 #
 #     applyForAid = schema.Choice(
-#         title=_(u'Are you applying for financial aid?'),
-#         description=_(u'If you are not applying for financial aid, skip to the next section.'),
+#         title=_(u'Financial Aid'),
+#         description=_(u'I will use financial aid to fund all or part of my program.'),
 # #        required=True,
 #         required=False,
 #         vocabulary=yes_no_none_vocabulary,
