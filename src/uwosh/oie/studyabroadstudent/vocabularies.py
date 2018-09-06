@@ -228,10 +228,10 @@ contactrelationship = SimpleVocabulary(
 departure_transfer_vocabulary = SimpleVocabulary(
     [
         SimpleTerm(u'-- choose one --'),
-        SimpleTerm(u'I will transfer from Oshkosh to the airport with the group'),
-        SimpleTerm(u'I will transfer from Milwaukee to the airport with the group'),
-        SimpleTerm(u'I will arrange my own transportation to the airport'),
-        SimpleTerm(u'I will drive to my destination city (U.S. & Canada programs only)'),
+        SimpleTerm(u'I will transfer from Oshkosh with the group.'),
+        SimpleTerm(u'I will transfer from Fond du Lac with the group.'),
+        SimpleTerm(u'I will transfer from Milwaukee with the group.'),
+        SimpleTerm(u'I will arrange my own transportation.'),
     ]
 )
 
