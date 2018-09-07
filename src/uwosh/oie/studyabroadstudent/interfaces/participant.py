@@ -171,10 +171,20 @@ class IOIEStudyAbroadParticipant(Interface):
     #######################################################
     model.fieldset(
         'contact',
-        label=_(u"My Contact Information"),
-        fields=['mainPhone', 'otherPhone', 'otherContactService', 'otherContactID', 'localAddr',
+        label=_(u"Contact Information"),
+        fields=['stepi_label', 'contact_label', 'mainPhone', 'otherPhone', 'otherContactService', 'otherContactID', 'localAddr',
                 'localAddrApt', 'localCity', 'localState', 'localZip', 'homeAddr1', 'homeAddrApt',
                 'homeCity', 'homeState', 'homeZip', 'homeCountry', ]
+    )
+    
+    form.mode (stepi_label='display')
+        stepi_label = schema.TextLine(
+        title=_(u'STEP I'),
+     )
+
+    form.mode (contact_label='display')
+        contact_label = schema.TextLine(
+        title=_(u'Contact Information'),
     )
 
     mainPhone = schema.TextLine(
@@ -267,7 +277,7 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'emergency_contact',
         label=_(u"Emergency Contact"),
-        fields=['emerg1fullname', 'emerg1relationship', 'emerg1mail_personal',
+        fields=['emergencyContacts_label', 'emerg1fullname', 'emerg1relationship', 'emerg1mail_personal',
                 'emerg1mail_work', 'emerg1phone_main', 'emerg1phone_other',
                 'emerg2fullname', 'emerg2relationship', 'emerg2mail_personal',
                 'emerg2mail_work', 'emerg2phone_main', 'emerg2phone_other',
@@ -276,6 +286,12 @@ class IOIEStudyAbroadParticipant(Interface):
                 'emerg4fullname', 'emerg4relationship', 'emerg4mail_personal',
                 'emerg4mail_work', 'emerg4phone_main', 'emerg4phone_other',
                 ]
+    )
+
+    form.mode (emergencyContacts_label='display')
+        emergencyContacts_label = schema.TextLine(
+        title=_(u'Emergency Contact(s)'),
+        required=
     )
 
     emerg1fullname = schema.TextLine(
@@ -448,8 +464,25 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'demographics',
         label=_(u"Demographics"),
-        fields=['stateResidency', 'countrycitizenship', 'immigrationStatus', 'countryBirth',
-                'ethnicity', 'ethnicityOther', ]
+        fields=['demographics_label', 'ethnicity', 'ethnicityOther', 'stateResidency', 'countrycitizenship', 'immigrationStatus', 'countryBirth']
+    )
+
+    form.mode (demographic_label='display')
+        demographics_label = schema.TextLine(
+        title=_(u'Demographics'),
+    )
+
+    ethnicity = schema.Choice(
+        title=_(u'Ethnicity'),
+        description=_(u''),
+        source=RegistryValueVocabulary('oiestudyabroadstudent.ethnicities'),
+        required=False,
+    )
+
+    ethnicityOther = schema.TextLine(
+        title=_(u'Other Ethnicity'),
+        description=_(u'Enter ethnicity if you selected Other'),
+        required=False,
     )
 
     stateResidency = schema.Choice(
@@ -477,25 +510,17 @@ class IOIEStudyAbroadParticipant(Interface):
         required=True,
     )
 
-    ethnicity = schema.Choice(
-        title=_(u'Ethnicity'),
-        description=_(u''),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.ethnicities'),
-        required=False,
-    )
-
-    ethnicityOther = schema.TextLine(
-        title=_(u'Other Ethnicity'),
-        description=_(u'Enter ethnicity if you selected Other'),
-        required=False,
-    )
-
     #######################################################
     model.fieldset(
         'education',
         label=_(u"Education"),
-        fields=['educationLevel', 'universityEnrolledUWO', 'universityEnrolledOther', 'cumulativeGPA',
+        fields=['education_label', 'educationLevel', 'universityEnrolledUWO', 'universityEnrolledOther', 
                 'major1', 'major2', 'minor1', 'minor2', 'graduationYear', 'graduationMonth']
+    )
+        
+    form.mode (education_label='display')
+        education_label = schema.TextLine(
+        title=_(u'Education'),
     )
 
     educationLevel = schema.Choice(
@@ -512,14 +537,8 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     universityEnrolledOther = schema.TextLine(
-        title=_(u'Name of other university'),
-        description=_(u'No abbreviations please'),
-        required=False,
-    )
-
-    cumulativeGPA = schema.Float(
-        title=_(u'Cumulative GPA'),
-        description=_(u'out of 4.0 (use 0.0 if not a student)'),
+        title=_(u'If "School" is "OTHER"'),
+        description=_(u'Type the official name of the school you are attending now only if you chose "other" above.'),
         required=False,
     )
 
@@ -754,7 +773,7 @@ class IOIEStudyAbroadParticipant(Interface):
                 'special_student_form_for_undergraduate_admissions_form_link',
                 'special_student_form_for_undergraduate_admissions_uploaded_file',
                 'disciplinary_clearance_form_link',
-                'disciplinary_clearance_form_uploaded_file']
+                'disciplinary_clearance_form_uploaded_file', 'cumulativeGPA']
     )
     form.mode(state_of_wisconsin_need_based_travel_grant_form_link="display")
     state_of_wisconsin_need_based_travel_grant_form_link = RichText(
@@ -790,6 +809,11 @@ class IOIEStudyAbroadParticipant(Interface):
     disciplinary_clearance_form_uploaded_file = field.NamedFile(
         title=u'Disciplinary Clearance Form',
         description=u'Upload your filled-out copy of the form',
+        required=False,
+    )
+    cumulativeGPA = schema.Float(
+        title=_(u'Cumulative GPA'),
+        description=_(u'out of 4.0 (use 0.0 if not a student)'),
         required=False,
     )
 
