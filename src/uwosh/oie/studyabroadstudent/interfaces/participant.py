@@ -195,80 +195,80 @@ class IOIEStudyAbroadParticipant(Interface):
 
     otherPhone = schema.TextLine(
         title=_(u'Other phone'),
-        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         required=False,
     )
 
     otherContactService = schema.Choice(
-        title=_(u'Other contact service'),
-        description=_(u'Please choose one'),
+        title=_(u'Other Contact Service'),
+        description=_(u'Select the service you use most often, or leave blank if you don't use any of these services.'),
         required=False,
         vocabulary=socialmediaservice,
     )
 
     otherContactID = schema.TextLine(
         title=_(u'Other contact service username or ID'),
-        description=_(u'Please enter your username or ID on the service you chose above'),
+        description=_(u'Enter your username or ID for the service you chose above, or leave blank if you did not select a service above.'),
         required=False,
     )
 
     localAddr = schema.TextLine(
-        title=_(u'Local Address'),
+        title=_(u'Local Address: Street'),
         required=True,
     )
 
     localAddrApt = schema.TextLine(
-        title=_(u'Local Address Apartment Number'),
+        title=_(u'Local Address: Apartment Number'),
         required=False,
     )
 
     localCity = schema.TextLine(
-        title=_(u'Local City'),
+        title=_(u'Local Address: City'),
         required=True,
     )
 
     localState = schema.TextLine(
-        title=_(u'Local State'),
+        title=_(u'Local Address: State'),
         default=_(u'WI'),
         required=True,
     )
 
     localZip = schema.TextLine(
-        title=_(u'Local Zip Code'),
+        title=_(u'Local Address: Zip Code'),
         default=_(u'54901'),
         required=True,
     )
 
     homeAddr1 = schema.TextLine(
-        title=_(u'Home Address'),
+        title=_(u'Home Address: Street'),
         required=True,
     )
 
     homeAddrApt = schema.TextLine(
-        title=_(u'Home Address Apartment Number'),
+        title=_(u'Home Address: Apartment Number'),
         required=False,
     )
 
     homeCity = schema.TextLine(
-        title=_(u'Home City'),
+        title=_(u'Home Address: City'),
         description=_(u''),
         required=True,
     )
 
     homeState = schema.TextLine(
-        title=_(u'Home State'),
+        title=_(u'Home Address: State'),
         description=_(u''),
         required=True,
     )
 
     homeZip = schema.TextLine(
-        title=_(u'Home Zip or Postal Code'),
+        title=_(u'Home Address: Zip or Postal Code'),
         description=_(u''),
         required=True,
     )
 
     homeCountry = schema.Choice(
-        title=_(u'Home Country'),
+        title=_(u'Home Address: Country'),
         required=True,
         source=RegistryValueVocabulary('oiestudyabroadstudent.countries'),
     )
