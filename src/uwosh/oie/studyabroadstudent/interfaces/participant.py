@@ -256,7 +256,7 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     homeState = schema.TextLine(
-        title=_(u'Home Address: State'),
+        title=_(u'Home Address: State/Province/Department'),
         description=_(u''),
         required=True,
     )
