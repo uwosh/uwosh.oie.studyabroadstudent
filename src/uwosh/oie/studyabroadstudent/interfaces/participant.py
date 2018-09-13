@@ -480,13 +480,13 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     ethnicityOther = schema.TextLine(
-        title=_(u'Other Ethnicity'),
-        description=_(u'Enter ethnicity if you selected Other'),
+        title=_(u'Ethnicity: Other'),
+        description=_(u'Enter your ethnicity only if you selected "other" above.'),
         required=False,
     )
 
     stateResidency = schema.Choice(
-        title=_(u'State Residency'),
+        title=_(u'State of Residency'),
         description=_(u''),
         source=RegistryValueVocabulary('oiestudyabroadstudent.us_states_territories'),
         required=True,
@@ -569,15 +569,16 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     graduationYear = schema.Int(
-        title=_(u'Anticipated Graduation Year'),
-        description=_(u'enter the full 4-digit year'),
+        title=_(u'Graduation: Anticipated Year'),
+        description=_(u'Enter the full 4-digit year.'),
         min=2018,
         max=2100,
         required=False,
     )
 
     graduationMonth = schema.Choice(
-        title=_(u'Anticipated Graduation Month'),
+        title=_(u'Graduation: Anticipated Month'),
+        description=_(u'Select the month that corresponds to your official graduation date.'),
         vocabulary=graduation_month_vocabulary,
         required=False,
     )
