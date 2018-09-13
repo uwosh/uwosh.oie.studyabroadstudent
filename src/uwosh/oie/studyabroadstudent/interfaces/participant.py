@@ -592,7 +592,7 @@ class IOIEStudyAbroadParticipant(Interface):
 
     courses = schema.List(
         title=_(u'Course Selection'),
-        description=_(u'Request enrollment in these courses'),
+        description=_(u'Request enrollment in study away courses.  Your selection must match advertised course options.'),
         value_type=schema.Choice(source=RegistryValueVocabulary('oiestudyabroadstudent.course_subject_and_number'))
     )
 
@@ -609,14 +609,15 @@ class IOIEStudyAbroadParticipant(Interface):
     interviewDate = schema.Date(
         title=_(u'Interview Date'),
         description=_(
-            u'Contact the Program Liaison to schedule an interview.  Make your interview appointment and type your interview date here prior to submiting this application.  The actual interview date may or may not need to occur prior to the STEP II application deadline; this will be determined by the Program Liaison.'),
+            u'Contact the Program Liaison to schedule an interview.  Make your interview appointment and type your interview date here prior to submiting this application.  The actual interview date may or may not need to occur prior to the STEP II application deadline.'),
         required=False,
+        # TODO Displays only if "interview" is checked "yes" in MGMT PORTAL.
     )
 
     orientationDeadline = schema.Choice(
-        title=_(u'I have read the statement below and understand.'),
+        title=_(u'Orientation Submission Deadline'),
         description=_(
-            u'I understand that the Office of International Education Orientation deadline is (DATE from PROGRAM WORKFLOW SHOULD APPEAR HERE).  I understand that all Office of International Education orientation requirements must be completed by this date.  If not completed by this date, I understand that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply. '),
+            u'I understand that the Office of International Education deadline for submission of orientation materials is a final deadline.  I understand and agree that all Office of International Education orientation requirements must be completed by this date.  If I forsee conflicts with this date, I will complete requirements in advance of this date.  If not completed by this date, I understand and agree that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply.'),
         vocabulary=yes_no_none_vocabulary,
         required=True,
         # TODO insert date from program object
@@ -634,7 +635,7 @@ class IOIEStudyAbroadParticipant(Interface):
     paymentDeadlines = schema.Choice(
         title=_(u'Payment Deadlines'),
         description=_(
-            u'I understand that the payment deadlines are (DATES from PROGRAM WORKFLOW SHOULD APPEAR HERE).  I understand that all payments must be made in full by this date, or I must submit the "Notice of Financial Aid Award for Study Abroad" form if making my payments using financial aid, a scholarship that I have already received, veterans benefits or an outside loan.  If not submitted by this date, I understand that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply. '),
+            u'I understand that the payment deadlines are final deadlines and that it is my responsibility to record these dates in my calendar.  I understand that all payments must be made in full by the deadlines, or I must submit the "Notice of Financial Aid Award for Study Abroad/Away" form if making my payments using financial aid, a scholarship that I have already received, veterans benefits or an outside loan.  If not submitted by this date, I understand that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply.'),
         vocabulary=yes_no_none_vocabulary,
         required=True,
         # TODO insert date from program object
@@ -649,7 +650,7 @@ class IOIEStudyAbroadParticipant(Interface):
 
     airportTransferDeparture = schema.Choice(
         title=_(u'Confirm Departure from Oshkosh (or alternative city)'),
-        description=_(u'Choose one'),
+        description=_(u''),
         vocabulary=departure_transfer_vocabulary,
         required=False,
         # TODO this should appear only when "transfer provided" is selected on the "program workflow"
@@ -657,7 +658,7 @@ class IOIEStudyAbroadParticipant(Interface):
 
     departureModeOfTransportation = schema.Choice(
         title=_(u'Confirm Flight'),
-        description=_(u'Choose one'),
+        description=_(u''),
         vocabulary=departure_mode_transportation_vocabulary,
         required=False,
         # TODO this should appear only when "transfer provided" is selected on the "program workflow"
@@ -680,7 +681,7 @@ class IOIEStudyAbroadParticipant(Interface):
 
     airportTransferReturn = schema.Choice(
         title=_(u'Confirm Return to Oshkosh (or alternative city)'),
-        description=_(u'Choose one'),
+        description=_(u''),
         vocabulary=return_transfer_vocabulary,
         required=False,
         # TODO this should appear only when "transfer provided" is selected on the "program workflow"
