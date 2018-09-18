@@ -710,7 +710,7 @@ class IOIEStudyAbroadParticipant(Interface):
     applicant_question_text1 = schema.Text(
         title=u'Applicant Question 1',
         description=u'',
-        default=u'The question will appear here after you press Save. If a question does not appear after Saving, it is because your program does not require a response here.',
+        default=u'Question 1 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.',
         required=False,
     )
     applicant_question_answer1 = schema.Text(
@@ -722,7 +722,7 @@ class IOIEStudyAbroadParticipant(Interface):
     applicant_question_text2 = schema.Text(
         title=u'Applicant Question 2',
         description=u'',
-        default=u'The question will appear here after you press Save. If a question does not appear after Saving, it is because your program does not require a response here.',
+        default=u'Question 2 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.,
         required=False,
     )
     applicant_question_answer2 = schema.Text(
@@ -734,7 +734,7 @@ class IOIEStudyAbroadParticipant(Interface):
     applicant_question_text3 = schema.Text(
         title=u'Applicant Question 3',
         description=u'',
-        default=u'The question will appear here after you press Save. If a question does not appear after Saving, it is because your program does not require a response here.',
+        default=u'Question 3 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.',
         required=False,
     )
     applicant_question_answer3 = schema.Text(
@@ -746,7 +746,7 @@ class IOIEStudyAbroadParticipant(Interface):
     applicant_question_text4 = schema.Text(
         title=u'Applicant Question 4',
         description=u'',
-        default=u'The question will appear here after you press Save. If a question does not appear after Saving, it is because your program does not require a response here.',
+        default=u'Question 4 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.',
         required=False,
     )
     applicant_question_answer4 = schema.Text(
@@ -758,7 +758,7 @@ class IOIEStudyAbroadParticipant(Interface):
     applicant_question_text5 = schema.Text(
         title=u'Applicant Question 5',
         description=u'',
-        default=u'The question will appear here after you press Save. If a question does not appear after Saving, it is because your program does not require a response here.',
+        default=u'Question 5 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.',
         required=False,
     )
     applicant_question_answer5 = schema.Text(
