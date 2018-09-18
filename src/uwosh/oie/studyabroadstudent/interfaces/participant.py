@@ -588,7 +588,12 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'courses',
         label=_(u"Courses"),
-        fields=['courses']
+        fields=['courses_label', 'courses']
+    )
+        
+    form.mode (courses_label='display')
+    courses_label = schema.TextLine(
+        title=_(u'Study Away Courses'),
     )
 
     courses = schema.List(
@@ -601,10 +606,15 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'date',
         label=_(u"Dates"),
-        fields=['interviewDate', 'orientationDeadline', 'prePostTravelClassDates', 'paymentDeadlines',
+        fields=['dates_label', 'interviewDate', 'orientationDeadline', 'prePostTravelClassDates', 'paymentDeadlines',
                 'programDepartureDate', 'airportTransferDeparture', 'departureModeOfTransportation',
                 'programReturnDate', 'returnModeOfTransportation', 'airportTransferReturn',
                 'requestToDeviateFromProgramDates']
+    )
+        
+    form.mode (dates_label='display')
+    dates_label = schema.TextLine(
+        title=_(u'Dates'),
     )
 
     interviewDate = schema.Date(
@@ -696,7 +706,19 @@ class IOIEStudyAbroadParticipant(Interface):
         # TODO need link to the PDF document
     )
 
-    #######################################################
+        #######################################################
+    model.fieldset(
+        'financial_aid',
+        label=_(u"Financial Aid"),
+        fields=['financialAid_label']
+    )
+
+    form.mode (financialAid_label='display')
+    financialAid_label = schema.TextLine(
+        title=_(u'Financial Aid'),
+    )
+        
+        #######################################################
     model.fieldset(
         'shortanswerquestions',
         label=_(u"Short Answer Questions"),
@@ -704,6 +726,12 @@ class IOIEStudyAbroadParticipant(Interface):
                 'applicant_question_answer2', 'applicant_question_text3', 'applicant_question_answer3',
                 'applicant_question_text4', 'applicant_question_answer4', 'applicant_question_text5',
                 'applicant_question_answer5', ]
+    )
+
+    form.mode (shortAnswer_label='display')
+    shortAnswer_label = schema.TextLine(
+        title=_(u'Short Answer Questions'),
+        description=_(u'Answer these questions thoroughly and carefully.  Your response may be used in the application selection process (for competitive programs) or to inform your Program Leaders.  If you will need more than 10 minutes to compose your answers, it is highly recommended that you type your answers outside of this system (e.g. in Word) and then copy and paste them into this system.'), 
     )
 
     form.mode(applicant_question_text1="display")
