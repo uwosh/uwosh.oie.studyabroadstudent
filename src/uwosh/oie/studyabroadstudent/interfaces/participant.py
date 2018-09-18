@@ -974,15 +974,22 @@ assistiveDeviceList = schema.TextLine(
 description=_(u'If yes, list the device or devices here.'), 
 required=False,
 )
-walkingClimbing = schema.Choice(
-description=_(u'It is difficult for me to walk long distances, climb stairs, walk up inclines or down declines, or walk at high altitudes, in heat, in cold or in humidity.'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-)
-walkingMaxMinutes = schema.Int(
-description=_(u'If yes, what is the maximum number of minutes you can walk?'), 
-required=False,
-)
+
+#     hasDifficultyWalking = schema.Choice(
+#         title=_(u''),
+#         description=_(u'It is difficult for me to walk long distances, climb stairs, walk up inclines or down declines, or walk at high altitudes, in heat, in cold or in humidity.'),
+#         vocabulary=yes_no_none_vocabulary,
+# #        required=True,
+#         required=False,
+#     )
+#
+#     maxWalkingDistance = schema.TextLine(
+# #    maxWalkingDistance = schema.Int(
+#         title=_(u''),
+#         description=_(u'If yes, what is the maximum number of minutes you can walk?'),
+#         required=False,
+#     )
+#
 stairsMax = schema.Int(
 description=_(u'If yes, what is the maximum number of stairs you can climb?'), 
 required=False,
@@ -1139,21 +1146,6 @@ required=False,
 #     medicalPolicyGroupNumber = schema.TextLine(
 #         title=_(u'Policy / Group Number'),
 # #        required=True,
-#         required=False,
-#     )
-#
-#     hasDifficultyWalking = schema.Choice(
-#         title=_(u'Difficulty Walking'),
-#         description=_(u'Do you have a condition which would make it difficult to walk long distances?'),
-#         vocabulary=yes_no_none_vocabulary,
-# #        required=True,
-#         required=False,
-#     )
-#
-#     maxWalkingDistance = schema.TextLine(
-# #    maxWalkingDistance = schema.Int(
-#         title=_(u'Max Walking Distance'),
-#         description=_(u'If so, what is the maximum number of minutes you can walk?'),
 #         required=False,
 #     )
 #
