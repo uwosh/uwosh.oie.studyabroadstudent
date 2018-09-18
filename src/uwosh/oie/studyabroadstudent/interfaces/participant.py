@@ -898,12 +898,14 @@ vocabulary=vocabulary=yes_no_none_vocabulary,
     health_label = schema.TextLine(
         title=_(u'Health'),
     )
-healthRelease = schema.Choice(
-description=_(u'I understand that failure to disclose medical or mental health conditions may inhibit or prohibit staff from planning for my participation or assisting me in an emergency and may inhibit or prohibit program leaders, hosts and/or host families from meeting'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-# TODO must be 'yes'
-)
+#     medicalReadStatement = schema.Choice(
+#         title=_(u''),
+#         description=_(u'I understand that failure to disclose medical or mental health conditions may inhibit or prohibit staff from planning for my participation or assisting me in an emergency and may inhibit or prohibit program leaders, hosts and/or host families from meeting my needs.  It may also cause health professionals abroad/away to take actions that could lead to serious medical consequences, including death.'),
+#         vocabulary=yes_no_none_vocabulary,
+# #        required=True,
+#         required=False,
+#     )
+#
     form.mode (allergies_label='display')
     allergies_label = schema.TextLine(
         title=_(u'Allergies'),
@@ -1153,14 +1155,6 @@ required=False,
 #         'medical2',
 #         label=_(u"Medical II"),
 #         fields=['medicalReadStatement']
-#     )
-#
-#     medicalReadStatement = schema.Choice(
-#         title=_(u'I have read the statement below and understand.'),
-#         description=_(u'""Pre-existing medical and mental health conditions are often intensified by travel to or living in a foreign environment.  Before committing to a study abroad program, consider how your new environment may affect your personal health both physically and mentally.  For example, your new environment may introduce you to new diseases, such as malaria or yellow fever, or new stresses which may cause additional complications for a person with a preexisting condition.<br> <br> The OIE strongly recommends that you have a physical, talk with a medical provider about any preexisting conditions and recommended and/or required immunizations, talk with a psychiatrist or counselor about any preexisting conditions and take care of any dental work before departure.<br> <br> If you choose not to complete this section before program acceptance, you must forward information related to the following to the OIE within one week of the application deadline for your program.  Failure to disclose medical or mental health conditions will make it extremely difficult for staff at UW Oshkosh and abroad to assist you in an emergency and may cause health professionals abroad to take actions which could lead to serious medical consequences, including death.<br> <br> NOTE ON MEDICATIONS: You are responsible for ensuring that your medications can be carried into the foreign country.  If your medical status changes after completing this application, you must inform the OIE.""'),
-#         vocabulary=yes_no_none_vocabulary,
-# #        required=True,
-#         required=False,
 #     )
 #
 #     model.fieldset(
