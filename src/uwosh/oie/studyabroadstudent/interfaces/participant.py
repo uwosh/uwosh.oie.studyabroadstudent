@@ -612,7 +612,7 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'date',
         label=_(u"Dates"),
-        fields=['dates_label', 'interviewDate', 'orientationDeadline', 'prePostTravelClassDates', 'paymentDeadlines',
+        fields=['dates_label', 'interviewDate', 'prePostTravelClassDates', 'orientationDeadline', 'paymentDeadlines',
                 'programDepartureDate', 'airportTransferDeparture', 'departureModeOfTransportation',
                 'programReturnDate', 'returnModeOfTransportation', 'airportTransferReturn',
                 'requestToDeviateFromProgramDates']
@@ -631,15 +631,6 @@ class IOIEStudyAbroadParticipant(Interface):
         # TODO Displays only if "interview" is checked "yes" in MGMT PORTAL.
     )
 
-    orientationDeadline = schema.Choice(
-        title=_(u'Orientation Submission Deadline'),
-        description=_(
-            u'I understand that the Office of International Education deadline for submission of orientation materials is a final deadline.  I understand and agree that all Office of International Education orientation requirements must be completed by this date.  If I forsee conflicts with this date, I will complete requirements in advance of this date.  If not completed by this date, I understand and agree that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=True,
-        # TODO insert date from program object
-    )
-
     prePostTravelClassDates = schema.Choice(
         title=_(u'Confirm Attendance at Pre- & Post-travel Program-specific Sessions'),
         description=_(
@@ -647,6 +638,15 @@ class IOIEStudyAbroadParticipant(Interface):
         vocabulary=yes_no_none_vocabulary,
         required=True,
         # TODO insert date from program object; Displays only if there are dates in "Pretravel Class & Orientation Dates" or "Post-travel Class Dates" in the MGMT PORTAL.
+    )
+
+    orientationDeadline = schema.Choice(
+        title=_(u'Orientation Submission Deadline'),
+        description=_(
+            u'I understand that the Office of International Education deadline for submission of orientation materials is a final deadline.  I understand and agree that all Office of International Education orientation requirements must be completed by this date.  If I forsee conflicts with this date, I will complete requirements in advance of this date.  If not completed by this date, I understand and agree that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=True,
+        # TODO insert date from program object
     )
 
     paymentDeadlines = schema.Choice(
