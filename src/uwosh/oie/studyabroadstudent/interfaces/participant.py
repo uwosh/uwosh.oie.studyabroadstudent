@@ -502,6 +502,7 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Immigration Status'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.immigration_status'),
         required=True,
+        # TODO appears only if "Country of Citizenship" is NOT United States
     )
 
     countryBirth = schema.Choice(
@@ -510,7 +511,12 @@ class IOIEStudyAbroadParticipant(Interface):
         required=True,
     )
 
-    #######################################################
+#     dateOfBirth = schema.Date(
+#         title=_(u'Birthday'),
+#         required=True,
+#     )
+        
+########################################################
     model.fieldset(
         'education',
         label=_(u"Education"),
@@ -722,7 +728,7 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'shortanswerquestions',
         label=_(u"Short Answer Questions"),
-        fields=['applicant_question_text1', 'applicant_question_answer1', 'applicant_question_text2',
+        fields=['shortAnswer_label', 'applicant_question_text1', 'applicant_question_answer1', 'applicant_question_text2',
                 'applicant_question_answer2', 'applicant_question_text3', 'applicant_question_answer3',
                 'applicant_question_text4', 'applicant_question_answer4', 'applicant_question_text5',
                 'applicant_question_answer5', ]
@@ -1057,11 +1063,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #         title=_(u'Other State Residency'),
 #         description=_(u'Enter state of residency if you selected Other'),
 #         required=False,
-#     )
-#
-#     dateOfBirth = schema.Date(
-#         title=_(u'Birthday'),
-#         required=True,
 #     )
 #
 #     placeOfBirth = schema.TextLine(
