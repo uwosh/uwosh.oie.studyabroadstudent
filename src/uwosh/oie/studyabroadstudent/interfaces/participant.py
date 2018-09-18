@@ -1022,28 +1022,37 @@ required=False,
     medications_label = schema.TextLine(
         title=_(u'Medications'),
     )
-prescriptionsYesNo = schema.Choice(
-description=_(u'I have taken one or more prescription medications in the past three years.'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-)
+#     medicalHealthProblems_takenMedication = schema.Choice(
+#         title=_(u''),
+#         description=_(u'I have taken one or more prescription medications in the past three years.'),
+#         vocabulary=yes_no_none_vocabulary,
+# #        required=True,
+#         required=False,
+#     )
 prescriptionsCarry = schema.Choice(
 description=_(u'I will carry over-the-counter medications containing amphetamines when I travel.'), 
 required=False,
 vocabulary=vocabulary=yes_no_none_vocabulary,
 )
-prescriptionsList = chart
-description=_(u'Include all prescription medications you have taken in the past three years whether or not you intend to carry these with you when you travel.  Also include all over-the-counter medications containing amphetamines that you intend to carry with you when yo'), 
-required=False,
-# TODO medications should be listed in a chart, with columns: Medication Name
-Medication-related Condition
-medication start (month/year)
-medication end or anticipated end (month/year)
-if end is not in the past: 
---Dose
---Times per Day (1, 2, 3, as needed)
---Sto
-)
+#     medicalHealthProblems_medications = schema.Text(
+#         title=_(u''),
+#         description=_(u'Include all prescription medications you have taken in the past three years whether or not you intend to carry these with you when you travel.  Also include all over-the-counter medications containing amphetamines that you intend to carry with you when you travel.'),
+#         required=False,
+        # TODO medications should be listed in a chart, with columns: 
+        Medication Name
+        Medication-related Condition
+        medication start (month/year)
+        medication end or anticipated end (month/year)
+
+        if end is not in the past: 
+        --Dose
+        --Times per Day (1, 2, 3, as needed)
+        --Storage Requirements (drop down: no special storage required; refrigeration required; refrigeration preferred; other)
+        --are you Stable on this Medication
+        --Is your provider willing to prescribe enough medication to last throughout your planned program away (i.e. are you able to fill your prescription for the total number of days you will be abroad prior to travel)?
+        --If you were to become separated from your medication, how long can you go before that medication must be replaced?  (DROPDOWN or text field: XX hours or XX days or ‘I can complete my program abroad without replacing this medication.”)
+#     )
+#
 medicationsStorage = schema.TextLine(
 description=_(u'If your medication requires special storage (e.g. refrigeration), describe your storage needs.'), 
 required=False,
@@ -1175,20 +1184,6 @@ required=False,
 #                 'medicalMentalProblems_enoughMedication', 'medicalMentalProblems_additionalInfo',
 #                 'medicalRegistered', 'medicalRegistered_office',
 #                 'medicalRegistered_accommodations', 'medicalAccessOK', ]
-#     )
-#
-#     medicalHealthProblems_takenMedication = schema.Choice(
-#         title=_(u'Has Taken Medication'),
-#         description=_(u'Are you taking or have you ever taken medication related to your physical health?'),
-#         vocabulary=yes_no_none_vocabulary,
-# #        required=True,
-#         required=False,
-#     )
-#
-#     medicalHealthProblems_medications = schema.Text(
-#         title=_(u'Medication List'),
-#         description=_(u'If so, list the medications you have taken over the past year. Write ''n/a'' in blanks where appropriate.'),
-#         required=False,
 #     )
 #
 #     medicalHealthProblems_stable = schema.Choice(
