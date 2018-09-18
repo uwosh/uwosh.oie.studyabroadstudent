@@ -786,20 +786,33 @@ class IOIEStudyAbroadParticipant(Interface):
         defaultFactory=get_url_special_student_form,
     )
     state_of_wisconsin_need_based_travel_grant_form_uploaded_file = field.NamedFile(
-        title=u'State of Wisconsin Need-based Travel Grant Form',
-        description=u'Upload your filled-out copy of the form',
+        title=u'State of Wisconsin Need-based Travel Grant Submission',
+        description=u'Upload your completed form.',
         required=False,
     )
     form.mode(special_student_form_for_undergraduate_admissions_form_link="display")
     special_student_form_for_undergraduate_admissions_form_link = RichText(
-        title=u'Special Student Form for Undergraduate Admissions',
-        description=u'Download this PDF, fill it out, and upload it below',
+        title=u'Special/Non-degree Registration-Undergraduate Level',
+        description=u'Download this form, fill it out, and upload it below.',
         required=False,
         defaultFactory=get_url_special_student_form_for_undergraduate_admissions_form,
+        # TODO appears when "Special/Non-Degree Registration-Graduate Level" is checked "yes" in the MGMT PORTAL
+        AND
+        "Current Education Level" is NOT "graduate school" 
+        AND
+        the course request in the PART PORTAL includes at least one course numbered 500-799.
+
+        OR
+
+        appears when "Special/Non-Degree Registration-Graduate Level" is checked "yes" in the MGMT PORTAL
+        AND
+        "Current Education Level" IS "graduate school" 
+        AND
+        the course request in the PART PORTAL includes at least one course numbered 100-499.
     )
     special_student_form_for_undergraduate_admissions_uploaded_file = field.NamedFile(
-        title=u'Special Student Form for Undergraduate Admissions',
-        description=u'Upload your filled-out copy of the form',
+        title=u'Special/Non-degree Registration-Undergraduate Level Submission',
+        description=u'Upload your completed form.',
         required=False,
     )
     form.mode(disciplinary_clearance_form_link="display")
@@ -816,7 +829,7 @@ class IOIEStudyAbroadParticipant(Interface):
     )
     cumulativeGPA = schema.Float(
         title=_(u'Cumulative GPA'),
-        description=_(u'out of 4.0 (use 0.0 if not a student)'),
+        description=_(u'Type the applicant's CURRENT CUMULATIVE GPA exactly as it appears on the unofficial transcript.'),
         required=False,
     )
 
