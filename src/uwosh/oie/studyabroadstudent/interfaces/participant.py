@@ -934,11 +934,12 @@ description=_(u'I have one or more current, continuing or recurring physical hea
 required=False,
 vocabulary=vocabulary=yes_no_none_vocabulary,
 )
-healthConditionsDetails = chart
-description=_(u'Include all current, continuing or recurring health and/or mental health conditions, including physical disabilities and/or medical conditions and mental health conditions such as anxiety, depression, bipolar disorder, substance abuse (alcohol or drugs),'), 
-required=False,
-# TODO conditions should be listed in a chart, with columns: Condition, Approx Treatment Start Date, Anticipated Treatment End Date (or 'n/a'), Healthcare Provider, Recovery Status
-)
+#     medicalHealthProblems = schema.Text(
+#         title=_(u''),
+#         description=_(u'Include all current, continuing or recurring health and/or mental health conditions, including physical disabilities and/or medical conditions and mental health conditions such as anxiety, depression, bipolar disorder, substance abuse (alcohol or drugs), eating disorders (anorexia/bulimia), etc.'),
+#         required=False,
+#     )
+#
 healthConditionsSurgeriesYesNo = schema.Choice(
 description=_(u'I have undergone surgeries that affect my physical health today.'), 
 required=False,
@@ -949,11 +950,14 @@ description=_(u'Include all surgeries that affect your physical health today.'),
 required=False,
 # TODO conditions should be listed in a chart, with columns: Condition Treated, Surgery Date, Healthcare Provider, Recovery Status
 )
-healthConditionsUnderDoctorCare = schema.Choice(
-description=_(u'I am currently under the care of a doctor, psychiatrist, substance abuse counselor, mental health professional or other health care professional for conditions listed above.'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-)
+#     medicalHealthProblems_underCare = schema.Choice(
+#         title=_(u''),
+            description=_(u'I am currently under the care of a doctor, psychiatrist, substance abuse counselor, mental health professional or other health care professional for conditions listed above.'), 
+#         vocabulary=yes_no_none_vocabulary,
+# #        required=True,
+#         required=False,
+#     )
+#
     form.mode (healthPhysical_label='display')
     healthPhysical_label = schema.TextLine(
         title=_(u'Physical Health'),
@@ -1173,12 +1177,6 @@ required=False,
 #                 'medicalRegistered_accommodations', 'medicalAccessOK', ]
 #     )
 #
-#     medicalHealthProblems = schema.Text(
-#         title=_(u'Health Problems'),
-#         description=_(u'List and describe any recent (within the past five years) or continuing health problems, including physical disabilities or medical conditions; learning disabilities; drug, plant, food, animal, or insect sting allergies (include information pertaining to reactions); and/or surgeries that should be brought to the attention of the lead faculty members, liaison abroad and/or host family abroad. Complete this section now or by the Friday following the application deadline.  Write ''n/a'' in blanks where appropriate.'),
-#         required=False,
-#     )
-#
 #     medicalHealthProblems_takenMedication = schema.Choice(
 #         title=_(u'Has Taken Medication'),
 #         description=_(u'Are you taking or have you ever taken medication related to your physical health?'),
@@ -1196,13 +1194,6 @@ required=False,
 #     medicalHealthProblems_stable = schema.Choice(
 #         title=_(u'Are you stable on this medication?'),
 #         vocabulary=yes_no_na_vocabulary,
-# #        required=True,
-#         required=False,
-#     )
-#
-#     medicalHealthProblems_underCare = schema.Choice(
-#         title=_(u'Are you currently under the care of a doctor or other health care professional?'),
-#         vocabulary=yes_no_none_vocabulary,
 # #        required=True,
 #         required=False,
 #     )
