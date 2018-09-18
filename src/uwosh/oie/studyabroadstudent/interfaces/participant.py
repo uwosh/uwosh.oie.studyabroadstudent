@@ -527,6 +527,7 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Current Education Level'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.education_level'),
         required=False,
+        # TODO check vocabulary; If MGMT PORTAL "Student Status" is "1", the answer here cannot be "I am not a student'
     )
 
     universityEnrolledUWO = schema.Choice(
@@ -609,7 +610,7 @@ class IOIEStudyAbroadParticipant(Interface):
     interviewDate = schema.Date(
         title=_(u'Interview Date'),
         description=_(
-            u'Contact the Program Liaison to schedule an interview.  Make your interview appointment and type your interview date here prior to submiting this application.  The actual interview date may or may not need to occur prior to the STEP II application deadline.'),
+            u'Contact the Program Liaison to schedule an interview.  Make your interview appointment and type your interview date here prior to submiting this application.  The actual interview date may or may not need to occur prior to the STEP II application deadline.  This will be determined by the Program Liaison.'),
         required=False,
         # TODO Displays only if "interview" is checked "yes" in MGMT PORTAL.
     )
