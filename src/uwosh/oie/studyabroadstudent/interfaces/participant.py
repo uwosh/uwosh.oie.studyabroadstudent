@@ -625,12 +625,12 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     prePostTravelClassDates = schema.Choice(
-        title=_(u'Pre- & Post-Travel Class Dates'),
+        title=_(u'Confirm Attendance at Pre- & Post-travel Program-specific Sessions'),
         description=_(
-            u'Select ''Yes'' if you have no conflicts with pre- or post-travel class dates or orientation dates. Select ''No'' if you have a conflict on one or more dates.'),
+            u'Select 'Yes' to confirm that you will attend all advertised pre- or post-travel sessions.  Select 'No' if you have a conflict on one or more dates.'),
         vocabulary=yes_no_none_vocabulary,
         required=True,
-        # TODO insert date from program object
+        # TODO insert date from program object; Displays only if there are dates in "Pretravel Class & Orientation Dates" or "Post-travel Class Dates" in the MGMT PORTAL.
     )
 
     paymentDeadlines = schema.Choice(
