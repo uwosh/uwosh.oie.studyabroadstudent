@@ -1030,12 +1030,12 @@ class IOIEStudyAbroadParticipant(Interface):
         medication start (month/year)
         medication end or anticipated end (month/year)
         if end is not in the past: 
-        --Dose
-        --Times per Day (1, 2, 3, as needed)
-        --Storage Requirements (drop down: no special storage required; refrigeration required; refrigeration preferred; other)
-        --are you Stable on this Medication
-        --Is your provider willing to prescribe enough medication to last throughout your planned program away (i.e. are you able to fill your prescription for the total number of days you will be abroad prior to travel)?
-        --If you were to become separated from your medication, how long can you go before that medication must be replaced?  (DROPDOWN or text field: XX hours or XX days or ‘I can complete my program abroad without replacing this medication.”)
+        Dose
+        Times per Day (1, 2, 3, as needed)
+        Storage Requirements (drop down: no special storage required; refrigeration required; refrigeration preferred; other)
+        are you Stable on this Medication
+        Is your provider willing to prescribe enough medication to last throughout your planned program away (i.e. are you able to fill your prescription for the total number of days you will be abroad prior to travel)?
+        If you were to become separated from your medication, how long can you go before that medication must be replacedd?  (DROPDOWN or text field: XX hours or XX days or ‘I can complete my program abroad without replacing this medication.”)
 #     )
 #
     form.mode (authorizedAccommodation_label='display')
