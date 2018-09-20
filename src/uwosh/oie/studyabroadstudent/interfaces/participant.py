@@ -1024,18 +1024,7 @@ class IOIEStudyAbroadParticipant(Interface):
 #         title=_(u''),
 #         description=_(u'Include all prescription medications you have taken in the past three years whether or not you intend to carry these with you when you travel.  Also include all over-the-counter medications containing amphetamines that you intend to carry with you when you travel.'),
 #         required=False,
-        # TODO medications should be listed in a chart, with columns: 
-        Medication Name
-        Medication-related Condition
-        medication start (month/year)
-        medication end or anticipated end (month/year)
-        if end is not in the past: 
-        Dose
-        Times per Day (1, 2, 3, as needed)
-        Storage Requirements (drop down: no special storage required; refrigeration required; refrigeration preferred; other)
-        are you Stable on this Medication
-        Is your provider willing to prescribe enough medication to last throughout your planned program away (i.e. are you able to fill your prescription for the total number of days you will be abroad prior to travel)?
-        If you were to become separated from your medication, how long can you go before that medication must be replacedd?  (DROPDOWN or text field: XX hours or XX days or ‘I can complete my program abroad without replacing this medication.”)
+        # TODO medications should be listed in a chart, with columns: Medication Name, Medication-related Condition, medication start (month/year), medication end or anticipated end (month/year); if end is not in the past: Dose, Times per Day (1, 2, 3, as needed), Storage Requirements (drop down: no special storage required; refrigeration required; refrigeration preferred; other), are you Stable on this Medication, Is your provider willing to prescribe enough medication to last throughout your planned program away (i.e. are you able to fill your prescription for the total number of days you will be abroad prior to travel)?, If you were to become separated from your medication, how long can you go before that medication must be replacedd?  (DROPDOWN or text field: XX hours or XX days or ‘I can complete my program abroad without replacing this medication.”)
 #     )
 #
     form.mode (authorizedAccommodation_label='display')
