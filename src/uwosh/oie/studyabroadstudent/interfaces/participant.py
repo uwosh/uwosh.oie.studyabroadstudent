@@ -920,11 +920,6 @@ class IOIEStudyAbroadParticipant(Interface):
     allergies_label = schema.TextLine(
         title=_(u'Allergies'),
     )
-allergiesYesNo = schema.Choice(
-description=_(u'I have allergies.'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-)
 #     foodAllergies = schema.TextLine(
 #         title=_(u''),
 #         description=_(u'List all allergies.'),
@@ -957,16 +952,6 @@ vocabulary=vocabulary=yes_no_none_vocabulary,
 #         required=False,
 #     )
 #
-healthConditionsSurgeriesYesNo = schema.Choice(
-description=_(u'I have undergone surgeries that affect my physical health today.'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-)
-healthConditionsSurgeriesDetails = chart
-description=_(u'Include all surgeries that affect your physical health today.'), 
-required=False,
-# TODO conditions should be listed in a chart, with columns: Condition Treated, Surgery Date, Healthcare Provider, Recovery Status
-)
 #     medicalHealthProblems_underCare = schema.Choice(
 #         title=_(u''),
             description=_(u'I am currently under the care of a doctor, psychiatrist, substance abuse counselor, mental health professional or other health care professional for conditions listed above.'), 
@@ -979,25 +964,6 @@ required=False,
     healthPhysical_label = schema.TextLine(
         title=_(u'Physical & Mental Health'),
     )
-wheelchair = schema.Choice(
-description=_(u'I use a wheelchair, prosthetic or other assistive device.'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-)
-assistiveDevice = schema.TextLine(
-description=_(u'List the assistive device (devices) that you plan to use while on your program.'), 
-required=False,
-)
-assistiveDeviceOnFlight = schema.Choice(
-description=_(u'I will (or I might) bring a medical or mental health-related device onto the airplane (e.g. CPAP machine).'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-)
-assistiveDeviceList = schema.TextLine(
-description=_(u'If yes, list the device or devices here.'), 
-required=False,
-)
-
 #     hasDifficultyWalking = schema.Choice(
 #         title=_(u''),
 #         description=_(u'It is difficult for me to walk long distances, climb stairs, walk up inclines or down declines, or walk at high altitudes, in heat, in cold or in humidity.'),
@@ -1013,24 +979,6 @@ required=False,
 #         required=False,
 #     )
 #
-stairsMax = schema.Int(
-description=_(u'If yes, what is the maximum number of stairs you can climb?'), 
-required=False,
-)
-walkingClimbingDescription = schema.TextLine(
-description=_(u'If yes, describe your ability to walk up inclines or down declines, or walk at high altitudes, in heat, in cold or in humidity.'), 
-required=False,
-)
-sight = schema.Choice(
-description=_(u'My sight is impaired beyond correction.'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-)
-healthPhysicalAdditionalInfoYesNo = schema.Choice(
-description=_(u'I would like to share additional information related to my physical or mental health that may be helpful for program organizers, liaisons and/or host families.'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-)
 #     additionalNeeds = schema.Text(
 #         title=_(u''),
 #         description=_(u'Share any additional information related to your physical or mental health that may be helpful for program organizers, liaisons and/or host families.'),
@@ -1048,11 +996,16 @@ vocabulary=vocabulary=yes_no_none_vocabulary,
 # #        required=True,
 #         required=False,
 #     )
-prescriptionsCarry = schema.Choice(
-description=_(u'I will carry over-the-counter medications containing amphetamines when I travel.'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-)
+
+#     medicalHealthProblems_willingToPrescribe = schema.Choice(
+#         title=_(u''),
+#         description=_(u'I will carry over-the-counter medications containing amphetamines when I travel.'),
+#         vocabulary=yes_no_na_vocabulary,
+# #        required=True,
+#         required=False,
+        # TODO change to yes_no_none_vocabulary
+#     )
+#
 #     medicalHealthProblems_medications = schema.Text(
 #         title=_(u''),
 #         description=_(u'Include all prescription medications you have taken in the past three years whether or not you intend to carry these with you when you travel.  Also include all over-the-counter medications containing amphetamines that you intend to carry with you when you travel.'),
@@ -1062,7 +1015,6 @@ vocabulary=vocabulary=yes_no_none_vocabulary,
         Medication-related Condition
         medication start (month/year)
         medication end or anticipated end (month/year)
-
         if end is not in the past: 
         --Dose
         --Times per Day (1, 2, 3, as needed)
@@ -1072,10 +1024,6 @@ vocabulary=vocabulary=yes_no_none_vocabulary,
         --If you were to become separated from your medication, how long can you go before that medication must be replaced?  (DROPDOWN or text field: XX hours or XX days or ‘I can complete my program abroad without replacing this medication.”)
 #     )
 #
-medicationsStorage = schema.TextLine(
-description=_(u'If your medication requires special storage (e.g. refrigeration), describe your storage needs.'), 
-required=False,
-)
     form.mode (authorizedAccommodation_label='display')
     authorizedAccommodation_label = schema.TextLine(
         title=_(u'Authorized Accommodation'),
@@ -1111,18 +1059,25 @@ required=False,
     healthConfirmation_label = schema.TextLine(
         title=_(u'I understand and agree'),
     )
-medicationsImport = schema.Choice(
-description=_(u'...that whether or not I have disclosed medications here, I am ultimately responsible for ensuring that my medications can be carried into any and all foreign countries I plan to visit and that I my medications can be replaced with a comparable product if'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-# TODO must be 'yes'
-)
-healthStatusChange = schema.Choice(
-description=_(u'...that if my medical or mental health status changes after completing this application, I will inform the OIE by updating my medical or mental health information within this application.'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-# TODO must be 'yes'
-)
+        
+#     medicalMentalProblems_enoughMedication = schema.Choice(
+#         title=_(u''),
+#         description=_(u'...that whether or not I have disclosed medications here, I am ultimately responsible for ensuring that my medications can be carried into any and all foreign countries I plan to visit and that I my medications can be replaced with a comparable product if they are lost, stolen or damaged.'),
+#         vocabulary=yes_no_na_vocabulary,
+# #        required=True,
+#         required=False,
+        # TODO must be 'yes' & change to yes_no_none_vocabulary
+#     )
+#
+#     medicalMentalProblems_stable = schema.Choice(
+#         title=_(u''),
+        description=_(u'...that if my medical or mental health status changes after completing this application, I will inform the OIE by updating my medical or mental health information within this application.'), 
+#         vocabulary=yes_no_na_vocabulary,
+# #        required=True,
+#         required=False,
+        # TODO must be 'yes' & change to yes_no_none_vocabulary
+#     )
+#
 #     medicalAccessOK = schema.Choice(
 #         title=_(u''),
 #         description=_(u'...that this information may be accessed by the following people: program leader/s (for group programs), exchange liaison/s abroad/away (for student exchange and direct enroll programs), program organizer/s outside of UW Oshkosh, my host family (if homestay is offered on the program), staff in the OIE, professional staff in the Dean of Students Office, professional staff in the UWO Counseling Center and professional staff in the UWO Student Health Center.'),
@@ -1132,10 +1087,6 @@ vocabulary=vocabulary=yes_no_none_vocabulary,
         # TODO must be 'yes'
 #     )
 #
-healthMeetingNotes = field.NamedFile(
-title=_(u'Health Meeting Notes'),
-required=False,
-)
     form.mode (roommate_label='display')
     roommate_label = schema.TextLine(
         title=_(u'Roommate'),
@@ -1158,6 +1109,9 @@ required=False,
         
         
 
+        
+        
+        
 #     doctorLastname = schema.TextLine(
 #         title=_(u'Last Name of your Family Doctor'),
 # #        required=True,
@@ -1217,14 +1171,6 @@ required=False,
 #                 'medicalRegistered_accommodations', 'medicalAccessOK', ]
 #     )
 #
-#     medicalHealthProblems_willingToPrescribe = schema.Choice(
-#         title=_(u'Enough Medication'),
-#         description=_(u'Is your current physician willing to prescribe enough medication to last throughout your planned program abroad?'),
-#         vocabulary=yes_no_na_vocabulary,
-# #        required=True,
-#         required=False,
-#     )
-#
 #     medicalMentalProblems = schema.Text(
 #         title=_(u'Mental Health Problems'),
 #         description=_(u'List and describe any recent or continuing mental health problems, including anxiety, depression, bipolar disorder, substance abuse (alcohol or drugs), eating disorders (anorexia/bulimia), etc. that should be brought to the attention of the lead faculty members, liaison abroad and/or host family abroad.  Include the following information: diagnosis, dates of treatment, names & locations of treating professionals, and recovery status.'),
@@ -1250,13 +1196,6 @@ required=False,
 #         required=False,
 #     )
 #
-#     medicalMentalProblems_stable = schema.Choice(
-#         title=_(u'Are you stable on this medication?'),
-#         vocabulary=yes_no_na_vocabulary,
-# #        required=True,
-#         required=False,
-#     )
-#
 #     medicalMentalProblems_underCare = schema.Choice(
 #         title=_(u'Mental Health Care'),
 #         description=_(u'Are you currently or have you ever been under the care of a psychiatrist or other medical provider, substance abuse counselor or other mental health professional?'),
@@ -1268,14 +1207,6 @@ required=False,
 #     medicalMentalProblems_condition = schema.Text(
 #         title=_(u'Mental Health Care Conditions'),
 #         description=_(u'If yes, for what condition? Write ''n/a'' in text area when appropriate.'),
-#         required=False,
-#     )
-#
-#     medicalMentalProblems_enoughMedication = schema.Choice(
-#         title=_(u'Sufficient Mental Health Medication'),
-#         description=_(u'Is your current medical provider willing to prescribe enough medication to last for the duration of your planned program abroad?'),
-#         vocabulary=yes_no_na_vocabulary,
-# #        required=True,
 #         required=False,
 #     )
 #
@@ -1291,11 +1222,6 @@ required=False,
 #         fields=['smokingPreferred', 'isVegetarian', 'additionalNeeds', ]
 #     )
 #
-    
-        
-        
-        
-
 #     emerg1workPhone = schema.TextLine(
 #         title=_(u'Emergency Contact 1 Work Phone'),
 #         description=_(u'Strongly recommended.  Please include country code (if outside US) and area code'),
