@@ -581,6 +581,20 @@ class IOIEStudyAbroadParticipant(Interface):
         min=2018,
         max=2100,
         required=False,
+        # TODO add vocabulary options 
+        01/19/2018
+        06/01/2018
+        08/03/2018
+        01/25/2019
+        06/07/2019
+        08/09/2019
+        01/24/2020
+        06/05/2020
+        08/07/2020
+        01/22/2021
+        06/04/2021
+        08/06/2021
+        2022 or later
     )
 
     graduationMonth = schema.Choice(
