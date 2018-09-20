@@ -941,11 +941,16 @@ vocabulary=vocabulary=yes_no_none_vocabulary,
     healthConditions_label = schema.TextLine(
         title=_(u'Health Conditions & Surgeries'),
     )
-healthConditionsYesNo = schema.Choice(
-description=_(u'I have one or more current, continuing or recurring physical health and/or mental health conditions, a physical disability (disabilities) and/or medical condition (conditions).'), 
-required=False,
-vocabulary=vocabulary=yes_no_none_vocabulary,
-)
+        
+#     medicalHealthProblems_stable = schema.Choice(
+#         title=_(u''),
+        description=_(u'I have one or more current, continuing or recurring physical health and/or mental health conditions, a physical disability (disabilities) and/or medical condition (conditions).'),
+#         vocabulary=yes_no_na_vocabulary,
+# #        required=True,
+#         required=False,
+        # TODO change to yes_no_none_vocabulary
+#     )
+#
 #     medicalHealthProblems = schema.Text(
 #         title=_(u''),
 #         description=_(u'Include all current, continuing or recurring health and/or mental health conditions, including physical disabilities and/or medical conditions and mental health conditions such as anxiety, depression, bipolar disorder, substance abuse (alcohol or drugs), eating disorders (anorexia/bulimia), etc.'),
@@ -1085,7 +1090,7 @@ required=False,
 #
         #     medicalRegistered_office = schema.TextLine(
 #         title=_(u'UW Oshkosh Office Accommodations'),
-#         description=_(u'If so, with which office have you registered? Type 'none' if you have not registered.'),
+#         description=_(u'If yes, with which office have you registered? Type 'none' if you have not registered.'),
 #         required=False,
         # TODO add vocabulary at some point (change from text to choice): Dean of Students Office; Project Success; Other office providing services for students with disabilities
 #     )
@@ -1096,10 +1101,12 @@ required=False,
 #         required=False,
 #     )
 #
-authorizedAccommodationRequest = schema.TextLine(
-description=_(u'What accommodations are you requesting in relation to your program abroad/away?'), 
-required=False,
-)
+#     medicalHealthProblems_additionalInfo = schema.Text(
+#         title=_(u''),
+#         description=_(u'What accommodations are you requesting in relation to your program away?'),
+#         required=False,
+#     )
+#
     form.mode (healthConfirmation_label='display')
     healthConfirmation_label = schema.TextLine(
         title=_(u'I understand and agree'),
@@ -1210,24 +1217,11 @@ required=False,
 #                 'medicalRegistered_accommodations', 'medicalAccessOK', ]
 #     )
 #
-#     medicalHealthProblems_stable = schema.Choice(
-#         title=_(u'Are you stable on this medication?'),
-#         vocabulary=yes_no_na_vocabulary,
-# #        required=True,
-#         required=False,
-#     )
-#
 #     medicalHealthProblems_willingToPrescribe = schema.Choice(
 #         title=_(u'Enough Medication'),
 #         description=_(u'Is your current physician willing to prescribe enough medication to last throughout your planned program abroad?'),
 #         vocabulary=yes_no_na_vocabulary,
 # #        required=True,
-#         required=False,
-#     )
-#
-#     medicalHealthProblems_additionalInfo = schema.Text(
-#         title=_(u'Additional Health Info'),
-#         description=_(u'Is there any additional information related to your physical health which may be helpful for program organizers, liaisons and host families to know? Write ''none'' in blank if appropriate.'),
 #         required=False,
 #     )
 #
