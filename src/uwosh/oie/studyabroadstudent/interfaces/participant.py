@@ -512,7 +512,7 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
 #     dateOfBirth = schema.Date(
-#         title=_(u'Birthday'),
+#         title=_(u'Date of Birth'),
 #         required=True,
 #     )
         
