@@ -747,11 +747,13 @@ class IOIEStudyAbroadParticipant(Interface):
         default=u'Question 1 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.',
         required=False,
     )
+        
     applicant_question_answer1 = schema.Text(
         title=u'Answer 1',
         description=u'If a question appears under Applicant Question 1 above, type your response here.',
         required=False,
     )
+        
     form.mode(applicant_question_text2="display")
     applicant_question_text2 = schema.Text(
         title=u'Applicant Question 2',
@@ -759,11 +761,13 @@ class IOIEStudyAbroadParticipant(Interface):
         default=u'Question 2 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.,
         required=False,
     )
+        
     applicant_question_answer2 = schema.Text(
         title=u'Answer 2',
         description=u'If a question appears under Applicant Question 2 above, type your response here.',
         required=False,
     )
+        
     form.mode(applicant_question_text3="display")
     applicant_question_text3 = schema.Text(
         title=u'Applicant Question 3',
@@ -776,6 +780,7 @@ class IOIEStudyAbroadParticipant(Interface):
         description=u'If a question appears under Applicant Question 3 above, type your response here.',
         required=False,
     )
+        
     form.mode(applicant_question_text4="display")
     applicant_question_text4 = schema.Text(
         title=u'Applicant Question 4',
@@ -783,6 +788,7 @@ class IOIEStudyAbroadParticipant(Interface):
         default=u'Question 4 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.',
         required=False,
     )
+        
     applicant_question_answer4 = schema.Text(
         title=u'Answer 4',
         description=u'If a question appears under Applicant Question 4 above, type your response here.',
@@ -795,6 +801,7 @@ class IOIEStudyAbroadParticipant(Interface):
         default=u'Question 5 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.',
         required=False,
     )
+        
     applicant_question_answer5 = schema.Text(
         title=u'Answer 5',
         description=u'If a question appears under Applicant Question 5 above, type your response here.',
@@ -812,6 +819,7 @@ class IOIEStudyAbroadParticipant(Interface):
                 'disciplinary_clearance_form_link',
                 'disciplinary_clearance_form_uploaded_file', 'cumulativeGPA']
     )
+        
     form.mode(state_of_wisconsin_need_based_travel_grant_form_link="display")
     state_of_wisconsin_need_based_travel_grant_form_link = RichText(
         title=u'State of Wisconsin Need-based Travel Grant Form',
@@ -819,11 +827,13 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
         defaultFactory=get_url_special_student_form,
     )
+        
     state_of_wisconsin_need_based_travel_grant_form_uploaded_file = field.NamedFile(
         title=u'State of Wisconsin Need-based Travel Grant Submission',
         description=u'Upload your completed form.',
         required=False,
     )
+        
     form.mode(special_student_form_for_undergraduate_admissions_form_link="display")
     special_student_form_for_undergraduate_admissions_form_link = RichText(
         title=u'Special/Non-degree Registration-Undergraduate Level',
@@ -844,11 +854,13 @@ class IOIEStudyAbroadParticipant(Interface):
         AND
         the course request in the PART PORTAL includes at least one course numbered 100-499.
     )
+        
     special_student_form_for_undergraduate_admissions_uploaded_file = field.NamedFile(
         title=u'Special/Non-degree Registration-Undergraduate Level Submission',
         description=u'Upload your completed form.',
         required=False,
     )
+        
     form.mode(disciplinary_clearance_form_link="display")
     disciplinary_clearance_form_link = RichText(
         title=u'Disciplinary Clearance Form',
@@ -856,11 +868,13 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
         defaultFactory=get_url_disciplinary_clearance_form,
     )
+        
     disciplinary_clearance_form_uploaded_file = field.NamedFile(
         title=u'Disciplinary Clearance Form',
         description=u'Upload your filled-out copy of the form',
         required=False,
     )
+        
     cumulativeGPA = schema.Float(
         title=_(u'Cumulative GPA'),
         description=_(u'Type the applicant's CURRENT CUMULATIVE GPA exactly as it appears on the unofficial transcript.'),
@@ -873,18 +887,14 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Lifestyle'),
     )
         
-food = schema.Choice(
-description=_(u'When offered a choice, I prefer food that is (check all that apply):'), 
-required=False,
-vocabulary=,
-# TODO vegetarian, vegan, gluten free, dairy free OR no preference
-)
 #     isVegetarian = schema.Choice(
-#         title=_(u'Are you vegetarian?'),
+#         title=_(u''),
+        description=_(u'When offered a choice, I prefer food that is vegetarian, vegan, gluten free, or dairy free.'),
 #         vocabulary=yes_no_none_vocabulary,
 #         #default="No",
 # #        required=True,
 #         required=False,
+        # TODO in the future, change this to a dropdown list, with 'no preference' as one of the options
 #     )
 #
 #     smokingPreferred = schema.Choice(
