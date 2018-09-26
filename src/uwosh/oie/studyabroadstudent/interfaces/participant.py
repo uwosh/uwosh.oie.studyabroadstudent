@@ -952,6 +952,12 @@ class IOIEStudyAbroadParticipant(Interface):
 #         required=False,
 #     )
 #
+#     withdrawalRefund = schema.Bool(
+#         title=_(u'Withdrawal & Refund Policy Verified'),
+          description=_(u'Both of the following conditions must be met before checking this item in.  1) Is the applicant's full name clearly printed on the form?  2) Has the form been signed and dated by hand?  Signatures cannot be typed.
+#         required=False,
+#     )
+#
     form.mode(disciplinary_clearance_form_link="display")
     disciplinary_clearance_form_link = RichText(
         title=u'Disciplinary Clearance Form',
@@ -2240,11 +2246,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #
 #     comments = schema.Text(
 #         title=_(u'Comments'),
-#         required=False,
-#     )
-#
-#     withdrawalRefund = schema.Bool(
-#         title=_(u'Withdrawal and Refund Form Submitted'),
 #         required=False,
 #     )
 #
