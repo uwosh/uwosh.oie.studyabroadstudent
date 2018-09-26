@@ -939,7 +939,19 @@ class IOIEStudyAbroadParticipant(Interface):
         description=u'Upload your completed form.',
         required=False,
     )
-        
+
+#     UWOshkoshStatementOK = schema.Bool(
+#         title=_(u'UW Oshkosh Uniform Statement of Responsibility Verified'),
+#         description=_(u'Both of the following conditions must be met before checking this item in.  1) Is the applicant's full name clearly printed on the form?  2) Has the form been signed and dated by hand?  Signatures cannot be typed.'),
+#         required=False,
+#     )
+#    
+#     UWSystemStatementOK = schema.Bool(
+#         title=_(u'UW System Uniform Statement of Responsibility Verified'),
+          description=_(u'All of the following conditions must be met before checking this item in.  1) Is the applicant's full name clearly printed on the form?  2) Does the form include the official program name?  3) Does the form include the CORRECT dates of participation (months & years only)?  4) Has the form been signed and dated by hand?  Signatures cannot be typed.
+#         required=False,
+#     )
+#
     form.mode(disciplinary_clearance_form_link="display")
     disciplinary_clearance_form_link = RichText(
         title=u'Disciplinary Clearance Form',
@@ -2228,17 +2240,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #
 #     comments = schema.Text(
 #         title=_(u'Comments'),
-#         required=False,
-#     )
-#
-#     UWSystemStatementOK = schema.Bool(
-#         title=_(u'UW System Statement of Responsibility Submitted'),
-#         required=False,
-#     )
-#
-#     UWOshkoshStatementOK = schema.Bool(
-#         title=_(u'UW Oshkosh Statement of Responsibility Submitted'),
-#         description=_(u'This is the date in which the application was completed.'),
 #         required=False,
 #     )
 #
