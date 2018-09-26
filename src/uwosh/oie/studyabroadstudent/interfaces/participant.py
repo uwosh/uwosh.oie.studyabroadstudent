@@ -866,13 +866,18 @@ class IOIEStudyAbroadParticipant(Interface):
     #######################################################
     model.fieldset(
         'forms',
-        label=_(u"Forms"),
+        label=_(u"STEP II Forms"),
         fields=['state_of_wisconsin_need_based_travel_grant_form_link',
                 'state_of_wisconsin_need_based_travel_grant_form_uploaded_file',
                 'special_student_form_for_undergraduate_admissions_form_link',
                 'special_student_form_for_undergraduate_admissions_uploaded_file',
                 'disciplinary_clearance_form_link',
                 'disciplinary_clearance_form_uploaded_file', 'cumulativeGPA']
+    )
+    form.mode (stepii_label='display')
+    stepii_label = schema.TextLine(
+        title=_(u'STEP II'),
+        description=_(u'To complete STEP II, print relevant documents, clearly print your responses, sign forms by hand where indicated, and follow instructions below.  Signatures cannot be typed.'), 
     )
         
     form.mode(state_of_wisconsin_need_based_travel_grant_form_link="display")
