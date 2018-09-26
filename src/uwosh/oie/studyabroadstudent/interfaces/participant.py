@@ -738,6 +738,15 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Financial Aid'),
     )
         
+ #     applyForAid = schema.Choice(
+#         title=_(u'Financial Aid'),
+#         description=_(u'I will use financial aid to fund all or part of my program.'),
+# #        required=True,
+#         required=False,
+#         vocabulary=yes_no_none_vocabulary,
+#         #write_permission="UWOshOIE: Modify normal fields",
+#     )
+#       
         #######################################################
     model.fieldset(
         'shortanswerquestions',
@@ -2287,15 +2296,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #         'financial_aid',
 #         label=_(u"Financial Aid"),
 #         fields=['applyForAid', 'holdApplication', 'financialAidGranted']
-#     )
-#
-#     applyForAid = schema.Choice(
-#         title=_(u'Financial Aid'),
-#         description=_(u'I will use financial aid to fund all or part of my program.'),
-# #        required=True,
-#         required=False,
-#         vocabulary=yes_no_none_vocabulary,
-#         #write_permission="UWOshOIE: Modify normal fields",
 #     )
 #
 #     holdApplication = schema.Choice(
