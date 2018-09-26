@@ -464,7 +464,7 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'demographics',
         label=_(u"Demographics"),
-        fields=['demographics_label', 'ethnicity', 'ethnicityOther', 'stateResidency', 'countrycitizenship', 'immigrationStatus', 'countryBirth']
+        fields=['demographics_label', 'ethnicity', 'ethnicityOther', 'stateResidency', 'countrycitizenship', 'immigrationStatus', 'countryBirth', 'dateOfBirth']
     )
 
     form.mode (demographic_label='display')
@@ -825,7 +825,7 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'background',
         label=_(u"Background"),
-        fields=['background_label', 'cbcCitation', 'cbcConviction', 'cbcArrest', 'cbcFutureCitation', 'cbcTruthful', 'cbcAdvising',]
+        fields=['background_label']
 )
 
     form.mode (background_label='display')
@@ -838,7 +838,7 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'release',
         label=_(u"Release"),
-        fields=['release_label', 'releasePictures', 'UWOshkoshRelease', 'certification']
+        fields=['release_label', 'UWOshkoshRelease', 'certification']
 )
 
     form.mode (release_label='display')
@@ -867,12 +867,12 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'forms',
         label=_(u"STEP II Forms"),
-        fields=['stepii_label', 'applicationFeeOK', 'specialStudentFormOK', 'state_of_wisconsin_need_based_travel_grant_form_link',
+        fields=['stepii_label', 'applicationFeeOK', 'disciplinary_clearance_form_link', 'disciplinary_clearance_form_uploaded_file', 
+                'specialStudentFormOK', 'state_of_wisconsin_need_based_travel_grant_form_link',
                 'state_of_wisconsin_need_based_travel_grant_form_uploaded_file',
                 'special_student_form_for_undergraduate_admissions_form_link',
-                'special_student_form_for_undergraduate_admissions_uploaded_file', 'transcriptsOK', 
-                'disciplinary_clearance_form_link',
-                'disciplinary_clearance_form_uploaded_file', 'cumulativeGPA']
+                'special_student_form_for_undergraduate_admissions_uploaded_file', 'transcriptsOK', 'UWOshkoshStatementOK', 
+                'UWSystemStatementOK', 'withdrawalRefund', 'cumulativeGPA']
     )
         
     form.mode (stepii_label='display')
@@ -921,12 +921,6 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
     )
 
-#     transcriptsOK = schema.Bool(
-#         title=_(u'Transcript (Unofficial) Verified'),
-          description=_u'All of the following conditions must be met before checking this item in.  1) The transcript must include the applicant's name & student ID.  2) The transcript must be from the CURRENT school as indicated in this application.  3) The transcript must include all terms of attendance.  4) There may be no pages missing. 5) The transcript must include the CUMULATIVE GPA.  6) The transcript may NOT be replaced by the UW Oshkosh STAR report.  7) If the transcript for the current institution of attendance does not include a cumulative GPA, and if the applicant is not in the first semester of university or college, the applicant must upload, assembled into one document, an unofficial transcript from the current institution plus an unofficial transcript from the instutitution attended prior to the current institution.
-#         required=False,
-#     )
-#
     form.mode(special_student_form_for_undergraduate_admissions_form_link="display")
     special_student_form_for_undergraduate_admissions_form_link = RichText(
         title=u'Special/Non-degree Registration-Undergraduate Level',
@@ -954,6 +948,12 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
     )
 
+#     transcriptsOK = schema.Bool(
+#         title=_(u'Transcript (Unofficial) Verified'),
+          description=_u'All of the following conditions must be met before checking this item in.  1) The transcript must include the applicant's name & student ID.  2) The transcript must be from the CURRENT school as indicated in this application.  3) The transcript must include all terms of attendance.  4) There may be no pages missing. 5) The transcript must include the CUMULATIVE GPA.  6) The transcript may NOT be replaced by the UW Oshkosh STAR report.  7) If the transcript for the current institution of attendance does not include a cumulative GPA, and if the applicant is not in the first semester of university or college, the applicant must upload, assembled into one document, an unofficial transcript from the current institution plus an unofficial transcript from the instutitution attended prior to the current institution.
+#         required=False,
+#     )
+#                        
 #     UWOshkoshStatementOK = schema.Bool(
 #         title=_(u'UW Oshkosh Uniform Statement of Responsibility Verified'),
 #         description=_(u'Both of the following conditions must be met before checking this item in.  1) Is the applicant's full name clearly printed on the form?  2) Has the form been signed and dated by hand?  Signatures cannot be typed.'),
@@ -982,7 +982,21 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'stepiiiforms',
         label=_(u"STEP III Forms"),
-        fields=['stepiii_label', 'documentation_label', 'transferCreditForm', 'transferCreditSubmission', 'transferCreditVerified', 'identification_label', 'travelDocLast', 'travelDocFirst', 'travelDocMiddle', 'travelDocSex', 'travelDocNumber', 'travelDocExpiration', 'p
+        fields=[‘stepiii_label’, ‘documentation_label’, ‘transferCreditForm_link’, ‘transferCreditSubmission’, ‘transferCreditVerified’, 
+                ‘identification_label’, ‘travelDocLast’, ‘travelDocFirst’, ‘travelDocMiddle’, ‘travelDocSex’, ‘travelDocNumber’, 
+                ‘travelDocExpiration’, ‘passportReceipt’, ‘passportOK’, ‘driversLicenseReceipt’, ‘driversLicenseReceiptVerified’, 
+                ‘photoPaperOfficial’, ‘photoPaperOfficialVerified’, ‘photoDigitalOfficial’, ‘photoDigitalOfficialVerified’, ‘photoPaper’, 
+                ‘photoPaperVerified’, ‘photoDigital’, ‘photoDigitalVerified’, ‘fecop_label’, ‘fecop_link’, ‘fecopSubmission’, 
+                ‘fecopVerified’, ‘lifestyle_label’, ‘isVegetarian’, ‘smokingPreferred’, ‘health_label’, ‘medicalReadStatement’, 
+                ‘allergies_label’, ‘allergiesYesNo’, ‘foodAllergies’, ‘medicalHealthProblems_whatCondition’, ‘healthConditions_label’, 
+                ‘medicalHealthProblems_stable’, ‘medicalHealthProblems’, ‘healthConditionsSurgeriesYesNo’, ‘healthConditionsSurgeriesDetails’, 
+                ‘medicalHealthProblems_underCare’, ‘healthPhysical_label’, ‘wheelchair’, ‘assistiveDevice’, ‘assistiveDeviceOnFlight’, 
+                ‘assistiveDeviceList’, ‘hasDifficultyWalking’, ‘maxWalkingDistance’, ‘stairsMax’, ‘walkingClimbingDescription’, ‘sight’, 
+                ‘healthPhysicalAdditionalInfoYesNo’, ‘additionalNeeds’, ‘medications_label’, ‘medicalHealthProblems_takenMedication’, 
+                ‘medicalHealthProblems_willingToPrescribe’, ‘medicalHealthProblems_medications’, ‘medicationsStorage’, 
+                ‘authorizedAccommodation_label’, ‘medicalRegistered’, ‘medicalRegistered_office’, ‘medicalRegistered_accommodations’, 
+                ‘medicalHealthProblems_additionalInfo’, ‘healthConfirmation_label’, ‘medicalMentalProblems_enoughMedication’, 
+                ‘medicalMentalProblems_stable’, ‘medicalAccessOK’, ‘healthMeetingNotes’, ‘roommate_label’, ‘roommateName1’, ‘roommateName2’]
     )
 
     form.mode (stepiii_label='display')
@@ -1011,7 +1025,7 @@ class IOIEStudyAbroadParticipant(Interface):
     fecop_label = schema.TextLine(
         title=_(u'Financial'),
     )
-    #######################################################
+
     form.mode (lifestyle_label='display')
     lifestyle_label = schema.TextLine(
         title=_(u'Lifestyle'),
@@ -1227,7 +1241,8 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'stepivforms',
         label=_(u"STEP IV Forms"),
-        fields=['stepiv_label', 'enrollment_label', 'enrollmentByOIE', 'enrollmentServiceIndicator', 'cbc_label', 'cbcReportSubmission', 'cbcReportClean', 'fbiReportSubmission', 'fbiReportClean', 'financial_label', 'financialAidNotice', 'financialAidNoticeSubmission', '
+        fields=['stepiv_label', 'enrollment_label', 'cbc_label', 'financial_label', 'depositOnTime', 'payment2OnTime', 
+                'orientation_label', 'attendedOrientation', 'travelDocuments_label', 'flight_label', 'flightDeparture_label', 'flightReturn_label']
     )
 
     form.mode (stepiv_label='display')
@@ -1236,16 +1251,19 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     form.mode (enrollment_label='display')
-    enrollment_labeltitle=_(u'Course Enrollment'),
+    enrollment_label
+    title=_(u'Course Enrollment'),
     )
 
     form.mode (cbc_label='display')
-    cbc_labeltitle=_(u'Criminal Background Check'),
+    cbc_label
+    title=_(u'Criminal Background Check'),
         # TODO appears only when "Program Type" is "exchange-U.S." OR "exchange-international" in MGMT PORTAL
     )
 
     form.mode (financial_label='display')
-    financial_labeltitle=_(u'Financial'),
+    financial_label
+    title=_(u'Financial'),
     )
 
 #     depositOnTime = schema.Choice(
@@ -1263,7 +1281,8 @@ class IOIEStudyAbroadParticipant(Interface):
 #     )
 #
     form.mode (orientation_label='display')
-    orientation_labeltitle=_(u'Orientation'),
+    orientation_label
+    title=_(u'Orientation'),
     )
 
 #     attendedOrientation = schema.Choice(
@@ -1298,7 +1317,7 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'programChanges',
         label=_(u"Program Changes"),
-        fields=['programChanges_label', 'programChangeOptionSelected', 'agreements_label', 'gpaAgreement', 'gpaMeetingNotes', 'behaviorAgreement', 'behaviorMeetingNotes', 'nonSponsoredTravel_label', 'nonSponsoredTravel']
+        fields=['programChanges_label', 'agreements_label', 'nonSponsoredTravel_label']
     )
 
     form.mode (programChanges_label='display')
