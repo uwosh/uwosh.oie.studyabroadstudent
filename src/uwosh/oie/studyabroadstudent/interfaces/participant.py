@@ -1006,7 +1006,11 @@ class IOIEStudyAbroadParticipant(Interface):
           description=_(u'For first-time passport applicants, the applicant must have submitted a copy of the receipt from the Clerk of Courts or the Post Office indicating payment for a passport.  For applicants renewing a passport, the applicant must have submitted either a copy of the recript for shipping or a copy of the shipping envelope.'),
 #         required=False,
 #     )
-#        
+#  
+    form.mode (fecop_label='display')
+    fecop_label = schema.TextLine(
+        title=_(u'Financial'),
+    )
     #######################################################
     form.mode (lifestyle_label='display')
     lifestyle_label = schema.TextLine(
@@ -1219,6 +1223,100 @@ class IOIEStudyAbroadParticipant(Interface):
 #         #write_permission="UWOshOIE: Modify revisable fields",
 #     )
 #
+    #######################################################
+    model.fieldset(
+        'stepivforms',
+        label=_(u"STEP IV Forms"),
+        fields=['stepiv_label', 'enrollment_label', 'enrollmentByOIE', 'enrollmentServiceIndicator', 'cbc_label', 'cbcReportSubmission', 'cbcReportClean', 'fbiReportSubmission', 'fbiReportClean', 'financial_label', 'financialAidNotice', 'financialAidNoticeSubmission', '
+    )
+
+    form.mode (stepiv_label='display')
+    stepiv_label = schema.TextLine(
+        title=_(u'STEP IV'),
+    )
+
+    form.mode (enrollment_label='display')
+    enrollment_labeltitle=_(u'Course Enrollment'),
+    )
+
+    form.mode (cbc_label='display')
+    cbc_labeltitle=_(u'Criminal Background Check'),
+        # TODO appears only when "Program Type" is "exchange-U.S." OR "exchange-international" in MGMT PORTAL
+    )
+
+    form.mode (financial_label='display')
+    financial_labeltitle=_(u'Financial'),
+    )
+
+#     depositOnTime = schema.Choice(
+#         title=_(u'First Payment Received'),
+#         description=_(u'If this box is not checked, your first payment has not been confirmed as received.  Please allow up to three business days for this to update.'),
+#         vocabulary=yes_no_none_vocabulary,
+#         required=False,
+#     )
+#
+#     payment2OnTime = schema.Choice(
+#         title=_(u'Final Payment Received'),
+#         description=_(u'If this box is not checked, your final payment has not been confirmed as received.  Please allow up to three business days for this to update.'),
+#         vocabulary=yes_no_none_vocabulary,
+#         required=False,
+#     )
+#
+    form.mode (orientation_label='display')
+    orientation_labeltitle=_(u'Orientation'),
+    )
+
+#     attendedOrientation = schema.Choice(
+#         title=_(u'In Person Orientation Requirement Met'),
+#         required=False,
+#         vocabulary=yes_no_none_vocabulary
+#     )
+#
+    form.mode (travelDocuments_label='display')
+    travelDocuments_label = schema.TextLine(
+        title=_(u'Travel Documents'),
+    )
+
+    form.mode (flight_label='display')
+    flight_label = schema.TextLine(
+        title=_(u'Flight'),
+    )
+
+    form.mode (flightDeparture_label='display')
+    flightDeparture_label = schema.TextLine(
+        title=_(u'Departure Flight'),
+        # TODO appears if "Application for Permission to follow an Alternative Schedule on the Outbound Flight Only or on my Roundtrip Flights" is "yes" in the MGMT PORTAL AND one of the following selections has been made above:  --I will apply for permission to fly to my program site on an alternative flight but will return from my program site with the group.  --I will apply for permission to fly to and from my program site on an alternative flight.  OR   appears if "Application for Permission to follow an Alternative Schedule on the Outbound Flight Only or on my Roundtrip Flights" is "yes" in the MGMT PORTAL AND "Program Dates" selection is one of the following:  --I will apply for permission to arrive at my program site on an alternative date but will depart from my program site on the official program date.  --I will apply for permission to arrive at and depart from my program site on alternative dates.  OR  appears if "Program Type" in MGMT PORTAL does NOT begin with "group..."
+    )
+
+    form.mode (flightReturn_label='display')
+    flightReturn_label = schema.TextLine(
+        title=_(u'Return Flight'),
+    # TODO appears if "Application for Permission to follow an Alternative Schedule on the Return Flight Only" is "yes" or if "Application for Permission to follow an Alternative Schedule on the Outbound Flight Only or on my Roundtrip Flights" is "yes"in the MGMT PO
+    )
+
+    #######################################################
+    model.fieldset(
+        'programChanges',
+        label=_(u"Program Changes"),
+        fields=['programChanges_label', 'programChangeOptionSelected', 'agreements_label', 'gpaAgreement', 'gpaMeetingNotes', 'behaviorAgreement', 'behaviorMeetingNotes', 'nonSponsoredTravel_label', 'nonSponsoredTravel']
+    )
+
+    form.mode (programChanges_label='display')
+    programChanges_label = schema.TextLine(
+        title=_(u'Program Changes'),
+        description=_(u'Please review information provided to you by the OIE carefully and contact the OIE with questions, if needed, prior to making your decision.'), 
+    )
+
+    form.mode (agreements_label='display')
+    agreements_label = schema.TextLine(
+        title=_(u'Agreements'),
+        description=_(u'Please review information provided to you by the OIE carefully and contact the OIE with questions, if needed, prior to making your decision.'), 
+    )
+
+    form.mode (nonSponsoredTravel_label='display')
+    nonSponsoredTravel_label
+        title=_(u'Non-sponsored Out-of-Country (or out-of-state) Travel'),
+    )
 
         
         
@@ -2333,12 +2431,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #         required=False,
 #     )
 #
-#     attendedOrientation = schema.Choice(
-#         title=_(u'Attended Orientation'),
-#         required=False,
-#         vocabulary=yes_no_none_vocabulary
-#     )
-#
 #     cisiDates = schema.TextLine(
 #         title=_(u'Health Insurance Dates'),
 #         description=_(u'Cultural Insurance Services International'),
@@ -2361,20 +2453,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #     tuitionPayment = schema.Float(
 #         title=_(u'Tuition Payment (student exchange only)'),
 #         description=_(u''),
-#         required=False,
-#     )
-#
-#     depositOnTime = schema.Choice(
-#         title=_(u'Deposit Paid on Time'),
-#         description=_(u''),
-#         vocabulary=yes_no_none_vocabulary,
-#         required=False,
-#     )
-#
-#     payment2OnTime = schema.Choice(
-#         title=_(u'Final Payment Made on Time (except exchange students)'),
-#         description=_(u''),
-#         vocabulary=yes_no_none_vocabulary,
 #         required=False,
 #     )
 #
