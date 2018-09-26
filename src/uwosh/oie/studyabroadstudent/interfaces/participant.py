@@ -886,7 +886,21 @@ class IOIEStudyAbroadParticipant(Interface):
           description=_(u'Both of the following conditions must be met before checking this item in.  1) Has the fee been deposited into the correct account?  (293)  2) Does the receipt show the correct fee amount, based on residency?  U.S. State of Residency: (State of Residency RESPONSE should appear here from STEP I in PARTICIPANT PORTAL)
 #         required=False,
 #     )
-                        
+
+    form.mode(disciplinary_clearance_form_link="display")
+    disciplinary_clearance_form_link = RichText(
+        title=u'Disciplinary Clearance Form',
+        description=u'Download this PDF, fill it out, and upload it below',
+        required=False,
+        defaultFactory=get_url_disciplinary_clearance_form,
+    )
+        
+    disciplinary_clearance_form_uploaded_file = field.NamedFile(
+        title=u'Disciplinary Clearance Form',
+        description=u'Upload your filled-out copy of the form',
+        required=False,
+    )
+        
 ##     specialStudentFormOK = schema.Bool(
 #         title=_(u'Special/Non-degree Registration-Graduate Level Verified'),
           description=u'This form must be completely filled out with answers appropriate to the questions before checking this item in.',        
@@ -958,26 +972,41 @@ class IOIEStudyAbroadParticipant(Interface):
 #         required=False,
 #     )
 #
-    form.mode(disciplinary_clearance_form_link="display")
-    disciplinary_clearance_form_link = RichText(
-        title=u'Disciplinary Clearance Form',
-        description=u'Download this PDF, fill it out, and upload it below',
-        required=False,
-        defaultFactory=get_url_disciplinary_clearance_form,
-    )
-        
-    disciplinary_clearance_form_uploaded_file = field.NamedFile(
-        title=u'Disciplinary Clearance Form',
-        description=u'Upload your filled-out copy of the form',
-        required=False,
-    )
-        
     cumulativeGPA = schema.Float(
         title=_(u'Cumulative GPA'),
         description=_(u'Type the applicant's CURRENT CUMULATIVE GPA exactly as it appears on the unofficial transcript.'),
         required=False,
     )
 
+    #######################################################
+    model.fieldset(
+        'stepiiiforms',
+        label=_(u"STEP III Forms"),
+        fields=['stepiii_label', 'documentation_label', 'transferCreditForm', 'transferCreditSubmission', 'transferCreditVerified', 'identification_label', 'travelDocLast', 'travelDocFirst', 'travelDocMiddle', 'travelDocSex', 'travelDocNumber', 'travelDocExpiration', 'p
+    )
+
+    form.mode (stepiii_label='display')
+    stepiii_label = schema.TextLine(
+        title=_(u'STEP III'),
+    )
+
+    form.mode (documentation_label='display')
+    documentation_label = schema.TextLine(
+        title=_(u'Documentation'),
+    )
+
+    form.mode (identification_label='display')
+    identification_label = schema.TextLine(
+        title=_(u'Identification'),
+        description=_(u'Complete the following using information from your unexpired passport (required for international travel) or with your unexpired driver's license (for domestic travel only).'), 
+    )
+
+#     passportOK = schema.Bool(
+#         title=_(u'Passport Application Receipt Verified'),
+          description=_(u'For first-time passport applicants, the applicant must have submitted a copy of the receipt from the Clerk of Courts or the Post Office indicating payment for a passport.  For applicants renewing a passport, the applicant must have submitted either a copy of the recript for shipping or a copy of the shipping envelope.'),
+#         required=False,
+#     )
+#        
     #######################################################
     form.mode (lifestyle_label='display')
     lifestyle_label = schema.TextLine(
@@ -2284,11 +2313,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #
 #     medicalForm = schema.Text(
 #         title=_(u'Medical Form'),
-#         required=False,
-#     )
-#
-#     passportOK = schema.Bool(
-#         title=_(u'Passport information or receipt submitted'),
 #         required=False,
 #     )
 #
