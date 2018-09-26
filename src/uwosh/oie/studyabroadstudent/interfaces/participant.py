@@ -867,19 +867,32 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'forms',
         label=_(u"STEP II Forms"),
-        fields=['state_of_wisconsin_need_based_travel_grant_form_link',
+        fields=['stepii_label', 'applicationFeeOK', 'specialStudentFormOK', 'state_of_wisconsin_need_based_travel_grant_form_link',
                 'state_of_wisconsin_need_based_travel_grant_form_uploaded_file',
                 'special_student_form_for_undergraduate_admissions_form_link',
-                'special_student_form_for_undergraduate_admissions_uploaded_file',
+                'special_student_form_for_undergraduate_admissions_uploaded_file', 'transcriptsOK', 
                 'disciplinary_clearance_form_link',
                 'disciplinary_clearance_form_uploaded_file', 'cumulativeGPA']
     )
+        
     form.mode (stepii_label='display')
     stepii_label = schema.TextLine(
         title=_(u'STEP II'),
         description=_(u'To complete STEP II, print relevant documents, clearly print your responses, sign forms by hand where indicated, and follow instructions below.  Signatures cannot be typed.'), 
     )
         
+#     applicationFeeOK = schema.Bool(
+#         title=_(u'Application Fee Receipt Verified'),
+          description=_(u'Both of the following conditions must be met before checking this item in.  1) Has the fee been deposited into the correct account?  (293)  2) Does the receipt show the correct fee amount, based on residency?  U.S. State of Residency: (State of Residency RESPONSE should appear here from STEP I in PARTICIPANT PORTAL)
+#         required=False,
+#     )
+                        
+##     specialStudentFormOK = schema.Bool(
+#         title=_(u'Special/Non-degree Registration-Graduate Level Verified'),
+          description=u'This form must be completely filled out with answers appropriate to the questions before checking this item in.',        
+#         required=False,
+#     )
+#        
     form.mode(state_of_wisconsin_need_based_travel_grant_form_link="display")
     state_of_wisconsin_need_based_travel_grant_form_link = RichText(
         title=u'State of Wisconsin Need-based Travel Grant Form',
@@ -893,7 +906,13 @@ class IOIEStudyAbroadParticipant(Interface):
         description=u'Upload your completed form.',
         required=False,
     )
-        
+
+#     transcriptsOK = schema.Bool(
+#         title=_(u'Transcript (Unofficial) Verified'),
+          description=_u'All of the following conditions must be met before checking this item in.  1) The transcript must include the applicant's name & student ID.  2) The transcript must be from the CURRENT school as indicated in this application.  3) The transcript must include all terms of attendance.  4) There may be no pages missing. 5) The transcript must include the CUMULATIVE GPA.  6) The transcript may NOT be replaced by the UW Oshkosh STAR report.  7) If the transcript for the current institution of attendance does not include a cumulative GPA, and if the applicant is not in the first semester of university or college, the applicant must upload, assembled into one document, an unofficial transcript from the current institution plus an unofficial transcript from the instutitution attended prior to the current institution.
+#         required=False,
+#     )
+#
     form.mode(special_student_form_for_undergraduate_admissions_form_link="display")
     special_student_form_for_undergraduate_admissions_form_link = RichText(
         title=u'Special/Non-degree Registration-Undergraduate Level',
@@ -2212,11 +2231,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #         required=False,
 #     )
 #
-#     applicationFeeOK = schema.Bool(
-#         title=_(u'Application Fee Submitted'),
-#         required=False,
-#     )
-#
 #     UWSystemStatementOK = schema.Bool(
 #         title=_(u'UW System Statement of Responsibility Submitted'),
 #         required=False,
@@ -2230,11 +2244,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #
 #     withdrawalRefund = schema.Bool(
 #         title=_(u'Withdrawal and Refund Form Submitted'),
-#         required=False,
-#     )
-#
-#     transcriptsOK = schema.Bool(
-#         title=_(u'Transcripts Submitted'),
 #         required=False,
 #     )
 #
@@ -2253,11 +2262,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #         title=_(u'Special Student Form Required'),
 #         required=False,
 #         vocabulary=yes_no_none_vocabulary
-#     )
-#
-#     specialStudentFormOK = schema.Bool(
-#         title=_(u'Special Student Form Submitted'),
-#         required=False,
 #     )
 #
 #     creditOverloadFormRequired = schema.Choice(
