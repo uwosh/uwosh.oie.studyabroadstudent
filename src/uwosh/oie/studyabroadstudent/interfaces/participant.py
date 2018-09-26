@@ -821,7 +821,48 @@ class IOIEStudyAbroadParticipant(Interface):
         description=u'If a question appears under Applicant Question 5 above, type your response here.',
         required=False,
     )
+####################################################### 
+    model.fieldset(
+        'background',
+        label=_(u"Background"),
+        fields=['background_label', 'cbcCitation', 'cbcConviction', 'cbcArrest', 'cbcFutureCitation', 'cbcTruthful', 'cbcAdvising',]
+)
 
+    form.mode (background_label='display')
+    background_label = schema.TextLine(
+        title=_(u'Criminal Background Check'),
+        description=_(u'If you are required to apply for advance permission (a visa) to enter one or more of your host countries, your visa application may require you to disclose citations, convictions and/or arrests in a criminal record.  If you will be working with minors, or'), 
+        # TODO appears only if "Criminal Background Check" is 'yes' in the MGMT PORTAL.
+)
+#######################################################
+    model.fieldset(
+        'release',
+        label=_(u"Release"),
+        fields=['release_label', 'releasePictures', 'UWOshkoshRelease', 'certification']
+)
+
+    form.mode (release_label='display')
+    release_label = schema.TextLine(
+        title=_(u'Release'),
+)
+#     UWOshkoshRelease = schema.Choice(
+#         title=_(u''),
+#         description=_(u'I hereby agree to hold harmless and indemnify the Board of Regents of the University of Wisconsin System and the University of Wisconsin Oshkosh, their officers, agents and employees, from any and all liability, loss, damages, costs or expenses which are sustained, incurred or required arising out of my actions.'),
+# #        required=True,
+#         required=False,
+#         vocabulary=yes_no_none_vocabulary,
+#         #write_permission="UWOshOIE: Modify normal fields",
+#     )
+#
+#     certification = schema.Choice(
+#         title=_(u'Certification'),
+#         description=_(u'I certify that the information stated above is true and correct. If accepted to the program, I agree to follow all payment and withdrawal policies and to regularly check my UW Oshkosh email account for program information beginning today. If I am a non-UW Oshkosh student, I will use and submit an email address that I check regularly.'),
+# #        required=True,
+#         required=False,
+#         vocabulary=yes_no_none_vocabulary,
+#         #write_permission="UWOshOIE: Modify normal fields",
+#     )
+#
     #######################################################
     model.fieldset(
         'forms',
@@ -2125,24 +2166,6 @@ class IOIEStudyAbroadParticipant(Interface):
 # #        required=True,
 #         required=False,
 #         vocabulary=aware_vocabulary,
-#         #write_permission="UWOshOIE: Modify normal fields",
-#     )
-#
-#     UWOshkoshRelease = schema.Choice(
-#         title=_(u'Release of Liability'),
-#         description=_(u'I hereby agree to hold harmless and indemnify the Board of Regents of the University of Wisconsin System and the University of Wisconsin Oshkosh, their officers, agents and employees, from any and all liability, loss, damages, costs or expenses which are sustained, incurred or required arising out of my actions.'),
-# #        required=True,
-#         required=False,
-#         vocabulary=yes_no_none_vocabulary,
-#         #write_permission="UWOshOIE: Modify normal fields",
-#     )
-#
-#     certification = schema.Choice(
-#         title=_(u'Certification'),
-#         description=_(u'I certify that the information stated above is true and correct.  If accepted to the program, I agree to follow all payment and withdrawal policies and to regularly check my UW Oshkosh email account for program information beginning today.  If I am a non-UW Oshkosh student, I will use and submit an email address that I check regularly.'),
-# #        required=True,
-#         required=False,
-#         vocabulary=yes_no_none_vocabulary,
 #         #write_permission="UWOshOIE: Modify normal fields",
 #     )
 #
