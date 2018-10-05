@@ -359,7 +359,7 @@ class IOIEStudyAbroadProgram(Interface):
     program_cycle = schema.Choice(
         title=_(u'Program Cycle'),
         description=_(
-            u'How often will this program be offered?  This information will display in some marketing materials.  If it isn't possible to predict, leave this blank.'),
+            u'How often will this program be offered?  This information will display in some marketing materials.  If it isn''t possible to predict, leave this blank.'),
         vocabulary=program_cycle_vocabulary,
     )
 
@@ -371,8 +371,8 @@ class IOIEStudyAbroadProgram(Interface):
         required=True,
         value_type=DictRow(title=u"Pre-Travel Dates", schema=IPreTravelDatesRowSchema)
     )
-    
-        form.mode(travelDatesTransitionsAndDestinations='display')
+
+    form.mode(travelDatesTransitionsAndDestinations='display')
     travelDatesTransitionsAndDestinations = RichText(
         title=_(u'Travel Dates, Transitions & Destinations'),
         description=_(u'All transitions for this program are listed here.'),
@@ -436,7 +436,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Arrival at Destination & Insurance Start Date'),
         required=False,
     )
-        
+
     #######################################################
     # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
     #
@@ -768,7 +768,18 @@ class IOIEStudyAbroadProgram(Interface):
     model.fieldset(
         'oie_review_fieldset',
         label=_(u"OIE Review"),
-        fields=['program_schedule', 'director_recommendations', 'health_safety_security_documents', 'add_health_document_link', 'application_deadlines_label', 'step_1_and_2_application_deadline', 'step_3_application_deadline', 'step_4_application_deadline', 'application_items_label', 'flight_deviation_request_return_flight_only', 'flight_deviation_request_roundtrip_or_outbound_flight', 'hessen_isu_application', 'hessen_iwu_application', 'graduate_registration_form_and_graduate_special_non_degree_information_form', 'transfer_credit_prior_approval_form', 'application_items_travel_label', 'drivers_license_copy_for_india_visa_application', 'biographical_page_of_your_signed_passport', 'original_passport', 'official_passport_photo_for_india_visa_application', 'digital_passport_photo', ‘passport_size_photo’, ‘    indian_visa_application’, 'visa_required_for_us_citizens', 'yellow_fever_vaccination_certificate', 'application_items_background_label', 'credit_overload_form', 'application_items_other_label'], 
+        fields=['program_schedule', 'director_recommendations', 'health_safety_security_documents',
+                'add_health_document_link', 'application_deadlines_label', 'step_1_and_2_application_deadline',
+                'step_3_application_deadline', 'step_4_application_deadline', 'application_items_label',
+                'flight_deviation_request_return_flight_only', 'flight_deviation_request_roundtrip_or_outbound_flight',
+                'hessen_isu_application', 'hessen_iwu_application',
+                'graduate_registration_form_and_graduate_special_non_degree_information_form',
+                'transfer_credit_prior_approval_form', 'application_items_travel_label',
+                'drivers_license_copy_for_india_visa_application', 'biographical_page_of_your_signed_passport',
+                'original_passport', 'official_passport_photo_for_india_visa_application', 'digital_passport_photo',
+                'passport_size_photo', 'indian_visa_application', 'visa_required_for_us_citizens',
+                'yellow_fever_vaccination_certificate', 'application_items_background_label', 'credit_overload_form',
+                'application_items_other_label'],
     )
     program_schedule = schema.Choice(
         title=_(u'Program Schedule'),
@@ -829,7 +840,7 @@ class IOIEStudyAbroadProgram(Interface):
     flight_deviation_request_return_flight_only = schema.Choice(
         title=_(u'Application for Permission to Follow an Alternative Schedule on the Return Flight Only'),
         description=_(
-            u' Select 'yes' for all independent travel programs where OIE does not hold space on a group flight and for all programs on which OIE holds space on a group flight but may allow deviations on the return flight only on a case-by-case basis.'),
+            u' Select ''yes'' for all independent travel programs where OIE does not hold space on a group flight and for all programs on which OIE holds space on a group flight but may allow deviations on the return flight only on a case-by-case basis.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
@@ -837,7 +848,7 @@ class IOIEStudyAbroadProgram(Interface):
     flight_deviation_request_roundtrip_or_outbound_flight = schema.Choice(
         title=_(u'Application for Permission to Follow an Alternative Schedule on the Outbound Flight Only or on My Roundtrip Flights'),
         description=_(
-            u'Select 'yes' for all independent travel programs where OIE does not hold space on a group flight and for all programs on which OIE holds space on a group flight but may allow deviations on the outbound or roundtrip flights on a case-by-case basis.'),
+            u'Select ''yes'' for all independent travel programs where OIE does not hold space on a group flight and for all programs on which OIE holds space on a group flight but may allow deviations on the outbound or roundtrip flights on a case-by-case basis.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
@@ -845,7 +856,7 @@ class IOIEStudyAbroadProgram(Interface):
     hessen_isu_application = schema.Choice(
         title=_(u'Hessen/Wisconsin ISU Student Exchange Application'),
         description=_(
-            u'Select 'yes' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an ISU (International Summer University).'),
+            u'Select ''yes'' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an ISU (International Summer University).'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
@@ -853,7 +864,7 @@ class IOIEStudyAbroadProgram(Interface):
     hessen_iwu_application = schema.Choice(
         title=_(u'Hessen/Wisconsin IWU Student Exchange Application'),
         description=_(
-            u'Select 'yes' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an IWU (International Winter University).'),
+            u'Select ''yes'' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an IWU (International Winter University).'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
@@ -861,7 +872,7 @@ class IOIEStudyAbroadProgram(Interface):
     graduate_registration_form_and_graduate_special_non_degree_information_form = schema.Choice(
         title=_(u'Special/Non-Degree Registration - Graduate Level'),
         description=_(
-            u'Select 'yes' 1) if the program allows undergraduate level course enrollment by graduate level students or 2) if the program offers graduate level courses and accepts applicants who will not be UW Oshkosh degree-seeking students during the term that the program runs.'),
+            u'Select ''yes'' 1) if the program allows undergraduate level course enrollment by graduate level students or 2) if the program offers graduate level courses and accepts applicants who will not be UW Oshkosh degree-seeking students during the term that the program runs.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
@@ -869,7 +880,7 @@ class IOIEStudyAbroadProgram(Interface):
     transfer_credit_prior_approval_form = schema.Choice(
         title=_(u'Transfer Credit Prior Approval Form'),
         description=_(
-            u'Select 'yes' if one or more applicants may be enrolled in a host institution course that is eligible for transfer back to UW Oshkosh, without simultaneous enrollment at UW Oshkosh.'),
+            u'Select ''yes'' if one or more applicants may be enrolled in a host institution course that is eligible for transfer back to UW Oshkosh, without simultaneous enrollment at UW Oshkosh.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
@@ -881,9 +892,9 @@ class IOIEStudyAbroadProgram(Interface):
             u'If checked "yes", the items below will appear in the Participant Portal as an application item.'),
     )
     drivers_license_copy_for_india_visa_application = schema.Choice(
-        title=_(u'Driver's License or State Issued I.D. – Color Copy'),
+        title=_(u'Driver\'s License or State Issued I.D. – Color Copy'),
         description=_(
-            u'Select ‘yes’ if required by external partners or by the foreign consulate to apply for a visa.'),
+            u'Select ''yes'' if required by external partners or by the foreign consulate to apply for a visa.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
          # TODO default=none
@@ -891,7 +902,7 @@ class IOIEStudyAbroadProgram(Interface):
     biographical_page_of_your_signed_passport = schema.Choice(
         title=_(u'Passport-Digital Copy of Biographical Page of Your SIGNED Passport'),
         description=_(
-            u'Select 'yes' if required by external partners.'),
+            u'Select ''yes'' if required by external partners.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
@@ -899,7 +910,7 @@ class IOIEStudyAbroadProgram(Interface):
     original_passport = schema.Choice(
         title=_(u'Passport-Original SIGNED Passport'),
         description=_(
-            u'Select 'yes' if this is required to apply for a visa.'),
+            u'Select ''yes'' if this is required to apply for a visa.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
@@ -907,7 +918,7 @@ class IOIEStudyAbroadProgram(Interface):
     official_passport_photo_for_india_visa_application = schema.Choice(
         title=_(u'Photo: Official Paper Passport Photo'),
         description=_(
-            u'Select 'yes' if required by external partners or if required to apply for a visa with photo requirements that are consistent with an official U.S. passport photo.'),
+            u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are consistent with an official U.S. passport photo.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
@@ -915,28 +926,28 @@ class IOIEStudyAbroadProgram(Interface):
     digital_passport_photo = schema.Choice(
         title=_(u'Photo: Official Digital Passport Photo'),
         description=_(
-            u'Select 'yes' if required by external partners or if required to apply for a visa with photo requirements that are consistent with an official U.S. passport photo.'),
+            u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are consistent with an official U.S. passport photo.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
          # TODO default=none
    )
     passport_size_photo = schema.Choice(
         title=_(u'Photo: Paper'),
-        description=_(u'Select 'yes' if required by external partners or if required to apply for a visa with photo requirements that are not consistent with an official U.S. passport photo.'),
+        description=_(u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are not consistent with an official U.S. passport photo.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
-    )    
+    )
     indian_visa_application = schema.Choice(
         title=_(u'Photo: Digital'),
-        description=_(u'Select 'yes' if required by external partners or if required to apply for a visa with photo requirements that are not consistent with an official U.S. passport photo.'),
+        description=_(u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are not consistent with an official U.S. passport photo.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
-    ) 
-        visa_required_for_us_citizens = schema.Choice(
+    )
+    visa_required_for_us_citizens = schema.Choice(
         title=_(u'Visa Application - All U.S. Citizens'),
-        description=_(u'Select 'yes' if a visa is required of U.S. citizens.'),
+        description=_(u'Select ''yes'' if a visa is required of U.S. citizens.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
         # TODO default=none
@@ -948,7 +959,7 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary=yes_no_none_vocabulary,
         required=False,
          # TODO default=none
-   )
+    )
     form.mode(application_items_background_label='display')
     application_items_background_label = schema.TextLine(
         title=_(u'Application Items – Background Check'),
@@ -958,7 +969,7 @@ class IOIEStudyAbroadProgram(Interface):
     credit_overload_form = schema.Choice(
         title=_(u'Criminal Background Check'),
         description=_(
-            u'Select 'yes' if a foreign government requires this as part of the visa application process, if an external partner requires this as part of the visa application process, if participants will work with children who have not yet reached the age of majority in their home country, or if participants will work with children who are 17 years old or younger, whichever is the higher of the two ages. Use this option for a Criminal Background Check only when an FBI report is not specifically required.'),
+            u'Select ''yes'' if a foreign government requires this as part of the visa application process, if an external partner requires this as part of the visa application process, if participants will work with children who have not yet reached the age of majority in their home country, or if participants will work with children who are 17 years old or younger, whichever is the higher of the two ages. Use this option for a Criminal Background Check only when an FBI report is not specifically required.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
          # TODO default=none
@@ -1169,7 +1180,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
     compensation_paperwork = field.NamedFile(
         title=_(u'Compensation Paperwork'),
-        description=_('Upload compensation paperwork.  Include, for example, HR forms, IPAR form, and/or messaging that explains any difference from compensation approval in the “Application to Lead a Group Program Abroad/Away”.'),
+        description=_('Upload compensation paperwork. Include, for example, HR forms, IPAR form, and/or messaging that explains any difference from compensation approval in the "Application to Lead a Group Program Abroad/Away"'),
         required=False,
         # TODO "This field must be associated with each individual Program Leader & Program Co-leader.
     )
