@@ -200,7 +200,7 @@ class IOIEStudyAbroadProgram(Interface):
     calendar_year = schema.Choice(
         title=_(u'Calendar Year'),
         description=_(
-            u'Use the year during which the program runs; this is not the year that is associated with the term of study.  For example, a January interim program running from Jan 2-28, 2017 will be associated with "2017".   A program running Dec 28, 2016-Jan 28, 2017 will also be associated with "2017".'),
+            u'Select the calendar year during which the program will run.  This is not the year associated with the term of study.  For example, a January interim program running from Jan 2-28, 2019 will be associated with "2019".   A program running Dec 28, 2018-Jan 28, 2019 will also be associated with "2019".'),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.calendar_year',
         required=True,
     )
@@ -221,7 +221,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     countries = schema.List(
         title=_(u'Country or Countries'),
-        description=_(u''),
+        description=_(u'Country names will be added to your "Program Title" and used in marketing.'),
         required=True,
         value_type=schema.Choice(source=RegistryValueVocabulary('oiestudyabroadstudent.countries'))
     )
@@ -344,7 +344,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     cooperating_partners = schema.List(
         title=_(u'Cooperating Partners'),
-        description=_(u''),
+        description=_(u'Only entities listed on the UW System Preferred Provider List or academic institutions with a current affiliation agreement with UWO may be selected here.  All other cooperating partners must be selected by following UW System procurement policies.'),
         required=False,
         value_type=schema.Choice(vocabulary='uwosh.oie.studyabroadstudent.vocabularies.cooperatingpartner')
     )
@@ -353,7 +353,7 @@ class IOIEStudyAbroadProgram(Interface):
     model.fieldset(
         'dates_destinations_fieldset',
         label=_(u"Dates and Destinations"),
-        fields=['program_cycle', 'pretravel_dates'],
+        fields=['program_cycle', 'pretravel_dates', 'travelDatesTransitionsAndDestinations', 'add_transition_link', 'firstChoiceDatesFlexible', 'postTravelClassDates'],
     ),
 
     program_cycle = schema.Choice(
@@ -367,57 +367,38 @@ class IOIEStudyAbroadProgram(Interface):
     pretravel_dates = schema.List(
         title=_(u'Pre-Travel Class & Orientation Dates'),
         description=_(
-            u'Students expect to meet group members and their program leader or program advisor in a formal group setting at least once prior to travel.  Check with your department chair and/or College administration on pre-travel requirements specific to your unit. Students are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during your pre-travel class dates.  Students with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the student on the program.  For this reason, after we advertise these dates to students as mandatory, the dates shouldn''t be changed!'),
+            u'Students expect to meet group members and their program leader or program advisor in a formal group setting at least once prior to travel. Check with your department chair and/or College administration on pre-travel requirements specific to your unit. OIE recommends holding program orientation dates after the OIE Orientation Materials Submission Deadline. This may allow you to reinforce, rather than fully introduce, information that will be presented in the OIE orientation. Students are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during your pre-travel class dates. Students with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the student on the program. For this reason, after we advertise these dates to students as mandatory, the dates shouldn’t be changed!'),
         required=True,
         value_type=DictRow(title=u"Pre-Travel Dates", schema=IPreTravelDatesRowSchema)
     )
 
-    #######################################################
-    # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
-    #
-    model.fieldset(
-        'departure_from_oshkosh_fieldset',
-        label=_(u'Departure from Oshkosh'),
-        fields=['transportationFromOshkoshToDepartureAirport', 'airport_transfer', 'oshkoshDepartureLocation',
-                'oshkoshMeetingDateTime', 'oshkoshDepartureDateTime', 'milwaukeeDepartureDateTime',
-                'airportArrivalDateTime']
+    form.mode(travelDatesTransitionsAndDestinations='display')
+    travelDatesTransitionsAndDestinations = RichText(
+        title=_(u'Travel Dates, Transitions & Destinations'),
+        description=_(u'All transitions for this program are listed here.'),
+        required=False,
+        default=u'<em>There are currently no transitions</em>',
+    )
+    form.mode(add_transition_link="display")
+    add_transition_link = RichText(
+        required=False,
+        default=u'<em>You can add transitions after saving this program</em>',
     )
 
-    transportationFromOshkoshToDepartureAirport = schema.Choice(
-        title=_(u'Transportation from Oshkosh to departure airport'),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.airport_transfer'),
-        required=False,
+    firstChoiceDatesFlexible = schema.Choice(
+        title=_(u'My first-choice dates are flexible.'),
+        description=_(u'If yes, your OIE Program Manager may recommend changes based on flight availability or program component scheduling.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=True,
     )
 
-    oshkoshDepartureLocation = schema.Choice(
-        title=_('Oshkosh Departure Location'),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.locations'),
+    widget('postTravelClassDates', DataGridFieldFactory)
+    postTravelClassDates = schema.List(
+        title=_(u'Post-travel Class Dates'),
+        description=_(
+            u'Participants are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during post-travel class dates.  Participants with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the participant on the program.  For this reason, after we advertise these dates to participants as mandatory, the dates shouldn’t be changed!'),
+        value_type=DictRow(title=u'Post-travel Class Dates', schema=IPostTravelClassDatesRowSchema),
         required=False,
-        # TODO dropdown  [display only if "Transportation from Oshkosh to departure airport is "yes"]
-    )
-
-    oshkoshMeetingDateTime = schema.Datetime(
-        title=_(u'Oshkosh Meeting Date & Time'),
-        required=False,
-        # TODO =departure flight date/time minus 7.75 hours [display only if "Transportation from Oshkosh to departure airport is "yes"]
-    )
-
-    oshkoshDepartureDateTime = schema.Datetime(
-        title=_(u'Oshkosh Departure Date & Time'),
-        required=False,
-        # TODO [display only if "Transportation from Oshkosh to departure airport is "yes"]
-    )
-
-    milwaukeeDepartureDateTime = schema.Datetime(
-        title=_('Milwaukee Departure Date & Time'),
-        required=False,
-        # TODO [display only if "Transportation from Milwaukee to departure airport is "yes"]
-    )
-
-    airportArrivalDateTime = schema.Datetime(
-        title=_('Airport Arrival Date & Time'),
-        required=False,
-        # TODO '=departure flight date/time minus 3.5 hours [display only if "Transportation from Oshkosh to departure airport is "yes"]
     )
 
     #######################################################
@@ -425,10 +406,8 @@ class IOIEStudyAbroadProgram(Interface):
     #
     model.fieldset(
         'departure_flight_fieldset',
-        label=_('Departure Flight'),
-        fields=['airline', 'flightNumber', 'airport', 'departureDateTime', 'arrivalAtDestinationAndInsuranceStartDate',
-                'travelDatesTransitionsAndDestinations', 'add_transition_link', 'firstChoiceDatesFlexible',
-                'postTravelClassDates',]
+        label=_('Departure'),
+        fields=['airline', 'flightNumber', 'airport', 'departureDateTime', 'arrivalAtDestinationAndInsuranceStartDate',]
     )
 
     airline = schema.Choice(
@@ -458,33 +437,52 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    form.mode(travelDatesTransitionsAndDestinations='display')
-    travelDatesTransitionsAndDestinations = RichText(
-        title=_(u'Travel Dates, Transitions & Destinations'),
-        description=_(u'All transitions for this program are listed here.'),
-        required=False,
-        default=u'<em>There are currently no transitions</em>',
-    )
-    form.mode(add_transition_link="display")
-    add_transition_link = RichText(
-        required=False,
-        default=u'<em>You can add transitions after saving this program</em>',
+    #######################################################
+    # TODO Applicant should not see this field during the "Initial" state.  Can this be made visible AFTER transitioning from this state?
+    #
+    model.fieldset(
+        'departure_from_oshkosh_fieldset',
+        label=_(u'Departure from Oshkosh'),
+        fields=['transportationFromOshkoshToDepartureAirport', 'airport_transfer', 'oshkoshDepartureLocation',
+                'oshkoshMeetingDateTime', 'oshkoshDepartureDateTime', 'milwaukeeDepartureDateTime',
+                'airportArrivalDateTime']
     )
 
-    firstChoiceDatesFlexible = schema.Choice(
-        title=_(u'Are your first-choice dates flexible?'),
-        description=_(u'If yes, your OIE Program Manager will meet with you to discuss transition dates'),
-        vocabulary=yes_no_none_vocabulary,
-        required=True,
+    transportationFromOshkoshToDepartureAirport = schema.Choice(
+        title=_(u'Transportation is provided from Oshkosh'),
+        source=RegistryValueVocabulary('oiestudyabroadstudent.airport_transfer'),
+        required=False,
     )
 
-    widget('postTravelClassDates', DataGridFieldFactory)
-    postTravelClassDates = schema.List(
-        title=_(u'Post-travel Class Dates'),
-        description=_(
-            u'Participants are expected to ensure, prior to confirming participation on a study abroad/away program, that they have no other obligations during your post-travel class dates.  Participants with obligations during one or more dates/times must disclose this on their application and must have the approval of the Program Liaison to participate before the OIE will place the participant on the program.  For this reason, after we advertise these dates to participants as mandatory, the dates shouldn’t be changed!'),
-        value_type=DictRow(title=u'Post-travel Class Dates', schema=IPostTravelClassDatesRowSchema),
+    oshkoshDepartureLocation = schema.Choice(
+        title=_('Oshkosh Departure Location'),
+        source=RegistryValueVocabulary('oiestudyabroadstudent.locations'),
         required=False,
+        # TODO dropdown  [display only if "Transportation is provided from Oshkosh is "yes"]
+    )
+
+    oshkoshMeetingDateTime = schema.Datetime(
+        title=_(u'Oshkosh Meeting Date & Time'),
+        required=False,
+        # TODO =departure flight date/time minus 7.75 hours [display only if "Transportation is provided from Oshkosh is "yes"]
+    )
+
+    oshkoshDepartureDateTime = schema.Datetime(
+        title=_(u'Oshkosh Departure Date & Time'),
+        required=False,
+        # TODO =departure flight date/time minus 7.5 hours [display only if "Transportation is provided from Oshkosh is "yes"]
+    )
+
+    milwaukeeDepartureDateTime = schema.Datetime(
+        title=_('Milwaukee Departure Date & Time'),
+        required=False,
+        # TODO =departure flight date/time minus 6.0 hours [display only if "Milwaukee Departure Location” is not null]
+    )
+
+    airportArrivalDateTime = schema.Datetime(
+        title=_('Destination Arrival Date & Time'),
+        required=False,
+        # TODO '=departure flight date/time minus 3.5 hours [display only if "Transportation is provided from Oshkosh is "yes"]
     )
 
     #######################################################
@@ -492,7 +490,7 @@ class IOIEStudyAbroadProgram(Interface):
     #
     model.fieldset(
         'return_flight_fieldset',
-        label=_('Return Flight'),
+        label=_('Return'),
         fields=['airlineReturn', 'flightNumberReturn', 'airportReturn', 'returnDateTime', 'arrivalInWisconsinDate',
                 'insuranceEndDate', ]
     )
@@ -520,7 +518,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
 
     arrivalInWisconsinDate = schema.Datetime(
-        title=_(u'Arrival in Wisconsin'),
+        title=_(u'Arrival at Final Destination Airport'),
         required=False,
     )
 
@@ -539,7 +537,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
 
     transportationFromArrivalAirportToOshkosh = schema.Choice(
-        title=_(u'Transportation from arrival airport to Oshkosh'),
+        title=_(u'Transportation is Provided Back to Oshkosh'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.airport_transfer'),
         required=False,
     )
@@ -597,100 +595,105 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'The Program Liaison, Program Leader or Program Co-leader will interview each applicant'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
-        # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
+        # TODO yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in)
     )
 
     firstRecommendationRequired = schema.Choice(
-        title=_(u'1st Recommendation is required'),
+        title=_(u'1st Reference is required'),
         description=_(u'If "yes", this item appears in the Applicant Portal as an application item'),
-        vocabulary=yes_no_na_vocabulary,
+        vocabulary=yes_no_none_vocabulary,
         required=False,
-        # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
+        # TODO yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in)
     )
 
     secondRecommendationRequired = schema.Choice(
-        title=_(u'2nd Recommendation is required'),
+        title=_(u'2nd Reference is required'),
         description=_(u'If "yes", this item appears in the Applicant Portal as an application item'),
-        vocabulary=yes_no_na_vocabulary,
+        vocabulary=yes_no_none_vocabulary,
         required=False,
-        # TODO "yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in). This cannot be ""yes"" if ""A 1st Recommendation is required"" is ""no""."
+        # TODO "yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in). This cannot be ""yes"" if ""A 1st Recommendation is required"" is ""no""."
     )
 
     applicantQuestion1 = schema.Text(
-        title=_(u'All applicants must respond to this question 1'),
+        title=_(u'Question 1'),
         description=_(
-            u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+            u'You may add up to 5 short-answer questions to the participant application.  If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
         required=False,
+        # TODO max 200 characters; this question should be unavailable/greyed out if "approvalcriteria" is not filled in
     )
 
     applicantQuestion2 = schema.Text(
-        title=_(u'All applicants must respond to this question 2'),
+        title=_(u'Question 2'),
         description=_(
-            u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+            u'If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
         required=False,
+        # TODO max 200 characters; this question should be unavailable/greyed out if "approvalcriteria" is not filled in
     )
 
     applicantQuestion3 = schema.Text(
-        title=_(u'All applicants must respond to this question 3'),
+        title=_(u'Question 3'),
         description=_(
-            u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+            u'If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
         required=False,
+        # TODO max 200 characters; this question should be unavailable/greyed out if "approvalcriteria" is not filled in
     )
 
     applicantQuestion4 = schema.Text(
-        title=_(u'All applicants must respond to this question 4'),
+        title=_(u'Question 4'),
         description=_(
-            u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+            u'If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
         required=False,
+        # TODO max 200 characters; this question should be unavailable/greyed out if "approvalcriteria" is not filled in
     )
 
     applicantQuestion5 = schema.Text(
-        title=_(u'All applicants must respond to this question 5'),
+        title=_(u'Question 5'),
         description=_(
-            u'These questions will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
+            u'If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),
         required=False,
+        # TODO max 200 characters; this question should be unavailable/greyed out if "approvalcriteria" is not filled in
     )
 
     cvRequired = schema.Choice(
-        title=_(u'CV Required'),
+        title=_(u'CV or Resume'),
         description=_(
-            u'Complete this in English if studying in English; complete this in German if studying in German'),
-        vocabulary=yes_no_na_vocabulary,
+            u'If "yes", this item appears in the Applicant Portal as an application item.'),
+        vocabulary=yes_no_none_vocabulary,
         required=True,
-        # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
+        # TODO yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in)
     )
 
     letterOfMotivationRequired = schema.Choice(
-        title=_(u'Letter of Motivation Required'),
-        description=_(u'This must be typed'),
-        vocabulary=yes_no_na_vocabulary,
+        title=_(u'Letter of Motivation'),
+        description=_(u'If "yes", this item appears in the Applicant Portal as an application item.'),
+        vocabulary=yes_no_none_vocabulary,
         required=True,
-        # TODO yes/no (default=no if text box above is filled in; this question should be unavailable/greyed out if the text box above is not filled in)
+        # TODO yes/no (default=no; this question should be unavailable/greyed out if "approvalcriteria" is not filled in)
     )
 
     otherRequired = schema.Text(
-        title=_(u'Other Requirement(s)'),
+        title=_(u'Other'),
         required=False,
-        # TODO "this question should be unavailable/greyed out if the text box above is not filled in"
+        # TODO "this question should be unavailable/greyed out if "approvalcriteria" is not filled in"
     )
 
     #######################################################
     model.fieldset(
         'liaison_and_leadership_fieldset',
-        label=_(u"Liaison & Leadership"),
+        label=_(u"Liaison to the OIE"),
         fields=['liaison', 'program_leader', 'program_coleaders'],
     )
     liaison = schema.Choice(
-        title=_(u'Program Liaison to the OIE'),
+        title=_(u'Liaison to the OIE'),
         description=_(
-            u'The Liaison to the OIE communicates decisions related to program development and delivery to the Program Manager in the OIE and communicates program changes and updates to his/her unit administration. There is only one Liaison per program;  all decision-making at the unit level must be communicated to the OIE through the designated liaison. The Liaison may also include the OIE Program Manager and/or other OIE staff in conversations or seek input when appropriate. The Liaison may also serve as the On-site Program Leader and may also teach one or more of the program courses.'),
+            u'The Liaison to the OIE communicates decisions related to program development and delivery to the Program Manager in the OIE and communicates program changes and updates to his/her unit administration. There is only one Liaison per program;  all decisions made at the unit level must be communicated to the OIE through the designated liaison.  The Liaison may also serve as the On-site Program Leader and may teach one or more of the program courses.'),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.liaison',
         required=False,
     )
     program_leader = schema.Choice(
         title=_(u'On-site Program Leader'),
         description=_(
-            u'The On-site Program Leader is responsible for providing leadership for the group and for overseeing group health and safety.  The On-site Program Leader may also teach one or more of the program courses.'),
+            u'The On-site Program Leader is responsible for providing leadership for the group and for overseeing group health and safety.  The On-site Program Leader may also teach one or more of the program courses.  Select "no" if there will be NO Program Leader from UW Oshkosh accompanying the group.  Select "yes" and complete fields below related to Program Leadership if there will be a Program Leader from UW Oshkosh accompanying the group.'),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.program_leader',
         required=False,
     )
@@ -712,7 +715,7 @@ class IOIEStudyAbroadProgram(Interface):
     form.mode(courses="display")
     courses = RichText(
         title=u'UW Oshkosh Course Subject & Number',
-        description=u'All courses associated with your program, including courses that will be taught partially at UW Oshkosh and partially while away on the program.  Do not include courses that will be taught entirely at UWO, even when these courses are offered in preparation for the program away.  Contact the OIE to add a course (abroad@uwosh.edu).',
+        description=u'Include all courses that will be taught through this program.  Do not include courses that will be taught entirely at UWO, even when these courses are offered in preparation for the program away.  List existing courses only.  If the course you intend to use is not an existing course, your department must submit the course for formal approval through normal university channels prior to applying to use the course abroad/away.  Contact the OIE to add a course (abroad@uwosh.edu).',
         required=False,
         default=u'<em>There are currently no courses</em>',
     )
@@ -768,24 +771,26 @@ class IOIEStudyAbroadProgram(Interface):
         fields=['program_schedule', 'director_recommendations', 'health_safety_security_documents',
                 'add_health_document_link', 'application_deadlines_label', 'step_1_and_2_application_deadline',
                 'step_3_application_deadline', 'step_4_application_deadline', 'application_items_label',
-                'credit_overload_form', 'flight_deviation_request_return_flight_only',
-                'flight_deviation_request_roundtrip_or_outbound_flight',
+                'flight_deviation_request_return_flight_only', 'flight_deviation_request_roundtrip_or_outbound_flight',
+                'hessen_isu_application', 'hessen_iwu_application',
                 'graduate_registration_form_and_graduate_special_non_degree_information_form',
-                'biographical_page_of_your_signed_passport', 'visa_required_for_us_citizens', 'original_passport',
-                'official_passport_photo_for_india_visa_application', 'drivers_license_copy_for_india_visa_application',
-                'indian_visa_application', 'yellow_fever_vaccination_certificate', 'passport_size_photo',
-                'digital_passport_photo', 'transfer_credit_prior_approval_form', 'hessen_isu_application',
-                'hessen_iwu_application'], )
+                'transfer_credit_prior_approval_form', 'application_items_travel_label',
+                'drivers_license_copy_for_india_visa_application', 'biographical_page_of_your_signed_passport',
+                'original_passport', 'official_passport_photo_for_india_visa_application', 'digital_passport_photo',
+                'passport_size_photo', 'indian_visa_application', 'visa_required_for_us_citizens',
+                'yellow_fever_vaccination_certificate', 'application_items_background_label', 'credit_overload_form',
+                'application_items_other_label'],
+    )
     program_schedule = schema.Choice(
         title=_(u'Program Schedule'),
-        description=_(u''),  # TODO description?
+        description=_(u'The OIE Program Manager checks this box to confirm that the program schedule has been viewed.  Checking this box does not mean that activities on the schedule have been approved.  Further Risk Assessment will be completed after this initial review.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
-        # TODO check box or workflow?
+        # TODO check box or workflow? (for now, this will be just a check box.  It could become part of the workflow in the future.  The checkbox must be checked to move through the workflow.
     )
     director_recommendations = RichText(
         title=_(u'OIE Director Recommendation'),
-        description=_(u'including site-specific Health, Safety & Security  remarks'),
+        description=_(u'Include site-specific Health, Safety & Security remarks when appropriate.'),
         default_mime_type='text/plain',
         allowed_mime_types=('text/plain', 'text/html',),
         max_length=2500,
@@ -795,7 +800,7 @@ class IOIEStudyAbroadProgram(Interface):
     health_safety_security_documents = RichText(
         title=_(u'Health, Safety & Security Documents'),
         description=_(
-            u'For all sites, upload Department of State Country Information and CDC country-specific information.  For sites with a U.S. Travel Warning, or when otherwise warranted, upload OIE travel recommendation and supporting documents'),
+            u'For all sites, upload the OIE Risk Assessment, Department of State Country Information, and CDC country-specific information.  When warranted, upload additional risk forms and/or supporting documentation.'),
         required=False,
         default=u'<em>There are currently no documents</em>',
     )
@@ -811,90 +816,141 @@ class IOIEStudyAbroadProgram(Interface):
     )
     step_1_and_2_application_deadline = schema.Date(
         title=_(u'STEPs I & II Application Deadline'),
-        required=False,
+        description=_(u'The STEPs I & II application deadline must be the OIE default student application date, or a date that is two weeks prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: Last Friday in February (summer & fall semester programs); 2nd Friday in September (fall interim programs); last Friday in September (spring semester programs); 1st Friday of Spring Semester (spring interim programs).'),
+       required=False,
     )
     step_3_application_deadline = schema.Date(
         title=_(u'STEP III Application Deadline'),
+        description=_(u'The STEP III application deadline must be the OIE default student application date, or a date that is one week prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: 1st Friday in March (summer & fall semester programs); 3rd Friday in September (fall interim programs); 1st Friday in October (spring semester programs); 2nd Friday of Spring Semester (spring interim programs).'),
         required=False,
     )
     step_4_application_deadline = schema.Date(
         title=_(u'STEP IV Application Deadline'),
+        description=_(u'The STEP IV application deadline must take into consideration external deadlines and processing time in the OIE from the point of receiving completed application documents, and the anticipated dates on which documents can be sent to external partners and received by them.'),
         required=False,
     )
 
     form.mode(application_items_label='display')
     application_items_label = schema.TextLine(
+        title=_(u'Application Items - Internal Forms'),
         description=_(
-            u'Application Items: If checked "yes", the items below will appear in the Participant Portal as an application item.'),
-        # TODO Let's talk through this one.  Is there a way for us to select the documents that need to be displayed in the application by group and for invidual participants?
-    )
-    credit_overload_form = schema.Choice(
-        title=_(u'Credit Overload Form'),
-        description=_(
-            u'Required ONLY IF you will exceed 22 credits total, including study abroad & interim credits, during the semester in which you will study abroad OR if you will exceed 9 credits total, including study abroad credits, during a summer study abroad program.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
+            u'If checked "yes", the items below will appear in the Participant Portal as an application item.'),
+        # TODO Let's talk through this one.  Is there a way for us to select the documents that need to be displayed in the application by group and for individual participants?
     )
     flight_deviation_request_return_flight_only = schema.Choice(
-        title=_(u'Flight Deviation Request-Return Flight Only'),
+        title=_(u'Application for Permission to Follow an Alternative Schedule on the Return Flight Only'),
         description=_(
-            u'Required ONLY IF you plan to travel to your program site following the schedule provided by the UWO OIE, but return to the U.S. following your own schedule.'),
+            u' Select ''yes'' for all independent travel programs where OIE does not hold space on a group flight and for all programs on which OIE holds space on a group flight but may allow deviations on the return flight only on a case-by-case basis.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     flight_deviation_request_roundtrip_or_outbound_flight = schema.Choice(
-        title=_(u'Flight Deviation Request-Roundtrip or Outbound flight'),
+        title=_(u'Application for Permission to Follow an Alternative Schedule on the Outbound Flight Only or on My Roundtrip Flights'),
         description=_(
-            u'Required ONLY IF you plan to travel to your program site and return to the U.S. following your own schedule.'),
+            u'Select ''yes'' for all independent travel programs where OIE does not hold space on a group flight and for all programs on which OIE holds space on a group flight but may allow deviations on the outbound or roundtrip flights on a case-by-case basis.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
+    )
+    hessen_isu_application = schema.Choice(
+        title=_(u'Hessen/Wisconsin ISU Student Exchange Application'),
+        description=_(
+            u'Select ''yes'' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an ISU (International Summer University).'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+        # TODO default=none
+    )
+    hessen_iwu_application = schema.Choice(
+        title=_(u'Hessen/Wisconsin IWU Student Exchange Application'),
+        description=_(
+            u'Select ''yes'' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an IWU (International Winter University).'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+        # TODO default=none
     )
     graduate_registration_form_and_graduate_special_non_degree_information_form = schema.Choice(
-        title=_(u'Graduate Registration Form and Graduate Special/Non-Degree Information Form'),
+        title=_(u'Special/Non-Degree Registration - Graduate Level'),
         description=_(
-            u'Required ONLY IF you are not in a Graduate program at UW Oshkosh and want to earn graduate level credit, or if you are in a Graduate program at UW Oshkosh and want to earn undergraduate level credit.'),
+            u'Select ''yes'' 1) if the program allows undergraduate level course enrollment by graduate level students or 2) if the program offers graduate level courses and accepts applicants who will not be UW Oshkosh degree-seeking students during the term that the program runs.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
-    biographical_page_of_your_signed_passport = schema.Choice(
-        title=_(u'Biographical Page of your SIGNED Passport'),
+    transfer_credit_prior_approval_form = schema.Choice(
+        title=_(u'Transfer Credit Prior Approval Form'),
         description=_(
-            u'This is required by our partner abroad.  Make an electronic copy of the pages of your passport that show your signature and your photo and upload the copy.'),
+            u'Select ''yes'' if one or more applicants may be enrolled in a host institution course that is eligible for transfer back to UW Oshkosh, without simultaneous enrollment at UW Oshkosh.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
-    visa_required_for_us_citizens = schema.Choice(
-        title=_(u'Visa'),
-        description=_(u'Is a visa required for U.S. Citizens?'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
-    )
-    original_passport = schema.Choice(
-        title=_(u'Original Passport'),
+    form.mode(application_items_travel_label='display')
+    application_items_travel_label = schema.TextLine(
+        title=_(u'Application Items – Travel & Identification'),
         description=_(
-            u'You must submit your signed, original passport valid for 6 months from the date of arrival in the foreign country. It must have at least TWO side-by-side blank pages (in addition to the notes pages).   Your passport will be sent to the Consulate, along with your visa application, to apply for a visa.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
-    )
-    official_passport_photo_for_india_visa_application = schema.Choice(
-        title=_(u'Official Passport Photo for India Visa Application'),
-        description=_(
-            u'Required regardless of whether or not you already have a passport.  Submit 1 passport-size photo (2” x 2”) taken by a professional passport photographer. Write your name on the back of the photo prior to submitting. No glasses, no white shirts, long hair must be behind the shoulders, and you must have a neutral expression (not smiling) in the photo.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
+            u'If checked "yes", the items below will appear in the Participant Portal as an application item.'),
     )
     drivers_license_copy_for_india_visa_application = schema.Choice(
-        title=_(u'Driver''s License Copy for India Visa Application'),
+        title=_(u'Driver\'s License or State Issued I.D. – Color Copy'),
         description=_(
-            u'The address on your driver''s license must match the PRESENT address that you''ll list on your visa application.  If your Driver''s License or State Issued I.D. doesn''t match the PRESENT address you''ll list on your visa application, you must submit a major utility bill (Water, Gas, Electric, Sewage).'),
+            u'Select ''yes'' if required by external partners or by the foreign consulate to apply for a visa.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+         # TODO default=none
+   )
+    biographical_page_of_your_signed_passport = schema.Choice(
+        title=_(u'Passport-Digital Copy of Biographical Page of Your SIGNED Passport'),
+        description=_(
+            u'Select ''yes'' if required by external partners.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+        # TODO default=none
+    )
+    original_passport = schema.Choice(
+        title=_(u'Passport-Original SIGNED Passport'),
+        description=_(
+            u'Select ''yes'' if this is required to apply for a visa.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+        # TODO default=none
+    )
+    official_passport_photo_for_india_visa_application = schema.Choice(
+        title=_(u'Photo: Official Paper Passport Photo'),
+        description=_(
+            u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are consistent with an official U.S. passport photo.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+        # TODO default=none
+    )
+    digital_passport_photo = schema.Choice(
+        title=_(u'Photo: Official Digital Passport Photo'),
+        description=_(
+            u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are consistent with an official U.S. passport photo.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+         # TODO default=none
+   )
+    passport_size_photo = schema.Choice(
+        title=_(u'Photo: Paper'),
+        description=_(u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are not consistent with an official U.S. passport photo.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+        # TODO default=none
     )
     indian_visa_application = schema.Choice(
-        title=_(u'Indian Visa Application'),
-        description=_(u'The OIE will send instructions on how to complete this'),
+        title=_(u'Photo: Digital'),
+        description=_(u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are not consistent with an official U.S. passport photo.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
+    )
+    visa_required_for_us_citizens = schema.Choice(
+        title=_(u'Visa Application - All U.S. Citizens'),
+        description=_(u'Select ''yes'' if a visa is required of U.S. citizens.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=False,
+        # TODO default=none
     )
     yellow_fever_vaccination_certificate = schema.Choice(
         title=_(u'Yellow Fever Vaccination Certificate'),
@@ -902,40 +958,27 @@ class IOIEStudyAbroadProgram(Interface):
             u'Required ONLY IF you will have traveled to any of the countries listed on this website within 90 days of departure to your program site abroad.  A copy of the certificate should be sent in with your visa application as a precaution against visa denial.  wwwnc.cdc.gov/travel/yellowbook/2016/infectious-diseases-related-to-travel/yellow-fever'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+         # TODO default=none
     )
-    passport_size_photo = schema.Choice(
-        title=_(u'Passport-size Photo'),
-        description=_(u'Upload a digital photo.  To be used for your student ID at your host institution.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
-    )
-    digital_passport_photo = schema.Choice(
-        title=_(u'Digital Passport Photo'),
+    form.mode(application_items_background_label='display')
+    application_items_background_label = schema.TextLine(
+        title=_(u'Application Items – Background Check'),
         description=_(
-            u'When you had your passport photos taken, you probably received two photos but sent only one of these to the passport office with your application. Scan the passport photo you didn''t send.  If you already had a passport, you''ll need to have a new passport photo taken; you may NOT use a photo that is not an official passport photo and you may not scan the photo that is already in your passport.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
+            u'If checked "yes", the items below will appear in the Participant Portal as an application item.'),
     )
-    transfer_credit_prior_approval_form = schema.Choice(
-        title=_(u'Transfer Credit Prior Approval form'),
+    credit_overload_form = schema.Choice(
+        title=_(u'Criminal Background Check'),
         description=_(
-            u'The OIE recommends choosing twice as many courses as you plan to take per semester and completing the Transfer Credit Prior Approval for all of these courses. In the case that a course you intended to take abroad is full, not offered or is not what you expected, you will then be able to easily make changes to your enrollment while abroad.  If you complete more than one form, combine all of the forms into one file before uploading.'),
+            u'Select ''yes'' if a foreign government requires this as part of the visa application process, if an external partner requires this as part of the visa application process, if participants will work with children who have not yet reached the age of majority in their home country, or if participants will work with children who are 17 years old or younger, whichever is the higher of the two ages. Use this option for a Criminal Background Check only when an FBI report is not specifically required.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
-    )
-    hessen_isu_application = schema.Choice(
-        title=_(u'Hessen ISU Application'),
+         # TODO default=none
+   )
+    form.mode(application_items_other_label='display')
+    application_items_other_label = schema.TextLine(
+        title=_(u'Application Items – Other'),
         description=_(
-            u'Type your responses.  Sign by hand before saving an electronic copy of the document to upload.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
-    )
-    hessen_iwu_application = schema.Choice(
-        title=_(u'Hessen IWU Application'),
-        description=_(
-            u'Type your responses.  Sign by hand before saving an electronic copy of the document to upload.'),
-        vocabulary=yes_no_none_vocabulary,
-        required=False,
+            u'If checked "yes", the items below will appear in the Participant Portal as an application item.'),
     )
 
     #######################################################
@@ -977,6 +1020,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Provider 01 Awarded Contract'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     proposal_01 = field.NamedFile(
         title=_('Proposal 01'),
@@ -994,6 +1038,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Provider 02 Awarded Contract'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
+        # TODO default=none
     )
     proposal_02 = field.NamedFile(
         title=_('Proposal 02'),
@@ -1052,13 +1097,13 @@ class IOIEStudyAbroadProgram(Interface):
     budget_spreadsheet = field.NamedFile(
         title=_(u'Budget Spreadsheet'),
         description=_(
-            u'Upload a draft budget spreadsheet for review.  Replace this draft with updated budget spreadsheets until the review process is complete.  The budget spreadsheet in place as of the end of the review process must be maintained as a reference for the published program fee estimated.  Do not replace the final budget spreadsheet after the review process has ended.'),
+            u'Upload a draft budget spreadsheet for review.  Replace this draft with updated budget spreadsheets until the review process is complete.  The budget spreadsheet in place as of the end of the review process must be maintained as a reference for the published program fee estimate.  Do not replace the final budget spreadsheet after the review process has ended.'),
         required=False,
     )
     fecop_worksheet = field.NamedFile(
         title=_(u'Full Estimated Cost of Participation (FECOP) Worksheet'),
         description=_(
-            u'Upload a draft FECOP worksheets for review.  Replace this draft with updated FECOPs until the review process is complete.  The FECOP in place as of the "Application Intake in Progress" state will be the one shared with participants for application purposes.  Therefore, do not replace this FECOP after the review process has ended.'),
+            u'Upload a draft FECOP worksheet for review.  Replace this draft with updated FECOPs until the review process is complete.  The FECOP in place as of the "Application Intake in Progress" state will be the one shared with participants for application purposes.  Therefore, do not replace this FECOP after the review process has ended.'),
         required=False,
     )
 
@@ -1067,8 +1112,8 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(u'Required Prior to Publishing Initial Fee'),
     )
     program_fee = schema.Text(
-        title=_(
-            u'Add the official Program Fee estimate from the FECOP ($XXXX based on a minimum of XX participants).  If the official estimate on the FECOP is a fee range, the fee at the top end of the range must be used here.  Information in this field will display as the official fee, or the official fee range, on the OIE website upon transition to "Application Intake in Progress".'),
+        title=_(u'Full Estimated Cost of Participation'),
+        description=_(u'Add the official Full Estimated Cost of Participation from the FECOP ($XXXX based on a minimum of XX participants).  If the official estimate on the FECOP is a fee range, the fee at the top end of the range must be used here.  Information in this field will display as the official Full Estimated Cost of Participation on the OIE website upon transition to "Application Intake in Progress".'),
         default=u'TBA',
         required=False,
     )
@@ -1095,7 +1140,7 @@ class IOIEStudyAbroadProgram(Interface):
     form.mode(required_prior_to_publishing_initial_fee_label_2='display')
     required_prior_to_publishing_initial_fee_label_2 = schema.TextLine(
         description=_(
-            u'"Required Prior to Publishing Final Fee: Provider proposals and flight proposals on ""Proposals"" tab must also be complete."'),
+            u'Required Prior to Publishing Final Fee: Provider proposals and flight proposals on "Proposals" tab must also be complete.'),
     )
     final_participant_fee_statement = field.NamedFile(
         title=_(u'Final Participant Fee Statement'),
@@ -1114,12 +1159,12 @@ class IOIEStudyAbroadProgram(Interface):
 
     form.mode(required_prior_to_confirming_ter_received_label='display')
     required_prior_to_confirming_ter_received_label = schema.TextLine(
-        description=_(u'Required Prior to Confirming that TER has been Received'),
+        description=_(u'Required Prior to Confirming that the TER has been Received'),
     )
     travel_expense_report = field.NamedFile(
         title=_(u'Travel Expense Report'),
         description=_(
-            'Upload OIE Travel Expense Report Accounting forms plus all related receipts.  Receipts must be numbered to match line items on the accounting form and must be organized in number order.'),
+            'Upload a digital copy of OIE Travel Expense Report Accounting forms plus all related receipts.  Receipts must be numbered to match line items on the accounting form and must be organized in number order.'),
         required=False,
         # TODO This field must be associated with each individual Program Leader & Program Co-leader.
     )
@@ -1135,14 +1180,14 @@ class IOIEStudyAbroadProgram(Interface):
     )
     compensation_paperwork = field.NamedFile(
         title=_(u'Compensation Paperwork'),
-        description=_('Upload compensation paperwork'),
+        description=_('Upload compensation paperwork. Include, for example, HR forms, IPAR form, and/or messaging that explains any difference from compensation approval in the "Application to Lead a Group Program Abroad/Away"'),
         required=False,
         # TODO "This field must be associated with each individual Program Leader & Program Co-leader.
     )
     participant_refund_spreadsheet = field.NamedFile(
         title=_(u'Participant Refund Spreadsheet'),
         description=_(
-            'Upload the participant refund spreadsheet.  This spreadsheet will be accessed by student accounts for account adjustment purposes'),
+            'Upload the participant refund spreadsheet.  This spreadsheet will be accessed by student accounts for account adjustment purposes.'),
         required=False,
     )
 
@@ -1152,26 +1197,26 @@ class IOIEStudyAbroadProgram(Interface):
     )
     account_transfers = schema.Choice(
         title=_(u'Account Transfers'),
-        description=_(u'Confirm that all transfers into and out of the account are complete'),
+        description=_(u'Confirm that all transfers into and out of the account are complete.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
     )
     program_revenue = schema.Choice(
         title=_(u'Program Revenue'),
         description=_(
-            u'Confirm that all program revenue has been received.  Confirm that the correct program revenue amount is in the account'),
+            u'Confirm that all program revenue has been received.  Confirm that the correct program revenue amount is in the account.'),
         vocabulary=yes_no_none_vocabulary,
         required=False,
     )
     final_budget_documentation = field.NamedFile(
         title=_(u'Final Budget Documentation'),
         description=_(
-            'Upload the final budget spreadsheet & supporting financial documents.  Do not upload Travel Expense Report or related receipts here'),
+            'Upload the final budget spreadsheet & supporting financial documents.  Do not upload Travel Expense Report or related receipts here.'),
         required=False,
     )
     close_account = field.NamedFile(
         title=_(u'Close Account'),
-        description=_('Upload request to close the account'),
+        description=_('Upload request to close the account.'),
         required=False,
     )
 
@@ -1202,53 +1247,53 @@ class IOIEStudyAbroadProgram(Interface):
 
     form.mode(required_prior_to_confirming_program_to_run_label='display')
     required_prior_to_confirming_program_to_run_label = schema.TextLine(
-        description=_(u'Required prior to confirming program to run'),
+        description=_(u'Required Prior to Confirming Program to Run'),
     )
     participant_orientation_url = schema.URI(
         title=_(u'Participant Orientation'),
-        description=_(u'Insert a link to the participant orientation'),
+        description=_(u'Add detail on how to complete orientation.  Detail will show as participant instructions in the Participant Portal.'),
         required=False,
     )
 
     form.mode(proof_of_service_label='display')
     proof_of_service_label = schema.TextLine(
-        description=_(u'Proof of Service. Required prior to scheduling the operational briefing.'),
+        description=_(u'Required Prior to Scheduling the Operational Briefing'),
     )
     final_itinerary = field.NamedFile(
         title=_(u'Final Itinerary'),
-        description=_('Upload a clean copy of the official, final program itinerary'),
+        description=_('Upload a clean copy of the official, final program itinerary.'),
         required=False,
     )
     bus_contract_departure = field.NamedFile(
         title=_(u'Bus Contract (departure)'),
-        description=_('Upload the bus contract'),
+        description=_('Upload the bus contract.'),
         required=False,
     )
     bus_contract_return = field.NamedFile(
         title=_(u'Bus Contract (return)'),
-        description=_('Upload the bus contract'),
+        description=_('Upload the bus contract.'),
         required=False,
     )
     e_tickets = field.NamedFile(
         title=_(u'E-tickets'),
         description=_(
-            'Upload group e-tickets.  Individual traveler tickets are uploaded by the individual through the participant portal'),
+            'Upload group e-tickets.  Individual traveler tickets are uploaded by the individual through the participant portal.'),
         required=False,
     )
     vouchers = field.NamedFile(
         title=_(u'Vouchers'),
-        description=_('Upload payment vouchers'),
+        description=_('Upload payment vouchers.'),
         required=False,
     )
     insurance_invoice = field.NamedFile(
         title=_(u'Insurance Invoice'),
         description=_(
-            'Upload the insurance invoice (the document that includes the partricipant ID) for all Program Leaders, Program Co-leaders and program participants'),
+            'Upload the insurance invoice (the document that includes the partricipant ID) for all Program Leaders, Program Co-leaders and program participants.'),
         required=False,
     )
     visas = field.NamedFile(
         title=_(u'Visas'),
-        description=_('Upload visa copies'),
+        description=_('Upload visa copies.'),
         required=False,
     )
     other = field.NamedFile(
@@ -1271,17 +1316,17 @@ class IOIEStudyAbroadProgram(Interface):
     )
     participant_evaluations = field.NamedFile(
         title=_(u'Participant Evaluations'),
-        description=_('Upload participant evaluations'),
+        description=_('Upload participant evaluations.'),
         required=False,
     )
     post_program_evaluation = field.NamedFile(
         title=_(u'Post-program Evaluation'),
-        description=_('Upload Liaison and/or Program Leader and/or Program Co-leader program evaluation'),
+        description=_('Upload Liaison and/or Program Leader and/or Program Co-leader program evaluation.'),
         required=False,
     )
     incident_report = field.NamedFile(
         title=_(u'Incident Report'),
-        description=_('Upload incident report'),
+        description=_('Upload incident report.'),
         required=False,
     )
     total_number_of_high_school_students = schema.Int(

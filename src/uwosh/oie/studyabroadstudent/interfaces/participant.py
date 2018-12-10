@@ -173,7 +173,7 @@ class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('studentID')
     studentID = schema.TextLine(
         title=_(u'UW Oshkosh Student ID'),
-        description=_(u'(if applicable)'),
+        description=_(u'Do not include the initial "W" in the UW Oshkosh ID.  If you do not have a UW Oshkosh ID (current or past), leave this blank.'),
         required=False,
         constraint=validate_student_id,
     )
@@ -182,93 +182,103 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'contact',
         label=_(u"Contact Information"),
-        fields=['mainPhone', 'otherPhone', 'otherContactService', 'otherContactID', 'localAddr',
+        fields=['stepi_label', 'contact_label', 'mainPhone', 'otherPhone', 'otherContactService', 'otherContactID', 'localAddr',
                 'localAddrApt', 'localCity', 'localState', 'localZip', 'homeAddr1', 'homeAddrApt',
                 'homeCity', 'homeState', 'homeZip', 'homeCountry', ]
     )
 
+    form.mode(stepi_label='display')
+    stepi_label = schema.TextLine(
+        title=_(u'STEP I'),
+     )
+
+    form.mode(contact_label='display')
+    contact_label = schema.TextLine(
+        title=_(u'Contact Information'),
+    )
+
     mainPhone = schema.TextLine(
         title=_(u'Main phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         required=True,
     )
 
     otherPhone = schema.TextLine(
         title=_(u'Other phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         required=False,
     )
 
     otherContactService = schema.Choice(
-        title=_(u'Other contact service'),
-        description=_(u'Please choose one'),
+        title=_(u'Other Contact Service'),
+        description=_(u'Select the service you use most often, or leave blank if you don\'t use any of these services.'),
         required=False,
         vocabulary=socialmediaservice,
     )
 
     otherContactID = schema.TextLine(
         title=_(u'Other contact service username or ID'),
-        description=_(u'Please enter your username or ID on the service you chose above'),
+        description=_(u'Enter your username or ID for the service you chose above, or leave blank if you did not select a service above.'),
         required=False,
     )
 
     localAddr = schema.TextLine(
-        title=_(u'Local Address'),
+        title=_(u'Local Address: Street'),
         required=True,
     )
 
     localAddrApt = schema.TextLine(
-        title=_(u'Local Address Apartment Number'),
+        title=_(u'Local Address: Apartment Number'),
         required=False,
     )
 
     localCity = schema.TextLine(
-        title=_(u'Local City'),
+        title=_(u'Local Address: City'),
         required=True,
     )
 
     localState = schema.TextLine(
-        title=_(u'Local State'),
+        title=_(u'Local Address: State'),
         default=_(u'WI'),
         required=True,
     )
 
     localZip = schema.TextLine(
-        title=_(u'Local Zip Code'),
+        title=_(u'Local Address: Zip Code'),
         default=_(u'54901'),
         required=True,
     )
 
     homeAddr1 = schema.TextLine(
-        title=_(u'Home Address'),
+        title=_(u'Home Address: Street'),
         required=True,
     )
 
     homeAddrApt = schema.TextLine(
-        title=_(u'Home Address Apartment Number'),
+        title=_(u'Home Address: Apartment Number'),
         required=False,
     )
 
     homeCity = schema.TextLine(
-        title=_(u'Home City'),
+        title=_(u'Home Address: City'),
         description=_(u''),
         required=True,
     )
 
     homeState = schema.TextLine(
-        title=_(u'Home State'),
+        title=_(u'Home Address: State/Province/Department'),
         description=_(u''),
         required=True,
     )
 
     homeZip = schema.TextLine(
-        title=_(u'Home Zip or Postal Code'),
+        title=_(u'Home Address: Zip or Postal Code'),
         description=_(u''),
         required=True,
     )
 
     homeCountry = schema.Choice(
-        title=_(u'Home Country'),
+        title=_(u'Home Address: Country'),
         required=True,
         source=RegistryValueVocabulary('oiestudyabroadstudent.countries'),
     )
@@ -277,7 +287,7 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'emergency_contact',
         label=_(u"Emergency Contact"),
-        fields=['emerg1fullname', 'emerg1relationship', 'emerg1mail_personal',
+        fields=['emergencyContacts_label', 'emerg1fullname', 'emerg1relationship', 'emerg1mail_personal',
                 'emerg1mail_work', 'emerg1phone_main', 'emerg1phone_other',
                 'emerg2fullname', 'emerg2relationship', 'emerg2mail_personal',
                 'emerg2mail_work', 'emerg2phone_main', 'emerg2phone_other',
@@ -288,42 +298,48 @@ class IOIEStudyAbroadParticipant(Interface):
                 ]
     )
 
+    form.mode (emergencyContacts_label='display')
+    emergencyContacts_label = schema.TextLine(
+        title=_(u'Emergency Contact(s)'),
+        required=False
+    )
+
     emerg1fullname = schema.TextLine(
-        title=_(u'Emergency Contact 1 Full Name'),
+        title=_(u'1 Full Name'),
         #        required=True,
         required=False,
     )
 
     emerg1relationship = schema.Choice(
-        title=_(u'Emergency Contact 1 Relationship to You'),
+        title=_(u'1 Relationship to You'),
         required=False,
         vocabulary=contactrelationship,
     )
 
     emerg1mail_personal = schema.TextLine(
-        title=_(u'Emergency Contact 1 Personal Email'),
-        description=_(u'Strongly recommended'),
+        title=_(u'1 Main Email'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg1mail_work = schema.TextLine(
-        title=_(u'Emergency Contact 1 Work Email'),
-        description=_(u'Strongly recommended'),
+        title=_(u'1 Other Email'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg1phone_main = schema.TextLine(
-        title=_(u'Emergency Contact 1 Main Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        title=_(u'1 Main Phone'),
+        description=_(u'Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
 
     emerg1phone_other = schema.TextLine(
-        title=_(u'Emergency Contact 1 Other Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        title=_(u'1 Other Phone'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
@@ -331,41 +347,41 @@ class IOIEStudyAbroadParticipant(Interface):
     ###############
 
     emerg2fullname = schema.TextLine(
-        title=_(u'Emergency Contact 2 Full Name'),
+        title=_(u'2 Full Name'),
         #        required=True,
         required=False,
     )
 
     emerg2relationship = schema.Choice(
-        title=_(u'Emergency Contact 2 Relationship to You'),
+        title=_(u'2 Relationship to You'),
         required=False,
         vocabulary=contactrelationship,
     )
 
     emerg2mail_personal = schema.TextLine(
-        title=_(u'Emergency Contact 2 Personal Email'),
-        description=_(u'Strongly recommended'),
+        title=_(u'2 Main Email'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg2mail_work = schema.TextLine(
-        title=_(u'Emergency Contact 2 Work Email'),
-        description=_(u'Strongly recommended'),
+        title=_(u'2 Other Email'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg2phone_main = schema.TextLine(
-        title=_(u'Emergency Contact 2 Main Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        title=_(u'2 Main Phone'),
+        description=_(u'Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
 
     emerg2phone_other = schema.TextLine(
-        title=_(u'Emergency Contact 2 Other Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        title=_(u'2 Other Phone'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
@@ -373,41 +389,41 @@ class IOIEStudyAbroadParticipant(Interface):
     #############
 
     emerg3fullname = schema.TextLine(
-        title=_(u'Emergency Contact 3 Full Name'),
+        title=_(u'3 Full Name'),
         #        required=True,
         required=False,
     )
 
     emerg3relationship = schema.Choice(
-        title=_(u'Emergency Contact 3 Relationship to You'),
+        title=_(u'3 Relationship to You'),
         required=False,
         vocabulary=contactrelationship,
     )
 
     emerg3mail_personal = schema.TextLine(
-        title=_(u'Emergency Contact 3 Personal Email'),
-        description=_(u'Strongly recommended'),
+        title=_(u'3 Main Email'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg3mail_work = schema.TextLine(
-        title=_(u'Emergency Contact 3 Work Email'),
-        description=_(u'Strongly recommended'),
+        title=_(u'3 Other Email'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg3phone_main = schema.TextLine(
-        title=_(u'Emergency Contact 3 Main Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        title=_(u'3 Main Phone'),
+        description=_(u'Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
 
     emerg3phone_other = schema.TextLine(
-        title=_(u'Emergency Contact 3 Other Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        title=_(u'3 Other Phone'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
@@ -415,41 +431,41 @@ class IOIEStudyAbroadParticipant(Interface):
     #############
 
     emerg4fullname = schema.TextLine(
-        title=_(u'Emergency Contact 4 Full Name'),
+        title=_(u'4 Full Name'),
         #        required=True,
         required=False,
     )
 
     emerg4relationship = schema.Choice(
-        title=_(u'Emergency Contact 4 Relationship to You'),
+        title=_(u'4 Relationship to You'),
         required=False,
         vocabulary=contactrelationship,
     )
 
     emerg4mail_personal = schema.TextLine(
-        title=_(u'Emergency Contact 4 Personal Email'),
-        description=_(u'Strongly recommended'),
+        title=_(u'4 Main Email'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg4mail_work = schema.TextLine(
-        title=_(u'Emergency Contact 4 Work Email'),
-        description=_(u'Strongly recommended'),
+        title=_(u'4 Other Email'),
+        description=_(u'Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg4phone_main = schema.TextLine(
-        title=_(u'Emergency Contact 4 Main Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        title=_(u'4 Main Phone'),
+        description=_(u'Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
 
     emerg4phone_other = schema.TextLine(
-        title=_(u'Emergency Contact 4 Other Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        title=_(u'4 Other Phone'),
+        description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),
         #        required=True,
         required=False,
     )
@@ -458,12 +474,29 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'demographics',
         label=_(u"Demographics"),
-        fields=['stateResidency', 'countrycitizenship', 'immigrationStatus', 'countryBirth',
-                'ethnicity', 'ethnicityOther', ]
+        fields=['demographics_label', 'ethnicity', 'ethnicityOther', 'stateResidency', 'countrycitizenship', 'immigrationStatus', 'countryBirth', 'dateOfBirth']
+    )
+
+    form.mode(demographic_label='display')
+    demographics_label = schema.TextLine(
+        title=_(u'Demographics'),
+    )
+
+    ethnicity = schema.Choice(
+        title=_(u'Ethnicity'),
+        description=_(u''),
+        source=RegistryValueVocabulary('oiestudyabroadstudent.ethnicities'),
+        required=False,
+    )
+
+    ethnicityOther = schema.TextLine(
+        title=_(u'Ethnicity: Other'),
+        description=_(u'Enter your ethnicity only if you selected "other" above.'),
+        required=False,
     )
 
     stateResidency = schema.Choice(
-        title=_(u'State Residency'),
+        title=_(u'State of Residency'),
         description=_(u''),
         source=RegistryValueVocabulary('oiestudyabroadstudent.us_states_territories'),
         required=True,
@@ -479,6 +512,7 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Immigration Status'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.immigration_status'),
         required=True,
+        # TODO appears only if "Country of Citizenship" is NOT United States
     )
 
     countryBirth = schema.Choice(
@@ -487,31 +521,29 @@ class IOIEStudyAbroadParticipant(Interface):
         required=True,
     )
 
-    ethnicity = schema.Choice(
-        title=_(u'Ethnicity'),
-        description=_(u''),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.ethnicities'),
-        required=False,
-    )
+#     dateOfBirth = schema.Date(
+#         title=_(u'Date of Birth'),
+#         required=True,
+#     )
 
-    ethnicityOther = schema.TextLine(
-        title=_(u'Other Ethnicity'),
-        description=_(u'Enter ethnicity if you selected Other'),
-        required=False,
-    )
-
-    #######################################################
+########################################################
     model.fieldset(
         'education',
         label=_(u"Education"),
-        fields=['educationLevel', 'universityEnrolledUWO', 'universityEnrolledOther', 'cumulativeGPA',
+        fields=['education_label', 'educationLevel', 'universityEnrolledUWO', 'universityEnrolledOther',
                 'major1', 'major2', 'minor1', 'minor2', 'graduationYear', 'graduationMonth']
     )
 
+    form.mode(education_label='display')
+    education_label = schema.TextLine(
+        title=_(u'Education'),
+    )
+
     educationLevel = schema.Choice(
-        title=_(u'Education Level'),
+        title=_(u'Current Education Level'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.education_level'),
         required=False,
+        # TODO check vocabulary; If MGMT PORTAL "Student Status" is "1", the answer here cannot be "I am not a student'
     )
 
     universityEnrolledUWO = schema.Choice(
@@ -522,49 +554,62 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     universityEnrolledOther = schema.TextLine(
-        title=_(u'Name of other university'),
-        description=_(u'No abbreviations please'),
-        required=False,
-    )
-
-    cumulativeGPA = schema.Float(
-        title=_(u'Cumulative GPA'),
-        description=_(u'out of 4.0 (use 0.0 if not a student)'),
+        title=_(u'If "School" is "OTHER"'),
+        description=_(u'Type the official name of the school you are attending now only if you chose "other" above.'),
         required=False,
     )
 
     major1 = schema.Choice(
         title=_(u'First Major'),
+        description=_(u'This must match the intended major on your STAR report.'),
         required=False,
         source=RegistryValueVocabulary('oiestudyabroadstudent.majors'),
     )
 
     major2 = schema.Choice(
         title=_(u'Second Major'),
+        description=_(u'This must match the intended major on your STAR report.  If you don\'t have a second major, leave this blank.'),
         required=False,
         source=RegistryValueVocabulary('oiestudyabroadstudent.majors'),
     )
 
     minor1 = schema.TextLine(
-        title=_(u'Minor 1'),
+        title=_(u'First Minor'),
+        description=_(u'This must match the intended minor on your STAR report.  If you don\'t have a minor, leave this blank.'),
         required=False,
     )
 
     minor2 = schema.TextLine(
-        title=_(u'Minor 2'),
+        title=_(u'Second Minor'),
+        description=_(u'This must match the intended minor on your STAR report.  If you don\'t have a minor, leave this blank.'),
         required=False,
     )
 
     graduationYear = schema.Int(
-        title=_(u'Expected Graduation Year'),
-        description=_(u'enter the full 4-digit year'),
+        title=_(u'Graduation: Anticipated Year'),
+        description=_(u'Enter the full 4-digit year.'),
         min=2018,
         max=2100,
         required=False,
+        # TODO add vocabulary options
+        # 01/19/2018
+        # 06/01/2018
+        # 08/03/2018
+        # 01/25/2019
+        # 06/07/2019
+        # 08/09/2019
+        # 01/24/2020
+        # 06/05/2020
+        # 08/07/2020
+        # 01/22/2021
+        # 06/04/2021
+        # 08/06/2021
+        # 2022 or later
     )
 
     graduationMonth = schema.Choice(
-        title=_(u'Expected Graduation Month'),
+        title=_(u'Graduation: Anticipated Month'),
+        description=_(u'Select the month that corresponds to your official graduation date.'),
         vocabulary=graduation_month_vocabulary,
         required=False,
     )
@@ -573,12 +618,17 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'courses',
         label=_(u"Courses"),
-        fields=['courses']
+        fields=['courses_label', 'courses']
+    )
+
+    form.mode (courses_label='display')
+    courses_label = schema.TextLine(
+        title=_(u'Study Away Courses'),
     )
 
     courses = schema.List(
         title=_(u'Course Selection'),
-        description=_(u'Request enrollment in these courses'),
+        description=_(u'Request enrollment in study away courses.  Your selection must match advertised course options.'),
         value_type=schema.Choice(source=RegistryValueVocabulary('oiestudyabroadstudent.course_subject_and_number'))
     )
 
@@ -586,32 +636,38 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'date',
         label=_(u"Dates"),
-        fields=['interviewDate', 'orientationDeadline', 'prePostTravelClassDates', 'paymentDeadlines',
+        fields=['dates_label', 'interviewDate', 'prePostTravelClassDates', 'orientationDeadline', 'paymentDeadlines',
                 'programDepartureDate', 'airportTransferDeparture', 'departureModeOfTransportation',
                 'programReturnDate', 'returnModeOfTransportation', 'airportTransferReturn',
                 'requestToDeviateFromProgramDates']
     )
 
+    form.mode(dates_label='display')
+    dates_label = schema.TextLine(
+        title=_(u'Dates'),
+    )
+
     interviewDate = schema.Date(
         title=_(u'Interview Date'),
         description=_(
-            u'Applicants to this program must contact the Program Leader to schedule an interview. Your interview date may or may not need to occur prior to the STEP II application deadline. You must make your interview appointment prior to submiiting this application. Indicate your interview date here. (For some programs, students choose from a list of dates/times/locations.  For others, they set this up with an individual and report this to OIE. Most programs, however, don''t require an interview).'),
+            u'Contact the Program Liaison to schedule an interview.  Make your interview appointment and type your interview date here prior to submiting this application.  The actual interview date may or may not need to occur prior to the STEP II application deadline.  This will be determined by the Program Liaison.'),
         required=False,
-    )
-
-    orientationDeadline = schema.Choice(
-        title=_(u'I have read the statement below and understand.'),
-        description=_(
-            u'I understand that the Office of International Education Orientation deadline is (DATE from PROGRAM WORKFLOW SHOULD APPEAR HERE).  I understand that all Office of International Education orientation requirements must be completed by this date.  If not completed by this date, I understand that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply. '),
-        vocabulary=yes_no_none_vocabulary,
-        required=True,
-        # TODO insert date from program object
+        # TODO Displays only if "interview" is checked "yes" in MGMT PORTAL.
     )
 
     prePostTravelClassDates = schema.Choice(
-        title=_(u'Pre- & Post-Travel Class Dates'),
+        title=_(u'Confirm Attendance at Pre- & Post-travel Program-specific Sessions'),
         description=_(
-            u'Select ''Yes'' if you have no conflicts with pre- or post-travel class dates or orientation dates. Select ''No'' if you have a conflict on one or more dates.'),
+            u'Select ''Yes'' to confirm that you will attend all advertised pre- or post-travel sessions.  Select ''No'' if you have a conflict on one or more dates.'),
+        vocabulary=yes_no_none_vocabulary,
+        required=True,
+        # TODO insert date from program object; Displays only if there are dates in "Pretravel Class & Orientation Dates" or "Post-travel Class Dates" in the MGMT PORTAL.
+    )
+
+    orientationDeadline = schema.Choice(
+        title=_(u'Orientation Submission Deadline'),
+        description=_(
+            u'I understand that the Office of International Education deadline for submission of orientation materials is a final deadline.  I understand and agree that all Office of International Education orientation requirements must be completed by this date.  If I forsee conflicts with this date, I will complete requirements in advance of this date.  If not completed by this date, I understand and agree that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply.'),
         vocabulary=yes_no_none_vocabulary,
         required=True,
         # TODO insert date from program object
@@ -620,7 +676,7 @@ class IOIEStudyAbroadParticipant(Interface):
     paymentDeadlines = schema.Choice(
         title=_(u'Payment Deadlines'),
         description=_(
-            u'I understand that the payment deadlines are (DATES from PROGRAM WORKFLOW SHOULD APPEAR HERE).  I understand that all payments must be made in full by this date, or I must submit the "Notice of Financial Aid Award for Study Abroad" form if making my payments using financial aid, a scholarship that I have already received, veterans benefits or an outside loan.  If not submitted by this date, I understand that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply. '),
+            u'I understand that the payment deadlines are final deadlines and that it is my responsibility to record these dates in my calendar.  I understand that all payments must be made in full by the deadlines, or I must submit the "Notice of Financial Aid Award for Study Abroad/Away" form if making my payments using financial aid, a scholarship that I have already received, veterans benefits or an outside loan.  If not submitted by this date, I understand that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply.'),
         vocabulary=yes_no_none_vocabulary,
         required=True,
         # TODO insert date from program object
@@ -634,16 +690,16 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     airportTransferDeparture = schema.Choice(
-        title=_(u'Airport Transfer (for Departure)'),
-        description=_(u'Choose one'),
+        title=_(u'Confirm Departure from Oshkosh (or alternative city)'),
+        description=_(u''),
         vocabulary=departure_transfer_vocabulary,
         required=False,
         # TODO this should appear only when "transfer provided" is selected on the "program workflow"
     )
 
     departureModeOfTransportation = schema.Choice(
-        title=_(u'Departure-Mode of Transportation'),
-        description=_(u'Choose one'),
+        title=_(u'Confirm Flight'),
+        description=_(u''),
         vocabulary=departure_mode_transportation_vocabulary,
         required=False,
         # TODO this should appear only when "transfer provided" is selected on the "program workflow"
@@ -665,8 +721,8 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     airportTransferReturn = schema.Choice(
-        title=_(u'Airport Transfer (for Return)'),
-        description=_(u'Choose one'),
+        title=_(u'Confirm Return to Oshkosh (or alternative city)'),
+        description=_(u''),
         vocabulary=return_transfer_vocabulary,
         required=False,
         # TODO this should appear only when "transfer provided" is selected on the "program workflow"
@@ -680,88 +736,196 @@ class IOIEStudyAbroadParticipant(Interface):
         # TODO need link to the PDF document
     )
 
-    #######################################################
+        #######################################################
+    model.fieldset(
+        'financial_aid',
+        label=_(u"Financial Aid"),
+        fields=['financialAid_label']
+    )
+
+    form.mode (financialAid_label='display')
+    financialAid_label = schema.TextLine(
+        title=_(u'Financial Aid'),
+    )
+
+ #     applyForAid = schema.Choice(
+#         title=_(u'Financial Aid'),
+#         description=_(u'I will use financial aid to fund all or part of my program.'),
+# #        required=True,
+#         required=False,
+#         vocabulary=yes_no_none_vocabulary,
+#         #write_permission="UWOshOIE: Modify normal fields",
+#     )
+#
+        #######################################################
     model.fieldset(
         'shortanswerquestions',
         label=_(u"Short Answer Questions"),
-        fields=['applicant_question_text1', 'applicant_question_answer1', 'applicant_question_text2',
+        fields=['shortAnswer_label', 'applicant_question_text1', 'applicant_question_answer1', 'applicant_question_text2',
                 'applicant_question_answer2', 'applicant_question_text3', 'applicant_question_answer3',
                 'applicant_question_text4', 'applicant_question_answer4', 'applicant_question_text5',
                 'applicant_question_answer5', ]
+    )
+
+    form.mode (shortAnswer_label='display')
+    shortAnswer_label = schema.TextLine(
+        title=_(u'Short Answer Questions'),
+        description=_(u'Answer these questions thoroughly and carefully.  Your response may be used in the application selection process (for competitive programs) or to inform your Program Leaders.  If you will need more than 10 minutes to compose your answers, it is highly recommended that you type your answers outside of this system (e.g. in Word) and then copy and paste them into this system.'),
     )
 
     form.mode(applicant_question_text1="display")
     applicant_question_text1 = schema.Text(
         title=u'Applicant Question 1',
         description=u'',
-        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
+        default=u'Question 1 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.',
         required=False,
     )
+
     applicant_question_answer1 = schema.Text(
         title=u'Answer 1',
-        description=u'Please answer here',
+        description=u'If a question appears under Applicant Question 1 above, type your response here.',
         required=False,
     )
+
     form.mode(applicant_question_text2="display")
     applicant_question_text2 = schema.Text(
         title=u'Applicant Question 2',
         description=u'',
-        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
+        default=u'Question 2 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.',
         required=False,
     )
+
     applicant_question_answer2 = schema.Text(
         title=u'Answer 2',
-        description=u'Please answer here',
+        description=u'If a question appears under Applicant Question 2 above, type your response here.',
         required=False,
     )
+
     form.mode(applicant_question_text3="display")
     applicant_question_text3 = schema.Text(
         title=u'Applicant Question 3',
         description=u'',
-        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
+        default=u'Question 3 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.',
         required=False,
     )
     applicant_question_answer3 = schema.Text(
         title=u'Answer 3',
-        description=u'Please answer here',
+        description=u'If a question appears under Applicant Question 3 above, type your response here.',
         required=False,
     )
+
     form.mode(applicant_question_text4="display")
     applicant_question_text4 = schema.Text(
         title=u'Applicant Question 4',
         description=u'',
-        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
+        default=u'Question 4 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.',
         required=False,
     )
+
     applicant_question_answer4 = schema.Text(
         title=u'Answer 4',
-        description=u'Please answer here',
+        description=u'If a question appears under Applicant Question 4 above, type your response here.',
         required=False,
     )
     form.mode(applicant_question_text5="display")
     applicant_question_text5 = schema.Text(
         title=u'Applicant Question 5',
         description=u'',
-        default=u'The question will appear here after you press Save. If the question still does not appear, it is because no question has been set in your selected primary program.',
-        required=False,
-    )
-    applicant_question_answer5 = schema.Text(
-        title=u'Answer 5',
-        description=u'Please answer here',
+        default=u'Question 5 will appear here after you press Save. If a question does not appear after saving, it is because your study away program does not require a response here.',
         required=False,
     )
 
+    applicant_question_answer5 = schema.Text(
+        title=u'Answer 5',
+        description=u'If a question appears under Applicant Question 5 above, type your response here.',
+        required=False,
+    )
+#######################################################
+    model.fieldset(
+        'background',
+        label=_(u"Background"),
+        fields=['background_label']
+)
+
+    form.mode (background_label='display')
+    background_label = schema.TextLine(
+        title=_(u'Criminal Background Check'),
+        description=_(u'If you are required to apply for advance permission (a visa) to enter one or more of your host countries, your visa application may require you to disclose citations, convictions and/or arrests in a criminal record.  If you will be working with minors, or'),
+        # TODO appears only if "Criminal Background Check" is 'yes' in the MGMT PORTAL.
+)
+#######################################################
+    model.fieldset(
+        'release',
+        label=_(u"Release"),
+        fields=['release_label', 'UWOshkoshRelease', 'certification']
+)
+
+    form.mode (release_label='display')
+    release_label = schema.TextLine(
+        title=_(u'Release'),
+)
+#     UWOshkoshRelease = schema.Choice(
+#         title=_(u''),
+#         description=_(u'I hereby agree to hold harmless and indemnify the Board of Regents of the University of Wisconsin System and the University of Wisconsin Oshkosh, their officers, agents and employees, from any and all liability, loss, damages, costs or expenses which are sustained, incurred or required arising out of my actions.'),
+# #        required=True,
+#         required=False,
+#         vocabulary=yes_no_none_vocabulary,
+#         #write_permission="UWOshOIE: Modify normal fields",
+#     )
+#
+#     certification = schema.Choice(
+#         title=_(u'Certification'),
+#         description=_(u'I certify that the information stated above is true and correct. If accepted to the program, I agree to follow all payment and withdrawal policies and to regularly check my UW Oshkosh email account for program information beginning today. If I am a non-UW Oshkosh student, I will use and submit an email address that I check regularly.'),
+# #        required=True,
+#         required=False,
+#         vocabulary=yes_no_none_vocabulary,
+#         #write_permission="UWOshOIE: Modify normal fields",
+#     )
+#
     #######################################################
     model.fieldset(
         'forms',
-        label=_(u"Forms"),
-        fields=['state_of_wisconsin_need_based_travel_grant_form_link',
+        label=_(u"STEP II Forms"),
+        fields=['stepii_label', 'applicationFeeOK', 'disciplinary_clearance_form_link', 'disciplinary_clearance_form_uploaded_file',
+                'specialStudentFormOK', 'state_of_wisconsin_need_based_travel_grant_form_link',
                 'state_of_wisconsin_need_based_travel_grant_form_uploaded_file',
                 'special_student_form_for_undergraduate_admissions_form_link',
-                'special_student_form_for_undergraduate_admissions_uploaded_file',
-                'disciplinary_clearance_form_link',
-                'disciplinary_clearance_form_uploaded_file']
+                'special_student_form_for_undergraduate_admissions_uploaded_file', 'transcriptsOK', 'UWOshkoshStatementOK',
+                'UWSystemStatementOK', 'withdrawalRefund', 'cumulativeGPA']
     )
+
+    form.mode(stepii_label='display')
+    stepii_label = schema.TextLine(
+        title=_(u'STEP II'),
+        description=_(u'To complete STEP II, print relevant documents, clearly print your responses, sign forms by hand where indicated, and follow instructions below.  Signatures cannot be typed.'),
+    )
+
+#     applicationFeeOK = schema.Bool(
+#         title=_(u'Application Fee Receipt Verified'),
+#           description=_(u'Both of the following conditions must be met before checking this item in.  1) Has the fee been deposited into the correct account?  (293)  2) Does the receipt show the correct fee amount, based on residency?  U.S. State of Residency: (State of Residency RESPONSE should appear here from STEP I in PARTICIPANT PORTAL)
+#         required=False,
+#     )
+
+    form.mode(disciplinary_clearance_form_link='display')
+    disciplinary_clearance_form_link = RichText(
+        title=u'Disciplinary Clearance Form',
+        description=u'Download this PDF, fill it out, and upload it below',
+        required=False,
+        defaultFactory=get_url_disciplinary_clearance_form,
+    )
+
+    disciplinary_clearance_form_uploaded_file = field.NamedFile(
+        title=u'Disciplinary Clearance Form',
+        description=u'Upload your filled-out copy of the form',
+        required=False,
+    )
+
+##     specialStudentFormOK = schema.Bool(
+#         title=_(u'Special/Non-degree Registration-Graduate Level Verified'),
+#           description=u'This form must be completely filled out with answers appropriate to the questions before checking this item in.',
+#         required=False,
+#     )
+#
     form.mode(state_of_wisconsin_need_based_travel_grant_form_link="display")
     state_of_wisconsin_need_based_travel_grant_form_link = RichText(
         title=u'State of Wisconsin Need-based Travel Grant Form',
@@ -769,38 +933,544 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
         defaultFactory=get_url_special_student_form,
     )
+
     state_of_wisconsin_need_based_travel_grant_form_uploaded_file = field.NamedFile(
-        title=u'State of Wisconsin Need-based Travel Grant Form',
-        description=u'Upload your filled-out copy of the form',
+        title=u'State of Wisconsin Need-based Travel Grant Submission',
+        description=u'Upload your completed form.',
         required=False,
     )
+
     form.mode(special_student_form_for_undergraduate_admissions_form_link="display")
     special_student_form_for_undergraduate_admissions_form_link = RichText(
-        title=u'Special Student Form for Undergraduate Admissions',
-        description=u'Download this PDF, fill it out, and upload it below',
+        title=u'Special/Non-degree Registration-Undergraduate Level',
+        description=u'Download this form, fill it out, and upload it below.',
         required=False,
         defaultFactory=get_url_special_student_form_for_undergraduate_admissions_form,
+        # TODO appears when "Special/Non-Degree Registration-Graduate Level" is checked "yes" in the MGMT PORTAL
+        # AND
+        # "Current Education Level" is NOT "graduate school"
+        # AND
+        # the course request in the PART PORTAL includes at least one course numbered 500-799.
+        #
+        # OR
+        #
+        # appears when "Special/Non-Degree Registration-Graduate Level" is checked "yes" in the MGMT PORTAL
+        # AND
+        # "Current Education Level" IS "graduate school"
+        # AND
+        # the course request in the PART PORTAL includes at least one course numbered 100-499.
     )
+
     special_student_form_for_undergraduate_admissions_uploaded_file = field.NamedFile(
-        title=u'Special Student Form for Undergraduate Admissions',
-        description=u'Upload your filled-out copy of the form',
-        required=False,
-    )
-    form.mode(disciplinary_clearance_form_link="display")
-    disciplinary_clearance_form_link = RichText(
-        title=u'Disciplinary Clearance Form',
-        description=u'Download this PDF, fill it out, and upload it below',
-        required=False,
-        defaultFactory=get_url_disciplinary_clearance_form,
-    )
-    disciplinary_clearance_form_uploaded_file = field.NamedFile(
-        title=u'Disciplinary Clearance Form',
-        description=u'Upload your filled-out copy of the form',
+        title=u'Special/Non-degree Registration-Undergraduate Level Submission',
+        description=u'Upload your completed form.',
         required=False,
     )
 
+#     transcriptsOK = schema.Bool(
+#         title=_(u'Transcript (Unofficial) Verified'),
+#           description=_u'All of the following conditions must be met before checking this item in.  1) The transcript must include the applicant's name & student ID.  2) The transcript must be from the CURRENT school as indicated in this application.  3) The transcript must include all terms of attendance.  4) There may be no pages missing. 5) The transcript must include the CUMULATIVE GPA.  6) The transcript may NOT be replaced by the UW Oshkosh STAR report.  7) If the transcript for the current institution of attendance does not include a cumulative GPA, and if the applicant is not in the first semester of university or college, the applicant must upload, assembled into one document, an unofficial transcript from the current institution plus an unofficial transcript from the instutitution attended prior to the current institution.
+#         required=False,
+#     )
+#
+#     UWOshkoshStatementOK = schema.Bool(
+#         title=_(u'UW Oshkosh Uniform Statement of Responsibility Verified'),
+#         description=_(u'Both of the following conditions must be met before checking this item in.  1) Is the applicant's full name clearly printed on the form?  2) Has the form been signed and dated by hand?  Signatures cannot be typed.'),
+#         required=False,
+#     )
+#
+#     UWSystemStatementOK = schema.Bool(
+#         title=_(u'UW System Uniform Statement of Responsibility Verified'),
+#           description=_(u'All of the following conditions must be met before checking this item in.  1) Is the applicant's full name clearly printed on the form?  2) Does the form include the official program name?  3) Does the form include the CORRECT dates of participation (months & years only)?  4) Has the form been signed and dated by hand?  Signatures cannot be typed.
+#         required=False,
+#     )
+#
+#     withdrawalRefund = schema.Bool(
+#         title=_(u'Withdrawal & Refund Policy Verified'),
+#           description=_(u'Both of the following conditions must be met before checking this item in.  1) Is the applicant's full name clearly printed on the form?  2) Has the form been signed and dated by hand?  Signatures cannot be typed.
+#         required=False,
+#     )
+
+    cumulativeGPA = schema.Float(
+        title=_(u'Cumulative GPA'),
+        description=_(u'Type the applicant''s CURRENT CUMULATIVE GPA exactly as it appears on the unofficial transcript.'),
+        required=False,
+    )
+
+    #######################################################
+    model.fieldset(
+        'stepiiiforms',
+        label=_(u"STEP III Forms"),
+        fields=['stepiii_label', 'documentation_label', 'transferCreditForm_link', 'transferCreditSubmission',
+                'transferCreditVerified', 'identification_label', 'travelDocLast', 'travelDocFirst', 'travelDocMiddle',
+                'travelDocSex', 'travelDocNumber', 'travelDocExpiration', 'passportReceipt', 'passportOK',
+                'driversLicenseReceipt', 'driversLicenseReceiptVerified', 'photoPaperOfficial',
+                'photoPaperOfficialVerified', 'photoDigitalOfficial', 'photoDigitalOfficialVerified', 'photoPaper',
+                'photoPaperVerified', 'photoDigital', 'photoDigitalVerified', 'fecop_label', 'fecop_link',
+                'fecopSubmission', 'fecopVerified', 'lifestyle_label', 'isVegetarian', 'smokingPreferred', 'health_label',
+                'medicalReadStatement', 'allergies_label', 'allergiesYesNo', 'foodAllergies',
+                'medicalHealthProblems_whatCondition', 'healthConditions_label', 'medicalHealthProblems_stable',
+                'medicalHealthProblems', 'healthConditionsSurgeriesYesNo', 'healthConditionsSurgeriesDetails',
+                'medicalHealthProblems_underCare', 'healthPhysical_label', 'wheelchair', 'assistiveDevice',
+                'assistiveDeviceOnFlight', 'assistiveDeviceList', 'hasDifficultyWalking', 'maxWalkingDistance', 'stairsMax',
+                'walkingClimbingDescription', 'sight', 'healthPhysicalAdditionalInfoYesNo', 'additionalNeeds',
+                'medications_label', 'medicalHealthProblems_takenMedication', 'medicalHealthProblems_willingToPrescribe',
+                'medicalHealthProblems_medications', 'medicationsStorage', 'authorizedAccommodation_label',
+                'medicalRegistered', 'medicalRegistered_office', 'medicalRegistered_accommodations',
+                'medicalHealthProblems_additionalInfo', 'healthConfirmation_label',
+                'medicalMentalProblems_enoughMedication', 'medicalMentalProblems_stable', 'medicalAccessOK',
+                'healthMeetingNotes', 'roommate_label', 'roommateName1', 'roommateName2']
+    )
+
+    form.mode (stepiii_label='display')
+    stepiii_label = schema.TextLine(
+        title=_(u'STEP III'),
+    )
+
+    form.mode (documentation_label='display')
+    documentation_label = schema.TextLine(
+        title=_(u'Documentation'),
+    )
+
+    form.mode (identification_label='display')
+    identification_label = schema.TextLine(
+        title=_(u'Identification'),
+        description=_(u'Complete the following using information from your unexpired passport (required for international travel) or with your unexpired driver\'s license (for domestic travel only).'),
+    )
+
+#     passportOK = schema.Bool(
+#         title=_(u'Passport Application Receipt Verified'),
+#           description=_(u'For first-time passport applicants, the applicant must have submitted a copy of the receipt from the Clerk of Courts or the Post Office indicating payment for a passport.  For applicants renewing a passport, the applicant must have submitted either a copy of the recript for shipping or a copy of the shipping envelope.'),
+#         required=False,
+#     )
+#
+    form.mode (fecop_label='display')
+    fecop_label = schema.TextLine(
+        title=_(u'Financial'),
+    )
+
+    form.mode (lifestyle_label='display')
+    lifestyle_label = schema.TextLine(
+        title=_(u'Lifestyle'),
+    )
+
+#     isVegetarian = schema.Choice(
+#         title=_(u''),
+#         description=_(u'When offered a choice, I prefer food that is vegetarian, vegan, gluten free, or dairy free.'),
+#         vocabulary=yes_no_none_vocabulary,
+#         #default="No",
+# #        required=True,
+#         required=False,
+        # TODO in the future, change this to a dropdown list, with 'no preference' as one of the options
+#     )
+#
+#     smokingPreferred = schema.Choice(
+#         title=_(u'Smoking Preference'),
+#         vocabulary=smoking_vocabulary,
+#         default= 'No Preference',
+#         required=False,
+#     )
+#
+    form.mode (health_label='display')
+    health_label = schema.TextLine(
+        title=_(u'Health'),
+    )
+#     medicalReadStatement = schema.Choice(
+#         title=_(u''),
+#         description=_(u'I understand that failure to disclose medical or mental health conditions may inhibit or prohibit staff from planning for my participation or assisting me in an emergency and may inhibit or prohibit program leaders, hosts and/or host families from meeting my needs.  It may also cause health professionals abroad/away to take actions that could lead to serious medical consequences, including death.'),
+#         vocabulary=yes_no_none_vocabulary,
+# #        required=True,
+#         required=False,
+#     )
+#
+    form.mode (allergies_label='display')
+    allergies_label = schema.TextLine(
+        title=_(u'Allergies'),
+    )
+#     foodAllergies = schema.TextLine(
+#         title=_(u''),
+#         description=_(u'List all allergies.'),
+#         required=False,
+#     )
+#
+#     medicalHealthProblems_whatCondition = schema.Text(
+#         title=_(u''),
+#         description=_(u'Explain your medical condition when ingesting or coming into contact with substances that cause an allergic reaction.  How do you avoid having an allergic reaction?  When having a reaction, what treatment do you use?'),
+#         required=False,
+#     )
+#
+    form.mode (healthConditions_label='display')
+    healthConditions_label = schema.TextLine(
+        title=_(u'Health Conditions & Surgeries'),
+    )
+
+#     medicalHealthProblems_stable = schema.Choice(
+#         title=_(u''),
+#         description=_(u'I have one or more current, continuing or recurring physical health and/or mental health conditions, a physical disability (disabilities) and/or medical condition (conditions).'),
+#         vocabulary=yes_no_na_vocabulary,
+# #        required=True,
+#         required=False,
+        # TODO change to yes_no_none_vocabulary
+#     )
+#
+#     medicalHealthProblems = schema.Text(
+#         title=_(u''),
+#         description=_(u'Include all current, continuing or recurring health and/or mental health conditions, including physical disabilities and/or medical conditions and mental health conditions such as anxiety, depression, bipolar disorder, substance abuse (alcohol or drugs), eating disorders (anorexia/bulimia), etc.'),
+#         required=False,
+#     )
+#
+#     medicalHealthProblems_underCare = schema.Choice(
+#         title=_(u''),
+#             description=_(u'I am currently under the care of a doctor, psychiatrist, substance abuse counselor, mental health professional or other health care professional for conditions listed above.'),
+#         vocabulary=yes_no_none_vocabulary,
+# #        required=True,
+#         required=False,
+#     )
+#
+    form.mode (healthPhysical_label='display')
+    healthPhysical_label = schema.TextLine(
+        title=_(u'Physical & Mental Health'),
+    )
+#     hasDifficultyWalking = schema.Choice(
+#         title=_(u''),
+#         description=_(u'It is difficult for me to walk long distances, climb stairs, walk up inclines or down declines, or walk at high altitudes, in heat, in cold or in humidity.'),
+#         vocabulary=yes_no_none_vocabulary,
+# #        required=True,
+#         required=False,
+#     )
+#
+#     maxWalkingDistance = schema.TextLine(
+# #    maxWalkingDistance = schema.Int(
+#         title=_(u''),
+#         description=_(u'If yes, what is the maximum number of minutes you can walk?'),
+#         required=False,
+#     )
+#
+#     additionalNeeds = schema.Text(
+#         title=_(u''),
+#         description=_(u'Share any additional information related to your physical or mental health that may be helpful for program organizers, liaisons and/or host families.'),
+#         required=False,
+#     )
+#
+    form.mode (medications_label='display')
+    medications_label = schema.TextLine(
+        title=_(u'Medications'),
+    )
+#     medicalHealthProblems_takenMedication = schema.Choice(
+#         title=_(u''),
+#         description=_(u'I have taken one or more prescription medications in the past three years.'),
+#         vocabulary=yes_no_none_vocabulary,
+# #        required=True,
+#         required=False,
+#     )
+
+#     medicalHealthProblems_willingToPrescribe = schema.Choice(
+#         title=_(u''),
+#         description=_(u'I will carry over-the-counter medications containing amphetamines when I travel.'),
+#         vocabulary=yes_no_na_vocabulary,
+# #        required=True,
+#         required=False,
+        # TODO change to yes_no_none_vocabulary
+#     )
+#
+#     medicalHealthProblems_medications = schema.Text(
+#         title=_(u''),
+#         description=_(u'Include all prescription medications you have taken in the past three years whether or not you intend to carry these with you when you travel.  Also include all over-the-counter medications containing amphetamines that you intend to carry with you when you travel.'),
+#         required=False,
+        # TODO medications should be listed in a chart, with columns: Medication Name, Medication-related Condition, medication start (month/year), medication end or anticipated end (month/year); if end is not in the past: Dose, Times per Day (1, 2, 3, as needed), Storage Requirements (drop down: no special storage required; refrigeration required; refrigeration preferred; other), are you Stable on this Medication, Is your provider willing to prescribe enough medication to last throughout your planned program away (i.e. are you able to fill your prescription for the total number of days you will be abroad prior to travel)?, If you were to become separated from your medication, how long can you go before that medication must be replacedd?  (DROPDOWN or text field: XX hours or XX days or ‘I can complete my program abroad without replacing this medication.”)
+#     )
+#
+    form.mode (authorizedAccommodation_label='display')
+    authorizedAccommodation_label = schema.TextLine(
+        title=_(u'Authorized Accommodation'),
+    )
+#     medicalRegistered = schema.Choice(
+#         title=_(u''),
+#         description=_(u'I am currently registered for medical or mental-health related accommodations through the Dean of Students office or Project Success at the University of Wisconsin Oshkosh, or with a similar office at my school.'),
+#         vocabulary=yes_no_none_vocabulary,
+# #        required=True,
+#         required=False,
+#     )
+#
+        #     medicalRegistered_office = schema.TextLine(
+#         title=_(u'UW Oshkosh Office Accommodations'),
+#         description=_(u'If yes, with which office have you registered? Type 'none' if you have not registered.'),
+#         required=False,
+        # TODO add vocabulary at some point (change from text to choice): Dean of Students Office; Project Success; Other office providing services for students with disabilities
+#     )
+#
+#     medicalRegistered_accommodations = schema.Text(
+#         title=_(u'Medical Authorized Accommodations'),
+#         description=_(u'What accommodations have been authorized for you? Type 'none' in text area if you have no authorized accommodations.'),
+#         required=False,
+#     )
+#
+#     medicalHealthProblems_additionalInfo = schema.Text(
+#         title=_(u''),
+#         description=_(u'What accommodations are you requesting in relation to your program away?'),
+#         required=False,
+#     )
+#
+    form.mode (healthConfirmation_label='display')
+    healthConfirmation_label = schema.TextLine(
+        title=_(u'I understand and agree'),
+    )
+
+#     medicalMentalProblems_enoughMedication = schema.Choice(
+#         title=_(u''),
+#         description=_(u'...that whether or not I have disclosed medications here, I am ultimately responsible for ensuring that my medications can be carried into any and all foreign countries I plan to visit and that I my medications can be replaced with a comparable product if they are lost, stolen or damaged.'),
+#         vocabulary=yes_no_na_vocabulary,
+# #        required=True,
+#         required=False,
+        # TODO must be 'yes' & change to yes_no_none_vocabulary
+#     )
+#
+#     medicalMentalProblems_stable = schema.Choice(
+#         title=_(u''),
+#         description=_(u'...that if my medical or mental health status changes after completing this application, I will inform the OIE by updating my medical or mental health information within this application.'),
+#         vocabulary=yes_no_na_vocabulary,
+# #        required=True,
+#         required=False,
+        # TODO must be 'yes' & change to yes_no_none_vocabulary
+#     )
+#
+#     medicalAccessOK = schema.Choice(
+#         title=_(u''),
+#         description=_(u'...that this information may be accessed by the following people: program leader/s (for group programs), exchange liaison/s abroad/away (for student exchange and direct enroll programs), program organizer/s outside of UW Oshkosh, my host family (if homestay is offered on the program), staff in the OIE, professional staff in the Dean of Students Office, professional staff in the UWO Counseling Center and professional staff in the UWO Student Health Center.'),
+#         vocabulary=yes_no_none_vocabulary,
+# #        required=True,
+#         required=False,
+        # TODO must be 'yes'
+#     )
+#
+    form.mode (roommate_label='display')
+    roommate_label = schema.TextLine(
+        title=_(u'Roommate'),
+        description=_(u'If you are not traveling with a UW Oshkosh student group, do not list a roommate choice.  If you are traveling on a group program, list your first and second choice roommates here.  Any roommate you request must list you on his/her application in return.'),
+    )
+#     roommateName1 = schema.TextLine(
+#         title=_(u'Roommate 1 Name'),
+#         required=False,
+#         #write_permission="UWOshOIE: Modify revisable fields",
+#     )
+#
+#     roommateName2 = schema.TextLine(
+#         title=_(u'Roommate 2 Name'),
+#         required=False,
+#         #write_permission="UWOshOIE: Modify revisable fields",
+#     )
+#
+    #######################################################
+    model.fieldset(
+        'stepivforms',
+        label=_(u"STEP IV Forms"),
+        fields=['stepiv_label', 'enrollment_label', 'cbc_label', 'financial_label', 'depositOnTime', 'payment2OnTime',
+                'orientation_label', 'attendedOrientation', 'travelDocuments_label', 'flight_label', 'flightDeparture_label', 'flightReturn_label']
+    )
+
+    form.mode (stepiv_label='display')
+    stepiv_label = schema.TextLine(
+        title=_(u'STEP IV'),
+    )
+
+    form.mode (enrollment_label='display')
+    enrollment_label = schema.TextLine(
+        title=_(u'Course Enrollment'),
+    )
+
+    form.mode (cbc_label='display')
+    cbc_label = schema.TextLine(
+        title=_(u'Criminal Background Check'),
+        # TODO appears only when "Program Type" is "exchange-U.S." OR "exchange-international" in MGMT PORTAL
+    )
+
+    form.mode (financial_label='display')
+    financial_label = schema.TextLine(
+        title=_(u'Financial'),
+    )
+
+#     depositOnTime = schema.Choice(
+#         title=_(u'First Payment Received'),
+#         description=_(u'If this box is not checked, your first payment has not been confirmed as received.  Please allow up to three business days for this to update.'),
+#         vocabulary=yes_no_none_vocabulary,
+#         required=False,
+#     )
+#
+#     payment2OnTime = schema.Choice(
+#         title=_(u'Final Payment Received'),
+#         description=_(u'If this box is not checked, your final payment has not been confirmed as received.  Please allow up to three business days for this to update.'),
+#         vocabulary=yes_no_none_vocabulary,
+#         required=False,
+#     )
+#
+    form.mode (orientation_label='display')
+    orientation_label = schema.TextLine(
+        title=_(u'Orientation'),
+    )
+
+#     attendedOrientation = schema.Choice(
+#         title=_(u'In Person Orientation Requirement Met'),
+#         required=False,
+#         vocabulary=yes_no_none_vocabulary
+#     )
+#
+    form.mode (travelDocuments_label='display')
+    travelDocuments_label = schema.TextLine(
+        title=_(u'Travel Documents'),
+    )
+
+    form.mode (flight_label='display')
+    flight_label = schema.TextLine(
+        title=_(u'Flight'),
+    )
+
+    form.mode (flightDeparture_label='display')
+    flightDeparture_label = schema.TextLine(
+        title=_(u'Departure Flight'),
+        # TODO appears if "Application for Permission to follow an Alternative Schedule on the Outbound Flight Only or on my Roundtrip Flights" is "yes" in the MGMT PORTAL AND one of the following selections has been made above:  --I will apply for permission to fly to my program site on an alternative flight but will return from my program site with the group.  --I will apply for permission to fly to and from my program site on an alternative flight.  OR   appears if "Application for Permission to follow an Alternative Schedule on the Outbound Flight Only or on my Roundtrip Flights" is "yes" in the MGMT PORTAL AND "Program Dates" selection is one of the following:  --I will apply for permission to arrive at my program site on an alternative date but will depart from my program site on the official program date.  --I will apply for permission to arrive at and depart from my program site on alternative dates.  OR  appears if "Program Type" in MGMT PORTAL does NOT begin with "group..."
+    )
+
+    form.mode (flightReturn_label='display')
+    flightReturn_label = schema.TextLine(
+        title=_(u'Return Flight'),
+    # TODO appears if "Application for Permission to follow an Alternative Schedule on the Return Flight Only" is "yes" or if "Application for Permission to follow an Alternative Schedule on the Outbound Flight Only or on my Roundtrip Flights" is "yes"in the MGMT PO
+    )
+
+    #######################################################
+    model.fieldset(
+        'programChanges',
+        label=_(u"Program Changes"),
+        fields=['programChanges_label', 'agreements_label', 'nonSponsoredTravel_label']
+    )
+
+    form.mode (programChanges_label='display')
+    programChanges_label = schema.TextLine(
+        title=_(u'Program Changes'),
+        description=_(u'Please review information provided to you by the OIE carefully and contact the OIE with questions, if needed, prior to making your decision.'),
+    )
+
+    form.mode (agreements_label='display')
+    agreements_label = schema.TextLine(
+        title=_(u'Agreements'),
+        description=_(u'Please review information provided to you by the OIE carefully and contact the OIE with questions, if needed, prior to making your decision.'),
+    )
+
+    form.mode (nonSponsoredTravel_label='display')
+    nonSponsoredTravel_label = schema.TextLine(
+        title=_(u'Non-sponsored Out-of-Country (or out-of-state) Travel'),
+    )
 
 
+#     doctorLastname = schema.TextLine(
+#         title=_(u'Last Name of your Family Doctor'),
+# #        required=True,
+#         required=False,
+#     )
+#
+#     doctorFirstname = schema.TextLine(
+#         title=_(u'First Name of your Family Doctor'),
+# #        required=True,
+#         required=False,
+#     )
+#
+#     doctorPhone = schema.TextLine(
+#         title=_(u'Doctor''s Phone Number'),
+#         description=_(u'Please include country code (if outside US) and area code'),
+# #        required=True,
+#         required=False,
+#     )
+#
+#     medicalInsuranceCompany = schema.TextLine(
+#         title=_(u'Name of Insurance Company'),
+# #        required=True,
+#         required=False,
+#     )
+#
+#     medicalPolicyHolder = schema.TextLine(
+#         title=_(u'Name of Policy Holder'),
+# #        required=True,
+#         required=False,
+#     )
+#
+#     medicalPolicyGroupNumber = schema.TextLine(
+#         title=_(u'Policy / Group Number'),
+# #        required=True,
+#         required=False,
+#     )
+#
+#     model.fieldset(
+#         'medical2',
+#         label=_(u"Medical II"),
+#         fields=['medicalReadStatement']
+#     )
+#
+#     model.fieldset(
+#         'medical3',
+#         label=_(u"Medical III"),
+#         fields=['medicalHealthProblems', 'medicalHealthProblems_takenMedication',
+#                 'medicalHealthProblems_medications', 'medicalHealthProblems_stable',
+#                 'medicalHealthProblems_underCare', 'medicalHealthProblems_whatCondition',
+#                 'medicalHealthProblems_willingToPrescribe',
+#                 'medicalHealthProblems_additionalInfo', 'medicalMentalProblems',
+#                 'medicalMentalProblems_takenMedication', 'medicalMentalProblems_medications',
+#                 'medicalMentalProblems_currentDose', 'medicalMentalProblems_stable',
+#                 'medicalMentalProblems_underCare', 'medicalMentalProblems_condition',
+#                 'medicalMentalProblems_enoughMedication', 'medicalMentalProblems_additionalInfo',
+#                 'medicalRegistered', 'medicalRegistered_office',
+#                 'medicalRegistered_accommodations', 'medicalAccessOK', ]
+#     )
+#
+#     medicalMentalProblems = schema.Text(
+#         title=_(u'Mental Health Problems'),
+#         description=_(u'List and describe any recent or continuing mental health problems, including anxiety, depression, bipolar disorder, substance abuse (alcohol or drugs), eating disorders (anorexia/bulimia), etc. that should be brought to the attention of the lead faculty members, liaison abroad and/or host family abroad.  Include the following information: diagnosis, dates of treatment, names & locations of treating professionals, and recovery status.'),
+#         required=False,
+#     )
+#
+#     medicalMentalProblems_takenMedication = schema.Choice(
+#         title=_(u'Are you taking/have you ever taken medication related to your mental health?  '),
+#         vocabulary=yes_no_none_vocabulary,
+# #        required=True,
+#         required=False,
+#     )
+#
+#     medicalMentalProblems_medications = schema.Text(
+#         title=_(u'Mental Health Medications'),
+#         description=_(u'If so, list the medications taken over the past year. Write ''n/a'' in blanks where appropriate.'),
+#         required=False,
+#     )
+#
+#     medicalMentalProblems_currentDose = schema.Text(
+#         title=_(u'Mental Health Medications Dosage'),
+#         description=_(u'What is the current dose? Write ''n/a'' in text area when appropriate.'),
+#         required=False,
+#     )
+#
+#     medicalMentalProblems_underCare = schema.Choice(
+#         title=_(u'Mental Health Care'),
+#         description=_(u'Are you currently or have you ever been under the care of a psychiatrist or other medical provider, substance abuse counselor or other mental health professional?'),
+#         vocabulary=yes_no_none_vocabulary,
+# #        required=True,
+#         required=False,
+#     )
+#
+#     medicalMentalProblems_condition = schema.Text(
+#         title=_(u'Mental Health Care Conditions'),
+#         description=_(u'If yes, for what condition? Write ''n/a'' in text area when appropriate.'),
+#         required=False,
+#     )
+#
+#     medicalMentalProblems_additionalInfo = schema.Text(
+#         title=_(u'Mental Health Additional Information'),
+#         description=_(u'Is there any additional information related to your mental health which may be helpful for program organizers, liaisons and host families to know? Write ''none'' in text area if there isn''t any.'),
+#         required=False,
+#     )
+#
+#     model.fieldset(
+#         'preferences',
+#         label=_(u"Preferences"),
+#         fields=['smokingPreferred', 'isVegetarian', 'additionalNeeds', ]
+#     )
+#
 #     emerg1workPhone = schema.TextLine(
 #         title=_(u'Emergency Contact 1 Work Phone'),
 #         description=_(u'Strongly recommended.  Please include country code (if outside US) and area code'),
@@ -997,11 +1667,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #         required=False,
 #     )
 #
-#     dateOfBirth = schema.Date(
-#         title=_(u'Birthday'),
-#         required=True,
-#     )
-#
 #     placeOfBirth = schema.TextLine(
 #         title=_(u'Place of Birth'),
 #         description=_(u'Enter city, state, and country'),
@@ -1146,21 +1811,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #     foodAllergies = schema.TextLine(
 #         title=_(u'Allergies'),
 #         description=_(u'List any allergies (food, pet, etc.)'),
-#         required=False,
-#     )
-#
-#     hasDifficultyWalking = schema.Choice(
-#         title=_(u'Difficulty Walking'),
-#         description=_(u'Do you have a condition which would make it difficult to walk long distances?'),
-#         vocabulary=yes_no_none_vocabulary,
-# #        required=True,
-#         required=False,
-#     )
-#
-#     maxWalkingDistance = schema.TextLine(
-# #    maxWalkingDistance = schema.Int(
-#         title=_(u'Max Walking Distance'),
-#         description=_(u'If so, what is the maximum number of minutes you can walk?'),
 #         required=False,
 #     )
 #
@@ -1340,13 +1990,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #         'preferences',
 #         label=_(u"Preferences"),
 #         fields=['smokingPreferred', 'isVegetarian', 'additionalNeeds', ]
-#     )
-#
-#     smokingPreferred = schema.Choice(
-#         title=_(u'Smoking Preference'),
-#         vocabulary=smoking_vocabulary,
-#         default= 'No Preference',
-#         required=False,
 #     )
 #
 #     isVegetarian = schema.Choice(
@@ -1663,15 +2306,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #         fields=['applyForAid', 'holdApplication', 'financialAidGranted']
 #     )
 #
-#     applyForAid = schema.Choice(
-#         title=_(u'Are you applying for financial aid?'),
-#         description=_(u'If you are not applying for financial aid, skip to the next section.'),
-# #        required=True,
-#         required=False,
-#         vocabulary=yes_no_none_vocabulary,
-#         #write_permission="UWOshOIE: Modify normal fields",
-#     )
-#
 #     holdApplication = schema.Choice(
 #         title=_(u'Should the OIE hold or process your application?'),
 #         description=_(u'HOLD your Study Abroad Application (i.e. you will only study abroad IF financial aid is available; at this point the application fee is still refundable but the OIE is not reserving a seat for you), or PROCESS your Study Abroad Applciation (i.e. you will study abroad regardless of your aid package; at this point the application fee is non-refundable and the OIE will reserve your seat.'),
@@ -1702,18 +2336,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #         #write_permission="UWOshOIE: Modify revisable fields",
 #     )
 #
-#     roommateName1 = schema.TextLine(
-#         title=_(u'Roommate 1 Name'),
-#         required=False,
-#         #write_permission="UWOshOIE: Modify revisable fields",
-#     )
-#
-#     roommateName2 = schema.TextLine(
-#         title=_(u'Roommate 2 Name'),
-#         required=False,
-#         #write_permission="UWOshOIE: Modify revisable fields",
-#     )
-#
 #     model.fieldset(
 #         'expectations',
 #         label=_(u"Expectations"),
@@ -1740,24 +2362,6 @@ class IOIEStudyAbroadParticipant(Interface):
 # #        required=True,
 #         required=False,
 #         vocabulary=aware_vocabulary,
-#         #write_permission="UWOshOIE: Modify normal fields",
-#     )
-#
-#     UWOshkoshRelease = schema.Choice(
-#         title=_(u'Release of Liability'),
-#         description=_(u'I hereby agree to hold harmless and indemnify the Board of Regents of the University of Wisconsin System and the University of Wisconsin Oshkosh, their officers, agents and employees, from any and all liability, loss, damages, costs or expenses which are sustained, incurred or required arising out of my actions.'),
-# #        required=True,
-#         required=False,
-#         vocabulary=yes_no_none_vocabulary,
-#         #write_permission="UWOshOIE: Modify normal fields",
-#     )
-#
-#     certification = schema.Choice(
-#         title=_(u'Certification'),
-#         description=_(u'I certify that the information stated above is true and correct.  If accepted to the program, I agree to follow all payment and withdrawal policies and to regularly check my UW Oshkosh email account for program information beginning today.  If I am a non-UW Oshkosh student, I will use and submit an email address that I check regularly.'),
-# #        required=True,
-#         required=False,
-#         vocabulary=yes_no_none_vocabulary,
 #         #write_permission="UWOshOIE: Modify normal fields",
 #     )
 #
@@ -1799,32 +2403,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #         required=False,
 #     )
 #
-#     applicationFeeOK = schema.Bool(
-#         title=_(u'Application Fee Submitted'),
-#         required=False,
-#     )
-#
-#     UWSystemStatementOK = schema.Bool(
-#         title=_(u'UW System Statement of Responsibility Submitted'),
-#         required=False,
-#     )
-#
-#     UWOshkoshStatementOK = schema.Bool(
-#         title=_(u'UW Oshkosh Statement of Responsibility Submitted'),
-#         description=_(u'This is the date in which the application was completed.'),
-#         required=False,
-#     )
-#
-#     withdrawalRefund = schema.Bool(
-#         title=_(u'Withdrawal and Refund Form Submitted'),
-#         required=False,
-#     )
-#
-#     transcriptsOK = schema.Bool(
-#         title=_(u'Transcripts Submitted'),
-#         required=False,
-#     )
-#
 #     programSpecificMaterialsRequired = schema.Choice(
 #         title=_(u'Program-Specific Materials Required(Step II)?'),
 #         required=False,
@@ -1840,11 +2418,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #         title=_(u'Special Student Form Required'),
 #         required=False,
 #         vocabulary=yes_no_none_vocabulary
-#     )
-#
-#     specialStudentFormOK = schema.Bool(
-#         title=_(u'Special Student Form Submitted'),
-#         required=False,
 #     )
 #
 #     creditOverloadFormRequired = schema.Choice(
@@ -1868,11 +2441,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #         required=False,
 #     )
 #
-#     passportOK = schema.Bool(
-#         title=_(u'Passport information or receipt submitted'),
-#         required=False,
-#     )
-#
 #     metPassportDeadline = schema.Choice(
 #         title=_(u'Passport Deadline Met'),
 #         required=False,
@@ -1888,12 +2456,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #     programSpecificMaterialsOKStepIII = schema.Bool(
 #         title=_(u'Program-Specific Materials Submitted(Step III)'),
 #         required=False,
-#     )
-#
-#     attendedOrientation = schema.Choice(
-#         title=_(u'Attended Orientation'),
-#         required=False,
-#         vocabulary=yes_no_none_vocabulary
 #     )
 #
 #     cisiDates = schema.TextLine(
@@ -1918,20 +2480,6 @@ class IOIEStudyAbroadParticipant(Interface):
 #     tuitionPayment = schema.Float(
 #         title=_(u'Tuition Payment (student exchange only)'),
 #         description=_(u''),
-#         required=False,
-#     )
-#
-#     depositOnTime = schema.Choice(
-#         title=_(u'Deposit Paid on Time'),
-#         description=_(u''),
-#         vocabulary=yes_no_none_vocabulary,
-#         required=False,
-#     )
-#
-#     payment2OnTime = schema.Choice(
-#         title=_(u'Final Payment Made on Time (except exchange students)'),
-#         description=_(u''),
-#         vocabulary=yes_no_none_vocabulary,
 #         required=False,
 #     )
 #

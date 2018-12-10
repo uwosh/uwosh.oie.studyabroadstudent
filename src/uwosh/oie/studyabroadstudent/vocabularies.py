@@ -228,18 +228,19 @@ contactrelationship = SimpleVocabulary(
 departure_transfer_vocabulary = SimpleVocabulary(
     [
         SimpleTerm(u'-- choose one --'),
-        SimpleTerm(u'I will transfer from Oshkosh to the airport with the group'),
-        SimpleTerm(u'I will transfer from Milwaukee to the airport with the group'),
-        SimpleTerm(u'I will arrange my own transportation to the airport'),
-        SimpleTerm(u'I will drive to my destination city (U.S. & Canada programs only)'),
+        SimpleTerm(u'I will transfer from Oshkosh with the group.'),
+        SimpleTerm(u'I will transfer from Fond du Lac with the group.'),
+        SimpleTerm(u'I will transfer from Milwaukee with the group.'),
+        SimpleTerm(u'I will arrange my own transportation.'),
     ]
 )
 
 departure_mode_transportation_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(u'I will fly with the group'),
-        SimpleTerm(u'I will apply for permission to arrange my own flight'),
-        SimpleTerm(u'I will drive to my destination city (U.S. & Canada programs only)')
+        SimpleTerm(u'I will fly to and from my program site with the group.'),
+        SimpleTerm(u'I will fly with the group to my program site but will apply for permission to arrange an alternative flight home.'),
+        SimpleTerm(u'I will apply for permission to fly to my program site on an alternative flight but will return from my program site with the group.'),
+        SimpleTerm(u'I will apply for permission to fly to and from my program site on an alternative flight.'),
     ]
 )
 
@@ -254,10 +255,10 @@ return_mode_transportation_vocabulary = SimpleVocabulary(
 return_transfer_vocabulary = SimpleVocabulary(
     [
         SimpleTerm(u'-- choose one --'),
-        SimpleTerm(u'I will transfer from the airport to Oshkosh with the group'),
-        SimpleTerm(u'I will transfer from the airport to Milwaukee with the group'),
-        SimpleTerm(u'I will arrange my own transportation home from the airport'),
-        SimpleTerm(u'I will drive back to my home at the end of my program (U.S. and Canada programs only)'),
+        SimpleTerm(u'I will transfer back to Oshkosh with the group.'),
+        SimpleTerm(u'I will transfer back to Fond du Lac with the group.'),
+        SimpleTerm(u'I will transfer back to Milwaukee with the group.'),
+        SimpleTerm(u'I will arrange my own transportation home.'),
     ]
 )
 
