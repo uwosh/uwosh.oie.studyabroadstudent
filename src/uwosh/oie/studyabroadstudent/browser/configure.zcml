@@ -44,6 +44,14 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="view"
+      for="..interfaces.participant.IOIEStudyAbroadParticipant"
+      class=".views.ParticipantView"
+      template="participantview.pt"
+      permission="zope2.View"
+      />
+
     <browser:page
       name="manager_view"
       for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"

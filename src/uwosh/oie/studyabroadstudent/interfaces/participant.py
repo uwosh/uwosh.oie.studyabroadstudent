@@ -46,29 +46,39 @@ def validate_student_id(value):
 
 def get_url_special_student_form():
     form = api.portal.get_registry_record('oiestudyabroadstudent.state_of_wisconsin_need_based_travel_grant_form')
-    filename, data = b64decode_file(form)
-    file = NamedFile(data=data, filename=filename)
-    url = "data:%s;base64, %s" % (file.contentType, file.data.encode('base64'))
-    html = '<a target="_blank" href="%s">Download this form</a>' % url
-    return RichTextValue(html, 'text/html', 'text/html')
+    if form is not None:
+        filename, data = b64decode_file(form)
+        file = NamedFile(data=data, filename=filename)
+        url = "data:%s;base64, %s" % (file.contentType, file.data.encode('base64'))
+        html = '<a target="_blank" href="%s">Download this form</a>' % url
+        return RichTextValue(html, 'text/html', 'text/html')
+    else:
+        return RichTextValue("<em>The Wisconsin need based travel grant form has not yet been specified by an administrator</em>", 'text/html', 'text/html')
 
 
 def get_url_special_student_form_for_undergraduate_admissions_form():
     form = api.portal.get_registry_record('oiestudyabroadstudent.special_student_form_for_undergraduate_admissions')
-    filename, data = b64decode_file(form)
-    file = NamedFile(data=data, filename=filename)
-    url = "data:%s;base64, %s" % (file.contentType, file.data.encode('base64'))
-    html = '<a target="_blank" href="%s">Download this form</a>' % url
-    return RichTextValue(html, 'text/html', 'text/html')
+    if form is not None:
+        filename, data = b64decode_file(form)
+        file = NamedFile(data=data, filename=filename)
+        url = "data:%s;base64, %s" % (file.contentType, file.data.encode('base64'))
+        html = '<a target="_blank" href="%s">Download this form</a>' % url
+        return RichTextValue(html, 'text/html', 'text/html')
+    else:
+        return RichTextValue("<em>The special student form for undergraduate admissions has not yet been specified by an administrator</em>", 'text/html', 'text/html')
+
 
 
 def get_url_disciplinary_clearance_form():
     form = api.portal.get_registry_record('oiestudyabroadstudent.disciplinary_clearance_form')
-    filename, data = b64decode_file(form)
-    file = NamedFile(data=data, filename=filename)
-    url = "data:%s;base64, %s" % (file.contentType, file.data.encode('base64'))
-    html = '<a target="_blank" href="%s">Download this form</a>' % url
-    return RichTextValue(html, 'text/html', 'text/html')
+    if form is not None:
+        filename, data = b64decode_file(form)
+        file = NamedFile(data=data, filename=filename)
+        url = "data:%s;base64, %s" % (file.contentType, file.data.encode('base64'))
+        html = '<a target="_blank" href="%s">Download this form</a>' % url
+        return RichTextValue(html, 'text/html', 'text/html')
+    else:
+        return RichTextValue("<em>The disciplinary clearance form has not yet been specified by an administrator</em>", 'text/html', 'text/html')
 
 
 class IOIEStudyAbroadParticipant(Interface):

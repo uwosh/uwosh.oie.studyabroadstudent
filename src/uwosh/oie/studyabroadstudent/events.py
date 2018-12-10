@@ -96,19 +96,23 @@ def contact_modified(o, event):
 
 
 ###############################################################
-def _participant_update(o, event):
+def _participant_update(o, event, event_type=None):
     program_uid = o.programName
     if program_uid:
         program = uuidToObject(program_uid)
         if program:
             answer_changed_str = "This answer requires review because the question has changed: "
             programName = program.title
-            program_changed = False
-            for evt_description in event.descriptions:
-                if 'programName' in evt_description.attributes:
-                    program_changed = True
-                    break
-            if program_changed:
+            if event_type == 'created':
+                program_assigned_or_changed = True
+            else:
+                program_assigned_or_changed = False
+            if event_type == 'updated' and hasattr(event, 'descriptions'):
+                for evt_description in event.descriptions:
+                    if 'programName' in evt_description.attributes:
+                        program_assigned_or_changed = True
+                        break
+            if program_assigned_or_changed:
                 # copy questions from program object
                 o.applicant_question_text1 = program.applicantQuestion1
                 o.applicant_question_text2 = program.applicantQuestion2
@@ -137,14 +141,14 @@ def _participant_update(o, event):
 
 
 def participant_created(o, event):
-    _participant_update(o, event)
+    _participant_update(o, event, event_type='created')
     if not o.id:
         normalizer = getUtility(IIDNormalizer)
         o.id = normalizer.normalize(o.title)
 
 
 def participant_modified(o, event):
-    _participant_update(o, event)
+    _participant_update(o, event, event_type='updated')
 
 
 ###############################################################

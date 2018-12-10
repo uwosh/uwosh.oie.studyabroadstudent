@@ -7,6 +7,7 @@ from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.file import NamedImage
 import logging
+from Products.CMFPlone.PloneBatch import Batch
 
 
 class ApplicationView(DefaultView):
@@ -134,7 +135,7 @@ class ContactView(DefaultView):
     pass
 
 
-class ParticipantView(DefaultView):
+class ParticipantView(DefaultView, FolderView):
     pass
 
 class AttemptTransitionsPeriodicallyView(DefaultView):
