@@ -3,7 +3,7 @@ from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
-from uwosh.oie.studyabroadstudent.interfaces.participant import IOIEStudyAbroadParticipant
+from uwosh.oie.studyabroadstudent.interfaces.participant import IOIEStudyAbroadParticipant  # noqa
 from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING  # noqa
 from zope.component import createObject
 from zope.component import queryUtility
@@ -41,8 +41,8 @@ class OIEStudyAbroadParticipantIntegrationTest(unittest.TestCase):
             container=self.portal,
             type='OIEStudyAbroadParticipant',
             id='OIEStudyAbroadParticipant',
-            state_of_wisconsin_need_based_travel_grant_form_link = '',
-            special_student_form_for_undergraduate_admissions_form_link = '',
-            disciplinary_clearance_form_link = '',
+            state_of_wisconsin_need_based_travel_grant_form_link='',
+            special_student_form_for_undergraduate_admissions_form_link='',
+            disciplinary_clearance_form_link='',
         )
         self.assertTrue(IOIEStudyAbroadParticipant.providedBy(obj))

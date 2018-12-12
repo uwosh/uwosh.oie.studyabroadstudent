@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
+from collective import dexteritytextindexer
+from plone.directives import form
+from Products.CMFPlone.RegistrationTool import checkEmailAddress
+from Products.CMFPlone.RegistrationTool import EmailAddressInvalid
 from uwosh.oie.studyabroadstudent import _
+from uwosh.oie.studyabroadstudent.vocabularies import socialmediaservice
 from zope import schema
 from zope.interface import Interface
-from collective import dexteritytextindexer
-from uwosh.oie.studyabroadstudent.vocabularies import socialmediaservice
 from zope.schema import ValidationError
-from Products.CMFPlone.RegistrationTool import checkEmailAddress, EmailAddressInvalid
-from plone.directives import form
 
 
 class InvalidEmailAddress(ValidationError):
-    "Invalid email address"
+    """Invalid email address"""
 
 
 def validate_email(value):
@@ -24,7 +25,7 @@ def validate_email(value):
 
 class IOIEContact(Interface):
     dexteritytextindexer.searchable('title')
-    form.mode(title="display")
+    form.mode(title='display')
     title = schema.TextLine(
         title=_(u'Full Name'),
         required=False,
@@ -53,13 +54,13 @@ class IOIEContact(Interface):
     dexteritytextindexer.searchable('phone')
     phone = schema.TextLine(
         title=_(u'Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Please include country code (if outside US) and area code'),  # noqa
         required=False,
     )
     dexteritytextindexer.searchable('mobile_phone')
     mobile_phone = schema.TextLine(
         title=_(u'Mobile Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),
+        description=_(u'Please include country code (if outside US) and area code'),  # noqa
         required=False,
     )
     dexteritytextindexer.searchable('email')
