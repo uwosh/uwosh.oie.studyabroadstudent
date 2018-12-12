@@ -25,32 +25,49 @@
 
       <legend tal:content="group/label" />
 
-      <div tal:condition="python: fieldset_viewable">
+      <div tal:condition="fieldset_viewable">
             <tal:block tal:repeat="widget group/widgets/values">
                 <tal:widget tal:replace="structure widget/@@ploneform-render-widget"/>
             </tal:block>
       </div>
+      <div tal:condition="not: fieldset_viewable">
+            Fieldset is not viewable
+      </div>
 
       <div tal:condition="python: fieldset_level_viewability == ''">
+        fieldset_level_viewability is ''
       </div>
 
       <div tal:condition="python: fieldset_level_viewability is None or not isinstance(fieldset_viewable, dict)">
           <tal:block tal:repeat="widget group/widgets/values">
-              <div tal:define="id widget/id; is_visible python: view.is_field_viewable(id)" tal:condition="is_visible">
+            <div  tal:define="id widget/id; is_visible python: view.is_field_viewable(id)">
+              <div tal:condition="is_visible">
                 <tal:widget tal:replace="structure widget/@@ploneform-render-widget"/>
               </div>
+              <div tal:condition="not: is_visible">
+                The widget <span tal:content="id">[widget ID]</span> is not visible
+              </div>
+            </div>
           </tal:block>
+      </div>
+      <div tal:condition="python: not (fieldset_level_viewability is None or not isinstance(fieldset_viewable, dict))">
+          python: not (fieldset_level_viewability is None or not isinstance(fieldset_viewable, dict))
       </div>
 
     </div>
   </fieldset>
 
-  <fieldset id="folder-listing" tal:condition="python: view.is_field_viewable('_SHOW_CONTENTS')">
+  <div tal:define="are_contents_viewable python: view.is_field_viewable('_SHOW_CONTENTS')">
+    <fieldset id="folder-listing" tal:condition="are_contents_viewable">
       <legend i18n:translate="" i18n:domain="plone">Contents</legend>
       <tal:block define="view nocall:context/folder_listing; listing_macro view/macros/listing">
-          <metal:use_macro use-macro="listing_macro" />
+        <metal:use_macro use-macro="listing_macro"/>
       </tal:block>
-  </fieldset>
+    </fieldset>
+    <fieldset id="folder-listing" tal:condition="not: are_contents_viewable">
+      Viewing content listing is not allowed
+    </fieldset>
+  </div>
 
 </metal:content-core>
 </metal:main>

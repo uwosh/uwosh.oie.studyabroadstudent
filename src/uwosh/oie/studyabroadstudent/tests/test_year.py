@@ -3,7 +3,7 @@ from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
-from uwosh.oie.studyabroadstudent.interfaces.calendaryear import IOIECalendarYear
+from uwosh.oie.studyabroadstudent.interfaces.calendaryear import IOIECalendarYear  # noqa
 from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING  # noqa
 from zope.component import createObject
 from zope.component import queryUtility

@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-from plone.autoform.view import WidgetsView
+from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.utils import getAdditionalSchemata
 from zope.component import getUtility
-from plone.dexterity.browser.view import DefaultView
+
 
 class ProgramManagerView(DefaultView):
-    """The default view for Dexterity content. This uses a WidgetsView and
-    renders all widgets in display mode.
+    """The default view for Dexterity content.
     """
 
     @property

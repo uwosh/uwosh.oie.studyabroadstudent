@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from plone import api
-from plone.dexterity.browser.view import DefaultView
+from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.app.contenttypes.browser.folder import FolderView
 from plone.app.uuid.utils import uuidToObject
-from plone.app.contenttypes.behaviors.leadimage import ILeadImage
+from plone.dexterity.browser.view import DefaultView
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.file import NamedImage
+
 import logging
-from Products.CMFPlone.PloneBatch import Batch
 
 
 class ApplicationView(DefaultView):
@@ -16,7 +16,9 @@ class ApplicationView(DefaultView):
 
 class ProgramView(DefaultView, FolderView):
     def can_edit(self):
-        """Determine whether to show the 'public' information only or the actual contents of the Program"""
+        """Determine whether to show the 'public' information only or the
+        actual contents of the Program
+        """
         if api.user.is_anonymous():
             return False
         current = api.user.get_current()
@@ -29,41 +31,56 @@ class ProgramView(DefaultView, FolderView):
         """Retrieve info for all countries associated with the program"""
         country_info_html = '<dl>'
         countries = self.context.countries
-        portal = api.portal.get()
         for country_name in countries:
-            brains = api.content.find(portal_type='OIECountry', Title=country_name)
+            brains = api.content.find(portal_type='OIECountry',
+                                      Title=country_name)
             if brains:
                 country = brains[0].getObject()
                 country_url = country.absolute_url()
                 if country_url is None:
                     country_url_atag = '(missing country URL)'
                 else:
-                    country_url_atag = '<a href="%s">%s</a>' % (country_url, country_name)
+                    country_url_atag = '<a href="{0}">{1}</a>'.format(
+                        country_url,
+                        country_name,
+                    )
                 timezone_url = country.timezone_url
                 if timezone_url is None:
                     timezone_url_atag = '(missing timezone URL)'
                 else:
-                    timezone_url_atag = '<a href="%s">time zone</a>' % timezone_url
+                    timezone_url_atag = '<a href="{0}">time zone</a>'.format(
+                        timezone_url)
                 cdc_info_url = country.cdc_info_url
                 if cdc_info_url is None:
                     cdc_info_url_atag = '(missing CDC URL)'
                 else:
-                    cdc_info_url_atag = '<a href="%s">CDC</a>' % cdc_info_url
+                    cdc_info_url_atag = '<a href="{0}">CDC</a>'.format(
+                        cdc_info_url,
+                    )
                 state_dept_info_url = country.state_dept_info_url
                 if state_dept_info_url is None:
                     state_dept_info_url_atag = '(missing State Dept URL)'
                 else:
-                    state_dept_info_url_atag = '<a href="%s">State Dept.</a>' % state_dept_info_url
+                    state_dept_info_url_atag = '<a href="{0}">State Dept.</a>'.format(  # noqa
+                        state_dept_info_url,
+                    )
                 country_info_html += \
-                    '<dt>%s</dt><dd>%s, %s, %s</dd>' % \
-                    (country_url_atag, cdc_info_url_atag, state_dept_info_url_atag, timezone_url_atag)
+                    '<dt>{0}</dt><dd>{1}, {2}, {3}</dd>'.format(
+                        country_url_atag,
+                        cdc_info_url_atag,
+                        state_dept_info_url_atag,
+                        timezone_url_atag)
             else:
-                country_info_html += '<dt>%s (missing country info)</dt>' % country_name
+                country_info_html += '<dt>{0} (missing country info)</dt>'.format(  # noqa
+                    country_name,
+                )
         country_info_html += '</dl>'
         return country_info_html
 
     def uwo_logo(self):
-        uwo_logo_data = api.portal.get_registry_record('oiestudyabroadstudent.uwo_logo')
+        uwo_logo_data = api.portal.get_registry_record(
+            'oiestudyabroadstudent.uwo_logo',
+        )
         if uwo_logo_data is None or len(uwo_logo_data) == 0:
             return None
         filename, data = b64decode_file(uwo_logo_data)
@@ -71,10 +88,12 @@ class ProgramView(DefaultView, FolderView):
         return image
 
     def footer_info(self):
-        footer_text = api.portal.get_registry_record('oiestudyabroadstudent.program_view_footer')
+        footer_text = api.portal.get_registry_record(
+            'oiestudyabroadstudent.program_view_footer',
+        )
         return footer_text
 
-    def liaison (self):
+    def liaison(self):
         liaison = None
         if self.context.liaison:
             liaison = uuidToObject(self.context.liaison)
@@ -88,8 +107,12 @@ class ProgramView(DefaultView, FolderView):
 
     def coleaders(self):
         coleaders = []
-        if self.context.program_coleaders and len(self.context.program_coleaders) > 0:
-            coleaders = [uuidToObject(coleader['coleader']) for coleader in self.context.program_coleaders]
+        if (
+                self.context.program_coleaders and
+                len(self.context.program_coleaders) > 0
+        ):
+            coleaders = [uuidToObject(coleader['coleader'])
+                         for coleader in self.context.program_coleaders]
         return coleaders
 
     def calendar_year(self):
@@ -100,13 +123,18 @@ class ProgramView(DefaultView, FolderView):
                 return year
 
     def housing(self):
-        brains = api.content.find(context=self.context, portal_type='OIETransition')
+        brains = api.content.find(context=self.context,
+                                  portal_type='OIETransition')
         locations = [b.getObject() for b in brains]
         return set([l.accommodation for l in locations])
 
     def has_lead_image(self):
         bdata = ILeadImage(self.context)
-        if hasattr(bdata, 'image') and bdata.image is not None and bdata.image.size > 0:
+        if (
+                getattr(bdata, 'image', None) and
+                bdata.image is not None and
+                bdata.image.size > 0
+        ):
             return True
 
     def get_detailed_view_link(self):
@@ -118,15 +146,15 @@ class CooperatingPartnerView(DefaultView):
         primary_contact = getattr(self.context, 'primary_contact', None)
         if primary_contact:
             contact = primary_contact.to_object
-            return '<a href="%s">%s, %s, %s, %s, %s, %s : %s</a>' % (
-                contact.absolute_url(),
-                getattr(contact, 'title', None),
-                getattr(contact, 'job_title', None),
-                getattr(contact, 'telephone', None),
-                getattr(contact, 'mobile', None),
-                getattr(contact, 'email', None),
-                getattr(contact, 'other_service', None),
-                getattr(contact, 'other_username', None),
+            return '<a href="{url}">{title}, {job}, {tel}, {mob}, {email}, {serv} : {user}</a>'.format(  # noqa
+                url=contact.absolute_url(),
+                title=getattr(contact, 'title', None),
+                job=getattr(contact, 'job_title', None),
+                tel=getattr(contact, 'telephone', None),
+                mob=getattr(contact, 'mobile', None),
+                email=getattr(contact, 'email', None),
+                serv=getattr(contact, 'other_service', None),
+                user=getattr(contact, 'other_username', None),
             )
         return ''
 
@@ -138,9 +166,12 @@ class ContactView(DefaultView):
 class ParticipantView(DefaultView, FolderView):
     pass
 
+
 class AttemptTransitionsPeriodicallyView(DefaultView):
 
     def __call__(self, *args, **kwargs):
-        """execute certain workflow transitions which should use their guard expressions before proceeding"""
-        logger = logging.getLogger(__class__)
+        """execute certain workflow transitions which should use their guard
+        expressions before proceeding
+        """
+        logger = logging.getLogger(__class__)  # noqa
         logger.info("'transition has been attempted")

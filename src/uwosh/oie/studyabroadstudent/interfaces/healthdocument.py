@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
+from plone.directives import form
+from plone.namedfile import field
 from uwosh.oie.studyabroadstudent import _
 from zope import schema
-from zope.interface import Interface, implementer
-from plone.namedfile import field
-from plone.directives import form
+from zope.interface import Interface
 
 
 class IOIEHealthSafetySecurityDocument(Interface):
-    form.mode(title="display")
+    form.mode(title='display')
     title = schema.TextLine(
         title=_(u'Title'),
         required=False,

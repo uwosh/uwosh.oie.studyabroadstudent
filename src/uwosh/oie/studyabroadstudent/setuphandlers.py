@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-from Products.CMFPlone.interfaces import INonInstallable
-from zope.interface import implementer
 from plone import api
-from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from plone.app.discussion.interfaces import IDiscussionSettings
 from plone.app.textfield.value import RichTextValue
-from zope.component import queryUtility
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.registry.interfaces import IRegistry
-from plone.app.discussion.interfaces import IDiscussionSettings
+from Products.CMFPlone.interfaces import INonInstallable
+from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from zope.component import queryUtility
+from zope.interface import implementer
 
 
 @implementer(INonInstallable)
@@ -29,7 +29,11 @@ def constrain_types(folder, ftis):
 
 def create_toplevel_folder(portal, portal_ids, title, id, ftis):
     if id not in portal_ids:
-        folder = api.content.create(type='Folder', title=title, id=id, container=portal)
+        folder = api.content.create(
+            type='Folder',
+            title=title, id=id,
+            container=portal,
+        )
     else:
         folder = portal[id]
     constrain_types(folder, ftis)
@@ -49,8 +53,14 @@ def post_install(context):
 
     # add Link to OIE control panel
     if 'oie-settings' not in portal_ids:
-        link = api.content.create(type='Link', title='OIE Settings', id='oie-settings', container=portal)
-        link.remoteUrl = '${navigation_root_url}/@@oiestudyabroadstudent-controlpanel'
+        link = api.content.create(
+            type='Link',
+            title='OIE Settings',
+            id='oie-settings',
+            container=portal,
+        )
+        link.remoteUrl = \
+            '${navigation_root_url}/@@oiestudyabroadstudent-controlpanel'
 
     populate_airlines(portal)
     populate_partners(portal)
@@ -59,198 +69,96 @@ def post_install(context):
 
 
 def create_generic_accounts(portal):
+    _create_account('kim.nguyen+Site_Admin@wildcardcorp.com',
+                    'Site_Admin', ['Site_Admin', 'SiteAdministrator'])
+    _create_account('kim.nguyen+Mgmt_Director@wildcardcorp.com',
+                    'Mgmt_Director', ['Mgmt_Director', 'SiteAdministrator'])
+    _create_account('kim.nguyen+Mgmt_Manager@wildcardcorp.com',
+                    'Mgmt_Manager', ['Mgmt_Manager'])
+    _create_account('kim.nguyen+Mgmt_Coordinator@wildcardcorp.com',
+                    'Mgmt_Coordinator', ['Mgmt_Coordinator'])
+    _create_account('kim.nguyen+Mgmt_Financial@wildcardcorp.com',
+                    'Mgmt_Financial', ['Mgmt_Financial'])
+    _create_account('kim.nguyen+Mgmt_OIEProfessional@wildcardcorp.com',
+                    'Mgmt_OIEProfessional', ['Mgmt_OIEProfessional'])
+    _create_account('kim.nguyen+Mgmt_Intern@wildcardcorp.com',
+                    'Mgmt_Intern', ['Mgmt_Intern'])
+    _create_account('kim.nguyen+Mgmt_Liaison@wildcardcorp.com',
+                    'Mgmt_Liaison', ['Mgmt_Liaison'])
+    _create_account('kim.nguyen+Mgmt_ProgramLeader@wildcardcorp.com',
+                    'Mgmt_ProgramLeader', ['Mgmt_ProgramLeader'])
+    _create_account('kim.nguyen+Mgmt_Dean@wildcardcorp.com',
+                    'Mgmt_Dean', ['Mgmt_Dean'])
+    _create_account('kim.nguyen+Mgmt_Chair@wildcardcorp.com',
+                    'Mgmt_Chair', ['Mgmt_Chair'])
+    _create_account('kim.nguyen+Mgmt_Provost@wildcardcorp.com',
+                    'Mgmt_Provost', ['Mgmt_Provost'])
+    _create_account('kim.nguyen+Mgmt_LeaderReview@wildcardcorp.com',
+                    'Mgmt_LeaderReview', ['Mgmt_LeaderReview'])
+    _create_account('kim.nguyen+Mgmt_CourseBuilder@wildcardcorp.com',
+                    'Mgmt_CourseBuilder', ['Mgmt_CourseBuilder'])
+    _create_account('kim.nguyen+Mgmt_RiskMgmt@wildcardcorp.com',
+                    'Mgmt_RiskMgmt', ['Mgmt_RiskMgmt'])
+    _create_account('kim.nguyen+Participant_Director@wildcardcorp.com',
+                    'Participant_Director', ['Participant_Director'])
+    _create_account('kim.nguyen+Participant_Manager@wildcardcorp.com',
+                    'Participant_Manager', ['Participant_Manager'])
+    _create_account('kim.nguyen+Participant_Coordinator@wildcardcorp.com',
+                    'Participant_Coordinator', ['Participant_Coordinator'])
+    _create_account('kim.nguyen+Participant_Financial@wildcardcorp.com',
+                    'Participant_Financial', ['Participant_Financial'])
+    _create_account('kim.nguyen+Participant_OIEProfessional@wildcardcorp.com',
+                    'Participant_OIEProfessional',
+                    ['Participant_OIEProfessional'])
+    _create_account('kim.nguyen+Participant_Intern@wildcardcorp.com',
+                    'Participant_Intern', ['Participant_Intern'])
+    _create_account('kim.nguyen+Participant_Liaison@wildcardcorp.com',
+                    'Participant_Liaison', ['Participant_Liaison'])
+    _create_account('kim.nguyen+Participant_ProgramLeader@wildcardcorp.com',
+                    'Participant_ProgramLeader', ['Participant_ProgramLeader'])
+    _create_account('kim.nguyen+Participant_FinancialAid@wildcardcorp.com',
+                    'Participant_FinancialAid', ['Participant_FinancialAid'])
+    _create_account('kim.nguyen+Participant_Provost@wildcardcorp.com',
+                    'Participant_Provost', ['Participant_Provost'])
+    _create_account('kim.nguyen+Participant_DeanOfStudents@wildcardcorp.com',
+                    'Participant_DeanOfStudents',
+                    ['Participant_DeanOfStudents'])
+    _create_account('kim.nguyen+Participant_Health@wildcardcorp.com',
+                    'Participant_Health', ['Participant_Health'])
+    _create_account('kim.nguyen+Participant_StudentAccounts@wildcardcorp.com',
+                    'Participant_StudentAccounts',
+                    ['Participant_StudentAccounts'])
+    _create_account('kim.nguyen+Participant_Reference@wildcardcorp.com',
+                    'Participant_Reference', ['Participant_Reference'])
+    _create_account('kim.nguyen+Participant_RiskMgmt@wildcardcorp.com',
+                    'Participant_RiskMgmt', ['Participant_RiskMgmt'])
+    _create_account('kim.nguyen+Participant_Applicant@wildcardcorp.com',
+                    'Participant_Applicant', ['Participant_Applicant'])
+
+
+def _create_account(email, username, roles, password='secret'):
+    # check if account already exists before trying to create
+    user = api.user.get(username=username)
+    if user:
+        return
     try:
-        user = api.user.create(email='kim.nguyen+Site_Admin@wildcardcorp.com', username='Site_Admin', password='secret')
-        api.user.grant_roles(username=user.id, roles=['Site_Admin', 'SiteAdministrator'])
-    except:
+        user = api.user.create(
+            email=email,
+            username=username,
+            password=password,
+        )
+        api.user.grant_roles(username=user.id, roles=roles)
+    except Exception:
         pass
 
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_Director@wildcardcorp.com', username='Mgmt_Director')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_Director', 'SiteAdministrator'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_Manager@wildcardcorp.com', username='Mgmt_Manager')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_Manager'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_Coordinator@wildcardcorp.com', username='Mgmt_Coordinator')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_Coordinator'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_Financial@wildcardcorp.com', username='Mgmt_Financial')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_Financial'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_OIEProfessional@wildcardcorp.com', username='Mgmt_OIEProfessional')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_OIEProfessional'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_Intern@wildcardcorp.com', username='Mgmt_Intern')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_Intern'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_Liaison@wildcardcorp.com', username='Mgmt_Liaison')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_Liaison'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_ProgramLeader@wildcardcorp.com', username='Mgmt_ProgramLeader')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_ProgramLeader'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_Dean@wildcardcorp.com', username='Mgmt_Dean')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_Dean'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_Chair@wildcardcorp.com', username='Mgmt_Chair')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_Chair'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_Provost@wildcardcorp.com', username='Mgmt_Provost')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_Provost'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_LeaderReview@wildcardcorp.com', username='Mgmt_LeaderReview')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_LeaderReview'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_CourseBuilder@wildcardcorp.com', username='Mgmt_CourseBuilder')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_CourseBuilder'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Mgmt_RiskMgmt@wildcardcorp.com', username='Mgmt_RiskMgmt')
-        api.user.grant_roles(username=user.id, roles=['Mgmt_RiskMgmt'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_Director@wildcardcorp.com', username='Participant_Director')
-        api.user.grant_roles(username=user.id, roles=['Participant_Director'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_Manager@wildcardcorp.com', username='Participant_Manager')
-        api.user.grant_roles(username=user.id, roles=['Participant_Manager'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_Coordinator@wildcardcorp.com', username='Participant_Coordinator')
-        api.user.grant_roles(username=user.id, roles=['Participant_Coordinator'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_Financial@wildcardcorp.com', username='Participant_Financial')
-        api.user.grant_roles(username=user.id, roles=['Participant_Financial'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_OIEProfessional@wildcardcorp.com', username='Participant_OIEProfessional')
-        api.user.grant_roles(username=user.id, roles=['Participant_OIEProfessional'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_Intern@wildcardcorp.com', username='Participant_Intern')
-        api.user.grant_roles(username=user.id, roles=['Participant_Intern'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_Liaison@wildcardcorp.com', username='Participant_Liaison')
-        api.user.grant_roles(username=user.id, roles=['Participant_Liaison'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_ProgramLeader@wildcardcorp.com', username='Participant_ProgramLeader')
-        api.user.grant_roles(username=user.id, roles=['Participant_ProgramLeader'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_FinancialAid@wildcardcorp.com', username='Participant_FinancialAid')
-        api.user.grant_roles(username=user.id, roles=['Participant_FinancialAid'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_Provost@wildcardcorp.com', username='Participant_Provost')
-        api.user.grant_roles(username=user.id, roles=['Participant_Provost'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_DeanOfStudents@wildcardcorp.com', username='Participant_DeanOfStudents')
-        api.user.grant_roles(username=user.id, roles=['Participant_DeanOfStudents'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_Health@wildcardcorp.com', username='Participant_Health')
-        api.user.grant_roles(username=user.id, roles=['Participant_Health'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_StudentAccounts@wildcardcorp.com', username='Participant_StudentAccounts')
-        api.user.grant_roles(username=user.id, roles=['Participant_StudentAccounts'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_Reference@wildcardcorp.com', username='Participant_Reference')
-        api.user.grant_roles(username=user.id, roles=['Participant_Reference'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_RiskMgmt@wildcardcorp.com', username='Participant_RiskMgmt')
-        api.user.grant_roles(username=user.id, roles=['Participant_RiskMgmt'])
-    except:
-        pass
-
-    try:
-        user = api.user.create(email='kim.nguyen+Participant_Applicant@wildcardcorp.com', username='Participant_Applicant')
-        api.user.grant_roles(username=user.id, roles=['Participant_Applicant'])
-    except:
-        pass
 
 def set_front_page_text(portal, portal_ids):
     # change front page text
     if 'front-page' in portal_ids:
         frontpage = portal['front-page']
         frontpage.title = 'Welcome to OIE'
-        frontpage.description = 'You have reached the UW Oshkosh Office of International Education'
+        frontpage.description = \
+            'You have reached the UW Oshkosh Office of International Education'
         frontpage.text = RichTextValue(
             u'Lorem ipsum',
             'text/plain',
@@ -270,13 +178,25 @@ def hide_users_folder(portal, portal_ids):
 
 def populate_repositories(portal, portal_ids):
     # create and hide repositories
-    create_toplevel_folder(portal, portal_ids, 'Images', 'image-repository', ['Image'])
+    create_toplevel_folder(
+        portal,
+        portal_ids,
+        'Images',
+        'image-repository',
+        ['Image'],
+    )
     images = portal['image-repository']
     images.exclude_from_nav = True
     wf_state = api.content.get_state(images)
     if wf_state != 'published':
         api.content.transition(obj=images, transition='publish')
-    create_toplevel_folder(portal, portal_ids, 'Files', 'file-repository', ['File'])
+    create_toplevel_folder(
+        portal,
+        portal_ids,
+        'Files',
+        'file-repository',
+        ['File'],
+    )
     files = portal['file-repository']
     files.exclude_from_nav = True
     wf_state = api.content.get_state(files)
@@ -286,22 +206,30 @@ def populate_repositories(portal, portal_ids):
 
 def populate_toplevel_folders(portal, portal_ids):
     # add folders and restrict addable types
-    create_toplevel_folder(portal, portal_ids, 'Legacy Applications', 'legacy-applications',
+    create_toplevel_folder(portal, portal_ids, 'Legacy Applications',
+                           'legacy-applications',
                            ['OIEStudyAbroadStudentApplication'])
-    create_toplevel_folder(portal, portal_ids, 'Countries', 'countries', ['OIECountry'])
-    create_toplevel_folder(portal, portal_ids, 'Participants', 'participants', ['OIEStudyAbroadParticipant'])
-    create_toplevel_folder(portal, portal_ids, 'Programs', 'programs', ['OIEStudyAbroadProgram'])
-    create_toplevel_folder(portal, portal_ids, 'People', 'people', ['OIEContact', 'OIELiaison', 'OIEProgramLeader'])
-    create_toplevel_folder(portal, portal_ids, 'Partners', 'partners', ['OIECooperatingPartner'])
-    create_toplevel_folder(portal, portal_ids, 'Years', 'years', ['OIECalendarYear'])
-    create_toplevel_folder(portal, portal_ids, 'Airlines', 'airlines', ['OIEAirline'])
+    create_toplevel_folder(portal, portal_ids, 'Countries', 'countries',
+                           ['OIECountry'])
+    create_toplevel_folder(portal, portal_ids, 'Participants', 'participants',
+                           ['OIEStudyAbroadParticipant'])
+    create_toplevel_folder(portal, portal_ids, 'Programs', 'programs',
+                           ['OIEStudyAbroadProgram'])
+    create_toplevel_folder(portal, portal_ids, 'People', 'people',
+                           ['OIEContact', 'OIELiaison', 'OIEProgramLeader'])
+    create_toplevel_folder(portal, portal_ids, 'Partners', 'partners',
+                           ['OIECooperatingPartner'])
+    create_toplevel_folder(portal, portal_ids, 'Years', 'years',
+                           ['OIECalendarYear'])
+    create_toplevel_folder(portal, portal_ids, 'Airlines', 'airlines',
+                           ['OIEAirline'])
     create_toplevel_folder(portal, portal_ids, 'Forms', 'forms', ['File'])
 
 
 def enable_commenting():
     # enable commenting/discussion
     registry = queryUtility(IRegistry)
-    settings = registry.forInterface(IDiscussionSettings, check=False)
+    settings = registry.forInterface(IDiscussionSettings, check=False)  # noqa
     if not settings.globally_enabled:
         settings.globally_enabled = True
     if not settings.moderation_enabled:
@@ -329,16 +257,20 @@ def populate_partners(portal):
     partner_folder = portal['partners']
     create_partner('Academic Programs International (API)', partner_folder)
     create_partner('Accent International', partner_folder)
-    create_partner('American Institute for Foreign Study (AIFS)', partner_folder)
+    create_partner('American Institute for Foreign Study (AIFS)',
+                   partner_folder)
     create_partner('AMIDEAST', partner_folder)
     create_partner('Amizade Ltd.', partner_folder)
     create_partner('Anglo Educational Services', partner_folder)
     create_partner('Anytour International', partner_folder)
-    create_partner('Beyond Borders International / Minds Abroad', partner_folder)
+    create_partner('Beyond Borders International / Minds Abroad',
+                   partner_folder)
     create_partner('Cultural Experiences Abroad (CEA)', partner_folder)
-    create_partner('Customized Educational Programs Abroad (CEPA)', partner_folder)
+    create_partner('Customized Educational Programs Abroad (CEPA)',
+                   partner_folder)
     create_partner('China Sense', partner_folder)
-    create_partner('Council on International Educational Exchange (CIEE)', partner_folder)
+    create_partner('Council on International Educational Exchange (CIEE)',
+                   partner_folder)
     create_partner('CISabroad', partner_folder)
     create_partner('Destination Partners', partner_folder)
     create_partner('Educators Abroad Ltd', partner_folder)
@@ -523,121 +455,272 @@ def populate_airlines(portal):
 def populate_countries(portal):
     # populate countries
     country_folder = portal['countries']
-    create_country('Australia', 'https://www.timeanddate.com/worldclock/results.html?query=australia',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/australia',
-                   'https://travel.state.gov/content/passports/en/country/australia.html', country_folder)
-    create_country('Austria', 'https://www.timeanddate.com/worldclock/austria',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/austria',
-                   'https://travel.state.gov/content/passports/en/country/austria.html', country_folder)
-    create_country('Belgium', 'https://www.timeanddate.com/worldclock/belgium',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/belgium',
-                   'https://travel.state.gov/content/passports/en/country/belgium.html', country_folder)
-    create_country('Belize', 'https://www.timeanddate.com/worldclock/belize',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/belize',
-                   'https://travel.state.gov/content/passports/en/country/belize.html', country_folder)
-    create_country('Bermuda', 'https://www.timeanddate.com/worldclock/bermuda',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/bermuda',
-                   'https://travel.state.gov/content/passports/en/country/bermuda.html', country_folder)
-    create_country('Canada', 'https://www.timeanddate.com/worldclock/canada',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/canada',
-                   'https://travel.state.gov/content/passports/en/country/canada.html', country_folder)
-    create_country('China', 'https://www.timeanddate.com/worldclock/results.html?query=china',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/china',
-                   'https://travel.state.gov/content/passports/en/country/china.html', country_folder)
-    create_country('Costa Rica', 'https://www.timeanddate.com/worldclock/costa-rica',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/costa-rica',
-                   'https://travel.state.gov/content/passports/en/country/costa-rica.html', country_folder)
-    create_country('Czech Rep.', 'https://www.timeanddate.com/worldclock/czech-republic',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/czech-republic',
-                   'https://travel.state.gov/content/passports/en/country/czech-republic.html', country_folder)
-    create_country('France', 'https://www.timeanddate.com/worldclock/france',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/france',
-                   'https://travel.state.gov/content/passports/en/country/france.html', country_folder)
-    create_country('Germany', 'https://www.timeanddate.com/worldclock/germany',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/germany',
-                   'https://travel.state.gov/content/passports/en/country/germany.html', country_folder)
-    create_country('Greece', 'https://www.timeanddate.com/worldclock/greece',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/greece',
-                   'https://travel.state.gov/content/passports/en/country/greece.html', country_folder)
-    create_country('Honduras', 'https://www.timeanddate.com/worldclock/honduras',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/honduras',
-                   'https://travel.state.gov/content/passports/en/country/honduras.html', country_folder)
-    create_country('Hong Kong, China', 'https://www.timeanddate.com/worldclock/hong-kong',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/hong-kong-sar',
-                   'https://travel.state.gov/content/passports/en/country/hongkong.html', country_folder)
-    create_country('Hungary', 'https://www.timeanddate.com/worldclock/hungary',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/hungary',
-                   'https://travel.state.gov/content/passports/en/country/hungary.html', country_folder)
-    create_country('India', 'https://www.timeanddate.com/worldclock/india',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/india',
-                   'https://travel.state.gov/content/passports/en/country/india.html', country_folder)
-    create_country('Ireland', 'https://www.timeanddate.com/worldclock/ireland',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/ireland',
-                   'https://travel.state.gov/content/passports/en/country/ireland.html', country_folder)
-    create_country('Italy', 'https://www.timeanddate.com/worldclock/italy',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/italy',
-                   'https://travel.state.gov/content/passports/en/country/italy.html', country_folder)
-    create_country('Jamaica', 'https://www.timeanddate.com/worldclock/jamaica',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/jamaica',
-                   'https://travel.state.gov/content/passports/en/country/jamaica.html', country_folder)
-    create_country('Japan', 'https://www.timeanddate.com/worldclock/japan',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/japan',
-                   'https://travel.state.gov/content/passports/en/country/japan.html', country_folder)
-    create_country('Kenya', 'https://www.timeanddate.com/worldclock/kenya',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/kenya',
-                   'https://travel.state.gov/content/passports/en/country/kenya.html', country_folder)
-    create_country('Korea, Rep.', 'https://www.timeanddate.com/worldclock/south-korea',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/south-korea',
-                   'https://travel.state.gov/content/passports/en/country/korea-south.html', country_folder)
-    create_country('Malaysia', 'https://www.timeanddate.com/worldclock/malaysia',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/malaysia',
-                   'https://travel.state.gov/content/passports/en/country/malaysia.html', country_folder)
-    create_country('Netherlands', 'https://www.timeanddate.com/worldclock/netherlands',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/netherlands',
-                   'https://travel.state.gov/content/passports/en/country/netherlands.html', country_folder)
-    create_country('New Zealand', 'https://www.timeanddate.com/worldclock/new-zealand',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/new-zealand',
-                   'https://travel.state.gov/content/passports/en/country/new-zealand.html', country_folder)
-    create_country('Nicaragua', 'https://www.timeanddate.com/worldclock/nicaragua',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/nicaragua',
-                   'https://travel.state.gov/content/passports/en/country/nicaragua.html', country_folder)
-    create_country('Oman', 'https://www.timeanddate.com/worldclock/oman',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/oman',
-                   'https://travel.state.gov/content/passports/en/country/oman.html', country_folder)
-    create_country('Peru', 'https://www.timeanddate.com/worldclock/peru',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/peru',
-                   'https://travel.state.gov/content/passports/en/country/peru.html', country_folder)
-    create_country('Poland', 'https://www.timeanddate.com/worldclock/poland',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/poland',
-                   'https://travel.state.gov/content/passports/en/country/poland.html', country_folder)
-    create_country('Portugal', 'https://www.timeanddate.com/worldclock/portugal',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/portugal',
-                   'https://travel.state.gov/content/passports/en/country/Portugal.html', country_folder)
-    create_country('Puerto Rico', 'https://www.timeanddate.com/worldclock/puerto-rico',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/puerto-rico', '', country_folder)
-    create_country('Spain', 'https://www.timeanddate.com/worldclock/spain',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/spain',
-                   'https://travel.state.gov/content/passports/en/country/spain.html', country_folder)
-    create_country('Switzerland', 'https://www.timeanddate.com/worldclock/switzerland',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/switzerland',
-                   'https://travel.state.gov/content/passports/en/country/switzerland-and-liechtenstein.html',
-                   country_folder)
-    create_country('Tanzania', 'https://www.timeanddate.com/worldclock/tanzania',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/tanzania',
-                   'https://travel.state.gov/content/passports/en/country/tanzania.html', country_folder)
-    create_country('Uganda', 'https://www.timeanddate.com/worldclock/uganda',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/uganda',
-                   'https://travel.state.gov/content/passports/en/country/uganda.html', country_folder)
-    create_country('United Kingdom', 'https://www.timeanddate.com/worldclock/uk',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-kingdom',
-                   'https://travel.state.gov/content/passports/en/country/united-kingdom.html', country_folder)
-    create_country('United States', 'https://www.timeanddate.com/worldclock/usa',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-states', '', country_folder)
-    create_country('Virgin Islands (U.S.)', 'https://www.timeanddate.com/worldclock/us-virgin',
-                   'https://wwwnc.cdc.gov/travel/destinations/traveler/none/usvirgin-islands', '', country_folder)
-
-
-# TODO add tests for content type creation and reading
+    create_country(
+        'Australia',
+        'https://www.timeanddate.com/worldclock/results.html?query=australia',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/australia',
+        'https://travel.state.gov/content/passports/en/country/australia.html',
+        country_folder,
+    )
+    create_country(
+        'Austria',
+        'https://www.timeanddate.com/worldclock/austria',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/austria',
+        'https://travel.state.gov/content/passports/en/country/austria.html',
+        country_folder,
+    )
+    create_country(
+        'Belgium',
+        'https://www.timeanddate.com/worldclock/belgium',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/belgium',
+        'https://travel.state.gov/content/passports/en/country/belgium.html',
+        country_folder,
+    )
+    create_country(
+        'Belize',
+        'https://www.timeanddate.com/worldclock/belize',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/belize',
+        'https://travel.state.gov/content/passports/en/country/belize.html',
+        country_folder,
+    )
+    create_country(
+        'Bermuda',
+        'https://www.timeanddate.com/worldclock/bermuda',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/bermuda',
+        'https://travel.state.gov/content/passports/en/country/bermuda.html',
+        country_folder,
+    )
+    create_country(
+        'Canada',
+        'https://www.timeanddate.com/worldclock/canada',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/canada',
+        'https://travel.state.gov/content/passports/en/country/canada.html',
+        country_folder,
+    )
+    create_country(
+        'China',
+        'https://www.timeanddate.com/worldclock/results.html?query=china',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/china',
+        'https://travel.state.gov/content/passports/en/country/china.html',
+        country_folder,
+    )
+    create_country(
+        'Costa Rica',
+        'https://www.timeanddate.com/worldclock/costa-rica',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/costa-rica',
+        'https://travel.state.gov/content/passports/en/country/costa-rica.html',  # noqa
+        country_folder,
+    )
+    create_country(
+        'Czech Rep.',
+        'https://www.timeanddate.com/worldclock/czech-republic',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/czech-republic',  # noqa
+        'https://travel.state.gov/content/passports/en/country/czech-republic.html',  # noqa
+        country_folder,
+    )
+    create_country(
+        'France',
+        'https://www.timeanddate.com/worldclock/france',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/france',
+        'https://travel.state.gov/content/passports/en/country/france.html',
+        country_folder,
+    )
+    create_country(
+        'Germany',
+        'https://www.timeanddate.com/worldclock/germany',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/germany',
+        'https://travel.state.gov/content/passports/en/country/germany.html',
+        country_folder,
+    )
+    create_country(
+        'Greece',
+        'https://www.timeanddate.com/worldclock/greece',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/greece',
+        'https://travel.state.gov/content/passports/en/country/greece.html',
+        country_folder,
+    )
+    create_country(
+        'Honduras',
+        'https://www.timeanddate.com/worldclock/honduras',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/honduras',
+        'https://travel.state.gov/content/passports/en/country/honduras.html',
+        country_folder,
+    )
+    create_country(
+        'Hong Kong, China',
+        'https://www.timeanddate.com/worldclock/hong-kong',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/hong-kong-sar',  # noqa
+        'https://travel.state.gov/content/passports/en/country/hongkong.html',
+        country_folder,
+    )
+    create_country(
+        'Hungary',
+        'https://www.timeanddate.com/worldclock/hungary',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/hungary',
+        'https://travel.state.gov/content/passports/en/country/hungary.html',
+        country_folder,
+    )
+    create_country(
+        'India',
+        'https://www.timeanddate.com/worldclock/india',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/india',
+        'https://travel.state.gov/content/passports/en/country/india.html',
+        country_folder,
+    )
+    create_country(
+        'Ireland',
+        'https://www.timeanddate.com/worldclock/ireland',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/ireland',
+        'https://travel.state.gov/content/passports/en/country/ireland.html',
+        country_folder,
+    )
+    create_country(
+        'Italy',
+        'https://www.timeanddate.com/worldclock/italy',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/italy',
+        'https://travel.state.gov/content/passports/en/country/italy.html',
+        country_folder,
+    )
+    create_country(
+        'Jamaica',
+        'https://www.timeanddate.com/worldclock/jamaica',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/jamaica',
+        'https://travel.state.gov/content/passports/en/country/jamaica.html',
+        country_folder,
+    )
+    create_country(
+        'Japan',
+        'https://www.timeanddate.com/worldclock/japan',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/japan',
+        'https://travel.state.gov/content/passports/en/country/japan.html',
+        country_folder,
+    )
+    create_country(
+        'Kenya',
+        'https://www.timeanddate.com/worldclock/kenya',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/kenya',
+        'https://travel.state.gov/content/passports/en/country/kenya.html',
+        country_folder,
+    )
+    create_country(
+        'Korea, Rep.',
+        'https://www.timeanddate.com/worldclock/south-korea',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/south-korea',
+        'https://travel.state.gov/content/passports/en/country/korea-south.html',  # noqa
+        country_folder,
+    )
+    create_country(
+        'Malaysia',
+        'https://www.timeanddate.com/worldclock/malaysia',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/malaysia',
+        'https://travel.state.gov/content/passports/en/country/malaysia.html',
+        country_folder,
+    )
+    create_country(
+        'Netherlands',
+        'https://www.timeanddate.com/worldclock/netherlands',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/netherlands',
+        'https://travel.state.gov/content/passports/en/country/netherlands.html',  # noqa
+        country_folder,
+    )
+    create_country(
+        'New Zealand',
+        'https://www.timeanddate.com/worldclock/new-zealand',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/new-zealand',
+        'https://travel.state.gov/content/passports/en/country/new-zealand.html',  # noqa
+        country_folder,
+    )
+    create_country(
+        'Nicaragua',
+        'https://www.timeanddate.com/worldclock/nicaragua',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/nicaragua',
+        'https://travel.state.gov/content/passports/en/country/nicaragua.html',
+        country_folder,
+    )
+    create_country(
+        'Oman',
+        'https://www.timeanddate.com/worldclock/oman',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/oman',
+        'https://travel.state.gov/content/passports/en/country/oman.html',
+        country_folder,
+    )
+    create_country(
+        'Peru',
+        'https://www.timeanddate.com/worldclock/peru',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/peru',
+        'https://travel.state.gov/content/passports/en/country/peru.html',
+        country_folder,
+    )
+    create_country(
+        'Poland',
+        'https://www.timeanddate.com/worldclock/poland',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/poland',
+        'https://travel.state.gov/content/passports/en/country/poland.html',
+        country_folder,
+    )
+    create_country(
+        'Portugal',
+        'https://www.timeanddate.com/worldclock/portugal',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/portugal',
+        'https://travel.state.gov/content/passports/en/country/Portugal.html',
+        country_folder,
+    )
+    create_country(
+        'Puerto Rico',
+        'https://www.timeanddate.com/worldclock/puerto-rico',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/puerto-rico',
+        '',
+        country_folder,
+    )
+    create_country(
+        'Spain',
+        'https://www.timeanddate.com/worldclock/spain',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/spain',
+        'https://travel.state.gov/content/passports/en/country/spain.html',
+        country_folder,
+    )
+    create_country(
+        'Switzerland',
+        'https://www.timeanddate.com/worldclock/switzerland',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/switzerland',
+        'https://travel.state.gov/content/passports/en/country/switzerland-and-liechtenstein.html',  # noqa
+        country_folder,
+    )
+    create_country(
+        'Tanzania',
+        'https://www.timeanddate.com/worldclock/tanzania',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/tanzania',
+        'https://travel.state.gov/content/passports/en/country/tanzania.html',
+        country_folder,
+    )
+    create_country(
+        'Uganda',
+        'https://www.timeanddate.com/worldclock/uganda',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/uganda',
+        'https://travel.state.gov/content/passports/en/country/uganda.html',
+        country_folder,
+    )
+    create_country(
+        'United Kingdom',
+        'https://www.timeanddate.com/worldclock/uk',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-kingdom',  # noqa
+        'https://travel.state.gov/content/passports/en/country/united-kingdom.html',  # noqa
+        country_folder,
+    )
+    create_country(
+        'United States',
+        'https://www.timeanddate.com/worldclock/usa',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-states',  # noqa
+        '',
+        country_folder,
+    )
+    create_country(
+        'Virgin Islands (U.S.)',
+        'https://www.timeanddate.com/worldclock/us-virgin',
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/usvirgin-islands',  # noqa
+        '',
+        country_folder,
+    )
 
 
 def create_airline(name, folder):
@@ -653,7 +736,8 @@ def create_year(name, folder):
     id = util.normalize(name)
     brains = api.content.find(portal_type='OIECalendarYear', id=id)
     if len(brains) < 1:
-        api.content.create(type='OIECalendarYear', container=folder, title=name)
+        api.content.create(type='OIECalendarYear', container=folder,
+                           title=name)
 
 
 def create_partner(name, folder):
@@ -661,10 +745,12 @@ def create_partner(name, folder):
     id = util.normalize(name)
     brains = api.content.find(portal_type='OIECooperatingPartner', id=id)
     if len(brains) < 1:
-        api.content.create(type='OIECooperatingPartner', container=folder, title=name)
+        api.content.create(type='OIECooperatingPartner', container=folder,
+                           title=name)
 
 
-def create_country(name, timezone_url, cdc_info_url, state_dept_info_url, folder):
+def create_country(name, timezone_url, cdc_info_url, state_dept_info_url,
+                   folder):
     util = queryUtility(IIDNormalizer)
     id = util.normalize(name)
     brains = api.content.find(portal_type='OIECountry', id=id)

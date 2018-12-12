@@ -26,7 +26,8 @@ class TestSetup(unittest.TestCase):
         from uwosh.oie.studyabroadstudent.interfaces import (
             IUwoshOieStudyabroadstudentLayer)
         from plone.browserlayer import utils
-        self.assertIn(IUwoshOieStudyabroadstudentLayer, utils.registered_layers())
+        self.assertIn(IUwoshOieStudyabroadstudentLayer,
+                      utils.registered_layers())
 
 
 class TestUninstall(unittest.TestCase):
@@ -48,4 +49,5 @@ class TestUninstall(unittest.TestCase):
         from uwosh.oie.studyabroadstudent.interfaces import \
             IUwoshOieStudyabroadstudentLayer
         from plone.browserlayer import utils
-        self.assertNotIn(IUwoshOieStudyabroadstudentLayer, utils.registered_layers())
+        self.assertNotIn(IUwoshOieStudyabroadstudentLayer,
+                         utils.registered_layers())

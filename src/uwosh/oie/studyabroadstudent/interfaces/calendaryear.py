@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+from datetime import date
+from datetime import datetime
 from uwosh.oie.studyabroadstudent import _
 from zope import schema
 from zope.interface import Interface
-from datetime import date, datetime
 
 
 def date_default_value():
@@ -110,23 +111,26 @@ class IOIECalendarYear(Interface):
         defaultFactory=date_default_value,
     )
 
-    spring_interim_summer_fall_semester_participant_orientation_deadline = schema.Datetime(
-        title=u'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',
-        required=True,
-        defaultFactory=datetime_default_value,
-    )
+    spring_interim_summer_fall_semester_participant_orientation_deadline = \
+        schema.Datetime(
+            title=u'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',  # noqa
+            required=True,
+            defaultFactory=datetime_default_value,
+        )
 
-    spring_interim_summer_fall_semester_in_person_orientation = schema.Datetime(
-        title=u'Spring Interim, Summer & Fall Semester In-person Orientation',
-        required=True,
-        defaultFactory=datetime_default_value,
-    )
+    spring_interim_summer_fall_semester_in_person_orientation = \
+        schema.Datetime(
+            title=u'Spring Interim, Summer & Fall Semester In-person Orientation',  # noqa
+            required=True,
+            defaultFactory=datetime_default_value,
+        )
 
-    winter_interim_spring_semester_participant_orientation_deadline = schema.Datetime(
-        title=u'Winter Interim & Spring Semester Participant Orientation Deadline',
-        required=True,
-        defaultFactory=datetime_default_value,
-    )
+    winter_interim_spring_semester_participant_orientation_deadline = \
+        schema.Datetime(
+            title=u'Winter Interim & Spring Semester Participant Orientation Deadline',  # noqa
+            required=True,
+            defaultFactory=datetime_default_value,
+        )
 
     winter_interim_spring_semester_in_person_orientation = schema.Datetime(
         title=u'Winter Interim & Spring Semester In-person Orientation',

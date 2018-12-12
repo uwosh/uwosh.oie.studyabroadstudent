@@ -1,4 +1,5 @@
-#! /Users/kim/PloneBuilds/Plone-5.0.4-unified-clean/zinstance/bin/python
+# -*- coding: utf-8 -*-
+# ! /Users/kim/PloneBuilds/Plone-5.0.4-unified-clean/zinstance/bin/python
 #
 # - 2017-05-20 read ISO8601 dates, workflow state, and all workflow transitions
 #
@@ -8,17 +9,19 @@
 # invoke like this:
 # bin/instance run importApplications.py
 
-from datetime import datetime, date
-import DateTime
+from datetime import date
 from plone import api
-from zope.component.hooks import setSite, getSite
-import uwosh.oie.studyabroadstudent
+from Products.CMFPlone.utils import getToolByName
+from uwosh.oie.studyabroadstudent.extractoutput import app_data
+from zope.component.hooks import getSite
+from zope.component.hooks import setSite
+
 import argparse
+import DateTime
 import transaction
 
-from uwosh.oie.studyabroadstudent.extractoutput import app_data
 
-MAX_COUNT = 100000 # stop after this many records
+MAX_COUNT = 100000  # stop after this many records
 
 counter = 0
 folder_id = 'applications'
@@ -27,15 +30,30 @@ PORTAL_TYPE = 'OIEStudyAbroadStudentApplication'
 
 parser = argparse.ArgumentParser(
     description='...')
-parser.add_argument('--site-id', dest='site_id', default='OIE', help='the ID of the site in which to create the applications; defaults to "OIE"')
-parser.add_argument('--folder-id', dest='folder_id', default='applications', help='the ID of the folder within the site in which to create the applications; defaults to "applications"')
-parser.add_argument('--skip-existing', dest='skip_existing', default=False, help='set to True to skip creating the application if an application with the same ID already exists in the site; defaults to False')
+parser.add_argument(
+    '--site-id',
+    dest='site_id',
+    default='OIE',
+    help='the ID of the site in which to create the applications; defaults to "OIE"',  # noqa
+)
+parser.add_argument(
+    '--folder-id',
+    dest='folder_id',
+    default='applications',
+    help='the ID of the folder within the site in which to create the applications; defaults to "applications"',  # noqa
+)
+parser.add_argument(
+    '--skip-existing',
+    dest='skip_existing',
+    default=False,
+    help='set to True to skip creating the application if an application with the same ID already exists in the site; defaults to False',  # noqa
+)
 args, _ = parser.parse_known_args()
 
 # Sets the current site as the active site
 site_id = args.site_id
-setSite(app[site_id])
-site = getSite()
+setSite(app[site_id])  # noqa
+site = getSite()  # noqa
 
 # ensure folder exists
 toplevel_items = site.items()
@@ -48,29 +66,28 @@ if 'applications' not in [id for id, obj in toplevel_items]:
     )
 
 month_values = {
-    'January' : 1,
-    'February' : 2,
-    'March' : 3,
-    'April' : 4,
-    'May' : 5,
-    'June' : 6,
-    'July' : 7,
-    'August' : 8,
-    'September' : 9,
-    'October' : 10,
-    'November' : 11,
-    'December' : 12,
+    'January': 1,
+    'February': 2,
+    'March': 3,
+    'April': 4,
+    'May': 5,
+    'June': 6,
+    'July': 7,
+    'August': 8,
+    'September': 9,
+    'October': 10,
+    'November': 11,
+    'December': 12,
 }
 
 # Enable the context manager to switch the user
-with api.env.adopt_user(username="admin"):
+with api.env.adopt_user(username='admin'):
     # You're now posing as admin!
-    #portal.restrictedTraverse("manage_propertiesForm")
 
     wtool = site.portal_workflow
-    folder = app.unrestrictedTraverse("%s/%s" % (site_id, folder_id))
+    folder = app.unrestrictedTraverse("{0}/{1}".format(site_id, folder_id))  # noqa
 
-    for values in app_data:
+    for values in app_data:  # noqa
         (id,
          review_state,
          Creators,
@@ -287,20 +304,25 @@ with api.env.adopt_user(username="admin"):
         if modified is not None and len(modified):
             modified = (DateTime.DateTime(modified)).asdatetime()
         if DepartureDate is not None and len(DepartureDate):
-            DepartureDate = (DateTime.DateTime(DepartureDate)).asdatetime().date()
+            DepartureDate = (DateTime.DateTime(DepartureDate)).asdatetime().date()  # noqa
         if ReturnDate is not None and len(ReturnDate):
             ReturnDate = (DateTime.DateTime(ReturnDate)).asdatetime().date()
         if OrientationDate1 is not None and len(OrientationDate1):
-            OrientationDate1 = (DateTime.DateTime(OrientationDate1)).asdatetime().date()
+            OrientationDate1 = (DateTime.DateTime(OrientationDate1)).asdatetime().date()  # noqa
         if OrientationDate2 is not None and len(OrientationDate2):
-            OrientationDate2 = (DateTime.DateTime(OrientationDate2)).asdatetime().date()
+            OrientationDate2 = (DateTime.DateTime(OrientationDate2)).asdatetime().date()  # noqa
         if ConflictDate is not None and len(ConflictDate):
-            ConflictDate = (DateTime.DateTime(ConflictDate)).asdatetime().date()
+            ConflictDate = (DateTime.DateTime(ConflictDate)).asdatetime().date()  # noqa
         if CompletionDate is not None and len(CompletionDate):
-            CompletionDate = (DateTime.DateTime(CompletionDate)).asdatetime().date()
+            CompletionDate = (DateTime.DateTime(CompletionDate)).asdatetime().date()  # noqa
 
-        # # skip if object with that ID already exists (commented out because it doesn't work right)
-        # existing = api.content.find(portal_type='OIEStudentApplicationWorkflow', id=id)
+        # # skip if object with that ID already exists (commented out
+        # # because it doesn't work right)
+        #
+        # existing = api.content.find(
+        #                portal_type='OIEStudentApplicationWorkflow',
+        #                id=id,
+        #            )
         # if len(existing) > 0:
         #     print "Skipping existing object with ID", id
         #     next
@@ -328,27 +350,78 @@ with api.env.adopt_user(username="admin"):
         if PassportExpDate_month == 'April' and PassportExpDate_day == '31':
             PassportExpDate_day = '30'
         try:
-            dateOfBirth=date(int((DateOfBirth_year is not None) and DateOfBirth_year or '1900'), month_values[((DateOfBirth_month is not None) and (DateOfBirth_month != '-- choose one --')) and DateOfBirth_month or 'January'], int(((DateOfBirth_day is not None) and (DateOfBirth_day != '-- choose one --') and DateOfBirth_day or 1)))
-        except:
-            import pdb;pdb.set_trace()
+            dateOfBirth = date(
+                int(
+                    (DateOfBirth_year is not None) and
+                    DateOfBirth_year or
+                    '1900',
+                ),
+                month_values[
+                    (
+                        (DateOfBirth_month is not None) and
+                        (DateOfBirth_month != '-- choose one --')
+                    ) and
+                    DateOfBirth_month or
+                    'January'
+                ],
+                int(
+                    (DateOfBirth_day is not None) and
+                    (DateOfBirth_day != '-- choose one --') and
+                    DateOfBirth_day or
+                    1,
+                ),
+            )
+        except Exception:
+            import pdb;pdb.set_trace()  # noqa
 
         try:
-            passportExpDate=date(int((PassportExpDate_year is not None and PassportExpDate_year is not '') and PassportExpDate_year or '1900'), month_values[(PassportExpDate_month == '-- choose one --' or PassportExpDate_month == '') and 'January' or PassportExpDate_month], int((PassportExpDate_day == '-- choose one --' or PassportExpDate_day == '') and 1 or PassportExpDate_day))
-        except:
-            import pdb;pdb.set_trace()
+            passportExpDate = date(
+                int(
+                    (
+                        PassportExpDate_year is not None and
+                        PassportExpDate_year is not ''
+                    ) and
+                    PassportExpDate_year or
+                    '1900',
+                ),
+                month_values[
+                    (
+                        PassportExpDate_month == '-- choose one --' or
+                        PassportExpDate_month == ''
+                    ) and
+                    'January' or
+                    PassportExpDate_month
+                ],
+                int(
+                    (
+                        PassportExpDate_day == '-- choose one --' or
+                        PassportExpDate_day == ''
+                    ) and
+                    1 or
+                    PassportExpDate_day,
+                ),
+            )
+        except Exception:
+            import pdb;pdb.set_trace()  # noqa
 
         if args.skip_existing:
             # try to look up an application by the same ID
             existing_apps = api.content.find(portal_type=PORTAL_TYPE, id=id)
             if len(existing_apps) > 0:
-                print "Skipping existing application", id
+                print 'Skipping existing application', id  # noqa
         else:
             obj = api.content.create(
                 safe_id=True,
                 container=folder,
                 type=PORTAL_TYPE,
                 id=id,
-                title="%s %s %s %s %s" % (FirstName, MiddleName, LastName, ProgramName, ProgramYear),
+                title='{f} {m} {l} {pn} {py}'.format(
+                    f=FirstName,
+                    m=MiddleName,
+                    l=LastName,
+                    pn=ProgramName,
+                    py=ProgramYear,
+                ),
                 studentID=StudentID,
                 firstName=FirstName,
                 middleName=MiddleName,
@@ -400,25 +473,25 @@ with api.env.adopt_user(username="admin"):
                 maxWalkingDistance=MaxWalkingDistance,
                 medicalReadStatement=MedicalReadStatement,
                 medicalHealthProblems=MedicalHealthProblems,
-                medicalHealthProblems_takenMedication=MedicalHealthProblems_takenMedication,
-                medicalHealthProblems_medications=MedicalHealthProblems_medications,
+                medicalHealthProblems_takenMedication=MedicalHealthProblems_takenMedication,  # noqa
+                medicalHealthProblems_medications=MedicalHealthProblems_medications,  # noqa
                 medicalHealthProblems_stable=MedicalHealthProblems_stable,
-                medicalHealthProblems_underCare=MedicalHealthProblems_underCare,
-                medicalHealthProblems_whatCondition=MedicalHealthProblems_whatCondition,
-                medicalHealthProblems_willingToPrescribe=MedicalHealthProblems_willingToPrescribe,
-                medicalHealthProblems_additionalInfo=MedicalHealthProblems_additionalInfo,
+                medicalHealthProblems_underCare=MedicalHealthProblems_underCare,  # noqa
+                medicalHealthProblems_whatCondition=MedicalHealthProblems_whatCondition,  # noqa
+                medicalHealthProblems_willingToPrescribe=MedicalHealthProblems_willingToPrescribe,  # noqa
+                medicalHealthProblems_additionalInfo=MedicalHealthProblems_additionalInfo,  # noqa
                 medicalMentalProblems=MedicalMentalProblems,
-                medicalMentalProblems_takenMedication=MedicalMentalProblems_takenMedication,
-                medicalMentalProblems_medications=MedicalMentalProblems_medications,
-                medicalMentalProblems_currentDose=MedicalMentalProblems_currentDose,
+                medicalMentalProblems_takenMedication=MedicalMentalProblems_takenMedication,  # noqa
+                medicalMentalProblems_medications=MedicalMentalProblems_medications,  # noqa
+                medicalMentalProblems_currentDose=MedicalMentalProblems_currentDose,  # noqa
                 medicalMentalProblems_stable=MedicalMentalProblems_stable,
-                medicalMentalProblems_underCare=MedicalMentalProblems_underCare,
-                medicalMentalProblems_condition=MedicalMentalProblems_condition,
-                medicalMentalProblems_enoughMedication=MedicalMentalProblems_enoughMedication,
-                medicalMentalProblems_additionalInfo=MedicalMentalProblems_additionalInfo,
+                medicalMentalProblems_underCare=MedicalMentalProblems_underCare,  # noqa
+                medicalMentalProblems_condition=MedicalMentalProblems_condition,  # noqa
+                medicalMentalProblems_enoughMedication=MedicalMentalProblems_enoughMedication,  # noqa
+                medicalMentalProblems_additionalInfo=MedicalMentalProblems_additionalInfo,  # noqa
                 medicalRegistered=MedicalRegistered,
                 medicalRegistered_office=MedicalRegistered_office,
-                medicalRegistered_accommodations=MedicalRegistered_accommodations,
+                medicalRegistered_accommodations=MedicalRegistered_accommodations,  # noqa
                 medicalAccessOK=MedicalAccessOK,
                 smokingPreferred=SmokingPreferred,
                 isVegetarian=IsVegetarian,
@@ -519,7 +592,7 @@ with api.env.adopt_user(username="admin"):
                 UWOshkoshStatementOK=_UWOshkoshStatementOK,
                 withdrawalRefund=WithdrawalRefund,
                 transcriptsOK=TranscriptsOK,
-                programSpecificMaterialsRequired=ProgramSpecificMaterialsRequired,
+                programSpecificMaterialsRequired=ProgramSpecificMaterialsRequired,  # noqa
                 programSpecificMaterialsOK=ProgramSpecificMaterialsOK,
                 specialStudentFormRequired=SpecialStudentFormRequired,
                 specialStudentFormOK=SpecialStudentFormOK,
@@ -529,8 +602,8 @@ with api.env.adopt_user(username="admin"):
                 medicalForm=MedicalForm,
                 passportOK=PassportOK,
                 metPassportDeadline=MetPassportDeadline,
-                programSpecificMaterialsRequiredStepIII=ProgramSpecificMaterialsRequiredStepIII,
-                programSpecificMaterialsOKStepIII=ProgramSpecificMaterialsOKStepIII,
+                programSpecificMaterialsRequiredStepIII=ProgramSpecificMaterialsRequiredStepIII,  # noqa
+                programSpecificMaterialsOKStepIII=ProgramSpecificMaterialsOKStepIII,  # noqa
                 attendedOrientation=AttendedOrientation,
                 cisiDates=CisiDates,
                 cisiNumberOfMonths=CisiNumberOfMonths,
@@ -555,38 +628,38 @@ with api.env.adopt_user(username="admin"):
             for h in review_history:
                 wtool.setStatusOf(workflow_id, obj, h)
 
-            print "    ", id, Email
+            print '    ', id, Email  # noqa
 
             # set some metadata (do this last)
             obj.setCreators(Creators)
-            obj.creation_date=created
+            obj.creation_date = created
             obj.setModificationDate(modified)
-            # reindexing these doesn't actually work correctly; instead, do a full catalog clear and rebuild at the end
+            # reindexing these doesn't actually work correctly;
+            #   instead, do a full catalog clear and rebuild at the end
             # obj.reindexObject(idxs=['modified', 'created', 'Creator'])
 
             counter += 1
             if counter >= MAX_COUNT:
-                print "Stopping after reaching MAX_COUNT ", MAX_COUNT
+                print 'Stopping after reaching MAX_COUNT ', MAX_COUNT  # noqa
                 break
 
         # commit every 100 objects
         if counter % 100 == 0:
-            print counter
+            print counter  # noqa
             # Commit transaction
             transaction.commit()
             # Perform ZEO client synchronization (if running in clustered mode)
-            app._p_jar.sync()
+            app._p_jar.sync()  # noqa
 
-print counter
+print counter  # noqa
 # final commit transaction
 transaction.commit()
 # Perform ZEO client synchronization (if running in clustered mode)
-app._p_jar.sync()
+app._p_jar.sync()  # noqa
 
-print "Rebuilding the catalog to update for modified dates, creation dates, and creators. Will take a few minutes:"
-from Products.CMFPlone.utils import getToolByName
-catalog = getToolByName(site, 'portal_catalog', None)
+print 'Rebuilding the catalog to update for modified dates, creation dates, and creators. Will take a few minutes:'  # noqa
+catalog = getToolByName(site, 'portal_catalog', None)  # noqa
 if catalog:
     catalog.manage_catalogRebuild()
-print "Catalog rebuild is done."
-print "Import is complete."
+print 'Catalog rebuild is done.'  # noqa
+print 'Import is complete.'  # noqa

@@ -29,13 +29,13 @@ UWOSH_OIE_STUDYABROADSTUDENT_FIXTURE = UwoshOieStudyabroadstudentLayer()
 
 UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING = IntegrationTesting(
     bases=(UWOSH_OIE_STUDYABROADSTUDENT_FIXTURE,),
-    name='UwoshOieStudyabroadstudentLayer:IntegrationTesting'
+    name='UwoshOieStudyabroadstudentLayer:IntegrationTesting',
 )
 
 
 UWOSH_OIE_STUDYABROADSTUDENT_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(UWOSH_OIE_STUDYABROADSTUDENT_FIXTURE,),
-    name='UwoshOieStudyabroadstudentLayer:FunctionalTesting'
+    name='UwoshOieStudyabroadstudentLayer:FunctionalTesting',
 )
 
 
@@ -43,7 +43,7 @@ UWOSH_OIE_STUDYABROADSTUDENT_ACCEPTANCE_TESTING = FunctionalTesting(
     bases=(
         UWOSH_OIE_STUDYABROADSTUDENT_FIXTURE,
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
-        z2.ZSERVER_FIXTURE
+        z2.ZSERVER_FIXTURE,
     ),
-    name='UwoshOieStudyabroadstudentLayer:AcceptanceTesting'
+    name='UwoshOieStudyabroadstudentLayer:AcceptanceTesting',
 )
