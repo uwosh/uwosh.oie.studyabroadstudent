@@ -1,17 +1,23 @@
 <?xml version="1.0"?>
 <rolemap>
   <roles>
-    <role name="Mgmt_Admin"/>
+    <role name="Mgmt_Access"/>
+    <role name="Mgmt_Admin"/> <!-- TODO use built-in Site Administrator-->
+    <role name="Mgmt_AdminServices"/>
     <role name="Mgmt_Chair"/>
     <role name="Mgmt_Coordinator"/>
     <role name="Mgmt_CourseBuilder"/>
     <role name="Mgmt_Dean"/>
-    <!--<role name="Mgmt_Director"/> use built-in Site Administrator-->
+    <role name="Mgmt_DeanDirector"/>
+    <role name="Mgmt_Director"/> <!-- TODO use built-in Site Administrator-->
+    <role name="Mgmt_Emergency"/>
     <role name="Mgmt_Financial"/>
+    <role name="Mgmt_HR"/>
     <role name="Mgmt_Intern"/>
     <role name="Mgmt_LeaderReview"/>
     <role name="Mgmt_Liaison"/>
     <role name="Mgmt_Manager"/>
+    <role name="Mgmt_OIE"/>
     <role name="Mgmt_OIEProfessional"/>
     <role name="Mgmt_ProgramLeader"/>
     <role name="Mgmt_Provost"/>

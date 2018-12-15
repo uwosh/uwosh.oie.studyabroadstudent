@@ -9,6 +9,12 @@ from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from zope.component import queryUtility
 from zope.interface import implementer
 
+import random
+import string
+
+
+PASSWORD_LENGTH = 50
+
 
 @implementer(INonInstallable)
 class HiddenProfiles(object):
@@ -71,8 +77,12 @@ def post_install(context):
 def create_generic_accounts(portal):
     _create_account('kim.nguyen+Site_Admin@wildcardcorp.com',
                     'Site_Admin', ['Site_Admin', 'SiteAdministrator'])
+
+    # program management workflow
     _create_account('kim.nguyen+Mgmt_Director@wildcardcorp.com',
                     'Mgmt_Director', ['Mgmt_Director', 'SiteAdministrator'])
+    _create_account('kim.nguyen+Mgmt_Admin@wildcardcorp.com',
+                    'Mgmt_Admin', ['Mgmt_Admin'])
     _create_account('kim.nguyen+Mgmt_Manager@wildcardcorp.com',
                     'Mgmt_Manager', ['Mgmt_Manager'])
     _create_account('kim.nguyen+Mgmt_Coordinator@wildcardcorp.com',
@@ -81,6 +91,10 @@ def create_generic_accounts(portal):
                     'Mgmt_Financial', ['Mgmt_Financial'])
     _create_account('kim.nguyen+Mgmt_OIEProfessional@wildcardcorp.com',
                     'Mgmt_OIEProfessional', ['Mgmt_OIEProfessional'])
+    # TODO duplicate?  # noqa
+    _create_account('kim.nguyen+Mgmt_OIE@wildcardcorp.com',
+                    'Mgmt_OIE', ['Mgmt_OIE'])
+    # TODO not in workflow roles  # noqa
     _create_account('kim.nguyen+Mgmt_Intern@wildcardcorp.com',
                     'Mgmt_Intern', ['Mgmt_Intern'])
     _create_account('kim.nguyen+Mgmt_Liaison@wildcardcorp.com',
@@ -89,16 +103,31 @@ def create_generic_accounts(portal):
                     'Mgmt_ProgramLeader', ['Mgmt_ProgramLeader'])
     _create_account('kim.nguyen+Mgmt_Dean@wildcardcorp.com',
                     'Mgmt_Dean', ['Mgmt_Dean'])
+    # TODO duplicate?  # noqa
+    _create_account('kim.nguyen+Mgmt_DeanDirector@wildcardcorp.com',
+                    'Mgmt_DeanDirector', ['Mgmt_DeanDirector'])
     _create_account('kim.nguyen+Mgmt_Chair@wildcardcorp.com',
                     'Mgmt_Chair', ['Mgmt_Chair'])
     _create_account('kim.nguyen+Mgmt_Provost@wildcardcorp.com',
                     'Mgmt_Provost', ['Mgmt_Provost'])
+    _create_account('kim.nguyen+Mgmt_HR@wildcardcorp.com',
+                    'Mgmt_HR', ['Mgmt_HR'])
+    _create_account('kim.nguyen+Mgmt_Access@wildcardcorp.com',
+                    'Mgmt_Access', ['Mgmt_Access'])
+    _create_account('kim.nguyen+Mgmt_Emergency@wildcardcorp.com',
+                    'Mgmt_Emergency', ['Mgmt_Emergency'])
+    _create_account('kim.nguyen+Mgmt_CourseBuilder@wildcardcorp.com',
+                    'Mgmt_CourseBuilder', ['Mgmt_CourseBuilder'])
+    _create_account('kim.nguyen+Mgmt_AdminServices@wildcardcorp.com',
+                    'Mgmt_AdminServices', ['Mgmt_AdminServices'])
     _create_account('kim.nguyen+Mgmt_LeaderReview@wildcardcorp.com',
                     'Mgmt_LeaderReview', ['Mgmt_LeaderReview'])
     _create_account('kim.nguyen+Mgmt_CourseBuilder@wildcardcorp.com',
                     'Mgmt_CourseBuilder', ['Mgmt_CourseBuilder'])
     _create_account('kim.nguyen+Mgmt_RiskMgmt@wildcardcorp.com',
                     'Mgmt_RiskMgmt', ['Mgmt_RiskMgmt'])
+
+    # participant workflow
     _create_account('kim.nguyen+Participant_Director@wildcardcorp.com',
                     'Participant_Director', ['Participant_Director'])
     _create_account('kim.nguyen+Participant_Manager@wildcardcorp.com',
@@ -136,20 +165,29 @@ def create_generic_accounts(portal):
                     'Participant_Applicant', ['Participant_Applicant'])
 
 
-def _create_account(email, username, roles, password='secret'):
+def _generatePassword(length):
+    return ''.join(
+        random.choice(
+            string.ascii_letters + string.digits + string.punctuation,
+        ) for x in range(length)
+    )
+
+
+def _create_account(email, username, roles, password=None):
     # check if account already exists before trying to create
     user = api.user.get(username=username)
-    if user:
-        return
-    try:
-        user = api.user.create(
-            email=email,
-            username=username,
-            password=password,
-        )
-        api.user.grant_roles(username=user.id, roles=roles)
-    except Exception:
-        pass
+    if not user:
+        if password is None:
+            password = _generatePassword(PASSWORD_LENGTH)
+        try:
+            user = api.user.create(
+                email=email,
+                username=username,
+                password=password,
+            )
+            api.user.grant_roles(username=user.id, roles=roles)
+        except Exception:
+            pass
 
 
 def set_front_page_text(portal, portal_ids):
