@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# from plone.autoform.view import WidgetsView
 from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.interfaces import IDexterityFTI
@@ -8,6 +7,16 @@ from zope.component import getUtility
 
 import logging
 
+
+CAN_EDIT_PERMISSION = 'Modify portal content'
+
+FIELDS_VIEWABLE = ['IRelatedItems-relatedItems']
+
+FIELDS_NOT_VIEWABLE = [
+    'IShortName-id',
+    'ITableOfContents-table_of_contents',
+    'IVersionable-versioning_enabled',
+]
 
 LOG = logging.getLogger('viewability')
 
@@ -447,6 +456,9 @@ VIEWABILITY = {
             'passport_size_photo': READ,
             'digital_passport_photo': READ,
             'transfer_credit_prior_approval_form': READ,
+            'application_items_travel_label': READ,
+            'application_items_background_label': READ,
+            'application_items_other_label': READ,
             'hessen_isu_application': READ,
             'hessen_iwu_application': READ,
             'proposals_label': READ,
@@ -689,6 +701,9 @@ VIEWABILITY = {
             'passport_size_photo': NOTHING,
             'digital_passport_photo': NOTHING,
             'transfer_credit_prior_approval_form': NOTHING,
+            'application_items_travel_label': NOTHING,
+            'application_items_background_label': NOTHING,
+            'application_items_other_label': NOTHING,
             'hessen_isu_application': NOTHING,
             'hessen_iwu_application': NOTHING,
             'proposals_label': NOTHING,
@@ -1673,12 +1688,12 @@ class ProgramRoleRestrictedView(DefaultView):
             field_id = widget_id[len(FORM_WIDGETS_PREFIX):]  # remove prefix
         else:
             field_id = widget_id
-        can_edit = api.user.has_permission('Modify portal content')
+        can_edit = api.user.has_permission(CAN_EDIT_PERMISSION)
         if SIMPLE_METHOD and can_edit:
             return True
-        if field_id in ['IShortName-id', 'ITableOfContents-table_of_contents']:
+        if field_id in FIELDS_NOT_VIEWABLE:
             return False
-        if field_id in ['IRelatedItems-relatedItems']:
+        if field_id in FIELDS_VIEWABLE:
             return True
         viewability = self._get_viewability()
         if isinstance(viewability, str):
@@ -1686,7 +1701,7 @@ class ProgramRoleRestrictedView(DefaultView):
         else:
             # detailed dict specifying READ or READ_WRITE for all fields
             if field_id not in viewability.keys():
-                LOG.warn('not found: field_id {0}; defaulting to not viewable/editable'.format(field_id))  # noqa
+                LOG.warn('not found: field_id {0} so defaulting to not viewable/editable'.format(field_id))  # noqa
                 return False
             field_viewability = viewability[field_id]
             return field_viewability in [READ, READ_WRITE]

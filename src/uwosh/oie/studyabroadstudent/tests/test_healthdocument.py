@@ -3,7 +3,7 @@ from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
-from plone.namedfile.tests.base import getFile
+from plone.namedfile.tests import getFile
 from uwosh.oie.studyabroadstudent.interfaces.healthdocument import IOIEHealthSafetySecurityDocument  # noqa
 from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING  # noqa
 from zope.component import createObject

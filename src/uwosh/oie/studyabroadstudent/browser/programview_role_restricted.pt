@@ -19,42 +19,31 @@
   <fieldset tal:repeat="group view/groups"
             tal:attributes="id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')">
 
-    <div tal:define="fieldset_id python: group.__name__;
+    <tal:fieldset-not-visible tal:define="fieldset_id python: group.__name__;
                      fieldset_level_viewability python: view.fieldset_level_viewability(fieldset_id);
                      fieldset_viewable python: fieldset_level_viewability and fieldset_level_viewability[fieldset_id] in ['r', 'rw']">
 
-      <legend tal:content="group/label" />
-
-      <div tal:condition="fieldset_viewable">
+      <tal:fieldset-visible condition="fieldset_viewable">
+        <legend tal:content="group/label" />
             <tal:block tal:repeat="widget group/widgets/values">
                 <tal:widget tal:replace="structure widget/@@ploneform-render-widget"/>
             </tal:block>
-      </div>
-      <div tal:condition="not: fieldset_viewable">
-            Fieldset is not viewable
-      </div>
-
-      <div tal:condition="python: fieldset_level_viewability == ''">
-        fieldset_level_viewability is ''
-      </div>
+      </tal:fieldset-visible>
 
       <div tal:condition="python: fieldset_level_viewability is None or not isinstance(fieldset_viewable, dict)">
           <tal:block tal:repeat="widget group/widgets/values">
-            <div  tal:define="id widget/id; is_visible python: view.is_field_viewable(id)">
-              <div tal:condition="is_visible">
+            <tal:block define="id widget/id; is_visible python: view.is_field_viewable(id)">
+              <tal:field-visible condition="is_visible">
                 <tal:widget tal:replace="structure widget/@@ploneform-render-widget"/>
-              </div>
-              <div tal:condition="not: is_visible">
-                The widget <span tal:content="id">[widget ID]</span> is not visible
-              </div>
-            </div>
+              </tal:field-visible>
+            </tal:block>
           </tal:block>
       </div>
       <div tal:condition="python: not (fieldset_level_viewability is None or not isinstance(fieldset_viewable, dict))">
           python: not (fieldset_level_viewability is None or not isinstance(fieldset_viewable, dict))
       </div>
 
-    </div>
+    </tal:fieldset-not-visible>
   </fieldset>
 
   <div tal:define="are_contents_viewable python: view.is_field_viewable('_SHOW_CONTENTS')">
@@ -63,9 +52,6 @@
       <tal:block define="view nocall:context/folder_listing; listing_macro view/macros/listing">
         <metal:use_macro use-macro="listing_macro"/>
       </tal:block>
-    </fieldset>
-    <fieldset id="folder-listing" tal:condition="not: are_contents_viewable">
-      Viewing content listing is not allowed
     </fieldset>
   </div>
 
