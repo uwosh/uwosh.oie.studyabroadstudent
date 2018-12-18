@@ -9,7 +9,7 @@ class IOIEAirline(Interface):
 
     dexteritytextindexer.searchable('luggage_general')
     luggage_general = schema.URI(
-        title=_(u'General luggage'),
+        title=_(u'General luggage x'),
         description=_(u'website address (URL)'),
         required=False,
     )
