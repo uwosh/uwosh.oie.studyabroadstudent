@@ -220,15 +220,15 @@ def participant_modified(o, event):
 ###############################################################
 def liaison_created(o, event):
     if o.middle_name and o.middle_name.strip() != '':
-        title = '{f} {m} {l}'.format(
+        title = '{f} {m} {ln}'.format(
             f=o.first_name,
             m=o.middle_name,
-            l=o.last_name,
+            ln=o.last_name,
         )
     else:
-        title = '{f} {l}'.format(
+        title = '{f} {ln}'.format(
             f=o.first_name,
-            l=o.last_name,
+            ln=o.last_name,
         )
     if o.title != title:
         o.title = title
@@ -396,13 +396,13 @@ def health_document_modified(o, event):
 ###############################################################
 def program_leader_created(o, event):
     if o.middle_name and o.middle_name.strip() != '':
-        title = '{f} {m} {l}'.format(
+        title = '{f} {m} {ln}'.format(
             f=o.first_name,
             m=o.middle_name,
-            l=o.last_name,
+            ln=o.last_name,
         )
     else:
-        title = '{f} {l}'.format(f=o.first_name, l=o.last_name)
+        title = '{f} {ln}'.format(f=o.first_name, ln=o.last_name)
     if o.title != title:
         o.title = title
 

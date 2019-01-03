@@ -33,7 +33,12 @@ def constrain_types(folder, ftis):
     aspect.setImmediatelyAddableTypes(ftis)
 
 
-def create_toplevel_folder(portal, portal_ids, title, id, ftis):
+def create_toplevel_folder(portal,
+                           portal_ids,
+                           title,
+                           id,
+                           ftis,
+                           publish_but_exclude=False):
     if id not in portal_ids:
         folder = api.content.create(
             type='Folder',

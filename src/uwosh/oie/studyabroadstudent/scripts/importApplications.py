@@ -415,10 +415,10 @@ with api.env.adopt_user(username='admin'):
                 container=folder,
                 type=PORTAL_TYPE,
                 id=id,
-                title='{f} {m} {l} {pn} {py}'.format(
+                title='{f} {m} {ln} {pn} {py}'.format(
                     f=FirstName,
                     m=MiddleName,
-                    l=LastName,
+                    ln=LastName,
                     pn=ProgramName,
                     py=ProgramYear,
                 ),
