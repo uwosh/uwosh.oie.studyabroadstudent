@@ -48,6 +48,11 @@ def create_toplevel_folder(portal,
     else:
         folder = portal[id]
     constrain_types(folder, ftis)
+    if publish_but_exclude:
+        if folder.exclude_from_nav is not True:
+            folder.exclude_from_nav = True
+        if api.content.get_state(folder) != 'published':
+            api.content.transition(folder, transition='publish')
 
 
 def post_install(context):
@@ -253,19 +258,23 @@ def populate_toplevel_folders(portal, portal_ids):
                            'legacy-applications',
                            ['OIEStudyAbroadStudentApplication'])
     create_toplevel_folder(portal, portal_ids, 'Countries', 'countries',
-                           ['OIECountry'])
+                           ['OIECountry'], publish_but_exclude=True)
     create_toplevel_folder(portal, portal_ids, 'Participants', 'participants',
-                           ['OIEStudyAbroadParticipant'])
+                           ['OIEStudyAbroadParticipant'],
+                           publish_but_exclude=True)
     create_toplevel_folder(portal, portal_ids, 'Programs', 'programs',
-                           ['OIEStudyAbroadProgram'])
+                           ['OIEStudyAbroadProgram'],
+                           publish_but_exclude=True)
     create_toplevel_folder(portal, portal_ids, 'People', 'people',
-                           ['OIEContact', 'OIELiaison', 'OIEProgramLeader'])
+                           ['OIEContact', 'OIELiaison', 'OIEProgramLeader'],
+                           publish_but_exclude=True)
     create_toplevel_folder(portal, portal_ids, 'Partners', 'partners',
-                           ['OIECooperatingPartner'])
+                           ['OIECooperatingPartner'],
+                           publish_but_exclude=True)
     create_toplevel_folder(portal, portal_ids, 'Years', 'years',
-                           ['OIECalendarYear'])
+                           ['OIECalendarYear'], publish_but_exclude=True)
     create_toplevel_folder(portal, portal_ids, 'Airlines', 'airlines',
-                           ['OIEAirline'])
+                           ['OIEAirline'], publish_but_exclude=True)
     create_toplevel_folder(portal, portal_ids, 'Forms', 'forms', ['File'])
 
 
