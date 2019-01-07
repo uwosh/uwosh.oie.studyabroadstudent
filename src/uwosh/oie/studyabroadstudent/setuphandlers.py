@@ -62,6 +62,7 @@ def post_install(context):
     portal_ids = [id for id, obj in portal_items]
 
     populate_toplevel_folders(portal, portal_ids)
+    grant_permissions_toplevel_folders(portal)
     populate_repositories(portal, portal_ids)
     populate_countries(portal)
     hide_users_folder(portal, portal_ids)
@@ -250,6 +251,14 @@ def populate_repositories(portal, portal_ids):
     wf_state = api.content.get_state(files)
     if wf_state != 'published':
         api.content.transition(obj=files, transition='publish')
+
+
+def grant_permissions_toplevel_folders(portal):
+    # programs folder
+    api.group.create(groupname='liaison', title='Liaison')
+    api.group.add_user(groupname='liaison', username='Mgmt_Liaison')
+    folder = portal.programs
+    folder.manage_addLocalRoles('liaison', ['Contributor'])
 
 
 def populate_toplevel_folders(portal, portal_ids):
