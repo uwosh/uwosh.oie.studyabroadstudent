@@ -62,27 +62,17 @@ def post_install(context):
     portal_ids = [id for id, obj in portal_items]
 
     populate_toplevel_folders(portal, portal_ids)
-    grant_permissions_toplevel_folders(portal)
     populate_repositories(portal, portal_ids)
     populate_countries(portal)
     hide_users_folder(portal, portal_ids)
     set_front_page_text(portal, portal_ids)
 
-    # add Link to OIE control panel
-    if 'oie-settings' not in portal_ids:
-        link = api.content.create(
-            type='Link',
-            title='OIE Settings',
-            id='oie-settings',
-            container=portal,
-        )
-        link.remoteUrl = \
-            '${navigation_root_url}/@@oiestudyabroadstudent-controlpanel'
-
     populate_airlines(portal)
     populate_partners(portal)
     enable_commenting()
     create_generic_accounts(portal)
+
+    grant_permissions_toplevel_folders(portal)
 
 
 def create_generic_accounts(portal):
