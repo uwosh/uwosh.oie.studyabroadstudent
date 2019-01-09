@@ -64,6 +64,7 @@ def post_install(context):
     populate_toplevel_folders(portal, portal_ids)
     populate_repositories(portal, portal_ids)
     populate_countries(portal)
+    populate_years(portal)
     hide_users_folder(portal, portal_ids)
     set_front_page_text(portal, portal_ids)
 
@@ -301,6 +302,8 @@ def populate_years(portal):
     # populate Calendar Year content items
     years_folder = portal['years']
     create_year('2018', years_folder)
+    create_year('2019', years_folder)
+    create_year('2020', years_folder)
 
 
 def populate_partners(portal):
