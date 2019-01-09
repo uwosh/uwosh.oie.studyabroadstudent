@@ -146,8 +146,11 @@ settings = Fieldset(
     label=_(u'Settings'),
     fields=['changeNote'],
 )
-fieldsets = IVersionable.getTaggedValue(FIELDSETS_KEY)
-fieldsets.append(settings)
+try:
+    fieldsets = IVersionable.getTaggedValue(FIELDSETS_KEY)
+    fieldsets.append(settings)
+except KeyError:
+    IVersionable.setTaggedValue(FIELDSETS_KEY, [settings])
 
 leadimage_fieldset = Fieldset(
     'leadimage',
