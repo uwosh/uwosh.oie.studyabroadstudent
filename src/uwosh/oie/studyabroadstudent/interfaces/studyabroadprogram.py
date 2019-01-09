@@ -5,13 +5,17 @@ from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 # from zope.interface import invariant
 from plone import api
+from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.app.textfield import RichText
+from plone.app.versioningbehavior.behaviors import IVersionable
 from plone.autoform.directives import read_permission
 from plone.autoform.directives import widget
 from plone.autoform.directives import write_permission
 from plone.directives import form
 from plone.namedfile import field
 from plone.supermodel import model
+from plone.supermodel.interfaces import FIELDSETS_KEY
+from plone.supermodel.model import Fieldset
 from Products.CMFPlone.RegistrationTool import checkEmailAddress
 from Products.CMFPlone.RegistrationTool import EmailAddressInvalid
 from uwosh.oie.studyabroadstudent import _
@@ -135,6 +139,26 @@ class IOIEUserCommentsRowSchema(Interface):
     comment = schema.Text(
         title=_(u'Add a comment'),
     )
+
+
+settings = Fieldset(
+    'settings',
+    label=_(u'Settings'),
+    fields=['changeNote'],
+)
+fieldsets = IVersionable.getTaggedValue(FIELDSETS_KEY)
+fieldsets.append(settings)
+
+leadimage_fieldset = Fieldset(
+    'leadimage',
+    label=_(u'Lead Image'),
+    fields=['image', 'image_caption'],
+)
+try:
+    leadimage_fieldsets = ILeadImage.getTaggedValue(FIELDSETS_KEY)
+    leadimage_fieldsets.append(leadimage_fieldset)
+except KeyError:
+    ILeadImage.setTaggedValue(FIELDSETS_KEY, [leadimage_fieldset])
 
 
 class IOIEStudyAbroadProgram(Interface):
@@ -1749,6 +1773,8 @@ class TitleRequiredValidator(validator.SimpleFieldValidator):
                         ),
                     ),
                 )
+
+
 validator.WidgetValidatorDiscriminators(TitleRequiredValidator,
                                         field=IOIEStudyAbroadProgram['title'])
 
@@ -1765,6 +1791,8 @@ class DescriptionRequiredValidator(validator.SimpleFieldValidator):
                         ),
                     ),
                 )
+
+
 validator.WidgetValidatorDiscriminators(
     DescriptionRequiredValidator,
     field=IOIEStudyAbroadProgram['description'],
