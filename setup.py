@@ -53,6 +53,7 @@ setup(
         'Products.ContentWellPortlets',
         'webcouturier.dropdownmenu',
         'plone.app.iterate',
+        'uwosh.oie.studyabroadtheme',
     ],
     extras_require={
         'test': [
