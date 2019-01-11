@@ -338,7 +338,7 @@ class IOIEStudyAbroadProgram(Interface):
     learning_objectives = schema.List(
         title=_(u'Learning Objectives'),
         description=_(
-            u'State the learning objectives for this program.  Include only one learning objective per text field. These learning objectives will be included in end-of-program assessment and may be used to support Higher Learning Commission and other accreditation processes. (Max: 12 entries)'),  # noqa
+            u'State the learning objectives for this program.  Include only one learning objective per text field. These learning objectives will be included in end-of-program assessment and may be used to support Higher Learning Commission and other accreditation processes. Press Tab to add more (max 12 entries)'),  # noqa
         required=True,
         value_type=DictRow(
             title=u'learning objective row',
