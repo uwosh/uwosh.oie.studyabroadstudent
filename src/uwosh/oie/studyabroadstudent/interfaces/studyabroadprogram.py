@@ -201,6 +201,7 @@ class IOIEStudyAbroadProgram(Interface):
         'comments_fieldset',
         label=_(u'Comments'),
         fields=['comments_oie_leaders', 'comments_oie_all'],
+        order=10000,
     )
 
     read_permission(comments_oie_leaders='OIE: View OIE leadership comments')
@@ -236,6 +237,7 @@ class IOIEStudyAbroadProgram(Interface):
         label=_(u'Program Code'),
         fields=['calendar_year', 'term', 'college_or_unit', 'countries',
                 'program_code'],
+        order=1,
     )
 
     calendar_year = schema.Choice(
