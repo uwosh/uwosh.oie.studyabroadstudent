@@ -1372,6 +1372,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'American Sign Language',
             'Arabic',
             'Chinese',
+            'English',
             'French',
             'German',
             'Italian',
