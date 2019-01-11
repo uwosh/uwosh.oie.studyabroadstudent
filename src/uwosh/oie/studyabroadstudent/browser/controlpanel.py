@@ -846,6 +846,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     program_component = schema.Tuple(
         title=_(u'Program Component'),
         default=(
+            'none',
             'Clinicals',
             'Field Research',
             'Internship',
