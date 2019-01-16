@@ -43,3 +43,13 @@ class OIECalendarYearIntegrationTest(unittest.TestCase):
             id='OIECalendarYear',
         )
         self.assertTrue(IOIECalendarYear.providedBy(obj))
+
+    def test_view_year_in_toplevel_folder(self):
+        """test that we can view a year even if not a Manager"""
+        year = api.content.create(
+            container=self.portal,
+            type='OIECalendarYear',
+            id='OIECalendarYear',
+        )
+        setRoles(self.portal, TEST_USER_ID, ['Mgmt_Chair'])
+        self.assertIsNotNone(year, 'unable to view year as Mgmt_Chair')
