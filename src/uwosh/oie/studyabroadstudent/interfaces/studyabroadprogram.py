@@ -8,6 +8,7 @@ from plone import api
 from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.app.textfield import RichText
 from plone.app.versioningbehavior.behaviors import IVersionable
+from plone.autoform.directives import omitted
 from plone.autoform.directives import read_permission
 from plone.autoform.directives import widget
 from plone.autoform.directives import write_permission
@@ -24,11 +25,12 @@ from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import seat_assignment_protocol
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_na_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary
-# from z3c.form.interfaces import WidgetActionExecutionError
 from z3c.form import validator
+from z3c.form.interfaces import IAddForm
 from zope import schema
 from zope.interface import Interface
 from zope.interface import Invalid
+from zope.interface import invariant
 from zope.schema import ValidationError
 
 
@@ -164,23 +166,182 @@ except KeyError:
     ILeadImage.setTaggedValue(FIELDSETS_KEY, [leadimage_fieldset])
 
 
+def not_empty(value):
+    if len(value) == 0:
+        raise Invalid(_(u'You must set a value'))
+    return True
+
+
+def firstChoiceDatesFlexible_validator(value):
+    if value is None or len(value) == 0:
+        raise Invalid(_(u'You must choose Yes or No'))
+    return True
+
+
 class IOIEStudyAbroadProgram(Interface):
+
+    # hide fields that don't belong in the add form: Departure,
+    #   Departure from Oshkosh, Return, Return to Oshkosh,
+    #   Participant Selection, Liaison to the OIE, Courses, Contributions,
+    #   Reviewers, OIE Review, Proposals, Finances, Pre-departure, Reporting,
+    #   Program Dates, Comments
+    omitted(
+        IAddForm,
+        'airline', 'flightNumber', 'airport', 'departureDateTime',
+        'arrivalAtDestinationAndInsuranceStartDate',
+        'transportationFromOshkoshToDepartureAirport',
+        'airport_transfer', 'oshkoshDepartureLocation',
+        'oshkoshMeetingDateTime', 'oshkoshDepartureDateTime',
+        'milwaukeeDepartureDateTime',
+        'airportArrivalDateTime',
+        'airlineReturn', 'flightNumberReturn', 'airportReturn',
+        'returnDateTime', 'arrivalInWisconsinDate',
+        'insuranceEndDate',
+        'transportationFromArrivalAirportToOshkosh',
+        'milwaukeeArrivalDateTime', 'oshkoshArrivalDateTime',
+        'studentStatus', 'seatAssignmentProtocol',
+        'liaisonReviewOfIndividualApplicants', 'approvalCriteria',
+        'individualInterview', 'firstRecommendationRequired',
+        'secondRecommendationRequired',
+        'applicantQuestion1', 'applicantQuestion2',
+        'applicantQuestion3', 'applicantQuestion4',
+        'applicantQuestion5', 'cvRequired',
+        'letterOfMotivationRequired', 'otherRequired',
+        'liaison', 'program_leader', 'program_coleaders',
+        'courses', 'add_course_link',
+        'contributions_label', 'contributing_entity',
+        'reviewers_label', 'reviewer_emails',
+        'program_schedule', 'director_recommendations',
+        'health_safety_security_documents',
+        'add_health_document_link', 'application_deadlines_label',
+        'step_1_and_2_application_deadline',
+        'step_3_application_deadline', 'step_4_application_deadline',
+        'application_items_label',
+        'flight_deviation_request_return_flight_only',
+        'flight_deviation_request_roundtrip_or_outbound_flight',
+        'hessen_isu_application', 'hessen_iwu_application',
+        'graduate_registration_form_and_graduate_special_non_degree_information_form',  # noqa
+        'transfer_credit_prior_approval_form',
+        'application_items_travel_label',
+        'drivers_license_copy_for_india_visa_application',
+        'biographical_page_of_your_signed_passport',
+        'original_passport',
+        'official_passport_photo_for_india_visa_application',
+        'digital_passport_photo',
+        'passport_size_photo', 'indian_visa_application',
+        'visa_required_for_us_citizens',
+        'yellow_fever_vaccination_certificate',
+        'application_items_background_label',
+        'credit_overload_form',
+        'application_items_other_label',
+        'proposals_label', 'request_for_proposal',
+        'request_for_proposal_due_date', 'provider_proposals_label',
+        'provider_01', 'provider_01_awarded_contract', 'proposal_01',
+        'provider_02',
+        'provider_02_awarded_contract', 'proposal_02', 'provider_03',
+        'provider_03_awarded_contract',
+        'proposal_03',
+        'finances_label', 'anticipated_number_of_applicants_min',
+        'anticipated_number_of_applicants_max',
+        'budget_spreadsheet', 'fecop_worksheet',
+        'required_prior_to_publishing_initial_fee_label',
+        'program_fee', 'required_prior_to_confirming_to_run_label',
+        'first_participant_fee_statement_',
+        'first_participant_fee_spreadsheet',
+        'required_prior_to_publishing_initial_fee_label_2',
+        'final_participant_fee_statement',
+        'final_participant_fee_spreadsheet',
+        'required_prior_to_confirming_ter_received_label',
+        'travel_expense_report',
+        'required_prior_to_processing_refunds_label',
+        'participant_fees_paid_in_full',
+        'compensation_paperwork',
+        'participant_refund_spreadsheet',
+        'required_prior_to_archiving_program_label',
+        'account_transfers',
+        'program_revenue', 'final_budget_documentation',
+        'close_account',
+        'orientation_label', 'program_leader_orientation_packet',
+        'partner_orientation',
+        'required_prior_to_confirming_program_to_run_label',
+        'participant_orientation_url',
+        'proof_of_service_label', 'final_itinerary',
+        'bus_contract_departure', 'bus_contract_return',
+        'e_tickets', 'vouchers', 'insurance_invoice', 'visas',
+        'other',
+        'participant_evaluations',
+        'post_program_evaluation',
+        'incident_report',
+        'total_number_of_high_school_students',
+        'total_number_of_uw_oshkosh_freshmen',
+        'total_number_of_uw_oshkosh_sophomores',
+        'total_number_of_uw_oshkosh_juniors',
+        'total_number_of_uw_oshkosh_seniors',
+        'total_number_of_uw_oshkosh_graduate_students',
+        'total_number_of_other_university_undergraduate_students',
+        'total_number_of_other_university_graduate_students',
+        'total_number_of_uw_oshkosh_program_leaders',
+        'total_number_of_community_members',
+        'first_day_of_spring_semester_classes',
+        'last_day_of_spring_semester_classes',
+        'first_day_of_spring_interim_classes',
+        'last_day_of_spring_interim_classes',
+        'official_spring_graduation_date',
+        'first_day_of_summer_i_classes',
+        'last_day_of_summer_i_classes',
+        'first_day_of_summer_ii_classes',
+        'last_day_of_summer_ii_classes',
+        'official_summer_graduation_date',
+        'first_day_of_fall_semester_classes',
+        'last_day_of_fall_semester_classes',
+        'first_day_of_winter_interim_classes',
+        'last_day_of_winter_interim_classes',
+        'official_fall_graduation_date',
+        'spring_interim_summer_fall_semester_participant_orientation_deadline',  # noqa
+        'spring_interim_summer_fall_semester_in_person_orientation',
+        'winter_interim_spring_semester_participant_orientation_deadline',  # noqa
+        'winter_interim_spring_semester_in_person_orientation',
+        'spring_interim_summer_fall_semester_payment_deadline_1',
+        'spring_interim_payment_deadline_2',
+        'summer_payment_deadline_2',
+        'fall_semester_payment_deadline_2',
+        'winter_interim_spring_payment_deadline_1',
+        'winter_interim_spring_payment_deadline_2',
+        'comments_oie_leaders', 'comments_oie_all',
+        'IExcludeFromNavigation.exclude_from_nav', 'nextPreviousEnabled',
+    )
 
     dexteritytextindexer.searchable('title')
     title = schema.TextLine(
         title=_(u'Program Title'),
         description=_(
-            u'The full Program Title will be displayed in all OIE print and on-line marketing and in all official OIE program-related materials.  To avoid confusion and increase "brand" awareness for your program, consistently use this program name in full, exactly as it appears here, in your print and electronic media.  Do not include country or city names in this field. (max length 45 chars)'),  # noqa
+            u'The full Program Title will be displayed in all OIE print and on-line marketing and in all official OIE program-related materials.  To avoid confusion and increase "brand" awareness for your program, consistently use this program name in full, exactly as it appears here, in your print and electronic media.  Do not include country or city names in this field. (10 - 45 chars)'),  # noqa
         required=True,
         max_length=45,
+        min_length=10,
+        constraint=not_empty,
     )
+
+    @invariant
+    def validate_non_empty_title(data):
+        if data.title is None or len(data.title) == 0:
+            raise Invalid(_('You must specify a title'))
+
+    @invariant
+    def validate_non_empty_description(data):
+        if data.description is None or len(data.description) == 0:
+            raise Invalid(_('You must specify a description'))
 
     dexteritytextindexer.searchable('description')
     description = schema.Text(
         title=_(u'Description'),
         description=_(
-            u'A brief description that will show up in search results'),
+            u'A brief description that will show up in search results '
+            '(10 - 100 chars)'),
         required=True,
+        min_length=10,
+        max_length=100,
+        constraint=not_empty,
     )
 
     dexteritytextindexer.searchable('rich_description')
@@ -273,6 +434,7 @@ class IOIEStudyAbroadProgram(Interface):
                 'oiestudyabroadstudent.countries',
             ),
         ),
+        min_length=1,
     )
 
     program_code = schema.TextLine(
@@ -307,6 +469,7 @@ class IOIEStudyAbroadProgram(Interface):
                 'oiestudyabroadstudent.sponsoring_unit_or_department',
             ),
         ),
+        min_length=1,
     )
 
     program_type = schema.Choice(
@@ -321,6 +484,7 @@ class IOIEStudyAbroadProgram(Interface):
         source=RegistryValueVocabulary(
             'oiestudyabroadstudent.program_component',
         ),
+        default=None,
     )
 
     eligibility_requirement = schema.Choice(
@@ -346,6 +510,7 @@ class IOIEStudyAbroadProgram(Interface):
             title=u'learning objective row',
             schema=ILearningObjectiveRowSchema,
         ),
+        min_length=1,
     )
 
     equipment_and_space = schema.Choice(
@@ -409,6 +574,7 @@ class IOIEStudyAbroadProgram(Interface):
         value_type=schema.Choice(
             source=RegistryValueVocabulary('oiestudyabroadstudent.language'),
         ),
+        min_length=1,
     )
 
     cooperating_partners = schema.List(
@@ -447,6 +613,7 @@ class IOIEStudyAbroadProgram(Interface):
             title=u'Pre-Travel Dates',
             schema=IPreTravelDatesRowSchema,
         ),
+        min_length=1,
     )
 
     form.mode(travelDatesTransitionsAndDestinations='display')
@@ -467,6 +634,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(u'If yes, your OIE Program Manager may recommend changes based on flight availability or program component scheduling.'),  # noqa
         vocabulary=yes_no_none_vocabulary,
         required=True,
+        constraint=firstChoiceDatesFlexible_validator,
     )
 
     widget('postTravelClassDates', DataGridFieldFactory)
