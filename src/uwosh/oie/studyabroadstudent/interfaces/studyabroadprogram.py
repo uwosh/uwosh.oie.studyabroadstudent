@@ -58,7 +58,7 @@ class IPreTravelDatesRowSchema(Interface):
         title=_(u'Start'),
         required=True,
     )
-    pretravel_end_datetime = schema.Date(
+    pretravel_end_datetime = schema.Datetime(
         title=_(u'End'),
         required=True,
     )
