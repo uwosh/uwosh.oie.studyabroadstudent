@@ -182,11 +182,14 @@
           (leader)
         </div>
         <div class="coleaders" tal:repeat="contact view/coleaders" tal:condition="view/coleaders">
-          <b><a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact name]</a></b>
-          <span tal:content="contact/office_building">[office building]</span>
-          <span tal:content="contact/office_room">[office room]</span>;
-          <span tal:content="contact/email">[email]</span>
-          (coleader)
+          <div tal:condition="python: contact.title != '*Nobody'">
+            <b><a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact
+              name]</a></b>
+            <span tal:content="contact/office_building">[office building]</span>
+            <span tal:content="contact/office_room">[office room]</span>;
+            <span tal:content="contact/email">[email]</span>
+            (coleader)
+          </div>
         </div>
       </div>
       <div class="oie-footer" style="padding-top: 50px">

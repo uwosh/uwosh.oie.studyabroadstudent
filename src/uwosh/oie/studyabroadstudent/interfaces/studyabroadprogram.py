@@ -23,6 +23,7 @@ from uwosh.oie.studyabroadstudent import _
 from uwosh.oie.studyabroadstudent.vocabularies import program_cycle_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import seat_assignment_protocol
+from uwosh.oie.studyabroadstudent.vocabularies import selection_criteria_vocabulary  # noqa
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_na_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary
 from z3c.form import validator
@@ -57,7 +58,7 @@ class IPreTravelDatesRowSchema(Interface):
         title=_(u'Start'),
         required=True,
     )
-    pretravel_end_datetime = schema.Datetime(
+    pretravel_end_datetime = schema.Date(
         title=_(u'End'),
         required=True,
     )
@@ -95,6 +96,7 @@ class ICoLeadersRowSchema(Interface):
     coleader = schema.Choice(
         title=_(u'On-site Program Co-leader'),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.program_leader',
+        required=False,
     )
 
 
@@ -309,6 +311,8 @@ class IOIEStudyAbroadProgram(Interface):
         'winter_interim_spring_payment_deadline_2',
         'comments_oie_leaders', 'comments_oie_all',
         'IExcludeFromNavigation.exclude_from_nav', 'nextPreviousEnabled',
+        'travelDatesTransitionsAndDestinations',
+        'add_transition_link',
     )
 
     dexteritytextindexer.searchable('title')
@@ -548,7 +552,7 @@ class IOIEStudyAbroadProgram(Interface):
     syllabus_and_supporting_docs = field.NamedFile(
         title=_(u'Syllabus & Other Supporting Documents'),
         description=_(
-            u'Upload your syllabus plus other related documents (if any).  If you update your syllabus, replace this copy with the updated copy.  This field will remain editable until just prior to travel.'),  # noqa
+            u'Upload your syllabus; if you update your syllabus, replace this copy with the updated copy. This field will remain editable until just prior to travel. Additional documents can be added to this program folder once it has been saved.'),  # noqa
         required=False,
     )
 
@@ -739,7 +743,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
 
     airportArrivalDateTime = schema.Datetime(
-        title=_('Destination Arrival Date & Time'),
+        title=_('Arrival at Ground Program Launch Location'),
         required=False,
         # TODO '=departure flight date/time minus 3.5 hours [display only if  # noqa
         #   "Transportation is provided from Oshkosh is "yes"]
@@ -784,7 +788,7 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    insuranceEndDate = schema.Datetime(
+    insuranceEndDate = schema.Date(
         title=_(u'Insurance End Date'),
         required=False,
     )
@@ -853,7 +857,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Liaison Review of Individual Applicants'),
         description=_(
             u'For competitive programs or for programs that require each applicant to have specific background in addition to meeting course pre-requisites, indicate criteria to be used and select the method or methods to be employed to determine whether criteria have been met.  Do not include or duplicate course pre-requisites here.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=selection_criteria_vocabulary,
         required=True,
     )
 
@@ -984,9 +988,9 @@ class IOIEStudyAbroadProgram(Interface):
     )
     widget('program_coleaders', DataGridFieldFactory)
     program_coleaders = schema.List(
-        title=_(u'On-site Program Leader (choose 0-4)'),
+        title=_(u'On-site Program Co-Leader (choose 0-4)'),
         description=_(
-            u'The On-site Program Leader is responsible for providing leadership for the group and for overseeing group health and safety.  The On-site Program Leader may also teach one or more of the program courses.'),  # noqa
+            u'The On-site Program Co-Leader is responsible for providing leadership for the group and for overseeing group health and safety.  The On-site Program Co-Leader may also teach one or more of the program courses.'),  # noqa
         value_type=DictRow(
             title=u'co-leaders',
             schema=ICoLeadersRowSchema,
@@ -1053,7 +1057,8 @@ class IOIEStudyAbroadProgram(Interface):
     widget('reviewer_emails', DataGridFieldFactory)
     reviewer_emails = schema.List(
         title=_(u'Reviewer Emails'),
-        description=_(u'(max: 6)'),
+        description=_(u'"One per line, and press Enter or Tab '
+                      'after each one to add more (max: 6)'),
         required=False,
         value_type=DictRow(
             title=u'Reviewer Emails',
@@ -1777,7 +1782,14 @@ class IOIEStudyAbroadProgram(Interface):
                 'summer_payment_deadline_2',
                 'fall_semester_payment_deadline_2',
                 'winter_interim_spring_payment_deadline_1',
-                'winter_interim_spring_payment_deadline_2'],
+                'winter_interim_spring_payment_deadline_2',
+                'summer_application_deadline',
+                'fall_semester_application_deadline',
+                'fall_interim_application_deadline',
+                'spring_semester_application_deadline',
+                'spring_interim_application_deadline',
+                'spring_break_application_deadline',
+                ],
     )
 
     first_day_of_spring_semester_classes = schema.Date(
@@ -1811,7 +1823,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
 
     first_day_of_summer_i_classes = schema.Date(
-        title=u'First day of Spring Interim Classes',
+        title=u'First day of Summer I Classes',
         description=u'will be copied from the selected calendar year on first save',  # noqa
         required=False,
     )
@@ -1866,6 +1878,42 @@ class IOIEStudyAbroadProgram(Interface):
 
     official_fall_graduation_date = schema.Date(
         title=u'Official Fall Graduation Date',
+        description=u'will be copied from the selected calendar year on first save',  # noqa
+        required=False,
+    )
+
+    summer_application_deadline = schema.Date(
+        title=u'Summer Application Deadline',
+        description=u'will be copied from the selected calendar year on first save',  # noqa
+        required=False,
+    )
+
+    fall_semester_application_deadline = schema.Date(
+        title=u'Fall Semester Application Deadline',
+        description=u'will be copied from the selected calendar year on first save',  # noqa
+        required=False,
+    )
+
+    fall_interim_application_deadline = schema.Date(
+        title=u'Fall Interim Application Deadline',
+        description=u'will be copied from the selected calendar year on first save',  # noqa
+        required=False,
+    )
+
+    spring_semester_application_deadline = schema.Date(
+        title=u'Spring Semester Application Deadline',
+        description=u'will be copied from the selected calendar year on first save',  # noqa
+        required=False,
+    )
+
+    spring_break_application_deadline = schema.Date(
+        title=u'Spring Break Application Deadline',
+        description=u'will be copied from the selected calendar year on first save',  # noqa
+        required=False,
+    )
+
+    spring_interim_application_deadline = schema.Date(
+        title=u'Spring Interim Application Deadline',
         description=u'will be copied from the selected calendar year on first save',  # noqa
         required=False,
     )

@@ -289,6 +289,13 @@ salary_form = SimpleVocabulary(
     ],
 )
 
+selection_criteria_vocabulary = SimpleVocabulary(
+    [
+        SimpleTerm(value='Set selection criteria'),
+        SimpleTerm(value='There are no additional selection criteria'),
+    ],
+)
+
 
 @implementer(IContextSourceBinder)
 class RegistryValueVocabulary(object):
