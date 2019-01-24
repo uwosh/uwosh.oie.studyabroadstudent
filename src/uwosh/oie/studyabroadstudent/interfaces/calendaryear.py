@@ -46,13 +46,13 @@ class IOIECalendarYear(Interface):
     )
 
     official_spring_graduation_date = schema.Date(
-        title=u'official spring graduation date',
+        title=u'Official spring graduation date',
         required=True,
         defaultFactory=date_default_value,
     )
 
     first_day_of_summer_i_classes = schema.Date(
-        title=u'First day of Spring Interim Classes',
+        title=u'First day of Summer I Classes',
         required=True,
         defaultFactory=date_default_value,
     )
@@ -107,6 +107,73 @@ class IOIECalendarYear(Interface):
 
     official_fall_graduation_date = schema.Date(
         title=u'Official Fall Graduation Date',
+        required=True,
+        defaultFactory=date_default_value,
+    )
+
+    summer_request_for_proposals_deadline_date = schema.Date(
+        title=u'Summer Request for Proposals Deadline',
+        required=True,
+        defaultFactory=date_default_value,
+    )
+    fall_semester_request_for_proposals_deadline_date = schema.Date(
+        title=u'Fall Semester Request for Proposals Deadline',
+        required=True,
+        defaultFactory=date_default_value,
+    )
+    fall_interim_request_for_proposals_deadline_date = schema.Date(
+        title=u'Fall Interim Request for Proposals Deadline',
+        required=True,
+        defaultFactory=date_default_value,
+    )
+    spring_semester_request_for_proposals_deadline_date = schema.Date(
+        title=u'Spring Semester Request for Proposals Deadline',
+        required=True,
+        defaultFactory=date_default_value,
+    )
+    spring_break_request_for_proposals_deadline_date = schema.Date(
+        title=u'Spring Break Request for Proposals Deadline',
+        required=True,
+        defaultFactory=date_default_value,
+    )
+    spring_interim_request_for_proposals_deadline_date = schema.Date(
+        title=u'Spring Interim Request for Proposals Deadline',
+        required=True,
+        defaultFactory=date_default_value,
+    )
+
+    summer_application_deadline = schema.Date(
+        title=u'Summer Application Deadline',
+        required=True,
+        defaultFactory=date_default_value,
+    )
+
+    fall_semester_application_deadline = schema.Date(
+        title=u'Fall Semester Application Deadline',
+        required=True,
+        defaultFactory=date_default_value,
+    )
+
+    fall_interim_application_deadline = schema.Date(
+        title=u'Fall Interim Application Deadline',
+        required=True,
+        defaultFactory=date_default_value,
+    )
+
+    spring_semester_application_deadline = schema.Date(
+        title=u'Spring Semester Application Deadline',
+        required=True,
+        defaultFactory=date_default_value,
+    )
+
+    spring_break_application_deadline = schema.Date(
+        title=u'Spring Break Application Deadline',
+        required=True,
+        defaultFactory=date_default_value,
+    )
+
+    spring_interim_application_deadline = schema.Date(
+        title=u'Spring Interim Application Deadline',
         required=True,
         defaultFactory=date_default_value,
     )

@@ -64,7 +64,7 @@ def post_install(context):
     populate_toplevel_folders(portal, portal_ids)
     populate_repositories(portal, portal_ids)
     populate_countries(portal)
-    populate_years(portal)
+    populate_people(portal)
     hide_users_folder(portal, portal_ids)
     set_front_page_text(portal, portal_ids)
 
@@ -298,14 +298,6 @@ def enable_commenting():
         settings.user_notification_enabled = True
 
 
-def populate_years(portal):
-    # populate Calendar Year content items
-    years_folder = portal['years']
-    create_year('2018', years_folder)
-    create_year('2019', years_folder)
-    create_year('2020', years_folder)
-
-
 def populate_partners(portal):
     # populate Cooperating Partners content items
     partner_folder = portal['partners']
@@ -504,6 +496,20 @@ def populate_airlines(portal):
     create_airline('WestJet', airline_folder)
     create_airline('Xiamen Airlines', airline_folder)
     create_airline('XL Airways', airline_folder)
+
+
+def populate_people(portal):
+    # add dummy Nobody program leader
+    people_folder = portal['people']
+    nobody = api.content.create(
+        type='OIEProgramLeader',
+        container=people_folder,
+        title='*Nobody',
+    )
+    nobody.title = '*No Co-Leader'
+    nobody.first_name = '*No'
+    nobody.middle_name = ''
+    nobody.last_name = 'Co-Leader'
 
 
 def populate_countries(portal):
@@ -783,15 +789,6 @@ def create_airline(name, folder):
     brains = api.content.find(portal_type='OIEAirline', id=id)
     if len(brains) < 1:
         api.content.create(type='OIEAirline', container=folder, title=name)
-
-
-def create_year(name, folder):
-    util = queryUtility(IIDNormalizer)
-    id = util.normalize(name)
-    brains = api.content.find(portal_type='OIECalendarYear', id=id)
-    if len(brains) < 1:
-        api.content.create(type='OIECalendarYear', container=folder,
-                           title=name)
 
 
 def create_partner(name, folder):
