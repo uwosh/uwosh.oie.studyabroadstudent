@@ -313,6 +313,12 @@ class IOIEStudyAbroadProgram(Interface):
         'IExcludeFromNavigation.exclude_from_nav', 'nextPreviousEnabled',
         'travelDatesTransitionsAndDestinations',
         'add_transition_link',
+        'summer_application_deadline',
+        'fall_semester_application_deadline',
+        'fall_interim_application_deadline',
+        'spring_semester_application_deadline',
+        'spring_interim_application_deadline',
+        'spring_break_application_deadline',
     )
 
     dexteritytextindexer.searchable('title')
@@ -405,6 +411,8 @@ class IOIEStudyAbroadProgram(Interface):
         order=1,
     )
 
+    # read_permission(calendar_year='OIE: View calendar_year')
+    write_permission(calendar_year='OIE: Edit calendar_year')
     calendar_year = schema.Choice(
         title=_(u'Calendar Year'),
         description=_(
