@@ -74,7 +74,13 @@ def program_created(o, event):
               'spring_interim_payment_deadline_2',
               'summer_payment_deadline_2', 'fall_semester_payment_deadline_2',
               'winter_interim_spring_payment_deadline_1',
-              'winter_interim_spring_payment_deadline_2']:
+              'winter_interim_spring_payment_deadline_2',
+              'summer_application_deadline',
+              'fall_semester_application_deadline',
+              'fall_interim_application_deadline',
+              'spring_semester_application_deadline',
+              'spring_interim_application_deadline',
+              'spring_break_application_deadline']:
         setattr(o, d, getattr(calendar_year_obj, d))
 
 
