@@ -80,8 +80,10 @@ def program_created(o, event):
               'fall_interim_application_deadline',
               'spring_semester_application_deadline',
               'spring_interim_application_deadline',
-              'spring_break_application_deadline']:
+              'spring_break_application_deadline',
+              'request_for_proposals_due_date']:
         setattr(o, d, getattr(calendar_year_obj, d))
+    _update_contained_object_fields(o, event)
 
 
 def program_added(o, event):
@@ -100,6 +102,10 @@ def program_modified(o, event):
         program_code += c[0:3].upper()
     if o.program_code != program_code:
         o.program_code = program_code
+    _update_contained_object_fields(o, event)
+
+
+def _update_contained_object_fields(o, event):
     # update fields that show contained objects
     # and related 'add object' link fields
     update_course_field(o)

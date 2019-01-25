@@ -240,3 +240,9 @@ class IOIECalendarYear(Interface):
         required=True,
         defaultFactory=date_default_value,
     )
+
+    request_for_proposals_due_date = schema.Date(
+        title=u'Request for Proposals Due Date',
+        required=True,
+        defaultFactory=date_default_value,
+    )
