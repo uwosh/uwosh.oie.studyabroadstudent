@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import date
 from datetime import datetime
+from plone.supermodel import model
 from uwosh.oie.studyabroadstudent import _
 from zope import schema
 from zope.interface import Interface
@@ -245,4 +246,163 @@ class IOIECalendarYear(Interface):
         title=u'Request for Proposals Due Date',
         required=True,
         defaultFactory=date_default_value,
+    )
+
+    model.fieldset(
+        'step_application_deadlines_fi_fieldset',
+        label=_(u'STEP Application Deadlines (Fall Interim)'),
+        fields=[
+            'step_1_and_2_application_deadline_fi',
+            'step_3_application_deadline_fi',
+            'step_4_application_deadline_fi',
+        ],
+    )
+    model.fieldset(
+        'step_application_deadlines_ss_fieldset',
+        label=_(u'STEP Application Deadlines (Spring)'),
+        fields=[
+            'step_1_and_2_application_deadline_ss',
+            'step_3_application_deadline_ss',
+            'step_4_application_deadline_ss',
+        ],
+    )
+    model.fieldset(
+        'step_application_deadlines_sb_fieldset',
+        label=_(u'STEP Application Deadlines (Spring Break)'),
+        fields=[
+            'step_1_and_2_application_deadline_sb',
+            'step_3_application_deadline_sb',
+            'step_4_application_deadline_sb',
+        ],
+    )
+    model.fieldset(
+        'step_application_deadlines_si_fieldset',
+        label=_(u'STEP Application Deadlines (Spring Interim)'),
+        fields=[
+            'step_1_and_2_application_deadline_si',
+            'step_3_application_deadline_si',
+            'step_4_application_deadline_si',
+        ],
+    )
+    model.fieldset(
+        'step_application_deadlines_s_fieldset',
+        label=_(u'STEP Application Deadlines (Summer)'),
+        fields=[
+            'step_1_and_2_application_deadline_s',
+            'step_3_application_deadline_s',
+            'step_4_application_deadline_s',
+        ],
+    )
+    model.fieldset(
+        'step_application_deadlines_f_fieldset',
+        label=_(u'STEP Application Deadlines (Fall)'),
+        fields=[
+            'step_1_and_2_application_deadline_f',
+            'step_3_application_deadline_f',
+            'step_4_application_deadline_f',
+        ],
+    )
+
+    # Fall Interim
+    step_1_and_2_application_deadline_fi = schema.Date(
+        title=_(u'STEPs I & II Application Deadline'),
+        description=_(u'The STEPs I & II application deadline must be the OIE default student application date, or a date that is two weeks prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: Last Friday in February (summer & fall semester programs); 2nd Friday in September (fall interim programs); last Friday in September (spring semester programs); 1st Friday of Spring Semester (spring interim programs).'),  # noqa
+        required=False,
+    )
+    step_3_application_deadline_fi = schema.Date(
+        title=_(u'STEP III Application Deadline'),
+        description=_(u'The STEP III application deadline must be the OIE default student application date, or a date that is one week prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: 1st Friday in March (summer & fall semester programs); 3rd Friday in September (fall interim programs); 1st Friday in October (spring semester programs); 2nd Friday of Spring Semester (spring interim programs).'),  # noqa
+        required=False,
+    )
+    step_4_application_deadline_fi = schema.Date(
+        title=_(u'STEP IV Application Deadline'),
+        description=_(u'The STEP IV application deadline must take into consideration external deadlines and processing time in the OIE from the point of receiving completed application documents, and the anticipated dates on which documents can be sent to external partners and received by them.'),  # noqa
+        required=False,
+    )
+
+    # Spring Semester
+    step_1_and_2_application_deadline_ss = schema.Date(
+        title=_(u'STEPs I & II Application Deadline'),
+        description=_(u'The STEPs I & II application deadline must be the OIE default student application date, or a date that is two weeks prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: Last Friday in February (summer & fall semester programs); 2nd Friday in September (fall interim programs); last Friday in September (spring semester programs); 1st Friday of Spring Semester (spring interim programs).'),  # noqa
+        required=False,
+    )
+    step_3_application_deadline_ss = schema.Date(
+        title=_(u'STEP III Application Deadline'),
+        description=_(u'The STEP III application deadline must be the OIE default student application date, or a date that is one week prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: 1st Friday in March (summer & fall semester programs); 3rd Friday in September (fall interim programs); 1st Friday in October (spring semester programs); 2nd Friday of Spring Semester (spring interim programs).'),  # noqa
+        required=False,
+    )
+    step_4_application_deadline_ss = schema.Date(
+        title=_(u'STEP IV Application Deadline'),
+        description=_(u'The STEP IV application deadline must take into consideration external deadlines and processing time in the OIE from the point of receiving completed application documents, and the anticipated dates on which documents can be sent to external partners and received by them.'),  # noqa
+        required=False,
+    )
+
+    # Spring Break
+    step_1_and_2_application_deadline_sb = schema.Date(
+        title=_(u'STEPs I & II Application Deadline'),
+        description=_(u'The STEPs I & II application deadline must be the OIE default student application date, or a date that is two weeks prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: Last Friday in February (summer & fall semester programs); 2nd Friday in September (fall interim programs); last Friday in September (spring semester programs); 1st Friday of Spring Semester (spring interim programs).'),  # noqa
+        required=False,
+    )
+    step_3_application_deadline_sb = schema.Date(
+        title=_(u'STEP III Application Deadline'),
+        description=_(u'The STEP III application deadline must be the OIE default student application date, or a date that is one week prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: 1st Friday in March (summer & fall semester programs); 3rd Friday in September (fall interim programs); 1st Friday in October (spring semester programs); 2nd Friday of Spring Semester (spring interim programs).'),  # noqa
+        required=False,
+    )
+    step_4_application_deadline_sb = schema.Date(
+        title=_(u'STEP IV Application Deadline'),
+        description=_(u'The STEP IV application deadline must take into consideration external deadlines and processing time in the OIE from the point of receiving completed application documents, and the anticipated dates on which documents can be sent to external partners and received by them.'),  # noqa
+        required=False,
+    )
+
+    # Spring Interim
+    step_1_and_2_application_deadline_si = schema.Date(
+        title=_(u'STEPs I & II Application Deadline'),
+        description=_(u'The STEPs I & II application deadline must be the OIE default student application date, or a date that is two weeks prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: Last Friday in February (summer & fall semester programs); 2nd Friday in September (fall interim programs); last Friday in September (spring semester programs); 1st Friday of Spring Semester (spring interim programs).'),  # noqa
+        required=False,
+    )
+    step_3_application_deadline_si = schema.Date(
+        title=_(u'STEP III Application Deadline'),
+        description=_(u'The STEP III application deadline must be the OIE default student application date, or a date that is one week prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: 1st Friday in March (summer & fall semester programs); 3rd Friday in September (fall interim programs); 1st Friday in October (spring semester programs); 2nd Friday of Spring Semester (spring interim programs).'),  # noqa
+        required=False,
+    )
+    step_4_application_deadline_si = schema.Date(
+        title=_(u'STEP IV Application Deadline'),
+        description=_(u'The STEP IV application deadline must take into consideration external deadlines and processing time in the OIE from the point of receiving completed application documents, and the anticipated dates on which documents can be sent to external partners and received by them.'),  # noqa
+        required=False,
+    )
+
+    # Summer
+    step_1_and_2_application_deadline_s = schema.Date(
+        title=_(u'STEPs I & II Application Deadline'),
+        description=_(u'The STEPs I & II application deadline must be the OIE default student application date, or a date that is two weeks prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: Last Friday in February (summer & fall semester programs); 2nd Friday in September (fall interim programs); last Friday in September (spring semester programs); 1st Friday of Spring Semester (spring interim programs).'),  # noqa
+        required=False,
+    )
+    step_3_application_deadline_s = schema.Date(
+        title=_(u'STEP III Application Deadline'),
+        description=_(u'The STEP III application deadline must be the OIE default student application date, or a date that is one week prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: 1st Friday in March (summer & fall semester programs); 3rd Friday in September (fall interim programs); 1st Friday in October (spring semester programs); 2nd Friday of Spring Semester (spring interim programs).'),  # noqa
+        required=False,
+    )
+    step_4_application_deadline_s = schema.Date(
+        title=_(u'STEP IV Application Deadline'),
+        description=_(u'The STEP IV application deadline must take into consideration external deadlines and processing time in the OIE from the point of receiving completed application documents, and the anticipated dates on which documents can be sent to external partners and received by them.'),  # noqa
+        required=False,
+    )
+
+    # Fall Semester
+    step_1_and_2_application_deadline_f = schema.Date(
+        title=_(u'STEPs I & II Application Deadline'),
+        description=_(u'The STEPs I & II application deadline must be the OIE default student application date, or a date that is two weeks prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: Last Friday in February (summer & fall semester programs); 2nd Friday in September (fall interim programs); last Friday in September (spring semester programs); 1st Friday of Spring Semester (spring interim programs).'),  # noqa
+        required=False,
+    )
+
+    step_3_application_deadline_f = schema.Date(
+        title=_(u'STEP III Application Deadline'),
+        description=_(u'The STEP III application deadline must be the OIE default student application date, or a date that is one week prior to the contracted date to release airline tickets, whichever is earlier.  Alternatively, the Program Liaison may identify an even earlier deadline, provided OIE can provide sufficient staffing in the week leading up to the proposed deadline.  Default student application deadlines are: 1st Friday in March (summer & fall semester programs); 3rd Friday in September (fall interim programs); 1st Friday in October (spring semester programs); 2nd Friday of Spring Semester (spring interim programs).'),  # noqa
+        required=False,
+    )
+
+    step_4_application_deadline_f = schema.Date(
+        title=_(u'STEP IV Application Deadline'),
+        description=_(u'The STEP IV application deadline must take into consideration external deadlines and processing time in the OIE from the point of receiving completed application documents, and the anticipated dates on which documents can be sent to external partners and received by them.'),  # noqa
+        required=False,
     )
