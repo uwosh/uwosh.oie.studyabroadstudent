@@ -84,11 +84,13 @@ def program_created(o, event):
               'request_for_proposals_due_date']:
         setattr(o, d, getattr(calendar_year_obj, d))
     _update_contained_object_fields(o, event)
-    _update_step_application_deadlines(o, event)
+    _update_term_based_dates(o, event)
 
 
-def _update_step_application_deadlines(o, event):
-    # copy the correct STEP I, II, III, IV application deadlines
+def _update_term_based_dates(o, event):
+    # copy the correct STEP I, II, III, IV application deadlines,
+    #   request for proposal deadlines,
+    #   application deadlines
     #   based on the term selected
     term = o.term
     year = uuidToObject(o.calendar_year)
@@ -97,31 +99,43 @@ def _update_step_application_deadlines(o, event):
             year.step_1_and_2_application_deadline_fi
         o.step_3_application_deadline = year.step_3_application_deadline_fi
         o.step_4_application_deadline = year.step_4_application_deadline_fi
+        o.request_for_proposal_due_date = \
+            year.fall_interim_request_for_proposals_deadline_date
     elif term == '2 Spring Semester':
         o.step_1_and_2_application_deadline = \
             year.step_1_and_2_application_deadline_ss
         o.step_3_application_deadline = year.step_3_application_deadline_ss
         o.step_4_application_deadline = year.step_4_application_deadline_ss
+        o.request_for_proposal_due_date = \
+            year.spring_semester_request_for_proposals_deadline_date
     elif term == '3 Spring Break':
         o.step_1_and_2_application_deadline = \
             year.step_1_and_2_application_deadline_sb
         o.step_3_application_deadline = year.step_3_application_deadline_sb
         o.step_4_application_deadline = year.step_4_application_deadline_sb
+        o.request_for_proposal_due_date = \
+            year.spring_break_request_for_proposals_deadline_date
     elif term == '4 Spring Interim':
         o.step_1_and_2_application_deadline = \
             year.step_1_and_2_application_deadline_si
         o.step_3_application_deadline = year.step_3_application_deadline_si
         o.step_4_application_deadline = year.step_4_application_deadline_si
+        o.request_for_proposal_due_date = \
+            year.spring_interim_request_for_proposals_deadline_date
     elif term == '5 Summer':
         o.step_1_and_2_application_deadline = \
             year.step_1_and_2_application_deadline_s
         o.step_3_application_deadline = year.step_3_application_deadline_s
         o.step_4_application_deadline = year.step_4_application_deadline_s
+        o.request_for_proposal_due_date = \
+            year.summer_request_for_proposals_deadline_date
     elif term == '6 Fall Semester':
         o.step_1_and_2_application_deadline = \
             year.step_1_and_2_application_deadline_f
         o.step_3_application_deadline = year.step_3_application_deadline_f
         o.step_4_application_deadline = year.step_4_application_deadline_f
+        o.request_for_proposal_due_date = \
+            year.fall_semester_request_for_proposals_deadline_date
 
 
 def program_added(o, event):
@@ -141,7 +155,7 @@ def program_modified(o, event):
     if o.program_code != program_code:
         o.program_code = program_code
     _update_contained_object_fields(o, event)
-    _update_step_application_deadlines(o, event)
+    _update_term_based_dates(o, event)
 
 
 def _update_contained_object_fields(o, event):
