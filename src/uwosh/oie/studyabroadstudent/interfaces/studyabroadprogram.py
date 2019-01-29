@@ -1773,12 +1773,7 @@ class IOIEStudyAbroadProgram(Interface):
                 'fall_semester_payment_deadline_2',
                 'winter_interim_spring_payment_deadline_1',
                 'winter_interim_spring_payment_deadline_2',
-                'summer_application_deadline',
-                'fall_semester_application_deadline',
-                'fall_interim_application_deadline',
-                'spring_semester_application_deadline',
-                'spring_interim_application_deadline',
-                'spring_break_application_deadline',
+                'application_deadline',
                 'step_1_and_2_application_deadline',
                 'step_3_application_deadline', 'step_4_application_deadline',
                 ],
@@ -1874,42 +1869,6 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    summer_application_deadline = schema.Date(
-        title=u'Summer Application Deadline',
-        description=u'will be copied from the selected calendar year on first save',  # noqa
-        required=False,
-    )
-
-    fall_semester_application_deadline = schema.Date(
-        title=u'Fall Semester Application Deadline',
-        description=u'will be copied from the selected calendar year on first save',  # noqa
-        required=False,
-    )
-
-    fall_interim_application_deadline = schema.Date(
-        title=u'Fall Interim Application Deadline',
-        description=u'will be copied from the selected calendar year on first save',  # noqa
-        required=False,
-    )
-
-    spring_semester_application_deadline = schema.Date(
-        title=u'Spring Semester Application Deadline',
-        description=u'will be copied from the selected calendar year on first save',  # noqa
-        required=False,
-    )
-
-    spring_break_application_deadline = schema.Date(
-        title=u'Spring Break Application Deadline',
-        description=u'will be copied from the selected calendar year on first save',  # noqa
-        required=False,
-    )
-
-    spring_interim_application_deadline = schema.Date(
-        title=u'Spring Interim Application Deadline',
-        description=u'will be copied from the selected calendar year on first save',  # noqa
-        required=False,
-    )
-
     spring_interim_summer_fall_semester_participant_orientation_deadline = \
         schema.Datetime(
             title=u'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',  # noqa
@@ -1985,6 +1944,11 @@ class IOIEStudyAbroadProgram(Interface):
     step_4_application_deadline = schema.Date(
         title=_(u'STEP IV Application Deadline'),
         description=_(u'The STEP IV application deadline must take into consideration external deadlines and processing time in the OIE from the point of receiving completed application documents, and the anticipated dates on which documents can be sent to external partners and received by them.'),  # noqa
+        required=False,
+    )
+    application_deadline = schema.Date(
+        title=u'Application Deadline',
+        description=u'will be copied from the selected calendar year on first save',  # noqa
         required=False,
     )
 
