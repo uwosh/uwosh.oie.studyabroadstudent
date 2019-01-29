@@ -1,17 +1,25 @@
 # -*- coding: utf-8 -*-
-
 from collective import dexteritytextindexer
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 # from zope.interface import invariant
 from plone import api
 from plone.app.contenttypes.behaviors.leadimage import ILeadImage
+from plone.app.contenttypes.behaviors.tableofcontents import ITableOfContents
+from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
+from plone.app.dexterity.behaviors.id import IShortName
+from plone.app.dexterity.behaviors.metadata import ICategorization
+from plone.app.dexterity.behaviors.metadata import IOwnership
+from plone.app.dexterity.behaviors.metadata import IPublication
+from plone.app.dexterity.behaviors.nextprevious import INextPreviousToggle
+from plone.app.relationfield.behavior import IRelatedItems
 from plone.app.textfield import RichText
 from plone.app.versioningbehavior.behaviors import IVersionable
 from plone.autoform.directives import omitted
 from plone.autoform.directives import read_permission
 from plone.autoform.directives import widget
 from plone.autoform.directives import write_permission
+from plone.autoform.interfaces import OMITTED_KEY
 from plone.directives import form
 from plone.namedfile import field
 from plone.supermodel import model
@@ -28,6 +36,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import yes_no_na_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary
 from z3c.form import validator
 from z3c.form.interfaces import IAddForm
+from z3c.form.interfaces import IEditForm
 from zope import schema
 from zope.interface import Interface
 from zope.interface import Invalid
@@ -145,17 +154,7 @@ class IOIEUserCommentsRowSchema(Interface):
     )
 
 
-settings = Fieldset(
-    'settings',
-    label=_(u'Settings'),
-    fields=['changeNote'],
-)
-try:
-    fieldsets = IVersionable.getTaggedValue(FIELDSETS_KEY)
-    fieldsets.append(settings)
-except KeyError:
-    IVersionable.setTaggedValue(FIELDSETS_KEY, [settings])
-
+# move lead image fields into their own Lead Image fieldset
 leadimage_fieldset = Fieldset(
     'leadimage',
     label=_(u'Lead Image'),
@@ -166,6 +165,85 @@ try:
     leadimage_fieldsets.append(leadimage_fieldset)
 except KeyError:
     ILeadImage.setTaggedValue(FIELDSETS_KEY, [leadimage_fieldset])
+
+
+# hide these behavior fields
+IExcludeFromNavigation.setTaggedValue(
+    OMITTED_KEY,
+    [
+        (Interface, 'exclude_from_nav', 'true'),
+        (IEditForm, 'exclude_from_nav', 'false'),
+    ],
+)
+INextPreviousToggle.setTaggedValue(
+    OMITTED_KEY,
+    [
+        (Interface, 'nextPreviousEnabled', 'true'),
+        (IEditForm, 'nextPreviousEnabled', 'false'),
+    ],
+)
+IShortName.setTaggedValue(
+    OMITTED_KEY,
+    [
+        (Interface, 'id', 'true'),
+        (IEditForm, 'id', 'false'),
+    ],
+)
+ITableOfContents.setTaggedValue(
+    OMITTED_KEY,
+    [
+        (Interface, 'table_of_contents', 'true'),
+        (IEditForm, 'table_of_contents', 'false'),
+    ],
+)
+IVersionable.setTaggedValue(
+    OMITTED_KEY,
+    [
+        (Interface, 'versioning_enabled', 'true'),
+        (IEditForm, 'versioning_enabled', 'false'),
+        (Interface, 'changeNote', 'true'),
+        (IEditForm, 'changeNote', 'false'),
+    ],
+)
+ICategorization.setTaggedValue(
+    OMITTED_KEY,
+    [
+        (Interface, 'subjects', 'true'),
+        (IEditForm, 'subjects', 'false'),
+        (Interface, 'language', 'true'),
+        (IEditForm, 'language', 'false'),
+    ],
+)
+IRelatedItems.setTaggedValue(
+    OMITTED_KEY,
+    [
+        (Interface, 'relatedItems', 'true'),
+        (IEditForm, 'relatedItems', 'false'),
+    ],
+)
+IPublication.setTaggedValue(
+    OMITTED_KEY,
+    [
+        (Interface, 'effective', 'true'),
+        (IEditForm, 'effective', 'false'),
+        (Interface, 'expires', 'true'),
+        (IEditForm, 'expires', 'false'),
+    ],
+)
+IOwnership.setTaggedValue(
+    OMITTED_KEY,
+    [
+        (Interface, 'creators', 'true'),
+        (IEditForm, 'creators', 'false'),
+        (Interface, 'contributors', 'true'),
+        (IEditForm, 'contributors', 'false'),
+        (Interface, 'rights', 'true'),
+        (IEditForm, 'rights', 'false'),
+    ],
+)
+
+
+# validators
 
 
 def not_empty(value):
@@ -184,8 +262,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     # hide fields that don't belong in the add form: Departure,
     #   Departure from Oshkosh, Return, Return to Oshkosh,
-    #   Participant Selection, Liaison to the OIE, Courses, Contributions,
-    #   Reviewers, OIE Review, Proposals, Finances, Pre-departure, Reporting,
+    #   Courses, OIE Review, Proposals, Finances, Pre-departure, Reporting,
     #   Program Dates, Comments
     omitted(
         IAddForm,
@@ -201,18 +278,7 @@ class IOIEStudyAbroadProgram(Interface):
         'insuranceEndDate',
         'transportationFromArrivalAirportToOshkosh',
         'milwaukeeArrivalDateTime', 'oshkoshArrivalDateTime',
-        'studentStatus', 'seatAssignmentProtocol',
-        'liaisonReviewOfIndividualApplicants', 'approvalCriteria',
-        'individualInterview', 'firstRecommendationRequired',
-        'secondRecommendationRequired',
-        'applicantQuestion1', 'applicantQuestion2',
-        'applicantQuestion3', 'applicantQuestion4',
-        'applicantQuestion5', 'cvRequired',
-        'letterOfMotivationRequired', 'otherRequired',
-        'liaison', 'program_leader', 'program_coleaders',
         'courses', 'add_course_link',
-        'contributions_label', 'contributing_entity',
-        'reviewers_label', 'reviewer_emails',
         'program_schedule', 'director_recommendations',
         'health_safety_security_documents',
         'add_health_document_link', 'application_deadlines_label',
@@ -310,7 +376,6 @@ class IOIEStudyAbroadProgram(Interface):
         'winter_interim_spring_payment_deadline_1',
         'winter_interim_spring_payment_deadline_2',
         'comments_oie_leaders', 'comments_oie_all',
-        'IExcludeFromNavigation.exclude_from_nav', 'nextPreviousEnabled',
         'travelDatesTransitionsAndDestinations',
         'add_transition_link',
         'summer_application_deadline',
