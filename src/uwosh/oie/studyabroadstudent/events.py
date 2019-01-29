@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import timedelta
 from plone import api
 from plone.app.dexterity.behaviors.constrains import DISABLED
 from plone.app.uuid.utils import uuidToObject
@@ -79,6 +80,21 @@ def program_created(o, event):
         setattr(o, d, getattr(calendar_year_obj, d))
     _update_contained_object_fields(o, event)
     _update_term_based_dates(o, event)
+    _update_insurance_end_date(o, event)
+
+
+def _update_insurance_end_date(o, event):
+    arrival = o.arrivalInWisconsinDate
+    start = o.arrivalAtDestinationAndInsuranceStartDate
+    if arrival and start:
+        duration = arrival - start
+        DURATIONS = [7, 14, 21, 35, 65, 95, 125, 155, 185, 215, 245, 275, 305,
+                     335, 365]
+        for d in DURATIONS:
+            delta = timedelta(days=d)
+            if duration <= delta:
+                o.insuranceEndDate = start + delta
+                break
 
 
 def _update_term_based_dates(o, event):
@@ -157,6 +173,7 @@ def program_modified(o, event):
         o.program_code = program_code
     _update_contained_object_fields(o, event)
     _update_term_based_dates(o, event)
+    _update_insurance_end_date(o, event)
 
 
 def _update_contained_object_fields(o, event):

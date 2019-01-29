@@ -798,6 +798,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     insuranceEndDate = schema.Date(
         title=_(u'Insurance End Date'),
+        description=_(u'This is an automatically calculated value'),
         required=False,
     )
 
