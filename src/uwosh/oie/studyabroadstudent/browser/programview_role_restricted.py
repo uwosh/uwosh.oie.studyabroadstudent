@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from AccessControl import Unauthorized
 from plone import api
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.interfaces import IDexterityFTI
@@ -1658,11 +1659,29 @@ class ProgramRoleRestrictedView(DefaultView):
         object = self.context
         state = api.content.get_state(object)
         roles = api.user.get_roles(obj=object)
-        if len(roles) > 1:
+        role = '_marker'
+        if len(roles) == 0:
+            raise Unauthorized
+        elif len(roles) == 1:
+            role = roles[0]
+        elif len(roles) > 1:
             if 'Manager' in roles:
                 role = 'Mgmt_Director'  # takes precedence
-        else:
-            role = roles[0]  # TODO check that this works correctly with test users having other roles  # noqa
+            else:
+                oie_roles = [
+                    r for r in roles
+                    if r.startswith('Mgmt_') or r.startswith('Participant_')
+                ]
+                if len(oie_roles) > 1:
+                    # XX need to handle users with > 1 OIE role
+                    LOG.warn(
+                        'More than one OIE role was found in {0}'.format(
+                            oie_roles,
+                        ),
+                    )
+                role = oie_roles[0]  # take the first one
+        if role == '_marker':
+            raise Exception('Unable to find matching OIE role')
         return VIEWABILITY[role][state]
 
     def fieldset_level_viewability(self, group_id):
