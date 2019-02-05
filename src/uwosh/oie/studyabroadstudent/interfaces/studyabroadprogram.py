@@ -207,6 +207,19 @@ except KeyError:
     ILeadImage.setTaggedValue(FIELDSETS_KEY, [leadimage_fieldset])
 
 
+# move change note into its own fieldset
+changeNote_fieldset = Fieldset(
+    'changeNote',
+    label=_(u'Change Note'),
+    fields=['changeNote'],
+)
+try:
+    changeNote_fieldsets = IVersionable.getTaggedValue(FIELDSETS_KEY)
+    changeNote_fieldsets.append(changeNote_fieldset)
+except KeyError:
+    IVersionable.setTaggedValue(FIELDSETS_KEY, [changeNote_fieldset])
+
+
 # hide these behavior fields
 IExcludeFromNavigation.setTaggedValue(
     OMITTED_KEY,
