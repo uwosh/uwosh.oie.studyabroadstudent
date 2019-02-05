@@ -1,0 +1,118 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="uwosh.oie.studyabroadstudent">
+    <permission id="uwosh.oie.studyabroadstudent.view.program_code_fieldset"
+                title="OIE: View program code fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.program_code_fieldset"
+                title="OIE: Edit program code fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.academic_program_fieldset"
+                title="OIE: View academic program fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.academic_program_fieldset"
+                title="OIE: Edit academic program fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.syllabus_and_supporting_docs"
+                title="OIE: Edit syllabus and supporting docs">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.program_description"
+                title="OIE: Edit program description">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.dates_destinations_fieldset"
+                title="OIE: View dates destinations fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.dates_destinations_fieldset"
+                title="OIE: Edit dates destinations fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.departure_flight_fieldset"
+                title="OIE: View departure flight fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.departure_flight_fieldset"
+                title="OIE: Edit departure flight fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.departure_from_oshkosh_fieldset"
+                title="OIE: View departure from oshkosh fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.departure_from_oshkosh_fieldset"
+                title="OIE: Edit departure from oshkosh fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.return_flight_fieldset"
+                title="OIE: View return flight fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.return_flight_fieldset"
+                title="OIE: Edit return flight fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.return_to_oshkosh_fieldset"
+                title="OIE: View return to oshkosh fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.return_to_oshkosh_fieldset"
+                title="OIE: Edit return to oshkosh fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.participant_selection_fieldset"
+                title="OIE: View participant selection fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.participant_selection_fieldset"
+                title="OIE: Edit participant selection fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.liaison_and_leadership_fieldset"
+                title="OIE: View liaison and leadership fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.liaison_and_leadership_fieldset"
+                title="OIE: Edit liaison and leadership fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.courses_fieldset"
+                title="OIE: View courses fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.courses_fieldset"
+                title="OIE: Edit courses fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.contributions_fieldset"
+                title="OIE: View contributions fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.contributions_fieldset"
+                title="OIE: Edit contributions fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.reviewers_fieldset"
+                title="OIE: View reviewers fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.reviewers_fieldset"
+                title="OIE: Edit reviewers fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.oie_review_fieldset"
+                title="OIE: View oie review fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.oie_review_fieldset"
+                title="OIE: Edit oie review fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.proposals_fieldset"
+                title="OIE: View proposals fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.proposals_fieldset"
+                title="OIE: Edit proposals fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.finances_fieldset"
+                title="OIE: View finances fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.finances_fieldset"
+                title="OIE: Edit finances fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.pre_departure_fieldset"
+                title="OIE: View pre departure fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.pre_departure_fieldset"
+                title="OIE: Edit pre departure fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.reporting_fieldset"
+                title="OIE: View reporting fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.reporting_fieldset"
+                title="OIE: Edit reporting fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.program_dates_fieldset"
+                title="OIE: View program dates fieldset">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.program_dates_fieldset"
+                title="OIE: Edit program dates fieldset">
+    </permission>
+</configure>

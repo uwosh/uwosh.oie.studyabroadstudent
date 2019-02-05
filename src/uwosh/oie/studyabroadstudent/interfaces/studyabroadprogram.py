@@ -44,6 +44,46 @@ from zope.interface import invariant
 from zope.schema import ValidationError
 
 
+V_PROGRAM_CODE_FS = 'uwosh.oie.studyabroadstudent.view.program_code_fieldset'
+E_PROGRAM_CODE_FS = 'uwosh.oie.studyabroadstudent.edit.program_code_fieldset'
+E_PROGRAM_DESCRIPTION = 'uwosh.oie.studyabroadstudent.edit.program_description'
+E_SYLLABUS_AND_SUPPORTING_DOCS = 'uwosh.oie.studyabroadstudent.edit.syllabus_and_supporting_docs'  # noqa
+V_ACADEMIC_PROGRAM_FS = 'uwosh.oie.studyabroadstudent.view.academic_program_fieldset'  # noqa
+E_ACADEMIC_PROGRAM_FS = 'uwosh.oie.studyabroadstudent.edit.academic_program_fieldset'  # noqa
+V_DATES_DESTINATIONS_FS = 'uwosh.oie.studyabroadstudent.view.dates_destinations_fieldset'  # noqa
+E_DATES_DESTINATIONS_FS = 'uwosh.oie.studyabroadstudent.edit.dates_destinations_fieldset'  # noqa
+V_DEPARTURE_FLIGHT_FS = 'uwosh.oie.studyabroadstudent.view.departure_flight_fieldset'  # noqa
+E_DEPARTURE_FLIGHT_FS = 'uwosh.oie.studyabroadstudent.edit.departure_flight_fieldset'  # noqa
+V_DEPARTURE_FROM_OSHKOSH_FS = 'uwosh.oie.studyabroadstudent.view.departure_from_oshkosh_fieldset'  # noqa
+E_DEPARTURE_FROM_OSHKOSH_FS = 'uwosh.oie.studyabroadstudent.edit.departure_from_oshkosh_fieldset'  # noqa
+V_RETURN_FLIGHT_FS = 'uwosh.oie.studyabroadstudent.view.return_flight_fieldset'
+E_RETURN_FLIGHT_FS = 'uwosh.oie.studyabroadstudent.edit.return_flight_fieldset'
+V_RETURN_TO_OSHKOSH_FS = 'uwosh.oie.studyabroadstudent.view.return_to_oshkosh_fieldset'  # noqa
+E_RETURN_TO_OSHKOSH_FS = 'uwosh.oie.studyabroadstudent.edit.return_to_oshkosh_fieldset'  # noqa
+V_PARTICIPANT_SELECTION_FS = 'uwosh.oie.studyabroadstudent.view.participant_selection_fieldset'  # noqa
+E_PARTICIPANT_SELECTION_FS = 'uwosh.oie.studyabroadstudent.edit.participant_selection_fieldset'  # noqa
+V_LIAISON_AND_LEADERSHIP_FS = 'uwosh.oie.studyabroadstudent.view.liaison_and_leadership_fieldset'  # noqa
+E_LIAISON_AND_LEADERSHIP_FS = 'uwosh.oie.studyabroadstudent.edit.liaison_and_leadership_fieldset'  # noqa
+V_COURSES_FS = 'uwosh.oie.studyabroadstudent.view.courses_fieldset'
+E_COURSES_FS = 'uwosh.oie.studyabroadstudent.edit.courses_fieldset'
+V_CONTRIBUTIONS_FS = 'uwosh.oie.studyabroadstudent.view.contributions_fieldset'
+E_CONTRIBUTIONS_FS = 'uwosh.oie.studyabroadstudent.edit.contributions_fieldset'
+V_REVIEWERS_FS = 'uwosh.oie.studyabroadstudent.view.reviewers_fieldset'
+E_REVIEWERS_FS = 'uwosh.oie.studyabroadstudent.edit.reviewers_fieldset'
+V_OIE_REVIEW_FS = 'uwosh.oie.studyabroadstudent.view.oie_review_fieldset'
+E_OIE_REVIEW_FS = 'uwosh.oie.studyabroadstudent.edit.oie_review_fieldset'
+V_PROPOSALS_FS = 'uwosh.oie.studyabroadstudent.view.proposals_fieldset'
+E_PROPOSALS_FS = 'uwosh.oie.studyabroadstudent.edit.proposals_fieldset'
+V_FINANCES_FS = 'uwosh.oie.studyabroadstudent.view.finances_fieldset'
+E_FINANCES_FS = 'uwosh.oie.studyabroadstudent.edit.finances_fieldset'
+V_PRE_DEPARTURE_FS = 'uwosh.oie.studyabroadstudent.view.pre_departure_fieldset'
+E_PRE_DEPARTURE_FS = 'uwosh.oie.studyabroadstudent.edit.pre_departure_fieldset'
+E_REPORTING_FS = 'uwosh.oie.studyabroadstudent.edit.reporting_fieldset'
+V_REPORTING_FS = 'uwosh.oie.studyabroadstudent.view.reporting_fieldset'
+E_PROGRAM_DATES_FS = 'uwosh.oie.studyabroadstudent.edit.program_dates_fieldset'
+V_PROGRAM_DATES_FS = 'uwosh.oie.studyabroadstudent.view.program_dates_fieldset'
+
+
 class InvalidEmailAddress(ValidationError):
     """Invalid email address"""
 
@@ -434,41 +474,6 @@ class IOIEStudyAbroadProgram(Interface):
 
     #######################################################
     model.fieldset(
-        'comments_fieldset',
-        label=_(u'Comments'),
-        fields=['comments_oie_leaders', 'comments_oie_all'],
-        order=10000,
-    )
-
-    read_permission(comments_oie_leaders='OIE: View OIE leadership comments')
-    write_permission(comments_oie_leaders='OIE: Modify OIE leadership comments')  # noqa
-    widget(comments_oie_leaders=DataGridFieldFactory)
-    comments_oie_leaders = schema.List(
-        title=_(u'Comments for OIE leadership'),
-        description=_(
-            u'Comments entered here are visible by the OIE Program Manager, Program Liaison, Program Leaders/Co-leaders and site administrators.'),  # noqa
-        required=False,
-        value_type=DictRow(
-            title=u'comments',
-            schema=ILeadershipCommentsRowSchema,
-        ),
-    )
-
-    read_permission(comments_oie_all='OIE: View all OIE user comments')
-    write_permission(comments_oie_all='OIE: Modify all OIE user comments')
-    widget(comments_oie_all=DataGridFieldFactory)
-    comments_oie_all = schema.List(
-        title=_(u'Comments for all OIE users'),
-        description=_(u'Comments entered here are visible by all OIE professional staff.'),  # noqa
-        required=False,
-        value_type=DictRow(
-            title=u'comments',
-            schema=IOIEUserCommentsRowSchema,
-        ),
-    )
-
-    #######################################################
-    model.fieldset(
         'program_code_fieldset',
         label=_(u'Program Code'),
         fields=['calendar_year', 'term', 'college_or_unit', 'countries',
@@ -476,8 +481,17 @@ class IOIEStudyAbroadProgram(Interface):
         order=1,
     )
 
-    # read_permission(calendar_year='OIE: View calendar_year')
-    write_permission(calendar_year='OIE: Edit calendar_year')
+    read_permission(calendar_year=V_PROGRAM_CODE_FS)
+    write_permission(calendar_year=E_PROGRAM_CODE_FS)
+    read_permission(term=V_PROGRAM_CODE_FS)
+    write_permission(term=E_PROGRAM_CODE_FS)
+    read_permission(college_or_unit=V_PROGRAM_CODE_FS)
+    write_permission(college_or_unit=E_PROGRAM_CODE_FS)
+    read_permission(countries=V_PROGRAM_CODE_FS)
+    write_permission(countries=E_PROGRAM_CODE_FS)
+    read_permission(program_code=V_PROGRAM_CODE_FS)
+    write_permission(program_code=E_PROGRAM_CODE_FS)
+
     calendar_year = schema.Choice(
         title=_(u'Calendar Year'),
         description=_(
@@ -536,6 +550,41 @@ class IOIEStudyAbroadProgram(Interface):
                 'max_credits_earned', 'language_of_study',
                 'cooperating_partners'],
     )
+
+    read_permission(sponsoring_unit_or_department=V_ACADEMIC_PROGRAM_FS)
+    write_permission(sponsoring_unit_or_department=E_ACADEMIC_PROGRAM_FS)
+    read_permission(program_type=V_ACADEMIC_PROGRAM_FS)
+    write_permission(program_type=E_ACADEMIC_PROGRAM_FS)
+    read_permission(program_component=V_ACADEMIC_PROGRAM_FS)
+    write_permission(program_component=E_ACADEMIC_PROGRAM_FS)
+    read_permission(title=V_ACADEMIC_PROGRAM_FS)
+    write_permission(title=E_ACADEMIC_PROGRAM_FS)
+    read_permission(description=V_ACADEMIC_PROGRAM_FS)
+    write_permission(description=E_PROGRAM_DESCRIPTION)
+    read_permission(rich_description=V_ACADEMIC_PROGRAM_FS)
+    write_permission(rich_description=E_ACADEMIC_PROGRAM_FS)
+    read_permission(eligibility_requirement=V_ACADEMIC_PROGRAM_FS)
+    write_permission(eligibility_requirement=E_ACADEMIC_PROGRAM_FS)
+    read_permission(learning_objectives=V_ACADEMIC_PROGRAM_FS)
+    write_permission(learning_objectives=E_ACADEMIC_PROGRAM_FS)
+    read_permission(equipment_and_space=V_ACADEMIC_PROGRAM_FS)
+    write_permission(equipment_and_space=E_ACADEMIC_PROGRAM_FS)
+    read_permission(equipment_and_space_needs=V_ACADEMIC_PROGRAM_FS)
+    write_permission(equipment_and_space_needs=E_ACADEMIC_PROGRAM_FS)
+    read_permission(guest_lectures=V_ACADEMIC_PROGRAM_FS)
+    write_permission(guest_lectures=E_ACADEMIC_PROGRAM_FS)
+    read_permission(initial_draft_program_schedule=V_ACADEMIC_PROGRAM_FS)
+    write_permission(initial_draft_program_schedule=E_ACADEMIC_PROGRAM_FS)
+    read_permission(syllabus_and_supporting_docs=V_ACADEMIC_PROGRAM_FS)
+    write_permission(syllabus_and_supporting_docs=E_SYLLABUS_AND_SUPPORTING_DOCS)  # noqa
+    read_permission(min_credits_earned=V_ACADEMIC_PROGRAM_FS)
+    write_permission(min_credits_earned=E_ACADEMIC_PROGRAM_FS)
+    read_permission(max_credits_earned=V_ACADEMIC_PROGRAM_FS)
+    write_permission(max_credits_earned=E_ACADEMIC_PROGRAM_FS)
+    read_permission(language_of_study=V_ACADEMIC_PROGRAM_FS)
+    write_permission(language_of_study=E_ACADEMIC_PROGRAM_FS)
+    read_permission(cooperating_partners=V_ACADEMIC_PROGRAM_FS)
+    write_permission(cooperating_partners=E_ACADEMIC_PROGRAM_FS)
 
     sponsoring_unit_or_department = schema.List(
         title=_(u'Sponsoring Unit or Department'),
@@ -673,6 +722,19 @@ class IOIEStudyAbroadProgram(Interface):
                 'postTravelClassDates'],
     ),
 
+    read_permission(program_cycle=V_DATES_DESTINATIONS_FS)
+    write_permission(program_cycle=E_DATES_DESTINATIONS_FS)
+    read_permission(pretravel_dates=V_DATES_DESTINATIONS_FS)
+    write_permission(pretravel_dates=E_DATES_DESTINATIONS_FS)
+    read_permission(travelDatesTransitionsAndDestinations=V_DATES_DESTINATIONS_FS)  # noqa
+    write_permission(travelDatesTransitionsAndDestinations=E_DATES_DESTINATIONS_FS)  # noqa
+    read_permission(add_transition_link=V_DATES_DESTINATIONS_FS)
+    write_permission(add_transition_link=E_DATES_DESTINATIONS_FS)
+    read_permission(firstChoiceDatesFlexible=V_DATES_DESTINATIONS_FS)
+    write_permission(firstChoiceDatesFlexible=E_DATES_DESTINATIONS_FS)
+    read_permission(postTravelClassDates=V_DATES_DESTINATIONS_FS)
+    write_permission(postTravelClassDates=E_DATES_DESTINATIONS_FS)
+
     program_cycle = schema.Choice(
         title=_(u'Program Cycle'),
         description=_(
@@ -737,6 +799,17 @@ class IOIEStudyAbroadProgram(Interface):
                 'arrivalAtDestinationAndInsuranceStartDate'],
     )
 
+    read_permission(airline=V_DEPARTURE_FLIGHT_FS)
+    write_permission(airline=E_DEPARTURE_FLIGHT_FS)
+    read_permission(flightNumber=V_DEPARTURE_FLIGHT_FS)
+    write_permission(flightNumber=E_DEPARTURE_FLIGHT_FS)
+    read_permission(airport=V_DEPARTURE_FLIGHT_FS)
+    write_permission(airport=E_DEPARTURE_FLIGHT_FS)
+    read_permission(departureDateTime=V_DEPARTURE_FLIGHT_FS)
+    write_permission(departureDateTime=E_DEPARTURE_FLIGHT_FS)
+    read_permission(arrivalAtDestinationAndInsuranceStartDate=V_DEPARTURE_FLIGHT_FS)  # noqa
+    write_permission(arrivalAtDestinationAndInsuranceStartDate=E_DEPARTURE_FLIGHT_FS)  # noqa
+
     airline = schema.Choice(
         title=_(u'Airline'),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airline',
@@ -777,6 +850,21 @@ class IOIEStudyAbroadProgram(Interface):
                 'milwaukeeDepartureDateTime',
                 'airportArrivalDateTime'],
     )
+
+    read_permission(transportationFromOshkoshToDepartureAirport=V_DEPARTURE_FROM_OSHKOSH_FS)  # noqa
+    write_permission(transportationFromOshkoshToDepartureAirport=E_DEPARTURE_FROM_OSHKOSH_FS)  # noqa
+    read_permission(airport_transfer=V_DEPARTURE_FROM_OSHKOSH_FS)
+    write_permission(airport_transfer=E_DEPARTURE_FROM_OSHKOSH_FS)
+    read_permission(oshkoshDepartureLocation=V_DEPARTURE_FROM_OSHKOSH_FS)
+    write_permission(oshkoshDepartureLocation=E_DEPARTURE_FROM_OSHKOSH_FS)
+    read_permission(oshkoshMeetingDateTime=V_DEPARTURE_FROM_OSHKOSH_FS)
+    write_permission(oshkoshMeetingDateTime=E_DEPARTURE_FROM_OSHKOSH_FS)
+    read_permission(oshkoshDepartureDateTime=V_DEPARTURE_FROM_OSHKOSH_FS)
+    write_permission(oshkoshDepartureDateTime=E_DEPARTURE_FROM_OSHKOSH_FS)
+    read_permission(milwaukeeDepartureDateTime=V_DEPARTURE_FROM_OSHKOSH_FS)
+    write_permission(milwaukeeDepartureDateTime=E_DEPARTURE_FROM_OSHKOSH_FS)
+    read_permission(airportArrivalDateTime=V_DEPARTURE_FROM_OSHKOSH_FS)
+    write_permission(airportArrivalDateTime=E_DEPARTURE_FROM_OSHKOSH_FS)
 
     transportationFromOshkoshToDepartureAirport = schema.Choice(
         title=_(u'Transportation is provided from Oshkosh'),
@@ -834,6 +922,19 @@ class IOIEStudyAbroadProgram(Interface):
                 'insuranceEndDate'],
     )
 
+    read_permission(airlineReturn=V_RETURN_FLIGHT_FS)
+    write_permission(airlineReturn=E_RETURN_FLIGHT_FS)
+    read_permission(flightNumberReturn=V_RETURN_FLIGHT_FS)
+    write_permission(flightNumberReturn=E_RETURN_FLIGHT_FS)
+    read_permission(airportReturn=V_RETURN_FLIGHT_FS)
+    write_permission(airportReturn=E_RETURN_FLIGHT_FS)
+    read_permission(returnDateTime=V_RETURN_FLIGHT_FS)
+    write_permission(returnDateTime=E_RETURN_FLIGHT_FS)
+    read_permission(arrivalInWisconsinDate=V_RETURN_FLIGHT_FS)
+    write_permission(arrivalInWisconsinDate=E_RETURN_FLIGHT_FS)
+    read_permission(insuranceEndDate=V_RETURN_FLIGHT_FS)
+    write_permission(insuranceEndDate=E_RETURN_FLIGHT_FS)
+
     airlineReturn = schema.Choice(
         title=_(u'Airline'),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.airline',
@@ -878,6 +979,13 @@ class IOIEStudyAbroadProgram(Interface):
                 'milwaukeeArrivalDateTime', 'oshkoshArrivalDateTime'],
     )
 
+    read_permission(transportationFromArrivalAirportToOshkosh=V_RETURN_TO_OSHKOSH_FS)  # noqa
+    write_permission(transportationFromArrivalAirportToOshkosh=E_RETURN_TO_OSHKOSH_FS)  # noqa
+    read_permission(milwaukeeArrivalDateTime=V_RETURN_TO_OSHKOSH_FS)
+    write_permission(milwaukeeArrivalDateTime=E_RETURN_TO_OSHKOSH_FS)
+    read_permission(oshkoshArrivalDateTime=V_RETURN_TO_OSHKOSH_FS)
+    write_permission(oshkoshArrivalDateTime=E_RETURN_TO_OSHKOSH_FS)
+
     transportationFromArrivalAirportToOshkosh = schema.Choice(
         title=_(u'Transportation is Provided Back to Oshkosh'),
         source=RegistryValueVocabulary(
@@ -913,6 +1021,37 @@ class IOIEStudyAbroadProgram(Interface):
                 'applicantQuestion5', 'cvRequired',
                 'letterOfMotivationRequired', 'otherRequired'],
     ),
+
+    read_permission(studentStatus=V_PARTICIPANT_SELECTION_FS)
+    write_permission(studentStatus=E_PARTICIPANT_SELECTION_FS)
+    read_permission(seatAssignmentProtocol=V_PARTICIPANT_SELECTION_FS)
+    write_permission(seatAssignmentProtocol=E_PARTICIPANT_SELECTION_FS)
+    read_permission(liaisonReviewOfIndividualApplicants=V_PARTICIPANT_SELECTION_FS)  # noqa
+    write_permission(liaisonReviewOfIndividualApplicants=E_PARTICIPANT_SELECTION_FS)  # noqa
+    read_permission(approvalCriteria=V_PARTICIPANT_SELECTION_FS)
+    write_permission(approvalCriteria=E_PARTICIPANT_SELECTION_FS)
+    read_permission(individualInterview=V_PARTICIPANT_SELECTION_FS)
+    write_permission(individualInterview=E_PARTICIPANT_SELECTION_FS)
+    read_permission(firstRecommendationRequired=V_PARTICIPANT_SELECTION_FS)
+    write_permission(firstRecommendationRequired=E_PARTICIPANT_SELECTION_FS)
+    read_permission(secondRecommendationRequired=V_PARTICIPANT_SELECTION_FS)
+    write_permission(secondRecommendationRequired=E_PARTICIPANT_SELECTION_FS)
+    read_permission(applicantQuestion1=V_PARTICIPANT_SELECTION_FS)
+    write_permission(applicantQuestion1=E_PARTICIPANT_SELECTION_FS)
+    read_permission(applicantQuestion2=V_PARTICIPANT_SELECTION_FS)
+    write_permission(applicantQuestion2=E_PARTICIPANT_SELECTION_FS)
+    read_permission(applicantQuestion3=V_PARTICIPANT_SELECTION_FS)
+    write_permission(applicantQuestion3=E_PARTICIPANT_SELECTION_FS)
+    read_permission(applicantQuestion4=V_PARTICIPANT_SELECTION_FS)
+    write_permission(applicantQuestion4=E_PARTICIPANT_SELECTION_FS)
+    read_permission(applicantQuestion5=V_PARTICIPANT_SELECTION_FS)
+    write_permission(applicantQuestion5=E_PARTICIPANT_SELECTION_FS)
+    read_permission(cvRequired=V_PARTICIPANT_SELECTION_FS)
+    write_permission(cvRequired=E_PARTICIPANT_SELECTION_FS)
+    read_permission(letterOfMotivationRequired=V_PARTICIPANT_SELECTION_FS)
+    write_permission(letterOfMotivationRequired=E_PARTICIPANT_SELECTION_FS)
+    read_permission(otherRequired=V_PARTICIPANT_SELECTION_FS)
+    write_permission(otherRequired=E_PARTICIPANT_SELECTION_FS)
 
     studentStatus = schema.Choice(
         title=_(u'Student Status'),
@@ -1046,6 +1185,13 @@ class IOIEStudyAbroadProgram(Interface):
         label=_(u'Liaison to the OIE'),
         fields=['liaison', 'program_leader', 'program_coleaders'],
     )
+    read_permission(liaison=V_LIAISON_AND_LEADERSHIP_FS)
+    write_permission(liaison=E_LIAISON_AND_LEADERSHIP_FS)
+    read_permission(program_leader=V_LIAISON_AND_LEADERSHIP_FS)
+    write_permission(program_leader=E_LIAISON_AND_LEADERSHIP_FS)
+    read_permission(program_coleaders=V_LIAISON_AND_LEADERSHIP_FS)
+    write_permission(program_coleaders=E_LIAISON_AND_LEADERSHIP_FS)
+
     liaison = schema.Choice(
         title=_(u'Liaison to the OIE'),
         description=_(
@@ -1078,6 +1224,11 @@ class IOIEStudyAbroadProgram(Interface):
         label=_(u'Courses'),
         fields=['courses', 'add_course_link'],
     )
+    read_permission(courses=V_COURSES_FS)
+    write_permission(courses=E_COURSES_FS)
+    read_permission(add_course_link=V_COURSES_FS)
+    write_permission(add_course_link=E_COURSES_FS)
+
     form.mode(courses='display')
     courses = RichText(
         title=u'UW Oshkosh Course Subject & Number',
@@ -1097,6 +1248,11 @@ class IOIEStudyAbroadProgram(Interface):
         label=_(u'Contributions'),
         fields=['contributions_label', 'contributing_entity'],
     )
+    read_permission(contributions_label=V_CONTRIBUTIONS_FS)
+    write_permission(contributions_label=E_CONTRIBUTIONS_FS)
+    read_permission(contributing_entity=V_CONTRIBUTIONS_FS)
+    write_permission(contributing_entity=E_CONTRIBUTIONS_FS)
+
     form.mode(contributions_label='display')
     contributions_label = schema.TextLine(
         description=_(
@@ -1119,6 +1275,11 @@ class IOIEStudyAbroadProgram(Interface):
         label=_(u'Reviewers'),
         fields=['reviewers_label', 'reviewer_emails'],
     )
+    read_permission(reviewers_label=V_REVIEWERS_FS)
+    write_permission(reviewers_label=E_REVIEWERS_FS)
+    read_permission(reviewer_emails=V_REVIEWERS_FS)
+    write_permission(reviewer_emails=E_REVIEWERS_FS)
+
     form.mode(reviewers_label='display')
     reviewers_label = schema.TextLine(
         description=_(
@@ -1166,6 +1327,57 @@ class IOIEStudyAbroadProgram(Interface):
                 'credit_overload_form',
                 'application_items_other_label'],
     )
+    read_permission(program_schedule=V_OIE_REVIEW_FS)
+    write_permission(program_schedule=E_OIE_REVIEW_FS)
+    read_permission(director_recommendations=V_OIE_REVIEW_FS)
+    write_permission(director_recommendations=E_OIE_REVIEW_FS)
+    read_permission(health_safety_security_documents=V_OIE_REVIEW_FS)
+    write_permission(health_safety_security_documents=E_OIE_REVIEW_FS)
+    read_permission(add_health_document_link=V_OIE_REVIEW_FS)
+    write_permission(add_health_document_link=E_OIE_REVIEW_FS)
+    read_permission(application_deadlines_label=V_OIE_REVIEW_FS)
+    write_permission(application_deadlines_label=E_OIE_REVIEW_FS)
+    read_permission(application_items_label=V_OIE_REVIEW_FS)
+    write_permission(application_items_label=E_OIE_REVIEW_FS)
+    read_permission(flight_deviation_request_return_flight_only=V_OIE_REVIEW_FS)  # noqa
+    write_permission(flight_deviation_request_return_flight_only=E_OIE_REVIEW_FS)  # noqa
+    read_permission(flight_deviation_request_roundtrip_or_outbound_flight=V_OIE_REVIEW_FS)  # noqa
+    write_permission(flight_deviation_request_roundtrip_or_outbound_flight=E_OIE_REVIEW_FS)  # noqa
+    read_permission(hessen_isu_application=V_OIE_REVIEW_FS)
+    write_permission(hessen_isu_application=E_OIE_REVIEW_FS)
+    read_permission(hessen_iwu_application=V_OIE_REVIEW_FS)
+    write_permission(hessen_iwu_application=E_OIE_REVIEW_FS)
+    read_permission(graduate_registration_form_and_graduate_special_non_degree_information_form=V_OIE_REVIEW_FS)  # noqa
+    write_permission(graduate_registration_form_and_graduate_special_non_degree_information_form=E_OIE_REVIEW_FS)  # noqa
+    read_permission(transfer_credit_prior_approval_form=V_OIE_REVIEW_FS)
+    write_permission(transfer_credit_prior_approval_form=E_OIE_REVIEW_FS)
+    read_permission(application_items_travel_label=V_OIE_REVIEW_FS)
+    write_permission(application_items_travel_label=E_OIE_REVIEW_FS)
+    read_permission(drivers_license_copy_for_india_visa_application=V_OIE_REVIEW_FS)  # noqa
+    write_permission(drivers_license_copy_for_india_visa_application=E_OIE_REVIEW_FS)  # noqa
+    read_permission(biographical_page_of_your_signed_passport=V_OIE_REVIEW_FS)
+    write_permission(biographical_page_of_your_signed_passport=E_OIE_REVIEW_FS)
+    read_permission(original_passport=V_OIE_REVIEW_FS)
+    write_permission(original_passport=E_OIE_REVIEW_FS)
+    read_permission(official_passport_photo_for_india_visa_application=V_OIE_REVIEW_FS)  # noqa
+    write_permission(official_passport_photo_for_india_visa_application=E_OIE_REVIEW_FS)  # noqa
+    read_permission(digital_passport_photo=V_OIE_REVIEW_FS)
+    write_permission(digital_passport_photo=E_OIE_REVIEW_FS)
+    read_permission(passport_size_photo=V_OIE_REVIEW_FS)
+    write_permission(passport_size_photo=E_OIE_REVIEW_FS)
+    read_permission(indian_visa_application=V_OIE_REVIEW_FS)
+    write_permission(indian_visa_application=E_OIE_REVIEW_FS)
+    read_permission(visa_required_for_us_citizens=V_OIE_REVIEW_FS)
+    write_permission(visa_required_for_us_citizens=E_OIE_REVIEW_FS)
+    read_permission(yellow_fever_vaccination_certificate=V_OIE_REVIEW_FS)
+    write_permission(yellow_fever_vaccination_certificate=E_OIE_REVIEW_FS)
+    read_permission(application_items_background_label=V_OIE_REVIEW_FS)
+    write_permission(application_items_background_label=E_OIE_REVIEW_FS)
+    read_permission(credit_overload_form=V_OIE_REVIEW_FS)
+    write_permission(credit_overload_form=E_OIE_REVIEW_FS)
+    read_permission(application_items_other_label=V_OIE_REVIEW_FS)
+    write_permission(application_items_other_label=E_OIE_REVIEW_FS)
+
     program_schedule = schema.Choice(
         title=_(u'Program Schedule'),
         description=_(u'The OIE Program Manager checks this box to confirm that the program schedule has been viewed.  Checking this box does not mean that activities on the schedule have been approved.  Further Risk Assessment will be completed after this initial review.'),  # noqa
@@ -1366,6 +1578,33 @@ class IOIEStudyAbroadProgram(Interface):
                 'provider_03_awarded_contract',
                 'proposal_03'],
     )
+    read_permission(proposals_label=V_PROPOSALS_FS)
+    write_permission(proposals_label=E_PROPOSALS_FS)
+    read_permission(request_for_proposal=V_PROPOSALS_FS)
+    write_permission(request_for_proposal=E_PROPOSALS_FS)
+    read_permission(request_for_proposal_due_date=V_PROPOSALS_FS)
+    write_permission(request_for_proposal_due_date=E_PROPOSALS_FS)
+    read_permission(provider_proposals_label=V_PROPOSALS_FS)
+    write_permission(provider_proposals_label=E_PROPOSALS_FS)
+    read_permission(provider_01=V_PROPOSALS_FS)
+    write_permission(provider_01=E_PROPOSALS_FS)
+    read_permission(provider_01_awarded_contract=V_PROPOSALS_FS)
+    write_permission(provider_01_awarded_contract=E_PROPOSALS_FS)
+    read_permission(proposal_01=V_PROPOSALS_FS)
+    write_permission(proposal_01=E_PROPOSALS_FS)
+    read_permission(provider_02=V_PROPOSALS_FS)
+    write_permission(provider_02=E_PROPOSALS_FS)
+    read_permission(provider_02_awarded_contract=V_PROPOSALS_FS)
+    write_permission(provider_02_awarded_contract=E_PROPOSALS_FS)
+    read_permission(proposal_02=V_PROPOSALS_FS)
+    write_permission(proposal_02=E_PROPOSALS_FS)
+    read_permission(provider_03=V_PROPOSALS_FS)
+    write_permission(provider_03=E_PROPOSALS_FS)
+    read_permission(provider_03_awarded_contract=V_PROPOSALS_FS)
+    write_permission(provider_03_awarded_contract=E_PROPOSALS_FS)
+    read_permission(proposal_03=V_PROPOSALS_FS)
+    write_permission(proposal_03=E_PROPOSALS_FS)
+
     form.mode(proposals_label='display')
     proposals_label = schema.TextLine(
         description=_(u'Required prior to submitting for Liaison review'),
@@ -1494,6 +1733,61 @@ class IOIEStudyAbroadProgram(Interface):
                 'program_revenue', 'final_budget_documentation',
                 'close_account'],
     )
+    read_permission(finances_label=V_FINANCES_FS)
+    write_permission(finances_label=E_FINANCES_FS)
+    read_permission(anticipated_number_of_applicants_min=V_FINANCES_FS)
+    write_permission(anticipated_number_of_applicants_min=E_FINANCES_FS)
+    read_permission(anticipated_number_of_applicants_max=V_FINANCES_FS)
+    write_permission(anticipated_number_of_applicants_max=E_FINANCES_FS)
+    write_permission(budget_spreadsheet=E_FINANCES_FS)
+    read_permission(budget_spreadsheet=V_FINANCES_FS)
+    write_permission(fecop_worksheet=E_FINANCES_FS)
+    read_permission(fecop_worksheet=V_FINANCES_FS)
+    read_permission(required_prior_to_publishing_initial_fee_label=V_FINANCES_FS)  # noqa
+    write_permission(required_prior_to_publishing_initial_fee_label=E_FINANCES_FS)  # noqa
+    read_permission(program_fee=V_FINANCES_FS)
+    write_permission(program_fee=E_FINANCES_FS)
+    read_permission(required_prior_to_confirming_to_run_label=V_FINANCES_FS)
+    write_permission(required_prior_to_confirming_to_run_label=E_FINANCES_FS)
+    read_permission(first_participant_fee_statement_=V_FINANCES_FS)
+    write_permission(first_participant_fee_statement_=E_FINANCES_FS)
+    read_permission(first_participant_fee_spreadsheet=V_FINANCES_FS)
+    write_permission(first_participant_fee_spreadsheet=E_FINANCES_FS)
+    read_permission(required_prior_to_publishing_initial_fee_label_2=V_FINANCES_FS)  # noqa
+    write_permission(required_prior_to_publishing_initial_fee_label_2=E_FINANCES_FS)  # noqa
+    read_permission(final_participant_fee_statement=V_FINANCES_FS)
+    write_permission(final_participant_fee_statement=E_FINANCES_FS)
+    read_permission(first_participant_fee_spreadsheet=V_FINANCES_FS)
+    write_permission(first_participant_fee_spreadsheet=E_FINANCES_FS)
+    read_permission(required_prior_to_publishing_initial_fee_label_2=V_FINANCES_FS)  # noqa
+    write_permission(required_prior_to_publishing_initial_fee_label_2=E_FINANCES_FS)  # noqa
+    read_permission(final_participant_fee_statement=V_FINANCES_FS)
+    write_permission(final_participant_fee_statement=E_FINANCES_FS)
+    read_permission(final_participant_fee_spreadsheet=V_FINANCES_FS)
+    write_permission(final_participant_fee_spreadsheet=E_FINANCES_FS)
+    read_permission(required_prior_to_confirming_ter_received_label=V_FINANCES_FS)  # noqa
+    write_permission(required_prior_to_confirming_ter_received_label=E_FINANCES_FS)  # noqa
+    read_permission(travel_expense_report=V_FINANCES_FS)
+    write_permission(travel_expense_report=E_FINANCES_FS)
+    read_permission(required_prior_to_processing_refunds_label=V_FINANCES_FS)
+    write_permission(required_prior_to_processing_refunds_label=E_FINANCES_FS)
+    read_permission(participant_fees_paid_in_full=V_FINANCES_FS)
+    write_permission(participant_fees_paid_in_full=E_FINANCES_FS)
+    read_permission(compensation_paperwork=V_FINANCES_FS)
+    write_permission(compensation_paperwork=E_FINANCES_FS)
+    read_permission(participant_refund_spreadsheet=V_FINANCES_FS)
+    write_permission(participant_refund_spreadsheet=E_FINANCES_FS)
+    read_permission(required_prior_to_archiving_program_label=V_FINANCES_FS)
+    write_permission(required_prior_to_archiving_program_label=E_FINANCES_FS)
+    read_permission(account_transfers=V_FINANCES_FS)
+    write_permission(account_transfers=E_FINANCES_FS)
+    read_permission(program_revenue=V_FINANCES_FS)
+    write_permission(program_revenue=E_FINANCES_FS)
+    read_permission(final_budget_documentation=V_FINANCES_FS)
+    write_permission(final_budget_documentation=E_FINANCES_FS)
+    read_permission(close_account=V_FINANCES_FS)
+    write_permission(close_account=E_FINANCES_FS)
+
     form.mode(finances_label='display')
     finances_label = schema.TextLine(
         description=_(u'Required to Determine Program Fee'),
@@ -1654,6 +1948,35 @@ class IOIEStudyAbroadProgram(Interface):
                 'other'],
     )
 
+    read_permission(orientation_label=V_PRE_DEPARTURE_FS)
+    write_permission(orientation_label=E_PRE_DEPARTURE_FS)
+    read_permission(program_leader_orientation_packet=V_PRE_DEPARTURE_FS)
+    write_permission(program_leader_orientation_packet=E_PRE_DEPARTURE_FS)
+    read_permission(partner_orientation=V_PRE_DEPARTURE_FS)
+    write_permission(partner_orientation=E_PRE_DEPARTURE_FS)
+    read_permission(required_prior_to_confirming_program_to_run_label=V_PRE_DEPARTURE_FS)  # noqa
+    write_permission(required_prior_to_confirming_program_to_run_label=E_PRE_DEPARTURE_FS)  # noqa
+    read_permission(participant_orientation_url=V_PRE_DEPARTURE_FS)
+    write_permission(participant_orientation_url=E_PRE_DEPARTURE_FS)
+    read_permission(proof_of_service_label=V_PRE_DEPARTURE_FS)
+    write_permission(proof_of_service_label=E_PRE_DEPARTURE_FS)
+    read_permission(final_itinerary=V_PRE_DEPARTURE_FS)
+    write_permission(final_itinerary=E_PRE_DEPARTURE_FS)
+    read_permission(bus_contract_departure=V_PRE_DEPARTURE_FS)
+    write_permission(bus_contract_departure=E_PRE_DEPARTURE_FS)
+    read_permission(bus_contract_return=V_PRE_DEPARTURE_FS)
+    write_permission(bus_contract_return=E_PRE_DEPARTURE_FS)
+    read_permission(e_tickets=V_PRE_DEPARTURE_FS)
+    write_permission(e_tickets=E_PRE_DEPARTURE_FS)
+    read_permission(vouchers=V_PRE_DEPARTURE_FS)
+    write_permission(vouchers=E_PRE_DEPARTURE_FS)
+    read_permission(insurance_invoice=V_PRE_DEPARTURE_FS)
+    write_permission(insurance_invoice=E_PRE_DEPARTURE_FS)
+    read_permission(visas=V_PRE_DEPARTURE_FS)
+    write_permission(visas=E_PRE_DEPARTURE_FS)
+    read_permission(other=V_PRE_DEPARTURE_FS)
+    write_permission(other=E_PRE_DEPARTURE_FS)
+
     form.mode(orientation_label='display')
     orientation_label = schema.TextLine(
         description=_(u'Orientation'),
@@ -1744,6 +2067,33 @@ class IOIEStudyAbroadProgram(Interface):
                 'total_number_of_uw_oshkosh_program_leaders',
                 'total_number_of_community_members'],
     )
+    read_permission(participant_evaluations=V_REPORTING_FS)
+    write_permission(participant_evaluations=E_REPORTING_FS)
+    read_permission(post_program_evaluation=V_REPORTING_FS)
+    write_permission(post_program_evaluation=E_REPORTING_FS)
+    read_permission(incident_report=V_REPORTING_FS)
+    write_permission(incident_report=E_REPORTING_FS)
+    read_permission(total_number_of_high_school_students=V_REPORTING_FS)
+    write_permission(total_number_of_high_school_students=E_REPORTING_FS)
+    read_permission(total_number_of_uw_oshkosh_freshmen=V_REPORTING_FS)
+    write_permission(total_number_of_uw_oshkosh_freshmen=E_REPORTING_FS)
+    read_permission(total_number_of_uw_oshkosh_sophomores=V_REPORTING_FS)
+    write_permission(total_number_of_uw_oshkosh_sophomores=E_REPORTING_FS)
+    read_permission(total_number_of_uw_oshkosh_juniors=V_REPORTING_FS)
+    write_permission(total_number_of_uw_oshkosh_juniors=E_REPORTING_FS)
+    read_permission(total_number_of_uw_oshkosh_seniors=V_REPORTING_FS)
+    write_permission(total_number_of_uw_oshkosh_seniors=E_REPORTING_FS)
+    read_permission(total_number_of_uw_oshkosh_graduate_students=V_REPORTING_FS)  # noqa
+    write_permission(total_number_of_uw_oshkosh_graduate_students=E_REPORTING_FS)  # noqa
+    read_permission(total_number_of_other_university_undergraduate_students=V_REPORTING_FS)  # noqa
+    write_permission(total_number_of_other_university_undergraduate_students=E_REPORTING_FS)  # noqa
+    read_permission(total_number_of_other_university_graduate_students=V_REPORTING_FS)  # noqa
+    write_permission(total_number_of_other_university_graduate_students=E_REPORTING_FS)  # noqa
+    read_permission(total_number_of_uw_oshkosh_program_leaders=V_REPORTING_FS)
+    write_permission(total_number_of_uw_oshkosh_program_leaders=E_REPORTING_FS)
+    read_permission(total_number_of_community_members=V_REPORTING_FS)
+    write_permission(total_number_of_community_members=E_REPORTING_FS)
+
     participant_evaluations = field.NamedFile(
         title=_(u'Participant Evaluations'),
         description=_('Upload participant evaluations.'),
@@ -1844,6 +2194,65 @@ class IOIEStudyAbroadProgram(Interface):
                 'step_3_application_deadline', 'step_4_application_deadline',
                 ],
     )
+
+    read_permission(first_day_of_spring_semester_classes=V_PROGRAM_DATES_FS)
+    write_permission(first_day_of_spring_semester_classes=E_PROGRAM_DATES_FS)
+    read_permission(last_day_of_spring_semester_classes=V_PROGRAM_DATES_FS)
+    write_permission(last_day_of_spring_semester_classes=E_PROGRAM_DATES_FS)
+    read_permission(first_day_of_spring_interim_classes=V_PROGRAM_DATES_FS)
+    write_permission(first_day_of_spring_interim_classes=E_PROGRAM_DATES_FS)
+    read_permission(last_day_of_spring_interim_classes=V_PROGRAM_DATES_FS)
+    write_permission(last_day_of_spring_interim_classes=E_PROGRAM_DATES_FS)
+    read_permission(official_spring_graduation_date=V_PROGRAM_DATES_FS)
+    write_permission(official_spring_graduation_date=E_PROGRAM_DATES_FS)
+    read_permission(first_day_of_summer_i_classes=V_PROGRAM_DATES_FS)
+    write_permission(first_day_of_summer_i_classes=E_PROGRAM_DATES_FS)
+    read_permission(last_day_of_summer_i_classes=V_PROGRAM_DATES_FS)
+    write_permission(last_day_of_summer_i_classes=E_PROGRAM_DATES_FS)
+    read_permission(first_day_of_summer_ii_classes=V_PROGRAM_DATES_FS)
+    write_permission(first_day_of_summer_ii_classes=E_PROGRAM_DATES_FS)
+    read_permission(last_day_of_summer_ii_classes=V_PROGRAM_DATES_FS)
+    write_permission(last_day_of_summer_ii_classes=E_PROGRAM_DATES_FS)
+    read_permission(official_summer_graduation_date=V_PROGRAM_DATES_FS)
+    write_permission(official_summer_graduation_date=E_PROGRAM_DATES_FS)
+    read_permission(first_day_of_fall_semester_classes=V_PROGRAM_DATES_FS)
+    write_permission(first_day_of_fall_semester_classes=E_PROGRAM_DATES_FS)
+    read_permission(last_day_of_fall_semester_classes=V_PROGRAM_DATES_FS)
+    write_permission(last_day_of_fall_semester_classes=E_PROGRAM_DATES_FS)
+    read_permission(first_day_of_winter_interim_classes=V_PROGRAM_DATES_FS)
+    write_permission(first_day_of_winter_interim_classes=E_PROGRAM_DATES_FS)
+    read_permission(last_day_of_winter_interim_classes=V_PROGRAM_DATES_FS)
+    write_permission(last_day_of_winter_interim_classes=E_PROGRAM_DATES_FS)
+    read_permission(official_fall_graduation_date=V_PROGRAM_DATES_FS)
+    write_permission(official_fall_graduation_date=E_PROGRAM_DATES_FS)
+    read_permission(spring_interim_summer_fall_semester_participant_orientation_deadline=V_PROGRAM_DATES_FS)  # noqa
+    write_permission(spring_interim_summer_fall_semester_participant_orientation_deadline=E_PROGRAM_DATES_FS)  # noqa
+    read_permission(spring_interim_summer_fall_semester_in_person_orientation=V_PROGRAM_DATES_FS)  # noqa
+    write_permission(spring_interim_summer_fall_semester_in_person_orientation=E_PROGRAM_DATES_FS)  # noqa
+    read_permission(winter_interim_spring_semester_participant_orientation_deadline=V_PROGRAM_DATES_FS)  # noqa
+    write_permission(winter_interim_spring_semester_participant_orientation_deadline=E_PROGRAM_DATES_FS)  # noqa
+    read_permission(winter_interim_spring_semester_in_person_orientation=V_PROGRAM_DATES_FS)  # noqa
+    write_permission(winter_interim_spring_semester_in_person_orientation=E_PROGRAM_DATES_FS)  # noqa
+    read_permission(spring_interim_summer_fall_semester_payment_deadline_1=V_PROGRAM_DATES_FS)  # noqa
+    write_permission(spring_interim_summer_fall_semester_payment_deadline_1=E_PROGRAM_DATES_FS)  # noqa
+    read_permission(spring_interim_payment_deadline_2=V_PROGRAM_DATES_FS)
+    write_permission(spring_interim_payment_deadline_2=E_PROGRAM_DATES_FS)
+    read_permission(summer_payment_deadline_2=V_PROGRAM_DATES_FS)
+    write_permission(summer_payment_deadline_2=E_PROGRAM_DATES_FS)
+    read_permission(fall_semester_payment_deadline_2=V_PROGRAM_DATES_FS)
+    write_permission(fall_semester_payment_deadline_2=E_PROGRAM_DATES_FS)
+    read_permission(winter_interim_spring_payment_deadline_1=V_PROGRAM_DATES_FS)  # noqa
+    write_permission(winter_interim_spring_payment_deadline_1=E_PROGRAM_DATES_FS)  # noqa
+    read_permission(winter_interim_spring_payment_deadline_2=V_PROGRAM_DATES_FS)  # noqa
+    write_permission(winter_interim_spring_payment_deadline_2=E_PROGRAM_DATES_FS)  # noqa
+    read_permission(application_deadline=V_PROGRAM_DATES_FS)
+    write_permission(application_deadline=E_PROGRAM_DATES_FS)
+    read_permission(step_1_and_2_application_deadline=V_PROGRAM_DATES_FS)
+    write_permission(step_1_and_2_application_deadline=E_PROGRAM_DATES_FS)
+    read_permission(step_3_application_deadline=V_PROGRAM_DATES_FS)
+    write_permission(step_3_application_deadline=E_PROGRAM_DATES_FS)
+    read_permission(step_4_application_deadline=V_PROGRAM_DATES_FS)
+    write_permission(step_4_application_deadline=E_PROGRAM_DATES_FS)
 
     first_day_of_spring_semester_classes = schema.Date(
         title=u'First day of Spring Semester Classes',
