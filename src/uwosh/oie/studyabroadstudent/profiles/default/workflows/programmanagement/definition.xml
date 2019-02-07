@@ -2054,19 +2054,26 @@
   <exit-transition transition_id="manager-return-to-provider-proposals-under-oie-review" />
   <exit-transition transition_id="manager-return-to-request-for-proposals-under-development" />
   <permission-map name="Access contents information" acquired="True">
-
-  </permission-map>
-  <permission-map name="Change portal events" acquired="True">
-
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="True">
-
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
   </permission-map>
   <permission-map name="View" acquired="True">
-
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2074,23 +2081,27 @@
 
   <permission-map name="OIE: View program code fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit program description" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit academic program fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit syllabus and supporting docs" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2098,11 +2109,13 @@
 
   <permission-map name="OIE: View academic program fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit dates destinations fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2110,11 +2123,13 @@
 
   <permission-map name="OIE: View dates destinations fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit departure flight fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2122,17 +2137,20 @@
 
   <permission-map name="OIE: View departure flight fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: View departure from oshkosh fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit departure from oshkosh fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2140,11 +2158,13 @@
 
   <permission-map name="OIE: View return flight fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit return flight fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2152,11 +2172,13 @@
 
   <permission-map name="OIE: View return to oshkosh fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit return to oshkosh fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2164,11 +2186,13 @@
 
   <permission-map name="OIE: View participant selection fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit participant selection fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2176,11 +2200,13 @@
 
   <permission-map name="OIE: View liaison and leadership fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit liaison and leadership fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2188,11 +2214,13 @@
 
   <permission-map name="OIE: View courses fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit courses fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2200,11 +2228,13 @@
 
   <permission-map name="OIE: View contributions fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit contributions fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2212,11 +2242,13 @@
 
   <permission-map name="OIE: View reviewers fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit reviewers fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2224,11 +2256,13 @@
 
   <permission-map name="OIE: View oie review fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit oie review fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2236,11 +2270,13 @@
 
   <permission-map name="OIE: View proposals fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit proposals fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2248,11 +2284,13 @@
 
   <permission-map name="OIE: View finances fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit finances fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2260,11 +2298,13 @@
 
   <permission-map name="OIE: View pre departure fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit pre departure fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2272,11 +2312,13 @@
 
   <permission-map name="OIE: View reporting fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2284,17 +2326,19 @@
 
   <permission-map name="OIE: View program dates fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit program dates fieldset" acquired="False">
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
+  <permission-map name="OIE: Edit program dates fieldset" acquired="False">
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Mgmt_Director</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
+  </permission-map>
  </state>
+
  <state state_id="initial-payment-billing-in-progress" title="Initial Payment Billing in Progress" >
   <exit-transition transition_id="send-bills-for-initial-payment" />
   <exit-transition transition_id="cancel" />

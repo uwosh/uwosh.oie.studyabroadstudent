@@ -234,6 +234,9 @@ def check_for_required_values_by_state(
                 },
             )
             raise StateError, message  # noqa
+        if isinstance(must_be, str):
+            # e.g., to handle DateTimes
+            value = str(value)
         if value != must_be:
             message = "the field '%s' is required to have the value '%s' for state '%s' but has the value '%s'" % (field_title, must_be, new_state_id, value)  # noqa
             LOG('check_for_required_values_by_state', WARNING, message)
