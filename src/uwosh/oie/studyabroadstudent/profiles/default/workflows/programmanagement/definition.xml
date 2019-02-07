@@ -10232,7 +10232,7 @@
   </guard>
 
  </transition>
- <transition transition_id="submit-to-chair" title="Submit to Chair" new_state="pending-chair-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="submit-to-chair" title="Submit to Chair" new_state="pending-chair-review" trigger="USER" before_script="pre_submit_to_chair" after_script="post_submit_to_chair" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-to-chair" category="workflow" icon="">Submit to Chair</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>

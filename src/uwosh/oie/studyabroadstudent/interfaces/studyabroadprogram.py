@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from collective import dexteritytextindexer
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
@@ -23,6 +24,7 @@ from plone.autoform.interfaces import OMITTED_KEY
 from plone.directives import form
 from plone.namedfile import field
 from plone.supermodel import model
+from plone.supermodel.directives import MetadataDictDirective
 from plone.supermodel.interfaces import FIELDSETS_KEY
 from plone.supermodel.model import Fieldset
 from Products.CMFPlone.RegistrationTool import checkEmailAddress
@@ -43,6 +45,9 @@ from zope.interface import Invalid
 from zope.interface import invariant
 from zope.schema import ValidationError
 
+
+REQUIRED_IN_STATE_KEY = u'uwosh.oie.studyabroadstudent.required-in-state'
+REQUIRED_VALUE_IN_STATE_KEY = u'uwosh.oie.studyabroadstudent.required-value-in-state'  # noqa
 
 V_PROGRAM_CODE_FS = 'uwosh.oie.studyabroadstudent.view.program_code_fieldset'
 E_PROGRAM_CODE_FS = 'uwosh.oie.studyabroadstudent.edit.program_code_fieldset'
@@ -82,6 +87,24 @@ E_REPORTING_FS = 'uwosh.oie.studyabroadstudent.edit.reporting_fieldset'
 V_REPORTING_FS = 'uwosh.oie.studyabroadstudent.view.reporting_fieldset'
 E_PROGRAM_DATES_FS = 'uwosh.oie.studyabroadstudent.edit.program_dates_fieldset'
 V_PROGRAM_DATES_FS = 'uwosh.oie.studyabroadstudent.view.program_dates_fieldset'
+
+
+class required_in_state(MetadataDictDirective):
+    """Directive used to set a field to be required in a given workflow state
+    """
+    key = REQUIRED_IN_STATE_KEY
+
+    def factory(self, **kw):
+        return kw
+
+
+class required_value_in_state(MetadataDictDirective):
+    """Directive to specify the required value of a field for a state
+    """
+    key = REQUIRED_VALUE_IN_STATE_KEY
+
+    def factory(self, **kw):
+        return kw
 
 
 class InvalidEmailAddress(ValidationError):
@@ -312,6 +335,10 @@ def firstChoiceDatesFlexible_validator(value):
 
 
 class IOIEStudyAbroadProgram(Interface):
+
+    # testing!
+    required_in_state(insuranceEndDate='pending-chair-review')
+    required_value_in_state(insuranceEndDate='2020-01-01')
 
     # hide fields that don't belong in the add form: Departure,
     #   Departure from Oshkosh, Return, Return to Oshkosh,
