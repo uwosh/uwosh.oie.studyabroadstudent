@@ -15,16 +15,23 @@ DEFAULT_NOTIFICATION_EMAIL_ADDRESS = 'tknguyen+oie@mac.com'
 
 
 def pre_submit_to_chair(self, state_change, **kw):
-    LOG('pre_submit_to_chair', INFO, 'entering...')
-    return check_for_required_values_by_state(self, state_change, {})
-    LOG('pre_submit_to_chair', INFO, 'exiting')
+    check_program_for_required_values_by_state(self, state_change, {})
+    check_program_for_required_specific_values_by_state(self, state_change, {})
 
 
 def post_submit_to_chair(self, state_change, **kw):
-    LOG('post_submit_to_chair', INFO, 'entering...')
     afterTransition(state_change.object, state_change.new_state.id)
     sendTransitionMessage(self, state_change)
-    LOG('post_submit_to_chair', INFO, 'exiting')
+
+
+def pre_submit_to_dean(self, state_change, **kw):
+    check_program_for_required_values_by_state(self, state_change, {})
+    check_program_for_required_specific_values_by_state(self, state_change, {})
+
+
+def post_submit_to_dean(self, state_change, **kw):
+    afterTransition(state_change.object, state_change.new_state.id)
+    sendTransitionMessage(self, state_change)
 
 
 def afterTransition(application, state_id):
@@ -188,11 +195,11 @@ def sendTransitionMessage(self, state_change, cc=[], onFailure=False):
             state_change.transition.id, mTo, mSubj, onFailure, emailTemplate, canSendEmail))  # noqa
 
 
-def check_for_required_values_by_state(
+def check_program_for_required_values_by_state(
         self,
         state_change,
         alreadyMissingValues={}):
-    """Find all fields that must have values or have specific values before
+    """Find all fields that must have values before
        we can move into the new state"""
     obj = state_change.object
     new_state_id = state_change.new_state.id
@@ -207,7 +214,6 @@ def check_for_required_values_by_state(
         required_fields = required_in_state.keys()
     else:
         required_fields = None
-    required_value_in_state = IOIEStudyAbroadProgram.queryTaggedValue(REQUIRED_VALUE_IN_STATE_KEY)  # noqa
     for f in required_fields:
         state = required_in_state[f]
         if new_state_id == state:
@@ -215,10 +221,6 @@ def check_for_required_values_by_state(
 
     for f in requiredFields:
         value = getattr(obj, f, None)
-        if required_value_in_state and f in required_value_in_state:
-            must_be = required_value_in_state[f]
-        else:
-            must_be = None
         field = IOIEStudyAbroadProgram.get(f)
         field_title = field.title
         if not value:
@@ -234,6 +236,41 @@ def check_for_required_values_by_state(
                 },
             )
             raise StateError, message  # noqa
+
+
+def check_program_for_required_specific_values_by_state(
+        self,
+        state_change,
+        alreadyMissingValues={}):
+    """Find all fields that must have specific values before
+       we can move into the new state"""
+    obj = state_change.object
+    new_state_id = state_change.new_state.id
+
+    missingValues = {}
+    if len(alreadyMissingValues) > 0:
+        missingValues = alreadyMissingValues
+
+    requiredValueFields = []
+    required_value_in_state = IOIEStudyAbroadProgram.queryTaggedValue(REQUIRED_VALUE_IN_STATE_KEY)  # noqa
+    if required_value_in_state:
+        required_value_fields = required_value_in_state.keys()
+    else:
+        required_value_fields = None
+    for f in required_value_fields:
+        if isinstance(required_value_in_state[f][0], tuple):
+            for must_be, state in required_value_in_state[f]:
+                if new_state_id == state:
+                    requiredValueFields.append([f, must_be])
+        else:
+            must_be, state = required_value_in_state[f]
+            if new_state_id == state:
+                requiredValueFields.append([f, must_be])
+
+    for f, must_be in requiredValueFields:
+        value = getattr(obj, f, None)
+        field = IOIEStudyAbroadProgram.get(f)
+        field_title = field.title
         if isinstance(must_be, str):
             # e.g., to handle DateTimes
             value = str(value)

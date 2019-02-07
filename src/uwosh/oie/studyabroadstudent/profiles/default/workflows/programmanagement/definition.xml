@@ -10286,7 +10286,7 @@
   </guard>
 
  </transition>
- <transition transition_id="submit-to-dean" title="Submit to Dean" new_state="pending-dean-unit-director-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="submit-to-dean" title="Submit to Dean" new_state="pending-dean-unit-director-review" trigger="USER" before_script="pre_submit_to_dean" after_script="post_submit_to_dean" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-to-dean" category="workflow" icon="">Submit to Dean</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -10779,5 +10779,11 @@
   <guard >
   </guard>
  </variable>
+
+ <script script_id="post_submit_to_chair" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_submit_to_chair" />
+ <script script_id="pre_submit_to_chair" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_submit_to_chair" />
+
+ <script script_id="post_submit_to_dean" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_submit_to_dean" />
+ <script script_id="pre_submit_to_dean" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_submit_to_dean" />
 
 </dc-workflow>

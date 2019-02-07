@@ -338,7 +338,14 @@ class IOIEStudyAbroadProgram(Interface):
 
     # testing!
     required_in_state(insuranceEndDate='pending-chair-review')
-    required_value_in_state(insuranceEndDate='2020-01-01')
+    # required_value_in_state(insuranceEndDate='2020-01-01')
+    # required_value_in_state(insuranceEndDate=('2020-01-01', 'pending-chair-review'))  # noqa
+    required_value_in_state(
+        insuranceEndDate=(
+            ('2020-01-01', 'pending-chair-review'),
+            ('2021-01-01', 'pending-dean-unit-director-review'),
+        ),
+    )
 
     # hide fields that don't belong in the add form: Departure,
     #   Departure from Oshkosh, Return, Return to Oshkosh,
