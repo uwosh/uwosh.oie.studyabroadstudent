@@ -317,15 +317,15 @@ class IOIEStudyAbroadProgram(Interface):
     # examples for using the required_in_state directive:
 
     # make insuranceEndDate required in the pending-chair-review state
-    required_in_state(insuranceEndDate='pending-chair-review')
+    # required_in_state(insuranceEndDate='pending-chair-review')
 
     # require these values for insuranceEndDate in these particular states
-    required_value_in_state(
-        insuranceEndDate=(
-            ('2020-01-01', 'pending-chair-review'),
-            ('2021-01-01', 'pending-dean-unit-director-review'),
-        ),
-    )
+    # required_value_in_state(
+    #     insuranceEndDate=(
+    #         ('2020-01-01', 'pending-chair-review'),
+    #         ('2021-01-01', 'pending-dean-unit-director-review'),
+    #     ),
+    # )
 
     # hide fields that don't belong in the add form: Departure,
     #   Departure from Oshkosh, Return, Return to Oshkosh,
