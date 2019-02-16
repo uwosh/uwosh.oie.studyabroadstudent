@@ -1093,6 +1093,10 @@ def check_program_for_required_values_by_state(
         required_fields = required_in_state.keys()
     else:
         required_fields = None
+
+    if not required_fields:
+        return
+
     for f in required_fields:
         state = required_in_state[f]
         if new_state_id == state:
@@ -1136,6 +1140,10 @@ def check_program_for_required_specific_values_by_state(
         required_value_fields = required_value_in_state.keys()
     else:
         required_value_fields = None
+
+    if not required_value_fields:
+        return
+
     for f in required_value_fields:
         if isinstance(required_value_in_state[f][0], tuple):
             for must_be, state in required_value_in_state[f]:
