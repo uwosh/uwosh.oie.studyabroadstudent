@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+# IOIEStudyAbroadParticipant: the new content type for participant applications
+
 from collective import dexteritytextindexer
 from plone import api
 from plone.app.textfield import RichText

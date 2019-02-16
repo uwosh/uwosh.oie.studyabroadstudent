@@ -72,25 +72,16 @@ else:
 
 # assume HTTPS because HTTP is unsafe
 if HTTPSONLY:
-    server = (
-        xmlrpclib.ServerProxy(
-            'https://{u}:{p}@{s}'.format(
-                u=remote_user,
-                p=remote_passwd,
-                s=remote_server,
-            ),
-        ),
-    )
+    protocol = 'https'
 else:
-    server = (
-        xmlrpclib.ServerProxy(
-            'http://{u}:{p}@{s}'.format(
-                u=remote_user,
-                p=remote_passwd,
-                s=remote_server,
-            ),
-        ),
-    )
+    protocol = 'http'
+server_str = '{protocol}://{u}:{p}@{s}'.format(
+    protocol=protocol,
+    u=remote_user,
+    p=remote_passwd,
+    s=remote_server,
+)
+server = xmlrpclib.ServerProxy(server_str)
 
 for id in application_ids:
     if SKIP_IDS and id in already_read:

@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+
+# IOIEStudyAbroadStudentApplication: the legacy student application content
+#   type, written in Dexterity instead of Archetypes
+
 from collective import dexteritytextindexer
 from plone.supermodel import model
 from uwosh.oie.studyabroadstudent import _
