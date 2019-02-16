@@ -3,12 +3,11 @@
 from Products.CMFCore.utils import getToolByName
 from uwosh.oie.studyabroadstudent.exceptions import StateError
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadProgram
-from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import REQUIRED_IN_STATE_KEY  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import REQUIRED_VALUE_IN_STATE_KEY  # noqa
-from zLOG import ERROR  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.directives import REQUIRED_IN_STATE_KEY  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.directives import REQUIRED_VALUE_IN_STATE_KEY  # noqa
+from zLOG import ERROR
 from zLOG import INFO
 from zLOG import LOG
-from zLOG import WARNING
 
 
 DEFAULT_NOTIFICATION_EMAIL_ADDRESS = 'tknguyen+oie@mac.com'
@@ -1105,7 +1104,7 @@ def check_program_for_required_values_by_state(
         field_title = field.title
         if not value:
             message = "the field '%s' is required for state '%s' but has no value" % (field_title, new_state_id)  # noqa
-            LOG('check_for_required_values_by_state', WARNING, message)
+            LOG('check_for_required_values_by_state', ERROR, message)
             intializeMissingValues(missingValues, f)
             missingValues[f].append(
                 {
@@ -1156,7 +1155,7 @@ def check_program_for_required_specific_values_by_state(
             value = str(value)
         if value != must_be:
             message = "the field '%s' is required to have the value '%s' for state '%s' but has the value '%s'" % (field_title, must_be, new_state_id, value)  # noqa
-            LOG('check_for_required_values_by_state', WARNING, message)
+            LOG('check_for_required_values_by_state', ERROR, message)
             intializeMissingValues(missingValues, f)
             missingValues[f].append(
                 {
