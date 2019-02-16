@@ -1175,34 +1175,6 @@ def check_program_for_required_specific_values_by_state(
             )
             raise StateError, message  # noqa
 
-#         must_not_be = getattr(f, 'must_not_be', None)
-#
-#         if aValue == None or str(
-#             aValue) == '':  # have to cast to a string to handle Products.Archetypes.Field.TextField values  # noqa
-#             if must_be is None:
-#                 must_be = "Any Value"
-#             intializeMissingValues(missingValues, f.schemata)
-#             missingValues[f.schemata].append({'expected': must_be,
-#                                               'current_value': str(aValue),
-#                                               'field': f.widget.label,
-#                                               'message': 'You are missing this required field'})  # noqa
-#             break
-#
-#         if must_be is not None and aValue != must_be and (aValue != None or len(str(aValue)) == 0):  # noqa
-#             intializeMissingValues(missingValues, f.schemata)
-#             missingValues[f.schemata].append({'expected': str(must_be),
-#                                               'current_value': str(aValue),
-#                                               'field': f.widget.label,
-#                                               'message': 'You have entered or are missing information that makes the application invalid'})  # noqa
-#             break
-#
-#         if must_not_be is not None and aValue == must_not_be and aValue != None:  # noqa
-#             intializeMissingValues(missingValues, f.schemata)
-#             missingValues[f.schemata].append({'expected': 'NOT  ' + str(must_not_be),  # noqa
-#                                               'current_value': str(aValue),
-#                                               'field': f.widget.label,
-#                                               'message': 'You are missing or have entered information that makes the application invalid'})  # noqa
-#
 #     if len(missingValues) > 0:
 #         sendTransitionMessage(self, state_change, None, missingValues)
 #
