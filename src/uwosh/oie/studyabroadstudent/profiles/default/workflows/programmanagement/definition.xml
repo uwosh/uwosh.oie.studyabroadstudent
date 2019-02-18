@@ -412,7 +412,6 @@
   </permission-map>
 
  </state>
-
  <state state_id="application-intake-in-progress" title="Application Intake in Progress" >
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="confirm-to-run" />
