@@ -153,7 +153,7 @@
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
-  <permission-map name="OIE: Edit syllabus_and_supporting_docs" acquired="False">
+  <permission-map name="OIE: Edit syllabus and supporting docs" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
   </permission-map>
 
@@ -387,11 +387,11 @@
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
-  <permission-map name="OIE: View program_leader_orientation_packet" acquired="False">
+  <permission-map name="OIE: View program leader orientation packet" acquired="False">
    <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
-  <permission-map name="OIE: Edit program_leader_orientation_packet" acquired="False">
+  <permission-map name="OIE: Edit program leader orientation packet" acquired="False">
    <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
