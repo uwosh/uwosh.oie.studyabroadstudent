@@ -11,12 +11,7 @@
  <permission>OIE: Edit academic program fieldset</permission>
  <permission>OIE: Edit syllabus and supporting docs</permission>
  <permission>OIE: Edit program description</permission>
- <permission>OIE: View program code fieldset</permission>
- <permission>OIE: Edit program code fieldset</permission>
- <permission>OIE: View academic program fieldset</permission>
- <permission>OIE: Edit academic program fieldset</permission>
  <permission>OIE: View syllabus and supporting docs</permission>
- <permission>OIE: Edit syllabus and supporting docs</permission>
   <permission>OIE: View dates destinations fieldset</permission>
   <permission>OIE: Edit dates destinations fieldset</permission>
   <permission>OIE: View departure flight fieldset</permission>
