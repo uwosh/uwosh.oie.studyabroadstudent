@@ -92,13 +92,17 @@ Each time you want to run the export, do this on the legacy site:
 
 - On the new server, move `listApplicationIDsoutput.py` to
   `src/uwosh/oie/studyabroadstudent/scripts/listApplicationIDsoutput.py` so that
-  the list of IDs can be loaded in the export script.
+  the list of IDs can be loaded in the export script. You can do both like
+  this::
+
+   scp listApplicationIDsoutput.py newserversshuser@newserver:uwosh.oie.studyabroadstudent-zeo/zeocluster/src/uwosh.oie.studyabroadstudent/uwosh/oie/studyabroadstudent/
 
 Choosing to Use a Public URL or an SSH Tunnel
 ---------------------------------------------
 
-Ensure that, from the new site server, the legacy site is accessible.The
-extract script uses XML-RPC to ask the legacy site to export each application.
+The extract script uses XML-RPC to have the legacy site export each
+application, so you must ensure that there is an internet connection from the
+new site server to the legacy site.
 
 You can specify the URL of the legacy site as HTTP or HTTPS.
 
