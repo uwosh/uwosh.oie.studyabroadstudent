@@ -413,11 +413,11 @@
 
  </state>
  <state state_id="application-intake-in-progress" title="Application Intake in Progress" >
+  <exit-transition transition_id="suspend" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="confirm-to-run" />
-  <exit-transition transition_id="send-for-fee-change" />
   <exit-transition transition_id="send-for-programmatic-change" />
-  <exit-transition transition_id="suspend" />
+  <exit-transition transition_id="send-for-fee-change" />
   <permission-map name="Access contents information" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
