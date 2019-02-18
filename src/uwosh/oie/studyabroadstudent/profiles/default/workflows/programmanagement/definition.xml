@@ -11,6 +11,12 @@
  <permission>OIE: Edit academic program fieldset</permission>
  <permission>OIE: Edit syllabus and supporting docs</permission>
  <permission>OIE: Edit program description</permission>
+ <permission>OIE: View program code fieldset</permission>
+ <permission>OIE: Edit program code fieldset</permission>
+ <permission>OIE: View academic program fieldset</permission>
+ <permission>OIE: Edit academic program fieldset</permission>
+ <permission>OIE: View syllabus and supporting docs</permission>
+ <permission>OIE: Edit syllabus and supporting docs</permission>
   <permission>OIE: View dates destinations fieldset</permission>
   <permission>OIE: Edit dates destinations fieldset</permission>
   <permission>OIE: View departure flight fieldset</permission>
@@ -39,10 +45,41 @@
   <permission>OIE: Edit finances fieldset</permission>
   <permission>OIE: View pre departure fieldset</permission>
   <permission>OIE: Edit pre departure fieldset</permission>
+  <permission>OIE: View program leader orientation packet</permission>
+  <permission>OIE: Edit program leader orientation packet</permission>
+  <permission>OIE: View other</permission>
+  <permission>OIE: Edit other</permission>
   <permission>OIE: View reporting fieldset</permission>
   <permission>OIE: Edit reporting fieldset</permission>
+  <permission>OIE: View participant evaluations</permission>
+  <permission>OIE: Edit participant evaluations</permission>
+  <permission>OIE: View post program evaluation</permission>
+  <permission>OIE: Edit post program evaluation</permission>
+  <permission>OIE: View incident report</permission>
+  <permission>OIE: Edit incident report</permission>
+  <permission>OIE: View total number of high school students</permission>
+  <permission>OIE: Edit total number of high school students</permission>
+  <permission>OIE: View total number of uw oshkosh freshmen</permission>
+  <permission>OIE: Edit total number of uw oshkosh freshmen</permission>
+  <permission>OIE: View total number of uw oshkosh sophomores</permission>
+  <permission>OIE: Edit total number of uw oshkosh sophomores</permission>
+  <permission>OIE: View total number of uw oshkosh juniors</permission>
+  <permission>OIE: Edit total number of uw oshkosh juniors</permission>
+  <permission>OIE: View total number of uw oshkosh seniors</permission>
+  <permission>OIE: Edit total number of uw oshkosh seniors</permission>
+  <permission>OIE: View total number of uw oshkosh graduate students</permission>
+  <permission>OIE: Edit total number of uw oshkosh graduate students</permission>
+  <permission>OIE: View total number of other university undergraduate students</permission>
+  <permission>OIE: Edit total number of other university undergraduate students</permission>
+  <permission>OIE: View total number of other university graduate students</permission>
+  <permission>OIE: Edit total number of other university graduate students</permission>
+  <permission>OIE: View total number of uw oshkosh program leaders</permission>
+  <permission>OIE: Edit total number of uw oshkosh program leaders</permission>
+  <permission>OIE: View total number of community members</permission>
+  <permission>OIE: Edit total number of community members</permission>
   <permission>OIE: View program dates fieldset</permission>
   <permission>OIE: Edit program dates fieldset</permission>
+
  <state state_id="applicants-considering-change" title="Applicants Considering Change" >
   <exit-transition transition_id="manager-return-to-program-fee-pending-publication" />
   <exit-transition transition_id="cancel-after-change" />
