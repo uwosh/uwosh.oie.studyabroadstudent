@@ -3430,7 +3430,7 @@
   </permission-map>
 
  </state>
- <state state_id="pending-arrival-at-destination" title="Pending Arrival at Destination" >
+ <state state_id="pending-arrival-abroad" title="Pending Arrival at Destination" >
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="confirm-safe-arrival" />
   <exit-transition transition_id="confirm-travel-delay" />
