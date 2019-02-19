@@ -3485,7 +3485,28 @@
 
   </permission-map>
 
-  <permission-map name="OIE: Edit program code fieldset" acquired="False">
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   <permission-map name="OIE: Edit program code fieldset" acquired="False">
    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
