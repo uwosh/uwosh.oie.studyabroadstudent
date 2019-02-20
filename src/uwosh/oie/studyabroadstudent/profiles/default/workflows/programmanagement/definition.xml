@@ -5796,7 +5796,6 @@
 
   </permission-map>
 
-
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
