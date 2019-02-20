@@ -11237,8 +11237,8 @@
  </state>
  <state state_id="provider-proposals-under-oie-review" title="Provider Proposals under OIE Review" >
   <exit-transition transition_id="return-to-initial" />
-   <exit-transition transition_id="submit-proposal-to-liaison" />
- <exit-transition transition_id="cancel" />
+  <exit-transition transition_id="submit-proposal-to-liaison" />
+  <exit-transition transition_id="cancel" />
   <exit-transition transition_id="suspend" />
   <permission-map name="Access contents information" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
