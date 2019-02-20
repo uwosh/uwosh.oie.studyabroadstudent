@@ -1339,7 +1339,7 @@ Manager"""
             fast=True,
         )
         initial_state = 'program-fee-pending-publication'
-        transition = 'announce-programmatic-for-fee-change'
+        transition = 'announce-programmatic-or-fee-change'
         end_state = 'applicants-considering-change'
         authorized_roles = ['Mgmt_Admin', 'Mgmt_Coordinator', 'Manager']
         self._transition_and_or_roles_test(fast,
