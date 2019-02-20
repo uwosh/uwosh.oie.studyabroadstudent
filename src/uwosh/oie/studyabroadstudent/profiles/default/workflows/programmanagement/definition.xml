@@ -8611,8 +8611,8 @@
   </permission-map>
 
   <permission-map name="OIE: View return to oshkosh fieldset" acquired="False">
-    <permission-role>Mgmt_Liaison</permission-role>
-  <permission-role>Manager</permission-role>
+   <permission-role>Mgmt_Liaison</permission-role>
+   <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Director</permission-role>
