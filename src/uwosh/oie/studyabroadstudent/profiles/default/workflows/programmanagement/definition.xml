@@ -13147,7 +13147,7 @@
   </permission-map>
 
  </state>
- <state state_id="travel-expense-report-&-student-evaluations-due-to-oie" title="Travel Expense Report & Student Evaluations Due to OIE" >
+ <state state_id="travel-expense-report-student-evaluations-due-to" title="Travel Expense Report &amp;amp; Student Evaluations Due to OIE" >
   <exit-transition transition_id="confirm-ter-received" />
   <permission-map name="Access contents information" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
