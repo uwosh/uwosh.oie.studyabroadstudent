@@ -4652,7 +4652,7 @@
 
  </state>
 
- <state state_id="pending-dean/unit-director-review" title="Pending Dean/Unit Director Review" >
+ <state state_id="pending-dean-unit-director-review" title="Pending Dean/Unit Director Review" >
   <exit-transition transition_id="submit-to-oie" />
   <exit-transition transition_id="decline" />
   <exit-transition transition_id="withdraw-application" />
@@ -10143,6 +10143,7 @@
  </state>
  <state state_id="program-fee-under-liaison-review" title="Program Fee under Liaison Review" >
   <exit-transition transition_id="return-to-program-manager" />
+  <exit-transition transition_id="return-to-oie" />
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="cancel" />
   <exit-transition transition_id="approve-fee" />
@@ -10936,7 +10937,8 @@
   </permission-map>
 
  </state>
- <state state_id="provider-proposals-under-liaision-review" title="Provider Proposals under Liaision Review" >
+ <state state_id="provider-proposals-under-liaison-review" title="Provider Proposals under Liaison Review" >
+  <exit-transition transition_id="return-to-oie" />
   <exit-transition transition_id="return-to-program-manager" />
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="cancel" />
