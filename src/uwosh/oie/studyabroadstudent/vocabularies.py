@@ -12,6 +12,8 @@ from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 
+PROGRAMMANAGEMENT = 'programmanagement'
+
 MAX_LENGTH = 250
 
 yes_no_none_vocabulary = SimpleVocabulary(
@@ -547,3 +549,23 @@ class ImageVocabularyFactory(object):
 
 
 ImageVocabulary = ImageVocabularyFactory()
+
+
+@implementer(IVocabularyFactory)
+class ProgramTransitionVocabularyFactory(object):
+
+    def __call__(self, context):
+        pw = api.portal.get_tool('portal_workflow')
+        program_workflow = pw[PROGRAMMANAGEMENT]
+        program_transitions = program_workflow['transitions'].items()
+        terms = []
+        for t_id, t_obj in program_transitions:
+            terms.append(SimpleTerm(
+                value=t_id,
+                token=t_id,
+                title=t_obj.title.decode('utf8'),
+            ))
+        return SimpleVocabulary(terms)
+
+
+ProgramTransitionVocabulary = ProgramTransitionVocabularyFactory()

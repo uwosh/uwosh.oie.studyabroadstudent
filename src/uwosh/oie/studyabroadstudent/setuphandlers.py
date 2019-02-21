@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from plone.app.discussion.interfaces import IDiscussionSettings
-from plone.app.textfield.value import RichTextValue
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.registry.interfaces import IRegistry
 from Products.CMFPlone.interfaces import INonInstallable
@@ -66,7 +65,6 @@ def post_install(context):
     populate_countries(portal)
     populate_people(portal)
     hide_users_folder(portal, portal_ids)
-    set_front_page_text(portal, portal_ids)
 
     populate_airlines(portal)
     populate_partners(portal)
@@ -192,20 +190,6 @@ def _create_account(email, username, roles, password=None):
             pass
 
 
-def set_front_page_text(portal, portal_ids):
-    # change front page text
-    if 'front-page' in portal_ids:
-        frontpage = portal['front-page']
-        frontpage.title = 'Welcome to OIE'
-        frontpage.description = \
-            'You have reached the UW Oshkosh Office of International Education'
-        frontpage.text = RichTextValue(
-            u'Lorem ipsum',
-            'text/plain',
-            'text/html',
-        )
-
-
 def hide_users_folder(portal, portal_ids):
     # retract and hide Users
     if 'Members' in portal_ids:
@@ -276,6 +260,8 @@ def populate_toplevel_folders(portal, portal_ids):
     create_toplevel_folder(portal, portal_ids, 'Airlines', 'airlines',
                            ['OIEAirline'], publish_but_exclude=True)
     create_toplevel_folder(portal, portal_ids, 'Forms', 'forms', ['File'])
+    create_toplevel_folder(portal, portal_ids, 'Email Templates',
+                           'email-templates', ['OIEEmailTemplate'])
 
 
 def enable_commenting():

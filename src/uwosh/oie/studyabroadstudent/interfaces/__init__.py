@@ -7,6 +7,7 @@ from uwosh.oie.studyabroadstudent.interfaces.contact import IOIEContact  # noqa
 from uwosh.oie.studyabroadstudent.interfaces.cooperatingpartner import IOIECooperatingPartner  # noqa
 from uwosh.oie.studyabroadstudent.interfaces.country import IOIECountry  # noqa
 from uwosh.oie.studyabroadstudent.interfaces.course import IOIECourse  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.emailtemplate import IOIEEmailTemplate  # noqa
 from uwosh.oie.studyabroadstudent.interfaces.liaison import IOIELiaison  # noqa
 from uwosh.oie.studyabroadstudent.interfaces.participant import IOIEStudyAbroadParticipant  # noqa
 from uwosh.oie.studyabroadstudent.interfaces.programleader import IOIEProgramLeader  # noqa

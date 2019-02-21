@@ -213,6 +213,10 @@
     name="uwosh.oie.studyabroadstudent.vocabularies.image"
     component="uwosh.oie.studyabroadstudent.vocabularies.ImageVocabulary" />
 
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.program_transition"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ProgramTransitionVocabulary" />
+
   <genericsetup:upgradeStep
       title="Reset some data grid fields to empty rich text fields"
       description="Some data grid fields were replaced by a rich text field showing new contained objects"
