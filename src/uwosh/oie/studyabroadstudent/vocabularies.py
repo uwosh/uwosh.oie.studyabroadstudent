@@ -555,11 +555,17 @@ ImageVocabulary = ImageVocabularyFactory()
 class ProgramTransitionVocabularyFactory(object):
 
     def __call__(self, context):
+        def getTitle(item):
+            if item and len(item) > 0:
+                return item[1].title.decode('utf8')
+            return None
+
         pw = api.portal.get_tool('portal_workflow')
         program_workflow = pw[PROGRAMMANAGEMENT]
         program_transitions = program_workflow['transitions'].items()
         terms = []
-        for t_id, t_obj in program_transitions:
+        program_transitions_sorted = sorted(program_transitions, key=getTitle)
+        for t_id, t_obj in program_transitions_sorted:
             terms.append(SimpleTerm(
                 value=t_id,
                 token=t_id,
