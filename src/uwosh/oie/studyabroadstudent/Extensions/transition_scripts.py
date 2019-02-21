@@ -918,33 +918,24 @@ def afterTransition(application, state_id):
 
 
 def getEmailMessageTemplate(self, transition, onFailure=False):
-    # LOG ('getEmailMessageTemplate', INFO, "called with onFailure='%s'" % (onFailure))  # noqa
     if onFailure:
         onFailure = True
     else:
         onFailure = False
-    # LOG ('getEmailMessageTemplate', INFO, "reinterpreted onFailure='%s'" % (onFailure))  # noqa
-
     templates = self.queryCatalog({
-        'portal_type': 'UWOshOIEEmailTemplate',
-        'getTransition': transition,
-        # 'getSendEmailOnFailure': onFailure, # this does NOT work so must filter below  # noqa
+        'portal_type': 'OIEEmailTemplate',
+        'transition': transition,
         'sort_on': 'modified',
     })
-    # the queryCatalog() does not return correctly based on getSendEmailOnFailure filter value passed in  # noqa
     retlist = []
     for t in templates:
         obj = t.getObject()
-        if obj.getSendEmailOnFailure() == onFailure:
+        if obj.sendEmailOnFailure == onFailure:
             retlist.append(obj)
-    # LOG ('getEmailMessageTemplate', INFO, "templates='%s', length=%s" % (templates, len(templates)))  # noqa
-
     if len(retlist) > 0:
         retval = retlist[0]
-        LOG('getEmailMessageTemplate', INFO, 'returning ''%s''' % (retval))  # noqa
         return retval
     else:
-        LOG('getEmailMessageTemplate', INFO, 'returning None')
         return None
 
 
@@ -1030,6 +1021,8 @@ Comment: %s
 
 
 def sendTransitionMessage(self, state_change, cc=[], onFailure=False):
+    return  # not implemented
+
     portal = getToolByName(self, 'portal_url').getPortalObject()  # noqa
     wftool = getToolByName(self, 'portal_workflow', None)  # noqa
 
@@ -1056,22 +1049,17 @@ def sendTransitionMessage(self, state_change, cc=[], onFailure=False):
     if old_state_id != new_state_id:
         state_msg = "Its state has changed from '" + old_state_id + "' to '" + new_state_id + "'.\n\n"  # noqa
 
-    canSendEmail = emailTemplate and emailTemplate.canSendEmail(onFailure)
-    if emailTemplate and canSendEmail:
+    if emailTemplate:
         LOG('sendTransitionMessage', INFO,
-            "Sending transition email for transition %s to %s, subject '%s', onFailure = '%s', emailTemplate = '%s', canSendEmail = '%s'" % (  # noqa
-            state_change.transition.id, mTo, mSubj, onFailure, emailTemplate, canSendEmail))  # noqa
+            "Sending transition email for transition %s to %s, subject '%s', onFailure = '%s', emailTemplate = '%s'" % (  # noqa
+            state_change.transition.id, mTo, mSubj, onFailure, emailTemplate))  # noqa
         mMsg = assembleEmailMessage(self, application, wftool, emailTemplate, onFailure)  # noqa
 
-        # only for debugging
-        # if DEBUG_MODE or DevelopmentMode:
-        #    DEBUG_MAIL_HOST.secureSend(mMsg, mTo, mFrom, mSubj)
-        # else:
         portal.MailHost.secureSend(mMsg, mTo, mFrom, mSubj)
     else:
         LOG('sendTransitionMessage', INFO,
-            "Not sending transition email for transition %s to %s, subject '%s', onFailure = '%s', emailTemplate = '%s', canSendEmail = '%s'" % (  # noqa
-            state_change.transition.id, mTo, mSubj, onFailure, emailTemplate, canSendEmail))  # noqa
+            "Not sending transition email for transition %s to %s, subject '%s', onFailure = '%s', emailTemplate = '%s'" % (  # noqa
+            state_change.transition.id, mTo, mSubj, onFailure, emailTemplate))  # noqa
 
 
 def check_program_for_required_values_by_state(
