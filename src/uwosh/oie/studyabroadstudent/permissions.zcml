@@ -115,4 +115,94 @@
     <permission id="uwosh.oie.studyabroadstudent.edit.program_dates_fieldset"
                 title="OIE: Edit program dates fieldset">
     </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.program_leader_orientation_packet"
+                title="OIE: View ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.program_leader_orientation_packet"
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.other"
+                title="OIE: View ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.other"
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.participant_evaluations"
+                title="OIE: View ">
+    </permission>
+    <permission id=“uwosh.oie.studyabroadstudent.edit.participant_evaluations”
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.post_program_evaluation"
+                title="OIE: View ">
+    </permission>
+    <permission id=“uwosh.oie.studyabroadstudent.edit.post_program_evaluation”
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.incident_report"
+                title="OIE: View ">
+    </permission>
+    <permission id=“uwosh.oie.studyabroadstudent.edit.incident_report”
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_high_school_students"
+                title="OIE: View ">
+    </permission>
+    <permission id=“uwosh.oie.studyabroadstudent.edit.total_number_of_high_school_students”
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_uw_oshkosh_freshmen"
+                title="OIE: View ">
+    </permission>
+    <permission id=“uwosh.oie.studyabroadstudent.edit.total_number_of_uw_oshkosh_freshmen”
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_uw_oshkosh_sophomores"
+                title="OIE: View ">
+    </permission>
+    <permission id=“uwosh.oie.studyabroadstudent.edit.total_number_of_uw_oshkosh_sophomores”
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_uw_oshkosh_juniors"
+                title="OIE: View ">
+    </permission>
+    <permission id=“uwosh.oie.studyabroadstudent.edit.total_number_of_uw_oshkosh_juniors”
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_uw_oshkosh_seniors"
+                title="OIE: View ">
+    </permission>
+    <permission id=“uwosh.oie.studyabroadstudent.edit.total_number_of_uw_oshkosh_seniors”
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_uw_oshkosh_graduate_students"
+                title="OIE: View ">
+    </permission>
+    <permission id=“uwosh.oie.studyabroadstudent.edit.total_number_of_uw_oshkosh_graduate_students”
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_other_university_undergraduate_students"
+                title="OIE: View ">
+    </permission>
+    <permission id=“uwosh.oie.studyabroadstudent.edit.total_number_of_other_university_undergraduate_students”
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_other_university_graduate_students"
+                title="OIE: View ">
+    </permission>
+    <permission id=“uwosh.oie.studyabroadstudent.edit.total_number_of_other_university_graduate_students”
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_uw_oshkosh_program_leaders"
+                title="OIE: View ">
+    </permission>
+    <permission id=“uwosh.oie.studyabroadstudent.edit.total_number_of_uw_oshkosh_program_leaders”
+                title="OIE: Edit ">
+    </permission>
+    <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_community_members"
+                title="OIE: View ">
+    </permission>
+    <permission id=“uwosh.oie.studyabroadstudent.edit.total_number_of_community_members”
+                title="OIE: Edit ">
+    </permission>
 </configure>
