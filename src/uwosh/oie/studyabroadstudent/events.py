@@ -371,6 +371,20 @@ def course_modified(o, event):
 
 
 ###############################################################
+
+
+def emailtemplate_created(o, event):
+    computed_title = o.transition
+    if o.title != computed_title:
+        o.title = computed_title
+        o.reindexObject()
+
+
+def emailtemplate_modified(o, event):
+    emailtemplate_created(o, event)
+
+
+###############################################################
 def update_transition_field(o):
     brains = api.content.find(
         context=o,

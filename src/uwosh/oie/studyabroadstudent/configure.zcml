@@ -116,6 +116,18 @@
     />
 
   <subscriber
+    for=".interfaces.emailtemplate.IOIEEmailTemplate
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.emailtemplate_created"
+    />
+
+  <subscriber
+    for=".interfaces.emailtemplate.IOIEEmailTemplate
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.emailtemplate_modified"
+    />
+
+  <subscriber
     for=".interfaces.transition.IOIETransition
          zope.lifecycleevent.IObjectAddedEvent"
     handler=".events.transition_added"
