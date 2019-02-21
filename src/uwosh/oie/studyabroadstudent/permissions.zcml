@@ -116,63 +116,63 @@
                 title="OIE: Edit program dates fieldset">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.program_leader_orientation_packet"
-                title="OIE: View ">
+                title="OIE: View program leader orientation packet">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.edit.program_leader_orientation_packet"
-                title="OIE: Edit ">
+                title="OIE: Edit program leader orientation packet">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.other"
-                title="OIE: View ">
+                title="OIE: View other">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.edit.other"
-                title="OIE: Edit ">
+                title="OIE: Edit other">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.participant_evaluations"
-                title="OIE: View ">
+                title="OIE: View participant evaluations">
     </permission>
     <permission id=“uwosh.oie.studyabroadstudent.edit.participant_evaluations”
-                title="OIE: Edit ">
+                title="OIE: Edit participant evaluations">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.post_program_evaluation"
-                title="OIE: View ">
+                title="OIE: View post program evaluation">
     </permission>
     <permission id=“uwosh.oie.studyabroadstudent.edit.post_program_evaluation”
-                title="OIE: Edit ">
+                title="OIE: Edit post program evaluation">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.incident_report"
-                title="OIE: View ">
+                title="OIE: View incident report">
     </permission>
     <permission id=“uwosh.oie.studyabroadstudent.edit.incident_report”
-                title="OIE: Edit ">
+                title="OIE: Edit incident report">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_high_school_students"
-                title="OIE: View ">
+                title="OIE: View number of high school students">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_uw_oshkosh_freshmen"
-                title="OIE: View ">
+                title="OIE: View number of uw oshkosh freshmen">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_uw_oshkosh_sophomores"
-                title="OIE: View ">
+                title="OIE: View number of uw oshkosh sophomores">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_uw_oshkosh_juniors"
-                title="OIE: View ">
+                title="OIE: View number of uw oshkosh juniors">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_uw_oshkosh_seniors"
-                title="OIE: View ">
+                title="OIE: View number of uw oshkosh seniors">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_uw_oshkosh_graduate_students"
-                title="OIE: View ">
+                title="OIE: View number of uw oshkosh graduate students">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_other_university_undergraduate_students"
-                title="OIE: View ">
+                title="OIE: View number of other university undergraduate students">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_other_university_graduate_students"
-                title="OIE: View ">
+                title="OIE: View number of other university graduate students">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_uw_oshkosh_program_leaders"
-                title="OIE: View ">
+                title="OIE: View number of uw oshkosh program leaders">
     </permission>
     <permission id="uwosh.oie.studyabroadstudent.view.total_number_of_community_members"
-                title="OIE: View ">
+                title="OIE: View number of community members">
     </permission>
 </configure>
