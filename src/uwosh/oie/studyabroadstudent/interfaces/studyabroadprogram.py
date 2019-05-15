@@ -3,8 +3,6 @@
 from collective import dexteritytextindexer
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
-# from zope.interface import invariant
-from plone import api
 from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.app.contenttypes.behaviors.tableofcontents import ITableOfContents
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
@@ -75,7 +73,6 @@ from uwosh.oie.studyabroadstudent.vocabularies import seat_assignment_protocol
 from uwosh.oie.studyabroadstudent.vocabularies import selection_criteria_vocabulary  # noqa
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_na_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary
-from z3c.form import validator
 from z3c.form.interfaces import IAddForm
 from z3c.form.interfaces import IEditForm
 from zope import schema
@@ -2453,41 +2450,3 @@ class IOIEStudyAbroadProgram(Interface):
         description=u'will be copied from the selected calendar year on first save',  # noqa
         required=False,
     )
-
-
-class TitleRequiredValidator(validator.SimpleFieldValidator):
-    def validate(self, value):
-        state = api.content.get_state(obj=self.context)
-        if state == 'initial':
-            if not value or not value.strip():
-                raise Invalid(
-                    _(
-                        u'Title is required in state ''{0}'''.format(
-                            state,
-                        ),
-                    ),
-                )
-
-
-validator.WidgetValidatorDiscriminators(TitleRequiredValidator,
-                                        field=IOIEStudyAbroadProgram['title'])
-
-
-class DescriptionRequiredValidator(validator.SimpleFieldValidator):
-    def validate(self, value):
-        state = api.content.get_state(obj=self.context)
-        if state == 'initial':
-            if not value or not value.strip():
-                raise Invalid(
-                    _(
-                        u'Description is required in state ''{0}'''.format(
-                            state,
-                        ),
-                    ),
-                )
-
-
-validator.WidgetValidatorDiscriminators(
-    DescriptionRequiredValidator,
-    field=IOIEStudyAbroadProgram['description'],
-)

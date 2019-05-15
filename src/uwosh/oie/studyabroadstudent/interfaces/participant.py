@@ -126,6 +126,7 @@ def get_url_disciplinary_clearance_form():
 
 class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('title')
+    form.mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Title'),
         required=False,

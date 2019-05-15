@@ -8,7 +8,7 @@ from zope.interface import Interface
 
 
 class IOIEEmailTemplate(Interface):
-    form.mode(title='display')
+    form.mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Template Title'),
         required=True,

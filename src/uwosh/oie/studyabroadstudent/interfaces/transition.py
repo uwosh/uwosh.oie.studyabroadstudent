@@ -9,7 +9,7 @@ from zope.interface import Interface
 
 
 class IOIETransition(Interface):
-    form.mode(title='display')
+    form.mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Transition Name'),
         required=False,

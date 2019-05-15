@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# !/Users/kim/PloneBuilds/Plone-5.0.4-unified-clean/zinstance/bin/python
-#
 # invoke like this:
 # bin/instance run extractApplicationsRemotely.py > extractApplicationsRemotely-output-201708101325.out  # noqa
 

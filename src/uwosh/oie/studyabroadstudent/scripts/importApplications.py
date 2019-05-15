@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# ! /Users/kim/PloneBuilds/Plone-5.0.4-unified-clean/zinstance/bin/python
-#
 # - 2017-05-20 read ISO8601 dates, workflow state, and all workflow transitions
 #
 # expects the extractoutput.py file or symlink to be in the folder

@@ -20,11 +20,13 @@ from uwosh.oie.studyabroadstudent.vocabularies import student_type_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_na_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary
 from zope import schema
+from plone.directives import form
 from zope.interface import Interface
 
 
 class IOIEStudyAbroadStudentApplication(Interface):
 
+    form.mode(title='hidden')
     dexteritytextindexer.searchable('title')
     title = schema.TextLine(
         title=_(u'Title'),

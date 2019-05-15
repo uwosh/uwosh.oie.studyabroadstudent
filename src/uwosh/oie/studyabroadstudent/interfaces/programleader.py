@@ -49,7 +49,7 @@ class IOIEProgramLeader(Interface):
     #   fields so that we can pull a roster that includes all participants,
     #   leaders and co-leaders. "
     dexteritytextindexer.searchable('title')
-    form.mode(title='display')
+    form.mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Full Name'),
         required=False,

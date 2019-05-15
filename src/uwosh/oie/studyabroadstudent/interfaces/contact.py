@@ -25,7 +25,7 @@ def validate_email(value):
 
 class IOIEContact(Interface):
     dexteritytextindexer.searchable('title')
-    form.mode(title='display')
+    form.mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Full Name'),
         required=False,

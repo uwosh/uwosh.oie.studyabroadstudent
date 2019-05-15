@@ -11,7 +11,7 @@ from zope.interface import Interface
 
 
 class IOIECourse(Interface):
-    form.mode(title='display')
+    form.mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Course Title'),
         required=False,

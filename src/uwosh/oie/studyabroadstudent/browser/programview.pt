@@ -5,24 +5,24 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="example.conference">
-<body>
 
-<metal:main fill-slot="main">
+<body>
+  <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
 
-        <div tal:replace="structure provider:plone.abovecontenttitle" />
-        <h1 class="documentFirstHeading" style="background-color: darkviolet; color: white; padding: 5px" tal:content="here/title" />
+    <div tal:replace="structure provider:plone.abovecontenttitle" />
+    <h1 class="documentFirstHeading" style="background-color: darkviolet; color: white; padding: 5px" tal:content="here/title" />
 
-        <a tal:condition="view/can_edit"
-          tal:attributes="href view/get_detailed_view_link">Detailed View</a>
+    <a tal:condition="view/can_edit"
+      tal:attributes="href view/get_detailed_view_link">Detailed View</a>
 
-        <div tal:replace="structure provider:plone.belowcontenttitle" />
+    <div tal:replace="structure provider:plone.belowcontenttitle" />
 
-	<tal:block repeat="widget view/widgets/values">
-	    <div class="field" tal:condition="python:widget.__name__ in ('IBasic.description', 'description',)">
-		<div tal:content="structure widget/render" />
-	    </div>
-	</tal:block>
+    <tal:block repeat="widget view/widgets/values">
+      <div class="field" tal:condition="python:widget.__name__ in ('IBasic.description', 'description',)">
+       <div tal:content="structure widget/render" />
+      </div>
+    </tal:block>
 
     <div tal:replace="structure provider:plone.abovecontentbody" />
 
@@ -31,132 +31,130 @@
       <div class="column-one col-md-7 col-sm-12" >
         <div class="lead-image" tal:define="base_url here/absolute_url; has_lead_image view/has_lead_image">
             <img tal:condition="has_lead_image" tal:attributes="src python: base_url+'/@@images/image'" style="max-width:100%;height:auto" title="program lead image" alt="program lead image"/>
-          <span tal:condition="not: has_lead_image"><em>[lead image not specified]</em></span>
         </div>
 
         <tal:block repeat="widget view/widgets/values">
-            <div class="field" tal:condition="python:widget.__name__ in ('IBasic.description', 'description',)">
-          <div tal:content="structure widget/render" />
-            </div>
+          <div class="field" tal:condition="python:widget.__name__ in ('IBasic.description', 'description',)">
+            <div tal:content="structure widget/render" />
+          </div>
         </tal:block>
 
-          <div tal:condition="python: context.rich_description is not None and hasattr(context.rich_description, 'output')"
-               tal:content="structure here/rich_description/output" />
+        <div tal:condition="python: context.rich_description is not None and hasattr(context.rich_description, 'output')"
+             tal:content="structure here/rich_description/output" />
 
-          <p>
-            For information on the application process, program fees and total estimated spending, see the Application Guide for this program.
-          </p>
+        <p>
+          For information on the application process, program fees and total estimated spending, see the Application Guide for this program.
+        </p>
 
-          <style media="screen" type="text/css">
-            .button {
-              font: bold 24px Arial;
-              text-decoration: none;
-              background-color: #0095ff;
-              color: white;
-              padding: 15px;
-              border-top: 1px solid #CCCCCC;
-              border-right: 1px solid #333333;
-              border-bottom: 1px solid #333333;
-              border-left: 1px solid #CCCCCC;
-            }
-            .center {
-              margin: auto;
-              width: 50%;
-              padding: 10px;
-            }
-          </style>
-          <div class="apply-now center">
-            <h3><a class="button" href=""><nobr>APPLY NOW</nobr></a></h3>
-          </div>
+        <style media="screen" type="text/css">
+          .button {
+            font: bold 24px Arial;
+            text-decoration: none;
+            background-color: #0095ff;
+            color: white;
+            padding: 15px;
+            border-top: 1px solid #CCCCCC;
+            border-right: 1px solid #333333;
+            border-bottom: 1px solid #333333;
+            border-left: 1px solid #CCCCCC;
+          }
+          .center {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+          }
+        </style>
+        <div class="apply-now center">
+          <h3><a class="button" href=""><nobr>APPLY NOW</nobr></a></h3>
+        </div>
 
-          <div class="eligibility">
-            <span tal:content="here/eligibility_requirement">[eligibility]</span>
-          </div>
-
+        <div class="eligibility">
+          <span tal:content="here/eligibility_requirement">[eligibility]</span>
+        </div>
       </div>
 
       <div class="column-two col-md-5 col-sm-12">
         <div class="term">
-            <h4>Term:</h4>
-            <span tal:define="term here/term" tal:content="python: term[2:]">[term]</span>
-            <span tal:define="year view/calendar_year" tal:content="year/Title">[year]</span>
-          </div>
+          <h4>Term:</h4>
+          <span tal:define="term here/term" tal:content="python: term[2:]">[term]</span>
+          <span tal:define="year view/calendar_year" tal:content="year/Title">[year]</span>
+        </div>
 
-          <div class="program-dates"  tal:define="start here/airportArrivalDateTime; end here/returnDateTime">
-            <h4>Program Dates:</h4>
-            <div tal:condition="python: start and end">
-              <span tal:content="start">[start date]</span> – <span tal:content="end">[end date]</span>
-            </div>
-            <div tal:condition="python: not (start and end)">TBA</div>
+        <div class="program-dates"  tal:define="start here/airportArrivalDateTime; end here/returnDateTime">
+          <h4>Program Dates:</h4>
+          <div tal:condition="python: start and end">
+            <span tal:content="start">[start date]</span> – <span tal:content="end">[end date]</span>
           </div>
+          <div tal:condition="python: not (start and end)">TBA</div>
+        </div>
 
-          <div class="program-type">
-            <h4>Program Type:</h4>
-            <span tal:content="here/program_type">[program type]</span>
-          </div>
+        <div class="program-type">
+          <h4>Program Type:</h4>
+          <span tal:content="here/program_type">[program type]</span>
+        </div>
 
-          <div class="housing">
-            <h4>Housing:</h4>
-            <span tal:repeat="housing view/housing">
-              <span tal:replace="housing">[accommodation]</span>;
-            </span>
-          </div>
+        <div class="housing">
+          <h4>Housing:</h4>
+          <span tal:repeat="housing view/housing">
+            <span tal:replace="housing">[accommodation]</span>;
+          </span>
+        </div>
 
-          <div class="airport-transfer">
-            <h4>Airport Transfer:</h4>
-            <span tal:content="here/transportationFromOshkoshToDepartureAirport">[airport transfer]</span>
-          </div>
+        <div class="airport-transfer">
+          <h4>Airport Transfer:</h4>
+          <span tal:content="here/transportationFromOshkoshToDepartureAirport">[airport transfer]</span>
+        </div>
 
-          <div class="program-fee">
-            <h4>Financial:</h4>
-            <span tal:content="here/program_fee">[program fee]</span>
-          </div>
+        <div class="program-fee">
+          <h4>Financial:</h4>
+          <span tal:content="here/program_fee">[program fee]</span>
+        </div>
 
-          <div class="application-deadlines">
-            <h4 style="background-color: green; color: white; padding: 5px">Application Deadlines:</h4>
-            <ul>
-              <li><b>Steps I & II deadline:</b> <span tal:content="here/step_1_and_2_application_deadline">[step_1_and_2_application_deadline]</span></li>
-              <li><b>Step III deadline:</b> <span tal:content="here/step_3_application_deadline">[step_3_application_deadline]</span></li>
-              <li><b>Step IV deadline:</b> <span tal:content="here/step_4_application_deadline">[step_4_application_deadline]</span></li>
-            </ul>
-          </div>
+        <div class="application-deadlines">
+          <h4 style="background-color: green; color: white; padding: 5px">Application Deadlines:</h4>
+          <ul>
+            <li><b>Steps I & II deadline:</b> <span tal:content="here/step_1_and_2_application_deadline">[step_1_and_2_application_deadline]</span></li>
+            <li><b>Step III deadline:</b> <span tal:content="here/step_3_application_deadline">[step_3_application_deadline]</span></li>
+            <li><b>Step IV deadline:</b> <span tal:content="here/step_4_application_deadline">[step_4_application_deadline]</span></li>
+          </ul>
+        </div>
 
-          <div class="academics">
-            <h4 style="background-color: orange; color: white; padding: 5px">Academics</h4>
-            <ul>
-              <li tal:define="is_richtext python: hasattr(context.courses, 'output')">
-                Required Courses:
-                <span tal:condition="is_richtext" tal:content="structure here/courses/output">[courses]</span>
-                <span tal:condition="not: is_richtext" tal:content="structure here/courses">[courses]</span>
-              </li>
-              <li>
-                Required Pre-Travel Courses:
-                <ul>
-                  <li tal:repeat="course here/pretravel_dates">
-                    <b><span tal:content="course/pretravel_start_datetime">[pretravel_start_datetime]</span></b>,
-                    <span tal:content="course/pretravel_building">[pretravel_building]</span>,
-                    <span tal:content="course/pretravel_room">[pretravel_room]</span>,
-                    <b>Attendance required:</b> <span tal:content="course/pretravel_attendance_required">[pretravel_attendance_required]</span>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+        <div class="academics">
+          <h4 style="background-color: orange; color: white; padding: 5px">Academics</h4>
+          <ul>
+            <li tal:define="is_richtext python: hasattr(context.courses, 'output')">
+              Required Courses:
+              <span tal:condition="is_richtext" tal:content="structure here/courses/output">[courses]</span>
+              <span tal:condition="not: is_richtext" tal:content="structure here/courses">[courses]</span>
+            </li>
+            <li>
+              Required Pre-Travel Courses:
+              <ul>
+                <li tal:repeat="course here/pretravel_dates">
+                  <b><span tal:content="course/pretravel_start_datetime">[pretravel_start_datetime]</span></b>,
+                  <span tal:content="course/pretravel_building">[pretravel_building]</span>,
+                  <span tal:content="course/pretravel_room">[pretravel_room]</span>,
+                  <b>Attendance required:</b> <span tal:content="course/pretravel_attendance_required">[pretravel_attendance_required]</span>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
 
-          <div class="orientation">
-            <h4 style="background-color: dodgerblue; color: white; padding: 5px">Orientation:</h4>
-            <ul>
-              <li><b>Orientation Quiz Due:</b>
-                <span tal:define="date here/winter_interim_spring_semester_participant_orientation_deadline" tal:condition="date" tal:content="date">[quiz due]</span>
-                <span tal:define="date here/spring_interim_summer_fall_semester_participant_orientation_deadline" tal:condition="date" tal:content="date">[quiz due]</span>
-              </li>
-              <li>
-                <b>In-person orientation (optional):</b>
-                <span tal:define="date here/winter_interim_spring_semester_in_person_orientation" tal:condition="date" tal:content="date">[winter, spring in-person orientation (optional)]</span>
-                <span tal:define="date here/spring_interim_summer_fall_semester_in_person_orientation" tal:condition="date" tal:content="date">[spring, summer, fall in-person orientation (optional)]</span>
-              </li>
-            </ul>
-          </div>
+        <div class="orientation">
+          <h4 style="background-color: dodgerblue; color: white; padding: 5px">Orientation:</h4>
+          <ul>
+            <li><b>Orientation Quiz Due:</b>
+              <span tal:define="date here/winter_interim_spring_semester_participant_orientation_deadline" tal:condition="date" tal:content="date">[quiz due]</span>
+              <span tal:define="date here/spring_interim_summer_fall_semester_participant_orientation_deadline" tal:condition="date" tal:content="date">[quiz due]</span>
+            </li>
+            <li>
+              <b>In-person orientation (optional):</b>
+              <span tal:define="date here/winter_interim_spring_semester_in_person_orientation" tal:condition="date" tal:content="date">[winter, spring in-person orientation (optional)]</span>
+              <span tal:define="date here/spring_interim_summer_fall_semester_in_person_orientation" tal:condition="date" tal:content="date">[spring, summer, fall in-person orientation (optional)]</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -197,9 +195,8 @@
       </div>
     </div>
 
-	      <div tal:replace="structure provider:plone.belowcontentbody" />
+	     <div tal:replace="structure provider:plone.belowcontentbody" />
 	  </tal:main-macro>
-      </metal:main>
-
+  </metal:main>
 </body>
 </html>

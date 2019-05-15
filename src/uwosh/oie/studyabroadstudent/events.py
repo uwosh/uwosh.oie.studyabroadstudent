@@ -217,20 +217,20 @@ def _participant_update(o, event, event_type=None):
     if program_uid:
         program = uuidToObject(program_uid)
         if program:
-            answer_changed_str = 'This answer requires review because '\
+            question_changed_str = 'This answer requires review because '\
                                  'the question has changed: '
             programName = program.title
+            program_assigned_or_changed = False
             if event_type == 'created':
                 program_assigned_or_changed = True
             else:
-                program_assigned_or_changed = False
-            if event_type == 'updated' and getattr(
-                event, 'descriptions', None,
-            ):
-                for evt_description in event.descriptions:
-                    if 'programName' in evt_description.attributes:
-                        program_assigned_or_changed = True
-                        break
+                if event_type == 'updated' and getattr(
+                    event, 'descriptions', None,
+                ):
+                    for evt_description in event.descriptions:
+                        if 'programName' in evt_description.attributes:
+                            program_assigned_or_changed = True
+                            break
             if program_assigned_or_changed:
                 # copy questions from program object
                 o.applicant_question_text1 = program.applicantQuestion1
@@ -240,29 +240,29 @@ def _participant_update(o, event, event_type=None):
                 o.applicant_question_text5 = program.applicantQuestion5
                 # if needed, mark the answer as being potentially out of date
                 if o.applicant_question_answer1 and not (
-                    o.applicant_question_answer1.startswith(answer_changed_str)
+                    o.applicant_question_answer1.startswith(question_changed_str)
                 ):
-                    o.applicant_question_answer1 = answer_changed_str + \
+                    o.applicant_question_answer1 = question_changed_str + \
                                                    o.applicant_question_answer1
                 if o.applicant_question_answer2 and not (
-                    o.applicant_question_answer2.startswith(answer_changed_str)
+                    o.applicant_question_answer2.startswith(question_changed_str)
                 ):
-                    o.applicant_question_answer2 = answer_changed_str + \
+                    o.applicant_question_answer2 = question_changed_str + \
                                                    o.applicant_question_answer2
                 if o.applicant_question_answer3 and not (
-                    o.applicant_question_answer3.startswith(answer_changed_str)
+                    o.applicant_question_answer3.startswith(question_changed_str)
                 ):
-                    o.applicant_question_answer3 = answer_changed_str + \
+                    o.applicant_question_answer3 = question_changed_str + \
                                                    o.applicant_question_answer3
                 if o.applicant_question_answer4 and not (
-                    o.applicant_question_answer4.startswith(answer_changed_str)
+                    o.applicant_question_answer4.startswith(question_changed_str)
                 ):
-                    o.applicant_question_answer4 = answer_changed_str + \
+                    o.applicant_question_answer4 = question_changed_str + \
                                                    o.applicant_question_answer4
                 if o.applicant_question_answer5 and not (
-                    o.applicant_question_answer5.startswith(answer_changed_str)
+                    o.applicant_question_answer5.startswith(question_changed_str)
                 ):
-                    o.applicant_question_answer5 = answer_changed_str + \
+                    o.applicant_question_answer5 = question_changed_str + \
                                                    o.applicant_question_answer5
             year_obj = uuidToObject(program.calendar_year)
             programYear = year_obj.title

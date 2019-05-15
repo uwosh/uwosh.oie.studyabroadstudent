@@ -48,7 +48,7 @@ also teach one or more of the program courses.
     #   were already in the system.
     dexteritytextindexer.searchable('title')
 
-    form.mode(title='display')
+    form.mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Full Name'),
         required=False,
