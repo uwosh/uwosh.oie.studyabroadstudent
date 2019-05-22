@@ -13,7 +13,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import replacement_costs
 from uwosh.oie.studyabroadstudent.vocabularies import salary_form
 from uwosh.oie.studyabroadstudent.vocabularies import socialmediaservice
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary
+from uwosh.oie.studyabroadstudent.vocabularies import yes_no_vocabulary
 from zope import schema
 from zope.interface import Interface
 from zope.schema import ValidationError
@@ -207,7 +207,7 @@ class IOIEProgramLeader(Interface):
     will_base_salary_change = schema.Choice(
         title=_(u'Will this person''s base salary change prior to the date on which this program is scheduled to end?'),  # noqa
         description=_(u'If you check ''no'' and the base salary changes, any compensation due for this program will be calculated using the current base salary.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
     )
     salary_form_type = schema.Choice(
         title=_(u'Salary Form Type'),
@@ -334,21 +334,21 @@ class IOIEProgramLeader(Interface):
     hr_review_ok = schema.Choice(
         title=_(u'HR Review'),
         description=_(u'There are no actions pending that may affect the Provost''s decision to approve this applicant as a Leader or Co-leader for a study abroad/away program'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
         # TODO Or, is this its own workflow?  # noqa
     )
     administrative_services_review_ok = schema.Choice(
         title=_(u'Administrative Services Review'),
         description=_(u'This applicant does not have any past due travel or cash advances'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
         # TODO Or, is this its own workflow?  # noqa
     )
     equal_opportunity_review_ok = schema.Choice(
         title=_(u'Office of Equal Opportunity & Access Review'),
         description=_(u'There are no actions pending that may affect the Provost''s decision to approve this applicant as a Leader or Co-leader for a study abroad/away program.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
         # TODO Or, is this its own workflow?  # noqa
     )

@@ -16,9 +16,8 @@ PROGRAMMANAGEMENT = 'programmanagement'
 
 MAX_LENGTH = 250
 
-yes_no_none_vocabulary = SimpleVocabulary(
+yes_no_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value=''),
         SimpleTerm(value='Yes'),
         SimpleTerm(value='No'),
     ],

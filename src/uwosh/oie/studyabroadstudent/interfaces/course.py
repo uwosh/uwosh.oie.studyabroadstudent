@@ -5,7 +5,7 @@ from plone.namedfile import field
 from uwosh.oie.studyabroadstudent import _
 from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import validate_email  # noqa
 from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary
+from uwosh.oie.studyabroadstudent.vocabularies import yes_no_vocabulary
 from zope import schema
 from zope.interface import Interface
 
@@ -88,7 +88,7 @@ class IOIECourse(Interface):
             u'"host" when instruction is provided by a partner.  Do not '
             u'select the name of the "instructor-of-record" at UW Oshkosh '
             u'when instruction is provided by a partner.'),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
     )
     instruction_provided_by = schema.Choice(
         title=_(u'Instruction Provided by (if not host)'),
@@ -197,7 +197,7 @@ class IOIECourse(Interface):
     )
     tuition_and_fees = schema.Choice(
         title=_(u'Tuition & Fees'),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # TODO vocabulary?  # noqa
         # TODO Applicant should not see this field.  This is for OIE.  This  # noqa
         #  field is specific to each Subject/Course # rather than to the
@@ -206,7 +206,7 @@ class IOIECourse(Interface):
     tuition_and_fees = schema.Choice(
         title=_(u'External Studies Courses'),
         description=_(u'Confirm that any External Studies Courses have been graded.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # TODO Applicant should not see this field.  This is for OIE.  This  # noqa
         #  field is specific to each Subject/Course # rather than to the
         #  program.

@@ -72,7 +72,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import seat_assignment_protocol
 from uwosh.oie.studyabroadstudent.vocabularies import selection_criteria_vocabulary  # noqa
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_na_vocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary
+from uwosh.oie.studyabroadstudent.vocabularies import yes_no_vocabulary
 from z3c.form.interfaces import IAddForm
 from z3c.form.interfaces import IEditForm
 from zope import schema
@@ -785,7 +785,7 @@ class IOIEStudyAbroadProgram(Interface):
     firstChoiceDatesFlexible = schema.Choice(
         title=_(u'My first-choice dates are flexible.'),
         description=_(u'If yes, your OIE Program Manager may recommend changes based on flight availability or program component scheduling.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=True,
         constraint=firstChoiceDatesFlexible_validator,
     )
@@ -1097,7 +1097,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     individualInterview = schema.Choice(
         title=_(u'The Program Liaison, Program Leader or Program Co-leader will interview each applicant'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
         # TODO yes/no (default=no; this question should be unavailable/greyed  # noqa
         #   out if "approvalcriteria" is not filled in)
@@ -1106,7 +1106,7 @@ class IOIEStudyAbroadProgram(Interface):
     firstRecommendationRequired = schema.Choice(
         title=_(u'1st Reference is required'),
         description=_(u'If "yes", this item appears in the Applicant Portal as an application item'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
         # TODO yes/no (default=no; this question should be unavailable/greyed  # noqa
         #   out if "approvalcriteria" is not filled in)
@@ -1115,7 +1115,7 @@ class IOIEStudyAbroadProgram(Interface):
     secondRecommendationRequired = schema.Choice(
         title=_(u'2nd Reference is required'),
         description=_(u'If "yes", this item appears in the Applicant Portal as an application item'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
         # TODO "yes/no (default=no; this question should be unavailable/greyed  # noqa
         #   out if "approvalcriteria" is not filled in). This cannot be ""yes""
@@ -1171,7 +1171,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'CV or Resume'),
         description=_(
             u'If "yes", this item appears in the Applicant Portal as an application item.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=True,
         # TODO yes/no (default=no; this question should be unavailable/greyed  # noqa
         #   out if "approvalcriteria" is not filled in)
@@ -1180,7 +1180,7 @@ class IOIEStudyAbroadProgram(Interface):
     letterOfMotivationRequired = schema.Choice(
         title=_(u'Letter of Motivation'),
         description=_(u'If "yes", this item appears in the Applicant Portal as an application item.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=True,
         # TODO yes/no (default=no; this question should be unavailable/greyed  # noqa
         #   out if "approvalcriteria" is not filled in)
@@ -1395,7 +1395,7 @@ class IOIEStudyAbroadProgram(Interface):
     program_schedule = schema.Choice(
         title=_(u'Program Schedule'),
         description=_(u'The OIE Program Manager checks this box to confirm that the program schedule has been viewed.  Checking this box does not mean that activities on the schedule have been approved.  Further Risk Assessment will be completed after this initial review.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
         # TODO check box or workflow? (for now, this will be just a check  # noqa
         #   box.  It could become part of the workflow in the future.  The
@@ -1440,49 +1440,43 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Application for Permission to Follow an Alternative Schedule on the Return Flight Only'),  # noqa
         description=_(
             u' Select ''yes'' for all independent travel programs where OIE does not hold space on a group flight and for all programs on which OIE holds space on a group flight but may allow deviations on the return flight only on a case-by-case basis.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     flight_deviation_request_roundtrip_or_outbound_flight = schema.Choice(
         title=_(u'Application for Permission to Follow an Alternative Schedule on the Outbound Flight Only or on My Roundtrip Flights'),  # noqa
         description=_(
             u'Select ''yes'' for all independent travel programs where OIE does not hold space on a group flight and for all programs on which OIE holds space on a group flight but may allow deviations on the outbound or roundtrip flights on a case-by-case basis.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     hessen_isu_application = schema.Choice(
         title=_(u'Hessen/Wisconsin ISU Student Exchange Application'),
         description=_(
             u'Select ''yes'' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an ISU (International Summer University).'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     hessen_iwu_application = schema.Choice(
         title=_(u'Hessen/Wisconsin IWU Student Exchange Application'),
         description=_(
             u'Select ''yes'' if this program is included in the Hessen/Wisconsin Student Exchange AND the program is an IWU (International Winter University).'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     graduate_registration_form_and_graduate_special_non_degree_information_form = schema.Choice(  # noqa
         title=_(u'Special/Non-Degree Registration - Graduate Level'),
         description=_(
             u'Select ''yes'' 1) if the program allows undergraduate level course enrollment by graduate level students or 2) if the program offers graduate level courses and accepts applicants who will not be UW Oshkosh degree-seeking students during the term that the program runs.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     transfer_credit_prior_approval_form = schema.Choice(
         title=_(u'Transfer Credit Prior Approval Form'),
         description=_(
             u'Select ''yes'' if one or more applicants may be enrolled in a host institution course that is eligible for transfer back to UW Oshkosh, without simultaneous enrollment at UW Oshkosh.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     form.mode(application_items_travel_label='display')
     application_items_travel_label = schema.TextLine(
@@ -1494,70 +1488,61 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Driver\'s License or State Issued I.D. – Color Copy'),
         description=_(
             u'Select ''yes'' if required by external partners or by the foreign consulate to apply for a visa.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-         # TODO default=none  # noqa
    )
     biographical_page_of_your_signed_passport = schema.Choice(
         title=_(u'Passport-Digital Copy of Biographical Page of Your SIGNED Passport'),  # noqa
         description=_(
             u'Select ''yes'' if required by external partners.'),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     original_passport = schema.Choice(
         title=_(u'Passport-Original SIGNED Passport'),
         description=_(
             u'Select ''yes'' if this is required to apply for a visa.'),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     official_passport_photo_for_india_visa_application = schema.Choice(
         title=_(u'Photo: Official Paper Passport Photo'),
         description=_(
             u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are consistent with an official U.S. passport photo.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     digital_passport_photo = schema.Choice(
         title=_(u'Photo: Official Digital Passport Photo'),
         description=_(
             u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are consistent with an official U.S. passport photo.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-         # TODO default=none  # noqa
    )
     passport_size_photo = schema.Choice(
         title=_(u'Photo: Paper'),
         description=_(u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are not consistent with an official U.S. passport photo.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     indian_visa_application = schema.Choice(
         title=_(u'Photo: Digital'),
         description=_(u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are not consistent with an official U.S. passport photo.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     visa_required_for_us_citizens = schema.Choice(
         title=_(u'Visa Application - All U.S. Citizens'),
         description=_(u'Select ''yes'' if a visa is required of U.S. citizens.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     yellow_fever_vaccination_certificate = schema.Choice(
         title=_(u'Yellow Fever Vaccination Certificate'),
         description=_(
             u'Required ONLY IF you will have traveled to any of the countries listed on this website within 90 days of departure to your program site abroad.  A copy of the certificate should be sent in with your visa application as a precaution against visa denial.  wwwnc.cdc.gov/travel/yellowbook/2016/infectious-diseases-related-to-travel/yellow-fever'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-         # TODO default=none  # noqa
     )
     form.mode(application_items_background_label='display')
     application_items_background_label = schema.TextLine(
@@ -1569,9 +1554,8 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Criminal Background Check'),
         description=_(
             u'Select ''yes'' if a foreign government requires this as part of the visa application process, if an external partner requires this as part of the visa application process, if participants will work with children who have not yet reached the age of majority in their home country, or if participants will work with children who are 17 years old or younger, whichever is the higher of the two ages. Use this option for a Criminal Background Check only when an FBI report is not specifically required.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-         # TODO default=none  # noqa
    )
     form.mode(application_items_other_label='display')
     application_items_other_label = schema.TextLine(
@@ -1664,9 +1648,8 @@ class IOIEStudyAbroadProgram(Interface):
     )
     provider_01_awarded_contract = schema.Choice(
         title=_(u'Provider 01 Awarded Contract'),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     proposal_01 = field.NamedFile(
         title=_('Proposal 01'),
@@ -1688,9 +1671,8 @@ class IOIEStudyAbroadProgram(Interface):
     )
     provider_02_awarded_contract = schema.Choice(
         title=_(u'Provider 02 Awarded Contract'),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default=none  # noqa
     )
     proposal_02 = field.NamedFile(
         title=_('Proposal 02'),
@@ -1712,7 +1694,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
     provider_03_awarded_contract = schema.Choice(
         title=_(u'Provider 03 Awarded Contract'),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
     )
     proposal_03 = field.NamedFile(
@@ -1902,7 +1884,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
     participant_fees_paid_in_full = schema.Choice(
         title=_(u'Participant Fees Paid in Full'),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
     )
     compensation_paperwork = field.NamedFile(
@@ -1926,14 +1908,14 @@ class IOIEStudyAbroadProgram(Interface):
     account_transfers = schema.Choice(
         title=_(u'Account Transfers'),
         description=_(u'Confirm that all transfers into and out of the account are complete.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
     )
     program_revenue = schema.Choice(
         title=_(u'Program Revenue'),
         description=_(
             u'Confirm that all program revenue has been received.  Confirm that the correct program revenue amount is in the account.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
     )
     final_budget_documentation = field.NamedFile(

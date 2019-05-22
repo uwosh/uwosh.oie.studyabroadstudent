@@ -18,7 +18,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import semester_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import smoking_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import student_type_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_na_vocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary
+from uwosh.oie.studyabroadstudent.vocabularies import yes_no_vocabulary
 from zope import schema
 from plone.directives import form
 from zope.interface import Interface
@@ -591,7 +591,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     hasDifficultyWalking = schema.Choice(
         title=_(u'Difficulty Walking'),
         description=_(u'Do you have a condition which would make it difficult to walk long distances?'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # required=True,
         required=False,
     )
@@ -611,7 +611,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     medicalReadStatement = schema.Choice(
         title=_(u'I have read the statement below and understand.'),
         description=_(u'""Pre-existing medical and mental health conditions are often intensified by travel to or living in a foreign environment.  Before committing to a study abroad program, consider how your new environment may affect your personal health both physically and mentally.  For example, your new environment may introduce you to new diseases, such as malaria or yellow fever, or new stresses which may cause additional complications for a person with a preexisting condition.<br> <br> The OIE strongly recommends that you have a physical, talk with a medical provider about any preexisting conditions and recommended and/or required immunizations, talk with a psychiatrist or counselor about any preexisting conditions and take care of any dental work before departure.<br> <br> If you choose not to complete this section before program acceptance, you must forward information related to the following to the OIE within one week of the application deadline for your program.  Failure to disclose medical or mental health conditions will make it extremely difficult for staff at UW Oshkosh and abroad to assist you in an emergency and may cause health professionals abroad to take actions which could lead to serious medical consequences, including death.<br> <br> NOTE ON MEDICATIONS: You are responsible for ensuring that your medications can be carried into the foreign country.  If your medical status changes after completing this application, you must inform the OIE.""'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # required=True,
         required=False,
     )
@@ -651,7 +651,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     medicalHealthProblems_takenMedication = schema.Choice(
         title=_(u'Has Taken Medication'),
         description=_(u'Are you taking or have you ever taken medication related to your physical health?'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # required=True,
         required=False,
     )
@@ -671,7 +671,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     medicalHealthProblems_underCare = schema.Choice(
         title=_(u'Are you currently under the care of a doctor or other health care professional?'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # required=True,
         required=False,
     )
@@ -704,7 +704,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     medicalMentalProblems_takenMedication = schema.Choice(
         title=_(u'Are you taking/have you ever taken medication related to your mental health?  '),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # required=True,
         required=False,
     )
@@ -731,7 +731,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     medicalMentalProblems_underCare = schema.Choice(
         title=_(u'Mental Health Care'),
         description=_(u'Are you currently or have you ever been under the care of a psychiatrist or other medical provider, substance abuse counselor or other mental health professional?'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # required=True,
         required=False,
     )
@@ -759,7 +759,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     medicalRegistered = schema.Choice(
         title=_(u'Registered with UW Oshkosh for Accommodations'),
         description=_(u'Are you currently registered with the University of Wisconsin Oshkosh (with offices such as the Dean of Students office or Project Success) or with your university for medical or mental-health related accommodations?'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # required=True,
         required=False,
     )
@@ -779,7 +779,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     medicalAccessOK = schema.Choice(
         title=_(u'Medical Access Granted'),
         description=_(u'""I understand and agree that this information will be accessed by the following people: faculty leader(s) (for faculty-led programs), exchange liaison(s) abroad (for student exchange programs), program organizers outside of UW Oshkosh, my host family, staff in the OIE, and staff in the Dean of Students Office.""'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # required=True,
         required=False,
     )
@@ -799,7 +799,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     isVegetarian = schema.Choice(
         title=_(u'Are you vegetarian?'),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # default="No",
         # required=True,
         required=False,
@@ -1200,7 +1200,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         description=_(u'If you are not applying for financial aid, skip to the next section.'),  # noqa
         # required=True,
         required=False,
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
@@ -1280,7 +1280,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         description=_(u'I hereby agree to hold harmless and indemnify the Board of Regents of the University of Wisconsin System and the University of Wisconsin Oshkosh, their officers, agents and employees, from any and all liability, loss, damages, costs or expenses which are sustained, incurred or required arising out of my actions.'),  # noqa
         # required=True,
         required=False,
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
@@ -1289,7 +1289,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         description=_(u'I certify that the information stated above is true and correct.  If accepted to the program, I agree to follow all payment and withdrawal policies and to regularly check my UW Oshkosh email account for program information beginning today.  If I am a non-UW Oshkosh student, I will use and submit an email address that I check regularly.'),  # noqa
         # required=True,
         required=False,
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
@@ -1372,7 +1372,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     programSpecificMaterialsRequired = schema.Choice(
         title=_(u'Program-Specific Materials Required(Step II)?'),
         required=False,
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
     )
 
     programSpecificMaterialsOK = schema.Bool(
@@ -1383,7 +1383,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     specialStudentFormRequired = schema.Choice(
         title=_(u'Special Student Form Required'),
         required=False,
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
     )
 
     specialStudentFormOK = schema.Bool(
@@ -1394,7 +1394,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     creditOverloadFormRequired = schema.Choice(
         title=_(u'Credit Overload Form Required'),
         required=False,
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
     )
 
     creditOverloadFormOK = schema.Bool(
@@ -1420,13 +1420,13 @@ class IOIEStudyAbroadStudentApplication(Interface):
     metPassportDeadline = schema.Choice(
         title=_(u'Passport Deadline Met'),
         required=False,
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
     )
 
     programSpecificMaterialsRequiredStepIII = schema.Choice(
         title=_(u'Program-Specific Materials Required(Step III)?'),
         required=False,
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
     )
 
     programSpecificMaterialsOKStepIII = schema.Bool(
@@ -1437,7 +1437,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     attendedOrientation = schema.Choice(
         title=_(u'Attended Orientation'),
         required=False,
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
     )
 
     cisiDates = schema.TextLine(
@@ -1467,21 +1467,21 @@ class IOIEStudyAbroadStudentApplication(Interface):
     depositOnTime = schema.Choice(
         title=_(u'Deposit Paid on Time'),
         description=_(u''),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
     )
 
     payment2OnTime = schema.Choice(
         title=_(u'Final Payment Made on Time (except exchange students)'),
         description=_(u''),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
     )
 
     applicationFeeRefund = schema.Choice(
         title=_(u'Application Fee Refunded'),
         description=_(u''),
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
     )
 

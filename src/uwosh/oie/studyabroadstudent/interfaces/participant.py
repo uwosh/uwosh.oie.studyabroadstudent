@@ -22,7 +22,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import return_mode_transportation_vocabulary  # noqa
 from uwosh.oie.studyabroadstudent.vocabularies import return_transfer_vocabulary  # noqa
 from uwosh.oie.studyabroadstudent.vocabularies import socialmediaservice
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_none_vocabulary
+from uwosh.oie.studyabroadstudent.vocabularies import yes_no_vocabulary
 from zope import schema
 from zope.interface import Interface
 from zope.schema import ValidationError
@@ -606,7 +606,7 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Are you enrolled at UW Oshkosh?'),
         description=_(u''),
         required=True,
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
     )
 
     universityEnrolledOther = schema.TextLine(
@@ -721,7 +721,7 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Confirm Attendance at Pre- & Post-travel Program-specific Sessions'),  # noqa
         description=_(
             u'Select ''Yes'' to confirm that you will attend all advertised pre- or post-travel sessions.  Select ''No'' if you have a conflict on one or more dates.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=True,
         # TODO insert date from program object; Displays only if there are dates in "Pretravel Class & Orientation Dates" or "Post-travel Class Dates" in the MGMT PORTAL.  # noqa
     )
@@ -730,7 +730,7 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Orientation Submission Deadline'),
         description=_(
             u'I understand that the Office of International Education deadline for submission of orientation materials is a final deadline.  I understand and agree that all Office of International Education orientation requirements must be completed by this date.  If I forsee conflicts with this date, I will complete requirements in advance of this date.  If not completed by this date, I understand and agree that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=True,
         # TODO insert date from program object  # noqa
     )
@@ -739,7 +739,7 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Payment Deadlines'),
         description=_(
             u'I understand that the payment deadlines are final deadlines and that it is my responsibility to record these dates in my calendar.  I understand that all payments must be made in full by the deadlines, or I must submit the "Notice of Financial Aid Award for Study Abroad/Away" form if making my payments using financial aid, a scholarship that I have already received, veterans benefits or an outside loan.  If not submitted by this date, I understand that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply.'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=True,
         # TODO insert date from program object  # noqa
     )
@@ -797,7 +797,7 @@ class IOIEStudyAbroadParticipant(Interface):
     requestToDeviateFromProgramDates = schema.Choice(
         title=_(u'Request to Deviate from Program Dates'),
         description=_(u'Select ''Yes'' once you have printed, read, signed and uploaded this PDF'),  # noqa
-        vocabulary=yes_no_none_vocabulary,
+        vocabulary=yes_no_vocabulary,
         required=False,
         # TODO need link to the PDF document  # noqa
     )
