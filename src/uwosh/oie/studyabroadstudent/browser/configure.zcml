@@ -32,7 +32,7 @@
       name="view"
       for="..interfaces.studyabroadstudentapplication.IOIEStudyAbroadStudentApplication"
       class=".views.ApplicationView"
-      template="applicationview.pt"
+      template="templates/applicationview.pt"
       permission="zope2.View"
       />
 
@@ -40,7 +40,7 @@
       name="view"
       for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"
       class=".views.ProgramView"
-      template="programview.pt"
+      template="templates/programview.pt"
       permission="zope2.View"
       />
 
@@ -48,7 +48,7 @@
       name="reporting"
       for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"
       class=".views.ReportingView"
-      template="reporting.pt"
+      template="templates/reporting.pt"
       permission="zope2.View"
       />
 
@@ -56,7 +56,7 @@
       name="view"
       for="..interfaces.participant.IOIEStudyAbroadParticipant"
       class=".views.ParticipantView"
-      template="participantview.pt"
+      template="templates/participantview.pt"
       permission="zope2.View"
       />
 
@@ -64,7 +64,7 @@
       name="manager_view"
       for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"
       class=".programview_manager.ProgramManagerView"
-      template="container.pt"
+      template="templates/container.pt"
       permission="cmf.ModifyPortalContent"
       />
 
@@ -72,7 +72,7 @@
       name="view"
       for="..interfaces.cooperatingpartner.IOIECooperatingPartner"
       class=".views.CooperatingPartnerView"
-      template="cooperatingpartnerview.pt"
+      template="templates/cooperatingpartnerview.pt"
       permission="zope2.View"
       />
 
@@ -80,7 +80,7 @@
       name="view"
       for="..interfaces.contact.IOIEContact"
       class=".views.ContactView"
-      template="contactview.pt"
+      template="templates/contactview.pt"
       permission="zope2.View"
       />
 
