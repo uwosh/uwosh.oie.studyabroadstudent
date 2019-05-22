@@ -45,6 +45,14 @@
       />
 
   <browser:page
+      name="reporting"
+      for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"
+      class=".views.ReportingView"
+      template="reporting.pt"
+      permission="zope2.View"
+      />
+
+  <browser:page
       name="view"
       for="..interfaces.participant.IOIEStudyAbroadParticipant"
       class=".views.ParticipantView"

@@ -6,6 +6,7 @@ from plone.app.uuid.utils import uuidToObject
 from plone.dexterity.browser.view import DefaultView
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.file import NamedImage
+from uwosh.oie.studyabroadstudent.reporting import ReportUtil
 
 import logging
 
@@ -175,3 +176,9 @@ class AttemptTransitionsPeriodicallyView(DefaultView):
         """
         logger = logging.getLogger(__class__)  # noqa
         logger.info("'transition has been attempted")
+
+
+class ReportingView(DefaultView):
+
+    def getReportUtil(self):
+        return ReportUtil()

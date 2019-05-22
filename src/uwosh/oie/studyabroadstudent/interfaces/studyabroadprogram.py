@@ -404,16 +404,6 @@ class IOIEStudyAbroadProgram(Interface):
         'participant_evaluations',
         'post_program_evaluation',
         'incident_report',
-        'total_number_of_high_school_students',
-        'total_number_of_uw_oshkosh_freshmen',
-        'total_number_of_uw_oshkosh_sophomores',
-        'total_number_of_uw_oshkosh_juniors',
-        'total_number_of_uw_oshkosh_seniors',
-        'total_number_of_uw_oshkosh_graduate_students',
-        'total_number_of_other_university_undergraduate_students',
-        'total_number_of_other_university_graduate_students',
-        'total_number_of_uw_oshkosh_program_leaders',
-        'total_number_of_community_members',
         'first_day_of_spring_semester_classes',
         'last_day_of_spring_semester_classes',
         'first_day_of_spring_interim_classes',
@@ -2079,17 +2069,7 @@ class IOIEStudyAbroadProgram(Interface):
         label=_(u'Reporting'),
         fields=['participant_evaluations',
                 'post_program_evaluation',
-                'incident_report',
-                'total_number_of_high_school_students',
-                'total_number_of_uw_oshkosh_freshmen',
-                'total_number_of_uw_oshkosh_sophomores',
-                'total_number_of_uw_oshkosh_juniors',
-                'total_number_of_uw_oshkosh_seniors',
-                'total_number_of_uw_oshkosh_graduate_students',
-                'total_number_of_other_university_undergraduate_students',
-                'total_number_of_other_university_graduate_students',
-                'total_number_of_uw_oshkosh_program_leaders',
-                'total_number_of_community_members'],
+                'incident_report'],
     )
     read_permission(participant_evaluations=V_REPORTING_FS)
     write_permission(participant_evaluations=E_REPORTING_FS)
@@ -2097,26 +2077,6 @@ class IOIEStudyAbroadProgram(Interface):
     write_permission(post_program_evaluation=E_REPORTING_FS)
     read_permission(incident_report=V_REPORTING_FS)
     write_permission(incident_report=E_REPORTING_FS)
-    read_permission(total_number_of_high_school_students=V_REPORTING_FS)
-    write_permission(total_number_of_high_school_students=E_REPORTING_FS)
-    read_permission(total_number_of_uw_oshkosh_freshmen=V_REPORTING_FS)
-    write_permission(total_number_of_uw_oshkosh_freshmen=E_REPORTING_FS)
-    read_permission(total_number_of_uw_oshkosh_sophomores=V_REPORTING_FS)
-    write_permission(total_number_of_uw_oshkosh_sophomores=E_REPORTING_FS)
-    read_permission(total_number_of_uw_oshkosh_juniors=V_REPORTING_FS)
-    write_permission(total_number_of_uw_oshkosh_juniors=E_REPORTING_FS)
-    read_permission(total_number_of_uw_oshkosh_seniors=V_REPORTING_FS)
-    write_permission(total_number_of_uw_oshkosh_seniors=E_REPORTING_FS)
-    read_permission(total_number_of_uw_oshkosh_graduate_students=V_REPORTING_FS)  # noqa
-    write_permission(total_number_of_uw_oshkosh_graduate_students=E_REPORTING_FS)  # noqa
-    read_permission(total_number_of_other_university_undergraduate_students=V_REPORTING_FS)  # noqa
-    write_permission(total_number_of_other_university_undergraduate_students=E_REPORTING_FS)  # noqa
-    read_permission(total_number_of_other_university_graduate_students=V_REPORTING_FS)  # noqa
-    write_permission(total_number_of_other_university_graduate_students=E_REPORTING_FS)  # noqa
-    read_permission(total_number_of_uw_oshkosh_program_leaders=V_REPORTING_FS)
-    write_permission(total_number_of_uw_oshkosh_program_leaders=E_REPORTING_FS)
-    read_permission(total_number_of_community_members=V_REPORTING_FS)
-    write_permission(total_number_of_community_members=E_REPORTING_FS)
 
     participant_evaluations = field.NamedFile(
         title=_(u'Participant Evaluations'),
@@ -2132,56 +2092,6 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Incident Report'),
         description=_('Upload incident report.'),
         required=False,
-    )
-    total_number_of_high_school_students = schema.Int(
-        title=_(u'Total Number of High School Students'),
-        required=False,
-        # TODO calculate  # noqa
-    )
-    total_number_of_uw_oshkosh_freshmen = schema.Int(
-        title=_(u'Total Number of UW Oshkosh Freshmen'),
-        required=False,
-        # TODO calculate  # noqa
-    )
-    total_number_of_uw_oshkosh_sophomores = schema.Int(
-        title=_(u'Total Number of UW Oshkosh Sophomores'),
-        required=False,
-        # TODO calculate  # noqa
-    )
-    total_number_of_uw_oshkosh_juniors = schema.Int(
-        title=_(u'Total Number of UW Oshkosh Juniors'),
-        required=False,
-        # TODO calculate  # noqa
-    )
-    total_number_of_uw_oshkosh_seniors = schema.Int(
-        title=_(u'Total Number of UW Oshkosh Seniors'),
-        required=False,
-        # TODO calculate  # noqa
-    )
-    total_number_of_uw_oshkosh_graduate_students = schema.Int(
-        title=_(u'Total Number of UW Oshkosh Graduate Students'),
-        required=False,
-        # TODO calculate  # noqa
-    )
-    total_number_of_other_university_undergraduate_students = schema.Int(
-        title=_(u'Total Number of Other University Undergraduate Students'),
-        required=False,
-        # TODO calculate  # noqa
-    )
-    total_number_of_other_university_graduate_students = schema.Int(
-        title=_(u'Total Number of Other University Graduate Students'),
-        required=False,
-        # TODO calculate  # noqa
-    )
-    total_number_of_uw_oshkosh_program_leaders = schema.Int(
-        title=_(u'Total Number of UW Oshkosh Program Leaders'),
-        required=False,
-        # TODO calculate  # noqa
-    )
-    total_number_of_community_members = schema.Int(
-        title=_(u'Total Number of Community Members'),
-        required=False,
-        # TODO calculate  # noqa
     )
 
     #######################################################

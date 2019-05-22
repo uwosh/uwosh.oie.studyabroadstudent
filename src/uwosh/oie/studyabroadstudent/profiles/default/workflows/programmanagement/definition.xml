@@ -52,26 +52,6 @@
   <permission>OIE: Edit post program evaluation</permission>
   <permission>OIE: View incident report</permission>
   <permission>OIE: Edit incident report</permission>
-  <permission>OIE: View total number of high school students</permission>
-  <permission>OIE: Edit total number of high school students</permission>
-  <permission>OIE: View total number of uw oshkosh freshmen</permission>
-  <permission>OIE: Edit total number of uw oshkosh freshmen</permission>
-  <permission>OIE: View total number of uw oshkosh sophomores</permission>
-  <permission>OIE: Edit total number of uw oshkosh sophomores</permission>
-  <permission>OIE: View total number of uw oshkosh juniors</permission>
-  <permission>OIE: Edit total number of uw oshkosh juniors</permission>
-  <permission>OIE: View total number of uw oshkosh seniors</permission>
-  <permission>OIE: Edit total number of uw oshkosh seniors</permission>
-  <permission>OIE: View total number of uw oshkosh graduate students</permission>
-  <permission>OIE: Edit total number of uw oshkosh graduate students</permission>
-  <permission>OIE: View total number of other university undergraduate students</permission>
-  <permission>OIE: Edit total number of other university undergraduate students</permission>
-  <permission>OIE: View total number of other university graduate students</permission>
-  <permission>OIE: Edit total number of other university graduate students</permission>
-  <permission>OIE: View total number of uw oshkosh program leaders</permission>
-  <permission>OIE: Edit total number of uw oshkosh program leaders</permission>
-  <permission>OIE: View total number of community members</permission>
-  <permission>OIE: Edit total number of community members</permission>
   <permission>OIE: View program dates fieldset</permission>
   <permission>OIE: Edit program dates fieldset</permission>
 
@@ -807,46 +787,6 @@
    <permission-role>Mgmt_Chair</permission-role>
   </permission-map>
 
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -1230,46 +1170,6 @@
    <permission-role>Mgmt_Financial</permission-role>
   </permission-map>
 
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -1363,22 +1263,10 @@
    <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
-
-
-
-
-
-
   <permission-map name="OIE: Edit academic program fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
-
-
-
-
-
-
 
   <permission-map name="OIE: View academic program fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
@@ -1632,46 +1520,6 @@
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
    <permission-role>Mgmt_Financial</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
@@ -2053,46 +1901,6 @@
    <permission-role>Mgmt_Coordinator</permission-role>
    <permission-role>Mgmt_Financial</permission-role>
    <permission-role>Mgmt_Chair</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
@@ -2483,46 +2291,6 @@
 
   <permission-map name="OIE: View incident report" acquired="False">
    <permission-role>Mgmt_Director</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
@@ -2925,46 +2693,6 @@
 
   <permission-map name="OIE: View incident_report" acquired="False">
    <permission-role>Mgmt_Director</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
@@ -3730,46 +3458,6 @@
    <permission-role>Mgmt_Chair</permission-role>
   </permission-map>
 
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -3851,73 +3539,73 @@
   </permission-map>
 
 
-   
-   
-   
-   
-   
 
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    <permission-map name="OIE: Edit program code fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -4229,46 +3917,6 @@
    <permission-role>Mgmt_Financial</permission-role>
    <permission-role>Mgmt_RiskMgmt</permission-role>
    <permission-role>Mgmt_Chair</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
@@ -5726,46 +5374,6 @@
    <permission-role>Mgmt_Chair</permission-role>
   </permission-map>
 
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -6497,46 +6105,6 @@
    <permission-role>Mgmt_Coordinator</permission-role>
    <permission-role>Mgmt_Financial</permission-role>
    <permission-role>Mgmt_Chair</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
@@ -7293,46 +6861,6 @@
    <permission-role>Mgmt_Chair</permission-role>
   </permission-map>
 
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -7716,46 +7244,6 @@
    <permission-role>Mgmt_Coordinator</permission-role>
    <permission-role>Mgmt_Financial</permission-role>
    <permission-role>Mgmt_Chair</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
@@ -8864,46 +8352,6 @@
    <permission-role>Mgmt_Chair</permission-role>
   </permission-map>
 
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -9288,46 +8736,6 @@
    <permission-role>Mgmt_Director</permission-role>
   </permission-map>
 
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -9706,46 +9114,6 @@
 
   <permission-map name="OIE: View incident report" acquired="False">
    <permission-role>Mgmt_Director</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
@@ -10871,46 +10239,6 @@
    <permission-role>Mgmt_Financial</permission-role>
    <permission-role>Mgmt_RiskMgmt</permission-role>
    <permission-role>Mgmt_Chair</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
@@ -12775,46 +12103,6 @@
    <permission-role>Mgmt_Chair</permission-role>
   </permission-map>
 
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -13184,46 +12472,6 @@
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
    <permission-role>Mgmt_Financial</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
@@ -13609,46 +12857,6 @@
    <permission-role>Mgmt_Director</permission-role>
   </permission-map>
 
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -14015,46 +13223,6 @@
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
    <permission-role>Mgmt_Financial</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of high school students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh freshmen" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh sophomores" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh juniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh seniors" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university undergraduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of other university graduate students" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of uw oshkosh program leaders" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View total number of community members" acquired="False">
-   <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit reporting fieldset" acquired="False">
@@ -15506,5 +14674,5 @@
  <script script_id="post_manager_return_to_travel_expense_report_student_evaluations_due_to" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_travel_expense_report_student_evaluations_due_to" />
  <script script_id="pre_manager_return_to_withdrawn" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_withdrawn" />
  <script script_id="post_manager_return_to_withdrawn" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_withdrawn" />
- 
+
 </dc-workflow>
