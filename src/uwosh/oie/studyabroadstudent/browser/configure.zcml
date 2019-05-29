@@ -49,8 +49,9 @@
       for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"
       class=".views.ReportingView"
       template="templates/reporting.pt"
-      permission="zope2.View"
+      permission="cmf.ModifyPortalContent"
       />
+    <!--TODO ^who all has permission to view this -->
 
   <browser:page
       name="view"
@@ -59,6 +60,15 @@
       template="templates/participantview.pt"
       permission="zope2.View"
       />
+
+  <browser:page
+      name="apply"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".views.ApplyView"
+      template="templates/apply.pt"
+      permission="zope2.View"
+      />
+    <!--TODO ^what permission will the applicants have? -->
 
     <browser:page
       name="manager_view"

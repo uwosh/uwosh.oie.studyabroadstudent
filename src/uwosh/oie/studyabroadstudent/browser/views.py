@@ -6,9 +6,12 @@ from plone.app.uuid.utils import uuidToObject
 from plone.dexterity.browser.view import DefaultView
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.file import NamedImage
+from Products.Five import BrowserView
 from uwosh.oie.studyabroadstudent.reporting import ReportUtil
+from uwosh.oie.studyabroadstudent.vocabularies import NewProgramsVocabulary
 
 import logging
+import json
 
 
 class ApplicationView(DefaultView):
@@ -166,6 +169,30 @@ class ContactView(DefaultView):
 
 class ParticipantView(DefaultView, FolderView):
     pass
+
+
+class ApplyView(BrowserView):
+
+    programID = None
+
+    def __call__(self):
+        if self.request.method == 'GET':
+            self.programID = self.request.get('program', None)
+        elif self.request.method == 'POST':
+            pass
+        return super(ApplyView, self).__call__()
+
+    def getPrograms(self):
+        programs = []
+        vocab = NewProgramsVocabulary(self.context)
+        for program_term in vocab:
+            program = {'name': program_term.title,
+                       'uid': program_term.value,
+                       'selected': False}
+            if program_term.value == self.programID:
+                program['selected'] = True
+            programs.append(program)
+        return programs
 
 
 class AttemptTransitionsPeriodicallyView(DefaultView):
