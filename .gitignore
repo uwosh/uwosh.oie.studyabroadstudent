@@ -8,6 +8,7 @@
 *~
 # dirs
 bin/
+env/
 buildout-cache/
 develop-eggs/
 eggs/

@@ -11,7 +11,6 @@ from uwosh.oie.studyabroadstudent.reporting import ReportUtil
 from uwosh.oie.studyabroadstudent.vocabularies import NewProgramsVocabulary
 
 import logging
-import json
 
 
 class ApplicationView(DefaultView):

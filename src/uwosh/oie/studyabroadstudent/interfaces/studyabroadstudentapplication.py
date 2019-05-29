@@ -4,6 +4,7 @@
 #   type, written in Dexterity instead of Archetypes
 
 from collective import dexteritytextindexer
+from plone.directives import form
 from plone.supermodel import model
 from uwosh.oie.studyabroadstudent import _
 from uwosh.oie.studyabroadstudent.vocabularies import aware_vocabulary
@@ -20,7 +21,6 @@ from uwosh.oie.studyabroadstudent.vocabularies import student_type_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_na_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_vocabulary
 from zope import schema
-from plone.directives import form
 from zope.interface import Interface
 
 

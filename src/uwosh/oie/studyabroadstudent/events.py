@@ -240,27 +240,32 @@ def _participant_update(o, event, event_type=None):
                 o.applicant_question_text5 = program.applicantQuestion5
                 # if needed, mark the answer as being potentially out of date
                 if o.applicant_question_answer1 and not (
-                    o.applicant_question_answer1.startswith(question_changed_str)
+                    o.applicant_question_answer1.startswith(
+                        question_changed_str)
                 ):
                     o.applicant_question_answer1 = question_changed_str + \
                                                    o.applicant_question_answer1
                 if o.applicant_question_answer2 and not (
-                    o.applicant_question_answer2.startswith(question_changed_str)
+                    o.applicant_question_answer2.startswith(
+                        question_changed_str)
                 ):
                     o.applicant_question_answer2 = question_changed_str + \
                                                    o.applicant_question_answer2
                 if o.applicant_question_answer3 and not (
-                    o.applicant_question_answer3.startswith(question_changed_str)
+                    o.applicant_question_answer3.startswith(
+                        question_changed_str)
                 ):
                     o.applicant_question_answer3 = question_changed_str + \
                                                    o.applicant_question_answer3
                 if o.applicant_question_answer4 and not (
-                    o.applicant_question_answer4.startswith(question_changed_str)
+                    o.applicant_question_answer4.startswith(
+                        question_changed_str)
                 ):
                     o.applicant_question_answer4 = question_changed_str + \
                                                    o.applicant_question_answer4
                 if o.applicant_question_answer5 and not (
-                    o.applicant_question_answer5.startswith(question_changed_str)
+                    o.applicant_question_answer5.startswith(
+                        question_changed_str)
                 ):
                     o.applicant_question_answer5 = question_changed_str + \
                                                    o.applicant_question_answer5
