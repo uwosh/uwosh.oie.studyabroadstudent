@@ -178,7 +178,7 @@ class ApplyView(BrowserView):
         if self.request.method == 'GET':
             self.programID = self.request.get('program', None)
         elif self.request.method == 'POST':
-            pass
+            self.create_participant()
         return super(ApplyView, self).__call__()
 
     def getPrograms(self):
@@ -192,6 +192,31 @@ class ApplyView(BrowserView):
                 program['selected'] = True
             programs.append(program)
         return programs
+
+    def create_participant(self):
+        program_ID = self.request.get('programID', None)
+        first = self.request.get('firstname', None)
+        last = self.request.get('lastname', None)
+        email = self.request.get('email', None)
+        fields = [program_ID, first, last, email]
+        if all(fields):
+            try:
+                site = api.portal.get()
+                participants_folder = site['participants']
+                data = {
+                    'firstName': first,
+                    'lastName': last,
+                    'email': email,
+                    'programName': program_ID,
+                }
+                api.content.create(
+                    type='OIEStudyAbroadParticipant',
+                    container=participants_folder,
+                    title='{0} {1}'.format(first, last),
+                    **data)
+            except Exception:
+                logger = logging.getLogger('uwosh.oie.studyabroadstudent')
+                logger.warn('Could not create partipant application.')
 
 
 class AttemptTransitionsPeriodicallyView(DefaultView):

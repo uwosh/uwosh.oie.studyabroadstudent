@@ -11,12 +11,14 @@
           This will be a basic first-step application form, a query param is used so the selection of which program
           can be pre-populated and APPLY NOW button can do so directly.  When it is POSTED, participant object will be created and the program-specific
           questions and such can be copied over before applicant ever sees confusing fields about potential questions.
-          <br><br><form action="${portal_url}/apply">
+          <br><br><form action="${portal_url}/apply" method="post">
             First name:<br>
             <input type="text" name="firstname" required /><br>
             Last name:<br>
             <input type="text" name="lastname" required /><br>
-            <select required>
+            Email:<br>
+            <input type="text" name="email" required /><br>
+            <select name="programID" required>
               <option tal:repeat="program programs"
                       tal:attributes="value program/uid;
                                       selected program/selected"
