@@ -181,6 +181,9 @@ class ApplyView(BrowserView):
     templates = {
         '0': ViewPageTemplateFile('templates/application_views/overview.pt'),
         '1': ViewPageTemplateFile('templates/application_views/step1.pt'),
+        '2': ViewPageTemplateFile('templates/application_views/step2.pt'),
+        '3': ViewPageTemplateFile('templates/application_views/step3.pt'),
+        '4': ViewPageTemplateFile('templates/application_views/step4.pt'),
     }
 
     def __call__(self):
