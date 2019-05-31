@@ -7,6 +7,7 @@ from plone.dexterity.browser.view import DefaultView
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.file import NamedImage
 from Products.Five import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from uwosh.oie.studyabroadstudent.reporting import ReportUtil
 from uwosh.oie.studyabroadstudent.vocabularies import NewProgramsVocabulary
 
@@ -14,6 +15,7 @@ import logging
 
 
 class ApplicationView(DefaultView):
+    # this is for the legacy applications
     pass
 
 
@@ -167,6 +169,7 @@ class ContactView(DefaultView):
 
 
 class ParticipantView(DefaultView, FolderView):
+    # This can be the view for reviewers/etc of the application
     pass
 
 
@@ -174,12 +177,32 @@ class ApplyView(BrowserView):
 
     programID = None
 
+    index = ViewPageTemplateFile('templates/application_views/apply.pt')
+    templates = {
+        '0': ViewPageTemplateFile('templates/application_views/overview.pt'),
+        '1': ViewPageTemplateFile('templates/application_views/step1.pt'),
+    }
+
     def __call__(self):
         if self.request.method == 'GET':
             self.programID = self.request.get('program', None)
+            step = self.request.get('step', None)
+            if step:
+                try:
+                    self.index = self.templates[step]
+                except KeyError:
+                    pass  # invalid step just show the apply view
         elif self.request.method == 'POST':
-            self.create_participant()
-        return super(ApplyView, self).__call__()
+            created = self.create_participant()
+            if created:
+                site_url = api.portal.get().absolute_url()
+                url = '{0}/apply?step=0'.format(site_url)
+                # redirect participant to their application overview
+                self.request.response.redirect(url, status=200)
+            else:
+                pass
+                # refresh with a message about something not validating
+        return self.index(self)
 
     def getPrograms(self):
         programs = []
@@ -209,14 +232,17 @@ class ApplyView(BrowserView):
                     'email': email,
                     'programName': program_ID,
                 }
-                api.content.create(
+                obj = api.content.create(
                     type='OIEStudyAbroadParticipant',
                     container=participants_folder,
                     title='{0} {1}'.format(first, last),
                     **data)
+                api.content.transition(obj, 'submit')  # go ahead to step I
+                return True
             except Exception:
                 logger = logging.getLogger('uwosh.oie.studyabroadstudent')
                 logger.warn('Could not create partipant application.')
+        return False
 
 
 class AttemptTransitionsPeriodicallyView(DefaultView):
@@ -232,4 +258,4 @@ class AttemptTransitionsPeriodicallyView(DefaultView):
 class ReportingView(DefaultView):
 
     def getReportUtil(self):
-        return ReportUtil()
+        return ReportUtil(self.context)

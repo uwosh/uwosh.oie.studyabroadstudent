@@ -4,14 +4,50 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       metal:use-macro="context/main_template/macros/master">
-
 <body>
   <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
       <div tal:define="util view/getReportUtil;
                        programTitle context/title">
         <h3>OIE Reporting for ${programTitle}</h3>
-
+        <table>
+          <tr>
+            <th>Participant Type</th>
+            <th>Count For This Program</th>
+          </tr>
+          <tr>
+            <td>High School Participants</td>
+            <td>${util/high_school_count}</td>
+          </tr>
+          <tr>
+            <td>UWO Freshman Participants</td>
+            <td>${util/uwo_freshman_count}</td>
+          </tr>
+          <tr>
+            <td>UWO Sophomore Participants</td>
+            <td>${util/uwo_sophomore_count}</td>
+          </tr>
+          <tr>
+            <td>UWO Junior Participants</td>
+            <td>${util/uwo_junior_count}</td>
+          </tr>
+          <tr>
+            <td>UWO Senior Participants</td>
+            <td>${util/uwo_senior_count}</td>
+          </tr>
+          <tr>
+            <td>UWO Graduate Participants</td>
+            <td>${util/uwo_graduate_count}</td>
+          </tr>
+          <tr>
+            <td>Other Undergraduate Participants</td>
+            <td>${util/other_undergrad_count}</td>
+          </tr>
+          <tr>
+            <td>Other Graduate Participants</td>
+            <td>${util/other_graduate_count}</td>
+          </tr>
+        </table>
       </div>
     </tal:main-macro>
   </metal:main>

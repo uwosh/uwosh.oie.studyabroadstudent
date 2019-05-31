@@ -75,93 +75,93 @@ def post_install(context):
 
 
 def create_generic_accounts(portal):
-    _create_account('kim.nguyen+Site_Admin@wildcardcorp.com',
+    _create_account('kyle.arthurs+Site_Admin@wildcardcorp.com',
                     'Site_Admin', ['Site_Admin', 'SiteAdministrator'])
 
     # program management workflow
-    _create_account('kim.nguyen+Mgmt_Director@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_Director@wildcardcorp.com',
                     'Mgmt_Director', ['Mgmt_Director', 'SiteAdministrator'])
-    _create_account('kim.nguyen+Mgmt_Admin@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_Admin@wildcardcorp.com',
                     'Mgmt_Admin', ['Mgmt_Admin'])
-    _create_account('kim.nguyen+Mgmt_Manager@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_Manager@wildcardcorp.com',
                     'Mgmt_Manager', ['Mgmt_Manager'])
-    _create_account('kim.nguyen+Mgmt_Coordinator@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_Coordinator@wildcardcorp.com',
                     'Mgmt_Coordinator', ['Mgmt_Coordinator'])
-    _create_account('kim.nguyen+Mgmt_Financial@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_Financial@wildcardcorp.com',
                     'Mgmt_Financial', ['Mgmt_Financial'])
-    _create_account('kim.nguyen+Mgmt_OIEProfessional@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_OIEProfessional@wildcardcorp.com',
                     'Mgmt_OIEProfessional', ['Mgmt_OIEProfessional'])
     # TODO duplicate?  # noqa
-    _create_account('kim.nguyen+Mgmt_OIE@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_OIE@wildcardcorp.com',
                     'Mgmt_OIE', ['Mgmt_OIE'])
     # TODO not in workflow roles  # noqa
-    _create_account('kim.nguyen+Mgmt_Intern@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_Intern@wildcardcorp.com',
                     'Mgmt_Intern', ['Mgmt_Intern'])
-    _create_account('kim.nguyen+Mgmt_Liaison@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_Liaison@wildcardcorp.com',
                     'Mgmt_Liaison', ['Mgmt_Liaison'])
-    _create_account('kim.nguyen+Mgmt_ProgramLeader@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_ProgramLeader@wildcardcorp.com',
                     'Mgmt_ProgramLeader', ['Mgmt_ProgramLeader'])
-    _create_account('kim.nguyen+Mgmt_Dean@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_Dean@wildcardcorp.com',
                     'Mgmt_Dean', ['Mgmt_Dean'])
     # TODO duplicate?  # noqa
-    _create_account('kim.nguyen+Mgmt_DeanDirector@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_DeanDirector@wildcardcorp.com',
                     'Mgmt_DeanDirector', ['Mgmt_DeanDirector'])
-    _create_account('kim.nguyen+Mgmt_Chair@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_Chair@wildcardcorp.com',
                     'Mgmt_Chair', ['Mgmt_Chair'])
-    _create_account('kim.nguyen+Mgmt_Provost@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_Provost@wildcardcorp.com',
                     'Mgmt_Provost', ['Mgmt_Provost'])
-    _create_account('kim.nguyen+Mgmt_HR@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_HR@wildcardcorp.com',
                     'Mgmt_HR', ['Mgmt_HR'])
-    _create_account('kim.nguyen+Mgmt_Access@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_Access@wildcardcorp.com',
                     'Mgmt_Access', ['Mgmt_Access'])
-    _create_account('kim.nguyen+Mgmt_Emergency@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_Emergency@wildcardcorp.com',
                     'Mgmt_Emergency', ['Mgmt_Emergency'])
-    _create_account('kim.nguyen+Mgmt_CourseBuilder@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_CourseBuilder@wildcardcorp.com',
                     'Mgmt_CourseBuilder', ['Mgmt_CourseBuilder'])
-    _create_account('kim.nguyen+Mgmt_AdminServices@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_AdminServices@wildcardcorp.com',
                     'Mgmt_AdminServices', ['Mgmt_AdminServices'])
-    _create_account('kim.nguyen+Mgmt_LeaderReview@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_LeaderReview@wildcardcorp.com',
                     'Mgmt_LeaderReview', ['Mgmt_LeaderReview'])
-    _create_account('kim.nguyen+Mgmt_CourseBuilder@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_CourseBuilder@wildcardcorp.com',
                     'Mgmt_CourseBuilder', ['Mgmt_CourseBuilder'])
-    _create_account('kim.nguyen+Mgmt_RiskMgmt@wildcardcorp.com',
+    _create_account('kyle.arthurs+Mgmt_RiskMgmt@wildcardcorp.com',
                     'Mgmt_RiskMgmt', ['Mgmt_RiskMgmt'])
 
     # participant workflow
-    _create_account('kim.nguyen+Participant_Director@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_Director@wildcardcorp.com',
                     'Participant_Director', ['Participant_Director'])
-    _create_account('kim.nguyen+Participant_Manager@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_Manager@wildcardcorp.com',
                     'Participant_Manager', ['Participant_Manager'])
-    _create_account('kim.nguyen+Participant_Coordinator@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_Coordinator@wildcardcorp.com',
                     'Participant_Coordinator', ['Participant_Coordinator'])
-    _create_account('kim.nguyen+Participant_Financial@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_Financial@wildcardcorp.com',
                     'Participant_Financial', ['Participant_Financial'])
-    _create_account('kim.nguyen+Participant_OIEProfessional@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_OIEProfessional@wildcardcorp.com', # noqa
                     'Participant_OIEProfessional',
                     ['Participant_OIEProfessional'])
-    _create_account('kim.nguyen+Participant_Intern@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_Intern@wildcardcorp.com',
                     'Participant_Intern', ['Participant_Intern'])
-    _create_account('kim.nguyen+Participant_Liaison@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_Liaison@wildcardcorp.com',
                     'Participant_Liaison', ['Participant_Liaison'])
-    _create_account('kim.nguyen+Participant_ProgramLeader@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_ProgramLeader@wildcardcorp.com',
                     'Participant_ProgramLeader', ['Participant_ProgramLeader'])
-    _create_account('kim.nguyen+Participant_FinancialAid@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_FinancialAid@wildcardcorp.com',
                     'Participant_FinancialAid', ['Participant_FinancialAid'])
-    _create_account('kim.nguyen+Participant_Provost@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_Provost@wildcardcorp.com',
                     'Participant_Provost', ['Participant_Provost'])
-    _create_account('kim.nguyen+Participant_DeanOfStudents@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_DeanOfStudents@wildcardcorp.com',
                     'Participant_DeanOfStudents',
                     ['Participant_DeanOfStudents'])
-    _create_account('kim.nguyen+Participant_Health@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_Health@wildcardcorp.com',
                     'Participant_Health', ['Participant_Health'])
-    _create_account('kim.nguyen+Participant_StudentAccounts@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_StudentAccounts@wildcardcorp.com', # noqa
                     'Participant_StudentAccounts',
                     ['Participant_StudentAccounts'])
-    _create_account('kim.nguyen+Participant_Reference@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_Reference@wildcardcorp.com',
                     'Participant_Reference', ['Participant_Reference'])
-    _create_account('kim.nguyen+Participant_RiskMgmt@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_RiskMgmt@wildcardcorp.com',
                     'Participant_RiskMgmt', ['Participant_RiskMgmt'])
-    _create_account('kim.nguyen+Participant_Applicant@wildcardcorp.com',
+    _create_account('kyle.arthurs+Participant_Applicant@wildcardcorp.com',
                     'Participant_Applicant', ['Participant_Applicant'])
 
 

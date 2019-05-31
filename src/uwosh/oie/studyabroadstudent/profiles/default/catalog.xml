@@ -3,6 +3,20 @@
   <index name="transition" meta_type="FieldIndex">
     <indexed_attr value="transition"/>
   </index>
-
+  <index name="educationLevel" meta_type="FieldIndex">
+    <indexed_attr value="educationLevel"/>
+  </index>
+  <index name="educationLevel" meta_type="FieldIndex">
+    <indexed_attr value="educationLevel"/>
+  </index>
+  <index name="university" meta_type="FieldIndex">
+    <indexed_attr value="university"/>
+  </index>
+  <index name="programName" meta_type="FieldIndex">
+    <indexed_attr value="programName"/>
+  </index>
   <column value="transition" />
+  <column value="educationLevel" />
+  <column value="university" />
+  <column value="programName" />
 </object>

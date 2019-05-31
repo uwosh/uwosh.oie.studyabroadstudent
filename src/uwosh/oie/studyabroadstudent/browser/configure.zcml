@@ -32,7 +32,7 @@
       name="view"
       for="..interfaces.studyabroadstudentapplication.IOIEStudyAbroadStudentApplication"
       class=".views.ApplicationView"
-      template="templates/applicationview.pt"
+      template="templates/application_views/legacy.pt"
       permission="zope2.View"
       />
 
@@ -65,7 +65,6 @@
       name="apply"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".views.ApplyView"
-      template="templates/apply.pt"
       permission="zope2.View"
       />
     <!--TODO ^what permission will the applicants have? -->
