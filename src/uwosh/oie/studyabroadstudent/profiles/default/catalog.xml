@@ -1,11 +1,20 @@
 <?xml version="1.0"?>
 <object name="portal_catalog">
+  <!--Program Indices-->
+  <index name="progam_type" meta_type="FieldIndex">
+    <indexed_attr value="progam_type"/>
+  </index>
+  <index name="calendar_year" meta_type="FieldIndex">
+    <indexed_attr value="calendar_year"/>
+  </index>
   <index name="transition" meta_type="FieldIndex">
     <indexed_attr value="transition"/>
   </index>
-  <index name="educationLevel" meta_type="FieldIndex">
-    <indexed_attr value="educationLevel"/>
-  </index>
+  <column value="transition" />
+  <column value="progam_type" />
+  <column value="calendar_year" />
+
+  <!--Participant Indices-->
   <index name="educationLevel" meta_type="FieldIndex">
     <indexed_attr value="educationLevel"/>
   </index>
@@ -15,7 +24,6 @@
   <index name="programName" meta_type="FieldIndex">
     <indexed_attr value="programName"/>
   </index>
-  <column value="transition" />
   <column value="educationLevel" />
   <column value="university" />
   <column value="programName" />

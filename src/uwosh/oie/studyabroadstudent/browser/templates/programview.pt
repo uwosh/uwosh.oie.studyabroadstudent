@@ -65,7 +65,7 @@
           }
         </style>
         <div class="apply-now center">
-          <h3><a class="button" href="${portal_url}/apply?program=${context/UID}"><nobr>APPLY NOW</nobr></a></h3>
+          <h3><a class="button" href="${context/absolute_url}/apply"><nobr>APPLY NOW</nobr></a></h3>
         </div>
 
         <div class="eligibility">

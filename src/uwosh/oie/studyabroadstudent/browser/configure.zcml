@@ -63,7 +63,7 @@
 
   <browser:page
       name="apply"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"
       class=".views.ApplyView"
       permission="zope2.View"
       />

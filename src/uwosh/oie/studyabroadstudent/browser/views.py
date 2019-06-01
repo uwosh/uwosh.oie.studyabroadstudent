@@ -175,8 +175,6 @@ class ParticipantView(DefaultView, FolderView):
 
 class ApplyView(BrowserView):
 
-    programID = None
-
     index = ViewPageTemplateFile('templates/application_views/apply.pt')
     templates = {
         '0': ViewPageTemplateFile('templates/application_views/overview.pt'),
@@ -188,7 +186,6 @@ class ApplyView(BrowserView):
 
     def __call__(self):
         if self.request.method == 'GET':
-            self.programID = self.request.get('program', None)
             step = self.request.get('step', None)
             if step:
                 try:
@@ -198,10 +195,10 @@ class ApplyView(BrowserView):
         elif self.request.method == 'POST':
             created = self.create_participant()
             if created:
-                site_url = api.portal.get().absolute_url()
-                url = '{0}/apply?step=0'.format(site_url)
+                url = '{0}/apply?step=0'.format(self.context.absoluteURL())
                 # redirect participant to their application overview
                 self.request.response.redirect(url, status=200)
+                return self.request.response
             else:
                 pass
                 # refresh with a message about something not validating
@@ -214,13 +211,13 @@ class ApplyView(BrowserView):
             program = {'name': program_term.title,
                        'uid': program_term.value,
                        'selected': False}
-            if program_term.value == self.programID:
+            if program_term.value == self.context.UID():
                 program['selected'] = True
             programs.append(program)
         return programs
 
     def create_participant(self):
-        program_ID = self.request.get('programID', None)
+        program_ID = self.context.UID()
         first = self.request.get('firstname', None)
         last = self.request.get('lastname', None)
         email = self.request.get('email', None)
