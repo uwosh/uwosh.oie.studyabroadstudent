@@ -8,10 +8,8 @@
     <metal:main fill-slot="main">
       <tal:main-macro metal:define-macro="main">
         <div tal:define="programs view/getPrograms">
-          This will be a basic first-step application form, a query param is used so the selection of which program
-          can be pre-populated and APPLY NOW button can do so directly.  When it is POSTED, participant object will be created and the program-specific
-          questions and such can be copied over before applicant ever sees confusing fields about potential questions.
-          <br><br><form action="${portal_url}/apply" method="post">
+          TODO: Text of this view
+          <br><br><form method="post">
             First name:<br>
             <input type="text" name="firstname" required /><br>
             Last name:<br>

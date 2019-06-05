@@ -2342,3 +2342,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=u'will be copied from the selected calendar year on first save',  # noqa
         required=False,
     )
+
+
+class IOIEStudyAbroadProgramsFolder(Interface):
+    pass

@@ -12,6 +12,7 @@ from uwosh.oie.studyabroadstudent.interfaces.liaison import IOIELiaison  # noqa
 from uwosh.oie.studyabroadstudent.interfaces.participant import IOIEStudyAbroadParticipant  # noqa
 from uwosh.oie.studyabroadstudent.interfaces.programleader import IOIEProgramLeader  # noqa
 from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import IOIEStudyAbroadProgram  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import IOIEStudyAbroadProgramsFolder  # noqa
 from uwosh.oie.studyabroadstudent.interfaces.studyabroadstudentapplication import IOIEStudyAbroadStudentApplication  # noqa
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 

@@ -5,7 +5,9 @@ from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.registry.interfaces import IRegistry
 from Products.CMFPlone.interfaces import INonInstallable
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadProgramsFolder  # noqa
 from zope.component import queryUtility
+from zope.interface import alsoProvides
 from zope.interface import implementer
 
 import random
@@ -37,7 +39,8 @@ def create_toplevel_folder(portal,
                            title,
                            id,
                            ftis,
-                           publish_but_exclude=False):
+                           publish_but_exclude=False,
+                           also_provides=[]):
     if id not in portal_ids:
         folder = api.content.create(
             type='Folder',
@@ -46,6 +49,7 @@ def create_toplevel_folder(portal,
         )
     else:
         folder = portal[id]
+    alsoProvides(folder, also_provides)
     constrain_types(folder, ftis)
     if publish_but_exclude:
         if folder.exclude_from_nav is not True:
@@ -248,7 +252,8 @@ def populate_toplevel_folders(portal, portal_ids):
                            publish_but_exclude=True)
     create_toplevel_folder(portal, portal_ids, 'Programs', 'programs',
                            ['OIEStudyAbroadProgram'],
-                           publish_but_exclude=True)
+                           publish_but_exclude=True,
+                           also_provides=[IOIEStudyAbroadProgramsFolder])
     create_toplevel_folder(portal, portal_ids, 'People', 'people',
                            ['OIEContact', 'OIELiaison', 'OIEProgramLeader'],
                            publish_but_exclude=True)

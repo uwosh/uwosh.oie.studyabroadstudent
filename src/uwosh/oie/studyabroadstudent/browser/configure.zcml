@@ -100,4 +100,13 @@
     class=".views.AttemptTransitionsPeriodicallyView"
     />
 
+  <browser:page
+    name="discover"
+    for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgramsFolder"
+    class=".views.ProgramSearchView"
+    template="templates/programsearch.pt"
+    permission="zope2.View"
+    layer="..interfaces.IUwoshOieStudyabroadstudentLayer"
+    />
+
 </configure>

@@ -4,6 +4,12 @@
     xmlns:monkey="http://namespaces.plone.org/monkey"
     i18n_domain="">
 
+  <!--Program Indices-->
+  <adapter name="calendar_year" factory=".indexers.calendar_year" />
+  <adapter name="program_type" factory=".indexers.program_type" />
+
+  <!--Participant Indices-->
   <adapter name="programName" factory=".indexers.programName" />
+  <adapter name="educationLevel" factory=".indexers.educationLevel" />
 
 </configure>

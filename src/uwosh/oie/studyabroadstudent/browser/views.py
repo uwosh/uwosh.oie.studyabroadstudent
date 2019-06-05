@@ -11,7 +11,13 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from uwosh.oie.studyabroadstudent.reporting import ReportUtil
 from uwosh.oie.studyabroadstudent.vocabularies import NewProgramsVocabulary
 
+import base64
+import json
 import logging
+import Missing
+
+
+logger = logging.getLogger('uwosh.oie.studyabroadstudent')
 
 
 class ApplicationView(DefaultView):
@@ -146,6 +152,39 @@ class ProgramView(DefaultView, FolderView):
         return self.context.absolute_url() + '/manager_view'
 
 
+class ProgramSearchView(BrowserView):
+
+    def get_program_data(self):
+        programs = []
+        catalog = api.portal.get_tool('portal_catalog')
+        brains = catalog(portal_type='OIEStudyAbroadProgram',
+                         review_state='application-intake-in-progress')
+        for brain in brains:
+            try:
+                program = {
+                            'title': brain.Title,
+                            'description': brain.description,
+                            'uid': brain.UID,
+                            'url': brain.getURL(),
+                            'programType': brain.program_type,
+                            'calendarYear': brain.calendar_year,
+                           }
+                programs.append(program)
+            except AttributeError:
+                logger.warn('Excluding program {0} from '
+                            'search view, not all searchable fields were '
+                            'indexed.'.format(brain.Title))
+
+        def handle_missing(obj):
+            if obj == Missing.Value:
+                return None
+            return obj
+
+        string = json.dumps(programs, default=handle_missing)
+        encoded = base64.b64encode(string)
+        return encoded
+
+
 class CooperatingPartnerView(DefaultView):
     def primary_contact(self):
         primary_contact = getattr(self.context, 'primary_contact', None)
@@ -195,7 +234,7 @@ class ApplyView(BrowserView):
         elif self.request.method == 'POST':
             created = self.create_participant()
             if created:
-                url = '{0}/apply?step=0'.format(self.context.absoluteURL())
+                url = '{0}/apply?step=0'.format(self.context.absolute_url())
                 # redirect participant to their application overview
                 self.request.response.redirect(url, status=200)
                 return self.request.response
@@ -240,7 +279,6 @@ class ApplyView(BrowserView):
                 api.content.transition(obj, 'submit')  # go ahead to step I
                 return True
             except Exception:
-                logger = logging.getLogger('uwosh.oie.studyabroadstudent')
                 logger.warn('Could not create partipant application.')
         return False
 
