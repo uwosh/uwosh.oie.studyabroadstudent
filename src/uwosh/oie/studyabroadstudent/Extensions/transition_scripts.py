@@ -2,6 +2,7 @@
 
 from Products.CMFCore.utils import getToolByName
 from uwosh.oie.studyabroadstudent.exceptions import StateError
+from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadProgram
 from uwosh.oie.studyabroadstudent.interfaces.directives import REQUIRED_IN_STATE_KEY  # noqa
 from uwosh.oie.studyabroadstudent.interfaces.directives import REQUIRED_VALUE_IN_STATE_KEY  # noqa
@@ -10,905 +11,37 @@ from zLOG import INFO
 from zLOG import LOG
 
 
-DEFAULT_NOTIFICATION_EMAIL_ADDRESS = 'tknguyen+oie@mac.com'
+DEFAULT_NOTIFICATION_EMAIL_ADDRESS = 'kyle.arthurs+oie@wildcardcorp.com'
 
 
-def pre_submit_to_chair(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
+# Participant Transition Scripts
+def participant_pre_transition(self, state_change, **kw):
+    check_for_required_values_by_state(self,
+                                       state_change,
+                                       {},
+                                       IOIEStudyAbroadParticipant)
+    check_for_required_specific_values_by_state(self,
+                                                state_change,
+                                                {},
+                                                IOIEStudyAbroadParticipant)
 
 
-def post_submit_to_chair(self, state_change, **kw):
+def participant_post_transition(self, state_change, **kw):
     afterTransition(state_change.object, state_change.new_state.id)
     sendTransitionMessage(self, state_change)
 
 
-def pre_submit_to_dean(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
+# Program Transition Scripts
+def program_pre_transition(self, state_change, **kw):
+    check_for_required_values_by_state(self,
+                                       state_change,
+                                       {})
+    check_for_required_specific_values_by_state(self,
+                                                state_change,
+                                                {})
 
 
-def post_submit_to_dean(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_announce_programmatic_for_fee_change(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_announce_programmatic_for_fee_change(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_approve_fee(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_approve_fee(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_approve_proposal(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_approve_proposal(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_approve_provosts_office(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_approve_provosts_office(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_approve_rfp(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_approve_rfp(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_archive_program(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_archive_program(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_arrive_non_sponsored_program(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_arrive_non_sponsored_program(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_arrive_sponsored_program(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_arrive_sponsored_program(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_bill_for_final_payment(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_bill_for_final_payment(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_bill_for_final_payment_programs_with_no_leader(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_bill_for_final_payment_programs_with_no_leader(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_cancel(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_cancel(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_cancel_after_change(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_cancel_after_change(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_confirm_briefing_completed(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_confirm_briefing_completed(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_confirm_orientation_completed(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_confirm_orientation_completed(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_confirm_return(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_confirm_return(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_confirm_safe_arrival(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_confirm_safe_arrival(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_confirm_ter_received(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_confirm_ter_received(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_confirm_to_run(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_confirm_to_run(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_confirm_travel_delay(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_confirm_travel_delay(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_decline(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_decline(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_depart(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_depart(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_depart_non_sponsored_program(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_depart_non_sponsored_program(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_depart_sponsored_program(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_depart_sponsored_program(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_develop_rfp(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_develop_rfp(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_end_incident(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_end_incident(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_pending_approval_of_alternate_course(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_pending_approval_of_alternate_course(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_pending_provider_proposal(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_pending_provider_proposal(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_process_refunds(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_process_refunds(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_publish_fee(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_publish_fee(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_publish_final_fee(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_publish_final_fee(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_report_incident(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_report_incident(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_return_rfp_to_program_manager(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_return_rfp_to_program_manager(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_return_to_initial(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_return_to_initial(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_initial(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_initial(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_return_to_oie(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_return_to_oie(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_return_to_oie_review(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_return_to_oie_review(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_return_to_rfp_under_development(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_return_to_rfp_under_development(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_returned_non_sponsored_program(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_returned_non_sponsored_program(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_returned_sponsored_program(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_returned_sponsored_program(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_review_provider_proposals(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_review_provider_proposals(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_schedule_operational_briefing(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_schedule_operational_briefing(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_send_bills_for_initial_payment(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_send_bills_for_initial_payment(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_send_for_fee_change(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_send_for_fee_change(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_send_for_programmatic_change(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_send_for_programmatic_change(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_submit_fee_for_liaison_review(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_submit_fee_for_liaison_review(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_submit_non_sponsored_program(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_submit_non_sponsored_program(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_submit_proposal_to_liaison(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_submit_proposal_to_liaison(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_submit_rfp_for_liaison_review(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_submit_rfp_for_liaison_review(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_submit_sponsored_program(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_submit_sponsored_program(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_submit_to_oie(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_submit_to_oie(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_submit_to_provost(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_submit_to_provost(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_suspend(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_suspend(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_travel_advance_ready(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_travel_advance_ready(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_withdraw_application(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_withdraw_application(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_applicants_considering_change(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_applicants_considering_change(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_application_intake_in_progress(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_application_intake_in_progress(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_cancelled(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_cancelled(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_declined(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_declined(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_final_payment_billing_in_progress(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_final_payment_billing_in_progress(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_final_program_accounting_in_progress(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_final_program_accounting_in_progress(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_incident_in_progress(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_incident_in_progress(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_initial_payment_billing_in_progress(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_initial_payment_billing_in_progress(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_pending_arrival_abroad(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_pending_arrival_abroad(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_pending_chair_review(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_pending_chair_review(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_pending_dean_unit_director_review(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_pending_dean_unit_director_review(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_pending_discussions_with_program_manager(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_pending_discussions_with_program_manager(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_pending_final_program_fee(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_pending_final_program_fee(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_pending_oie_review(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_pending_oie_review(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_pending_program_departure(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_pending_program_departure(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_pending_program_fee_determination_by_oie(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_pending_program_fee_determination_by_oie(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_pending_program_leader_operational_briefing(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_pending_program_leader_operational_briefing(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_pending_program_leader_orientation(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_pending_program_leader_orientation(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_pending_provider_responses(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_pending_provider_responses(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_pending_provost_review(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_pending_provost_review(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_pending_travel_advance(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_pending_travel_advance(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_process_refunds_budget_transfers(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_process_refunds_budget_transfers(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_program_completed(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_program_completed(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_program_fee_pending_publication(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_program_fee_pending_publication(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_program_fee_under_liaison_review(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_program_fee_under_liaison_review(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_program_in_progress(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_program_in_progress(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_provider_proposals_under_liaison_review(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_provider_proposals_under_liaison_review(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_provider_proposals_under_oie_review(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_provider_proposals_under_oie_review(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_request_for_proposals_under_development(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_request_for_proposals_under_development(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_request_for_proposals_under_liaison_review(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_request_for_proposals_under_liaison_review(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_reviewing_final_program_details(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_reviewing_final_program_details(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_suspended(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_suspended(self, state_change, **kw):
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_travel_expense_report_student_evaluations_due_to(self, state_change, **kw):  # noqa
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_travel_expense_report_student_evaluations_due_to(self, state_change, **kw):  # noqa
-    afterTransition(state_change.object, state_change.new_state.id)
-    sendTransitionMessage(self, state_change)
-
-
-def pre_manager_return_to_withdrawn(self, state_change, **kw):
-    check_program_for_required_values_by_state(self, state_change, {})
-    check_program_for_required_specific_values_by_state(self, state_change, {})
-
-
-def post_manager_return_to_withdrawn(self, state_change, **kw):
+def program_post_transition(self, state_change, **kw):
     afterTransition(state_change.object, state_change.new_state.id)
     sendTransitionMessage(self, state_change)
 
@@ -918,10 +51,6 @@ def afterTransition(application, state_id):
 
 
 def getEmailMessageTemplate(self, transition, onFailure=False):
-    if onFailure:
-        onFailure = True
-    else:
-        onFailure = False
     templates = self.queryCatalog({
         'portal_type': 'OIEEmailTemplate',
         'transition': transition,
@@ -1062,10 +191,11 @@ def sendTransitionMessage(self, state_change, cc=[], onFailure=False):
             state_change.transition.id, mTo, mSubj, onFailure, emailTemplate))  # noqa
 
 
-def check_program_for_required_values_by_state(
+def check_for_required_values_by_state(
         self,
         state_change,
-        alreadyMissingValues={}):
+        alreadyMissingValues={},
+        interface=IOIEStudyAbroadProgram):
     """Find all fields that must have values before
        we can move into the new state"""
     obj = state_change.object
@@ -1076,7 +206,7 @@ def check_program_for_required_values_by_state(
         missingValues = alreadyMissingValues
 
     requiredFields = []
-    required_in_state = IOIEStudyAbroadProgram.queryTaggedValue(REQUIRED_IN_STATE_KEY)  # noqa
+    required_in_state = interface.queryTaggedValue(REQUIRED_IN_STATE_KEY)  # noqa
     if required_in_state:
         required_fields = required_in_state.keys()
     else:
@@ -1092,7 +222,7 @@ def check_program_for_required_values_by_state(
 
     for f in requiredFields:
         value = getattr(obj, f, None)
-        field = IOIEStudyAbroadProgram.get(f)
+        field = interface.get(f)
         field_title = field.title
         if not value:
             message = "the field '%s' is required for state '%s' but has no value" % (field_title, new_state_id)  # noqa
@@ -1109,10 +239,11 @@ def check_program_for_required_values_by_state(
             raise StateError, message  # noqa
 
 
-def check_program_for_required_specific_values_by_state(
+def check_for_required_specific_values_by_state(
         self,
         state_change,
-        alreadyMissingValues={}):
+        alreadyMissingValues={},
+        interface=IOIEStudyAbroadProgram):
     """Find all fields that must have specific values before
        we can move into the new state"""
     obj = state_change.object
@@ -1123,7 +254,7 @@ def check_program_for_required_specific_values_by_state(
         missingValues = alreadyMissingValues
 
     requiredValueFields = []
-    required_value_in_state = IOIEStudyAbroadProgram.queryTaggedValue(REQUIRED_VALUE_IN_STATE_KEY)  # noqa
+    required_value_in_state = interface.queryTaggedValue(REQUIRED_VALUE_IN_STATE_KEY)  # noqa
     if required_value_in_state:
         required_value_fields = required_value_in_state.keys()
     else:
@@ -1144,7 +275,7 @@ def check_program_for_required_specific_values_by_state(
 
     for f, must_be in requiredValueFields:
         value = getattr(obj, f, None)
-        field = IOIEStudyAbroadProgram.get(f)
+        field = interface.get(f)
         field_title = field.title
         if isinstance(must_be, str):
             # e.g., to handle DateTimes

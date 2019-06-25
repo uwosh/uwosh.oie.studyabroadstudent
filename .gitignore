@@ -5,6 +5,7 @@
 *.mo
 *.py?
 *.swp
+*.pyc
 *~
 # dirs
 bin/

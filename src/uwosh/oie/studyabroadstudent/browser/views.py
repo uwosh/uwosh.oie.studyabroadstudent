@@ -157,8 +157,9 @@ class ProgramSearchView(BrowserView):
     def get_program_data(self):
         programs = []
         catalog = api.portal.get_tool('portal_catalog')
-        brains = catalog(portal_type='OIEStudyAbroadProgram',
-                         review_state='application-intake-in-progress')
+        # TODO brains = catalog(portal_type='OIEStudyAbroadProgram',  # noqa
+        #                 review_state='application-intake-in-progress')
+        brains = catalog(portal_type='OIEStudyAbroadProgram')
         for brain in brains:
             try:
                 program = {
@@ -168,6 +169,7 @@ class ProgramSearchView(BrowserView):
                             'url': brain.getURL(),
                             'programType': brain.program_type,
                             'calendarYear': brain.calendar_year,
+                            'countries': json.loads(brain.countries),
                            }
                 programs.append(program)
             except AttributeError:

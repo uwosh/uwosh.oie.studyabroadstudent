@@ -95,10 +95,8 @@ def create_generic_accounts(portal):
                     'Mgmt_Financial', ['Mgmt_Financial'])
     _create_account('kyle.arthurs+Mgmt_OIEProfessional@wildcardcorp.com',
                     'Mgmt_OIEProfessional', ['Mgmt_OIEProfessional'])
-    # TODO duplicate?  # noqa
     _create_account('kyle.arthurs+Mgmt_OIE@wildcardcorp.com',
                     'Mgmt_OIE', ['Mgmt_OIE'])
-    # TODO not in workflow roles  # noqa
     _create_account('kyle.arthurs+Mgmt_Intern@wildcardcorp.com',
                     'Mgmt_Intern', ['Mgmt_Intern'])
     _create_account('kyle.arthurs+Mgmt_Liaison@wildcardcorp.com',
@@ -107,7 +105,6 @@ def create_generic_accounts(portal):
                     'Mgmt_ProgramLeader', ['Mgmt_ProgramLeader'])
     _create_account('kyle.arthurs+Mgmt_Dean@wildcardcorp.com',
                     'Mgmt_Dean', ['Mgmt_Dean'])
-    # TODO duplicate?  # noqa
     _create_account('kyle.arthurs+Mgmt_DeanDirector@wildcardcorp.com',
                     'Mgmt_DeanDirector', ['Mgmt_DeanDirector'])
     _create_account('kyle.arthurs+Mgmt_Chair@wildcardcorp.com',

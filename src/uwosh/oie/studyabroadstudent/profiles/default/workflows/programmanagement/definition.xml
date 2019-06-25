@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="programmanagement" title="ProgramManagement" description=" - Simple workflow that is useful for basic web sites. - Things start out as private, and can either be submitted for review, or published directly. - The creator of a content item can edit the item even after it is published." state_variable="review_state"         initial_state="initial" manager_bypass="False" >
+<dc-workflow workflow_id="programmanagement" title="ProgramManagement" description="UWO OIE Program Workflow" state_variable="review_state" initial_state="initial" manager_bypass="False" >
 
  <permission>Access contents information</permission>
  <permission>Change portal events</permission>
@@ -13484,7 +13484,7 @@
   </permission-map>
 
  </state>
- <transition transition_id="announce-programmatic-or-fee-change" title="Announce Programmatic or Fee Change" new_state="applicants-considering-change" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="announce-programmatic-or-fee-change" title="Announce Programmatic or Fee Change" new_state="applicants-considering-change" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=announce-programmatic-or-fee-change" category="workflow" icon="">Announce Programmatic or Fee Change</action>
   <guard >
    <guard-role>Mgmt_Coordinator</guard-role>
@@ -13494,7 +13494,7 @@
   </guard>
 
  </transition>
- <transition transition_id="approve-fee" title="Approve Fee" new_state="program-fee-pending-publication" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="approve-fee" title="Approve Fee" new_state="program-fee-pending-publication" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=approve-fee" category="workflow" icon="">Approve Fee</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13504,7 +13504,7 @@
   </guard>
 
  </transition>
- <transition transition_id="approve-proposal" title="Approve Proposal" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="approve-proposal" title="Approve Proposal" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=approve-proposal" category="workflow" icon="">Approve Proposal</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13514,7 +13514,7 @@
   </guard>
 
  </transition>
- <transition transition_id="approve-provosts-office" title="Approve (Provost's Office)" new_state="pending-discussions-with-program-manager" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="approve-provosts-office" title="Approve (Provost's Office)" new_state="pending-discussions-with-program-manager" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=approve-provosts-office" category="workflow" icon="">Approve (Provost's Office)</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13524,7 +13524,7 @@
   </guard>
 
  </transition>
- <transition transition_id="approve-rfp" title="Approve RFP" new_state="pending-provider-responses" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="approve-rfp" title="Approve RFP" new_state="pending-provider-responses" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=approve-rfp" category="workflow" icon="">Approve RFP</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13534,7 +13534,7 @@
   </guard>
 
  </transition>
- <transition transition_id="archive-program" title="Archive Program" new_state="program-completed" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="archive-program" title="Archive Program" new_state="program-completed" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=archive-program" category="workflow" icon="">Archive Program</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13544,7 +13544,7 @@
   </guard>
 
  </transition>
- <transition transition_id="arrive-non-sponsored-program" title="Arrive-Non-sponsored Program" new_state="program-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="arrive-non-sponsored-program" title="Arrive-Non-sponsored Program" new_state="program-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <description>TRIGGER=When MGMT PORTAL's "On-site Program Leader", "Program Leadership" = "no"; transition occurs on the 2nd date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=arrive-non-sponsored-program" category="workflow" icon="">Arrive-Non-sponsored Program</action>
   <guard >
@@ -13554,7 +13554,7 @@
   </guard>
 
  </transition>
- <transition transition_id="arrive-sponsored-program" title="Arrive-Sponsored Program" new_state="program-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="arrive-sponsored-program" title="Arrive-Sponsored Program" new_state="program-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <description>TRIGGER=When MGMT PORTAL's "On-site Program Leader", "Program Leadership" = "no"; transition occurs on the 2nd date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=arrive-sponsored-program" category="workflow" icon="">Arrive-Sponsored Program</action>
   <guard >
@@ -13564,7 +13564,7 @@
   </guard>
 
  </transition>
- <transition transition_id="bill-for-final-payment" title="Bill for Final Payment (groups with leader)" new_state="pending-program-leader-orientation" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="bill-for-final-payment" title="Bill for Final Payment (groups with leader)" new_state="pending-program-leader-orientation" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=bill-for-final-payment" category="workflow" icon="">Bill for Final Payment (groups with leader)</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13574,7 +13574,7 @@
 </guard>
 
  </transition>
- <transition transition_id="bill-for-final-payment-programs-with-no-leader" title="Bill for Final Payment (programs with no leader)" new_state="pending-program-departure" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="bill-for-final-payment-programs-with-no-leader" title="Bill for Final Payment (programs with no leader)" new_state="pending-program-departure" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=bill-for-final-payment-programs-with-no-leader" category="workflow" icon="">Bill for Final Payment (programs with no leader)</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13584,7 +13584,7 @@
   </guard>
 
  </transition>
- <transition transition_id="cancel" title="Cancel" new_state="cancelled" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="cancel" title="Cancel" new_state="cancelled" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=cancel" category="workflow" icon="">Cancel</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13594,7 +13594,7 @@
   </guard>
 
  </transition>
- <transition transition_id="cancel-after-change" title="Cancel after Change" new_state="cancelled" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="cancel-after-change" title="Cancel after Change" new_state="cancelled" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=cancel-after-change" category="workflow" icon="">Cancel after Change</action>
   <guard >
    <guard-role>Mgmt_Coordinator</guard-role>
@@ -13604,7 +13604,7 @@
   </guard>
 
  </transition>
- <transition transition_id="confirm-briefing-completed" title="Confirm Briefing Completed" new_state="pending-program-departure" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="confirm-briefing-completed" title="Confirm Briefing Completed" new_state="pending-program-departure" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-briefing-completed" category="workflow" icon="">Confirm Briefing Completed</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13614,7 +13614,7 @@
   </guard>
 
  </transition>
- <transition transition_id="confirm-orientation-completed" title="Confirm Orientation Completed" new_state="pending-travel-advance" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="confirm-orientation-completed" title="Confirm Orientation Completed" new_state="pending-travel-advance" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-orientation-completed" category="workflow" icon="">Confirm Orientation Completed</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13624,7 +13624,7 @@
   </guard>
 
  </transition>
- <transition transition_id="confirm-return" title="Confirm Return" new_state="travel-expense-report-student-evaluations-due-to" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="confirm-return" title="Confirm Return" new_state="travel-expense-report-student-evaluations-due-to" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-return" category="workflow" icon="">Confirm Return</action>
   <guard >
    <guard-role>Mgmt_Coordinator</guard-role>
@@ -13635,7 +13635,7 @@
   </guard>
 
  </transition>
- <transition transition_id="confirm-safe-arrival" title="Confirm Safe Arrival" new_state="program-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="confirm-safe-arrival" title="Confirm Safe Arrival" new_state="program-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-safe-arrival" category="workflow" icon="">Confirm Safe Arrival</action>
   <guard >
    <guard-role>Mgmt_Coordinator</guard-role>
@@ -13647,7 +13647,7 @@
   </guard>
 
  </transition>
- <transition transition_id="confirm-ter-received" title="Confirm TER Received" new_state="final-program-accounting-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="confirm-ter-received" title="Confirm TER Received" new_state="final-program-accounting-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-ter-received" category="workflow" icon="">Confirm TER Received</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13657,7 +13657,7 @@
   </guard>
 
  </transition>
- <transition transition_id="confirm-to-run" title="Confirm to Run" new_state="initial-payment-billing-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="confirm-to-run" title="Confirm to Run" new_state="initial-payment-billing-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-to-run" category="workflow" icon="">Confirm to Run</action>
   <guard >
    <guard-role>Mgmt_Coordinator</guard-role>
@@ -13667,7 +13667,7 @@
   </guard>
 
  </transition>
- <transition transition_id="confirm-travel-delay" title="Confirm Travel Delay" new_state="pending-program-departure" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="confirm-travel-delay" title="Confirm Travel Delay" new_state="pending-program-departure" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-travel-delay" category="workflow" icon="">Confirm Travel Delay</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13676,7 +13676,7 @@
   </guard>
 
  </transition>
- <transition transition_id="decline" title="Decline" new_state="declined" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="decline" title="Decline" new_state="declined" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=decline" category="workflow" icon="">Decline</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13688,7 +13688,7 @@
   </guard>
 
  </transition>
- <transition transition_id="depart" title="Depart" new_state="pending-arrival-abroad" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="depart" title="Depart" new_state="pending-arrival-abroad" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=depart" category="workflow" icon="">Depart</action>
   <guard >
    <guard-role>Mgmt_Coordinator</guard-role>
@@ -13700,7 +13700,7 @@
   </guard>
 
  </transition>
- <transition transition_id="depart-non-sponsored-program" title="Depart-Non-sponsored Program" new_state="pending-arrival-abroad" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="depart-non-sponsored-program" title="Depart-Non-sponsored Program" new_state="pending-arrival-abroad" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <description>TRIGGER=When MGMT PORTAL's "Sponsoring Unit or Department" = "non-sponsored"; transition occurs on the 1st date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=depart-non-sponsored-program" category="workflow" icon="">Depart-Non-sponsored Program</action>
   <guard >
@@ -13713,7 +13713,7 @@
   </guard>
 
  </transition>
- <transition transition_id="depart-sponsored-program" title="Depart-Sponsored Program" new_state="pending-arrival-abroad" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="depart-sponsored-program" title="Depart-Sponsored Program" new_state="pending-arrival-abroad" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <description>TRIGGER=When MGMT PORTAL's "On-site Program Leader", "Program Leadership" = "no"; transition occurs on the 1st date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=depart-sponsored-program" category="workflow" icon="">Depart-Sponsored Program</action>
   <guard >
@@ -13726,7 +13726,7 @@
   </guard>
 
  </transition>
- <transition transition_id="develop-rfp" title="Develop RFP" new_state="request-for-proposals-under-development" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="develop-rfp" title="Develop RFP" new_state="request-for-proposals-under-development" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=develop-rfp" category="workflow" icon="">Develop RFP</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13736,7 +13736,7 @@
   </guard>
 
  </transition>
- <transition transition_id="end-incident" title="End Incident" new_state="program-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="end-incident" title="End Incident" new_state="program-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=end-incident" category="workflow" icon="">End Incident</action>
   <guard >
    <guard-role>Mgmt_Coordinator</guard-role>
@@ -13748,7 +13748,7 @@
   </guard>
 
  </transition>
- <transition transition_id="pending-approval-of-alternate-course" title="Pending Approval of Alternate Course" new_state="" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="pending-approval-of-alternate-course" title="Pending Approval of Alternate Course" new_state="" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=pending-approval-of-alternate-course" category="workflow" icon="">Pending Approval of Alternate Course</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13757,7 +13757,7 @@
   </guard>
 
  </transition>
- <transition transition_id="pending-provider-proposal" title="Pending Provider Proposal" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="pending-provider-proposal" title="Pending Provider Proposal" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=pending-provider-proposal" category="workflow" icon="">Pending Provider Proposal</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13767,7 +13767,7 @@
   </guard>
 
  </transition>
- <transition transition_id="process-refunds" title="Process Refunds" new_state="process-refunds-budget-transfers" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="process-refunds" title="Process Refunds" new_state="process-refunds-budget-transfers" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=process-refunds" category="workflow" icon="">Process Refunds</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13777,7 +13777,7 @@
   </guard>
 
  </transition>
- <transition transition_id="publish-fee" title="Publish Fee" new_state="application-intake-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="publish-fee" title="Publish Fee" new_state="application-intake-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=publish-fee" category="workflow" icon="">Publish Fee</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13787,7 +13787,7 @@
   </guard>
 
  </transition>
- <transition transition_id="publish-final-fee" title="Publish Final Fee" new_state="final-payment-billing-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="publish-final-fee" title="Publish Final Fee" new_state="final-payment-billing-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=publish-final-fee" category="workflow" icon="">Publish Final Fee</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13797,7 +13797,7 @@
   </guard>
 
  </transition>
- <transition transition_id="report-incident" title="Report Incident" new_state="incident-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="report-incident" title="Report Incident" new_state="incident-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=report-incident" category="workflow" icon="">Report Incident</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13807,7 +13807,7 @@
   </guard>
 
  </transition>
- <transition transition_id="return-rfp-to-program-manager" title="Return RFP to Program Manager" new_state="request-for-proposals-under-development" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="return-rfp-to-program-manager" title="Return RFP to Program Manager" new_state="request-for-proposals-under-development" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-rfp-to-program-manager" category="workflow" icon="">Return RFP to Program Manager</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13817,7 +13817,7 @@
   </guard>
 
  </transition>
- <transition transition_id="return-to-initial" title="Return to Initial" new_state="initial" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="return-to-initial" title="Return to Initial" new_state="initial" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-to-initial" category="workflow" icon="">Return to Initial</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13830,7 +13830,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-initial" title="(Managers Only) Return to Initial" new_state="initial" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-initial" title="(Managers Only) Return to Initial" new_state="initial" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-initial" category="workflow" icon="">(Managers Only) Return to Initial</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13841,7 +13841,7 @@
   </guard>
 
  </transition>
- <transition transition_id="return-to-oie" title="Return to Program Manager" new_state="provider-proposals-under-oie-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="return-to-oie" title="Return to Program Manager" new_state="provider-proposals-under-oie-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-to-oie" category="workflow" icon="">Return to Program Manager</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13851,7 +13851,7 @@
   </guard>
 
  </transition>
- <transition transition_id="return-to-oie-review" title="Return to OIE Review" new_state="pending-oie-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="return-to-oie-review" title="Return to OIE Review" new_state="pending-oie-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-to-oie-review" category="workflow" icon="">Return to OIE Review</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13861,7 +13861,7 @@
   </guard>
 
  </transition>
- <transition transition_id="return-to-rfp-under-development" title="Return to RFP under Development" new_state="" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="return-to-rfp-under-development" title="Return to RFP under Development" new_state="" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-to-rfp-under-development" category="workflow" icon="">Return to RFP under Development</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13870,7 +13870,7 @@
   </guard>
 
  </transition>
- <transition transition_id="returned-non-sponsored-program" title="Returned-Non-sponsored Program" new_state="program-completed" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="returned-non-sponsored-program" title="Returned-Non-sponsored Program" new_state="program-completed" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <description>TRIGGER=When MGMT PORTAL's "Sponsoring Unit or Department" = "non-sponsored"; transition occurs on the final date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=returned-non-sponsored-program" category="workflow" icon="">Returned-Non-sponsored Program</action>
   <guard >
@@ -13880,7 +13880,7 @@
   </guard>
 
  </transition>
- <transition transition_id="returned-sponsored-program" title="Returned-Sponsored Program" new_state="program-completed" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="returned-sponsored-program" title="Returned-Sponsored Program" new_state="program-completed" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <description>TRIGGER=When MGMT PORTAL's "On-site Program Leader", "Program Leadership" = "no"; transition occurs on the final date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
   <action url="%(content_url)s/content_status_modify?workflow_action=returned-sponsored-program" category="workflow" icon="">Returned-Sponsored Program</action>
   <guard >
@@ -13890,7 +13890,7 @@
   </guard>
 
  </transition>
- <transition transition_id="review-provider-proposals" title="Review Provider Proposals" new_state="provider-proposals-under-oie-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="review-provider-proposals" title="Review Provider Proposals" new_state="provider-proposals-under-oie-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=review-provider-proposals" category="workflow" icon="">Review Provider Proposals</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13900,7 +13900,7 @@
   </guard>
 
  </transition>
- <transition transition_id="schedule-operational-briefing" title="Schedule Operational Briefing" new_state="pending-program-leader-operational-briefing" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="schedule-operational-briefing" title="Schedule Operational Briefing" new_state="pending-program-leader-operational-briefing" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=schedule-operational-briefing" category="workflow" icon="">Schedule Operational Briefing</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13910,7 +13910,7 @@
   </guard>
 
  </transition>
- <transition transition_id="send-bills-for-initial-payment" title="Send Bills for Initial Payment" new_state="pending-final-program-fee" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="send-bills-for-initial-payment" title="Send Bills for Initial Payment" new_state="pending-final-program-fee" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=send-bills-for-initial-payment" category="workflow" icon="">Send Bills for Initial Payment</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13920,7 +13920,7 @@
   </guard>
 
  </transition>
- <transition transition_id="send-for-fee-change" title="Send for Fee Change" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="send-for-fee-change" title="Send for Fee Change" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=send-for-fee-change" category="workflow" icon="">Send for Fee Change</action>
   <guard >
    <guard-role>Mgmt_Coordinator</guard-role>
@@ -13930,7 +13930,7 @@
   </guard>
 
  </transition>
- <transition transition_id="send-for-programmatic-change" title="Send for Programmatic Change" new_state="provider-proposals-under-oie-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="send-for-programmatic-change" title="Send for Programmatic Change" new_state="provider-proposals-under-oie-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=send-for-programmatic-change" category="workflow" icon="">Send for Programmatic Change</action>
   <guard >
    <guard-role>Mgmt_Coordinator</guard-role>
@@ -13940,7 +13940,7 @@
   </guard>
 
  </transition>
- <transition transition_id="submit-fee-for-liaison-review" title="Submit Fee for Liaison Review" new_state="program-fee-under-liaison-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="submit-fee-for-liaison-review" title="Submit Fee for Liaison Review" new_state="program-fee-under-liaison-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-fee-for-liaison-review" category="workflow" icon="">Submit Fee for Liaison Review</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13950,7 +13950,7 @@
   </guard>
 
  </transition>
- <transition transition_id="submit-non-sponsored-program" title="Submit Non-sponsored Program" new_state="application-intake-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="submit-non-sponsored-program" title="Submit Non-sponsored Program" new_state="application-intake-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-non-sponsored-program" category="workflow" icon="">Submit Non-sponsored Program</action>
   <guard >
    <guard-role>Mgmt_Coordinator</guard-role>
@@ -13960,7 +13960,7 @@
   </guard>
 
  </transition>
- <transition transition_id="submit-proposal-to-liaison" title="Submit Proposal to Liaison" new_state="provider-proposals-under-liaison-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="submit-proposal-to-liaison" title="Submit Proposal to Liaison" new_state="provider-proposals-under-liaison-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-proposal-to-liaison" category="workflow" icon="">Submit Proposal to Liaison</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13970,7 +13970,7 @@
   </guard>
 
  </transition>
- <transition transition_id="submit-rfp-for-liaison-review" title="Submit RFP for Liaison Review" new_state="request-for-proposals-under-liaison-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="submit-rfp-for-liaison-review" title="Submit RFP for Liaison Review" new_state="request-for-proposals-under-liaison-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-rfp-for-liaison-review" category="workflow" icon="">Submit RFP for Liaison Review</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -13980,7 +13980,7 @@
   </guard>
 
  </transition>
- <transition transition_id="submit-sponsored-program" title="Submit Sponsored Program" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="submit-sponsored-program" title="Submit Sponsored Program" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-sponsored-program" category="workflow" icon="">Submit Sponsored Program</action>
   <guard >
    <guard-role>Mgmt_Coordinator</guard-role>
@@ -13990,7 +13990,7 @@
   </guard>
 
  </transition>
- <transition transition_id="submit-to-chair" title="Submit to Chair" new_state="pending-chair-review" trigger="USER" before_script="pre_submit_to_chair" after_script="post_submit_to_chair" >
+ <transition transition_id="submit-to-chair" title="Submit to Chair" new_state="pending-chair-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-to-chair" category="workflow" icon="">Submit to Chair</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14000,7 +14000,7 @@
   </guard>
 
  </transition>
- <transition transition_id="submit-to-dean" title="Submit to Dean" new_state="pending-dean-unit-director-review" trigger="USER" before_script="pre_submit_to_dean" after_script="post_submit_to_dean" >
+ <transition transition_id="submit-to-dean" title="Submit to Dean" new_state="pending-dean-unit-director-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-to-dean" category="workflow" icon="">Submit to Dean</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14010,7 +14010,7 @@
   </guard>
 
  </transition>
- <transition transition_id="submit-to-oie" title="Submit to OIE" new_state="pending-oie-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="submit-to-oie" title="Submit to OIE" new_state="pending-oie-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-to-oie" category="workflow" icon="">Submit to OIE</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14020,7 +14020,7 @@
   </guard>
 
  </transition>
- <transition transition_id="submit-to-provost" title="Submit to Provost" new_state="pending-provost-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="submit-to-provost" title="Submit to Provost" new_state="pending-provost-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-to-provost" category="workflow" icon="">Submit to Provost</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14030,7 +14030,7 @@
   </guard>
 
  </transition>
- <transition transition_id="suspend" title="Suspend" new_state="suspended" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="suspend" title="Suspend" new_state="suspended" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=suspend" category="workflow" icon="">Suspend</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14041,7 +14041,7 @@
   </guard>
 
  </transition>
- <transition transition_id="travel-advance-ready" title="Travel Advance Ready" new_state="reviewing-final-program-details" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="travel-advance-ready" title="Travel Advance Ready" new_state="reviewing-final-program-details" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=travel-advance-ready" category="workflow" icon="">Travel Advance Ready</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14051,7 +14051,7 @@
   </guard>
 
  </transition>
- <transition transition_id="withdraw-application" title="Withdraw Application" new_state="withdrawn" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="withdraw-application" title="Withdraw Application" new_state="withdrawn" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=withdraw-application" category="workflow" icon="">Withdraw Application</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14062,7 +14062,7 @@
 
  </transition>
 
- <transition transition_id="manager-return-to-applicants-considering-change" title="(Managers Only) Return to applicants-considering-change" new_state="applicants-considering-change" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-applicants-considering-change" title="(Managers Only) Return to applicants-considering-change" new_state="applicants-considering-change" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-applicants-considering-change" category="workflow" icon="">(Managers Only) Return to applicants-considering-change</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14073,7 +14073,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-application-intake-in-progress" title="(Managers Only) Return to application-intake-in-progress" new_state="application-intake-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-application-intake-in-progress" title="(Managers Only) Return to application-intake-in-progress" new_state="application-intake-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-application-intake-in-progress" category="workflow" icon="">(Managers Only) Return to application-intake-in-progress</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14084,7 +14084,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-cancelled" title="(Managers Only) Return to cancelled" new_state="cancelled" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-cancelled" title="(Managers Only) Return to cancelled" new_state="cancelled" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-cancelled" category="workflow" icon="">(Managers Only) Return to cancelled</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14095,7 +14095,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-declined" title="(Managers Only) Return to declined" new_state="declined" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-declined" title="(Managers Only) Return to declined" new_state="declined" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-declined" category="workflow" icon="">(Managers Only) Return to declined</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14106,7 +14106,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-final-payment-billing-in-progress" title="(Managers Only) Return to final-payment-billing-in-progress" new_state="final-payment-billing-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-final-payment-billing-in-progress" title="(Managers Only) Return to final-payment-billing-in-progress" new_state="final-payment-billing-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-final-payment-billing-in-progress" category="workflow" icon="">(Managers Only) Return to final-payment-billing-in-progress</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14117,7 +14117,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-final-program-accounting-in-progress" title="(Managers Only) Return to final-program-accounting-in-progress" new_state="final-program-accounting-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-final-program-accounting-in-progress" title="(Managers Only) Return to final-program-accounting-in-progress" new_state="final-program-accounting-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-final-program-accounting-in-progress" category="workflow" icon="">(Managers Only) Return to final-program-accounting-in-progress</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14128,7 +14128,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-incident-in-progress" title="(Managers Only) Return to incident-in-progress" new_state="incident-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-incident-in-progress" title="(Managers Only) Return to incident-in-progress" new_state="incident-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-incident-in-progress" category="workflow" icon="">(Managers Only) Return to incident-in-progress</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14139,7 +14139,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-initial-payment-billing-in-progress" title="(Managers Only) Return to initial-payment-billing-in-progress" new_state="initial-payment-billing-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-initial-payment-billing-in-progress" title="(Managers Only) Return to initial-payment-billing-in-progress" new_state="initial-payment-billing-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-initial-payment-billing-in-progress" category="workflow" icon="">(Managers Only) Return to initial-payment-billing-in-progress</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14150,7 +14150,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-pending-arrival-abroad" title="(Managers Only) Return to pending-arrival-abroad" new_state="pending-arrival-abroad" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-pending-arrival-abroad" title="(Managers Only) Return to pending-arrival-abroad" new_state="pending-arrival-abroad" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-arrival-abroad" category="workflow" icon="">(Managers Only) Return to pending-arrival-abroad</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14161,7 +14161,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-pending-chair-review" title="(Managers Only) Return to pending-chair-review" new_state="pending-chair-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-pending-chair-review" title="(Managers Only) Return to pending-chair-review" new_state="pending-chair-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-chair-review" category="workflow" icon="">(Managers Only) Return to pending-chair-review</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14172,7 +14172,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-pending-dean-unit-director-review" title="(Managers Only) Return to pending-dean-unit-director-review" new_state="pending-dean-unit-director-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-pending-dean-unit-director-review" title="(Managers Only) Return to pending-dean-unit-director-review" new_state="pending-dean-unit-director-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-dean-unit-director-review" category="workflow" icon="">(Managers Only) Return to pending-dean-unit-director-review</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14183,7 +14183,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-pending-discussions-with-program-manager" title="(Managers Only) Return to pending-discussions-with-program-manager" new_state="pending-discussions-with-program-manager" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-pending-discussions-with-program-manager" title="(Managers Only) Return to pending-discussions-with-program-manager" new_state="pending-discussions-with-program-manager" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-discussions-with-program-manager" category="workflow" icon="">(Managers Only) Return to pending-discussions-with-program-manager</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14194,7 +14194,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-pending-final-program-fee" title="(Managers Only) Return to pending-final-program-fee" new_state="pending-final-program-fee" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-pending-final-program-fee" title="(Managers Only) Return to pending-final-program-fee" new_state="pending-final-program-fee" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-final-program-fee" category="workflow" icon="">(Managers Only) Return to pending-final-program-fee</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14205,7 +14205,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-pending-oie-review" title="(Managers Only) Return to pending-oie-review" new_state="pending-oie-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-pending-oie-review" title="(Managers Only) Return to pending-oie-review" new_state="pending-oie-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-oie-review" category="workflow" icon="">(Managers Only) Return to pending-oie-review</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14216,7 +14216,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-pending-program-departure" title="(Managers Only) Return to pending-program-departure" new_state="pending-program-departure" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-pending-program-departure" title="(Managers Only) Return to pending-program-departure" new_state="pending-program-departure" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-program-departure" category="workflow" icon="">(Managers Only) Return to pending-program-departure</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14227,7 +14227,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-pending-program-fee-determination-by-oie" title="(Managers Only) Return to pending-program-fee-determination-by-oie" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-pending-program-fee-determination-by-oie" title="(Managers Only) Return to pending-program-fee-determination-by-oie" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-program-fee-determination-by-oie" category="workflow" icon="">(Managers Only) Return to pending-program-fee-determination-by-oie</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14238,7 +14238,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-pending-program-leader-operational-briefing" title="(Managers Only) Return to pending-program-leader-operational-briefing" new_state="pending-program-leader-operational-briefing" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-pending-program-leader-operational-briefing" title="(Managers Only) Return to pending-program-leader-operational-briefing" new_state="pending-program-leader-operational-briefing" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-program-leader-operational-briefing" category="workflow" icon="">(Managers Only) Return to pending-program-leader-operational-briefing</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14249,7 +14249,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-pending-program-leader-orientation" title="(Managers Only) Return to pending-program-leader-orientation" new_state="pending-program-leader-orientation" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-pending-program-leader-orientation" title="(Managers Only) Return to pending-program-leader-orientation" new_state="pending-program-leader-orientation" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-program-leader-orientation" category="workflow" icon="">(Managers Only) Return to pending-program-leader-orientation</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14260,7 +14260,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-pending-provider-responses" title="(Managers Only) Return to pending-provider-responses" new_state="pending-provider-responses" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-pending-provider-responses" title="(Managers Only) Return to pending-provider-responses" new_state="pending-provider-responses" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-provider-responses" category="workflow" icon="">(Managers Only) Return to pending-provider-responses</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14271,7 +14271,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-pending-provost-review" title="(Managers Only) Return to pending-provost-review" new_state="pending-provost-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-pending-provost-review" title="(Managers Only) Return to pending-provost-review" new_state="pending-provost-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-provost-review" category="workflow" icon="">(Managers Only) Return to pending-provost-review</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14282,7 +14282,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-pending-travel-advance" title="(Managers Only) Return to pending-travel-advance" new_state="pending-travel-advance" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-pending-travel-advance" title="(Managers Only) Return to pending-travel-advance" new_state="pending-travel-advance" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-travel-advance" category="workflow" icon="">(Managers Only) Return to pending-travel-advance</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14293,7 +14293,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-process-refunds-budget-transfers" title="(Managers Only) Return to process-refunds-budget-transfers" new_state="process-refunds-budget-transfers" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-process-refunds-budget-transfers" title="(Managers Only) Return to process-refunds-budget-transfers" new_state="process-refunds-budget-transfers" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-process-refunds-budget-transfers" category="workflow" icon="">(Managers Only) Return to process-refunds-budget-transfers</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14304,7 +14304,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-program-completed" title="(Managers Only) Return to program-completed" new_state="program-completed" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-program-completed" title="(Managers Only) Return to program-completed" new_state="program-completed" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-program-completed" category="workflow" icon="">(Managers Only) Return to program-completed</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14315,7 +14315,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-program-fee-pending-publication" title="(Managers Only) Return to program-fee-pending-publication" new_state="program-fee-pending-publication" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-program-fee-pending-publication" title="(Managers Only) Return to program-fee-pending-publication" new_state="program-fee-pending-publication" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-program-fee-pending-publication" category="workflow" icon="">(Managers Only) Return to program-fee-pending-publication</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14326,7 +14326,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-program-fee-under-liaison-review" title="(Managers Only) Return to program-fee-under-liaison-review" new_state="program-fee-under-liaison-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-program-fee-under-liaison-review" title="(Managers Only) Return to program-fee-under-liaison-review" new_state="program-fee-under-liaison-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-program-fee-under-liaison-review" category="workflow" icon="">(Managers Only) Return to program-fee-under-liaison-review</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14337,7 +14337,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-program-in-progress" title="(Managers Only) Return to program-in-progress" new_state="program-in-progress" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-program-in-progress" title="(Managers Only) Return to program-in-progress" new_state="program-in-progress" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-program-in-progress" category="workflow" icon="">(Managers Only) Return to program-in-progress</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14348,7 +14348,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-provider-proposals-under-liaison-review" title="(Managers Only) Return to provider-proposals-under-liaison-review" new_state="provider-proposals-under-liaison-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-provider-proposals-under-liaison-review" title="(Managers Only) Return to provider-proposals-under-liaison-review" new_state="provider-proposals-under-liaison-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-provider-proposals-under-liaison-review" category="workflow" icon="">(Managers Only) Return to provider-proposals-under-liaison-review</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14359,7 +14359,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-provider-proposals-under-oie-review" title="(Managers Only) Return to provider-proposals-under-oie-review" new_state="provider-proposals-under-oie-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-provider-proposals-under-oie-review" title="(Managers Only) Return to provider-proposals-under-oie-review" new_state="provider-proposals-under-oie-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-provider-proposals-under-oie-review" category="workflow" icon="">(Managers Only) Return to provider-proposals-under-oie-review</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14370,7 +14370,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-request-for-proposals-under-development" title="(Managers Only) Return to request-for-proposals-under-development" new_state="request-for-proposals-under-development" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-request-for-proposals-under-development" title="(Managers Only) Return to request-for-proposals-under-development" new_state="request-for-proposals-under-development" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-request-for-proposals-under-development" category="workflow" icon="">(Managers Only) Return to request-for-proposals-under-development</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14381,7 +14381,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" title="(Managers Only) Return to request-for-proposals-under-liaison-review" new_state="request-for-proposals-under-liaison-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" title="(Managers Only) Return to request-for-proposals-under-liaison-review" new_state="request-for-proposals-under-liaison-review" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-request-for-proposals-under-liaison-review" category="workflow" icon="">(Managers Only) Return to request-for-proposals-under-liaison-review</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14392,7 +14392,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-reviewing-final-program-details" title="(Managers Only) Return to reviewing-final-program-details" new_state="reviewing-final-program-details" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-reviewing-final-program-details" title="(Managers Only) Return to reviewing-final-program-details" new_state="reviewing-final-program-details" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-reviewing-final-program-details" category="workflow" icon="">(Managers Only) Return to reviewing-final-program-details</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14403,7 +14403,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-suspended" title="(Managers Only) Return to suspended" new_state="suspended" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-suspended" title="(Managers Only) Return to suspended" new_state="suspended" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-suspended" category="workflow" icon="">(Managers Only) Return to suspended</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14414,7 +14414,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-travel-expense-report-student-evaluations-due-to" title="(Managers Only) Return to travel-expense-report-student-evaluations-due-to" new_state="travel-expense-report-student-evaluations-due-to" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-travel-expense-report-student-evaluations-due-to" title="(Managers Only) Return to travel-expense-report-student-evaluations-due-to" new_state="travel-expense-report-student-evaluations-due-to" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-travel-expense-report-student-evaluations-due-to" category="workflow" icon="">(Managers Only) Return to travel-expense-report-student-evaluations-due-to</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14425,7 +14425,7 @@
   </guard>
 
  </transition>
- <transition transition_id="manager-return-to-withdrawn" title="(Managers Only) Return to withdrawn" new_state="withdrawn" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="manager-return-to-withdrawn" title="(Managers Only) Return to withdrawn" new_state="withdrawn" trigger="USER" before_script="program_pre_transition" after_script="program_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-withdrawn" category="workflow" icon="">(Managers Only) Return to withdrawn</action>
   <guard >
    <guard-role>Mgmt_Admin</guard-role>
@@ -14494,185 +14494,8 @@
   </guard>
  </variable>
 
- <script script_id="post_submit_to_chair" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_submit_to_chair" />
- <script script_id="pre_submit_to_chair" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_submit_to_chair" />
- <script script_id="post_submit_to_dean" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_submit_to_dean" />
- <script script_id="pre_submit_to_dean" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_submit_to_dean" />
- <script script_id="pre_announce_programmatic_for_fee_change" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_announce_programmatic_for_fee_change" />
- <script script_id="post_announce_programmatic_for_fee_change" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_announce_programmatic_for_fee_change" />
- <script script_id="pre_approve_fee" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_approve_fee" />
- <script script_id="post_approve_fee" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_approve_fee" />
- <script script_id="pre_approve_proposal" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_approve_proposal" />
- <script script_id="post_approve_proposal" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_approve_proposal" />
- <script script_id="pre_approve_provosts_office" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_approve_provosts_office" />
- <script script_id="post_approve_provosts_office" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_approve_provosts_office" />
- <script script_id="pre_approve_rfp" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_approve_rfp" />
- <script script_id="post_approve_rfp" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_approve_rfp" />
- <script script_id="pre_archive_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_archive_program" />
- <script script_id="post_archive_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_archive_program" />
- <script script_id="pre_arrive_non_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_arrive_non_sponsored_program" />
- <script script_id="post_arrive_non_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_arrive_non_sponsored_program" />
- <script script_id="pre_arrive_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_arrive_sponsored_program" />
- <script script_id="post_arrive_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_arrive_sponsored_program" />
- <script script_id="pre_bill_for_final_payment" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_bill_for_final_payment" />
- <script script_id="post_bill_for_final_payment" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_bill_for_final_payment" />
- <script script_id="pre_bill_for_final_payment_programs_with_no_leader" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_bill_for_final_payment_programs_with_no_leader" />
- <script script_id="post_bill_for_final_payment_programs_with_no_leader" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_bill_for_final_payment_programs_with_no_leader" />
- <script script_id="pre_cancel" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_cancel" />
- <script script_id="post_cancel" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_cancel" />
- <script script_id="pre_cancel_after_change" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_cancel_after_change" />
- <script script_id="post_cancel_after_change" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_cancel_after_change" />
- <script script_id="pre_confirm_briefing_completed" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_confirm_briefing_completed" />
- <script script_id="post_confirm_briefing_completed" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_confirm_briefing_completed" />
- <script script_id="pre_confirm_orientation_completed" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_confirm_orientation_completed" />
- <script script_id="post_confirm_orientation_completed" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_confirm_orientation_completed" />
- <script script_id="pre_confirm_return" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_confirm_return" />
- <script script_id="post_confirm_return" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_confirm_return" />
- <script script_id="pre_confirm_safe_arrival" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_confirm_safe_arrival" />
- <script script_id="post_confirm_safe_arrival" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_confirm_safe_arrival" />
- <script script_id="pre_confirm_ter_received" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_confirm_ter_received" />
- <script script_id="post_confirm_ter_received" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_confirm_ter_received" />
- <script script_id="pre_confirm_to_run" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_confirm_to_run" />
- <script script_id="post_confirm_to_run" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_confirm_to_run" />
- <script script_id="pre_confirm_travel_delay" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_confirm_travel_delay" />
- <script script_id="post_confirm_travel_delay" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_confirm_travel_delay" />
- <script script_id="pre_decline" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_decline" />
- <script script_id="post_decline" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_decline" />
- <script script_id="pre_depart" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_depart" />
- <script script_id="post_depart" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_depart" />
- <script script_id="pre_depart_non_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_depart_non_sponsored_program" />
- <script script_id="post_depart_non_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_depart_non_sponsored_program" />
- <script script_id="pre_depart_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_depart_sponsored_program" />
- <script script_id="post_depart_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_depart_sponsored_program" />
- <script script_id="pre_develop_rfp" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_develop_rfp" />
- <script script_id="post_develop_rfp" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_develop_rfp" />
- <script script_id="pre_end_incident" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_end_incident" />
- <script script_id="post_end_incident" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_end_incident" />
- <script script_id="pre_pending_approval_of_alternate_course" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_pending_approval_of_alternate_course" />
- <script script_id="post_pending_approval_of_alternate_course" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_pending_approval_of_alternate_course" />
- <script script_id="pre_pending_provider_proposal" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_pending_provider_proposal" />
- <script script_id="post_pending_provider_proposal" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_pending_provider_proposal" />
- <script script_id="pre_process_refunds" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_process_refunds" />
- <script script_id="post_process_refunds" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_process_refunds" />
- <script script_id="pre_publish_fee" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_publish_fee" />
- <script script_id="post_publish_fee" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_publish_fee" />
- <script script_id="pre_publish_final_fee" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_publish_final_fee" />
- <script script_id="post_publish_final_fee" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_publish_final_fee" />
- <script script_id="pre_report_incident" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_report_incident" />
- <script script_id="post_report_incident" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_report_incident" />
- <script script_id="pre_return_rfp_to_program_manager" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_return_rfp_to_program_manager" />
- <script script_id="post_return_rfp_to_program_manager" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_return_rfp_to_program_manager" />
- <script script_id="pre_return_to_initial" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_return_to_initial" />
- <script script_id="post_return_to_initial" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_return_to_initial" />
- <script script_id="pre_manager_return_to_initial" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_initial" />
- <script script_id="post_manager_return_to_initial" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_initial" />
- <script script_id="pre_return_to_oie" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_return_to_oie" />
- <script script_id="post_return_to_oie" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_return_to_oie" />
- <script script_id="pre_return_to_oie_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_return_to_oie_review" />
- <script script_id="post_return_to_oie_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_return_to_oie_review" />
- <script script_id="pre_return_to_rfp_under_development" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_return_to_rfp_under_development" />
- <script script_id="post_return_to_rfp_under_development" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_return_to_rfp_under_development" />
- <script script_id="pre_returned_non_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_returned_non_sponsored_program" />
- <script script_id="post_returned_non_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_returned_non_sponsored_program" />
- <script script_id="pre_returned_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_returned_sponsored_program" />
- <script script_id="post_returned_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_returned_sponsored_program" />
- <script script_id="pre_review_provider_proposals" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_review_provider_proposals" />
- <script script_id="post_review_provider_proposals" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_review_provider_proposals" />
- <script script_id="pre_schedule_operational_briefing" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_schedule_operational_briefing" />
- <script script_id="post_schedule_operational_briefing" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_schedule_operational_briefing" />
- <script script_id="pre_send_bills_for_initial_payment" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_send_bills_for_initial_payment" />
- <script script_id="post_send_bills_for_initial_payment" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_send_bills_for_initial_payment" />
- <script script_id="pre_send_for_fee_change" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_send_for_fee_change" />
- <script script_id="post_send_for_fee_change" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_send_for_fee_change" />
- <script script_id="pre_send_for_programmatic_change" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_send_for_programmatic_change" />
- <script script_id="post_send_for_programmatic_change" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_send_for_programmatic_change" />
- <script script_id="pre_submit_fee_for_liaison_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_submit_fee_for_liaison_review" />
- <script script_id="post_submit_fee_for_liaison_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_submit_fee_for_liaison_review" />
- <script script_id="pre_submit_non_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_submit_non_sponsored_program" />
- <script script_id="post_submit_non_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_submit_non_sponsored_program" />
- <script script_id="pre_submit_proposal_to_liaison" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_submit_proposal_to_liaison" />
- <script script_id="post_submit_proposal_to_liaison" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_submit_proposal_to_liaison" />
- <script script_id="pre_submit_rfp_for_liaison_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_submit_rfp_for_liaison_review" />
- <script script_id="post_submit_rfp_for_liaison_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_submit_rfp_for_liaison_review" />
- <script script_id="pre_submit_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_submit_sponsored_program" />
- <script script_id="post_submit_sponsored_program" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_submit_sponsored_program" />
- <script script_id="pre_submit_to_oie" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_submit_to_oie" />
- <script script_id="post_submit_to_oie" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_submit_to_oie" />
- <script script_id="pre_submit_to_provost" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_submit_to_provost" />
- <script script_id="post_submit_to_provost" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_submit_to_provost" />
- <script script_id="pre_suspend" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_suspend" />
- <script script_id="post_suspend" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_suspend" />
- <script script_id="pre_travel_advance_ready" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_travel_advance_ready" />
- <script script_id="post_travel_advance_ready" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_travel_advance_ready" />
- <script script_id="pre_withdraw_application" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_withdraw_application" />
- <script script_id="post_withdraw_application" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_withdraw_application" />
- <script script_id="pre_manager_return_to_applicants_considering_change" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_applicants_considering_change" />
- <script script_id="post_manager_return_to_applicants_considering_change" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_applicants_considering_change" />
- <script script_id="pre_manager_return_to_application_intake_in_progress" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_application_intake_in_progress" />
- <script script_id="post_manager_return_to_application_intake_in_progress" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_application_intake_in_progress" />
- <script script_id="pre_manager_return_to_cancelled" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_cancelled" />
- <script script_id="post_manager_return_to_cancelled" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_cancelled" />
- <script script_id="pre_manager_return_to_declined" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_declined" />
- <script script_id="post_manager_return_to_declined" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_declined" />
- <script script_id="pre_manager_return_to_final_payment_billing_in_progress" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_final_payment_billing_in_progress" />
- <script script_id="post_manager_return_to_final_payment_billing_in_progress" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_final_payment_billing_in_progress" />
- <script script_id="pre_manager_return_to_final_program_accounting_in_progress" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_final_program_accounting_in_progress" />
- <script script_id="post_manager_return_to_final_program_accounting_in_progress" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_final_program_accounting_in_progress" />
- <script script_id="pre_manager_return_to_incident_in_progress" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_incident_in_progress" />
- <script script_id="post_manager_return_to_incident_in_progress" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_incident_in_progress" />
- <script script_id="pre_manager_return_to_initial_payment_billing_in_progress" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_initial_payment_billing_in_progress" />
- <script script_id="post_manager_return_to_initial_payment_billing_in_progress" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_initial_payment_billing_in_progress" />
- <script script_id="pre_manager_return_to_pending_arrival_abroad" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_pending_arrival_abroad" />
- <script script_id="post_manager_return_to_pending_arrival_abroad" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_pending_arrival_abroad" />
- <script script_id="pre_manager_return_to_pending_chair_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_pending_chair_review" />
- <script script_id="post_manager_return_to_pending_chair_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_pending_chair_review" />
- <script script_id="pre_manager_return_to_pending_dean_unit_director_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_pending_dean_unit_director_review" />
- <script script_id="post_manager_return_to_pending_dean_unit_director_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_pending_dean_unit_director_review" />
- <script script_id="pre_manager_return_to_pending_discussions_with_program_manager" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_pending_discussions_with_program_manager" />
- <script script_id="post_manager_return_to_pending_discussions_with_program_manager" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_pending_discussions_with_program_manager" />
- <script script_id="pre_manager_return_to_pending_final_program_fee" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_pending_final_program_fee" />
- <script script_id="post_manager_return_to_pending_final_program_fee" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_pending_final_program_fee" />
- <script script_id="pre_manager_return_to_pending_oie_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_pending_oie_review" />
- <script script_id="post_manager_return_to_pending_oie_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_pending_oie_review" />
- <script script_id="pre_manager_return_to_pending_program_departure" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_pending_program_departure" />
- <script script_id="post_manager_return_to_pending_program_departure" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_pending_program_departure" />
- <script script_id="pre_manager_return_to_pending_program_fee_determination_by_oie" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_pending_program_fee_determination_by_oie" />
- <script script_id="post_manager_return_to_pending_program_fee_determination_by_oie" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_pending_program_fee_determination_by_oie" />
- <script script_id="pre_manager_return_to_pending_program_leader_operational_briefing" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_pending_program_leader_operational_briefing" />
- <script script_id="post_manager_return_to_pending_program_leader_operational_briefing" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_pending_program_leader_operational_briefing" />
- <script script_id="pre_manager_return_to_pending_program_leader_orientation" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_pending_program_leader_orientation" />
- <script script_id="post_manager_return_to_pending_program_leader_orientation" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_pending_program_leader_orientation" />
- <script script_id="pre_manager_return_to_pending_provider_responses" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_pending_provider_responses" />
- <script script_id="post_manager_return_to_pending_provider_responses" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_pending_provider_responses" />
- <script script_id="pre_manager_return_to_pending_provost_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_pending_provost_review" />
- <script script_id="post_manager_return_to_pending_provost_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_pending_provost_review" />
- <script script_id="pre_manager_return_to_pending_travel_advance" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_pending_travel_advance" />
- <script script_id="post_manager_return_to_pending_travel_advance" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_pending_travel_advance" />
- <script script_id="pre_manager_return_to_process_refunds_budget_transfers" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_process_refunds_budget_transfers" />
- <script script_id="post_manager_return_to_process_refunds_budget_transfers" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_process_refunds_budget_transfers" />
- <script script_id="pre_manager_return_to_program_completed" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_program_completed" />
- <script script_id="post_manager_return_to_program_completed" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_program_completed" />
- <script script_id="pre_manager_return_to_program_fee_pending_publication" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_program_fee_pending_publication" />
- <script script_id="post_manager_return_to_program_fee_pending_publication" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_program_fee_pending_publication" />
- <script script_id="pre_manager_return_to_program_fee_under_liaison_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_program_fee_under_liaison_review" />
- <script script_id="post_manager_return_to_program_fee_under_liaison_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_program_fee_under_liaison_review" />
- <script script_id="pre_manager_return_to_program_in_progress" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_program_in_progress" />
- <script script_id="post_manager_return_to_program_in_progress" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_program_in_progress" />
- <script script_id="pre_manager_return_to_provider_proposals_under_liaison_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_provider_proposals_under_liaison_review" />
- <script script_id="post_manager_return_to_provider_proposals_under_liaison_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_provider_proposals_under_liaison_review" />
- <script script_id="pre_manager_return_to_provider_proposals_under_oie_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_provider_proposals_under_oie_review" />
- <script script_id="post_manager_return_to_provider_proposals_under_oie_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_provider_proposals_under_oie_review" />
- <script script_id="pre_manager_return_to_request_for_proposals_under_development" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_request_for_proposals_under_development" />
- <script script_id="post_manager_return_to_request_for_proposals_under_development" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_request_for_proposals_under_development" />
- <script script_id="pre_manager_return_to_request_for_proposals_under_liaison_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_request_for_proposals_under_liaison_review" />
- <script script_id="post_manager_return_to_request_for_proposals_under_liaison_review" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_request_for_proposals_under_liaison_review" />
- <script script_id="pre_manager_return_to_reviewing_final_program_details" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_reviewing_final_program_details" />
- <script script_id="post_manager_return_to_reviewing_final_program_details" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_reviewing_final_program_details" />
- <script script_id="pre_manager_return_to_suspended" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_suspended" />
- <script script_id="post_manager_return_to_suspended" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_suspended" />
- <script script_id="pre_manager_return_to_travel_expense_report_student_evaluations_due_to" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_travel_expense_report_student_evaluations_due_to" />
- <script script_id="post_manager_return_to_travel_expense_report_student_evaluations_due_to" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_travel_expense_report_student_evaluations_due_to" />
- <script script_id="pre_manager_return_to_withdrawn" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="pre_manager_return_to_withdrawn" />
- <script script_id="post_manager_return_to_withdrawn" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="post_manager_return_to_withdrawn" />
+
+ <script script_id="program_pre_transition" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="participant_pre_transition" />
+ <script script_id="program_post_transition" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="participant_post_transition" />
 
 </dc-workflow>

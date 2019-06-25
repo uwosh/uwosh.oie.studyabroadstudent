@@ -1013,6 +1013,7 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
         # TODO '=arrival flight date/time plus 2.5 hours [display only if  # noqa
         #   "Transportation from Arrival airport to Oshkosh is "yes"]
+        # "yes" is not an option..
     )
 
     oshkoshArrivalDateTime = schema.Datetime(
@@ -1020,6 +1021,7 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
         # TODO '=arrival flight date/time plus 4 hours [display only if  # noqa
         #   "Transportation from Arrival airport to Oshkosh is "yes"]
+        # "yes" is not an option..
     )
 
     #######################################################
@@ -1099,8 +1101,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'The Program Liaison, Program Leader or Program Co-leader will interview each applicant'),  # noqa
         vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO yes/no (default=no; this question should be unavailable/greyed  # noqa
-        #   out if "approvalcriteria" is not filled in)
+        # TODO default "no" # noqa
     )
 
     firstRecommendationRequired = schema.Choice(
@@ -1108,8 +1109,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(u'If "yes", this item appears in the Applicant Portal as an application item'),  # noqa
         vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO yes/no (default=no; this question should be unavailable/greyed  # noqa
-        #   out if "approvalcriteria" is not filled in)
+        # TODO default "no" # noqa
     )
 
     secondRecommendationRequired = schema.Choice(
@@ -1117,9 +1117,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(u'If "yes", this item appears in the Applicant Portal as an application item'),  # noqa
         vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO "yes/no (default=no; this question should be unavailable/greyed  # noqa
-        #   out if "approvalcriteria" is not filled in). This cannot be ""yes""
-        #   if ""A 1st Recommendation is required"" is ""no""."
+        # TODO This cannot be "yes" if firstRecommendationRequired is "no" # noqa
     )
 
     applicantQuestion1 = schema.Text(
@@ -1127,8 +1125,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             u'You may add up to 5 short-answer questions to the participant application.  If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),  # noqa
         required=False,
-        # TODO max 200 characters; this question should be unavailable/greyed  # noqa
-        #  out if "approvalcriteria" is not filled in
+        max_length=200,
     )
 
     applicantQuestion2 = schema.Text(
@@ -1136,8 +1133,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             u'If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),  # noqa
         required=False,
-        # TODO max 200 characters; this question should be unavailable/greyed  # noqa
-        #  out if "approvalcriteria" is not filled in
+        max_length=200,
     )
 
     applicantQuestion3 = schema.Text(
@@ -1145,8 +1141,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             u'If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),  # noqa
         required=False,
-        # TODO max 200 characters; this question should be unavailable/greyed  # noqa
-        #  out if "approvalcriteria" is not filled in
+        max_length=200,
     )
 
     applicantQuestion4 = schema.Text(
@@ -1154,8 +1149,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             u'If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),  # noqa
         required=False,
-        # TODO max 200 characters; this question should be unavailable/greyed  # noqa
-        #   out if "approvalcriteria" is not filled in
+        max_length=200,
     )
 
     applicantQuestion5 = schema.Text(
@@ -1163,8 +1157,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             u'If a question appears here, it will be required of all applicants.  Questions cannot be made optional and cannot be applied to some applicants and not to others.'),  # noqa
         required=False,
-        # TODO max 200 characters; this question should be unavailable/greyed  # noqa
-        #   out if "approvalcriteria" is not filled in
+        max_length=200,
     )
 
     cvRequired = schema.Choice(
@@ -1173,8 +1166,7 @@ class IOIEStudyAbroadProgram(Interface):
             u'If "yes", this item appears in the Applicant Portal as an application item.'),  # noqa
         vocabulary=yes_no_vocabulary,
         required=True,
-        # TODO yes/no (default=no; this question should be unavailable/greyed  # noqa
-        #   out if "approvalcriteria" is not filled in)
+        # TODO default "no" # noqa
     )
 
     letterOfMotivationRequired = schema.Choice(
@@ -1189,8 +1181,6 @@ class IOIEStudyAbroadProgram(Interface):
     otherRequired = schema.Text(
         title=_(u'Other'),
         required=False,
-        # TODO "this question should be unavailable/greyed out if  # noqa
-        #  "approvalcriteria" is not filled in"
     )
 
     #######################################################
@@ -1397,9 +1387,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(u'The OIE Program Manager checks this box to confirm that the program schedule has been viewed.  Checking this box does not mean that activities on the schedule have been approved.  Further Risk Assessment will be completed after this initial review.'),  # noqa
         vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO check box or workflow? (for now, this will be just a check  # noqa
-        #   box.  It could become part of the workflow in the future.  The
-        #   checkbox must be checked to move through the workflow.
+        # TODO The checkbox must be checked to move through the workflow. (at what state is this required) # noqa
     )
     director_recommendations = RichText(
         title=_(u'OIE Director Recommendation'),

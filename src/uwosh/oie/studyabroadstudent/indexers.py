@@ -6,6 +6,8 @@ from plone.indexer.decorator import indexer
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadProgram
 
+import json
+
 
 concat = indexers._unicode_save_string_concat
 SearchableText = indexers.SearchableText
@@ -37,3 +39,8 @@ program_type = programIndexer(IndexerFactory('program_type'))
 def calendar_year(program):
     cal = uuidToObject(program.calendar_year)
     return cal.title
+
+
+@indexer(IOIEStudyAbroadProgram)
+def countries(program):
+    return json.dumps(program.countries)

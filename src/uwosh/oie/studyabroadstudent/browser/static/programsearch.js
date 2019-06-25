@@ -8,16 +8,31 @@ require([
         var el = document.getElementById('oie-search');
         var encoded = el.getAttribute('oie-program-data');
         var programs = JSON.parse(window.atob(encoded));
-        var unfilteredPrograms = programs.slice()
+        var unfilteredPrograms = programs.slice();
         var types = [];
-        // Iterate and get list of types
         var years = [];
-        // Iterate and get/sort list of years
+        var countries = [];
+        for (var i=0;i<programs.length;i++) {
+          var program = programs[i];
+          if (types.indexOf(program.type) != -1) {
+            types.push(program.type);
+          }
+          if (years.indexOf(program.calendarYear) != -1) {
+            years.push(program.calendarYear);
+          }
+          for (var j=0;j<program.countries.length;j++){
+            if (countries.indexOf(program.countries[j]) != -1) {
+              countries.push(program.countries[j]);
+            }
+          }
+        }
         return {
           programs: programs,
           count: programs.length,
           activePrograms: unfilteredPrograms,
           types: types,
+          countries: countries,
+          years: years,
           filters: {
             type: false,
             title: false,
@@ -83,7 +98,45 @@ require([
         }, types);
         searchFields.push(typeField);
 
-        // TODO calendar year field
+        var years = [D.option({
+          selected: true,
+          value: 'n/a'
+        }, '--Select a Program Year--')];
+        for (var i=0;i<this.state.years.length;i++) {
+          years.push(D.option({
+            value: this.state.years[i]
+          }, this.state.years[i]));
+        }
+
+        var yearField = D.select({
+          className: 'oie-search-field',
+          name: 'years',
+          onChange: this.handler
+        }, years);
+        searchFields.push(yearField);
+
+        var countries = [D.option({
+          selected: true,
+          value: 'n/a'
+        }, '--Select a Country--')];
+        for (var i=0;i<this.state.countries.length;i++) {
+          countries.push(D.option({
+            value: this.state.countries[i]
+          }, this.state.countries[i]));
+        }
+
+        var countryField = D.select({
+          className: 'oie-search-field',
+          name: 'countries',
+          onChange: this.handler
+        }, countries);
+        searchFields.push(countryField);
+
+
+        var clearButton = D.button({
+          className: 'oie-plone-button'
+        });
+        searchFields.push(clearButton);
 
         return searchFields;
       },
@@ -100,6 +153,7 @@ require([
       },
 
       resetSearchFields: function(event){
+
         // TODO add Clear button to call this
         // set each field back to default value
       },
@@ -178,7 +232,12 @@ require([
 
       renderPrograms: function(){
         if (!this.state.count) {
-          return;
+          noResults = D.div({}, [
+            D.span({}, [
+              'No Matching Programs'
+            ])
+          ])
+          return noResults;
         }
 
         var views = [];

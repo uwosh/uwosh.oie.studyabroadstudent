@@ -162,54 +162,33 @@ class IOIECourse(Interface):
     ps_course_id = schema.Int(
         title=_(u'PeopleSoft Course ID'),
         min=0,
-        # TODO Applicant should not see this field.  This is for OIE.  This  # noqa
-        #  field is specific to each Subject/Course # rather than to the
-        #  program.
     )
     ps_class_id = schema.Int(
         title=_(u'PeopleSoft Class Number'),
         min=0,
-        # TODO Applicant should not see this field.  This is for OIE.  This  # noqa
-        #  field is specific to each Subject/Course # rather than to the
-        #  program.
     )
     ps_section_id = schema.Int(
         title=_(u'PeopleSoft Course Section Number'),
         min=0,
-        # TODO Applicant should not see this field.  This is for OIE.  This  # noqa
-        #  field is specific to each Subject/Course # rather than to the
-        #  program.
     )
     ps_section_letter = schema.TextLine(
         title=_(u'PeopleSoft Course Section Letter'),
         # TODO dropdown?  # noqa
-        # TODO Applicant should not see this field.  This is for OIE.  This  # noqa
-        #  field is specific to each Subject/Course # rather than to the
-        #  program.
     )
     ps_grade_by_date = schema.Date(
         title=_(u'PeopleSoft "grade by" date'),
         # TODO Autogenerate the "PeopleSoft 'grade by' date" by adding 5  # noqa
         #  calendar days to the "PeopleSoft Class End Date".
-        # TODO Applicant should not see this field.  This is for OIE.  This  # noqa
-        #  field is specific to each Subject/Course # rather than to the
-        #  program.
     )
     tuition_and_fees = schema.Choice(
         title=_(u'Tuition & Fees'),
         vocabulary=yes_no_vocabulary,
         # TODO vocabulary?  # noqa
-        # TODO Applicant should not see this field.  This is for OIE.  This  # noqa
-        #  field is specific to each Subject/Course # rather than to the
-        #  program.
     )
     tuition_and_fees = schema.Choice(
         title=_(u'External Studies Courses'),
         description=_(u'Confirm that any External Studies Courses have been graded.'),  # noqa
         vocabulary=yes_no_vocabulary,
-        # TODO Applicant should not see this field.  This is for OIE.  This  # noqa
-        #  field is specific to each Subject/Course # rather than to the
-        #  program.
         # TODO This field must be associated with each Ext Studies Course  # noqa
         #  listed in "Course Subject & Number".
     )

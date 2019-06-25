@@ -663,73 +663,73 @@
 
 
  </state>
- <transition transition_id="account-paid" title="Account Paid" new_state="step-iv" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="account-paid" title="Account Paid" new_state="step-iv" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=account-paid" category="workflow" icon="">Account Paid</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="advise-on-gpa" title="Advise on GPA" new_state="advising-on-gpa" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="advise-on-gpa" title="Advise on GPA" new_state="advising-on-gpa" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=advise-on-gpa" category="workflow" icon="">Advise on GPA</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="advise-on-graduation-date" title="Advise on Graduation Date" new_state="pending-change-in-graduation-date" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="advise-on-graduation-date" title="Advise on Graduation Date" new_state="pending-change-in-graduation-date" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=advise-on-graduation-date" category="workflow" icon="">Advise on Graduation Date</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="advise-on-visa" title="Advise on Visa" new_state="researching-entry-requirements" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="advise-on-visa" title="Advise on Visa" new_state="researching-entry-requirements" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=advise-on-visa" category="workflow" icon="">Advise on Visa</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="agreement-submitted" title="Submit Behavior Agreement" new_state="check-for-disciplinary-record" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="agreement-submitted" title="Submit Behavior Agreement" new_state="check-for-disciplinary-record" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=agreement-submitted" category="workflow" icon="">Submit Behavior Agreement</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="alternate-course-not-approved" title="Alternate Course Not Approved" new_state="pending-applicant-decision-on-course-options" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="alternate-course-not-approved" title="Alternate Course Not Approved" new_state="pending-applicant-decision-on-course-options" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=alternate-course-not-approved" category="workflow" icon="">Alternate Course Not Approved</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="application-complete" title="Application Complete" new_state="application-complete" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="application-complete" title="Application Complete" new_state="application-complete" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=application-complete" category="workflow" icon="">Application Complete</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="apply-for-special-student-status-graduate" title="Apply for Special Student Status-Graduate" new_state="pending-special-student-status-graduate" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="apply-for-special-student-status-graduate" title="Apply for Special Student Status-Graduate" new_state="pending-special-student-status-graduate" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=apply-for-special-student-status-graduate" category="workflow" icon="">Apply for Special Student Status-Graduate</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="apply-for-special-student-status-undergraduate" title="Apply for Special Student Status-Undergraduate" new_state="pending-special-student-status-undergraduate" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="apply-for-special-student-status-undergraduate" title="Apply for Special Student Status-Undergraduate" new_state="pending-special-student-status-undergraduate" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=apply-for-special-student-status-undergraduate" category="workflow" icon="">Apply for Special Student Status-Undergraduate</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="clear-disciplinary-check" title="Clear Disciplinary Check" new_state="eligibility-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="clear-disciplinary-check" title="Clear Disciplinary Check" new_state="eligibility-review" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=clear-disciplinary-check" category="workflow" icon="">Clear Disciplinary Check</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="clear-gpa-check" title="Clear GPA Check" new_state="step-ii-check-for-application-completeness" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="clear-gpa-check" title="Clear GPA Check" new_state="step-ii-check-for-application-completeness" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=clear-gpa-check" category="workflow" icon="">Clear GPA Check</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="communicate-entry-requirements" title="Communicate Entry Requirements" new_state="pending-applicant-decision-on-entry-requirements" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="communicate-entry-requirements" title="Communicate Entry Requirements" new_state="pending-applicant-decision-on-entry-requirements" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=communicate-entry-requirements" category="workflow" icon="">Communicate Entry Requirements</action>
   <guard >
    <guard-role>Participant_Coordinator</guard-role>
@@ -737,44 +737,44 @@
   </guard>
 
  </transition>
- <transition transition_id="complete-step-i" title="Complete STEP I" new_state="step-ii" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="complete-step-i" title="Complete STEP I" new_state="step-ii" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=complete-step-i" category="workflow" icon="">Complete STEP I</action>
   <guard >
    <guard-role>Participant_Applicant</guard-role>
   </guard>
 
  </transition>
- <transition transition_id="complete-step-i-for-non-sponsored-program" title="Complete STEP I for Non-sponsored Program" new_state="step-ii" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="complete-step-i-for-non-sponsored-program" title="Complete STEP I for Non-sponsored Program" new_state="step-ii" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=complete-step-i-for-non-sponsored-program" category="workflow" icon="">Complete STEP I for Non-sponsored Program</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="complete-step-ii" title="Complete STEP II" new_state="step-ii-check-for-application-completeness" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="complete-step-ii" title="Complete STEP II" new_state="step-ii-check-for-application-completeness" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=complete-step-ii" category="workflow" icon="">Complete STEP II</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="complete-step-ii-for-non-sponsored-program" title="Complete STEP II for Non-sponsored Program" new_state="ready-to-travel" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="complete-step-ii-for-non-sponsored-program" title="Complete STEP II for Non-sponsored Program" new_state="ready-to-travel" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=complete-step-ii-for-non-sponsored-program" category="workflow" icon="">Complete STEP II for Non-sponsored Program</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="complete-step-iii" title="Complete STEP III" new_state="reviewing-health-disclosure-auto" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="complete-step-iii" title="Complete STEP III" new_state="reviewing-health-disclosure-auto" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=complete-step-iii" category="workflow" icon="">Complete STEP III</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="complete-step-iv" title="Complete STEP IV" new_state="ready-to-travel" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="complete-step-iv" title="Complete STEP IV" new_state="ready-to-travel" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=complete-step-iv" category="workflow" icon="">Complete STEP IV</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="confirm-alternate-course-approved" title="Confirm Alternate Course Approved" new_state="step-i" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="confirm-alternate-course-approved" title="Confirm Alternate Course Approved" new_state="step-i" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-alternate-course-approved" category="workflow" icon="">Confirm Alternate Course Approved</action>
   <guard >
    <guard-role>Participant_OIEProfessional</guard-role>
@@ -783,13 +783,13 @@
   </guard>
 
  </transition>
- <transition transition_id="confirm-alternate-schedule" title="Confirm Alternative Schedule" new_state="step-ii-check-for-application-completeness" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="confirm-alternate-schedule" title="Confirm Alternative Schedule" new_state="step-ii-check-for-application-completeness" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-alternate-schedule" category="workflow" icon="">Confirm Alternative Schedule</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="confirm-no-special-entry-requirements" title="Confirm No Special Entry Requirements" new_state="step-i" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="confirm-no-special-entry-requirements" title="Confirm No Special Entry Requirements" new_state="step-i" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-no-special-entry-requirements" category="workflow" icon="">Confirm No Special Entry Requirements</action>
   <guard >
    <guard-role>Participant_Coordinator</guard-role>
@@ -797,328 +797,328 @@
   </guard>
 
  </transition>
- <transition transition_id="confirm-special-student-status-graduate" title="Confirm Special Student Status-Graduate" new_state="step-ii-check-for-application-completeness" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="confirm-special-student-status-graduate" title="Confirm Special Student Status-Graduate" new_state="step-ii-check-for-application-completeness" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-special-student-status-graduate" category="workflow" icon="">Confirm Special Student Status-Graduate</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="confirm-special-student-status-undergraduate" title="Confirm Special Student Status-Undergraduate" new_state="step-ii-check-for-application-completeness" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="confirm-special-student-status-undergraduate" title="Confirm Special Student Status-Undergraduate" new_state="step-ii-check-for-application-completeness" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-special-student-status-undergraduate" category="workflow" icon="">Confirm Special Student Status-Undergraduate</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="decline" title="Decline" new_state="declined" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="decline" title="Decline" new_state="declined" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=decline" category="workflow" icon="">Decline</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="decline-alternate-schedule" title="Decline Alternative Schedule" new_state="step-i" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="decline-alternate-schedule" title="Decline Alternative Schedule" new_state="step-i" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=decline-alternate-schedule" category="workflow" icon="">Decline Alternative Schedule</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="decline-special-student-status-graduate" title="Decline Special Student Status-Graduate" new_state="step-i" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="decline-special-student-status-graduate" title="Decline Special Student Status-Graduate" new_state="step-i" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=decline-special-student-status-graduate" category="workflow" icon="">Decline Special Student Status-Graduate</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="decline-special-student-status-undergraduate" title="Decline Special Student Status-Undergraduate" new_state="step-i" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="decline-special-student-status-undergraduate" title="Decline Special Student Status-Undergraduate" new_state="step-i" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=decline-special-student-status-undergraduate" category="workflow" icon="">Decline Special Student Status-Undergraduate</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="depart" title="Depart" new_state="traveling" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="depart" title="Depart" new_state="traveling" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=depart" category="workflow" icon="">Depart</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="depart-non-sponsored-program" title="Depart-Non-sponsored Program" new_state="traveling" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="depart-non-sponsored-program" title="Depart-Non-sponsored Program" new_state="traveling" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=depart-non-sponsored-program" category="workflow" icon="">Depart-Non-sponsored Program</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="does-not-meet-eligibility-criteria" title="Does Not Meet Eligibility Criteria" new_state="eligibility-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="does-not-meet-eligibility-criteria" title="Does Not Meet Eligibility Criteria" new_state="eligibility-review" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=does-not-meet-eligibility-criteria" category="workflow" icon="">Does Not Meet Eligibility Criteria</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="end-program-participation-early" title="End Program Participation Early" new_state="completing-program-evaluation" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="end-program-participation-early" title="End Program Participation Early" new_state="completing-program-evaluation" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=end-program-participation-early" category="workflow" icon="">End Program Participation Early</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="fecop-approved" title="FECOP Approved" new_state="step-iii-conditionally-admitted" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="fecop-approved" title="FECOP Approved" new_state="step-iii-conditionally-admitted" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=fecop-approved" category="workflow" icon="">FECOP Approved</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="fecop-revised" title="FECOP Revised" new_state="revised-fecop-pending-applicant-signature" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="fecop-revised" title="FECOP Revised" new_state="revised-fecop-pending-applicant-signature" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=fecop-revised" category="workflow" icon="">FECOP Revised</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="financial-estimate-for-withdrawal-shared-via" title="Financial Estimate for Withdrawal Shared via Comment" new_state="" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="financial-estimate-for-withdrawal-shared-via" title="Financial Estimate for Withdrawal Shared via Comment" new_state="" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=financial-estimate-for-withdrawal-shared-via" category="workflow" icon="">Financial Estimate for Withdrawal Shared via Comment</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="i-accept-the-financial-estimate-for-withdrawal" title="I accept the financial estimate for withdrawal." new_state="withdrawn" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="i-accept-the-financial-estimate-for-withdrawal" title="I accept the financial estimate for withdrawal." new_state="withdrawn" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=i-accept-the-financial-estimate-for-withdrawal" category="workflow" icon="">I accept the financial estimate for withdrawal.</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="i-agree-to-the-change-in-graduation-date" title="I agree to the change in graduation date." new_state="step-i" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="i-agree-to-the-change-in-graduation-date" title="I agree to the change in graduation date." new_state="step-i" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=i-agree-to-the-change-in-graduation-date" category="workflow" icon="">I agree to the change in graduation date.</action>
   <guard >
    <guard-role>Participant_Applicant</guard-role>
   </guard>
 
  </transition>
- <transition transition_id="i-will-apply-for-the-visa" title="I will apply for the visa." new_state="step-i" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="i-will-apply-for-the-visa" title="I will apply for the visa." new_state="step-i" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=i-will-apply-for-the-visa" category="workflow" icon="">I will apply for the visa.</action>
   <guard >
    <guard-role>Participant_Applicant</guard-role>
   </guard>
 
  </transition>
- <transition transition_id="i-will-choose-an-existing-course" title="I will choose an existing course." new_state="step-i" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="i-will-choose-an-existing-course" title="I will choose an existing course." new_state="step-i" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=i-will-choose-an-existing-course" category="workflow" icon="">I will choose an existing course.</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="i-will-participate-on-the-program" title="I will participate on the program." new_state="ready-to-travel" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="i-will-participate-on-the-program" title="I will participate on the program." new_state="ready-to-travel" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=i-will-participate-on-the-program" category="workflow" icon="">I will participate on the program.</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="inform-of-past-due-account" title="Inform of Past-due Account" new_state="pending-payment-on-past-due-account" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="inform-of-past-due-account" title="Inform of Past-due Account" new_state="pending-payment-on-past-due-account" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=inform-of-past-due-account" category="workflow" icon="">Inform of Past-due Account</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="meets-eligibility-criteria" title="Meets Eligibility Criteria" new_state="eligibility-criteria-met" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="meets-eligibility-criteria" title="Meets Eligibility Criteria" new_state="eligibility-criteria-met" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=meets-eligibility-criteria" category="workflow" icon="">Meets Eligibility Criteria</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="move-to-liaison-review" title="Move to Liaison Review" new_state="liaison-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="move-to-liaison-review" title="Move to Liaison Review" new_state="liaison-review" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=move-to-liaison-review" category="workflow" icon="">Move to Liaison Review</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="move-to-step-iii-check-for-application" title="Move to Step III Review" new_state="step-iii-check-for-application-completeness" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="move-to-step-iii-check-for-application" title="Move to Step III Review" new_state="step-iii-check-for-application-completeness" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=move-to-step-iii-check-for-application" category="workflow" icon="">Move to Step III Review</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="move-to-step-iii-conditionally-admitted" title="Move to STEP III: Conditionally Admitted" new_state="step-iii-conditionally-admitted" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="move-to-step-iii-conditionally-admitted" title="Move to STEP III: Conditionally Admitted" new_state="step-iii-conditionally-admitted" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=move-to-step-iii-conditionally-admitted" category="workflow" icon="">Move to STEP III: Conditionally Admitted</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="move-to-step-iii-pending-materials-review" title="Move to Step III: Pending Materials Review" new_state="" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="move-to-step-iii-pending-materials-review" title="Move to Step III: Pending Materials Review" new_state="" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=move-to-step-iii-pending-materials-review" category="workflow" icon="">Move to Step III: Pending Materials Review</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="move-to-step-iv" title="Move to STEP IV" new_state="step-iv" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="move-to-step-iv" title="Move to STEP IV" new_state="step-iv" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=move-to-step-iv" category="workflow" icon="">Move to STEP IV</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="report-site-health-safety-or-security-incident" title="Report Site Health, Safety or Security Incident" new_state="addressing-site-health-safety-or-security-incident" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="report-site-health-safety-or-security-incident" title="Report Site Health, Safety or Security Incident" new_state="addressing-site-health-safety-or-security-incident" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=report-site-health-safety-or-security-incident" category="workflow" icon="">Report Site Health, Safety or Security Incident</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="request-agreement" title="Request Agreement" new_state="pending-signed-agreement" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="request-agreement" title="Request Agreement" new_state="pending-signed-agreement" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=request-agreement" category="workflow" icon="">Request Agreement</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="request-alternate-course" title="Request Alternate Course" new_state="pending-approval-of-alternate-course" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="request-alternate-course" title="Request Alternate Course" new_state="pending-approval-of-alternate-course" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=request-alternate-course" category="workflow" icon="">Request Alternate Course</action>
   <guard >
    <guard-role>Participant_Applicant</guard-role>
   </guard>
 
  </transition>
- <transition transition_id="request-alternate-flight" title="Request Alternate Flight" new_state="pending-decision-on-alternate-flight" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="request-alternate-flight" title="Request Alternate Flight" new_state="pending-decision-on-alternate-flight" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=request-alternate-flight" category="workflow" icon="">Request Alternate Flight</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="request-behavior-agreement" title="Request Behavior Agreement" new_state="pending-signed-agreement" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="request-behavior-agreement" title="Request Behavior Agreement" new_state="pending-signed-agreement" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=request-behavior-agreement" category="workflow" icon="">Request Behavior Agreement</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="request-financial-estimate-for-withdrawal" title="Request Financial Estimate for Withdrawal" new_state="requesting-financial-estimate-for-withdrawal-1" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="request-financial-estimate-for-withdrawal" title="Request Financial Estimate for Withdrawal" new_state="requesting-financial-estimate-for-withdrawal-1" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=request-financial-estimate-for-withdrawal" category="workflow" icon="">Request Financial Estimate for Withdrawal</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="request-gpa-agreement" title="Request GPA Agreement" new_state="pending-signed-gpa-agreement" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="request-gpa-agreement" title="Request GPA Agreement" new_state="pending-signed-gpa-agreement" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=request-gpa-agreement" category="workflow" icon="">Request GPA Agreement</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="return" title="Return" new_state="completing-program-evaluation" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="return" title="Return" new_state="completing-program-evaluation" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return" category="workflow" icon="">Return</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="return-non-sponsored-program" title="Return-Non-sponsored Program" new_state="program-completed" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="return-non-sponsored-program" title="Return-Non-sponsored Program" new_state="program-completed" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-non-sponsored-program" category="workflow" icon="">Return-Non-sponsored Program</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="return-to-step-ii" title="Return to STEP II" new_state="step-ii" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="return-to-step-ii" title="Return to STEP II" new_state="step-ii" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-to-step-ii" category="workflow" icon="">Return to STEP II</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="return-to-step-iii-conditionally-admitted" title="Return to STEP III: Conditionally Admitted" new_state="step-iii-conditionally-admitted" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="return-to-step-iii-conditionally-admitted" title="Return to STEP III: Conditionally Admitted" new_state="step-iii-conditionally-admitted" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-to-step-iii-conditionally-admitted" category="workflow" icon="">Return to STEP III: Conditionally Admitted</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="review-disciplinary-record" title="Review Disciplinary Record" new_state="review-disciplinary-record" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="review-disciplinary-record" title="Review Disciplinary Record" new_state="review-disciplinary-record" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=review-disciplinary-record" category="workflow" icon="">Review Disciplinary Record</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="review-health-disclosure" title="Review Health Disclosure" new_state="reviewing-health-disclosure" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="review-health-disclosure" title="Review Health Disclosure" new_state="reviewing-health-disclosure" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=review-health-disclosure" category="workflow" icon="">Review Health Disclosure</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="schedule-disciplinary-related-meeting" title="Schedule Disciplinary-related Meeting" new_state="pending-disciplinary-record-related-meeting" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="schedule-disciplinary-related-meeting" title="Schedule Disciplinary-related Meeting" new_state="pending-disciplinary-record-related-meeting" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=schedule-disciplinary-related-meeting" category="workflow" icon="">Schedule Disciplinary-related Meeting</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="schedule-gpa-related-meeting" title="Schedule GPA-related Meeting" new_state="pending-gpa-related-meeting" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="schedule-gpa-related-meeting" title="Schedule GPA-related Meeting" new_state="pending-gpa-related-meeting" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=schedule-gpa-related-meeting" category="workflow" icon="">Schedule GPA-related Meeting</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="schedule-health-meeting" title="Schedule Health Meeting" new_state="pending-health-disclosure-related-meeting" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="schedule-health-meeting" title="Schedule Health Meeting" new_state="pending-health-disclosure-related-meeting" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=schedule-health-meeting" category="workflow" icon="">Schedule Health Meeting</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="send-fecop-for-advisor-review" title="Send FECOP for Advisor Review" new_state="fecop-under-advisor-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="send-fecop-for-advisor-review" title="Send FECOP for Advisor Review" new_state="fecop-under-advisor-review" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=send-fecop-for-advisor-review" category="workflow" icon="">Send FECOP for Advisor Review</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="send-for-disciplinary-check" title="Send for Background Check" new_state="check-for-disciplinary-record" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="send-for-disciplinary-check" title="Send for Background Check" new_state="check-for-disciplinary-record" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=send-for-disciplinary-check" category="workflow" icon="">Send for Background Check</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="step-iii-external-partner-decision" title="STEP III: External Partner Decision" new_state="reviewing-health-disclosure-auto" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="step-iii-external-partner-decision" title="STEP III: External Partner Decision" new_state="reviewing-health-disclosure-auto" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=step-iii-external-partner-decision" category="workflow" icon="">STEP III: External Partner Decision</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="step-iii-uwo-oie-decision" title="STEP III: UWO OIE Decision" new_state="reviewing-health-disclosure-auto" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="step-iii-uwo-oie-decision" title="STEP III: UWO OIE Decision" new_state="reviewing-health-disclosure-auto" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=step-iii-uwo-oie-decision" category="workflow" icon="">STEP III: UWO OIE Decision</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="step-iv-accept-to-participate" title="STEP IV Accept to Participate" new_state="step-iv" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="step-iv-accept-to-participate" title="STEP IV Accept to Participate" new_state="step-iv" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=step-iv-accept-to-participate" category="workflow" icon="">STEP IV Accept to Participate</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="step-iv-recommend-to-external-partner" title="STEP IV Recommend to External Partner" new_state="step-iv" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="step-iv-recommend-to-external-partner" title="STEP IV Recommend to External Partner" new_state="step-iv" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=step-iv-recommend-to-external-partner" category="workflow" icon="">STEP IV Recommend to External Partner</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="submit" title="Submit" new_state="step-i" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="submit" title="Submit" new_state="step-i" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit" category="workflow" icon="">Submit</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="submit-evaluation" title="End Evaluation Period" new_state="program-completed" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="submit-evaluation" title="End Evaluation Period" new_state="program-completed" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-evaluation" category="workflow" icon="">Submit Evaluation</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="submit-fecop" title="Submit FECOP" new_state="fecop-under-advisor-review" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="submit-fecop" title="Submit FECOP" new_state="fecop-under-advisor-review" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-fecop" category="workflow" icon="">Submit FECOP</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="submit-gpa-agreement" title="Submit GPA Agreement" new_state="step-ii-check-for-application-completeness" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="submit-gpa-agreement" title="Submit GPA Agreement" new_state="step-ii-check-for-application-completeness" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-gpa-agreement" category="workflow" icon="">Submit GPA Agreement</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="travel-recommendation-shared-via-comment" title="Travel Recommendation Shared via Comment" new_state="traveling" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="travel-recommendation-shared-via-comment" title="Travel Recommendation Shared via Comment" new_state="traveling" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=travel-recommendation-shared-via-comment" category="workflow" icon="">Travel Recommendation Shared via Comment</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="waitlist" title="Send to Wait List" new_state="waitlist" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="waitlist" title="Send to Wait List" new_state="waitlist" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=waitlist" category="workflow" icon="">Send to Wait List</action>
   <guard >
   </guard>
 
  </transition>
- <transition transition_id="withdraw" title="Withdraw" new_state="withdrawn" trigger="USER" before_script="" after_script="" >
+ <transition transition_id="withdraw" title="Withdraw" new_state="withdrawn" trigger="USER" before_script="participant_pre_transition" after_script="participant_post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=withdraw" category="workflow" icon="">Withdraw</action>
   <guard >
    <guard-role>Participant_Applicant</guard-role>
@@ -1173,5 +1173,8 @@
   <guard >
   </guard>
  </variable>
+
+ <script script_id="participant_pre_transition" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="participant_pre_transition" />
+ <script script_id="participant_post_transition" type="External Method" filename="" module="uwosh.oie.studyabroadstudent.transition_scripts" function="participant_post_transition" />
 
 </dc-workflow>

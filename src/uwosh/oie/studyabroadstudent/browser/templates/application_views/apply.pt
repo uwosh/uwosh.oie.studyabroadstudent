@@ -5,26 +5,14 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master">
   <body>
+    <metal:javascript fill-slot="javascript_head_slot">
+      <script src="${portal_url|nothing}/++plone++uwosh.oie.studyabroadstudent/participantjs/apply.js">
+    </metal:javascript>
     <metal:main fill-slot="main">
       <tal:main-macro metal:define-macro="main">
         <div tal:define="programs view/getPrograms">
           TODO: Text of this view
-          <br><br><form method="post">
-            First name:<br>
-            <input type="text" name="firstname" required /><br>
-            Last name:<br>
-            <input type="text" name="lastname" required /><br>
-            Email:<br>
-            <input type="text" name="email" required /><br>
-            <select name="programID" required>
-              <option tal:repeat="program programs"
-                      tal:attributes="value program/uid;
-                                      selected program/selected"
-                      tal:content="program/name" />
-
-            </select><br><br>
-            <input type="submit" value="Submit" />
-          </form>
+          <div id="oie-apply-component" />
         </div>
       </tal:main-macro>
     </metal:main>

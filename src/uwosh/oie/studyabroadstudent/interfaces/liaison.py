@@ -143,19 +143,19 @@ also teach one or more of the program courses.
     )
     number_study_abroad_away_fair_flyers = schema.Int(
         title=_(u'Number of Study Abroad/Away Fair Flyers'),
-        description=_(u'Indicate the number (max: 999) of flyers, posters and brochures to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
+        description=_(u'Indicate the number (max: 999) of flyers to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
         min=0,
         max=999,
     )
     number_study_abroad_away_fair_posters = schema.Int(
         title=_(u'Number of Study Abroad/Away Fair Posters'),
-        description=_(u'Indicate the number (max: 99) of posters, posters and brochures to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
+        description=_(u'Indicate the number (max: 99) of posters to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
         min=0,
         max=99,
     )
     number_study_abroad_away_fair_brochures = schema.Int(
         title=_(u'Number of Study Abroad/Away Fair Brochures'),
-        description=_(u'Indicate the number (max: 999) of brochures, posters and brochures to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
+        description=_(u'Indicate the number (max: 999) of brochures to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
         min=0,
         max=999,
     )

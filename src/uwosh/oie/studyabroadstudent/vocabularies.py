@@ -292,8 +292,10 @@ salary_form = SimpleVocabulary(
 
 selection_criteria_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value='Set selection criteria'),
-        SimpleTerm(value='There are no additional selection criteria'),
+        SimpleTerm(title='Set selection criteria',
+                   value=True),
+        SimpleTerm(title='There are no additional selection criteria',
+                   value=False),
     ],
 )
 

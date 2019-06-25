@@ -45,7 +45,7 @@ class IOIEProgramLeader(Interface):
     # TODO The Program Leader may also be the Program Liaison or one of  # noqa
     #   the Program Co-leaders.
 
-    # TODO Some of these fields also need to be matched to ""participant""  # noqa
+    # TODO Some of these fields also need to be matched to "participant"  # noqa
     #   fields so that we can pull a roster that includes all participants,
     #   leaders and co-leaders. "
     dexteritytextindexer.searchable('title')
