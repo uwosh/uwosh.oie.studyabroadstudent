@@ -246,7 +246,7 @@ class ApplyView(DefaultView):
                 # refresh with a message about something not validating
         return self.index(self)
 
-    def getPrograms(self):
+    def get_programs(self):
         programs = []
         vocab = NewProgramsVocabulary(self.context)
         for program_term in vocab:

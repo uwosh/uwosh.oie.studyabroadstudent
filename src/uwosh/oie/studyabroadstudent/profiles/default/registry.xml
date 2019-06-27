@@ -7,7 +7,7 @@
   <records prefix="plone.bundles/uwosh.oie.studyabroadstudent"
             interface='Products.CMFPlone.interfaces.IBundleRegistry'>
     <value key="enabled">True</value>
-    <value key="jscompilation">++plone++uwosh.oie.studyabroadstudent/programedit.js</value>
+    <value key="jscompilation">++plone++uwosh.oie.studyabroadstudent/programjs/programedit.js</value>
     <value key="compile">False</value>
     <value key="depends">plone</value>
     <value key="merge_with">logged-in</value>
@@ -16,7 +16,7 @@
   <records prefix="plone.bundles/uwosh.oie.studyabroadstudent"
             interface='Products.CMFPlone.interfaces.IBundleRegistry'>
     <value key="enabled">True</value>
-    <value key="jscompilation">++plone++uwosh.oie.studyabroadstudent/participantedit.js</value>
+    <value key="jscompilation">++plone++uwosh.oie.studyabroadstudent/participantjs/participantedit.js</value>
     <value key="compile">False</value>
     <value key="depends">plone</value>
     <value key="merge_with">logged-in</value>

@@ -10,7 +10,7 @@
     </metal:javascript>
     <metal:main fill-slot="main">
       <tal:main-macro metal:define-macro="main">
-        <div tal:attributes="oie-program-data view/getPrograms">
+        <div id="oie-apply-data" tal:attributes="oie-program-data view/get_programs">
           TODO: Text of this view
           <div id="oie-apply-component" />
         </div>
