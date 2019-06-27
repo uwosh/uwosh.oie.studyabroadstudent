@@ -65,6 +65,7 @@
       name="apply"
       for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"
       class=".views.ApplyView"
+      template="templates/application_views/apply.pt"
       permission="zope2.View"
       />
     <!--TODO ^what permission will the applicants have? -->

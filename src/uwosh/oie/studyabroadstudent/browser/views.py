@@ -20,6 +20,12 @@ import Missing
 logger = logging.getLogger('uwosh.oie.studyabroadstudent')
 
 
+def handle_missing(obj):
+    if obj == Missing.Value:
+        return None
+    return obj
+
+
 class ApplicationView(DefaultView):
     # this is for the legacy applications
     pass
@@ -177,11 +183,6 @@ class ProgramSearchView(BrowserView):
                             'search view, not all searchable fields were '
                             'indexed.'.format(brain.Title))
 
-        def handle_missing(obj):
-            if obj == Missing.Value:
-                return None
-            return obj
-
         string = json.dumps(programs, default=handle_missing)
         encoded = base64.b64encode(string)
         return encoded
@@ -214,7 +215,7 @@ class ParticipantView(DefaultView, FolderView):
     pass
 
 
-class ApplyView(BrowserView):
+class ApplyView(DefaultView):
 
     index = ViewPageTemplateFile('templates/application_views/apply.pt')
     templates = {
@@ -233,7 +234,7 @@ class ApplyView(BrowserView):
                     self.index = self.templates[step]
                 except KeyError:
                     pass  # invalid step just show the apply view
-        elif self.request.method == 'POST':
+        if self.request.method == 'POST':
             created = self.create_participant()
             if created:
                 url = '{0}/apply?step=0'.format(self.context.absolute_url())
@@ -255,7 +256,9 @@ class ApplyView(BrowserView):
             if program_term.value == self.context.UID():
                 program['selected'] = True
             programs.append(program)
-        return programs
+        string = json.dumps(programs, default=handle_missing)
+        encoded = base64.b64encode(string)
+        return encoded
 
     def create_participant(self):
         program_ID = self.context.UID()

@@ -482,7 +482,7 @@ class IOIEStudyAbroadProgram(Interface):
         allowed_mime_types=('text/plain', 'text/html'),
         max_length=1000,
         # TODO: create a custom validator that renders text without HTML tags  # noqa
-        #  to count words accurately
+        #  to count words accurately (html2text ?)
         required=True,
     )
 

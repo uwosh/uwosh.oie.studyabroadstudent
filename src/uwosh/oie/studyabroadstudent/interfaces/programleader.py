@@ -168,6 +168,8 @@ class IOIEProgramLeader(Interface):
 
     #######################################################
     # TODO move JavaScript over for compensation fields  # noqa
+    # this appears to be the contents of programedit.js
+    # which is currently set to load on the program rather than leader type
     model.fieldset(
         'compensation',
         label=_(u'Compensation'),
