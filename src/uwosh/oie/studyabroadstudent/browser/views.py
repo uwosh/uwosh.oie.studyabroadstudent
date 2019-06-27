@@ -215,6 +215,14 @@ class ParticipantView(DefaultView, FolderView):
     pass
 
 
+class ParticipantEditUtilView(DefaultView):
+    # participantedit.js will call this, it will return data that will help
+    # accomplish remaining TODO items for edit for customization  # noqa
+    # such as adding relevant dates to field text dynamically
+    # and checking conditions which might cause a field to be hidden
+    pass
+
+
 class ApplyView(DefaultView):
 
     index = ViewPageTemplateFile('templates/application_views/apply.pt')
