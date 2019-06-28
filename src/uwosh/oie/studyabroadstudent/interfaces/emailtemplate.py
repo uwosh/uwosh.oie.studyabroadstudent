@@ -7,7 +7,7 @@ from zope import schema
 from zope.interface import Interface
 
 
-class IOIEEmailTemplate(Interface):
+class IOIEProgramEmailTemplate(Interface):
     form.mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Template Title'),
@@ -40,5 +40,14 @@ class IOIEEmailTemplate(Interface):
         description=_(u'Text that will display in the email body.'),
         default_mime_type='text/html',
         allowed_mime_types=('text/plain', 'text/html'),
+        required=True,
+    )
+
+
+class IOIEParticipantEmailTemplate(IOIEProgramEmailTemplate):
+    transition = schema.Choice(
+        title=_(u'Transition Name'),
+        description=_(u'Transition that it will send an email on.'),
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.participant_transition',  # noqa
         required=True,
     )

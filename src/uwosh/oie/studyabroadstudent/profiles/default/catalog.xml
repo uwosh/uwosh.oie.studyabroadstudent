@@ -7,13 +7,9 @@
   <index name="calendar_year" meta_type="FieldIndex">
     <indexed_attr value="calendar_year"/>
   </index>
-  <index name="transition" meta_type="FieldIndex">
-    <indexed_attr value="transition"/>
-  </index>
   <index name="countries" meta_type="FieldIndex">
     <indexed_attr value="countries"/>
   </index>
-  <column value="transition" />
   <column value="program_type" />
   <column value="calendar_year" />
   <column value="countries" />
@@ -31,4 +27,10 @@
   <column value="educationLevel" />
   <column value="university" />
   <column value="programName" />
+
+  <!--Email Template Indices-->
+  <index name="transition" meta_type="FieldIndex">
+    <indexed_attr value="transition"/>
+  </index>
+  <column value="transition" />
 </object>

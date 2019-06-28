@@ -6,7 +6,8 @@
   <object name="OIEAirline" meta_type="Dexterity FTI"/>
   <object name="OIEContact" meta_type="Dexterity FTI"/>
   <object name="OIECourse" meta_type="Dexterity FTI"/>
-  <object name="OIEEmailTemplate" meta_type="Dexterity FTI"/>
+  <object name="OIEProgramEmailTemplate" meta_type="Dexterity FTI"/>
+  <object name="OIEParticipantEmailTemplate" meta_type="Dexterity FTI"/>
   <object name="OIEHealthSafetySecurityDocument" meta_type="Dexterity FTI"/>
   <object name="OIELiaison" meta_type="Dexterity FTI"/>
   <object name="OIEProgramLeader" meta_type="Dexterity FTI"/>

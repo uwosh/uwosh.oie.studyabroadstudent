@@ -263,7 +263,8 @@ def populate_toplevel_folders(portal, portal_ids):
                            ['OIEAirline'], publish_but_exclude=True)
     create_toplevel_folder(portal, portal_ids, 'Forms', 'forms', ['File'])
     create_toplevel_folder(portal, portal_ids, 'Email Templates',
-                           'email-templates', ['OIEEmailTemplate'])
+                           'email-templates', ['OIEProgramEmailTemplate',
+                                               'OIEParticipantEmailTemplate'])
 
 
 def enable_commenting():

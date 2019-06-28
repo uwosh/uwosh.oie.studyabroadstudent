@@ -117,16 +117,28 @@
     />
 
   <subscriber
-    for=".interfaces.emailtemplate.IOIEEmailTemplate
+    for=".interfaces.emailtemplate.IOIEProgramEmailTemplate
          zope.lifecycleevent.IObjectCreatedEvent"
     handler=".events.emailtemplate_created"
     />
 
   <subscriber
-    for=".interfaces.emailtemplate.IOIEEmailTemplate
+    for=".interfaces.emailtemplate.IOIEProgramEmailTemplate
          zope.lifecycleevent.IObjectModifiedEvent"
     handler=".events.emailtemplate_modified"
     />
+
+    <subscriber
+      for=".interfaces.emailtemplate.IOIEParticipantEmailTemplate
+           zope.lifecycleevent.IObjectCreatedEvent"
+      handler=".events.emailtemplate_created"
+      />
+
+    <subscriber
+      for=".interfaces.emailtemplate.IOIEParticipantEmailTemplate
+           zope.lifecycleevent.IObjectModifiedEvent"
+      handler=".events.emailtemplate_modified"
+      />
 
   <subscriber
     for=".interfaces.transition.IOIETransition
@@ -229,6 +241,10 @@
   <utility
     name="uwosh.oie.studyabroadstudent.vocabularies.program_transition"
     component="uwosh.oie.studyabroadstudent.vocabularies.ProgramTransitionVocabulary" />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.participant_transition"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ParticipantTransitionVocabulary" />
 
   <genericsetup:upgradeStep
       title="Reset some data grid fields to empty rich text fields"

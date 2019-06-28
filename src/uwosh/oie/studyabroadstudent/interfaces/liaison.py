@@ -36,16 +36,6 @@ other OIE staff in conversations or seek input when appropriate.
 The Liaison may also serve as the On-site Program Leader and may
 also teach one or more of the program courses.
 """
-    # TODO Some of these fields also need to be matched to "participant"  # noqa
-    #   fields so that we can pull a roster that includes all participants,
-    #   leaders and co-leaders.
-    # TODO Would it be possible for Liaisons and Leaders to log into the  # noqa
-    #   system to set up a profile, to include the data with the * in this
-    #   section, before the application is completed?  This kind of information
-    #   remains the same over time and wouldn't have to be repeated for
-    #   each program.  It would also make things less complicated for the
-    #   Liaison to complete this application if the Leader/Co-leader details
-    #   were already in the system.
     dexteritytextindexer.searchable('title')
 
     form.mode(title='hidden')
