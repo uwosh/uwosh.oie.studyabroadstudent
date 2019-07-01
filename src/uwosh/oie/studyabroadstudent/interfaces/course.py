@@ -26,7 +26,7 @@ class IOIECourse(Interface):
             u'taught entirely at UWO, even when these courses are offered '
             u'in preparation for the program away.  Contact the OIE to add '
             u'a course (abroad@uwosh.edu).'),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.course'),
+        source=RegistryValueVocabulary('oiestudyabroadstudent.course_subject_and_number'),  # noqa
     )
     credits_earned = schema.Int(
         title=_(u'UW Oshkosh Credits Earned'),
