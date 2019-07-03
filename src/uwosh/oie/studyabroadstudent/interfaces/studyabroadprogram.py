@@ -175,8 +175,6 @@ class IReviewerEmailRowSchema(Interface):
     reviewer_email_row = schema.TextLine(
         title=_(u'Reviewer Email Address'),
         constraint=validate_email,
-        # TODO autocomplete from campus email addresses? Or commonly entered  # noqa
-        #  email addresses? Rely on browser?
     )
 
 
@@ -1186,7 +1184,7 @@ class IOIEStudyAbroadProgram(Interface):
     #######################################################
     model.fieldset(
         'liaison_and_leadership_fieldset',
-        label=_(u'Liaison to the OIE'),
+        label=_(u'Liaison and Leadership'),
         fields=['liaison', 'program_leader', 'program_coleaders'],
     )
     read_permission(liaison=V_LIAISON_AND_LEADERSHIP_FS)
@@ -1277,7 +1275,7 @@ class IOIEStudyAbroadProgram(Interface):
     model.fieldset(
         'reviewers_fieldset',
         label=_(u'Reviewers'),
-        fields=['reviewers_label', 'reviewer_emails'],
+        fields=['reviewers_label', 'dean_emails', 'chair_emails'],
     )
     read_permission(reviewers_label=V_REVIEWERS_FS)
     write_permission(reviewers_label=E_REVIEWERS_FS)
@@ -1287,20 +1285,28 @@ class IOIEStudyAbroadProgram(Interface):
     form.mode(reviewers_label='display')
     reviewers_label = schema.TextLine(
         description=_(
-            u'Type an email address for every Committee Chair, Department Chair and Dean: •  who supervises a Liaison, On-site Program Leader or On-site Program Co-leader listed in this application and/or •  is associated with a course offered through this program. Do not include email addresses for committee members who review applications.'),  # noqa3
-        # TODO Each program may have a different number of "Chair reviewers"  # noqa
-        #   and "Dean/Unit Director reviewers".  Who reviews an application
-        #   will change depending on who is leading the program and which
-        #   courses are offered.  How can this be handled?
+            u'Type an email address for every Committee Chair, Department Chair and Dean: •  who supervises a Liaison, On-site Program Leader or On-site Program Co-leader listed in this application and/or •  is associated with a course offered through this program. Do not include email addresses for committee members who review applications.'),  # noqa
     )
-    widget('reviewer_emails', DataGridFieldFactory)
-    reviewer_emails = schema.List(
-        title=_(u'Reviewer Emails'),
+    widget('dean_emails', DataGridFieldFactory)
+    dean_emails = schema.List(
+        title=_(u'Reviewer (Dean) Emails'),
         description=_(u'"One per line, and press Enter or Tab '
                       'after each one to add more (max: 6)'),
         required=False,
         value_type=DictRow(
-            title=u'Reviewer Emails',
+            title=u'Reviewer Emails when submitted to Dean',
+            schema=IReviewerEmailRowSchema,
+        ),
+    )
+
+    widget('chair_emails', DataGridFieldFactory)
+    chair_emails = schema.List(
+        title=_(u'Reviewer (Chair) Emails'),
+        description=_(u'"One per line, and press Enter or Tab '
+                      'after each one to add more (max: 6)'),
+        required=False,
+        value_type=DictRow(
+            title=u'Reviewer Emails when submitted to Chair',
             schema=IReviewerEmailRowSchema,
         ),
     )
@@ -1821,7 +1827,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             'Upload the first fee statement for participants.  This statement will display in the participant portal upon transition to "Pending Final Program Fee".  Participants deviating from the advertised program may require an alternative fee statement.'),  # noqa
         required=False,
-        # TODO Display this fee statement in the particpant portal.  # noqa
+        # TODO Display this fee statement in the participant portal.  # noqa
     )
     first_participant_fee_spreadsheet = field.NamedFile(
         title=_(u'First Participant Fee Spreadsheet'),
@@ -1842,7 +1848,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             'Upload the final fee statement for participants.  This statement will display in the participant portal upon transition to "Final Payment Billing in Progress".  Participants deviating from the advertised program may require an alternative fee statement.'),  # noqa
         required=False,
-        # TODO Display this fee statement in the particpant portal.  # noqa
+        # TODO Display this fee statement in the participant portal.  # noqa
     )
     final_participant_fee_spreadsheet = field.NamedFile(
         title=_(u'Final Participant Fee Spreadsheet'),

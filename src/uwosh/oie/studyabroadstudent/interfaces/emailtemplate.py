@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from plone.app.textfield import RichText
 from plone.directives import form
 from uwosh.oie.studyabroadstudent import _
@@ -42,6 +41,10 @@ class IOIEProgramEmailTemplate(Interface):
         allowed_mime_types=('text/plain', 'text/html'),
         required=True,
     )
+    send_to_actor = schema.Bool(
+        title=_(u'Send Email To the user who triggered this transition'),
+        description=_(u'Should the user who triggered this transition recieve an email?'),  # noqa
+    )
 
 
 class IOIEParticipantEmailTemplate(IOIEProgramEmailTemplate):
@@ -50,4 +53,14 @@ class IOIEParticipantEmailTemplate(IOIEProgramEmailTemplate):
         description=_(u'Transition that it will send an email on.'),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.participant_transition',  # noqa
         required=True,
+    )
+
+    send_to_participant = schema.Bool(
+        title=_(u'Send Email To Participant/Application on Transition'),
+        description=_(u'Should the participant/applicant recieve an email when their application goes through this transition?'),  # noqa
+    )
+
+    send_to_program_leader = schema.Bool(
+        title=_(u'Send Email To Participant/Application on Transition'),
+        description=_(u'Should the participant/applicant recieve an email when their application goes through this transition?'),  # noqa
     )

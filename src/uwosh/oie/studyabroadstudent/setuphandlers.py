@@ -490,15 +490,16 @@ def populate_airlines(portal):
 def populate_people(portal):
     # add dummy Nobody program leader
     people_folder = portal['people']
-    nobody = api.content.create(
-        type='OIEProgramLeader',
-        container=people_folder,
-        title='*Nobody',
-    )
-    nobody.title = '*No Co-Leader'
-    nobody.first_name = '*No'
-    nobody.middle_name = ''
-    nobody.last_name = 'Co-Leader'
+    if 'nobody' not in people_folder:
+        nobody = api.content.create(
+            type='OIEProgramLeader',
+            container=people_folder,
+            title='*Nobody',
+        )
+        nobody.title = '*No Co-Leader'
+        nobody.first_name = '*No'
+        nobody.middle_name = ''
+        nobody.last_name = 'Co-Leader'
 
 
 def populate_countries(portal):

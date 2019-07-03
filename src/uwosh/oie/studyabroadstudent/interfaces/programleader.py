@@ -232,18 +232,21 @@ class IOIEProgramLeader(Interface):
         description=_(u'Indicate the number (max: 999) of flyers, posters and brochures to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
         min=0,
         max=999,
+        default=0,
     )
     number_study_abroad_away_fair_posters = schema.Int(
         title=_(u'Number of Study Abroad/Away Fair Posters'),
         description=_(u'Indicate the number (max: 99) of posters, posters and brochures to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
         min=0,
         max=99,
+        default=0,
     )
     number_study_abroad_away_fair_brochures = schema.Int(
         title=_(u'Number of Study Abroad/Away Fair Brochures'),
         description=_(u'Indicate the number (max: 999) of brochures, posters and brochures to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
         min=0,
         max=999,
+        default=0,
     )
     #######################################################
     # TODO Either "passport" or "driver's license" should appear in place  # noqa
@@ -298,6 +301,7 @@ class IOIEProgramLeader(Interface):
         required=True,
     )
     #######################################################
+    # TODO this fieldset should be hidden from the person adding their Leader profile.  Who is allowed to see it?  # noqa
     model.fieldset(
         'Office Use Only',
         label=_(u'Office Use Only'),
@@ -310,28 +314,16 @@ class IOIEProgramLeader(Interface):
         title=_(u'Program Leader Orientation Completed'),
         description=_(u'Confirm attendance at orientation'),
         required=False,
-        # TODO Applicant should not see this field.  This is for OIE.  It  # noqa
-        #   would be better to put this on the "Orientation" tab, but this
-        #   field is specific to each Program Leader rather than to the
-        #   program.
     )
     cash_advance_request = field.NamedFile(
         title=_(u'Cash Advance Request'),
         description=_(u'Upload the signed Cash Advance Form'),
         required=False,
-        # TODO Applicant should not see this field.  This is for OIE.  It  # noqa
-        #   would be better to put this on the "Program Finances" tab, but this
-        #   field is specific to each Program Leader rather than to the
-        #   program.
     )
     cash_advance_distribution = schema.Date(
         title=_(u'Cash Advance Distribution'),
         description=_(u'Enter the date on which the cash advance was distributed to the Program Leader/Program Co-leader'),  # noqa
         required=False,
-        # TODO Applicant should not see this field.  This is for OIE.  It  # noqa
-        #   would be better to put this on the "Program Finances" tab, but this
-        #   field is specific to each Program Leader rather than to the
-        #   program.
     )
     hr_review_ok = schema.Choice(
         title=_(u'HR Review'),

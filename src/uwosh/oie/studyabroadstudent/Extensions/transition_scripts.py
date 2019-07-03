@@ -11,7 +11,7 @@ from zLOG import INFO
 from zLOG import LOG
 
 
-DEFAULT_NOTIFICATION_EMAIL_ADDRESS = 'kyle.arthurs+oie@wildcardcorp.com'
+DEFAULT_NOTIFICATION_FROM_ADDRESS = 'kyle.arthurs+oie@wildcardcorp.com'
 PRE = 0
 POST = 1
 
@@ -27,32 +27,32 @@ def get_interface_from_state_change(state_change):
 
 def pre_transition(state_change, **kw):
     interface = get_interface_from_state_change(state_change)
-    check_for_required_values_by_state(state_change)
-    check_for_required_specific_values_by_state(state_change)
+    check_for_required_values_by_state(state_change, interface)
+    check_for_required_specific_values_by_state(state_change, interface)
     transition = state_change.transition.id
     if transition in special_transitions[interface]:
-        special_transitions[interface][transition][PRE](state_change)
+        if special_transitions[interface][transition][PRE]:
+            special_transitions[interface][transition][PRE](state_change)
 
 
 def post_transition(state_change, **kw):
     interface = get_interface_from_state_change(state_change)
-    afterTransition(state_change)
-    sendTransitionMessage(state_change)
+    # afterTransition(state_change, interface)
+    sendTransitionMessage(state_change, interface)
     transition = state_change.transition.id
     if transition in special_transitions[interface]:
         if special_transitions[interface][transition][POST]:
             special_transitions[interface][transition][POST](state_change)
 
 
-def afterTransition(state_change):
+def afterTransition(state_change, interface):
     pass
 
 
-def check_for_required_values_by_state(state_change):
+def check_for_required_values_by_state(state_change, interface):
     """Find all fields that must have values before
        we can move into the new state"""
     obj = state_change.object
-    interface = get_interface_from_state_change(state_change)
     new_state_id = state_change.new_state.id
 
     requiredFields = []
@@ -87,11 +87,10 @@ def check_for_required_values_by_state(state_change):
             raise StateError(message)
 
 
-def check_for_required_specific_values_by_state(state_change):
+def check_for_required_specific_values_by_state(state_change, interface):
     """Find all fields that must have specific values before
        we can move into the new state"""
     obj = state_change.object
-    interface = get_interface_from_state_change(state_change)
     new_state_id = state_change.new_state.id
 
     missingValues = []
@@ -133,12 +132,12 @@ def check_for_required_specific_values_by_state(state_change):
             )
             raise StateError(message)
 
-    sendTransitionMessage(object, state_change)
+    sendTransitionMessage(state_change, interface)
 
 
-def sendTransitionMessage(state_change, cc=[]):
+def sendTransitionMessage(state_change, interface):
 
-    emailTemplate = getEmailMessageTemplate(state_change)  # noqa
+    emailTemplate = getEmailMessageTemplate(state_change, interface)  # noqa
 
     if not emailTemplate:
         LOG('sendTransitionMessage', INFO,
@@ -154,89 +153,84 @@ def sendTransitionMessage(state_change, cc=[]):
     old_state_id = state_change.old_state.id
     new_state_id = state_change.new_state.id
 
-    reviewer = getReviewerInfo(object)
+    mTo = getToAddresses(object, emailTemplate)
+    mFrom = DEFAULT_NOTIFICATION_FROM_ADDRESS  # use site settings 'From' address? # noqa
 
-    mTo = getToAddresses(object, emailTemplate, cc)
-    mFrom = reviewer['email']
+    update_text = {
+        IOIEStudyAbroadProgram: 'Study Abroad Program',
+        IOIEStudyAbroadParticipant: 'Study Abroad Participant Application',
+    }
 
-    # If the owner is performing action, this will prevent them from sending an email to themselves  # noqa
-    if mFrom in mTo:
-        mFrom = DEFAULT_NOTIFICATION_EMAIL_ADDRESS
-
-    mSubj = 'Your {0} update (UW Oshkosh Office of International Education)'  # noqa
+    mSubj = 'Your {0} Update (UW Oshkosh Office of International Education)'.format(update_text[interface])  # noqa
 
     state_msg = None
     if old_state_id != new_state_id:
         state_msg = "Its state has changed from '" + old_state_id + "' to '" + new_state_id + "'.\n\n"  # noqa
 
     LOG('sendTransitionMessage', INFO,
-        "Sending transition email for transition %s to %s, subject '%s', emailTemplate = '%s'" % (  # noqa
+        "Sending email for transition %s to %s, subject '%s', emailTemplate = '%s'" % (  # noqa
         state_change.transition.id, mTo, mSubj, emailTemplate))  # noqa
     mMsg = assembleEmailMessage(object, wftool, emailTemplate)
 
     portal.MailHost.secureSend(mMsg, mTo, mFrom, mSubj)
 
 
-def getEmailMessageTemplate(state_change):
+def getEmailMessageTemplate(state_change, interface):
     email_types = {
         IOIEStudyAbroadProgram: 'OIEProgramEmailTemplate',
         IOIEStudyAbroadParticipant: 'OIEParticipantEmailTemplate',
     }
-    interface = get_interface_from_state_change(state_change)
     template_type = email_types[interface]
-    templates = state_change.object.queryCatalog({
+    catalog = api.portal.get_tool('portal_catalog')
+    templates = catalog({
         'portal_type': template_type,
         'transition': state_change.transition.id,
         'sort_on': 'modified',
-    })  # this query only for objects within this program container?
+    })
     template = None
     if templates:
         template = templates[0].getObject()  # using last modified
     return template
 
 
-def getCreatorInfo(object):
-    creator = object.Creator()
-    member = api.user.get(creator)
+def getActor(object):
+    pmtool = api.portal.get_tool('portal_membership')
+    wftool = api.portal.get_tool('portal_workflow')
 
-    return {
+    memberid = wftool.getInfoFor(object, 'actor')  # noqa
+    member = pmtool.getMemberById(memberid)  # noqa
+
+    actor = {
         'member': member,
         'id': member.getId(),
         'fullname': member.getProperty('fullname', 'Fullname missing'),
         'email': member.getProperty('email', None),
     }
 
-
-def getReviewerInfo(object):
-    pmtool = api.portal.get_tool('portal_membership')
-    wftool = api.portal.get_tool('portal_workflow')
-
-    actorid = wftool.getInfoFor(object, 'actor')  # noqa
-    actor = pmtool.getMemberById(actorid)  # noqa
-
-    reviewer = {
-        'member': actor,
-        'id': actor.getId(),
-        'fullname': actor.getProperty('fullname', 'Fullname missing'),
-        'email': actor.getProperty('email', None),
-    }
-
-    return reviewer
+    return actor
 
 
-# cc will be faculty on that transition
-def getToAddresses(object, emailTemplate, cc=[]):
+def getToAddresses(object, emailTemplate):
     addresses = []
 
-    # student email
-    # addresses.append(application.getEmail())
+    if emailTemplate.send_to_participant:
+        addresses.append()
 
-    # if emailTemplate:
-    #    # custom specified emails sent
-    #    addresses.extend(emailTemplate.getFormattedCCAddresses())
+    if emailTemplate.send_to_actor:
+        actor = getActor(object)
+        if actor['email']:
+            addresses.append(actor['email'])
 
-    if cc is not None:
-        addresses.extend(cc)
+    if emailTemplate.send_to_program_leader:
+        try:
+            leader_id = object.program_leader
+            leader = api.content.get(UID=leader_id)
+            if leader.Title != '*Nobody':
+                addresses.append(leader.email)
+        except Exception:
+            LOG('getToAddresses', INFO, 'Can''t get program leader email')
+
+    # TODO add the cc list from emailtemplate  # noqa
 
     return addresses
 
@@ -289,7 +283,17 @@ def getAssembledErrorMessage(errorMessage):
 
 
 def chair_dean_review(state_change):
-    pass
+    addresses = []
+    if state_change.transition.id == 'submit-to-dean':
+        reviewers_field = state_change.object.dean_emails
+    else:  # submit-to-chair
+        reviewers_field = state_change.object.chair_emails
+    if reviewers_field:
+        for reviewer in reviewers_field:
+            email = reviewer.get('reviewer_email_row', None)
+            if email:
+                addresses.append(email)
+            # TODO need template for chair/dean reviews and to send the message here # noqa
 
 
 special_program_transitions = {
