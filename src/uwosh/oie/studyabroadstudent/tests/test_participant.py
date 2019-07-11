@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from . import OIEStudyAbroadContentBaseTest
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -8,10 +9,8 @@ from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_IN
 from zope.component import createObject
 from zope.component import queryUtility
 
-import unittest
 
-
-class OIEStudyAbroadParticipantIntegrationTest(unittest.TestCase):
+class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):
 
     layer = UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING
 
