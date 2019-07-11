@@ -14,14 +14,14 @@ require([
         var countries = [];
         for (var i=0;i<programs.length;i++) {
           var program = programs[i];
-          if (types.indexOf(program.type) != -1) {
+          if (types.indexOf(program.type) == -1) {
             types.push(program.type);
           }
-          if (years.indexOf(program.calendarYear) != -1) {
+          if (years.indexOf(program.calendarYear) == -1) {
             years.push(program.calendarYear);
           }
           for (var j=0;j<program.countries.length;j++){
-            if (countries.indexOf(program.countries[j]) != -1) {
+            if (countries.indexOf(program.countries[j]) == -1) {
               countries.push(program.countries[j]);
             }
           }
@@ -33,11 +33,7 @@ require([
           types: types,
           countries: countries,
           years: years,
-          filters: {
-            type: false,
-            title: false,
-            year: false
-          },
+          filters: Object.assign({},this.props.defaultFilters),
           markers: [],
           page: 1,
           perPage: 12
@@ -46,8 +42,15 @@ require([
 
       getDefaultProps: function(){
         var portal_url = document.body.getAttribute('data-portal-url')
+        var defaultFilters = {
+          type: false,
+          title: false,
+          calendarYear: false,
+          countries: false
+        }
         return {
-          portal_url: portal_url
+          portal_url: portal_url,
+          defaultFilters: defaultFilters
         };
       },
 
@@ -58,8 +61,8 @@ require([
       render: function(){
         this.filter();
         var programsearch = D.div({}, [
-          D.div({
-            id: 'oie-search',
+          D.form({
+            id: 'oie-search-form',
             'aria-hidden': 'true'
           },
             this.renderSearchFields()),
@@ -93,7 +96,7 @@ require([
 
         var typeField = D.select({
           className: 'oie-search-field',
-          name: 'types',
+          name: 'type',
           onChange: this.handler
         }, types);
         searchFields.push(typeField);
@@ -110,7 +113,7 @@ require([
 
         var yearField = D.select({
           className: 'oie-search-field',
-          name: 'years',
+          name: 'calendarYear',
           onChange: this.handler
         }, years);
         searchFields.push(yearField);
@@ -134,8 +137,9 @@ require([
 
 
         var clearButton = D.button({
-          className: 'oie-plone-button'
-        });
+          className: 'oie-plone-button',
+          onClick: this.resetSearchFields
+        }, 'Clear');
         searchFields.push(clearButton);
 
         return searchFields;
@@ -153,9 +157,12 @@ require([
       },
 
       resetSearchFields: function(event){
-
-        // TODO add Clear button to call this
-        // set each field back to default value
+        event.preventDefault();
+        form = document.getElementById('oie-search-form');
+        form.reset();
+        this.setState({
+          filters: Object.assign({}, this.props.defaultFilters)
+        });
       },
 
       filter: function(){
@@ -185,9 +192,10 @@ require([
             }
           } else if (typeof(filterValue) === 'string') {
             filterValue = filterValue.toLowerCase().trim();
-            var actualValues = actualValue;
             if (!Array.isArray(actualValue)) {
-              actualValues = [actualValue];
+              var actualValues = [actualValue];
+            } else {
+              var actualValues = actualValue;
             }
             for (var i=0;i<actualValues.length;i++) {
               actualValue = actualValues[i].toLowerCase().trim();

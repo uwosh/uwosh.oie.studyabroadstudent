@@ -173,7 +173,7 @@ class ProgramSearchView(BrowserView):
                             'description': brain.description,
                             'uid': brain.UID,
                             'url': brain.getURL(),
-                            'programType': brain.program_type,
+                            'type': brain.program_type,
                             'calendarYear': brain.calendar_year,
                             'countries': json.loads(brain.countries),
                            }
