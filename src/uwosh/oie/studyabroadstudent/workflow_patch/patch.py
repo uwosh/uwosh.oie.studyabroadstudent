@@ -8,6 +8,7 @@ from Products.DCWorkflow.events import BeforeTransitionEvent
 from Products.DCWorkflow.Expression import createExprContext
 from Products.DCWorkflow.Expression import StateChangeInfo
 from Products.DCWorkflow.utils import Message as _
+from uwosh.oie.studyabroadstudent.exceptions import StateError
 from zope.event import notify
 
 
@@ -37,21 +38,26 @@ def _executeTransition(self, ob, tdef=None, kwargs=None):
                 mapping={'state_id': new_state})
         raise WorkflowException(msg)
 
-    # Fire "before" event
-    notify(BeforeTransitionEvent(ob, self, old_sdef, new_sdef, tdef,
-                                 former_status, kwargs))
+    try:
+        # Fire "before" event
+        notify(BeforeTransitionEvent(ob, self, old_sdef, new_sdef, tdef,
+                                     former_status, kwargs))
 
-    # Execute the "before" script.
-    if tdef is not None and tdef.script_name:
-        script = self.scripts[tdef.script_name]
-        # Pass lots of info to the script in a single parameter.
-        sci = StateChangeInfo(
-            ob, self, former_status, tdef, old_sdef, new_sdef, kwargs)
-        try:
-            script(sci)  # May throw an exception.
-        except ObjectMoved as moved_exc:
-            ob = moved_exc.getNewObject()
-            # Re-raise after transition
+        # Execute the "before" script.
+        if tdef is not None and tdef.script_name:
+            script = self.scripts[tdef.script_name]
+            # Pass lots of info to the script in a single parameter.
+            sci = StateChangeInfo(
+                ob, self, former_status, tdef, old_sdef, new_sdef, kwargs)
+            try:
+                script(sci)  # May throw an exception.
+            except ObjectMoved as moved_exc:
+                ob = moved_exc.getNewObject()
+                # Re-raise after transition
+    except StateError as e:
+        msg = u'OIE: State Not Changed! {0}'.format(e.message)
+        ob.plone_utils.addPortalMessage(_(msg), type='error')
+        return
 
     # Update variables.
     state_values = new_sdef.var_values
