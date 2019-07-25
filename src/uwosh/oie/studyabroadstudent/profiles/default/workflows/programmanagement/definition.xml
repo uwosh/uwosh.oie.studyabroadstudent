@@ -125,12 +125,6 @@
    <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
-
-
-
-
-
-
   <permission-map name="OIE: Edit academic program fieldset" acquired="False">
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Manager</permission-role>
@@ -502,12 +496,6 @@
    <permission-role>Mgmt_ProgramLeader</permission-role>
    <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
-
-
-
-
-
-
 
   <permission-map name="OIE: Edit academic program fieldset" acquired="False">
    <permission-role>Mgmt_Manager</permission-role>
@@ -902,22 +890,10 @@
    <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
-
-
-
-
-
-
   <permission-map name="OIE: Edit academic program fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
-
-
-
-
-
-
 
   <permission-map name="OIE: View academic program fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
@@ -1618,12 +1594,6 @@
    <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
-
-
-
-
-
-
   <permission-map name="OIE: Edit academic program fieldset" acquired="False">
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Manager</permission-role>
@@ -1995,12 +1965,6 @@
    <permission-role>Mgmt_ProgramLeader</permission-role>
    <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
-
-
-
-
-
-
 
   <permission-map name="OIE: Edit academic program fieldset" acquired="False">
    <permission-role>Manager</permission-role>
@@ -2400,12 +2364,6 @@
    <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
-
-
-
-
-
-
   <permission-map name="OIE: Edit academic program fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
@@ -2789,7 +2747,7 @@
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
 
-</permission-map>
+  </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
    <permission-role>Manager</permission-role>
@@ -2807,24 +2765,11 @@
    <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
 
-
-
-
-
-
-
   <permission-map name="OIE: Edit academic program fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
-
-
-
-
-
-
-
 
   <permission-map name="OIE: View academic program fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>

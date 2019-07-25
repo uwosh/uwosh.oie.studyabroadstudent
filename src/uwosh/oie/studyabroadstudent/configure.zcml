@@ -11,6 +11,7 @@
   <include package=".browser" />
   <include file="permissions.zcml" />
   <include file="indexers.zcml" />
+  <include file="patches.zcml" />
 
   <genericsetup:registerProfile
       name="default"
