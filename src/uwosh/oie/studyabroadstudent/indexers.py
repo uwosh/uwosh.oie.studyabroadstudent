@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from plone.app.contenttypes import indexers
+from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.app.uuid.utils import uuidToObject
 from plone.indexer import indexer as indexer_wrapper
 from plone.indexer.decorator import indexer
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadProgram
-from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 
 import json
 
