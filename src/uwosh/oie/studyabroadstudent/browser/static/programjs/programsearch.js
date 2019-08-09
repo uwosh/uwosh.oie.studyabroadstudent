@@ -76,7 +76,7 @@ require([
         var searchFields = [];
 
         var titleField = D.input({
-          className: 'oie-search-field',
+          className: 'form-control oie-search-field',
           type: 'text',
           name: 'title',
           placeholder: 'Program Name/Title',
@@ -95,7 +95,7 @@ require([
         }
 
         var typeField = D.select({
-          className: 'oie-search-field',
+          className: 'form-control oie-search-field',
           name: 'type',
           onChange: this.handler
         }, types);
@@ -112,7 +112,7 @@ require([
         }
 
         var yearField = D.select({
-          className: 'oie-search-field',
+          className: 'form-control oie-search-field',
           name: 'calendarYear',
           onChange: this.handler
         }, years);
@@ -129,7 +129,7 @@ require([
         }
 
         var countryField = D.select({
-          className: 'oie-search-field',
+          className: 'form-control oie-search-field',
           name: 'countries',
           onChange: this.handler
         }, countries);
@@ -137,7 +137,7 @@ require([
 
 
         var clearButton = D.button({
-          className: 'oie-plone-button',
+          className: 'btn btn-primary clear-button',
           onClick: this.resetSearchFields
         }, 'Clear');
         searchFields.push(clearButton);
@@ -263,20 +263,21 @@ require([
           var program = this.state.programs[programIndex];
           var fields = [];
           if (program.image) {
-            var attributes = {
-            }
-            var programImage = D.div(attributes,
-              [D.img({
-                className: 'search-program-image focuspoint',
-                alt: '',
-                src: program.image
-              })]);
-            fields.push(programImage);
-          }
-          fields.push(D.a({
-            className: 'search-program-title',
-            href: program.url
-          }, program.title));
+            var imgSrc = program.image
+          } else {
+            var imgSrc = '/oie/++theme++oie-study-abroad-theme/img/logo.png';
+         }
+         fields.push(D.a({
+           className: 'search-program-title',
+           href: program.url
+         }, program.title));
+         var programImage = D.div({},
+           [D.img({
+              className: 'search-program-image focuspoint',
+              alt: '',
+              src: imgSrc
+            })]);
+          fields.push(programImage);
           fields.push(D.p({
             className: 'search-program-description'
           }, program.description));

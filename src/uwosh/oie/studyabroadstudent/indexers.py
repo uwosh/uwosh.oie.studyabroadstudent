@@ -5,6 +5,7 @@ from plone.indexer import indexer as indexer_wrapper
 from plone.indexer.decorator import indexer
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadProgram
+from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 
 import json
 
@@ -44,3 +45,14 @@ def calendar_year(program):
 @indexer(IOIEStudyAbroadProgram)
 def countries(program):
     return json.dumps(program.countries)
+
+
+@indexer(IOIEStudyAbroadProgram)
+def image(program):
+    bdata = ILeadImage(program)
+    if (
+            getattr(bdata, 'image', None) and
+            bdata.image is not None and
+            bdata.image.size > 0
+    ):
+        return '{0}/@@images/image'.format(program.absolute_url())

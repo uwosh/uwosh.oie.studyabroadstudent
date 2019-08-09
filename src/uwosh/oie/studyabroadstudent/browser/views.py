@@ -170,12 +170,13 @@ class ProgramSearchView(BrowserView):
             try:
                 program = {
                             'title': brain.Title,
-                            'description': brain.description,
+                            'description': brain.Description,
                             'uid': brain.UID,
                             'url': brain.getURL(),
                             'type': brain.program_type,
                             'calendarYear': brain.calendar_year,
                             'countries': json.loads(brain.countries),
+                            'image': brain.image,
                            }
                 programs.append(program)
             except AttributeError:

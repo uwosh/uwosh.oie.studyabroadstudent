@@ -8,6 +8,7 @@
   <adapter name="calendar_year" factory=".indexers.calendar_year" />
   <adapter name="program_type" factory=".indexers.program_type" />
   <adapter name="countries" factory=".indexers.countries" />
+  <adapter name="image" factory=".indexers.image" />
 
   <!--Participant Indices-->
   <adapter name="programName" factory=".indexers.programName" />

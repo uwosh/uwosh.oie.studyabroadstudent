@@ -13,6 +13,7 @@
   <column value="program_type" />
   <column value="calendar_year" />
   <column value="countries" />
+  <column value="image" />
 
   <!--Participant Indices-->
   <index name="educationLevel" meta_type="FieldIndex">
