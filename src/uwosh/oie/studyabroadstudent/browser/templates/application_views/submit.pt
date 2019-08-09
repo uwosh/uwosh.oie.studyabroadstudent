@@ -8,7 +8,13 @@
 <body>
   <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
-      Testing Step 1 view
+      <div tal:condition="nocall:view/created">
+        Your application to the Office of Internation Education program (<strong tal:content="context/Title"/>) has been created.
+        To continue working on your application, <a href="#" tal:attributes="href view/created">edit it here</a>
+      </div>
+      <div tal:condition="not:nocall:view/created">
+        <span>There was a problem creating your application for</span>
+      </div>
     </tal:main-macro>
   </metal:main>
 </body>

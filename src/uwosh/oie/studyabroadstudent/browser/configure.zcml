@@ -75,6 +75,14 @@
       template="templates/application_views/apply.pt"
       permission="zope2.View"
       />
+
+  <browser:page
+      name="submit"
+      for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"
+      class=".views.CreatedView"
+      template="templates/application_views/submit.pt"
+      permission="zope2.View"
+      />
     <!--TODO ^what permission will the applicants have? -->
 
     <browser:page

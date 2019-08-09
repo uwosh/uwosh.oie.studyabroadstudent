@@ -14,7 +14,7 @@ require([
       },
       render: function(){
         var applyFields = [];
-        var fieldClass = 'oie-apply-field';
+        var fieldClass = 'form-control oie-apply-field';
         var firstNameField = D.input({
           className: fieldClass,
           type: 'text',
@@ -52,27 +52,28 @@ require([
         }, programOptions);
         applyFields.push(programField);
         applyFields.push(D.input({
-          type: 'submit'
+          type: 'submit',
+          className: 'btn btn-primary apply-button'
         }));
+        var createURL = $('body').attr('data-base-url') + '/submit'
         var applyForm = D.div({
           id: 'oie-apply'
         }, [
           D.form({
-            onSubmit: this.validate,
+            action: createURL,
+            method: 'post',
+            onSubmit: this.submit,
           }, applyFields)
         ]);
         return applyForm;
       },
       validate: function(){
-        this.submit();
+        return true;
       },
       submit: function(event){
-        var validationErrors = this.validate();
-        if (validationErrors) {
+        var validated = this.validate();
+        if (validated !== true) {
           event.preventDefault();
-        } else {
-          next_url = document.getElementById();
-          window.location.href = "http://";
         }
       }
   });

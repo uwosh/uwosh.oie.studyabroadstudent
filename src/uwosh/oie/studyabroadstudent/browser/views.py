@@ -10,6 +10,8 @@ from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from uwosh.oie.studyabroadstudent.reporting import ReportUtil
 from uwosh.oie.studyabroadstudent.vocabularies import NewProgramsVocabulary
+from plone.protect.interfaces import IDisableCSRFProtection
+from zope.interface import alsoProvides
 
 import base64
 import json
@@ -226,35 +228,6 @@ class ParticipantEditUtilView(DefaultView):
 
 class ApplyView(DefaultView):
 
-    index = ViewPageTemplateFile('templates/application_views/apply.pt')
-    templates = {
-        '0': ViewPageTemplateFile('templates/application_views/overview.pt'),
-        '1': ViewPageTemplateFile('templates/application_views/step1.pt'),
-        '2': ViewPageTemplateFile('templates/application_views/step2.pt'),
-        '3': ViewPageTemplateFile('templates/application_views/step3.pt'),
-        '4': ViewPageTemplateFile('templates/application_views/step4.pt'),
-    }
-
-    def __call__(self):
-        if self.request.method == 'GET':
-            step = self.request.get('step', None)
-            if step:
-                try:
-                    self.index = self.templates[step]
-                except KeyError:
-                    pass  # invalid step just show the apply view
-        if self.request.method == 'POST':
-            created = self.create_participant()
-            if created:
-                url = '{0}/apply?step=0'.format(self.context.absolute_url())
-                # redirect participant to their application overview
-                self.request.response.redirect(url, status=200)
-                return self.request.response
-            else:
-                pass
-                # refresh with a message about something not validating
-        return self.index(self)
-
     def get_programs(self):
         programs = []
         vocab = NewProgramsVocabulary(self.context)
@@ -269,10 +242,23 @@ class ApplyView(DefaultView):
         encoded = base64.b64encode(string)
         return encoded
 
+
+class CreatedView(DefaultView):
+
+    created = False
+
+    def __call__(self):
+        if self.request.method == 'POST':
+            alsoProvides(self.request, IDisableCSRFProtection)
+            self.created = self.create_participant()
+            if not self.created:
+                pass  # Show some error message
+        return super(CreatedView, self).__call__()
+
     def create_participant(self):
         program_ID = self.context.UID()
-        first = self.request.get('firstname', None)
-        last = self.request.get('lastname', None)
+        first = self.request.get('first', None)
+        last = self.request.get('last', None)
         email = self.request.get('email', None)
         fields = [program_ID, first, last, email]
         if all(fields):
@@ -291,7 +277,7 @@ class ApplyView(DefaultView):
                     title='{0} {1}'.format(first, last),
                     **data)
                 api.content.transition(obj, 'submit')  # go ahead to step I
-                return True
+                return '{0}/edit'.format(obj.absolute_url())
             except Exception:
                 logger.warn('Could not create partipant application.')
         return False
