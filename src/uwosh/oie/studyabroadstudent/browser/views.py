@@ -6,11 +6,10 @@ from plone.app.uuid.utils import uuidToObject
 from plone.dexterity.browser.view import DefaultView
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.file import NamedImage
+from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from uwosh.oie.studyabroadstudent.reporting import ReportUtil
 from uwosh.oie.studyabroadstudent.vocabularies import NewProgramsVocabulary
-from plone.protect.interfaces import IDisableCSRFProtection
 from zope.interface import alsoProvides
 
 import base64
