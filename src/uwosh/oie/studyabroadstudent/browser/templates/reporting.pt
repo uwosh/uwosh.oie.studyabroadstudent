@@ -10,7 +10,7 @@
       <div tal:define="util view/getReportUtil;
                        programTitle context/title">
         <h3>OIE Reporting for ${programTitle}</h3>
-        <table>
+        <table class="oie-report-table table-striped">
           <tr>
             <th>Participant Type</th>
             <th>Count For This Program</th>

@@ -10,8 +10,8 @@
     </metal:javascript>
     <metal:main fill-slot="main">
       <tal:main-macro metal:define-macro="main">
-        <div id="oie-apply-data" tal:attributes="oie-program-data view/get_programs">
-          To open an application for <strong tal:content="context/Title"/>, submit the simple form below.  You can also choose to apply to a different program from here.
+        <div id="oie-apply-data">
+          To open an application for <strong tal:content="context/Title"/>, submit the simple form below.
           <div id="oie-apply-component" />
         </div>
       </tal:main-macro>

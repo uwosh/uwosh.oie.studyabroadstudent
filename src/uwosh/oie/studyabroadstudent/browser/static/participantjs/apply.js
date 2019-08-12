@@ -5,12 +5,7 @@ require([
 
   var ApplyFormComponent = R.createClass({
       getInitialState: function(){
-        var el = document.getElementById('oie-apply-data');
-        var encoded = el.getAttribute('oie-program-data');
-        var programs = JSON.parse(window.atob(encoded));
-        return {
-          programs: programs
-        }
+        return {}
       },
       render: function(){
         var applyFields = [];
@@ -36,21 +31,6 @@ require([
           placeholder: 'Email Address (Use university address if possible)'
         });
         applyFields.push(emailField);
-        var programOptions = [];
-        for (var i=0;i<this.state.programs.length;i++) {
-          var optionAttributes = {
-            value: this.state.programs[i]['uid']
-          }
-          if (this.state.programs[i]['selected'] == true){
-            optionAttributes['selected'] = true;
-          }
-          programOptions.push(D.option(optionAttributes, this.state.programs[i]['name']));
-        }
-        var programField = D.select({
-          className: fieldClass,
-          name: 'program'
-        }, programOptions);
-        applyFields.push(programField);
         applyFields.push(D.input({
           type: 'submit',
           className: 'btn btn-primary apply-button'

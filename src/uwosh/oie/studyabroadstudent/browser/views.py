@@ -9,7 +9,6 @@ from plone.namedfile.file import NamedImage
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five import BrowserView
 from uwosh.oie.studyabroadstudent.reporting import ReportUtil
-from uwosh.oie.studyabroadstudent.vocabularies import NewProgramsVocabulary
 from zope.interface import alsoProvides
 
 import base64
@@ -226,20 +225,7 @@ class ParticipantEditUtilView(DefaultView):
 
 
 class ApplyView(DefaultView):
-
-    def get_programs(self):
-        programs = []
-        vocab = NewProgramsVocabulary(self.context)
-        for program_term in vocab:
-            program = {'name': program_term.title,
-                       'uid': program_term.value,
-                       'selected': False}
-            if program_term.value == self.context.UID():
-                program['selected'] = True
-            programs.append(program)
-        string = json.dumps(programs, default=handle_missing)
-        encoded = base64.b64encode(string)
-        return encoded
+    pass
 
 
 class CreatedView(DefaultView):
