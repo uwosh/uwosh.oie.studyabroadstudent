@@ -1897,6 +1897,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     immigration_status = schema.Tuple(
         title=_(u'Immigration Status'),
         default=(
+            'N/A (US Citizen)'
             'Green Card Holder (US Permanent Resident)',
             'A',
             'A-2',

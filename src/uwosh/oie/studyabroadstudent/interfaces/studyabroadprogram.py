@@ -479,8 +479,6 @@ class IOIEStudyAbroadProgram(Interface):
         default_mime_type='text/plain',
         allowed_mime_types=('text/plain', 'text/html'),
         max_length=1000,
-        # TODO: create a custom validator that renders text without HTML tags  # noqa
-        #  to count words accurately (html2text ?)
         required=True,
     )
 
@@ -1099,7 +1097,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'The Program Liaison, Program Leader or Program Co-leader will interview each applicant'),  # noqa
         vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default "no" # noqa
+        default='No',
     )
 
     firstRecommendationRequired = schema.Choice(
@@ -1107,7 +1105,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(u'If "yes", this item appears in the Applicant Portal as an application item'),  # noqa
         vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO default "no" # noqa
+        default='No',
     )
 
     secondRecommendationRequired = schema.Choice(
@@ -1164,7 +1162,7 @@ class IOIEStudyAbroadProgram(Interface):
             u'If "yes", this item appears in the Applicant Portal as an application item.'),  # noqa
         vocabulary=yes_no_vocabulary,
         required=True,
-        # TODO default "no" # noqa
+        default='No',
     )
 
     letterOfMotivationRequired = schema.Choice(
@@ -2294,7 +2292,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
 
     summer_payment_deadline_2 = schema.Date(
-        title=u'Sunmmer Payment Deadline 2',
+        title=u'Summer Payment Deadline 2',
         description=u'will be copied from the selected calendar year on first save',  # noqa
         required=False,
     )

@@ -64,7 +64,7 @@
   <browser:page
       name="edit-util"
       for="..interfaces.participant.IOIEStudyAbroadParticipant"
-      class=".views.ParticipantView"
+      class=".views.ParticipantEditUtilView"
       permission="zope2.View"
       />
 
@@ -83,7 +83,6 @@
       template="templates/application_views/submit.pt"
       permission="zope2.View"
       />
-    <!--TODO ^what permission will the applicants have? -->
 
     <browser:page
       name="manager_view"

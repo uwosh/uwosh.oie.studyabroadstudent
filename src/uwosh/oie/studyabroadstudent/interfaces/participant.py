@@ -564,7 +564,6 @@ class IOIEStudyAbroadParticipant(Interface):
             'oiestudyabroadstudent.immigration_status',
         ),
         required=True,
-        # TODO appears only if "Country of Citizenship" is NOT United States  # noqa
     )
 
     countryBirth = schema.Choice(
@@ -573,10 +572,10 @@ class IOIEStudyAbroadParticipant(Interface):
         required=True,
     )
 
-#     dateOfBirth = schema.Date(
-#         title=_(u'Date of Birth'),
-#         required=True,
-#     )
+    dateOfBirth = schema.Date(
+        title=_(u'Date of Birth'),
+        required=True,
+    )
 
 ########################################################
     model.fieldset(
@@ -732,7 +731,6 @@ class IOIEStudyAbroadParticipant(Interface):
             u'I understand that the Office of International Education deadline for submission of orientation materials is a final deadline.  I understand and agree that all Office of International Education orientation requirements must be completed by this date.  If I forsee conflicts with this date, I will complete requirements in advance of this date.  If not completed by this date, I understand and agree that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply.'),  # noqa
         vocabulary=yes_no_vocabulary,
         required=True,
-        # TODO insert date from program object  # noqa
     )
 
     paymentDeadlines = schema.Choice(
@@ -741,7 +739,6 @@ class IOIEStudyAbroadParticipant(Interface):
             u'I understand that the payment deadlines are final deadlines and that it is my responsibility to record these dates in my calendar.  I understand that all payments must be made in full by the deadlines, or I must submit the "Notice of Financial Aid Award for Study Abroad/Away" form if making my payments using financial aid, a scholarship that I have already received, veterans benefits or an outside loan.  If not submitted by this date, I understand that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply.'),  # noqa
         vocabulary=yes_no_vocabulary,
         required=True,
-        # TODO insert date from program object  # noqa
     )
 
     programDepartureDate = schema.Date(
@@ -800,6 +797,7 @@ class IOIEStudyAbroadParticipant(Interface):
         vocabulary=yes_no_vocabulary,
         required=False,
         # TODO need link to the PDF document  # noqa
+        # currently 'https://www.uwosh.edu/oie/away/documents/deviationletter.pdf/view'  # noqa
     )
 
     #######################################################
@@ -911,7 +909,9 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Criminal Background Check'),
         description=_(u'If you are required to apply for advance permission (a visa) to enter one or more of your host countries, your visa application may require you to disclose citations, convictions and/or arrests in a criminal record.  If you will be working with minors, or'),  # noqa
         # TODO appears only if "Criminal Background Check" is 'yes' in the  # noqa
-        #  MGMT PORTAL.
+        # MGMT PORTAL.
+        # appears only when "Program Type" is "exchange-U.S." OR
+        # "exchange-international" in MGMT PORTAL
     )
 
     #######################################################
@@ -1149,13 +1149,6 @@ class IOIEStudyAbroadParticipant(Interface):
     form.mode(enrollment_label='display')
     enrollment_label = schema.TextLine(
         title=_(u'Course Enrollment'),
-    )
-
-    form.mode(cbc_label='display')
-    cbc_label = schema.TextLine(
-        title=_(u'Criminal Background Check'),
-        # TODO appears only when "Program Type" is "exchange-U.S." OR  # noqa
-        #   "exchange-international" in MGMT PORTAL
     )
 
     form.mode(financial_label='display')

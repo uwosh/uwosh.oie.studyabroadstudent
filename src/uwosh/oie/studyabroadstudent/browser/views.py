@@ -163,9 +163,8 @@ class ProgramSearchView(BrowserView):
     def get_program_data(self):
         programs = []
         catalog = api.portal.get_tool('portal_catalog')
-        # TODO brains = catalog(portal_type='OIEStudyAbroadProgram',  # noqa
-        #                 review_state='application-intake-in-progress')
-        brains = catalog(portal_type='OIEStudyAbroadProgram')
+        brains = catalog(portal_type='OIEStudyAbroadProgram',
+                         review_state='application-intake-in-progress')
         for brain in brains:
             try:
                 program = {
@@ -217,11 +216,50 @@ class ParticipantView(DefaultView, FolderView):
 
 
 class ParticipantEditUtilView(DefaultView):
-    # participantedit.js will call this, it will return data that will help
-    # accomplish remaining TODO items for edit for customization  # noqa
-    # such as adding relevant dates to field text dynamically
-    # and checking conditions which might cause a field to be hidden
-    pass
+    def __call__(self):
+        program = uuidToObject(self.context.programName)
+        util_data = {}
+        util_data['pretravelStart'] = str(program.pretravel_dates[0]['pretravel_start_datetime'])  # noqa
+        util_data['pretravelEnd'] = str(program.pretravel_dates[0]['pretravel_end_datetime'])  # noqa
+        payment_deadlines = []
+        payment_deadlines.append({
+            'label': 'Spring Interim, Summer & Fall Semester Payment Deadline 1',  # noqa
+            'date': str(program.spring_interim_summer_fall_semester_payment_deadline_1),  # noqa
+        })
+        payment_deadlines.append({
+            'label': 'Spring Interim Payment Deadline 2',
+            'date': str(program.spring_interim_payment_deadline_2),
+        })
+        payment_deadlines.append({
+            'label': 'Summer Payment Deadline 2',
+            'date': str(program.summer_payment_deadline_2),
+        })
+        payment_deadlines.append({
+            'label': 'Fall Semester Payment Deadline 2',
+            'date': str(program.fall_semester_payment_deadline_2),
+        })
+        payment_deadlines.append({
+            'label': 'Winter Interim & Spring Semester Payment Deadline 1',
+            'date': str(program.winter_interim_spring_payment_deadline_1),
+        })
+        payment_deadlines.append({
+            'label': 'Winter Interim & Spring Semester Payment Deadline 2',
+            'date': str(program.winter_interim_spring_payment_deadline_2),
+        })
+        util_data['paymentDeadlines'] = payment_deadlines
+        orientation_deadlines = []
+        orientation_deadlines.append({
+            'label': 'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',  # noqa
+            'date': str(program.spring_interim_summer_fall_semester_participant_orientation_deadline),  # noqa
+        })
+        orientation_deadlines.append({
+            'label': 'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',  # noqa
+            'date': str(program.winter_interim_spring_semester_participant_orientation_deadline),  # noqa
+        })
+        util_data['orientationDeadlines'] = orientation_deadlines
+        # paymentDeadlines, programReturnDate
+
+        return json.dumps(util_data)
 
 
 class ApplyView(DefaultView):

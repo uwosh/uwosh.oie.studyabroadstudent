@@ -267,11 +267,11 @@ require([
           } else {
             var imgSrc = '/oie/++theme++oie-study-abroad-theme/img/logo.png';
          }
-         fields.push(D.a({
-           className: 'search-program-title',
-           href: program.url
-         }, program.title));
-         var programImage = D.div({},
+         var title = D.div({className: 'search-program-title'}, D.a({
+               href: program.url
+            }, program.title));
+         fields.push(title);
+         var programImage = D.div({className: 'image-container'},
            [D.img({
               className: 'search-program-image focuspoint',
               alt: '',

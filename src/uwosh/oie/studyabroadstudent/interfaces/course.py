@@ -182,10 +182,9 @@ class IOIECourse(Interface):
     )
     tuition_and_fees = schema.Choice(
         title=_(u'Tuition & Fees'),
-        vocabulary=yes_no_vocabulary,
-        # TODO vocabulary?  # noqa
+        vocabulary='oiestudyabroadstudent.tuition_and_fees',
     )
-    tuition_and_fees = schema.Choice(
+    ext_studies_graded = schema.Choice(
         title=_(u'External Studies Courses'),
         description=_(u'Confirm that any External Studies Courses have been graded.'),  # noqa
         vocabulary=yes_no_vocabulary,

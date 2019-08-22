@@ -78,14 +78,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -105,7 +105,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -421,7 +420,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="application-intake-in-progress" title="Application Intake in Progress" >
   <exit-transition transition_id="suspend" />
@@ -450,14 +448,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -477,7 +475,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -801,7 +798,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="cancelled" title="Cancelled" >
   <exit-transition transition_id="manager-return-to-initial" />
@@ -843,14 +839,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -870,7 +866,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -898,8 +893,8 @@
   <permission-map name="OIE: View academic program fieldset" acquired="False">
    <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
-    <permission-role>Manager</permission-role>
-  <permission-role>Site Administrator</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
    <permission-role>Mgmt_ProgramLeader</permission-role>
@@ -1167,7 +1162,6 @@
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="declined" title="Declined" >
   <exit-transition transition_id="manager-return-to-pending-chair-review" />
@@ -1192,14 +1186,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -1219,7 +1213,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -1519,7 +1512,6 @@
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="final-payment-billing-in-progress" title="Final Payment Billing in Progress" >
   <exit-transition transition_id="bill-for-final-payment" />
@@ -1547,14 +1539,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -1574,7 +1566,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -1719,7 +1710,7 @@
 
   <permission-map name="OIE: Edit participant selection fieldset" acquired="False">
     <permission-role>Manager</permission-role>
-  <permission-role>Site Administrator</permission-role>
+    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: View liaison and leadership fieldset" acquired="False">
@@ -1895,7 +1886,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="final-program-accounting-in-progress" title="Final Program Accounting in Progress" >
   <exit-transition transition_id="process-refunds" />
@@ -1919,14 +1909,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -1946,12 +1936,11 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
     <permission-role>Manager</permission-role>
-  <permission-role>Site Administrator</permission-role>
+    <permission-role>Site Administrator</permission-role>
   </permission-map>
 
   <permission-map name="OIE: View program code fieldset" acquired="False">
@@ -2291,12 +2280,12 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="incident-in-progress" title="Incident in Progress" >
   <exit-transition transition_id="suspend" />
   <exit-transition transition_id="end-incident" />
   <exit-transition transition_id="manager-return-to-program-in-progress" />
+
   <permission-map name="Access contents information" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -2316,14 +2305,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -2343,7 +2332,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -2695,6 +2683,7 @@
   <exit-transition transition_id="manager-return-to-provider-proposals-under-liaison-review" />
   <exit-transition transition_id="manager-return-to-provider-proposals-under-oie-review" />
   <exit-transition transition_id="manager-return-to-request-for-proposals-under-development" />
+
   <permission-map name="Access contents information" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -2717,14 +2706,17 @@
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
    <permission-role>Mgmt_Liaison</permission-role>
    <permission-role>Mgmt_Director</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -2746,7 +2738,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -3045,7 +3036,6 @@
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
  </state>
-
  <state state_id="initial-payment-billing-in-progress" title="Initial Payment Billing in Progress" >
   <exit-transition transition_id="send-bills-for-initial-payment" />
   <exit-transition transition_id="cancel" />
@@ -3071,14 +3061,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -3098,7 +3088,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -3117,12 +3106,6 @@
    <permission-role>Mgmt_ProgramLeader</permission-role>
    <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
-
-
-
-
-
-
 
   <permission-map name="OIE: Edit academic program fieldset" acquired="False">
    <permission-role>Mgmt_Manager</permission-role>
@@ -3418,14 +3401,13 @@
    <permission-role>Mgmt_Financial</permission-role>
    <permission-role>Mgmt_ProgramLeader</permission-role>
    <permission-role>Mgmt_OIEProfessional</permission-role>
-</permission-map>
+  </permission-map>
 
   <permission-map name="OIE: Edit program dates fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="pending-arrival-abroad" title="Pending Arrival at Destination" >
   <exit-transition transition_id="suspend" />
@@ -3453,14 +3435,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -3483,75 +3465,7 @@
 
   </permission-map>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   <permission-map name="OIE: Edit program code fieldset" acquired="False">
+  <permission-map name="OIE: Edit program code fieldset" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
@@ -3568,12 +3482,6 @@
    <permission-role>Mgmt_RiskMgmt</permission-role>
    <permission-role>Mgmt_OIEProfessional</permission-role>
   </permission-map>
-
-
-
-
-
-
 
   <permission-map name="OIE: Edit academic program fieldset" acquired="False">
    <permission-role>Manager</permission-role>
@@ -3886,7 +3794,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
 
  <state state_id="pending-chair-review" title="Pending Chair Review" >
@@ -3914,14 +3821,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -3941,7 +3848,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -4242,7 +4148,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
 
  <state state_id="pending-dean-unit-director-review" title="Pending Dean/Unit Director Review" >
@@ -4271,14 +4176,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -4298,7 +4203,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -4599,7 +4503,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="pending-discussions-with-program-manager" title="Pending Discussions with Program Manager" >
   <exit-transition transition_id="develop-rfp" />
@@ -4627,14 +4530,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -4654,7 +4557,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -4967,7 +4869,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="pending-final-program-fee" title="Pending Final Program Fee" >
   <exit-transition transition_id="publish-final-fee" />
@@ -4993,14 +4894,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -5020,7 +4921,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -5341,7 +5241,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="pending-oie-review" title="Pending OIE Review" >
   <exit-transition transition_id="withdraw-application" />
@@ -5368,14 +5267,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Authenticated</permission-role>-->
    <!--<permission-role>Anonymous</permission-role>-->
@@ -5395,7 +5294,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -5690,7 +5588,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="pending-program-departure" title="Pending Program Departure" >
   <exit-transition transition_id="depart" />
@@ -5721,14 +5618,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -5748,7 +5645,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -6074,7 +5970,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="pending-program-fee-determination-by-oie" title="Pending Program Fee Determination by OIE" >
   <exit-transition transition_id="submit-fee-for-liaison-review" />
@@ -6106,14 +6001,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -6133,7 +6028,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -6448,7 +6342,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="pending-program-leader-operational-briefing" title="Pending Program Leader Operational Briefing" >
   <exit-transition transition_id="confirm-briefing-completed" />
@@ -6475,14 +6368,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -6502,7 +6395,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -6828,7 +6720,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="pending-program-leader-orientation" title="Pending Program Leader Orientation" >
   <exit-transition transition_id="confirm-orientation-completed" />
@@ -6855,14 +6746,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -6882,7 +6773,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -7213,7 +7103,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="pending-provider-responses" title="Pending Provider Responses" >
   <exit-transition transition_id="review-provider-proposals" />
@@ -7240,14 +7129,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -7267,7 +7156,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -7582,7 +7470,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="pending-provost-review" title="Pending Provost Review" >
   <exit-transition transition_id="approve-provosts-office" />
@@ -7611,14 +7498,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -7638,7 +7525,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -7939,7 +7825,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="pending-travel-advance" title="Pending Travel Advance" >
   <exit-transition transition_id="travel-advance-ready" />
@@ -7965,14 +7850,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -7992,7 +7877,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -8319,7 +8203,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="process-refunds-budget-transfers" title="Process Refunds &amp;amp; Budget Transfers" >
   <exit-transition transition_id="archive-program" />
@@ -8343,14 +8226,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -8370,7 +8253,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -8715,7 +8597,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="program-completed" title="Program Completed" >
   <exit-transition transition_id="manager-return-to-process-refunds-budget-transfers" />
@@ -8739,14 +8620,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -8766,7 +8647,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -9082,7 +8962,6 @@
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="program-fee-pending-publication" title="Program Fee Pending Publication" >
   <exit-transition transition_id="publish-fee" />
@@ -9109,14 +8988,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -9136,7 +9015,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -9452,7 +9330,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="program-fee-under-liaison-review" title="Program Fee under Liaison Review" >
   <exit-transition transition_id="return-to-program-manager" />
@@ -9480,14 +9357,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -9507,7 +9384,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -9822,7 +9698,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="program-in-progress" title="Program in Progress" >
   <exit-transition transition_id="confirm-return" />
@@ -9852,14 +9727,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -9879,7 +9754,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -10208,7 +10082,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="provider-proposals-under-liaison-review" title="Provider Proposals under Liaison Review" >
   <exit-transition transition_id="return-to-oie" />
@@ -10236,14 +10109,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -10263,7 +10136,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -10578,7 +10450,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="provider-proposals-under-oie-review" title="Provider Proposals under OIE Review" >
   <exit-transition transition_id="return-to-initial" />
@@ -10609,14 +10480,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -10636,7 +10507,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -10951,7 +10821,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="request-for-proposals-under-development" title="Request for Proposals Under Development" >
   <exit-transition transition_id="submit-rfp-for-liaison-review" />
@@ -10979,14 +10848,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -11006,7 +10875,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -11321,7 +11189,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="request-for-proposals-under-liaison-review" title="Request for Proposals Under Liaison Review" >
   <exit-transition transition_id="approve-rfp" />
@@ -11348,14 +11215,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -11375,7 +11242,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -11690,7 +11556,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="reviewing-final-program-details" title="Reviewing Final Program Details" >
   <exit-transition transition_id="schedule-operational-briefing" />
@@ -11716,14 +11581,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -11743,7 +11608,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -12070,7 +11934,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="suspended" title="Suspended" >
   <exit-transition transition_id="manager-return-to-pending-provost-review" />
@@ -12113,14 +11976,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -12140,7 +12003,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -12440,7 +12302,6 @@
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="travel-expense-report-student-evaluations-due-to" title="Travel Expense Report &amp;amp; Student Evaluations Due to OIE" >
   <exit-transition transition_id="confirm-ter-received" />
@@ -12464,14 +12325,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -12491,7 +12352,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -12836,7 +12696,6 @@
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="withdrawn" title="Withdrawn" >
   <exit-transition transition_id="manager-return-to-initial" />
@@ -12864,14 +12723,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -12891,7 +12750,6 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
@@ -13191,7 +13049,6 @@
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
-
  </state>
  <state state_id="generating-program-code" title="Generating Program Code" >
   <exit-transition transition_id="generate-code" />
@@ -13214,14 +13071,14 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
-
   </permission-map>
+
   <permission-map name="Change portal events" acquired="True">
-
   </permission-map>
+
   <permission-map name="Modify portal content" acquired="True">
-
   </permission-map>
+
   <permission-map name="View" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -13427,8 +13284,8 @@
    <permission-role>Manager</permission-role>
    <permission-role>Site Administrator</permission-role>
   </permission-map>
-
  </state>
+
  <transition transition_id="announce-programmatic-or-fee-change" title="Announce Programmatic or Fee Change" new_state="applicants-considering-change" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=announce-programmatic-or-fee-change" category="workflow" icon="">Announce Programmatic or Fee Change</action>
   <guard >
@@ -13437,7 +13294,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="approve-fee" title="Approve Fee" new_state="program-fee-pending-publication" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=approve-fee" category="workflow" icon="">Approve Fee</action>
@@ -13447,7 +13303,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="approve-proposal" title="Approve Proposal" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=approve-proposal" category="workflow" icon="">Approve Proposal</action>
@@ -13457,7 +13312,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="approve-provosts-office" title="Approve (Provost's Office)" new_state="pending-discussions-with-program-manager" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=approve-provosts-office" category="workflow" icon="">Approve (Provost's Office)</action>
@@ -13467,7 +13321,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="approve-rfp" title="Approve RFP" new_state="pending-provider-responses" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=approve-rfp" category="workflow" icon="">Approve RFP</action>
@@ -13477,7 +13330,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="archive-program" title="Archive Program" new_state="program-completed" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=archive-program" category="workflow" icon="">Archive Program</action>
@@ -13487,7 +13339,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="arrive-non-sponsored-program" title="Arrive-Non-sponsored Program" new_state="program-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <description>TRIGGER=When MGMT PORTAL's "On-site Program Leader", "Program Leadership" = "no"; transition occurs on the 2nd date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
@@ -13497,7 +13348,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="arrive-sponsored-program" title="Arrive-Sponsored Program" new_state="program-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <description>TRIGGER=When MGMT PORTAL's "On-site Program Leader", "Program Leadership" = "no"; transition occurs on the 2nd date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
@@ -13507,7 +13357,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="bill-for-final-payment" title="Bill for Final Payment (groups with leader)" new_state="pending-program-leader-orientation" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=bill-for-final-payment" category="workflow" icon="">Bill for Final Payment (groups with leader)</action>
@@ -13517,7 +13366,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
 </guard>
-
  </transition>
  <transition transition_id="bill-for-final-payment-programs-with-no-leader" title="Bill for Final Payment (programs with no leader)" new_state="pending-program-departure" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=bill-for-final-payment-programs-with-no-leader" category="workflow" icon="">Bill for Final Payment (programs with no leader)</action>
@@ -13527,7 +13375,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="cancel" title="Cancel" new_state="cancelled" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=cancel" category="workflow" icon="">Cancel</action>
@@ -13537,7 +13384,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="cancel-after-change" title="Cancel after Change" new_state="cancelled" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=cancel-after-change" category="workflow" icon="">Cancel after Change</action>
@@ -13547,7 +13393,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="confirm-briefing-completed" title="Confirm Briefing Completed" new_state="pending-program-departure" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-briefing-completed" category="workflow" icon="">Confirm Briefing Completed</action>
@@ -13557,7 +13402,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="confirm-orientation-completed" title="Confirm Orientation Completed" new_state="pending-travel-advance" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-orientation-completed" category="workflow" icon="">Confirm Orientation Completed</action>
@@ -13567,7 +13411,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="confirm-return" title="Confirm Return" new_state="travel-expense-report-student-evaluations-due-to" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-return" category="workflow" icon="">Confirm Return</action>
@@ -13578,7 +13421,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="confirm-safe-arrival" title="Confirm Safe Arrival" new_state="program-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-safe-arrival" category="workflow" icon="">Confirm Safe Arrival</action>
@@ -13590,7 +13432,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="confirm-ter-received" title="Confirm TER Received" new_state="final-program-accounting-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-ter-received" category="workflow" icon="">Confirm TER Received</action>
@@ -13600,7 +13441,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="confirm-to-run" title="Confirm to Run" new_state="initial-payment-billing-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-to-run" category="workflow" icon="">Confirm to Run</action>
@@ -13610,7 +13450,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="confirm-travel-delay" title="Confirm Travel Delay" new_state="pending-program-departure" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=confirm-travel-delay" category="workflow" icon="">Confirm Travel Delay</action>
@@ -13619,7 +13458,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="decline" title="Decline" new_state="declined" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=decline" category="workflow" icon="">Decline</action>
@@ -13631,7 +13469,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="depart" title="Depart" new_state="pending-arrival-abroad" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=depart" category="workflow" icon="">Depart</action>
@@ -13643,7 +13480,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="depart-non-sponsored-program" title="Depart-Non-sponsored Program" new_state="pending-arrival-abroad" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <description>TRIGGER=When MGMT PORTAL's "Sponsoring Unit or Department" = "non-sponsored"; transition occurs on the 1st date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
@@ -13656,7 +13492,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="depart-sponsored-program" title="Depart-Sponsored Program" new_state="pending-arrival-abroad" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <description>TRIGGER=When MGMT PORTAL's "On-site Program Leader", "Program Leadership" = "no"; transition occurs on the 1st date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
@@ -13669,7 +13504,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="develop-rfp" title="Develop RFP" new_state="request-for-proposals-under-development" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=develop-rfp" category="workflow" icon="">Develop RFP</action>
@@ -13679,7 +13513,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="end-incident" title="End Incident" new_state="program-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=end-incident" category="workflow" icon="">End Incident</action>
@@ -13691,7 +13524,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="pending-approval-of-alternate-course" title="Pending Approval of Alternate Course" new_state="" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=pending-approval-of-alternate-course" category="workflow" icon="">Pending Approval of Alternate Course</action>
@@ -13700,7 +13532,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="pending-provider-proposal" title="Pending Provider Proposal" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=pending-provider-proposal" category="workflow" icon="">Pending Provider Proposal</action>
@@ -13710,7 +13541,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="process-refunds" title="Process Refunds" new_state="process-refunds-budget-transfers" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=process-refunds" category="workflow" icon="">Process Refunds</action>
@@ -13720,7 +13550,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="publish-fee" title="Publish Fee" new_state="application-intake-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=publish-fee" category="workflow" icon="">Publish Fee</action>
@@ -13730,7 +13559,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="publish-final-fee" title="Publish Final Fee" new_state="final-payment-billing-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=publish-final-fee" category="workflow" icon="">Publish Final Fee</action>
@@ -13740,7 +13568,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="report-incident" title="Report Incident" new_state="incident-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=report-incident" category="workflow" icon="">Report Incident</action>
@@ -13750,7 +13577,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="return-rfp-to-program-manager" title="Return RFP to Program Manager" new_state="request-for-proposals-under-development" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-rfp-to-program-manager" category="workflow" icon="">Return RFP to Program Manager</action>
@@ -13760,7 +13586,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="return-to-initial" title="Return to Initial" new_state="initial" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-to-initial" category="workflow" icon="">Return to Initial</action>
@@ -13773,7 +13598,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-initial" title="(Managers Only) Return to Initial" new_state="initial" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-initial" category="workflow" icon="">(Managers Only) Return to Initial</action>
@@ -13784,7 +13608,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="return-to-oie" title="Return to Program Manager" new_state="provider-proposals-under-oie-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-to-oie" category="workflow" icon="">Return to Program Manager</action>
@@ -13794,7 +13617,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="return-to-oie-review" title="Return to OIE Review" new_state="pending-oie-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-to-oie-review" category="workflow" icon="">Return to OIE Review</action>
@@ -13804,7 +13626,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="return-to-rfp-under-development" title="Return to RFP under Development" new_state="" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=return-to-rfp-under-development" category="workflow" icon="">Return to RFP under Development</action>
@@ -13813,7 +13634,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="returned-non-sponsored-program" title="Returned-Non-sponsored Program" new_state="program-completed" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <description>TRIGGER=When MGMT PORTAL's "Sponsoring Unit or Department" = "non-sponsored"; transition occurs on the final date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
@@ -13823,7 +13643,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="returned-sponsored-program" title="Returned-Sponsored Program" new_state="program-completed" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <description>TRIGGER=When MGMT PORTAL's "On-site Program Leader", "Program Leadership" = "no"; transition occurs on the final date in MGMT PORTAL's "Travel Dates, Transitions &amp;amp; Destinations".</description>
@@ -13833,7 +13652,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="review-provider-proposals" title="Review Provider Proposals" new_state="provider-proposals-under-oie-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=review-provider-proposals" category="workflow" icon="">Review Provider Proposals</action>
@@ -13843,7 +13661,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="schedule-operational-briefing" title="Schedule Operational Briefing" new_state="pending-program-leader-operational-briefing" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=schedule-operational-briefing" category="workflow" icon="">Schedule Operational Briefing</action>
@@ -13853,7 +13670,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="send-bills-for-initial-payment" title="Send Bills for Initial Payment" new_state="pending-final-program-fee" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=send-bills-for-initial-payment" category="workflow" icon="">Send Bills for Initial Payment</action>
@@ -13863,7 +13679,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="send-for-fee-change" title="Send for Fee Change" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=send-for-fee-change" category="workflow" icon="">Send for Fee Change</action>
@@ -13873,7 +13688,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="send-for-programmatic-change" title="Send for Programmatic Change" new_state="provider-proposals-under-oie-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=send-for-programmatic-change" category="workflow" icon="">Send for Programmatic Change</action>
@@ -13883,7 +13697,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="submit-fee-for-liaison-review" title="Submit Fee for Liaison Review" new_state="program-fee-under-liaison-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-fee-for-liaison-review" category="workflow" icon="">Submit Fee for Liaison Review</action>
@@ -13893,7 +13706,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="submit-non-sponsored-program" title="Submit Non-sponsored Program" new_state="application-intake-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-non-sponsored-program" category="workflow" icon="">Submit Non-sponsored Program</action>
@@ -13903,7 +13715,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="submit-proposal-to-liaison" title="Submit Proposal to Liaison" new_state="provider-proposals-under-liaison-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-proposal-to-liaison" category="workflow" icon="">Submit Proposal to Liaison</action>
@@ -13913,7 +13724,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="submit-rfp-for-liaison-review" title="Submit RFP for Liaison Review" new_state="request-for-proposals-under-liaison-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-rfp-for-liaison-review" category="workflow" icon="">Submit RFP for Liaison Review</action>
@@ -13923,7 +13733,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="submit-sponsored-program" title="Submit Sponsored Program" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-sponsored-program" category="workflow" icon="">Submit Sponsored Program</action>
@@ -13933,7 +13742,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="submit-to-chair" title="Submit to Chair" new_state="pending-chair-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-to-chair" category="workflow" icon="">Submit to Chair</action>
@@ -13943,7 +13751,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="submit-to-dean" title="Submit to Dean" new_state="pending-dean-unit-director-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-to-dean" category="workflow" icon="">Submit to Dean</action>
@@ -13953,7 +13760,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="submit-to-oie" title="Submit to OIE" new_state="pending-oie-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-to-oie" category="workflow" icon="">Submit to OIE</action>
@@ -13963,7 +13769,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="submit-to-provost" title="Submit to Provost" new_state="pending-provost-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=submit-to-provost" category="workflow" icon="">Submit to Provost</action>
@@ -13973,7 +13778,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="suspend" title="Suspend" new_state="suspended" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=suspend" category="workflow" icon="">Suspend</action>
@@ -13984,7 +13788,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="travel-advance-ready" title="Travel Advance Ready" new_state="reviewing-final-program-details" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=travel-advance-ready" category="workflow" icon="">Travel Advance Ready</action>
@@ -13994,7 +13797,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="withdraw-application" title="Withdraw Application" new_state="withdrawn" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=withdraw-application" category="workflow" icon="">Withdraw Application</action>
@@ -14004,9 +13806,7 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
-
  <transition transition_id="manager-return-to-applicants-considering-change" title="(Managers Only) Return to applicants-considering-change" new_state="applicants-considering-change" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-applicants-considering-change" category="workflow" icon="">(Managers Only) Return to applicants-considering-change</action>
   <guard >
@@ -14016,7 +13816,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-application-intake-in-progress" title="(Managers Only) Return to application-intake-in-progress" new_state="application-intake-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-application-intake-in-progress" category="workflow" icon="">(Managers Only) Return to application-intake-in-progress</action>
@@ -14027,7 +13826,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-cancelled" title="(Managers Only) Return to cancelled" new_state="cancelled" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-cancelled" category="workflow" icon="">(Managers Only) Return to cancelled</action>
@@ -14038,7 +13836,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-declined" title="(Managers Only) Return to declined" new_state="declined" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-declined" category="workflow" icon="">(Managers Only) Return to declined</action>
@@ -14049,7 +13846,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-final-payment-billing-in-progress" title="(Managers Only) Return to final-payment-billing-in-progress" new_state="final-payment-billing-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-final-payment-billing-in-progress" category="workflow" icon="">(Managers Only) Return to final-payment-billing-in-progress</action>
@@ -14060,7 +13856,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-final-program-accounting-in-progress" title="(Managers Only) Return to final-program-accounting-in-progress" new_state="final-program-accounting-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-final-program-accounting-in-progress" category="workflow" icon="">(Managers Only) Return to final-program-accounting-in-progress</action>
@@ -14071,7 +13866,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-incident-in-progress" title="(Managers Only) Return to incident-in-progress" new_state="incident-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-incident-in-progress" category="workflow" icon="">(Managers Only) Return to incident-in-progress</action>
@@ -14082,7 +13876,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-initial-payment-billing-in-progress" title="(Managers Only) Return to initial-payment-billing-in-progress" new_state="initial-payment-billing-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-initial-payment-billing-in-progress" category="workflow" icon="">(Managers Only) Return to initial-payment-billing-in-progress</action>
@@ -14093,7 +13886,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-pending-arrival-abroad" title="(Managers Only) Return to pending-arrival-abroad" new_state="pending-arrival-abroad" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-arrival-abroad" category="workflow" icon="">(Managers Only) Return to pending-arrival-abroad</action>
@@ -14104,7 +13896,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-pending-chair-review" title="(Managers Only) Return to pending-chair-review" new_state="pending-chair-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-chair-review" category="workflow" icon="">(Managers Only) Return to pending-chair-review</action>
@@ -14115,7 +13906,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-pending-dean-unit-director-review" title="(Managers Only) Return to pending-dean-unit-director-review" new_state="pending-dean-unit-director-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-dean-unit-director-review" category="workflow" icon="">(Managers Only) Return to pending-dean-unit-director-review</action>
@@ -14126,7 +13916,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-pending-discussions-with-program-manager" title="(Managers Only) Return to pending-discussions-with-program-manager" new_state="pending-discussions-with-program-manager" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-discussions-with-program-manager" category="workflow" icon="">(Managers Only) Return to pending-discussions-with-program-manager</action>
@@ -14137,7 +13926,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-pending-final-program-fee" title="(Managers Only) Return to pending-final-program-fee" new_state="pending-final-program-fee" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-final-program-fee" category="workflow" icon="">(Managers Only) Return to pending-final-program-fee</action>
@@ -14148,7 +13936,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-pending-oie-review" title="(Managers Only) Return to pending-oie-review" new_state="pending-oie-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-oie-review" category="workflow" icon="">(Managers Only) Return to pending-oie-review</action>
@@ -14159,7 +13946,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-pending-program-departure" title="(Managers Only) Return to pending-program-departure" new_state="pending-program-departure" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-program-departure" category="workflow" icon="">(Managers Only) Return to pending-program-departure</action>
@@ -14170,7 +13956,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-pending-program-fee-determination-by-oie" title="(Managers Only) Return to pending-program-fee-determination-by-oie" new_state="pending-program-fee-determination-by-oie" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-program-fee-determination-by-oie" category="workflow" icon="">(Managers Only) Return to pending-program-fee-determination-by-oie</action>
@@ -14181,7 +13966,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-pending-program-leader-operational-briefing" title="(Managers Only) Return to pending-program-leader-operational-briefing" new_state="pending-program-leader-operational-briefing" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-program-leader-operational-briefing" category="workflow" icon="">(Managers Only) Return to pending-program-leader-operational-briefing</action>
@@ -14192,7 +13976,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-pending-program-leader-orientation" title="(Managers Only) Return to pending-program-leader-orientation" new_state="pending-program-leader-orientation" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-program-leader-orientation" category="workflow" icon="">(Managers Only) Return to pending-program-leader-orientation</action>
@@ -14203,7 +13986,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-pending-provider-responses" title="(Managers Only) Return to pending-provider-responses" new_state="pending-provider-responses" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-provider-responses" category="workflow" icon="">(Managers Only) Return to pending-provider-responses</action>
@@ -14214,7 +13996,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-pending-provost-review" title="(Managers Only) Return to pending-provost-review" new_state="pending-provost-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-provost-review" category="workflow" icon="">(Managers Only) Return to pending-provost-review</action>
@@ -14225,7 +14006,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-pending-travel-advance" title="(Managers Only) Return to pending-travel-advance" new_state="pending-travel-advance" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-pending-travel-advance" category="workflow" icon="">(Managers Only) Return to pending-travel-advance</action>
@@ -14236,7 +14016,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-process-refunds-budget-transfers" title="(Managers Only) Return to process-refunds-budget-transfers" new_state="process-refunds-budget-transfers" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-process-refunds-budget-transfers" category="workflow" icon="">(Managers Only) Return to process-refunds-budget-transfers</action>
@@ -14247,7 +14026,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-program-completed" title="(Managers Only) Return to program-completed" new_state="program-completed" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-program-completed" category="workflow" icon="">(Managers Only) Return to program-completed</action>
@@ -14258,7 +14036,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-program-fee-pending-publication" title="(Managers Only) Return to program-fee-pending-publication" new_state="program-fee-pending-publication" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-program-fee-pending-publication" category="workflow" icon="">(Managers Only) Return to program-fee-pending-publication</action>
@@ -14269,7 +14046,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-program-fee-under-liaison-review" title="(Managers Only) Return to program-fee-under-liaison-review" new_state="program-fee-under-liaison-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-program-fee-under-liaison-review" category="workflow" icon="">(Managers Only) Return to program-fee-under-liaison-review</action>
@@ -14280,7 +14056,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-program-in-progress" title="(Managers Only) Return to program-in-progress" new_state="program-in-progress" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-program-in-progress" category="workflow" icon="">(Managers Only) Return to program-in-progress</action>
@@ -14291,7 +14066,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-provider-proposals-under-liaison-review" title="(Managers Only) Return to provider-proposals-under-liaison-review" new_state="provider-proposals-under-liaison-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-provider-proposals-under-liaison-review" category="workflow" icon="">(Managers Only) Return to provider-proposals-under-liaison-review</action>
@@ -14302,7 +14076,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-provider-proposals-under-oie-review" title="(Managers Only) Return to provider-proposals-under-oie-review" new_state="provider-proposals-under-oie-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-provider-proposals-under-oie-review" category="workflow" icon="">(Managers Only) Return to provider-proposals-under-oie-review</action>
@@ -14313,7 +14086,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-request-for-proposals-under-development" title="(Managers Only) Return to request-for-proposals-under-development" new_state="request-for-proposals-under-development" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-request-for-proposals-under-development" category="workflow" icon="">(Managers Only) Return to request-for-proposals-under-development</action>
@@ -14324,7 +14096,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" title="(Managers Only) Return to request-for-proposals-under-liaison-review" new_state="request-for-proposals-under-liaison-review" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-request-for-proposals-under-liaison-review" category="workflow" icon="">(Managers Only) Return to request-for-proposals-under-liaison-review</action>
@@ -14335,7 +14106,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-reviewing-final-program-details" title="(Managers Only) Return to reviewing-final-program-details" new_state="reviewing-final-program-details" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-reviewing-final-program-details" category="workflow" icon="">(Managers Only) Return to reviewing-final-program-details</action>
@@ -14346,7 +14116,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-suspended" title="(Managers Only) Return to suspended" new_state="suspended" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-suspended" category="workflow" icon="">(Managers Only) Return to suspended</action>
@@ -14357,7 +14126,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-travel-expense-report-student-evaluations-due-to" title="(Managers Only) Return to travel-expense-report-student-evaluations-due-to" new_state="travel-expense-report-student-evaluations-due-to" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-travel-expense-report-student-evaluations-due-to" category="workflow" icon="">(Managers Only) Return to travel-expense-report-student-evaluations-due-to</action>
@@ -14368,7 +14136,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
  <transition transition_id="manager-return-to-withdrawn" title="(Managers Only) Return to withdrawn" new_state="withdrawn" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-withdrawn" category="workflow" icon="">(Managers Only) Return to withdrawn</action>
@@ -14379,7 +14146,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
   </guard>
-
  </transition>
 
 
@@ -14394,7 +14160,6 @@
  <variable variable_id="action" for_catalog="False" for_status="True" update_always="True" >
   <description>Previous transition</description>
   <default>
-
    <expression>transition/getId|nothing</expression>
   </default>
   <guard >
@@ -14403,7 +14168,6 @@
  <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True" >
   <description>The ID of the user who performed the previous transition</description>
   <default>
-
    <expression>user/getId</expression>
   </default>
   <guard >
@@ -14412,7 +14176,6 @@
  <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True" >
   <description>Comment about the last transition</description>
   <default>
-
    <expression>python:state_change.kwargs.get('comment', '')</expression>
   </default>
   <guard >
@@ -14432,7 +14195,6 @@
  <variable variable_id="time" for_catalog="False" for_status="True" update_always="True" >
   <description>When the previous transition was performed</description>
   <default>
-
    <expression>state_change/getDateTime</expression>
   </default>
   <guard >
