@@ -33,14 +33,14 @@ class OIEStudyAbroadContentBaseTest(unittest.TestCase):
     def _transition_and_or_roles_test(self, fast, initial_state, transition,
                                       end_state, authorized_roles):
         if fast:
-            self.assertEqual(api.content.get_state(obj=self.program),
+            self.assertEqual(api.content.get_state(obj=self.test_obj),
                              initial_state)
-            api.content.transition(obj=self.program, transition=transition)
-            self.assertEqual(api.content.get_state(obj=self.program),
+            api.content.transition(obj=self.test_obj, transition=transition)
+            self.assertEqual(api.content.get_state(obj=self.test_obj),
                              end_state)
         else:
             self._verify_transition_by_all_roles(
-                obj=self.program,
+                obj=self.test_obj,
                 initial_state=initial_state,
                 authorized_roles=authorized_roles,
                 transition=transition,
@@ -63,7 +63,6 @@ class OIEStudyAbroadContentBaseTest(unittest.TestCase):
         self.assertIsNotNone(authorized_roles)
         if unauthorized_roles is None:
             unauthorized_roles = list(self.ALL_ROLES - set(authorized_roles))
-        # self.assertIsNotNone(unauthorized_roles)
         self.assertIsNotNone(transition)
         self.assertIsNotNone(destination_state)
         self.assertIsNotNone(return_transition)
@@ -198,8 +197,6 @@ class OIEStudyAbroadContentBaseTest(unittest.TestCase):
         except InvalidParameterError as e:
             error_str = e.message
         found_expected_error = 'Invalid transition' in error_str
-        if not found_expected_error:
-            import pdb;pdb.set_trace()  # noqa
         self.assertTrue(found_expected_error)
         self.assertEqual(api.content.get_state(obj=obj), end_state)
 

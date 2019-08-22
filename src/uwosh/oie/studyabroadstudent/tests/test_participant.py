@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 from . import OIEStudyAbroadContentBaseTest
+# from AccessControl import getSecurityManager
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+# from plone.app.testing import TEST_USER_NAME
+# from plone.api.exc import InvalidParameterError
+# from plone.app.testing import login
+# from plone.app.testing import logout
 from plone.dexterity.interfaces import IDexterityFTI
 from uwosh.oie.studyabroadstudent.interfaces.participant import IOIEStudyAbroadParticipant  # noqa
 from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING  # noqa
@@ -19,6 +24,33 @@ class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.installer = api.portal.get_tool('portal_quickinstaller')
+
+        # add calendar year
+        self.calendar_year = api.content.create(
+            container=self.portal,
+            type='OIECalendarYear',
+            id='2019',
+        )
+        self.calendar_year_uid = api.content.get_uuid(obj=self.calendar_year)
+
+        # add a sample program
+        self.program = api.content.create(
+            container=self.portal,
+            type='OIEStudyAbroadProgram',
+            id='sample-program',
+            calendar_year=self.calendar_year_uid,
+            term='1 Fall Interim',
+            college_or_unit='B College of Business',
+            countries=['Afghanistan'],
+        )
+
+        # add a sample participant
+        self.test_obj = api.content.create(
+            container=self.portal,
+            type='OIEStudyAbroadParticipant',
+            id='sample-participant',
+            programName=api.content.get_uuid(obj=self.program),
+        )
 
     def test_schema(self):
         fti = queryUtility(IDexterityFTI, name='OIEStudyAbroadParticipant')
@@ -40,8 +72,37 @@ class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):
             container=self.portal,
             type='OIEStudyAbroadParticipant',
             id='OIEStudyAbroadParticipant',
-            state_of_wisconsin_need_based_travel_grant_form_link='',
-            special_student_form_for_undergraduate_admissions_form_link='',
-            disciplinary_clearance_form_link='',
         )
         self.assertTrue(IOIEStudyAbroadParticipant.providedBy(obj))
+
+    def test_correct_default_workflow(self):
+        workflowTool = api.portal.get_tool('portal_workflow')
+        chains = dict(workflowTool.listChainOverrides())
+        defaultChain = workflowTool.getDefaultChain()
+        participantChain = chains.get('OIEStudyAbroadParticipant',
+                                      defaultChain)
+        self.assertEqual(participantChain, ('participant',))
+
+    # def test_cannot_transition_as_anonymous(self):
+    #     portal = self.layer['portal']
+    #     login(portal, TEST_USER_NAME)
+    #     logout()
+    #     self.assertRaises(InvalidParameterError,
+    #                       api.content.transition,
+    #                       obj=self.test_obj,
+    #                       transition='submit')
+    #
+    # def test_can_transition_submit(self, fast=None):
+    #     self.assertTrue('Manager' in getSecurityManager().getUser().getRolesInContext(self.portal))  # noqa
+    #     initial_state = 'express-interest'
+    #     transition = 'submit'
+    #     end_state = 'step-i'
+    #     authorized_roles = ['Manager',
+    #                         'Mgmt_Admin',
+    #                         'Mgmt_Liaison',
+    #                         'Participant_Applicant']
+    #     self._transition_and_or_roles_test(fast,
+    #                                        initial_state,
+    #                                        transition,
+    #                                        end_state,
+    #                                        authorized_roles)

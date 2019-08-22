@@ -10,7 +10,6 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.dexterity.interfaces import IDexterityFTI
-from Products.CMFCore.utils import getToolByName
 from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import IOIEStudyAbroadProgram  # noqa
 from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING  # noqa
 from zope.component import createObject
@@ -39,7 +38,7 @@ class OIEStudyAbroadProgramIntegrationTest(OIEStudyAbroadContentBaseTest):
         self.calendar_year_uid = api.content.get_uuid(obj=self.calendar_year)
 
         # add a sample program
-        self.program = api.content.create(
+        self.test_obj = api.content.create(
             container=self.portal,
             type='OIEStudyAbroadProgram',
             id='sample-program',
@@ -89,8 +88,7 @@ class OIEStudyAbroadProgramIntegrationTest(OIEStudyAbroadContentBaseTest):
                           'sample-program/@@edit')
 
     def test_correct_default_workflow(self):
-        portal = self.layer['portal']
-        workflowTool = getToolByName(portal, 'portal_workflow')  # noqa
+        workflowTool = api.portal.get_tool('portal_workflow')
         chains = dict(workflowTool.listChainOverrides())
         defaultChain = workflowTool.getDefaultChain()
         programChain = chains.get('OIEStudyAbroadProgram', defaultChain)
@@ -101,7 +99,7 @@ class OIEStudyAbroadProgramIntegrationTest(OIEStudyAbroadContentBaseTest):
     def test_nonexistent_transition_by_manager(self):
         error_str = ''
         try:
-            api.content.transition(obj=self.program,
+            api.content.transition(obj=self.test_obj,
                                    transition='this-transition-does-not-exist')
         except InvalidParameterError as e:
             error_str = e.message
@@ -113,7 +111,7 @@ class OIEStudyAbroadProgramIntegrationTest(OIEStudyAbroadContentBaseTest):
         logout()
         self.assertRaises(InvalidParameterError,
                           api.content.transition,
-                          obj=self.program,
+                          obj=self.test_obj,
                           transition='submit-to-chair')
 
     # all workflow transitions by manager
