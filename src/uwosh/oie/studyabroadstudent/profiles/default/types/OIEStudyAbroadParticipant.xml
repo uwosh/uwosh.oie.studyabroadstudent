@@ -103,7 +103,7 @@
       title="Edit"
       url_expr="string:${object_url}/edit"
       visible="True">
-    <permission value="Modify portal content" />
+    <permission value="OIE: Main Participant Edit Permission" />
   </action>
 
 </object>

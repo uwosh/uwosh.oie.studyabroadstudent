@@ -348,5 +348,23 @@
       <role name="Manager"/>
       <role name="Site Administrator"/>
     </permission>
+    <permission name="OIE: Main Participant Edit Permission" acquire="True">
+      <role name="Mgmt_Access"/>
+      <role name="Mgmt_Admin"/>
+      <role name="Mgmt_AdminServices"/>
+      <role name="Mgmt_Chair"/>
+      <role name="Mgmt_Dean"/>
+      <role name="Mgmt_DeanDirector"/>
+      <role name="Mgmt_Director"/>
+      <role name="Mgmt_LeaderReview"/>
+      <role name="Mgmt_Liaison"/>
+      <role name="Mgmt_Manager"/>
+      <role name="Mgmt_OIE"/>
+      <role name="Participant_Applicant"/>
+      <role name="Participant_Coordinator"/>
+      <role name="Participant_DeanOfStudents"/>
+      <role name="Participant_Director"/>
+      <role name="Participant_Manager"/>
+    </permission>
   </permissions>
 </rolemap>

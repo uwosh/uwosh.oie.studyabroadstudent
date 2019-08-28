@@ -115,4 +115,7 @@
     <permission id="uwosh.oie.studyabroadstudent.edit.program_dates_fieldset"
                 title="OIE: Edit program dates fieldset">
     </permission>
+    <permission id="uwosh.oie.studyabroadstudent.edit.participant_main"
+                title="OIE: Main Participant Edit Permission">
+    </permission>
 </configure>

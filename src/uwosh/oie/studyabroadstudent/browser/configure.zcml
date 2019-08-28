@@ -62,6 +62,13 @@
       />
 
   <browser:page
+      name="edit"
+      for="..interfaces.participant.IOIEStudyAbroadParticipant"
+      class=".custom_forms.ParticipantEditForm"
+      permission="uwosh.oie.studyabroadstudent.edit.participant_main"
+      />
+
+  <browser:page
       name="edit-util"
       for="..interfaces.participant.IOIEStudyAbroadParticipant"
       class=".views.ParticipantEditUtilView"

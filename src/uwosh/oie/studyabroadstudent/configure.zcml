@@ -8,10 +8,10 @@
 
   <includeDependencies package="." />
 
-  <include package=".browser" />
   <include file="permissions.zcml" />
   <include file="indexers.zcml" />
   <include file="patches.zcml" />
+  <include package=".browser" />
 
   <genericsetup:registerProfile
       name="default"
