@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from cStringIO import StringIO
 from plone import api
 from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.app.contenttypes.browser.folder import FolderView
@@ -12,6 +13,7 @@ from uwosh.oie.studyabroadstudent.reporting import ReportUtil
 from zope.interface import alsoProvides
 
 import base64
+import csv
 import json
 import logging
 import Missing
@@ -317,6 +319,41 @@ class AttemptTransitionsPeriodicallyView(DefaultView):
 
 
 class ReportingView(DefaultView):
+
+    def __call__(self):
+        if 'csv' in self.request.form:
+            util = self.getReportUtil()
+
+            output = StringIO()
+            writer = csv.writer(output)
+
+            writer.writerow(['Participant Type', 'Count for this Program'])
+            writer.writerow(['High School Participants',
+                             util.high_school_count()])
+            writer.writerow(['UWO Freshman Participants',
+                             util.uwo_freshman_count()])
+            writer.writerow(['UWO Sophomore Participants',
+                            util.uwo_sophomore_count()])
+            writer.writerow(['UWO Junior Participants',
+                             util.uwo_junior_count()])
+            writer.writerow(['UWO Senior Participants',
+                             util.uwo_senior_count()])
+            writer.writerow(['UWO Graduate Participants',
+                             util.uwo_graduate_count()])
+            writer.writerow(['Other Undergraduate Participants',
+                            util.other_undergrad_count()])
+            writer.writerow(['Other Graduate Participants',
+                            util.other_graduate_count()])
+
+            resp = self.request.response
+            filename = '{0}-report.csv'.format(self.context.Title())
+            resp.setHeader('Content-Disposition',
+                           'attachment; filename={0}'.format(filename))
+            resp.setHeader('Content-Type', 'text/csv')
+            output.seek(0)
+            return output.read()
+        else:
+            return super(ReportingView, self).__call__()
 
     def getReportUtil(self):
         return ReportUtil(self.context)

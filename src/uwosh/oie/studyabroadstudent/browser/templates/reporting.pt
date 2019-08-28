@@ -49,6 +49,9 @@
           </tr>
         </table>
       </div>
+      <div>
+        <a class="btn btn-primary" href="${context/absolute_url}/reporting?csv">Download CSV</a>
+      </div>
     </tal:main-macro>
   </metal:main>
 </body>

@@ -230,7 +230,6 @@ contactrelationship = SimpleVocabulary(
 
 departure_transfer_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(u'-- choose one --'),
         SimpleTerm(u'I will transfer from Oshkosh with the group.'),
         SimpleTerm(u'I will transfer from Fond du Lac with the group.'),
         SimpleTerm(u'I will transfer from Milwaukee with the group.'),
@@ -257,7 +256,6 @@ return_mode_transportation_vocabulary = SimpleVocabulary(
 
 return_transfer_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(u'-- choose one --'),
         SimpleTerm(u'I will transfer back to Oshkosh with the group.'),
         SimpleTerm(u'I will transfer back to Fond du Lac with the group.'),
         SimpleTerm(u'I will transfer back to Milwaukee with the group.'),
