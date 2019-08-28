@@ -535,7 +535,6 @@ class IOIEStudyAbroadProgram(Interface):
                 'oiestudyabroadstudent.countries',
             ),
         ),
-        min_length=1,
     )
 
     program_code = schema.TextLine(
@@ -605,7 +604,6 @@ class IOIEStudyAbroadProgram(Interface):
                 'oiestudyabroadstudent.sponsoring_unit_or_department',
             ),
         ),
-        min_length=1,
     )
 
     program_type = schema.Choice(
@@ -646,7 +644,6 @@ class IOIEStudyAbroadProgram(Interface):
             title=u'learning objective row',
             schema=ILearningObjectiveRowSchema,
         ),
-        min_length=1,
     )
 
     equipment_and_space = schema.Choice(
@@ -706,11 +703,10 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Language of Study'),
         description=_(
             u'Select all that apply. Contact the Office of International Education to add a language (abroad@uwosh.edu).'),  # noqa
-        required=True,
+        required=False,
         value_type=schema.Choice(
             source=RegistryValueVocabulary('oiestudyabroadstudent.language'),
         ),
-        min_length=1,
     )
 
     cooperating_partners = schema.List(
@@ -762,7 +758,6 @@ class IOIEStudyAbroadProgram(Interface):
             title=u'Pre-Travel Dates',
             schema=IPreTravelDatesRowSchema,
         ),
-        min_length=1,
     )
 
     form.mode(travelDatesTransitionsAndDestinations='display')

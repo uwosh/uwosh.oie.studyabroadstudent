@@ -214,7 +214,10 @@ def getToAddresses(object, emailTemplate):
     addresses = []
 
     if emailTemplate.send_to_participant:
-        addresses.append()
+        try:
+            addresses.append(object.email)
+        except Exception:
+            LOG('getToAddresses', INFO, 'Can''t get participant email')
 
     if emailTemplate.send_to_actor:
         actor = getActor(object)
