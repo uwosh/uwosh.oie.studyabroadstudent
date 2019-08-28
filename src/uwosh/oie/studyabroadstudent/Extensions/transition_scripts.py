@@ -145,9 +145,6 @@ def sendTransitionMessage(state_change, interface):
             state_change.transition.id))
         return
 
-    portal = api.portal.get()
-    wftool = api.portal.get_tool('portal_workflow')
-
     object = state_change.object
 
     old_state_id = state_change.old_state.id
@@ -170,9 +167,10 @@ def sendTransitionMessage(state_change, interface):
     LOG('sendTransitionMessage', INFO,
         "Sending email for transition %s to %s, subject '%s', emailTemplate = '%s'" % (  # noqa
         state_change.transition.id, mTo, mSubj, emailTemplate))  # noqa
-    mMsg = assembleEmailMessage(object, wftool, emailTemplate)
+    mMsg = assembleEmailMessage(object, emailTemplate)
 
-    portal.MailHost.secureSend(mMsg, mTo, mFrom, mSubj)
+    mail_host = api.portal.get_tool(name='MailHost')
+    mail_host.send(mMsg, mTo, mFrom, mSubj)
 
 
 def getEmailMessageTemplate(state_change, interface):
@@ -238,10 +236,12 @@ def getToAddresses(object, emailTemplate):
     return addresses
 
 
-def assembleEmailMessage(object, wftool, emailTemplate):
+def assembleEmailMessage(object, emailTemplate):
     # Name: %s
     # Program Name: %s
     # Program Year: %s
+
+    wftool = api.portal.get_tool('portal_workflow')
 
     mMsg = """
 
@@ -252,12 +252,11 @@ Your UW Oshkosh Office of International Education study abroad program has been 
 You can view your program here: %s
 
 Comment: %s
-
 """ % (  # noqa
         # application.getFirstName() + ' ' + application.getLastName(),
         # application.getProgramNameAsString(),
         # application.getProgramYear(),
-        emailTemplate.getFormattedEmailText(),
+        emailTemplate.emailText,
         object.absolute_url(),
         wftool.getInfoFor(object, 'comments'),  # noqa
         # getAssembledErrorMessage(onFailure),

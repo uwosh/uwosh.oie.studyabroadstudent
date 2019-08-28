@@ -106,3 +106,6 @@ class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):
     #                                        transition,
     #                                        end_state,
     #                                        authorized_roles)
+
+    def test_transition_with_email_template(self):
+        pass  # TODO # noqa
