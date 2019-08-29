@@ -359,3 +359,12 @@ class ReportingView(DefaultView):
 
     def getReportUtil(self):
         return ReportUtil(self.context)
+
+
+class ProgramEditUtilView(DefaultView):
+    def __call__(self):
+        util_data = {}
+
+        util_data['portalState'] = api.content.get_state(self.context)
+
+        return json.dumps(util_data)

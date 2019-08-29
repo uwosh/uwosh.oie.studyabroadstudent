@@ -791,10 +791,6 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    #######################################################
-    # TODO Applicant should not see this field during the "Initial" state.  # noqa
-    #   Can this be made visible AFTER transitioning from this state?
-    #
     model.fieldset(
         'departure_flight_fieldset',
         label=_('Departure'),
@@ -840,10 +836,6 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    #######################################################
-    # TODO Applicant should not see this field during the "Initial" state.  # noqa
-    #   Can this be made visible AFTER transitioning from this state?
-    #
     model.fieldset(
         'departure_from_oshkosh_fieldset',
         label=_(u'Departure from Oshkosh'),
@@ -913,10 +905,6 @@ class IOIEStudyAbroadProgram(Interface):
         #   "Transportation is provided from Oshkosh is "yes"]
     )
 
-    #######################################################
-    # TODO Applicant should not see this field during the "Initial" state.  # noqa
-    #   Can this be made visible AFTER transitioning from this state?
-    #
     model.fieldset(
         'return_flight_fieldset',
         label=_('Return'),
@@ -971,10 +959,6 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    #######################################################
-    # TODO Applicant should not see this field during the "Initial" state.  # noqa
-    #   Can this be made visible AFTER transitioning from this state?
-    #
     model.fieldset(
         'return_to_oshkosh_fieldset',
         label=_(u'Return to Oshkosh'),

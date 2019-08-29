@@ -1,17 +1,11 @@
 $(document).ready(function() {
   if($('body').hasClass('template-edit') && $('body').hasClass('portaltype-oiestudyabroadprogram')) {
-    function disable_replacement_costs() {
-        $('select#form-widgets-replacement_costs').attr('disabled', true);
-    }
-    function enable_replacement_costs() {
-        $('select#form-widgets-replacement_costs').attr('disabled', false);
-    }
-    function disable_costs_paid_by() {
-        $('select#form-widgets-paid_by').attr('disabled', true);
-    }
-    function enable_costs_paid_by() {
-        $('select#form-widgets-paid_by').attr('disabled', false);
-    }
+    var baseURL = $('body').attr('data-base-url');
+    var utilURL = baseURL + '/edit-util';
+    var baseWidgetSelector = '#formfield-form-widgets-';
+    var baseInputSelector = '#form-widgets-';
+    var util_data = {};
+
     function disable_payment_rate_or_lump_sum() {
         $('select#form-widgets-rate_or_lump_sum').attr('disabled', true);
     }
@@ -28,12 +22,12 @@ $(document).ready(function() {
     function handle_load_or_overload () {
       var load_or_overload = $('select#form-widgets-load_or_overload').val();
       if (load_or_overload == 'load') {
-        enable_replacement_costs();
-        disable_costs_paid_by();
+        $('select#form-widgets-replacement_costs').attr('disabled', false);
+        $('select#form-widgets-paid_by').attr('disabled', true);
         handle_replacement_costs();
       } else {
-        disable_replacement_costs();
-        enable_costs_paid_by();
+        $('select#form-widgets-replacement_costs').attr('disabled', true);
+        $('select#form-widgets-paid_by').attr('disabled', false);
         handle_paid_by();
       }
     }
@@ -95,5 +89,22 @@ $(document).ready(function() {
 
     handle_equipment_and_space();
     $('select#form-widgets-equipment_and_space').change(handle_equipment_and_space);
+
+    function hideFieldsetsFromInitial(){
+      if (util_data['portalState'].toLowerCase() == 'initial'){
+        var editableLater = 'This fieldset becomes editable after the Initial state is completed.'
+        $('#fieldset-return_flight_fieldset').replaceWith(editableLater);
+        $('#fieldset-return_to_oshkosh_fieldset').replaceWith(editableLater);
+        $('#fieldset-departure_flight_fieldset').replaceWith(editableLater);
+        $('#fieldset-departure_from_oshkosh_fieldset').replaceWith(editableLater);
+      }
+    }
+
+    $.ajax(utilURL, {
+      success: function(data) {
+        util_data = JSON.parse(data);
+        hideFieldsetsFromInitial();
+      }
+    });
   }
 });

@@ -99,6 +99,13 @@
       permission="cmf.ModifyPortalContent"
       />
 
+    <browser:page
+        name="edit-util"
+        for="..interfaces.studyabroadprogram.IOIEStudyAbroadProgram"
+        class=".views.ProgramEditUtilView"
+        permission="zope2.View"
+        />
+
   <browser:page
       name="view"
       for="..interfaces.cooperatingpartner.IOIECooperatingPartner"

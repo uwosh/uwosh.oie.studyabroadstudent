@@ -597,8 +597,6 @@ class IOIEStudyAbroadParticipant(Interface):
             'oiestudyabroadstudent.education_level',
         ),
         required=False,
-        # TODO check vocabulary; If MGMT PORTAL "Student Status" is "1", the  # noqa
-        #   answer here cannot be "I am not a student'
     )
 
     universityEnrolledUWO = schema.Choice(
@@ -646,20 +644,6 @@ class IOIEStudyAbroadParticipant(Interface):
         min=2018,
         max=2100,
         required=False,
-        # TODO add vocabulary options  # noqa
-        # 01/19/2018
-        # 06/01/2018
-        # 08/03/2018
-        # 01/25/2019
-        # 06/07/2019
-        # 08/09/2019
-        # 01/24/2020
-        # 06/05/2020
-        # 08/07/2020
-        # 01/22/2021
-        # 06/04/2021
-        # 08/06/2021
-        # 2022 or later
     )
 
     graduationMonth = schema.Choice(
@@ -906,11 +890,7 @@ class IOIEStudyAbroadParticipant(Interface):
     form.mode(background_label='display')
     background_label = schema.TextLine(
         title=_(u'Criminal Background Check'),
-        description=_(u'If you are required to apply for advance permission (a visa) to enter one or more of your host countries, your visa application may require you to disclose citations, convictions and/or arrests in a criminal record.  If you will be working with minors, or'),  # noqa
-        # TODO appears only if "Criminal Background Check" is 'yes' in the  # noqa
-        # MGMT PORTAL.
-        # appears only when "Program Type" is "exchange-U.S." OR
-        # "exchange-international" in MGMT PORTAL
+        description=_(u'If you are required to apply for advance permission (a visa) to enter one or more of your host countries, your visa application may require you to disclose citations, convictions and/or arrests in a criminal record.'),  # noqa
     )
 
     #######################################################

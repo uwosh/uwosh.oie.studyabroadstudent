@@ -1391,7 +1391,6 @@ Manager"""
         self.test_can_transition_by_manager_publish_final_fee(
             fast=True,
         )
-        # TODO only for programs with leader  # noqa
         initial_state = 'final-payment-billing-in-progress'
         transition = 'bill-for-final-payment'
         end_state = 'pending-program-leader-orientation'
@@ -1411,7 +1410,6 @@ Manager"""
         self.test_can_transition_by_manager_publish_final_fee(
             fast=True,
         )
-        # TODO only for programs with leader  # noqa
         initial_state = 'final-payment-billing-in-progress'
         transition = 'cancel'
         end_state = 'cancelled'
@@ -1431,7 +1429,6 @@ Manager"""
         self.test_can_transition_by_manager_publish_final_fee(
             fast=True,
         )
-        # TODO only for programs with leader  # noqa
         initial_state = 'final-payment-billing-in-progress'
         transition = 'suspend'
         end_state = 'suspended'
@@ -1450,7 +1447,6 @@ Manager"""
         self.test_can_transition_by_manager_publish_final_fee(
             fast=True,
         )
-        # TODO only for programs with no leader  # noqa
         initial_state = 'final-payment-billing-in-progress'
         transition = 'bill-for-final-payment-programs-with-no-leader'
         end_state = 'pending-program-departure'
@@ -1469,7 +1465,6 @@ Manager"""
         self.test_can_transition_by_manager_bill_for_final_payment(
             fast=True,
         )
-        # TODO only for programs with leader  # noqa
         initial_state = 'pending-program-leader-orientation'
         transition = 'confirm-orientation-completed'
         end_state = 'pending-travel-advance'
@@ -1489,7 +1484,6 @@ Manager"""
         self.test_can_transition_by_manager_bill_for_final_payment(
             fast=True,
         )
-        # TODO only for programs with leader  # noqa
         initial_state = 'pending-program-leader-orientation'
         transition = 'cancel'
         end_state = 'cancelled'
@@ -1509,7 +1503,6 @@ Manager"""
         self.test_can_transition_by_manager_bill_for_final_payment(
             fast=True,
         )
-        # TODO only for programs with leader  # noqa
         initial_state = 'pending-program-leader-orientation'
         transition = 'suspend'
         end_state = 'suspended'
@@ -1528,7 +1521,6 @@ Manager"""
         self.test_can_transition_by_manager_confirm_orientation_completed(
             fast=True,
         )
-        # TODO only for programs with leader  # noqa
         initial_state = 'pending-travel-advance'
         transition = 'travel-advance-ready'
         end_state = 'reviewing-final-program-details'
@@ -1548,7 +1540,6 @@ Manager"""
         self.test_can_transition_by_manager_confirm_orientation_completed(
             fast=True,
         )
-        # TODO only for programs with leader  # noqa
         initial_state = 'pending-travel-advance'
         transition = 'cancel'
         end_state = 'cancelled'
@@ -1568,7 +1559,6 @@ Manager"""
         self.test_can_transition_by_manager_confirm_orientation_completed(
             fast=True,
         )
-        # TODO only for programs with leader  # noqa
         initial_state = 'pending-travel-advance'
         transition = 'suspend'
         end_state = 'suspended'
@@ -1587,7 +1577,6 @@ Manager"""
         self.test_can_transition_by_manager_travel_advance_ready(
             fast=True,
         )
-        # TODO only for programs with leader  # noqa
         initial_state = 'reviewing-final-program-details'
         transition = 'schedule-operational-briefing'
         end_state = 'pending-program-leader-operational-briefing'
@@ -1607,7 +1596,6 @@ Manager"""
         self.test_can_transition_by_manager_travel_advance_ready(
             fast=True,
         )
-        # TODO only for programs with leader  # noqa
         initial_state = 'reviewing-final-program-details'
         transition = 'cancel'
         end_state = 'cancelled'
@@ -1627,7 +1615,6 @@ Manager"""
         self.test_can_transition_by_manager_travel_advance_ready(
             fast=True,
         )
-        # TODO only for programs with leader  # noqa
         initial_state = 'reviewing-final-program-details'
         transition = 'suspend'
         end_state = 'suspended'
@@ -1646,7 +1633,6 @@ Manager"""
         self.test_can_transition_by_manager_schedule_operational_briefing(
             fast=True,
         )
-        # TODO only for programs with leader  # noqa
         initial_state = 'pending-program-leader-operational-briefing'
         transition = 'confirm-briefing-completed'
         end_state = 'pending-program-departure'
@@ -1703,7 +1689,6 @@ Manager"""
         self.test_can_transition_by_manager_confirm_briefing_completed(
             fast=True,
         )
-        # TODO only for programs with individuals  # noqa
         initial_state = 'pending-program-departure'
         transition = 'depart'
         end_state = 'pending-arrival-abroad'
@@ -1760,7 +1745,6 @@ Manager"""
         self.test_can_transition_by_manager_confirm_briefing_completed(
             fast=True,
         )
-        # TODO only for programs with groups  # noqa
         initial_state = 'pending-program-departure'
         transition = 'depart-sponsored-program'
         end_state = 'pending-arrival-abroad'
@@ -1779,7 +1763,6 @@ Manager"""
         self.test_can_transition_by_manager_confirm_briefing_completed(
             fast=True,
         )
-        # TODO only for programs with groups  # noqa
         initial_state = 'pending-program-departure'
         transition = 'depart-non-sponsored-program'
         end_state = 'pending-arrival-abroad'
@@ -1817,7 +1800,6 @@ Manager"""
         self.test_can_transition_by_manager_depart_non_sponsored_program(
             fast=True,
         )
-        # TODO only for programs with individuals  # noqa
         initial_state = 'pending-arrival-abroad'
         transition = 'confirm-safe-arrival'
         end_state = 'program-in-progress'
@@ -1836,7 +1818,6 @@ Manager"""
         self.test_can_transition_by_manager_depart_non_sponsored_program(
             fast=True,
         )
-        # TODO only for programs with individuals  # noqa
         initial_state = 'pending-arrival-abroad'
         transition = 'confirm-travel-delay'
         end_state = 'pending-program-departure'
@@ -1855,7 +1836,6 @@ Manager"""
         self.test_can_transition_by_manager_depart_non_sponsored_program(
             fast=True,
         )
-        # TODO only for programs with groups  # noqa
         initial_state = 'pending-arrival-abroad'
         transition = 'arrive-sponsored-program'
         end_state = 'program-in-progress'
@@ -1874,7 +1854,6 @@ Manager"""
         self.test_can_transition_by_manager_depart_non_sponsored_program(
             fast=True,
         )
-        # TODO only for programs with groups  # noqa
         initial_state = 'pending-arrival-abroad'
         transition = 'arrive-non-sponsored-program'
         end_state = 'program-in-progress'
@@ -1911,7 +1890,6 @@ Manager"""
         self.test_can_transition_by_manager_confirm_safe_arrival(
             fast=True,
         )
-        # TODO only for programs with groups  # noqa
         initial_state = 'program-in-progress'
         transition = 'returned-sponsored-program'
         end_state = 'program-completed'
@@ -1930,7 +1908,6 @@ Manager"""
         self.test_can_transition_by_manager_confirm_safe_arrival(
             fast=True,
         )
-        # TODO only for programs with groups  # noqa
         initial_state = 'program-in-progress'
         transition = 'returned-non-sponsored-program'
         end_state = 'program-completed'

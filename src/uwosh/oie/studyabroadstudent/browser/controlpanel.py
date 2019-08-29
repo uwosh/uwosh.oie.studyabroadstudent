@@ -1989,6 +1989,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'University Junior',
             'University Senior',
             'Graduate School',
+            'I am not a student',
         ),
         missing_value=None,
         required=True,
