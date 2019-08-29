@@ -261,6 +261,8 @@ class ParticipantEditUtilView(DefaultView):
         util_data['orientationDeadlines'] = orientation_deadlines
         # paymentDeadlines, programReturnDate
 
+        util_data['individualInterview'] = program.individualInterview
+
         return json.dumps(util_data)
 
 

@@ -713,7 +713,6 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_(
             u'Contact the Program Liaison to schedule an interview.  Make your interview appointment and type your interview date here prior to submiting this application.  The actual interview date may or may not need to occur prior to the STEP II application deadline.  This will be determined by the Program Liaison.'),  # noqa
         required=False,
-        # TODO Displays only if "interview" is checked "yes" in MGMT PORTAL.  # noqa
     )
 
     prePostTravelClassDates = schema.Choice(

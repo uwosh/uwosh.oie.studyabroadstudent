@@ -7,6 +7,7 @@ $(document).ready(function() {
     var baseWidgetSelector = '#formfield-form-widgets-';
     var baseInputSelector = '#form-widgets-';
     var util_data = {};
+
     function populateDates() {
       var deadlineMarkup = '';
       var moment = require('moment');
@@ -24,10 +25,18 @@ $(document).ready(function() {
       }
       $(baseWidgetSelector + 'orientationDeadline').prepend(deadlineMarkup);
     }
+
+    function handleInterview() {
+      if (util_data.individualInterview.toLowerCase() != 'yes') {
+        $(baseWidgetSelector + 'interviewDate').hide();
+      }
+    }
+
     $.ajax(utilURL, {
       success: function(data) {
         util_data = JSON.parse(data);
         populateDates();
+        handleInterview();
       }
     });
   }
