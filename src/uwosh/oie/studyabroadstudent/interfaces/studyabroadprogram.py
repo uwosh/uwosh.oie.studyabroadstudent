@@ -661,8 +661,6 @@ class IOIEStudyAbroadProgram(Interface):
         default_mime_type='text/plain',
         allowed_mime_types=('text/plain', 'text/html'),
         required=False,
-        # TODO: validator: if equipment_and_space then this must have non  # noqa
-        #  empty value
     )
 
     guest_lectures = schema.Choice(

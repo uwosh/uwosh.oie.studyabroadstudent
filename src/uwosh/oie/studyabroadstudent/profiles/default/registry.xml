@@ -4,20 +4,26 @@
   <records interface="uwosh.oie.studyabroadstudent.browser.controlpanel.IOIEStudyAbroadStudentControlPanel"
            prefix="oiestudyabroadstudent" />
 
-  <records prefix="plone.bundles/uwosh.oie.studyabroadstudent"
-            interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-    <value key="enabled">True</value>
-    <value key="jscompilation">++plone++uwosh.oie.studyabroadstudent/programjs/programedit.js</value>
-    <value key="compile">False</value>
-    <value key="depends">plone</value>
-    <value key="merge_with">logged-in</value>
+  <records prefix="plone.resources/oie-program-js"
+          interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+   <value key="js">++plone++uwosh.oie.studyabroadstudent/programjs/programedit.js</value>
   </records>
 
-  <records prefix="plone.bundles/uwosh.oie.studyabroadstudent"
+  <records prefix="plone.resources/oie-participant-js"
+          interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+   <value key="js">++plone++uwosh.oie.studyabroadstudent/participantjs/participantedit.js</value>
+  </records>
+
+
+  <records prefix="plone.bundles/oie-js"
             interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+    <value key="resources">
+      <element>oie-program-js</element>
+      <element>oie-participant-js</element>
+    </value>
     <value key="enabled">True</value>
-    <value key="jscompilation">++plone++uwosh.oie.studyabroadstudent/participantjs/participantedit.js</value>
-    <value key="compile">False</value>
+    <value key="last_compilation">2019-08-29 09:00:00</value>
+    <value key="compile">True</value>
     <value key="depends">plone</value>
     <value key="merge_with">logged-in</value>
   </records>

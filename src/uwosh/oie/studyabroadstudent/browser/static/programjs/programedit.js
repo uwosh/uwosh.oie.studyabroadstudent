@@ -81,19 +81,15 @@ $(document).ready(function() {
 
     // equipment and space
 
-    function disable_equipment_and_space_details() {
-      $('div#formfield-form-widgets-equipment_and_space_needs').hide(400);
-    }
-    function enable_equipment_and_space_details() {
-      $('div#formfield-form-widgets-equipment_and_space_needs').show(400);
-    }
-
     function handle_equipment_and_space() {
       var equipment_and_space_needed = $('select#form-widgets-equipment_and_space').val();
-      if (equipment_and_space_needed == 'i-do-not-need-teaching-space-or-equipment') {
-        disable_equipment_and_space_details();
+      var equipmentAndSpaceField = $('div#formfield-form-widgets-equipment_and_space_needs');
+      if (equipment_and_space_needed == 'I do not need teaching space or equipment.') {
+        equipmentAndSpaceField.hide();
+        equipmentAndSpaceField.children('textarea').prop("required",false);
       } else {
-        enable_equipment_and_space_details();
+        equipmentAndSpaceField.show();
+        equipmentAndSpaceField.children('textarea').prop("required",true);
       }
     }
 
