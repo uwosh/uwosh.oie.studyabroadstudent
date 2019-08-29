@@ -45,6 +45,10 @@ class IOIEProgramEmailTemplate(Interface):
         title=_(u'Send Email To the user who triggered this transition'),
         description=_(u'Should the user who triggered this transition recieve an email?'),  # noqa
     )
+    send_to_program_leader = schema.Bool(
+        title=_(u'Send Email To Program Leader on Transition'),
+        description=_(u'Should the program leader recieve an email when their application goes through this transition?'),  # noqa
+    )
 
 
 class IOIEParticipantEmailTemplate(IOIEProgramEmailTemplate):
@@ -58,9 +62,4 @@ class IOIEParticipantEmailTemplate(IOIEProgramEmailTemplate):
     send_to_participant = schema.Bool(
         title=_(u'Send Email To Participant/Application on Transition'),
         description=_(u'Should the participant/applicant recieve an email when their application goes through this transition?'),  # noqa
-    )
-
-    send_to_program_leader = schema.Bool(
-        title=_(u'Send Email To Program Leader on Transition'),
-        description=_(u'Should the program leader recieve an email when their application goes through this transition?'),  # noqa
     )

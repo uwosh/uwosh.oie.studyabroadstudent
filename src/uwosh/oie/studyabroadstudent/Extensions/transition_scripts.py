@@ -211,11 +211,12 @@ def getActor(object):
 def getToAddresses(object, emailTemplate):
     addresses = []
 
-    if emailTemplate.send_to_participant:
-        try:
-            addresses.append(object.email)
-        except Exception:
-            LOG('getToAddresses', INFO, 'Can''t get participant email')
+    if IOIEStudyAbroadParticipant.providedBy(object):
+        if emailTemplate.send_to_participant:
+            try:
+                addresses.append(object.email)
+            except Exception:
+                LOG('getToAddresses', INFO, 'Can''t get participant email')
 
     if emailTemplate.send_to_actor:
         actor = getActor(object)
@@ -231,7 +232,7 @@ def getToAddresses(object, emailTemplate):
         except Exception:
             LOG('getToAddresses', INFO, 'Can''t get program leader email')
 
-    # TODO add the cc list from emailtemplate  # noqa
+    addresses.extend([addr.strip() for addr in emailTemplate.ccUsers.split(',')])  # noqa
 
     return addresses
 
