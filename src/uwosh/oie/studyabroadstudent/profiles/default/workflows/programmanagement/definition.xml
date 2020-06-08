@@ -12,48 +12,48 @@
  <permission>OIE: Edit syllabus and supporting docs</permission>
  <permission>OIE: Edit program description</permission>
  <permission>OIE: View syllabus and supporting docs</permission>
-  <permission>OIE: View dates destinations fieldset</permission>
-  <permission>OIE: Edit dates destinations fieldset</permission>
-  <permission>OIE: View departure flight fieldset</permission>
-  <permission>OIE: Edit departure flight fieldset</permission>
-  <permission>OIE: View departure from oshkosh fieldset</permission>
-  <permission>OIE: Edit departure from oshkosh fieldset</permission>
-  <permission>OIE: View return flight fieldset</permission>
-  <permission>OIE: Edit return flight fieldset</permission>
-  <permission>OIE: View return to oshkosh fieldset</permission>
-  <permission>OIE: Edit return to oshkosh fieldset</permission>
-  <permission>OIE: View participant selection fieldset</permission>
-  <permission>OIE: Edit participant selection fieldset</permission>
-  <permission>OIE: View liaison and leadership fieldset</permission>
-  <permission>OIE: Edit liaison and leadership fieldset</permission>
-  <permission>OIE: View courses fieldset</permission>
-  <permission>OIE: Edit courses fieldset</permission>
-  <permission>OIE: View contributions fieldset</permission>
-  <permission>OIE: Edit contributions fieldset</permission>
-  <permission>OIE: View reviewers fieldset</permission>
-  <permission>OIE: Edit reviewers fieldset</permission>
-  <permission>OIE: View oie review fieldset</permission>
-  <permission>OIE: Edit oie review fieldset</permission>
-  <permission>OIE: View proposals fieldset</permission>
-  <permission>OIE: Edit proposals fieldset</permission>
-  <permission>OIE: View finances fieldset</permission>
-  <permission>OIE: Edit finances fieldset</permission>
-  <permission>OIE: View pre departure fieldset</permission>
-  <permission>OIE: Edit pre departure fieldset</permission>
-  <permission>OIE: View program leader orientation packet</permission>
-  <permission>OIE: Edit program leader orientation packet</permission>
-  <permission>OIE: View other</permission>
-  <permission>OIE: Edit other</permission>
-  <permission>OIE: View reporting fieldset</permission>
-  <permission>OIE: Edit reporting fieldset</permission>
-  <permission>OIE: View participant evaluations</permission>
-  <permission>OIE: Edit participant evaluations</permission>
-  <permission>OIE: View post program evaluation</permission>
-  <permission>OIE: Edit post program evaluation</permission>
-  <permission>OIE: View incident report</permission>
-  <permission>OIE: Edit incident report</permission>
-  <permission>OIE: View program dates fieldset</permission>
-  <permission>OIE: Edit program dates fieldset</permission>
+ <permission>OIE: View dates destinations fieldset</permission>
+ <permission>OIE: Edit dates destinations fieldset</permission>
+ <permission>OIE: View departure flight fieldset</permission>
+ <permission>OIE: Edit departure flight fieldset</permission>
+ <permission>OIE: View departure from oshkosh fieldset</permission>
+ <permission>OIE: Edit departure from oshkosh fieldset</permission>
+ <permission>OIE: View return flight fieldset</permission>
+ <permission>OIE: Edit return flight fieldset</permission>
+ <permission>OIE: View return to oshkosh fieldset</permission>
+ <permission>OIE: Edit return to oshkosh fieldset</permission>
+ <permission>OIE: View participant selection fieldset</permission>
+ <permission>OIE: Edit participant selection fieldset</permission>
+ <permission>OIE: View liaison and leadership fieldset</permission>
+ <permission>OIE: Edit liaison and leadership fieldset</permission>
+ <permission>OIE: View courses fieldset</permission>
+ <permission>OIE: Edit courses fieldset</permission>
+ <permission>OIE: View contributions fieldset</permission>
+ <permission>OIE: Edit contributions fieldset</permission>
+ <permission>OIE: View reviewers fieldset</permission>
+ <permission>OIE: Edit reviewers fieldset</permission>
+ <permission>OIE: View oie review fieldset</permission>
+ <permission>OIE: Edit oie review fieldset</permission>
+ <permission>OIE: View proposals fieldset</permission>
+ <permission>OIE: Edit proposals fieldset</permission>
+ <permission>OIE: View finances fieldset</permission>
+ <permission>OIE: Edit finances fieldset</permission>
+ <permission>OIE: View pre departure fieldset</permission>
+ <permission>OIE: Edit pre departure fieldset</permission>
+ <permission>OIE: View program leader orientation packet</permission>
+ <permission>OIE: Edit program leader orientation packet</permission>
+ <permission>OIE: View other</permission>
+ <permission>OIE: Edit other</permission>
+ <permission>OIE: View reporting fieldset</permission>
+ <permission>OIE: Edit reporting fieldset</permission>
+ <permission>OIE: View participant evaluations</permission>
+ <permission>OIE: Edit participant evaluations</permission>
+ <permission>OIE: View post program evaluation</permission>
+ <permission>OIE: Edit post program evaluation</permission>
+ <permission>OIE: View incident report</permission>
+ <permission>OIE: Edit incident report</permission>
+ <permission>OIE: View program dates fieldset</permission>
+ <permission>OIE: Edit program dates fieldset</permission>
 
  <state state_id="applicants-considering-change" title="Applicants Considering Change" >
   <exit-transition transition_id="manager-return-to-program-fee-pending-publication" />
@@ -13050,241 +13050,7 @@
    <permission-role>Site Administrator</permission-role>
   </permission-map>
  </state>
- <state state_id="generating-program-code" title="Generating Program Code" >
-  <exit-transition transition_id="generate-code" />
-  <permission-map name="Access contents information" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
-   <permission-role>Mgmt_Admin</permission-role>
-   <permission-role>Mgmt_Director</permission-role>
-   <permission-role>Mgmt_Manager</permission-role>
-   <permission-role>Mgmt_Coordinator</permission-role>
-   <permission-role>Mgmt_Financial</permission-role>
-   <permission-role>Mgmt_OIE</permission-role>
-   <permission-role>Mgmt_Liaison</permission-role>
-   <permission-role>Mgmt_ProgramLeader</permission-role>
-   <permission-role>Mgmt_DeanDirector</permission-role>
-   <permission-role>Mgmt_Chair</permission-role>
-   <permission-role>Mgmt_Provost</permission-role>
-   <permission-role>Mgmt_HR</permission-role>
-   <permission-role>Mgmt_Access</permission-role>
-   <permission-role>Mgmt_AdminServices</permission-role>
-   <permission-role>Mgmt_CourseBuilder</permission-role>
-   <permission-role>Mgmt_Emergency</permission-role>
-  </permission-map>
-
-  <permission-map name="Change portal events" acquired="True">
-  </permission-map>
-
-  <permission-map name="Modify portal content" acquired="True">
-  </permission-map>
-
-  <permission-map name="View" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
-   <permission-role>Mgmt_Admin</permission-role>
-   <permission-role>Mgmt_Director</permission-role>
-   <permission-role>Mgmt_Manager</permission-role>
-   <permission-role>Mgmt_Coordinator</permission-role>
-   <permission-role>Mgmt_Financial</permission-role>
-   <permission-role>Mgmt_OIE</permission-role>
-   <permission-role>Mgmt_Liaison</permission-role>
-   <permission-role>Mgmt_ProgramLeader</permission-role>
-   <permission-role>Mgmt_DeanDirector</permission-role>
-   <permission-role>Mgmt_Chair</permission-role>
-   <permission-role>Mgmt_Provost</permission-role>
-   <permission-role>Mgmt_HR</permission-role>
-   <permission-role>Mgmt_Access</permission-role>
-   <permission-role>Mgmt_AdminServices</permission-role>
-   <permission-role>Mgmt_CourseBuilder</permission-role>
-   <permission-role>Mgmt_Emergency</permission-role>
-
-  </permission-map>
-
-  <permission-map name="OIE: Edit program code fieldset" acquired="False">
-   <permission-role>Mgmt_Liaison</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Mgmt_Manager</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View program code fieldset" acquired="False">
-   <permission-role>Mgmt_Liaison</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-   <permission-role>Mgmt_Manager</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit academic program fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View academic program fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit dates destinations fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View dates destinations fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit departure flight fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View departure flight fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View departure from oshkosh fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit departure from oshkosh fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View return flight fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit return flight fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View return to oshkosh fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit return to oshkosh fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View participant selection fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit participant selection fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View liaison and leadership fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit liaison and leadership fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View courses fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit courses fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View contributions fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit contributions fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View reviewers fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit reviewers fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View oie review fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit oie review fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View proposals fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit proposals fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View finances fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit finances fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View pre departure fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit pre departure fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View reporting fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: View program dates fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-</permission-map>
-
-  <permission-map name="OIE: Edit reporting fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-
-  <permission-map name="OIE: Edit program dates fieldset" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
- </state>
+ 
 
  <transition transition_id="announce-programmatic-or-fee-change" title="Announce Programmatic or Fee Change" new_state="applicants-considering-change" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=announce-programmatic-or-fee-change" category="workflow" icon="">Announce Programmatic or Fee Change</action>
