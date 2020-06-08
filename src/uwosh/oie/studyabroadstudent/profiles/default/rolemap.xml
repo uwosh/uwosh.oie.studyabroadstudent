@@ -2,14 +2,13 @@
 <rolemap>
   <roles>
     <role name="Mgmt_Access"/>
-    <role name="Mgmt_Admin"/> <!-- TODO use built-in Site Administrator-->
+    <role name="Site Administrator"/>
     <role name="Mgmt_AdminServices"/>
     <role name="Mgmt_Chair"/>
     <role name="Mgmt_Coordinator"/>
     <role name="Mgmt_CourseBuilder"/>
     <role name="Mgmt_Dean"/>
     <role name="Mgmt_DeanDirector"/>
-    <role name="Mgmt_Director"/> <!-- TODO use built-in Site Administrator-->
     <role name="Mgmt_Emergency"/>
     <role name="Mgmt_Financial"/>
     <role name="Mgmt_HR"/>
@@ -22,7 +21,6 @@
     <role name="Mgmt_ProgramLeader"/>
     <role name="Mgmt_Provost"/>
     <role name="Mgmt_RiskMgmt"/>
-    <!--<role name="Site_Admin"/> use built-in Site Administrator-->
     <role name="Participant_Applicant"/>
     <role name="Participant_Coordinator"/>
     <role name="Participant_DeanOfStudents"/>
@@ -350,12 +348,11 @@
     </permission>
     <permission name="OIE: Main Participant Edit Permission" acquire="True">
       <role name="Mgmt_Access"/>
-      <role name="Mgmt_Admin"/>
+      <role name="Site Administrator"/>
       <role name="Mgmt_AdminServices"/>
       <role name="Mgmt_Chair"/>
       <role name="Mgmt_Dean"/>
       <role name="Mgmt_DeanDirector"/>
-      <role name="Mgmt_Director"/>
       <role name="Mgmt_LeaderReview"/>
       <role name="Mgmt_Liaison"/>
       <role name="Mgmt_Manager"/>
