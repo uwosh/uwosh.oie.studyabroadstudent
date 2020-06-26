@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from plone.directives import form
+from plone.autoform.directives import mode
 from plone.namedfile import field
 from uwosh.oie.studyabroadstudent import _
 from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import validate_email  # noqa
@@ -11,7 +11,7 @@ from zope.interface import Interface
 
 
 class IOIECourse(Interface):
-    form.mode(title='hidden')
+    mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Course Title'),
         required=False,

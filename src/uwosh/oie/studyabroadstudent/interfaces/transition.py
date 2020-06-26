@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from collective import dexteritytextindexer
-from plone.directives import form
+from plone.autoform.directives import mode
 from uwosh.oie.studyabroadstudent import _
 from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
 from zope import schema
@@ -9,7 +9,7 @@ from zope.interface import Interface
 
 
 class IOIETransition(Interface):
-    form.mode(title='hidden')
+    mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Transition Name'),
         required=False,

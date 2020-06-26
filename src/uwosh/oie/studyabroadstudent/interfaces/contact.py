@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from collective import dexteritytextindexer
-from plone.directives import form
+from plone.autoform.directives import mode
 from Products.CMFPlone.RegistrationTool import checkEmailAddress
 from Products.CMFPlone.RegistrationTool import EmailAddressInvalid
 from uwosh.oie.studyabroadstudent import _
@@ -25,7 +25,7 @@ def validate_email(value):
 
 class IOIEContact(Interface):
     dexteritytextindexer.searchable('title')
-    form.mode(title='hidden')
+    mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Full Name'),
         required=False,

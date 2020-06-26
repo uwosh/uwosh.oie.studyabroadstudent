@@ -6,7 +6,7 @@ from collective import dexteritytextindexer
 from plone import api
 from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
-from plone.directives import form
+from plone.autoform.directives import mode
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile import field
 from plone.namedfile.file import NamedFile
@@ -126,7 +126,7 @@ def get_url_disciplinary_clearance_form():
 
 class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('title')
-    form.mode(title='hidden')
+    mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Title'),
         required=False,
@@ -233,12 +233,12 @@ class IOIEStudyAbroadParticipant(Interface):
                 'homeZip', 'homeCountry'],
     )
 
-    form.mode(stepi_label='display')
+    mode(stepi_label='display')
     stepi_label = schema.TextLine(
         title=_(u'STEP I'),
      )
 
-    form.mode(contact_label='display')
+    mode(contact_label='display')
     contact_label = schema.TextLine(
         title=_(u'Contact Information'),
     )
@@ -344,7 +344,7 @@ class IOIEStudyAbroadParticipant(Interface):
                 'emerg4mail_work', 'emerg4phone_main', 'emerg4phone_other'],
     )
 
-    form.mode(emergencyContacts_label='display')
+    mode(emergencyContacts_label='display')
     emergencyContacts_label = schema.TextLine(
         title=_(u'Emergency Contact(s)'),
         required=False,
@@ -525,7 +525,7 @@ class IOIEStudyAbroadParticipant(Interface):
                 'immigrationStatus', 'countryBirth', 'dateOfBirth'],
     )
 
-    form.mode(demographic_label='display')
+    mode(demographic_label='display')
     demographics_label = schema.TextLine(
         title=_(u'Demographics'),
     )
@@ -586,7 +586,7 @@ class IOIEStudyAbroadParticipant(Interface):
                 'minor2', 'graduationYear', 'graduationMonth'],
     )
 
-    form.mode(education_label='display')
+    mode(education_label='display')
     education_label = schema.TextLine(
         title=_(u'Education'),
     )
@@ -660,7 +660,7 @@ class IOIEStudyAbroadParticipant(Interface):
         fields=['courses_label', 'courses'],
     )
 
-    form.mode(courses_label='display')
+    mode(courses_label='display')
     courses_label = schema.TextLine(
         title=_(u'Study Away Courses'),
     )
@@ -687,7 +687,7 @@ class IOIEStudyAbroadParticipant(Interface):
                 'requestToDeviateFromProgramDates'],
     )
 
-    form.mode(dates_label='display')
+    mode(dates_label='display')
     dates_label = schema.TextLine(
         title=_(u'Dates'),
     )
@@ -790,7 +790,7 @@ class IOIEStudyAbroadParticipant(Interface):
         fields=['financialAid_label'],
     )
 
-    form.mode(financialAid_label='display')
+    mode(financialAid_label='display')
     financialAid_label = schema.TextLine(
         title=_(u'Financial Aid'),
     )
@@ -807,13 +807,13 @@ class IOIEStudyAbroadParticipant(Interface):
                 'applicant_question_answer5'],
     )
 
-    form.mode(shortAnswer_label='display')
+    mode(shortAnswer_label='display')
     shortAnswer_label = schema.TextLine(
         title=_(u'Short Answer Questions'),
         description=_(u'Answer these questions thoroughly and carefully.  Your response may be used in the application selection process (for competitive programs) or to inform your Program Leaders.  If you will need more than 10 minutes to compose your answers, it is highly recommended that you type your answers outside of this system (e.g. in Word) and then copy and paste them into this system.'),  # noqa
     )
 
-    form.mode(applicant_question_text1='display')
+    mode(applicant_question_text1='display')
     applicant_question_text1 = schema.Text(
         title=u'Applicant Question 1',
         description=u'',
@@ -827,7 +827,7 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
     )
 
-    form.mode(applicant_question_text2='display')
+    mode(applicant_question_text2='display')
     applicant_question_text2 = schema.Text(
         title=u'Applicant Question 2',
         description=u'',
@@ -841,7 +841,7 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
     )
 
-    form.mode(applicant_question_text3='display')
+    mode(applicant_question_text3='display')
     applicant_question_text3 = schema.Text(
         title=u'Applicant Question 3',
         description=u'',
@@ -854,7 +854,7 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
     )
 
-    form.mode(applicant_question_text4='display')
+    mode(applicant_question_text4='display')
     applicant_question_text4 = schema.Text(
         title=u'Applicant Question 4',
         description=u'',
@@ -867,7 +867,7 @@ class IOIEStudyAbroadParticipant(Interface):
         description=u'If a question appears under Applicant Question 4 above, type your response here.',  # noqa
         required=False,
     )
-    form.mode(applicant_question_text5='display')
+    mode(applicant_question_text5='display')
     applicant_question_text5 = schema.Text(
         title=u'Applicant Question 5',
         description=u'',
@@ -887,7 +887,7 @@ class IOIEStudyAbroadParticipant(Interface):
         fields=['background_label'],
     )
 
-    form.mode(background_label='display')
+    mode(background_label='display')
     background_label = schema.TextLine(
         title=_(u'Criminal Background Check'),
         description=_(u'If you are required to apply for advance permission (a visa) to enter one or more of your host countries, your visa application may require you to disclose citations, convictions and/or arrests in a criminal record.'),  # noqa
@@ -900,7 +900,7 @@ class IOIEStudyAbroadParticipant(Interface):
         fields=['release_label', 'UWOshkoshRelease', 'certification'],
     )
 
-    form.mode(release_label='display')
+    mode(release_label='display')
     release_label = schema.TextLine(
         title=_(u'Release'),
     )
@@ -923,13 +923,13 @@ class IOIEStudyAbroadParticipant(Interface):
         ],
     )
 
-    form.mode(stepii_label='display')
+    mode(stepii_label='display')
     stepii_label = schema.TextLine(
         title=_(u'STEP II'),
         description=_(u'To complete STEP II, print relevant documents, clearly print your responses, sign forms by hand where indicated, and follow instructions below.  Signatures cannot be typed.'),  # noqa
     )
 
-    form.mode(disciplinary_clearance_form_link='display')
+    mode(disciplinary_clearance_form_link='display')
     disciplinary_clearance_form_link = RichText(
         title=u'Disciplinary Clearance Form',
         description=u'Download this PDF, fill it out, and upload it below',
@@ -943,7 +943,7 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
     )
 
-    form.mode(
+    mode(
         state_of_wisconsin_need_based_travel_grant_form_link='display',
     )
     state_of_wisconsin_need_based_travel_grant_form_link = RichText(
@@ -960,7 +960,7 @@ class IOIEStudyAbroadParticipant(Interface):
             required=False,
         )
 
-    form.mode(
+    mode(
         special_student_form_for_undergraduate_admissions_form_link='display',
     )
     special_student_form_for_undergraduate_admissions_form_link = RichText(
@@ -1042,68 +1042,68 @@ class IOIEStudyAbroadParticipant(Interface):
                 'roommateName2'],
     )
 
-    form.mode(stepiii_label='display')
+    mode(stepiii_label='display')
     stepiii_label = schema.TextLine(
         title=_(u'STEP III'),
     )
 
-    form.mode(documentation_label='display')
+    mode(documentation_label='display')
     documentation_label = schema.TextLine(
         title=_(u'Documentation'),
     )
 
-    form.mode(identification_label='display')
+    mode(identification_label='display')
     identification_label = schema.TextLine(
         title=_(u'Identification'),
         description=_(u'Complete the following using information from your unexpired passport (required for international travel) or with your unexpired driver\'s license (for domestic travel only).'),  # noqa
     )
 
-    form.mode(fecop_label='display')
+    mode(fecop_label='display')
     fecop_label = schema.TextLine(
         title=_(u'Financial'),
     )
 
-    form.mode(lifestyle_label='display')
+    mode(lifestyle_label='display')
     lifestyle_label = schema.TextLine(
         title=_(u'Lifestyle'),
     )
 
-    form.mode(health_label='display')
+    mode(health_label='display')
     health_label = schema.TextLine(
         title=_(u'Health'),
     )
 
-    form.mode(allergies_label='display')
+    mode(allergies_label='display')
     allergies_label = schema.TextLine(
         title=_(u'Allergies'),
     )
 
-    form.mode(healthConditions_label='display')
+    mode(healthConditions_label='display')
     healthConditions_label = schema.TextLine(
         title=_(u'Health Conditions & Surgeries'),
     )
 
-    form.mode(healthPhysical_label='display')
+    mode(healthPhysical_label='display')
     healthPhysical_label = schema.TextLine(
         title=_(u'Physical & Mental Health'),
     )
 
-    form.mode(medications_label='display')
+    mode(medications_label='display')
     medications_label = schema.TextLine(
         title=_(u'Medications'),
     )
 
-    form.mode(authorizedAccommodation_label='display')
+    mode(authorizedAccommodation_label='display')
     authorizedAccommodation_label = schema.TextLine(
         title=_(u'Authorized Accommodation'),
     )
 
-    form.mode(healthConfirmation_label='display')
+    mode(healthConfirmation_label='display')
     healthConfirmation_label = schema.TextLine(
         title=_(u'I understand and agree'),
     )
 
-    form.mode(roommate_label='display')
+    mode(roommate_label='display')
     roommate_label = schema.TextLine(
         title=_(u'Roommate'),
         description=_(u'If you are not traveling with a UW Oshkosh student group, do not list a roommate choice.  If you are traveling on a group program, list your first and second choice roommates here.  Any roommate you request must list you on his/her application in return.'),  # noqa
@@ -1120,37 +1120,37 @@ class IOIEStudyAbroadParticipant(Interface):
                 'flightDeparture_label', 'flightReturn_label'],
     )
 
-    form.mode(stepiv_label='display')
+    mode(stepiv_label='display')
     stepiv_label = schema.TextLine(
         title=_(u'STEP IV'),
     )
 
-    form.mode(enrollment_label='display')
+    mode(enrollment_label='display')
     enrollment_label = schema.TextLine(
         title=_(u'Course Enrollment'),
     )
 
-    form.mode(financial_label='display')
+    mode(financial_label='display')
     financial_label = schema.TextLine(
         title=_(u'Financial'),
     )
 
-    form.mode(orientation_label='display')
+    mode(orientation_label='display')
     orientation_label = schema.TextLine(
         title=_(u'Orientation'),
     )
 
-    form.mode(travelDocuments_label='display')
+    mode(travelDocuments_label='display')
     travelDocuments_label = schema.TextLine(
         title=_(u'Travel Documents'),
     )
 
-    form.mode(flight_label='display')
+    mode(flight_label='display')
     flight_label = schema.TextLine(
         title=_(u'Flight'),
     )
 
-    form.mode(flightDeparture_label='display')
+    mode(flightDeparture_label='display')
     flightDeparture_label = schema.TextLine(
         title=_(u'Departure Flight'),
         # TODO appears if "Application for Permission to follow an Alternative  # noqa
@@ -1171,7 +1171,7 @@ class IOIEStudyAbroadParticipant(Interface):
         #   does NOT begin with "group..."
     )
 
-    form.mode(flightReturn_label='display')
+    mode(flightReturn_label='display')
     flightReturn_label = schema.TextLine(
         title=_(u'Return Flight'),
         # TODO appears if "Application for Permission to follow an Alternative  # noqa
@@ -1188,19 +1188,19 @@ class IOIEStudyAbroadParticipant(Interface):
                 'nonSponsoredTravel_label'],
     )
 
-    form.mode(programChanges_label='display')
+    mode(programChanges_label='display')
     programChanges_label = schema.TextLine(
         title=_(u'Program Changes'),
         description=_(u'Please review information provided to you by the OIE carefully and contact the OIE with questions, if needed, prior to making your decision.'),  # noqa
     )
 
-    form.mode(agreements_label='display')
+    mode(agreements_label='display')
     agreements_label = schema.TextLine(
         title=_(u'Agreements'),
         description=_(u'Please review information provided to you by the OIE carefully and contact the OIE with questions, if needed, prior to making your decision.'),  # noqa
     )
 
-    form.mode(nonSponsoredTravel_label='display')
+    mode(nonSponsoredTravel_label='display')
     nonSponsoredTravel_label = schema.TextLine(
         title=_(u'Non-sponsored Out-of-Country (or out-of-state) Travel'),
     )

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective import dexteritytextindexer
-from plone.directives import form
+from plone.autoform.directives import mode
 from plone.namedfile import field
 from plone.supermodel import model
 from Products.CMFPlone.RegistrationTool import checkEmailAddress
@@ -49,7 +49,7 @@ class IOIEProgramLeader(Interface):
     #   fields so that we can pull a roster that includes all participants,
     #   leaders and co-leaders. "
     dexteritytextindexer.searchable('title')
-    form.mode(title='hidden')
+    mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Full Name'),
         required=False,
