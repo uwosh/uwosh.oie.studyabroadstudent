@@ -759,10 +759,10 @@
   </permission-map>
  </state>
  <state state_id="cancelled" title="Cancelled" >
-  <exit-transition transition_id="manager-return-to-initial" />
   <exit-transition transition_id="manager-return-to-applicants-considering-change" />
   <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
   <exit-transition transition_id="manager-return-to-final-payment-billing-in-progress" />
+  <exit-transition transition_id="manager-return-to-initial" />
   <exit-transition transition_id="manager-return-to-initial-payment-billing-in-progress" />
   <exit-transition transition_id="manager-return-to-pending-discussions-with-program-manager" />
   <exit-transition transition_id="manager-return-to-pending-final-program-fee" />
@@ -2872,11 +2872,11 @@
   </permission-map>
  </state>
  <state state_id="initial-payment-billing-in-progress" title="Initial Payment Billing in Progress" >
-  <exit-transition transition_id="send-bills-for-initial-payment" />
   <exit-transition transition_id="cancel" />
-  <exit-transition transition_id="suspend" />
   <exit-transition transition_id="manager-return-to-applicants-considering-change" />
   <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
+  <exit-transition transition_id="send-bills-for-initial-payment" />
+  <exit-transition transition_id="suspend" />
   <permission-map name="Access contents information" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -5645,15 +5645,15 @@
   </permission-map>
  </state>
  <state state_id="pending-program-fee-determination-by-oie" title="Pending Program Fee Determination by OIE" >
-  <exit-transition transition_id="submit-fee-for-liaison-review" />
   <exit-transition transition_id="cancel" />
-  <exit-transition transition_id="suspend" />
-  <exit-transition transition_id="return-to-initial" />
-  <exit-transition transition_id="manager-return-to-initial" />
-  <exit-transition transition_id="manager-return-to-provider-proposals-under-liaison-review" />
-  <exit-transition transition_id="manager-return-to-pending-discussions-with-program-manager" />
   <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
   <exit-transition transition_id="manager-return-to-initial" />
+  <exit-transition transition_id="manager-return-to-initial" />
+  <exit-transition transition_id="manager-return-to-pending-discussions-with-program-manager" />
+  <exit-transition transition_id="manager-return-to-provider-proposals-under-liaison-review" />
+  <exit-transition transition_id="return-to-initial" />
+  <exit-transition transition_id="submit-fee-for-liaison-review" />
+  <exit-transition transition_id="suspend" />
 
   <permission-map name="Access contents information" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
@@ -9877,15 +9877,15 @@
   </permission-map>
  </state>
  <state state_id="provider-proposals-under-oie-review" title="Provider Proposals under OIE Review" >
-  <exit-transition transition_id="return-to-initial" />
-  <exit-transition transition_id="submit-proposal-to-liaison" />
   <exit-transition transition_id="cancel" />
-  <exit-transition transition_id="suspend" />
-  <exit-transition transition_id="manager-return-to-pending-provost-review" />
-  <exit-transition transition_id="manager-return-to-pending-provider-responses" />
   <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
+  <exit-transition transition_id="manager-return-to-pending-provider-responses" />
+  <exit-transition transition_id="manager-return-to-pending-provost-review" />
   <exit-transition transition_id="manager-return-to-program-fee-under-liaison-review" />
   <exit-transition transition_id="manager-return-to-provider-proposals-under-liaison-review" />
+  <exit-transition transition_id="return-to-initial" />
+  <exit-transition transition_id="submit-proposal-to-liaison" />
+  <exit-transition transition_id="suspend" />
   <permission-map name="Access contents information" acquired="True">
    <!--<permission-role>Anonymous</permission-role>-->
    <!--<permission-role>Authenticated</permission-role>-->
@@ -11278,25 +11278,25 @@
   </permission-map>
  </state>
  <state state_id="suspended" title="Suspended" >
-  <exit-transition transition_id="manager-return-to-pending-provost-review" />
-  <exit-transition transition_id="manager-return-to-pending-discussions-with-program-manager" />
-  <exit-transition transition_id="manager-return-to-request-for-proposals-under-development" />
   <exit-transition transition_id="manager-return-to-application-intake-in-progress" />
+  <exit-transition transition_id="manager-return-to-final-payment-billing-in-progress" />
   <exit-transition transition_id="manager-return-to-initial-payment-billing-in-progress" />
+  <exit-transition transition_id="manager-return-to-pending-arrival-abroad" />
+  <exit-transition transition_id="manager-return-to-pending-discussions-with-program-manager" />
+  <exit-transition transition_id="manager-return-to-pending-final-program-fee" />
+  <exit-transition transition_id="manager-return-to-pending-program-departure" />
   <exit-transition transition_id="manager-return-to-pending-program-fee-determination-by-oie" />
+  <exit-transition transition_id="manager-return-to-pending-program-leader-operational-briefing" />
+  <exit-transition transition_id="manager-return-to-pending-program-leader-orientation" />
   <exit-transition transition_id="manager-return-to-pending-provider-responses" />
+  <exit-transition transition_id="manager-return-to-pending-provost-review" />
+  <exit-transition transition_id="manager-return-to-pending-travel-advance" />
   <exit-transition transition_id="manager-return-to-program-fee-pending-publication" />
   <exit-transition transition_id="manager-return-to-program-fee-under-liaison-review" />
   <exit-transition transition_id="manager-return-to-provider-proposals-under-liaison-review" />
   <exit-transition transition_id="manager-return-to-provider-proposals-under-oie-review" />
+  <exit-transition transition_id="manager-return-to-request-for-proposals-under-development" />
   <exit-transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" />
-  <exit-transition transition_id="manager-return-to-final-payment-billing-in-progress" />
-  <exit-transition transition_id="manager-return-to-pending-arrival-abroad" />
-  <exit-transition transition_id="manager-return-to-pending-final-program-fee" />
-  <exit-transition transition_id="manager-return-to-pending-program-departure" />
-  <exit-transition transition_id="manager-return-to-pending-program-leader-operational-briefing" />
-  <exit-transition transition_id="manager-return-to-pending-program-leader-orientation" />
-  <exit-transition transition_id="manager-return-to-pending-travel-advance" />
   <exit-transition transition_id="manager-return-to-reviewing-final-program-details" />
 
   <permission-map name="Access contents information" acquired="True">
@@ -13061,6 +13061,7 @@
    <guard-role>Site Administrator</guard-role>
    <guard-role>Mgmt_Manager</guard-role>
    <guard-role>Manager</guard-role>
+   <guard-role>Site Administrator</guard-role>
   </guard>
  </transition>
 

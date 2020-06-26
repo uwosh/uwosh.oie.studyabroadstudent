@@ -23676,8 +23676,7 @@
  <transition transition_id="manager-return-to-express-interest" title="(Managers Only) Return to Initial" new_state="express-interest" trigger="USER" before_script="pre_transition" after_script="post_transition" >
   <action url="%(content_url)s/content_status_modify?workflow_action=manager-return-to-express-interest" category="workflow" icon="">(Managers Only) Return to Express Interest</action>
   <guard>
-   <guard-role>Mgmt_Admin</guard-role>
-   <guard-role>Mgmt_Director</guard-role>
+   <guard-role>Site Administrator</guard-role>
    <guard-role>Mgmt_Manager</guard-role>
    <guard-role>Manager</guard-role>
    <guard-role>Site Administrator</guard-role>
