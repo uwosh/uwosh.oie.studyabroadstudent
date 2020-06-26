@@ -2,6 +2,7 @@
 
 from collective import dexteritytextindexer
 from collective.z3cform.datagridfield import DataGridFieldFactory
+from collective.z3cform.datagridfield import BlockDataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.app.contenttypes.behaviors.tableofcontents import ITableOfContents
@@ -746,7 +747,7 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary=program_cycle_vocabulary,
     )
 
-    widget(pretravel_dates=DataGridFieldFactory)
+    widget(pretravel_dates=BlockDataGridFieldFactory)
     pretravel_dates = schema.List(
         title=_(u'Pre-Travel Class & Orientation Dates'),
         description=_(
