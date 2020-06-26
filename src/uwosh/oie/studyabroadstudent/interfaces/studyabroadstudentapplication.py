@@ -4,7 +4,7 @@
 #   type, written in Dexterity instead of Archetypes
 
 from collective import dexteritytextindexer
-from plone.directives import form
+from plone.autoform.directives import mode
 from plone.supermodel import model
 from uwosh.oie.studyabroadstudent import _
 from uwosh.oie.studyabroadstudent.vocabularies import aware_vocabulary
@@ -26,7 +26,7 @@ from zope.interface import Interface
 
 class IOIEStudyAbroadStudentApplication(Interface):
 
-    form.mode(title='hidden')
+    mode(title='hidden')
     dexteritytextindexer.searchable('title')
     title = schema.TextLine(
         title=_(u'Title'),
@@ -214,7 +214,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     placeOfBirth = schema.TextLine(
         title=_(u'Place of Birth'),
         description=_(u'Enter city, state, and country.'),
-        required=True,
     )
 
     model.fieldset(
@@ -236,7 +235,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     emerg1name = schema.TextLine(
         title=_(u'Emergency Contact 1: Full Name'),
-        # required=True,
         required=False,
     )
 
@@ -262,7 +260,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     emerg1homePhone = schema.TextLine(
         title=_(u'Emergency Contact 1: Home Phone'),
         description=_(u'Include area code and country code (if outside the U.S.).'),  # noqa
-        # required=True,
         required=False,
     )
 
@@ -275,31 +272,26 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     emerg1addr1 = schema.TextLine(
         title=_(u'Emergency Contact 1: Address'),
-        # required=True,
         required=False,
     )
 
     emerg1city = schema.TextLine(
         title=_(u'Emergency Contact 1: City'),
-        # required=True,
         required=False,
     )
 
     emerg1state = schema.TextLine(
         title=_(u'Emergency Contact 1: State'),
-        # required=True,
         required=False,
     )
 
     emerg1zip = schema.TextLine(
         title=_(u'Emergency Contact 1: Zip Code'),
-        # required=True,
         required=False,
     )
 
     emerg1country = schema.TextLine(
         title=_(u'Emergency Contact 1: Country'),
-        # required=True,
         required=False,
     )
 
@@ -499,28 +491,24 @@ class IOIEStudyAbroadStudentApplication(Interface):
     questionAcadCareerPlan = schema.Text(
         title=_(u'Academic and Career Plan'),
         description=_(u'a) Briefly, what are your short- and long-term academic and career goals? <br> b) Why would you like to participate in this program? <br> c) What do you expect to gain from your experience?'),  # noqa
-        # required=True,
         required=False,
     )
 
     questionLangCulturalSkills = schema.Text(
         title=_(u'Language and Cultural Skills'),
         description=_(u'a) Have you studied a foreign language? If so, what is your level of fluency? <br> b) Have you completed any University-level courses on the culture or history of your destination? If so, explain. <br> c) Have you ever been immersed in a language and/or culture abroad? If so, please explain. <br> d) Do you plan to use a foreign language in a professional setting? If yes, please explain.'),  # noqa
-        # required=True,
         required=False,
     )
 
     questionPrevTravel = schema.Text(
         title=_(u'Previous Travel Experience'),
         description=_(u'Have you traveled abroad? If so, list the places to which you have traveled along with the dates and purpose.'),  # noqa
-        # required=True,
         required=False,
     )
 
     questionWorkExp = schema.Text(
         title=_(u'Work Experience'),
         description=_(u'a) Who is your current employer? <br> b) If relevant to your study abroad program, list and describe your responsibilities from current and previous jobs.'),  # noqa
-        # required=True,
         required=False,
     )
 
@@ -547,38 +535,32 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     doctorLastname = schema.TextLine(
         title=_(u'Last Name of your Family Doctor'),
-        # required=True,
         required=False,
     )
 
     doctorFirstname = schema.TextLine(
         title=_(u'First Name of your Family Doctor'),
-        # required=True,
         required=False,
     )
 
     doctorPhone = schema.TextLine(
         title=_(u'Doctor''s Phone Number'),
         description=_(u'Please include country code (if outside US) and area code'),  # noqa
-        # required=True,
         required=False,
     )
 
     medicalInsuranceCompany = schema.TextLine(
         title=_(u'Name of Insurance Company'),
-        # required=True,
         required=False,
     )
 
     medicalPolicyHolder = schema.TextLine(
         title=_(u'Name of Policy Holder'),
-        # required=True,
         required=False,
     )
 
     medicalPolicyGroupNumber = schema.TextLine(
         title=_(u'Policy / Group Number'),
-        # required=True,
         required=False,
     )
 
@@ -592,7 +574,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Difficulty Walking'),
         description=_(u'Do you have a condition which would make it difficult to walk long distances?'),  # noqa
         vocabulary=yes_no_vocabulary,
-        # required=True,
         required=False,
     )
 
@@ -612,7 +593,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'I have read the statement below and understand.'),
         description=_(u'""Pre-existing medical and mental health conditions are often intensified by travel to or living in a foreign environment.  Before committing to a study abroad program, consider how your new environment may affect your personal health both physically and mentally.  For example, your new environment may introduce you to new diseases, such as malaria or yellow fever, or new stresses which may cause additional complications for a person with a preexisting condition.<br> <br> The OIE strongly recommends that you have a physical, talk with a medical provider about any preexisting conditions and recommended and/or required immunizations, talk with a psychiatrist or counselor about any preexisting conditions and take care of any dental work before departure.<br> <br> If you choose not to complete this section before program acceptance, you must forward information related to the following to the OIE within one week of the application deadline for your program.  Failure to disclose medical or mental health conditions will make it extremely difficult for staff at UW Oshkosh and abroad to assist you in an emergency and may cause health professionals abroad to take actions which could lead to serious medical consequences, including death.<br> <br> NOTE ON MEDICATIONS: You are responsible for ensuring that your medications can be carried into the foreign country.  If your medical status changes after completing this application, you must inform the OIE.""'),  # noqa
         vocabulary=yes_no_vocabulary,
-        # required=True,
         required=False,
     )
 
@@ -652,7 +632,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Has Taken Medication'),
         description=_(u'Are you taking or have you ever taken medication related to your physical health?'),  # noqa
         vocabulary=yes_no_vocabulary,
-        # required=True,
         required=False,
     )
 
@@ -665,14 +644,12 @@ class IOIEStudyAbroadStudentApplication(Interface):
     medicalHealthProblems_stable = schema.Choice(
         title=_(u'Are you stable on this medication?'),
         vocabulary=yes_no_na_vocabulary,
-        # required=True,
         required=False,
     )
 
     medicalHealthProblems_underCare = schema.Choice(
         title=_(u'Are you currently under the care of a doctor or other health care professional?'),  # noqa
         vocabulary=yes_no_vocabulary,
-        # required=True,
         required=False,
     )
 
@@ -686,7 +663,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Enough Medication'),
         description=_(u'Is your current physician willing to prescribe enough medication to last throughout your planned program abroad?'),  # noqa
         vocabulary=yes_no_na_vocabulary,
-        # required=True,
         required=False,
     )
 
@@ -705,7 +681,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     medicalMentalProblems_takenMedication = schema.Choice(
         title=_(u'Are you taking/have you ever taken medication related to your mental health?  '),  # noqa
         vocabulary=yes_no_vocabulary,
-        # required=True,
         required=False,
     )
 
@@ -724,7 +699,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     medicalMentalProblems_stable = schema.Choice(
         title=_(u'Are you stable on this medication?'),
         vocabulary=yes_no_na_vocabulary,
-        # required=True,
         required=False,
     )
 
@@ -732,7 +706,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Mental Health Care'),
         description=_(u'Are you currently or have you ever been under the care of a psychiatrist or other medical provider, substance abuse counselor or other mental health professional?'),  # noqa
         vocabulary=yes_no_vocabulary,
-        # required=True,
         required=False,
     )
 
@@ -746,7 +719,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Sufficient Mental Health Medication'),
         description=_(u'Is your current medical provider willing to prescribe enough medication to last for the duration of your planned program abroad?'),  # noqa
         vocabulary=yes_no_na_vocabulary,
-        # required=True,
         required=False,
     )
 
@@ -760,7 +732,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Registered with UW Oshkosh for Accommodations'),
         description=_(u'Are you currently registered with the University of Wisconsin Oshkosh (with offices such as the Dean of Students office or Project Success) or with your university for medical or mental-health related accommodations?'),  # noqa
         vocabulary=yes_no_vocabulary,
-        # required=True,
         required=False,
     )
 
@@ -780,7 +751,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Medical Access Granted'),
         description=_(u'""I understand and agree that this information will be accessed by the following people: faculty leader(s) (for faculty-led programs), exchange liaison(s) abroad (for student exchange programs), program organizers outside of UW Oshkosh, my host family, staff in the OIE, and staff in the Dean of Students Office.""'),  # noqa
         vocabulary=yes_no_vocabulary,
-        # required=True,
         required=False,
     )
 
@@ -801,7 +771,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Are you vegetarian?'),
         vocabulary=yes_no_vocabulary,
         # default="No",
-        # required=True,
         required=False,
     )
 
@@ -815,7 +784,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     programName = schema.Choice(
         title=_(u'Program Name'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.programs'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -824,7 +792,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     programYear = schema.TextLine(
         title=_(u'Program Year'),
         description=_(u'Enter the year you will actually be attending the program (YYYY)'),  # noqa
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -832,7 +799,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     programSemester = schema.Choice(
         title=_(u'Semester'),
         vocabulary=semester_vocabulary,
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -848,7 +814,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     studentType = schema.Choice(
         title=_(u'Student Type'),
         vocabulary=student_type_vocabulary,
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -863,7 +828,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     graduationMonth = schema.Choice(
         title=_(u'Expected Graduation Month'),
         vocabulary=month_vocabulary,
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -871,7 +835,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     graduationYear = schema.TextLine(
         title=_(u'Expected Graduation Year'),
         description=_(u'YYYY (use ''0000'' if not a student)'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -879,14 +842,12 @@ class IOIEStudyAbroadStudentApplication(Interface):
     cumulativeGPA = schema.Float(
         title=_(u'Cumulative GPA'),
         description=_(u'out of 4.0 (use 0.0 if not a student)'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     major1 = schema.Choice(
         title=_(u'First Major'),
-        # required=True,
         required=False,
         source=RegistryValueVocabulary('oiestudyabroadstudent.majors'),
         # write_permission="UWOshOIE: Modify normal fields",
@@ -933,7 +894,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     willTakeBus = schema.Choice(
         title=_(u'Bus'),
         description=_(u'Please note: while a group bus is an option for most programs, not all programs offer this option.'),  # noqa
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
         vocabulary=bus_vocabulary,
@@ -941,7 +901,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     willFlyWithGroup = schema.Choice(
         title=_(u'Flights'),
-        # required=True,
         required=False,
         vocabulary=fly_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
@@ -964,7 +923,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     agreeToCosts = schema.TextLine(
         title=_(u'Agree to Costs'),
         description=_(u'I understand that if I choose not to fly on dates recommended by the OIE or by my hosts abroad, I remain responsible for the full program cost, regardless of whether I participate in all events or make use of all services. Enter your initials'),  # noqa
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -980,7 +938,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     orientationDate1 = schema.Date(
         title=_(u'I will attend the family orientation on'),
         description=_(u'Enter one date and time for the four-hour session, or enter two dates and times for the two-hour sessions'),  # noqa
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -989,7 +946,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
         title=_(u'Orientation Session 1 \"hours\"'),
         description=_(u''),
         source=RegistryValueVocabulary('oiestudyabroadstudent.session_hours'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -1011,7 +967,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     numberOfGuests = schema.TextLine(
         title=_(u'Number of Guests'),
         description=_(u'The following number of people will attend with me'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
@@ -1019,7 +974,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     orientationConflict = schema.Choice(
         title=_(u'Schedule Conflict'),
         description=_(u'Do you have a conflict with any of the other pre-travel academic and/or orientation sessions?'),  # noqa
-        # required=True,
         required=False,
         vocabulary=orientation_conflict_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1044,7 +998,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     subject1 = schema.Choice(
         title=_(u'Course 1 subject'),
-        # required=True,
         required=False,
         source=RegistryValueVocabulary('oiestudyabroadstudent.subjects'),
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1052,21 +1005,18 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     course1 = schema.TextLine(
         title=_(u'Course Number 1'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     credits1 = schema.Float(
         title=_(u'Credits 1'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     subject2 = schema.Choice(
         title=_(u'Course 2 subject'),
-        # required=True,
         required=False,
         source=RegistryValueVocabulary('oiestudyabroadstudent.subjects'),
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1074,21 +1024,18 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     course2 = schema.TextLine(
         title=_(u'Course Number 2'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     credits2 = schema.Float(
         title=_(u'Credits 2'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     subject3 = schema.Choice(
         title=_(u'Course 3 subject'),
-        # required=True,
         required=False,
         source=RegistryValueVocabulary('oiestudyabroadstudent.subjects'),
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1096,21 +1043,18 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     course3 = schema.TextLine(
         title=_(u'Course Number 3'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     credits3 = schema.Float(
         title=_(u'Credits 3'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     subject4 = schema.Choice(
         title=_(u'Course 4 subject'),
-        # required=True,
         required=False,
         source=RegistryValueVocabulary('oiestudyabroadstudent.subjects'),
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1118,21 +1062,18 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     course4 = schema.TextLine(
         title=_(u'Course Number 4'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     credits4 = schema.Float(
         title=_(u'Credits 4'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     subject5 = schema.Choice(
         title=_(u'Course 5 subject'),
-        # required=True,
         required=False,
         source=RegistryValueVocabulary('oiestudyabroadstudent.subjects'),
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1140,21 +1081,18 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     course5 = schema.TextLine(
         title=_(u'Course Number 5'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     credits5 = schema.Float(
         title=_(u'Credits 5'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     subject6 = schema.Choice(
         title=_(u'Course 6 subject'),
-        # required=True,
         required=False,
         source=RegistryValueVocabulary('oiestudyabroadstudent.subjects'),
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1162,14 +1100,12 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     course6 = schema.TextLine(
         title=_(u'Course Number 6'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     credits6 = schema.Float(
         title=_(u'Credits 6'),
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -1177,7 +1113,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     readSyllabus = schema.Bool(
         title=_(u'Has Read Syllabus'),
         description=_(u'I have read the syllabus for the one-credit course International Studies 333'),  # noqa
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -1198,7 +1133,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     applyForAid = schema.Choice(
         title=_(u'Are you applying for financial aid?'),
         description=_(u'If you are not applying for financial aid, skip to the next section.'),  # noqa
-        # required=True,
         required=False,
         vocabulary=yes_no_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1207,7 +1141,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     holdApplication = schema.Choice(
         title=_(u'Should the OIE hold or process your application?'),
         description=_(u'HOLD your Study Abroad Application (i.e. you will only study abroad IF financial aid is available; at this point the application fee is still refundable but the OIE is not reserving a seat for you), or PROCESS your Study Abroad Applciation (i.e. you will study abroad regardless of your aid package; at this point the application fee is non-refundable and the OIE will reserve your seat.'),  # noqa
-        # required=True,
         required=False,
         vocabulary=hold_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1228,7 +1161,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     roomType = schema.Choice(
         title=_(u'Room Type'),
-        # required=True,
         required=False,
         vocabulary=room_type_vocabulary,
         # write_permission="UWOshOIE: Modify revisable fields",
@@ -1255,7 +1187,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     questionExpectations = schema.Text(
         title=_(u'Your Expectations For'),
         description=_(u'a) this program as a whole? <br> b) the pre-travel general orientation session? <br> c) the pre-travel academic sessions? <br> d) your hosts (host institution, family, etc.) in the foreign country (if applicable)?'),  # noqa
-        # required=True,
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -1269,7 +1200,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     awareOfAllMaterials = schema.Choice(
         title=_(u'Are you aware of the application requirements for your program?'),  # noqa
         description=_(u'Additional application requirements for select programs are listed on individual program web pages.  Not all programs have additional requirements.'),  # noqa
-        # required=True,
         required=False,
         vocabulary=aware_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1278,7 +1208,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     UWOshkoshRelease = schema.Choice(
         title=_(u'Release of Liability'),
         description=_(u'I hereby agree to hold harmless and indemnify the Board of Regents of the University of Wisconsin System and the University of Wisconsin Oshkosh, their officers, agents and employees, from any and all liability, loss, damages, costs or expenses which are sustained, incurred or required arising out of my actions.'),  # noqa
-        # required=True,
         required=False,
         vocabulary=yes_no_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1287,7 +1216,6 @@ class IOIEStudyAbroadStudentApplication(Interface):
     certification = schema.Choice(
         title=_(u'Certification'),
         description=_(u'I certify that the information stated above is true and correct.  If accepted to the program, I agree to follow all payment and withdrawal policies and to regularly check my UW Oshkosh email account for program information beginning today.  If I am a non-UW Oshkosh student, I will use and submit an email address that I check regularly.'),  # noqa
-        # required=True,
         required=False,
         vocabulary=yes_no_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
