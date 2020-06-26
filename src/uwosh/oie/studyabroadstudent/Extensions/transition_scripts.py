@@ -11,7 +11,7 @@ from zLOG import INFO
 from zLOG import LOG
 
 
-DEFAULT_NOTIFICATION_FROM_ADDRESS = 'kyle.arthurs+oie@wildcardcorp.com'
+DEFAULT_NOTIFICATION_FROM_ADDRESS = 'brian.duncan+oie@wildcardcorp.com'
 PRE = 0
 POST = 1
 
@@ -142,7 +142,7 @@ def sendTransitionMessage(state_change, interface):
     if not emailTemplate:
         LOG('sendTransitionMessage', INFO,
             "Not sending transition email for transition %s" % (  # noqa
-            state_change.transition.id))
+                state_change.transition.id))
         return
 
     object = state_change.object
