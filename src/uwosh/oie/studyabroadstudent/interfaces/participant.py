@@ -6,7 +6,7 @@ from collective import dexteritytextindexer
 from plone import api
 from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
-from plone.autoform.directives import mode
+from plone.autoform.directives import mode, omitted
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile import field
 from plone.namedfile.file import NamedFile
@@ -126,7 +126,7 @@ def get_url_disciplinary_clearance_form():
 
 class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('title')
-    mode(title='hidden')
+    omitted('title')
     title = schema.TextLine(
         title=_(u'Title'),
         required=False,
@@ -137,7 +137,7 @@ class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('firstName')
     firstName = schema.TextLine(
         title=_(u'First Name'),
-        required=True,
+        required=False # change back,
     )
 
     dexteritytextindexer.searchable('middleName')
@@ -149,14 +149,17 @@ class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('lastName')
     lastName = schema.TextLine(
         title=_(u'Last Name'),
-        required=True,
+        required=False # change back,
     )
 
     #######################################################
     model.fieldset(
         'progress',
         label=_(u'Progress'),
-        fields=['seatNumber', 'waitlistNumber'],
+        fields=[
+            'seatNumber',
+            'waitlistNumber',
+        ],
     )
 
     seatNumber = schema.TextLine(
@@ -173,7 +176,12 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'interest',
         label=_(u'Express Interest'),
-        fields=['email', 'programName', 'programName2', 'programName3'],
+        fields=[
+            'email',
+            'programName',
+            'programName2',
+            'programName3',
+        ]
     )
 
     dexteritytextindexer.searchable('email')
@@ -181,8 +189,8 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Email Address'),
         description=_(
             u'UW Oshkosh students must use a @uwosh.edu email address.  Acceptable email addresses for other applicants include school and company addresses.'),  # noqa
-        required=True,
         constraint=validate_email,
+        required=False # change back,
     )
 
     dexteritytextindexer.searchable('programName')
@@ -190,7 +198,7 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Program Name (first choice)'),
         description=_(u'The courses listed for this program choice will appear in your Courses tab; you must indicate there which courses you wish to enroll in.'),  # noqa
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.newprograms',
-        required=True,
+        required=False # change back,
     )
 
     dexteritytextindexer.searchable('programName2')
@@ -225,28 +233,30 @@ class IOIEStudyAbroadParticipant(Interface):
     #######################################################
     model.fieldset(
         'contact',
-        label=_(u'Contact Information'),
-        fields=['stepi_label', 'contact_label', 'mainPhone', 'otherPhone',
-                'otherContactService', 'otherContactID', 'localAddr',
-                'localAddrApt', 'localCity', 'localState', 'localZip',
-                'homeAddr1', 'homeAddrApt', 'homeCity', 'homeState',
-                'homeZip', 'homeCountry'],
-    )
-
-    mode(stepi_label='display')
-    stepi_label = schema.TextLine(
-        title=_(u'STEP I'),
-     )
-
-    mode(contact_label='display')
-    contact_label = schema.TextLine(
-        title=_(u'Contact Information'),
+        label=_(u'Step1: Contact Information'),
+        fields=[
+            'mainPhone',
+            'otherPhone',
+            'otherContactService',
+            'otherContactID',
+            'localAddr',
+            'localAddrApt',
+            'localCity',
+            'localState',
+            'localZip',
+            'homeAddr1',
+            'homeAddrApt',
+            'homeCity',
+            'homeState',
+            'homeZip',
+            'homeCountry',
+        ],
     )
 
     mainPhone = schema.TextLine(
         title=_(u'Main phone'),
         description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa
-        required=True,
+        required=False # change back,
     )
 
     otherPhone = schema.TextLine(
@@ -270,7 +280,7 @@ class IOIEStudyAbroadParticipant(Interface):
 
     localAddr = schema.TextLine(
         title=_(u'Local Address: Street'),
-        required=True,
+        required=False # change back,
     )
 
     localAddrApt = schema.TextLine(
@@ -280,24 +290,24 @@ class IOIEStudyAbroadParticipant(Interface):
 
     localCity = schema.TextLine(
         title=_(u'Local Address: City'),
-        required=True,
+        required=False # change back,
     )
 
     localState = schema.TextLine(
         title=_(u'Local Address: State'),
         default=_(u'WI'),
-        required=True,
+        required=False # change back,
     )
 
     localZip = schema.TextLine(
         title=_(u'Local Address: Zip Code'),
         default=_(u'54901'),
-        required=True,
+        required=False # change back,
     )
 
     homeAddr1 = schema.TextLine(
         title=_(u'Home Address: Street'),
-        required=True,
+        required=False # change back,
     )
 
     homeAddrApt = schema.TextLine(
@@ -308,51 +318,62 @@ class IOIEStudyAbroadParticipant(Interface):
     homeCity = schema.TextLine(
         title=_(u'Home Address: City'),
         description=_(u''),
-        required=True,
+        required=False # change back,
     )
 
     homeState = schema.TextLine(
         title=_(u'Home Address: State/Province/Department'),
         description=_(u''),
-        required=True,
+        required=False # change back,
     )
 
     homeZip = schema.TextLine(
         title=_(u'Home Address: Zip or Postal Code'),
         description=_(u''),
-        required=True,
+        required=False # change back,
     )
 
     homeCountry = schema.Choice(
         title=_(u'Home Address: Country'),
-        required=True,
         source=RegistryValueVocabulary('oiestudyabroadstudent.countries'),
+        required=False # change back,
     )
 
     #######################################################
     model.fieldset(
         'emergency_contact',
         label=_(u'Emergency Contact'),
-        fields=['emergencyContacts_label', 'emerg1fullname',
-                'emerg1relationship', 'emerg1mail_personal',
-                'emerg1mail_work', 'emerg1phone_main', 'emerg1phone_other',
-                'emerg2fullname', 'emerg2relationship', 'emerg2mail_personal',
-                'emerg2mail_work', 'emerg2phone_main', 'emerg2phone_other',
-                'emerg3fullname', 'emerg3relationship', 'emerg3mail_personal',
-                'emerg3mail_work', 'emerg3phone_main', 'emerg3phone_other',
-                'emerg4fullname', 'emerg4relationship', 'emerg4mail_personal',
-                'emerg4mail_work', 'emerg4phone_main', 'emerg4phone_other'],
+        fields=[
+            'emerg1fullname',
+            'emerg1relationship',
+            'emerg1mail_personal',
+            'emerg1mail_work',
+            'emerg1phone_main',
+            'emerg1phone_other',
+            'emerg2fullname',
+            'emerg2relationship',
+            'emerg2mail_personal',
+            'emerg2mail_work',
+            'emerg2phone_main',
+            'emerg2phone_other',
+            'emerg3fullname',
+            'emerg3relationship',
+            'emerg3mail_personal',
+            'emerg3mail_work',
+            'emerg3phone_main',
+            'emerg3phone_other',
+            'emerg4fullname',
+            'emerg4relationship',
+            'emerg4mail_personal',
+            'emerg4mail_work',
+            'emerg4phone_main',
+            'emerg4phone_other',
+        ],
     )
 
-    mode(emergencyContacts_label='display')
-    emergencyContacts_label = schema.TextLine(
-        title=_(u'Emergency Contact(s)'),
-        required=False,
-    )
 
     emerg1fullname = schema.TextLine(
         title=_(u'1 Full Name'),
-        #        required=True,
         required=False,
     )
 
@@ -379,14 +400,12 @@ class IOIEStudyAbroadParticipant(Interface):
     emerg1phone_main = schema.TextLine(
         title=_(u'1 Main Phone'),
         description=_(u'Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa
-        #        required=True,
         required=False,
     )
 
     emerg1phone_other = schema.TextLine(
         title=_(u'1 Other Phone'),
         description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa
-        #        required=True,
         required=False,
     )
 
@@ -394,7 +413,6 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg2fullname = schema.TextLine(
         title=_(u'2 Full Name'),
-        #        required=True,
         required=False,
     )
 
@@ -421,14 +439,12 @@ class IOIEStudyAbroadParticipant(Interface):
     emerg2phone_main = schema.TextLine(
         title=_(u'2 Main Phone'),
         description=_(u'Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa
-        #        required=True,
         required=False,
     )
 
     emerg2phone_other = schema.TextLine(
         title=_(u'2 Other Phone'),
         description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa
-        #        required=True,
         required=False,
     )
 
@@ -436,7 +452,6 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg3fullname = schema.TextLine(
         title=_(u'3 Full Name'),
-        #        required=True,
         required=False,
     )
 
@@ -463,14 +478,12 @@ class IOIEStudyAbroadParticipant(Interface):
     emerg3phone_main = schema.TextLine(
         title=_(u'3 Main Phone'),
         description=_(u'Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa
-        #        required=True,
         required=False,
     )
 
     emerg3phone_other = schema.TextLine(
         title=_(u'3 Other Phone'),
         description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa
-        #        required=True,
         required=False,
     )
 
@@ -478,7 +491,6 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg4fullname = schema.TextLine(
         title=_(u'4 Full Name'),
-        #        required=True,
         required=False,
     )
 
@@ -505,14 +517,12 @@ class IOIEStudyAbroadParticipant(Interface):
     emerg4phone_main = schema.TextLine(
         title=_(u'4 Main Phone'),
         description=_(u'Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa
-        #        required=True,
         required=False,
     )
 
     emerg4phone_other = schema.TextLine(
         title=_(u'4 Other Phone'),
         description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa
-        #        required=True,
         required=False,
     )
 
@@ -520,14 +530,15 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'demographics',
         label=_(u'Demographics'),
-        fields=['demographics_label', 'ethnicity', 'ethnicityOther',
-                'stateResidency', 'countrycitizenship',
-                'immigrationStatus', 'countryBirth', 'dateOfBirth'],
-    )
-
-    mode(demographic_label='display')
-    demographics_label = schema.TextLine(
-        title=_(u'Demographics'),
+        fields=[
+            'ethnicity',
+            'ethnicityOther',
+            'stateResidency',
+            'countrycitizenship',
+            'immigrationStatus',
+            'countryBirth',
+            'dateOfBirth',
+        ],
     )
 
     ethnicity = schema.Choice(
@@ -549,13 +560,13 @@ class IOIEStudyAbroadParticipant(Interface):
         source=RegistryValueVocabulary(
             'oiestudyabroadstudent.us_states_territories',
         ),
-        required=True,
+        required=False # change back,
     )
 
     countrycitizenship = schema.Choice(
         title=_(u'Country of Citizenship'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.countries'),
-        required=True,
+        required=False # change back,
     )
 
     immigrationStatus = schema.Choice(
@@ -563,32 +574,35 @@ class IOIEStudyAbroadParticipant(Interface):
         source=RegistryValueVocabulary(
             'oiestudyabroadstudent.immigration_status',
         ),
-        required=True,
+        required=False # change back,
     )
 
     countryBirth = schema.Choice(
         title=_(u'Country of Birth'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.countries'),
-        required=True,
+        required=False # change back,
     )
 
     dateOfBirth = schema.Date(
         title=_(u'Date of Birth'),
-        required=True,
+        required=False # change back,
     )
 
 ########################################################
     model.fieldset(
         'education',
         label=_(u'Education'),
-        fields=['education_label', 'educationLevel', 'universityEnrolledUWO',
-                'universityEnrolledOther', 'major1', 'major2', 'minor1',
-                'minor2', 'graduationYear', 'graduationMonth'],
-    )
-
-    mode(education_label='display')
-    education_label = schema.TextLine(
-        title=_(u'Education'),
+        fields=[
+            'educationLevel',
+            'universityEnrolledUWO',
+            'universityEnrolledOther',
+            'major1',
+            'major2',
+            'minor1',
+            'minor2',
+            'graduationYear',
+            'graduationMonth',
+        ],
     )
 
     educationLevel = schema.Choice(
@@ -602,13 +616,13 @@ class IOIEStudyAbroadParticipant(Interface):
     universityEnrolledUWO = schema.Choice(
         title=_(u'Are you enrolled at UW Oshkosh?'),
         description=_(u''),
-        required=True,
         vocabulary=yes_no_vocabulary,
+        required=False # change back,
     )
 
     universityEnrolledOther = schema.TextLine(
         title=_(u'If "School" is "OTHER"'),
-        description=_(u'Type the official name of the school you are attending now only if you chose "other" above.'),  # noqa
+        description=_(u'Type the official name of the school you are attending now only if you chose "No" above.'),  # noqa
         required=False,
     )
 
@@ -656,13 +670,8 @@ class IOIEStudyAbroadParticipant(Interface):
     #######################################################
     model.fieldset(
         'courses',
-        label=_(u'Courses'),
-        fields=['courses_label', 'courses'],
-    )
-
-    mode(courses_label='display')
-    courses_label = schema.TextLine(
-        title=_(u'Study Away Courses'),
+        label=_(u'Study Away Courses'),
+        fields=['courses'],
     )
 
     courses = schema.List(
@@ -679,17 +688,19 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'date',
         label=_(u'Dates'),
-        fields=['dates_label', 'interviewDate', 'prePostTravelClassDates',
-                'orientationDeadline', 'paymentDeadlines',
-                'programDepartureDate', 'airportTransferDeparture',
-                'departureModeOfTransportation', 'programReturnDate',
-                'returnModeOfTransportation', 'airportTransferReturn',
-                'requestToDeviateFromProgramDates'],
-    )
-
-    mode(dates_label='display')
-    dates_label = schema.TextLine(
-        title=_(u'Dates'),
+        fields=[
+            'interviewDate',
+            'prePostTravelClassDates',
+            'orientationDeadline',
+            'paymentDeadlines',
+            'programDepartureDate',
+            'airportTransferDeparture',
+            'departureModeOfTransportation',
+            'programReturnDate',
+            'returnModeOfTransportation',
+            'airportTransferReturn',
+            'requestToDeviateFromProgramDates',
+                ],
     )
 
     interviewDate = schema.Date(
@@ -704,7 +715,7 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_(
             u'Select ''Yes'' to confirm that you will attend all advertised pre- or post-travel sessions.  Select ''No'' if you have a conflict on one or more dates.'),  # noqa
         vocabulary=yes_no_vocabulary,
-        required=True,
+        required=False # change back,
         # TODO insert date from program object; Displays only if there are dates in "Pretravel Class & Orientation Dates" or "Post-travel Class Dates" in the MGMT PORTAL.  # noqa
     )
 
@@ -713,7 +724,7 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_(
             u'I understand that the Office of International Education deadline for submission of orientation materials is a final deadline.  I understand and agree that all Office of International Education orientation requirements must be completed by this date.  If I forsee conflicts with this date, I will complete requirements in advance of this date.  If not completed by this date, I understand and agree that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply.'),  # noqa
         vocabulary=yes_no_vocabulary,
-        required=True,
+        required=False # change back,
     )
 
     paymentDeadlines = schema.Choice(
@@ -721,7 +732,7 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_(
             u'I understand that the payment deadlines are final deadlines and that it is my responsibility to record these dates in my calendar.  I understand that all payments must be made in full by the deadlines, or I must submit the "Notice of Financial Aid Award for Study Abroad/Away" form if making my payments using financial aid, a scholarship that I have already received, veterans benefits or an outside loan.  If not submitted by this date, I understand that the Office of International Education will begin the process of removing me from my program and that the Withdrawal & Refund Policy will apply.'),  # noqa
         vocabulary=yes_no_vocabulary,
-        required=True,
+        required=False # change back,
     )
 
     programDepartureDate = schema.Date(
@@ -787,33 +798,27 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'financial_aid',
         label=_(u'Financial Aid'),
-        fields=['financialAid_label'],
-    )
-
-    mode(financialAid_label='display')
-    financialAid_label = schema.TextLine(
-        title=_(u'Financial Aid'),
+        fields=[],
     )
 
     #######################################################
     model.fieldset(
         'shortanswerquestions',
         label=_(u'Short Answer Questions'),
-        fields=['shortAnswer_label', 'applicant_question_text1',
-                'applicant_question_answer1', 'applicant_question_text2',
-                'applicant_question_answer2', 'applicant_question_text3',
-                'applicant_question_answer3', 'applicant_question_text4',
-                'applicant_question_answer4', 'applicant_question_text5',
-                'applicant_question_answer5'],
+        fields=[
+            'applicant_question_text1',
+            'applicant_question_answer1',
+            'applicant_question_text2',
+            'applicant_question_answer2',
+            'applicant_question_text3',
+            'applicant_question_answer3',
+            'applicant_question_text4',
+            'applicant_question_answer4',
+            'applicant_question_text5',
+            'applicant_question_answer5',
+        ],
     )
 
-    mode(shortAnswer_label='display')
-    shortAnswer_label = schema.TextLine(
-        title=_(u'Short Answer Questions'),
-        description=_(u'Answer these questions thoroughly and carefully.  Your response may be used in the application selection process (for competitive programs) or to inform your Program Leaders.  If you will need more than 10 minutes to compose your answers, it is highly recommended that you type your answers outside of this system (e.g. in Word) and then copy and paste them into this system.'),  # noqa
-    )
-
-    mode(applicant_question_text1='display')
     applicant_question_text1 = schema.Text(
         title=u'Applicant Question 1',
         description=u'',
@@ -827,7 +832,6 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
     )
 
-    mode(applicant_question_text2='display')
     applicant_question_text2 = schema.Text(
         title=u'Applicant Question 2',
         description=u'',
@@ -841,7 +845,6 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
     )
 
-    mode(applicant_question_text3='display')
     applicant_question_text3 = schema.Text(
         title=u'Applicant Question 3',
         description=u'',
@@ -854,7 +857,6 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
     )
 
-    mode(applicant_question_text4='display')
     applicant_question_text4 = schema.Text(
         title=u'Applicant Question 4',
         description=u'',
@@ -867,7 +869,6 @@ class IOIEStudyAbroadParticipant(Interface):
         description=u'If a question appears under Applicant Question 4 above, type your response here.',  # noqa
         required=False,
     )
-    mode(applicant_question_text5='display')
     applicant_question_text5 = schema.Text(
         title=u'Applicant Question 5',
         description=u'',
@@ -884,33 +885,28 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'background',
         label=_(u'Background'),
-        fields=['background_label'],
+        description=_(u'If you are required to apply for advance permission (a visa) to enter one or more of your host countries, your visa application may require you to disclose citations, convictions and/or arrests in a criminal record.'),  # noqa
+        fields=[],
     )
 
-    mode(background_label='display')
-    background_label = schema.TextLine(
-        title=_(u'Criminal Background Check'),
-        description=_(u'If you are required to apply for advance permission (a visa) to enter one or more of your host countries, your visa application may require you to disclose citations, convictions and/or arrests in a criminal record.'),  # noqa
-    )
 
     #######################################################
     model.fieldset(
         'release',
         label=_(u'Release'),
-        fields=['release_label', 'UWOshkoshRelease', 'certification'],
-    )
-
-    mode(release_label='display')
-    release_label = schema.TextLine(
-        title=_(u'Release'),
+        fields=[
+            'UWOshkoshRelease',
+            'certification',
+        ],
     )
 
     #######################################################
     model.fieldset(
         'forms',
         label=_(u'STEP II Forms'),
+        description=_(u'To complete STEP II, print relevant documents, clearly print your responses, sign forms by hand where indicated, and follow instructions below.  Signatures cannot be typed.'),  # noqa
         fields=[
-            'stepii_label', 'applicationFeeOK',
+            'applicationFeeOK',
             'disciplinary_clearance_form_link',
             'disciplinary_clearance_form_uploaded_file',
             'specialStudentFormOK',
@@ -918,18 +914,14 @@ class IOIEStudyAbroadParticipant(Interface):
             'state_of_wisconsin_need_based_travel_grant_form_uploaded_file',
             'special_student_form_for_undergraduate_admissions_form_link',
             'special_student_form_for_undergraduate_admissions_uploaded_file',
-            'transcriptsOK', 'UWOshkoshStatementOK', 'UWSystemStatementOK',
-            'withdrawalRefund', 'cumulativeGPA',
+            'transcriptsOK',
+            'UWOshkoshStatementOK',
+            'UWSystemStatementOK',
+            'withdrawalRefund',
+            'cumulativeGPA',
         ],
     )
 
-    mode(stepii_label='display')
-    stepii_label = schema.TextLine(
-        title=_(u'STEP II'),
-        description=_(u'To complete STEP II, print relevant documents, clearly print your responses, sign forms by hand where indicated, and follow instructions below.  Signatures cannot be typed.'),  # noqa
-    )
-
-    mode(disciplinary_clearance_form_link='display')
     disciplinary_clearance_form_link = RichText(
         title=u'Disciplinary Clearance Form',
         description=u'Download this PDF, fill it out, and upload it below',
@@ -943,9 +935,6 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
     )
 
-    mode(
-        state_of_wisconsin_need_based_travel_grant_form_link='display',
-    )
     state_of_wisconsin_need_based_travel_grant_form_link = RichText(
         title=u'State of Wisconsin Need-based Travel Grant Form',
         description=u'Download this PDF, fill it out, and upload it below',
@@ -960,9 +949,6 @@ class IOIEStudyAbroadParticipant(Interface):
             required=False,
         )
 
-    mode(
-        special_student_form_for_undergraduate_admissions_form_link='display',
-    )
     special_student_form_for_undergraduate_admissions_form_link = RichText(
         title=u'Special/Non-degree Registration-Undergraduate Level',
         description=u'Download this form, fill it out, and upload it below.',
@@ -1000,207 +986,220 @@ class IOIEStudyAbroadParticipant(Interface):
 
     #######################################################
     model.fieldset(
-        'stepiiiforms',
-        label=_(u'STEP III Forms'),
-        fields=['stepiii_label', 'documentation_label',
-                'transferCreditForm_link', 'transferCreditSubmission',
-                'transferCreditVerified', 'identification_label',
-                'travelDocLast', 'travelDocFirst', 'travelDocMiddle',
-                'travelDocSex', 'travelDocNumber', 'travelDocExpiration',
-                'passportReceipt', 'passportOK',
-                'driversLicenseReceipt', 'driversLicenseReceiptVerified',
-                'photoPaperOfficial',
-                'photoPaperOfficialVerified', 'photoDigitalOfficial',
-                'photoDigitalOfficialVerified', 'photoPaper',
-                'photoPaperVerified', 'photoDigital', 'photoDigitalVerified',
-                'fecop_label', 'fecop_link',
-                'fecopSubmission', 'fecopVerified', 'lifestyle_label',
-                'isVegetarian', 'smokingPreferred', 'health_label',
-                'medicalReadStatement', 'allergies_label', 'allergiesYesNo',
-                'foodAllergies',
-                'medicalHealthProblems_whatCondition',
-                'healthConditions_label', 'medicalHealthProblems_stable',
-                'medicalHealthProblems', 'healthConditionsSurgeriesYesNo',
-                'healthConditionsSurgeriesDetails',
-                'medicalHealthProblems_underCare', 'healthPhysical_label',
-                'wheelchair', 'assistiveDevice',
-                'assistiveDeviceOnFlight', 'assistiveDeviceList',
-                'hasDifficultyWalking', 'maxWalkingDistance', 'stairsMax',
-                'walkingClimbingDescription', 'sight',
-                'healthPhysicalAdditionalInfoYesNo', 'additionalNeeds',
-                'medications_label', 'medicalHealthProblems_takenMedication',
-                'medicalHealthProblems_willingToPrescribe',
-                'medicalHealthProblems_medications', 'medicationsStorage',
-                'authorizedAccommodation_label',
-                'medicalRegistered', 'medicalRegistered_office',
-                'medicalRegistered_accommodations',
-                'medicalHealthProblems_additionalInfo',
-                'healthConfirmation_label',
-                'medicalMentalProblems_enoughMedication',
-                'medicalMentalProblems_stable', 'medicalAccessOK',
-                'healthMeetingNotes', 'roommate_label', 'roommateName1',
-                'roommateName2'],
+        'stepiii_documentation',
+        label=_(u'Documentation'),
+        description=_(u'Step 3 Documentation'),
+        fields=[
+            'transferCreditForm_link',
+            'transferCreditSubmission',
+            'transferCreditVerified',
+        ],
     )
 
-    mode(stepiii_label='display')
-    stepiii_label = schema.TextLine(
-        title=_(u'STEP III'),
-    )
-
-    mode(documentation_label='display')
-    documentation_label = schema.TextLine(
-        title=_(u'Documentation'),
-    )
-
-    mode(identification_label='display')
-    identification_label = schema.TextLine(
-        title=_(u'Identification'),
+    #######################################################
+    model.fieldset(
+        'stepiii_identification',
+        label=_(u'Step 3 Identification'),
         description=_(u'Complete the following using information from your unexpired passport (required for international travel) or with your unexpired driver\'s license (for domestic travel only).'),  # noqa
+        fields=[
+            'travelDocLast',
+            'travelDocFirst',
+            'travelDocMiddle',
+            'travelDocSex',
+            'travelDocNumber',
+            'travelDocExpiration',
+            'passportReceipt',
+            'passportOK',
+            'driversLicenseReceipt',
+            'driversLicenseReceiptVerified',
+            'photoPaperOfficial',
+            'photoPaperOfficialVerified',
+            'photoDigitalOfficial',
+            'photoDigitalOfficialVerified',
+            'photoPaper',
+            'photoPaperVerified',
+            'photoDigital',
+            'photoDigitalVerified',
+        ],
     )
 
-    mode(fecop_label='display')
-    fecop_label = schema.TextLine(
-        title=_(u'Financial'),
+    #######################################################
+    model.fieldset(
+        'stepiii_fecop',
+        label=_(u'STEP 3 FECOP'),
+        label=_(u'Financial'),
+        fields=[
+            'fecop_label',
+            'fecop_link',
+            'fecopSubmission',
+            'fecopVerified',
+        ],
     )
 
-    mode(lifestyle_label='display')
-    lifestyle_label = schema.TextLine(
-        title=_(u'Lifestyle'),
+    #######################################################
+    model.fieldset(
+        'stepiii_lifestyle',
+        label=_(u'STEP 3 Lifestyle'),
+        fields=[
+            'isVegetarian',
+            'smokingPreferred',
+        ],
     )
 
-    mode(health_label='display')
-    health_label = schema.TextLine(
-        title=_(u'Health'),
+    #######################################################
+    model.fieldset(
+        'stepiii_health',
+        label=_(u'STEP 3 Health'),
+        fields=[
+            'medicalReadStatement',
+            'medicalHealthProblems_whatCondition',
+            'medicalHealthProblems_stable',
+            'medicalHealthProblems',
+            'healthConditionsSurgeriesYesNo',
+            'healthConditionsSurgeriesDetails',
+            'medicalHealthProblems_underCare',
+            'wheelchair',
+            'assistiveDevice',
+            'assistiveDeviceOnFlight',
+            'assistiveDeviceList',
+            'hasDifficultyWalking',
+            'maxWalkingDistance',
+            'stairsMax',
+            'walkingClimbingDescription',
+            'sight',
+            'healthPhysicalAdditionalInfoYesNo',
+            'additionalNeeds',
+            'medicalRegistered',
+            'medicalRegistered_office',
+            'medicalRegistered_accommodations',
+            'medicalHealthProblems_additionalInfo',
+            'medicalMentalProblems_enoughMedication',
+            'medicalMentalProblems_stable',
+            'medicalAccessOK',
+            'healthMeetingNotes',
+        ],
     )
 
-    mode(allergies_label='display')
-    allergies_label = schema.TextLine(
-        title=_(u'Allergies'),
-    )
+    # healthConfirmation_label = schema.TextLine(
+    #     title=_(u'I understand and agree'),
+    # )
 
-    mode(healthConditions_label='display')
-    healthConditions_label = schema.TextLine(
-        title=_(u'Health Conditions & Surgeries'),
+    #######################################################
+    model.fieldset(
+        'stepiii_allergies_and_medication',
+        label=_(u'STEP 3 Allergies & Medications'),
+        fields=[
+            'allergiesYesNo',
+            'foodAllergies',
+            'medications_label',
+            'medicalHealthProblems_takenMedication',
+            'medicalHealthProblems_willingToPrescribe',
+            'medicalHealthProblems_medications',
+            'medicationsStorage',
+        ],
     )
-
-    mode(healthPhysical_label='display')
-    healthPhysical_label = schema.TextLine(
-        title=_(u'Physical & Mental Health'),
-    )
-
-    mode(medications_label='display')
-    medications_label = schema.TextLine(
-        title=_(u'Medications'),
-    )
-
-    mode(authorizedAccommodation_label='display')
-    authorizedAccommodation_label = schema.TextLine(
-        title=_(u'Authorized Accommodation'),
-    )
-
-    mode(healthConfirmation_label='display')
-    healthConfirmation_label = schema.TextLine(
-        title=_(u'I understand and agree'),
-    )
-
-    mode(roommate_label='display')
-    roommate_label = schema.TextLine(
-        title=_(u'Roommate'),
+            
+    #######################################################
+    model.fieldset(
+        'stepiii_roommate',
+        label=_(u'STEP III Roommate'),
         description=_(u'If you are not traveling with a UW Oshkosh student group, do not list a roommate choice.  If you are traveling on a group program, list your first and second choice roommates here.  Any roommate you request must list you on his/her application in return.'),  # noqa
+        fields=[
+            'roommateName1',
+            'roommateName2',
+        ],
     )
 
     #######################################################
-    model.fieldset(
-        'stepivforms',
-        label=_(u'STEP IV Forms'),
-        fields=['stepiv_label', 'enrollment_label', 'cbc_label',
-                'financial_label', 'depositOnTime', 'payment2OnTime',
-                'orientation_label', 'attendedOrientation',
-                'travelDocuments_label', 'flight_label',
-                'flightDeparture_label', 'flightReturn_label'],
-    )
+    # model.fieldset(
+    #     'stepivforms',
+    #     label=_(u'STEP IV Forms'),
+    #     fields=[
+    #         'stepiv_label',
+    #         'enrollment_label',
+    #         'cbc_label',
+    #         'financial_label',
+    #         'depositOnTime',
+    #         'payment2OnTime',
+    #         'orientation_label',
+    #         'attendedOrientation',
+    #         'travelDocuments_label',
+    #         'flight_label',
+    #         'flightDeparture_label',
+    #         'flightReturn_label',
+    #     ],
+    # )
 
-    mode(stepiv_label='display')
-    stepiv_label = schema.TextLine(
-        title=_(u'STEP IV'),
-    )
+    # stepiv_label = schema.TextLine(
+    #     title=_(u'STEP IV'),
+    # )
 
-    mode(enrollment_label='display')
-    enrollment_label = schema.TextLine(
-        title=_(u'Course Enrollment'),
-    )
+    # enrollment_label = schema.TextLine(
+    #     title=_(u'Course Enrollment'),
+    # )
 
-    mode(financial_label='display')
-    financial_label = schema.TextLine(
-        title=_(u'Financial'),
-    )
+    # financial_label = schema.TextLine(
+    #     title=_(u'Financial'),
+    # )
 
-    mode(orientation_label='display')
-    orientation_label = schema.TextLine(
-        title=_(u'Orientation'),
-    )
+    # orientation_label = schema.TextLine(
+    #     title=_(u'Orientation'),
+    # )
 
-    mode(travelDocuments_label='display')
-    travelDocuments_label = schema.TextLine(
-        title=_(u'Travel Documents'),
-    )
+    # travelDocuments_label = schema.TextLine(
+    #     title=_(u'Travel Documents'),
+    # )
 
-    mode(flight_label='display')
-    flight_label = schema.TextLine(
-        title=_(u'Flight'),
-    )
+    # flight_label = schema.TextLine(
+    #     title=_(u'Flight'),
+    # )
 
-    mode(flightDeparture_label='display')
-    flightDeparture_label = schema.TextLine(
-        title=_(u'Departure Flight'),
-        # TODO appears if "Application for Permission to follow an Alternative  # noqa
-        #   Schedule on the Outbound Flight Only or on my Roundtrip Flights"
-        #   is "yes" in the MGMT PORTAL AND one of the following selections has
-        #   been made above:  --I will apply for permission to fly to my
-        #   program site on an alternative flight but will return from my
-        #   program site with the group.  --I will apply for permission to fly
-        #   to and from my program site on an alternative flight.  OR
-        #   appears if "Application for Permission to follow an Alternative
-        #   Schedule on the Outbound Flight Only or on my Roundtrip Flights"
-        #   is "yes" in the MGMT PORTAL AND "Program Dates" selection is one
-        #   of the following:  --I will apply for permission to arrive at my
-        #   program site on an alternative date but will depart from my
-        #   program site on the official program date.  --I will apply for
-        #   permission to arrive at and depart from my program site on
-        #   alternative dates. OR  appears if "Program Type" in MGMT PORTAL
-        #   does NOT begin with "group..."
-    )
+    # flightDeparture_label = schema.TextLine(
+    #     title=_(u'Departure Flight'),
+    #     # TODO appears if "Application for Permission to follow an Alternative  # noqa
+    #     #   Schedule on the Outbound Flight Only or on my Roundtrip Flights"
+    #     #   is "yes" in the MGMT PORTAL AND one of the following selections has
+    #     #   been made above:  --I will apply for permission to fly to my
+    #     #   program site on an alternative flight but will return from my
+    #     #   program site with the group.  --I will apply for permission to fly
+    #     #   to and from my program site on an alternative flight.  OR
+    #     #   appears if "Application for Permission to follow an Alternative
+    #     #   Schedule on the Outbound Flight Only or on my Roundtrip Flights"
+    #     #   is "yes" in the MGMT PORTAL AND "Program Dates" selection is one
+    #     #   of the following:  --I will apply for permission to arrive at my
+    #     #   program site on an alternative date but will depart from my
+    #     #   program site on the official program date.  --I will apply for
+    #     #   permission to arrive at and depart from my program site on
+    #     #   alternative dates. OR  appears if "Program Type" in MGMT PORTAL
+    #     #   does NOT begin with "group..."
+    # )
 
-    mode(flightReturn_label='display')
-    flightReturn_label = schema.TextLine(
-        title=_(u'Return Flight'),
-        # TODO appears if "Application for Permission to follow an Alternative  # noqa
-        #   Schedule on the Return Flight Only" is "yes" or if "Application for
-        #   Permission to follow an Alternative Schedule on the Outbound Flight
-        #   Only or on my Roundtrip Flights" is "yes"in the MGMT PO
-    )
+    # flightReturn_label = schema.TextLine(
+    #     title=_(u'Return Flight'),
+    #     # TODO appears if "Application for Permission to follow an Alternative  # noqa
+    #     #   Schedule on the Return Flight Only" is "yes" or if "Application for
+    #     #   Permission to follow an Alternative Schedule on the Outbound Flight
+    #     #   Only or on my Roundtrip Flights" is "yes"in the MGMT PO
+    # )
 
     #######################################################
-    model.fieldset(
-        'programChanges',
-        label=_(u'Program Changes'),
-        fields=['programChanges_label', 'agreements_label',
-                'nonSponsoredTravel_label'],
-    )
+    # model.fieldset(
+    #     'programChanges',
+    #     label=_(u'Program Changes'),
+    #     fields=['programChanges_label', 'agreements_label',
+    #             'nonSponsoredTravel_label'],
+    # )
 
-    mode(programChanges_label='display')
-    programChanges_label = schema.TextLine(
-        title=_(u'Program Changes'),
-        description=_(u'Please review information provided to you by the OIE carefully and contact the OIE with questions, if needed, prior to making your decision.'),  # noqa
-    )
+    # programChanges_label = schema.TextLine(
+    #     title=_(u'Program Changes'),
+    #     description=_(u'Please review information provided to you by the OIE carefully and contact the OIE with questions, if needed, prior to making your decision.'),  # noqa
+    # )
 
-    mode(agreements_label='display')
-    agreements_label = schema.TextLine(
-        title=_(u'Agreements'),
-        description=_(u'Please review information provided to you by the OIE carefully and contact the OIE with questions, if needed, prior to making your decision.'),  # noqa
-    )
+    # agreements_label = schema.TextLine(
+    #     title=_(u'Agreements'),
+    #     description=_(u'Please review information provided to you by the OIE carefully and contact the OIE with questions, if needed, prior to making your decision.'),  # noqa
+    # )
 
-    mode(nonSponsoredTravel_label='display')
-    nonSponsoredTravel_label = schema.TextLine(
-        title=_(u'Non-sponsored Out-of-Country (or out-of-state) Travel'),
-    )
+    # nonSponsoredTravel_label = schema.TextLine(
+    #     title=_(u'Non-sponsored Out-of-Country (or out-of-state) Travel'),
+    # )
