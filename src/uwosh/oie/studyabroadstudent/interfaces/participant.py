@@ -6,7 +6,7 @@ from collective import dexteritytextindexer
 from plone import api
 from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
-from plone.autoform.directives import mode, omitted
+from plone.autoform.directives import mode, omitted, widget
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile import field
 from plone.namedfile.file import NamedFile
@@ -134,10 +134,21 @@ class IOIEStudyAbroadParticipant(Interface):
         default=_(u'will be auto-generated'),
     )
 
+    #######################################################
+    model.fieldset(
+        'participant_name',
+        label=_(u'Name'),
+        fields=[
+            'firstName',
+            'middleName',
+            'lastName',
+        ],
+    )
+
     dexteritytextindexer.searchable('firstName')
     firstName = schema.TextLine(
         title=_(u'First Name'),
-        required=False # change back,
+        required=True,
     )
 
     dexteritytextindexer.searchable('middleName')
@@ -149,7 +160,7 @@ class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('lastName')
     lastName = schema.TextLine(
         title=_(u'Last Name'),
-        required=False # change back,
+        required=True,
     )
 
     #######################################################
@@ -164,12 +175,16 @@ class IOIEStudyAbroadParticipant(Interface):
 
     seatNumber = schema.TextLine(
         title=_(u'Seat Number'),
-        required=False,
+        description=_(u'auto generate using STEP II date/time stamp and min/max participant fields from "program development" workflow'), # noqa
+        #  TODO (BD) - verify this functionality
+        # required=False,
     )
 
     waitlistNumber = schema.TextLine(
         title=_(u'Waitlist Number'),
-        required=False,
+        description=_(u'auto generate using STEP II date/time stamp and min/max participant fields from "program development" workflow'), # noqa
+        #  TODO (BD) - verify this functionality
+        # required=False,
     )
 
     #######################################################
@@ -190,7 +205,8 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_(
             u'UW Oshkosh students must use a @uwosh.edu email address.  Acceptable email addresses for other applicants include school and company addresses.'),  # noqa
         constraint=validate_email,
-        required=False # change back,
+        # TODO - write test_validate_email
+        required=True,
     )
 
     dexteritytextindexer.searchable('programName')
@@ -198,7 +214,7 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_(u'Program Name (first choice)'),
         description=_(u'The courses listed for this program choice will appear in your Courses tab; you must indicate there which courses you wish to enroll in.'),  # noqa
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.newprograms',
-        required=False # change back,
+        required=True,
     )
 
     dexteritytextindexer.searchable('programName2')
@@ -228,6 +244,7 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_(u'Do not include the initial "W" in the UW Oshkosh ID.  If you do not have a UW Oshkosh ID (current or past), leave this blank.'),  # noqa
         required=False,
         constraint=validate_student_id,
+        # TODO - write test_validate_student_id
     )
 
     #######################################################
@@ -256,7 +273,7 @@ class IOIEStudyAbroadParticipant(Interface):
     mainPhone = schema.TextLine(
         title=_(u'Main phone'),
         description=_(u'Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa
-        required=False # change back,
+        required=True,
     )
 
     otherPhone = schema.TextLine(
@@ -265,22 +282,23 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
     )
 
+    widget('otherContactService', onchange=u'javascript:otherContactServiceChanged(event)')
     otherContactService = schema.Choice(
         title=_(u'Other Contact Service'),
-        description=_(u'Select the service you use most often, or leave blank if you don\'t use any of these services.'),  # noqa
+        description=_(u'Select the service you use most often, or select "No value" if you don\'t use any of these services.'),  # noqa
         required=False,
         vocabulary=socialmediaservice,
     )
 
     otherContactID = schema.TextLine(
         title=_(u'Other contact service username or ID'),
-        description=_(u'Enter your username or ID for the service you chose above, or leave blank if you did not select a service above.'),  # noqa
+        description=_(u'Enter your username or ID for the service you chose above.'),  # noqa
         required=False,
     )
 
     localAddr = schema.TextLine(
         title=_(u'Local Address: Street'),
-        required=False # change back,
+        required=True,
     )
 
     localAddrApt = schema.TextLine(
@@ -290,24 +308,24 @@ class IOIEStudyAbroadParticipant(Interface):
 
     localCity = schema.TextLine(
         title=_(u'Local Address: City'),
-        required=False # change back,
+        required=True,
     )
 
     localState = schema.TextLine(
         title=_(u'Local Address: State'),
         default=_(u'WI'),
-        required=False # change back,
+        required=True,
     )
 
     localZip = schema.TextLine(
         title=_(u'Local Address: Zip Code'),
         default=_(u'54901'),
-        required=False # change back,
+        required=True,
     )
 
     homeAddr1 = schema.TextLine(
         title=_(u'Home Address: Street'),
-        required=False # change back,
+        required=True,
     )
 
     homeAddrApt = schema.TextLine(
@@ -318,25 +336,25 @@ class IOIEStudyAbroadParticipant(Interface):
     homeCity = schema.TextLine(
         title=_(u'Home Address: City'),
         description=_(u''),
-        required=False # change back,
+        required=True,
     )
 
     homeState = schema.TextLine(
         title=_(u'Home Address: State/Province/Department'),
         description=_(u''),
-        required=False # change back,
+        required=True,
     )
 
     homeZip = schema.TextLine(
         title=_(u'Home Address: Zip or Postal Code'),
         description=_(u''),
-        required=False # change back,
+        required=True,
     )
 
     homeCountry = schema.Choice(
         title=_(u'Home Address: Country'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.countries'),
-        required=False # change back,
+        required=True,
     )
 
     #######################################################
@@ -371,7 +389,7 @@ class IOIEStudyAbroadParticipant(Interface):
         ],
     )
 
-
+    widget('emerg1fullname', onchange=u'javascript:emergencyFullNameChanged(event)')
     emerg1fullname = schema.TextLine(
         title=_(u'1 Full Name'),
         required=False,
@@ -411,6 +429,7 @@ class IOIEStudyAbroadParticipant(Interface):
 
     ###############
 
+    widget('emerg2fullname', onchange=u'javascript:fullNameChanged(event)')
     emerg2fullname = schema.TextLine(
         title=_(u'2 Full Name'),
         required=False,
@@ -450,6 +469,7 @@ class IOIEStudyAbroadParticipant(Interface):
 
     #############
 
+    widget('emerg3fullname', onchange=u'javascript:fullNameChanged(event)')
     emerg3fullname = schema.TextLine(
         title=_(u'3 Full Name'),
         required=False,
@@ -489,6 +509,7 @@ class IOIEStudyAbroadParticipant(Interface):
 
     #############
 
+    widget('emerg4fullname', onchange=u'javascript:fullNameChanged(event)')
     emerg4fullname = schema.TextLine(
         title=_(u'4 Full Name'),
         required=False,
@@ -693,10 +714,10 @@ class IOIEStudyAbroadParticipant(Interface):
             'prePostTravelClassDates',
             'orientationDeadline',
             'paymentDeadlines',
-            'programDepartureDate',
+            'departureDate',
             'airportTransferDeparture',
             'departureModeOfTransportation',
-            'programReturnDate',
+            'returnDepartureDate',
             'returnModeOfTransportation',
             'airportTransferReturn',
             'requestToDeviateFromProgramDates',
@@ -735,7 +756,7 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False # change back,
     )
 
-    programDepartureDate = schema.Date(
+    departureDate = schema.Date(
         title=_(u'Program Departure Date'),
         description=_(u'will appear only when "transfer provided" is selected on the "program workflow"'),  # noqa
         required=False,
@@ -760,7 +781,7 @@ class IOIEStudyAbroadParticipant(Interface):
         #  on the "program workflow"
     )
 
-    programReturnDate = schema.Date(
+    returnDepartureDate = schema.Date(
         title=_(u'Program Return Date'),
         description=_(u'will appear only when "transfer provided" is selected on the "program workflow"'),  # noqa
         required=False,
@@ -1027,7 +1048,7 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'stepiii_fecop',
         label=_(u'STEP 3 FECOP'),
-        label=_(u'Financial'),
+        description=_(u'Financial'),
         fields=[
             'fecop_label',
             'fecop_link',

@@ -73,8 +73,8 @@ def get_optimized_obj(obj):
 
 
 script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-input_rel_path = '../participant_permissions.json'
-output_rel_path = '../optimized_participant_permissions.json'
+input_rel_path = '../static/json/participant_permissions.json'
+output_rel_path = '../static/json/optimized_participant_permissions.json'
 abs_file_path = os.path.join(script_dir, input_rel_path)
 new_file_path = os.path.join(script_dir, output_rel_path)
 print(abs_file_path)

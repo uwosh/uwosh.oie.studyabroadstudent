@@ -193,6 +193,7 @@ class ProgramSearchView(BrowserView):
 
         string = json.dumps(programs, default=handle_missing)
         encoded = base64.b64encode(string)
+        import pdb; pdb.set_trace()
         return encoded
 
 
@@ -245,7 +246,7 @@ class ParticipantView(DefaultView, FolderView):
 
 
     def _get_permissions(self, user_roles, transition_state):
-        relative_path = '../optimized_participant_permissions.json'
+        relative_path = '../static/json/optimized_participant_permissions.json'
         absolute_path = os.path.join(os.path.dirname(__file__), relative_path)
         field_permissions = {}
         # try:
@@ -269,46 +270,11 @@ class ParticipantView(DefaultView, FolderView):
         return False
 
     def updateFieldsFromSchemata(self):
-        # super(ParticipantView, self).updateFieldsFromSchemata()
-        # import pdb; pdb.set_trace()
-        # for group in self.groups:
-        #     for field in group.fields.values():
-        #         field.field.required = False
-        # IOIEStudyAbroadParticipant.setTaggedValue(
-        #     OMITTED_KEY,
-        #     [(Interface, field, 'false') for field in self.permissions]
-        # )
-        # import pdb; pdb.set_trace()
         IOIEStudyAbroadParticipant.setTaggedValue(
             OMITTED_KEY,
             [(Interface, field, 'true') for field in self.permissions if self.permissions[field] == 'none']
         )
-        import pdb; pdb.set_trace()
         super(ParticipantView, self).updateFieldsFromSchemata()
-
-
-    # @property
-    # def fields(self):
-    #     """ Get the field definition for this form.
-    #     Form class's fields attribute does not have to
-    #     be fixed, it can be property also.
-    #     """
-
-    #     # Construct the Fields instance as we would
-    #     # normally do in more static way
-    #     fields = Fields(IOIEStudyAbroadParticipant)
-    #     # We need to override the actual required from the
-    #     # schema field which is a little tricky.
-    #     # Schema fields are shared between instances
-    #     # by default, so we need to create a copy of it
-    #     for f in fields.values():
-    #         # Create copy of a schema field
-    #         # and force it unrequired
-    #         schema_field = copy.copy(f.field) # shallow copy of an instance
-    #         schema_field.required = True
-    #         f.field = schema_field
-    #     import pdb; pdb.set_trace()
-    #     print('teehee')
 
     def _get_highest_permission(self, *permissions):
         ranked = [None, 'none', 'read', 'read_write']
@@ -425,6 +391,7 @@ class CreatedView(DefaultView):
                     'email': email,
                     'programName': program_ID,
                 }
+                import pdb; pdb.set_trace()
                 obj = api.content.create(
                     type='OIEStudyAbroadParticipant',
                     container=participants_folder,
@@ -432,8 +399,9 @@ class CreatedView(DefaultView):
                     **data)
                 api.content.transition(obj, 'submit')  # go ahead to step I
                 return '{0}/edit'.format(obj.absolute_url())
-            except Exception:
+            except Exception as e:
                 logger.warn('Could not create partipant application.')
+                logger.warn(e)
         return False
 
 
