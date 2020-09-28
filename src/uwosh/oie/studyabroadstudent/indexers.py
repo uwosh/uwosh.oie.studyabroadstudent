@@ -28,7 +28,9 @@ educationLevel = participantIndexer(IndexerFactory('educationLevel'))
 
 @indexer(IOIEStudyAbroadParticipant)
 def university(participant):
-    import pdb; pdb.set_trace()  # if universityEnrolledUWO is Yes then this will be "UW Oshkosh", otherwise this is the value of universityEnrolledOther # noqa
+    if participant.universityEnrollowedUWO:
+        return "UW Oshkosh"
+    return participant.universityEnrolledOther
 
 
 # Program Indexers

@@ -193,7 +193,7 @@ class ProgramSearchView(BrowserView):
 
         string = json.dumps(programs, default=handle_missing)
         encoded = base64.b64encode(string)
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         return encoded
 
 
@@ -391,7 +391,7 @@ class CreatedView(DefaultView):
                     'email': email,
                     'programName': program_ID,
                 }
-                import pdb; pdb.set_trace()
+                # import pdb; pdb.set_trace()
                 obj = api.content.create(
                     type='OIEStudyAbroadParticipant',
                     container=participants_folder,
