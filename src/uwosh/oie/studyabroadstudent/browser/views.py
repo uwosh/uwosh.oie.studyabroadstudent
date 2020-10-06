@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from cStringIO import StringIO
+from io import StringIO
 from plone import api
 from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.app.contenttypes.browser.folder import FolderView
