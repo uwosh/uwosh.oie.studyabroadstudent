@@ -98,7 +98,7 @@ def add_dynamic_tests(cls):
     
 
 
-@add_dynamic_tests
+# @add_dynamic_tests
 class OIEStudyAbroadProgramIntegrationTest(OIEStudyAbroadContentBaseTest):
 
   
