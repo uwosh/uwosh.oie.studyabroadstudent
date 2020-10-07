@@ -206,7 +206,7 @@
       <role name="Member"/>
       <role name="Site Administrator"/>
     </permission>
-    <!-- <permission name="Reply to item" acquire="False">
+    <permission name="Reply to item" acquire="False">
       <role name="Authenticated"/>
     </permission>
     <permission name="Request review" acquire="True">
@@ -243,14 +243,14 @@
       <role name="Owner"/>
       <role name="Site Administrator"/>
     </permission>
-    <permission name="Use Database Methods" acquire="True">
+    <!-- <permission name="Use Database Methods" acquire="True">
       <role name="Site Administrator"/>
     </permission>
     <permission name="Use external editor" acquire="False">
       <role name="Authenticated"/>
       <role name="Manager"/>
       <role name="Site Administrator"/>
-    </permission>
+    </permission> -->
     <permission name="Use mailhost services" acquire="True">
       <role name="Site Administrator"/>
     </permission>
@@ -269,9 +269,9 @@
       <role name="Owner"/>
       <role name="Site Administrator"/>
     </permission>
-    <permission name="View History" acquire="True">
+    <!-- <permission name="View History" acquire="True">
       <role name="Site Administrator"/>
-    </permission>
+    </permission> -->
     <permission name="View management screens" acquire="True">
       <role name="Manager"/>
       <role name="Owner"/>
@@ -284,7 +284,7 @@
     </permission>
     <permission name="WebDAV access" acquire="True">
       <role name="Site Administrator"/>
-    </permission> -->
+    </permission>
     <permission name="plone.app.contenttypes: Add Collection" acquire="True">
       <role name="Contributor"/>
       <role name="Manager"/>
