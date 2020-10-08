@@ -472,7 +472,7 @@ class IOIEStudyAbroadProgram(Interface):
         constraint=not_empty,
     )
 
-    dexteritytextindexer.searchable('rich_description')
+    # TODO A custom indexer might be desired to add the content of this field to searchabletext. We cannot use dexteritytextindexer here, it errors on the fact that the value is not a text type.
     rich_description = RichText(
         title=_(u'Rich Text Description'),
         description=_(
