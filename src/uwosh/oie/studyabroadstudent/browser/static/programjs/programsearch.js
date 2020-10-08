@@ -6,8 +6,8 @@ require([
   var ProgramSearchComponent = R.createClass({
       getInitialState: function(){
         var el = document.getElementById('oie-search');
-        var encoded = el.getAttribute('oie-program-data');
-        var programs = JSON.parse(window.atob(encoded));
+        var program_data = el.getAttribute('oie-program-data');
+        var programs = JSON.parse(program_data);
         var unfilteredPrograms = programs.slice();
         var types = [];
         var years = [];
