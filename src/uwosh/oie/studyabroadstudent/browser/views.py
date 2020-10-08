@@ -154,13 +154,16 @@ class ProgramView(DefaultView, FolderView):
         return set([l.accommodation for l in locations])
 
     def has_lead_image(self):
-        bdata = ILeadImage(self.context)
-        if (
-                getattr(bdata, 'image', None) and
-                bdata.image is not None and
-                bdata.image.size > 0
-        ):
-            return True
+        try:
+            bdata = ILeadImage(self.context)
+            if (
+                    getattr(bdata, 'image', None) and
+                    bdata.image is not None and
+                    bdata.image.size > 0
+            ):
+                return True
+        except TypeError:
+            return False
 
     def get_detailed_view_link(self):
         return self.context.absolute_url() + '/manager_view'

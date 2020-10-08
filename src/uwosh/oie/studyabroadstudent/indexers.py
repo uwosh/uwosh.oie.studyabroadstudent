@@ -51,10 +51,12 @@ def countries(program):
 
 @indexer(IOIEStudyAbroadProgram)
 def image(program):
-    bdata = ILeadImage(program)
-    if (
-            getattr(bdata, 'image', None) and
-            bdata.image is not None and
-            bdata.image.size > 0
-    ):
-        return '{0}/@@images/image'.format(program.absolute_url())
+    try:
+        bdata = ILeadImage(program)
+        if (
+                getattr(bdata, 'image', None) and
+                bdata.image.size > 0
+        ):
+            return '{0}/@@images/image'.format(program.absolute_url())
+    except TypeError:
+        return
