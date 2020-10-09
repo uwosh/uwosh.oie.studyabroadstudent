@@ -32,22 +32,22 @@ for c in idstr:  # noqa
 if acc != '':
     ids.append(acc)
     acc = ''
-print '# len of ids is ', len(ids)  # noqa
-print 'ids = ', ids  # noqa
+print('# len of ids is ', len(ids))  # noqa
+print('ids = ', ids)  # noqa
 
 new_style = False  # set to False if looking at legacy site
 
-print 'application_data = ['  # noqa
+print('application_data = [')  # noqa
 for id in ids:  # noqa
     results = catalog.searchResults(portal_type='OIEStudentApplication', id=id)  # noqa
     if len(results) == 0:
         results = catalog.searchResults(portal_type='OIEStudyAbroadStudentApplication', id=id)  # noqa
         new_style = True
     if len(results) > 1:
-        print 'too many catalog query results ({0}) for ID {1}'.format(len(results), id)  # noqa
+        print(f'too many catalog query results ({len(results)}) for ID {id}')  # noqa
         return printed  # noqa
     if len(results) != 1:
-        print 'no catalog query results for ID {0}'.format(id)  # noqa
+        print(f'no catalog query results for ID {id}')  # noqa
         return printed  # noqa
     r = results[0]
     o = r.getObject()
@@ -154,7 +154,7 @@ for id in ids:  # noqa
     for h in review_history:
         h['time'] = h['time'].ISO8601()
     if not new_style:
-        print [o.id, r.review_state, o.Creators(), created, modified,  # noqa
+        print([o.id, r.review_state, o.Creators(), created, modified,  # noqa
                o.getStudentID(), o.getFirstName(), o.getMiddleName(),
                o.getLastName(), o.getEmail(), o.getLocalAddr1(),
                o.getLocalAddr2(), o.getLocalCity(), o.getLocalState(),
@@ -254,9 +254,9 @@ for id in ids:  # noqa
                o.getForeignCourse3(), o.getForeignCourse4(),
                o.getForeignCourse5(), o.getForeignCourse6(), o.getPapersOK(),
                o.getNoMoreMaterials(), o.getProgramMaterials(),
-               o.getProgramFee2(), review_history]
+               o.getProgramFee2(), review_history])
     else:
-        print [o.id, r.review_state, o.listCreators(), created,  # noqa
+        print([o.id, r.review_state, o.listCreators(), created,  # noqa
                modified, o.studentID, o.firstName, o.middleName, o.lastName,
                o.email, o.localAddr1, o.localAddr2, o.localCity,
                o.localState, o.localZip, o.localCountry, o.localPhone,
@@ -335,7 +335,7 @@ for id in ids:  # noqa
                o.applicationFeeRefund, o.foreignCourse1, o.foreignCourse2,
                o.foreignCourse3, o.foreignCourse4, o.foreignCourse5,
                o.foreignCourse6, o.papersOK, o.noMoreMaterials,
-               o.programMaterials, o.programFee2, review_history]
-    print ','  # noqa
-print ']'  # noqa
+               o.programMaterials, o.programFee2, review_history])
+    print(',')  # noqa
+print(']')  # noqa
 return printed  # noqa

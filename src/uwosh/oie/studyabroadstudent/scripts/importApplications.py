@@ -626,7 +626,7 @@ with api.env.adopt_user(username='admin'):
             for h in review_history:
                 wtool.setStatusOf(workflow_id, obj, h)
 
-            print '    ', id, Email  # noqa
+            print('    ', id, Email)  # noqa
 
             # set some metadata (do this last)
             obj.setCreators(Creators)
@@ -638,26 +638,26 @@ with api.env.adopt_user(username='admin'):
 
             counter += 1
             if counter >= MAX_COUNT:
-                print 'Stopping after reaching MAX_COUNT ', MAX_COUNT  # noqa
+                print('Stopping after reaching MAX_COUNT ', MAX_COUNT)  # noqa
                 break
 
         # commit every 100 objects
         if counter % 100 == 0:
-            print counter  # noqa
+            print(counter)  # noqa
             # Commit transaction
             transaction.commit()
             # Perform ZEO client synchronization (if running in clustered mode)
             app._p_jar.sync()  # noqa
 
-print counter  # noqa
+print(counter)  # noqa
 # final commit transaction
 transaction.commit()
 # Perform ZEO client synchronization (if running in clustered mode)
 app._p_jar.sync()  # noqa
 
-print 'Rebuilding the catalog to update for modified dates, creation dates, and creators. Will take a few minutes:'  # noqa
+print('Rebuilding the catalog to update for modified dates, creation dates, and creators. Will take a few minutes:')  # noqa
 catalog = getToolByName(site, 'portal_catalog', None)  # noqa
 if catalog:
     catalog.manage_catalogRebuild()
-print 'Catalog rebuild is done.'  # noqa
-print 'Import is complete.'  # noqa
+print('Catalog rebuild is done.')  # noqa
+print('Import is complete.')  # noqa

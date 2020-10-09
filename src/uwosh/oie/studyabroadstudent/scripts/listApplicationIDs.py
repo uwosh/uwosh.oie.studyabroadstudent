@@ -9,8 +9,8 @@ results1 = catalog.searchResults(portal_type='OIEStudentApplication')  # noqa
 results2 = catalog.searchResults(  # noqa
     portal_type='OIEStudyAbroadStudentApplication',
 )
-print '# retrieved this many OIEStudentApplication object IDs: {0}'.format(  # noqa
-    len(results1)+len(results2),
-)
-print 'application_ids = ', [o.id for o in results1+results2]  # noqa
+print(f'# retrieved this many OIEStudentApplication object IDs: {len(results1)+len(results2)}')  # noqa
+
+ids = [o.id for o in results1+results2]
+print('application_ids = ', *ids)  # noqa
 return printed  # noqa

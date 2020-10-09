@@ -52,7 +52,7 @@ for r in results:
     review_history = wtool.getInfoFor(o, 'review_history', [])  # noqa
     for h in review_history:
         h['time'] = h['time'].HTML4()
-    print [  # noqa
+    print ([  # noqa
         o.id,
         r.review_state,
         o.Creators(),
@@ -263,5 +263,5 @@ for r in results:
         o.getProgramMaterials(),
         o.getProgramFee2(),
         review_history,
-    ]
+    ])
 return printed  # noqa
