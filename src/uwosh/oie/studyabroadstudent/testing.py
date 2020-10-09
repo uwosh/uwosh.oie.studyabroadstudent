@@ -5,7 +5,7 @@ from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
-from plone.testing.zope import ZSERVER_FIXTURE
+from plone.testing.z2 import ZSERVER_FIXTURE
 
 import uwosh.oie.studyabroadstudent
 

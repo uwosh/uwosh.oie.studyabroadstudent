@@ -52,17 +52,16 @@ setup(
         'collective.impersonate',
         'collective.easyform',
         'Products.ContentWellPortlets',
-        'webcouturier.dropdownmenu',
         'plone.app.iterate',
-        'uwosh.oie.studyabroadtheme',
     ],
     extras_require={
         'test': [
+            'collective.xmltestreport',
             'plone.app.testing',
             # Plone KGS does not use this version, because it would break
             # Remove if your package shall be part of coredev.
             # plone_coredev tests as of 2016-04-01.
-            'plone.testing',
+            'plone.testing[zope]',
             'plone.app.contenttypes',
             'plone.app.robotframework[debug]',
         ],

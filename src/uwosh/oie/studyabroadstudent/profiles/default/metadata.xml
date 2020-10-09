@@ -6,7 +6,6 @@
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
     <dependency>profile-collective.easyform:default</dependency>
     <dependency>profile-Products.ContentWellPortlets:default</dependency>
-    <dependency>profile-webcouturier.dropdownmenu:default</dependency>
     <dependency>profile-plone.app.iterate:default</dependency>
     <dependency>profile-collective.impersonate:default</dependency>
   </dependencies>
