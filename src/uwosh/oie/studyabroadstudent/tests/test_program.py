@@ -185,4 +185,3 @@ class OIEStudyAbroadProgramIntegrationTest(OIEStudyAbroadContentBaseTest):
             obj=self.test_program,
             transition='submit-to-chair',
         )
-
