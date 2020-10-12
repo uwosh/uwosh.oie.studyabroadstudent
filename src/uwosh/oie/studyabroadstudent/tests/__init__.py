@@ -11,19 +11,19 @@ import os
 import unittest
 
 def get_roles():
-        pathname = os.path.dirname(os.path.realpath(__file__))
-        rolemap_tree = ElementTree.parse(pathname + '/../profiles/default/rolemap.xml') # noqa
-        rolemap = rolemap_tree.getroot()
-        roles_element = rolemap.find('roles')
-        roles = set([role.attrib['name'] for role in roles_element.getchildren()])
-        roles.add('Anonymous')
-        return roles
+    pathname = os.path.dirname(os.path.realpath(__file__))
+    rolemap_tree = ElementTree.parse(pathname + '/../profiles/default/rolemap.xml') # noqa
+    rolemap = rolemap_tree.getroot()
+    roles_element = rolemap.find('roles')
+    roles = set([role.attrib['name'] for role in list(roles_element)])
+    roles.add('Anonymous')
+    return roles
 
 def get_transitions_and_states():
     pathname = os.path.dirname(os.path.realpath(__file__))
     workflow_tree = ElementTree.parse(pathname + '/../profiles/default/workflows/programmanagement/definition.xml') # noqa
     dc_workflow = workflow_tree.getroot()
-    elements = dc_workflow.getchildren()
+    elements = list(dc_workflow)
     TRANSITIONS = {}
     STATES = {}
     for element in elements:
@@ -32,10 +32,10 @@ def get_transitions_and_states():
             transition = element
             id = transition.attrib['transition_id']
             TRANSITIONS[id] = transition.attrib
-            sub_elements = transition.getchildren()
+            sub_elements = list(transition)
             for sub_element in sub_elements:
                 if sub_element.tag == 'guard':
-                    TRANSITIONS[id]['guard_roles'] = [role.text for role in sub_element.getchildren()]
+                    TRANSITIONS[id]['guard_roles'] = [role.text for role in list(sub_element)]
                 else:
                     TRANSITIONS[id][sub_element.tag] = sub_element.attrib
         elif tag == 'state':
@@ -44,7 +44,7 @@ def get_transitions_and_states():
             STATES[id] = state.attrib
             STATES[id]['exit_transitions'] = []
             STATES[id]['permission_maps'] = []
-            sub_elements = state.getchildren()
+            sub_elements = list(state)
             for sub_element in sub_elements:
                 tag = sub_element.tag
                 if tag == 'exit-transition':
@@ -56,9 +56,11 @@ def get_transitions_and_states():
                     permission_map = sub_element
                     attribs = permission_map.attrib
                     STATES[id]['permission_maps'].append(
-                        {attribs['name']: [role.text for role in permission_map.getchildren()],
-                        'acquired': attribs['acquired']
-                        })
+                        {
+                            attribs['name']: [role.text for role in list(permission_map)],
+                            'acquired': attribs['acquired'],
+                        }
+                    )
     return (TRANSITIONS, STATES)
 
 
