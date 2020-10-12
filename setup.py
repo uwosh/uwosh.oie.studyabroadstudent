@@ -51,6 +51,7 @@ setup(
         'collective.z3cform.datagridfield',
         'collective.impersonate',
         'collective.easyform',
+        'plone.app.controlpanel',
         'Products.ContentWellPortlets',
         'plone.app.iterate',
     ],
