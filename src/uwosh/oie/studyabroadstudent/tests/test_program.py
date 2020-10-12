@@ -90,7 +90,7 @@ def add_dynamic_tests(cls):
                                         end_state=end_state,
                                         is_authorized=is_authorized)
                         can_or_cannot = 'can' if role in authorized_roles else 'cannot'  # noqa
-                        test_name = f'test_{role}_{can_or_cannot}_activate_{transition['transition_id']}_from_state_{state_id}'  # noqa
+                        test_name = f'test_{role}_{can_or_cannot}_activate_{transition["transition_id"]}_from_state_{state_id}'  # noqa
                         test_name = test_name.replace('-', '_')
                         test_method.__name__ = test_name
                         setattr(cls, test_method.__name__, test_method)
