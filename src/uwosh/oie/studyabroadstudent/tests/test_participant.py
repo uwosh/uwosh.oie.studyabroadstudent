@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 from . import OIEStudyAbroadContentBaseTest
-# from AccessControl import getSecurityManager
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-# from plone.app.testing import TEST_USER_NAME
-# from plone.api.exc import InvalidParameterError
-# from plone.app.testing import login
-# from plone.app.testing import logout
 from plone.dexterity.interfaces import IDexterityFTI
+from Products.CMFPlone.utils import get_installer
 from uwosh.oie.studyabroadstudent.interfaces.participant import IOIEStudyAbroadParticipant  # noqa
 from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING  # noqa
 from zope.component import createObject
@@ -23,10 +19,10 @@ class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):
         """Custom shared utility setup for tests."""
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.installer = api.portal.get_tool('portal_quickinstaller')
+        self.installer = get_installer(self.context)
 
         # add calendar year
-        self.calendar_year, self.calendar_year_uid = self.get_calendar_year_and_uid()
+        self.calendar_year, self.calendar_year_uid = self.get_calendar_year_and_uid()  # noqa
 
         # add a sample program
 
