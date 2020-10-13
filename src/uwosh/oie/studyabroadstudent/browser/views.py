@@ -154,11 +154,9 @@ class ProgramView(DefaultView, FolderView):
 
     def has_lead_image(self):
         try:
-            bdata = ILeadImage(self.context)
             if (
-                    getattr(bdata, 'image', None) and
-                    bdata.image is not None and
-                    bdata.image.size > 0
+                    getattr(self.context, 'image', None) and
+                    self.context.image.size > 0
             ):
                 return True
         except TypeError:

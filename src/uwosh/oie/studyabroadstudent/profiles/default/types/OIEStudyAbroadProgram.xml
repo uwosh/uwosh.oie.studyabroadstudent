@@ -47,7 +47,6 @@
     <element value="collective.dexteritytextindexer.behavior.IDexterityTextIndexer" />
     <element value="plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation"/>
     <element value="Products.CMFPlone.interfaces.constrains.ISelectableConstrainTypes"/>
-    <element value="plone.app.contenttypes.behaviors.leadimage.ILeadImage"/>
     <element value="plone.app.lockingbehavior.behaviors.ILocking"/>
     <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousEnabled"/>
     <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousToggle"/>

@@ -4,7 +4,6 @@ from collective import dexteritytextindexer
 from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import BlockDataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
-from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.app.contenttypes.behaviors.tableofcontents import ITableOfContents
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.dexterity.behaviors.id import IShortName
@@ -189,32 +188,6 @@ class IOIEUserCommentsRowSchema(Interface):
     comment = schema.Text(
         title=_(u'Add a comment'),
     )
-
-
-# move lead image fields into their own Lead Image fieldset
-leadimage_fieldset = Fieldset(
-    'leadimage',
-    label=_(u'Lead Image'),
-    fields=['image', 'image_caption'],
-)
-try:
-    leadimage_fieldsets = ILeadImage.getTaggedValue(FIELDSETS_KEY)
-    leadimage_fieldsets.append(leadimage_fieldset)
-except KeyError:
-    ILeadImage.setTaggedValue(FIELDSETS_KEY, [leadimage_fieldset])
-
-
-# move change note into its own fieldset
-changeNote_fieldset = Fieldset(
-    'changeNote',
-    label=_(u'Change Note'),
-    fields=['changeNote'],
-)
-try:
-    changeNote_fieldsets = IVersionable.getTaggedValue(FIELDSETS_KEY)
-    changeNote_fieldsets.append(changeNote_fieldset)
-except KeyError:
-    IVersionable.setTaggedValue(FIELDSETS_KEY, [changeNote_fieldset])
 
 
 # hide these behavior fields
@@ -472,6 +445,12 @@ class IOIEStudyAbroadProgram(Interface):
         constraint=not_empty,
     )
 
+    image = field.NamedBlobImage(
+        title=_(u'Academic Program Image'),
+        description=_(u'The image will display in application and listing views of this program'),
+        required=True
+    )
+
     # TODO A custom indexer might be desired to add the content of this field to searchabletext. We cannot use dexteritytextindexer here, it errors on the fact that the value is not a text type.
     rich_description = RichText(
         title=_(u'Rich Text Description'),
@@ -551,7 +530,7 @@ class IOIEStudyAbroadProgram(Interface):
         'academic_program_fieldset',
         label=_(u'Academic Program'),
         fields=['sponsoring_unit_or_department', 'program_type',
-                'program_component', 'title', 'description',
+                'program_component', 'title', 'description', 'image',
                 'rich_description', 'eligibility_requirement',
                 'learning_objectives', 'equipment_and_space',
                 'equipment_and_space_needs', 'guest_lectures',
