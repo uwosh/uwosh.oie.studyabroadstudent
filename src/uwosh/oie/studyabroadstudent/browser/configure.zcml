@@ -68,6 +68,24 @@
       permission="uwosh.oie.studyabroadstudent.edit.participant_main"
       />
 
+  
+
+  <adapter
+      for="Products.CMFCore.interfaces.IFolderish
+          zope.publisher.interfaces.browser.IDefaultBrowserLayer
+          plone.dexterity.interfaces.IDexterityFTI"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      factory=".custom_forms.ParticipantAddView"
+      name="OIEStudyAbroadParticipant"
+        />
+
+  <class class=".custom_forms.ParticipantAddView">
+      <require
+          permission="cmf.ModifyPortalContent"
+          interface="zope.publisher.interfaces.browser.IBrowserPage"
+          />
+  </class>
+
   <browser:page
       name="edit-util"
       for="..interfaces.participant.IOIEStudyAbroadParticipant"

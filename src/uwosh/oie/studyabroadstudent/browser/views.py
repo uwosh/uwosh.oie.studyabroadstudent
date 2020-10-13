@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from cStringIO import StringIO
+from io import StringIO
 from plone import api
 from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.app.contenttypes.browser.folder import FolderView
@@ -10,13 +10,18 @@ from plone.namedfile.file import NamedImage
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five import BrowserView
 from uwosh.oie.studyabroadstudent.reporting import ReportUtil
+from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
 from zope.interface import alsoProvides
+from z3c.form.field import Fields
+from plone.autoform.interfaces import OMITTED_KEY
+from zope.interface import Interface
 
-import base64
 import csv
 import json
 import logging
 import Missing
+import os
+import copy
 
 
 logger = logging.getLogger('uwosh.oie.studyabroadstudent')
@@ -148,13 +153,14 @@ class ProgramView(DefaultView, FolderView):
         return set([l.accommodation for l in locations])
 
     def has_lead_image(self):
-        bdata = ILeadImage(self.context)
-        if (
-                getattr(bdata, 'image', None) and
-                bdata.image is not None and
-                bdata.image.size > 0
-        ):
-            return True
+        try:
+            if (
+                    getattr(self.context, 'image', None) and
+                    self.context.image.size > 0
+            ):
+                return True
+        except TypeError:
+            return False
 
     def get_detailed_view_link(self):
         return self.context.absolute_url() + '/manager_view'
@@ -183,11 +189,8 @@ class ProgramSearchView(BrowserView):
             except AttributeError:
                 logger.warn('Excluding program {0} from '
                             'search view, not all searchable fields were '
-                            'indexed.'.format(brain.Title))
-
-        string = json.dumps(programs, default=handle_missing)
-        encoded = base64.b64encode(string)
-        return encoded
+                            'indexed.'.format(brain.Title))       
+        return json.dumps(programs, default=handle_missing)
 
 
 class CooperatingPartnerView(DefaultView):
@@ -214,8 +217,94 @@ class ContactView(DefaultView):
 
 class ParticipantView(DefaultView, FolderView):
     # This can be the view for reviewers/etc of the application
-    pass
 
+    @property
+    def permissions(self):
+        if not hasattr(self, '_permissions'):
+            self._permissions = self._get_permissions(self.user_roles, self.transition_state)
+        return self._permissions
+    
+    @property
+    def transition_state(self):
+        if not hasattr(self, '_transition_state'):
+            # try:
+                self._transition_state = api.content.get_state(self.context)
+            # except KeyError:
+                # self._transition_state = None
+        return self._transition_state
+
+    @property
+    def user_roles(self):
+        if not hasattr(self, '_user_roles'):
+            # self._user_roles = api.user.get_current().getRoles()
+            self._user_roles = []
+        return self._user_roles
+
+
+    def _get_permissions(self, user_roles, transition_state):
+        relative_path = '../static/json/optimized_participant_permissions.json'
+        absolute_path = os.path.join(os.path.dirname(__file__), relative_path)
+        field_permissions = {}
+        # try:
+        with open(absolute_path, 'r') as infile:
+            permission_map = json.load(infile)
+        # except Exception:
+        #     return field_permissions
+        for role in user_roles:
+            role_permissions = (permission_map[role]['default_permissions'], 
+                                permission_map[role][transition_state])
+            for permissions in role_permissions:
+                for read_write_none in permissions:
+                    for field in permissions[read_write_none]:
+                        field_permissions[field] = self._get_highest_permission(
+                            field_permissions.get(field, None),
+                            read_write_none
+                        )
+        return field_permissions
+
+    def show_error_page(self):
+        return False
+
+    def updateFieldsFromSchemata(self):
+        IOIEStudyAbroadParticipant.setTaggedValue(
+            OMITTED_KEY,
+            [(Interface, field, 'true') for field in self.permissions if self.permissions[field] == 'none']
+        )
+        super(ParticipantView, self).updateFieldsFromSchemata()
+
+    def _get_highest_permission(self, *permissions):
+        ranked = [None, 'none', 'read', 'read_write']
+        tmp = {permission: ranked.index(permission) for permission in set(permissions)}
+        return max(tmp, key=tmp.get)
+
+    def _get_show_these(self):
+        show_these = { 'fields': {}, 'groups': {} }
+        # import pdb; pdb.set_trace()
+        for group in self.groups:
+            show_these['groups'][group.label] = False
+            for widget in group.widgets.values():
+                if self.can_view_field(widget.label):
+                    show_these['groups'][group.label] = True
+                    break
+            
+        for field in self.widgets.values():
+            if self._can_view_field(field.label):
+                show_these['fields'][field.label] = True
+            else:
+                show_these['fields'][field.label] = False
+                
+        return show_these
+
+    def _can_view_field(self, field_name):
+        return field_name in self.permissions['read'] or \
+               field_name in self.permissions['read_write']
+
+    def show_widget(self, widget):
+        disallowed = ('IBasic.title', 'IBasic.description', 'title', 'description',)
+        # if not self._permissions:
+        #     self.call()
+        return widget.__name__ not in disallowed and \
+            self._permissions['fields'][widget.label] in ('read', 'read_write')
 
 class ParticipantEditUtilView(DefaultView):
     def __call__(self):
@@ -298,6 +387,7 @@ class CreatedView(DefaultView):
                     'email': email,
                     'programName': program_ID,
                 }
+                # import pdb; pdb.set_trace()
                 obj = api.content.create(
                     type='OIEStudyAbroadParticipant',
                     container=participants_folder,
@@ -305,8 +395,9 @@ class CreatedView(DefaultView):
                     **data)
                 api.content.transition(obj, 'submit')  # go ahead to step I
                 return '{0}/edit'.format(obj.absolute_url())
-            except Exception:
+            except Exception as e:
                 logger.warn('Could not create partipant application.')
+                logger.warn(e)
         return False
 
 

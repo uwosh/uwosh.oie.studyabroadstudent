@@ -28,7 +28,9 @@ educationLevel = participantIndexer(IndexerFactory('educationLevel'))
 
 @indexer(IOIEStudyAbroadParticipant)
 def university(participant):
-    import pdb; pdb.set_trace()  # if universityEnrolledUWO is Yes then this will be "UW Oshkosh", otherwise this is the value of universityEnrolledOther # noqa
+    if participant.universityEnrollowedUWO:
+        return "UW Oshkosh"
+    return participant.universityEnrolledOther
 
 
 # Program Indexers
@@ -49,10 +51,11 @@ def countries(program):
 
 @indexer(IOIEStudyAbroadProgram)
 def image(program):
-    bdata = ILeadImage(program)
-    if (
-            getattr(bdata, 'image', None) and
-            bdata.image is not None and
-            bdata.image.size > 0
-    ):
-        return '{0}/@@images/image'.format(program.absolute_url())
+    try:
+        if (
+                getattr(program, 'image', None) and
+                program.image.size > 0
+        ):
+            return '{0}/@@images/image'.format(program.absolute_url())
+    except TypeError:
+        return

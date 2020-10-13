@@ -2,8 +2,8 @@
 
 from collective import dexteritytextindexer
 from collective.z3cform.datagridfield import DataGridFieldFactory
+from collective.z3cform.datagridfield import BlockDataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
-from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.app.contenttypes.behaviors.tableofcontents import ITableOfContents
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.dexterity.behaviors.id import IShortName
@@ -14,12 +14,12 @@ from plone.app.dexterity.behaviors.nextprevious import INextPreviousToggle
 from plone.app.relationfield.behavior import IRelatedItems
 from plone.app.textfield import RichText
 from plone.app.versioningbehavior.behaviors import IVersionable
+from plone.autoform.directives import mode
 from plone.autoform.directives import omitted
 from plone.autoform.directives import read_permission
 from plone.autoform.directives import widget
 from plone.autoform.directives import write_permission
 from plone.autoform.interfaces import OMITTED_KEY
-from plone.directives import form
 from plone.namedfile import field
 from plone.supermodel import model
 from plone.supermodel.interfaces import FIELDSETS_KEY
@@ -188,32 +188,6 @@ class IOIEUserCommentsRowSchema(Interface):
     comment = schema.Text(
         title=_(u'Add a comment'),
     )
-
-
-# move lead image fields into their own Lead Image fieldset
-leadimage_fieldset = Fieldset(
-    'leadimage',
-    label=_(u'Lead Image'),
-    fields=['image', 'image_caption'],
-)
-try:
-    leadimage_fieldsets = ILeadImage.getTaggedValue(FIELDSETS_KEY)
-    leadimage_fieldsets.append(leadimage_fieldset)
-except KeyError:
-    ILeadImage.setTaggedValue(FIELDSETS_KEY, [leadimage_fieldset])
-
-
-# move change note into its own fieldset
-changeNote_fieldset = Fieldset(
-    'changeNote',
-    label=_(u'Change Note'),
-    fields=['changeNote'],
-)
-try:
-    changeNote_fieldsets = IVersionable.getTaggedValue(FIELDSETS_KEY)
-    changeNote_fieldsets.append(changeNote_fieldset)
-except KeyError:
-    IVersionable.setTaggedValue(FIELDSETS_KEY, [changeNote_fieldset])
 
 
 # hide these behavior fields
@@ -471,7 +445,13 @@ class IOIEStudyAbroadProgram(Interface):
         constraint=not_empty,
     )
 
-    dexteritytextindexer.searchable('rich_description')
+    image = field.NamedBlobImage(
+        title=_(u'Academic Program Image'),
+        description=_(u'The image will display in application and listing views of this program'),
+        required=True
+    )
+
+    # TODO A custom indexer might be desired to add the content of this field to searchabletext. We cannot use dexteritytextindexer here, it errors on the fact that the value is not a text type.
     rich_description = RichText(
         title=_(u'Rich Text Description'),
         description=_(
@@ -550,7 +530,7 @@ class IOIEStudyAbroadProgram(Interface):
         'academic_program_fieldset',
         label=_(u'Academic Program'),
         fields=['sponsoring_unit_or_department', 'program_type',
-                'program_component', 'title', 'description',
+                'program_component', 'title', 'description', 'image',
                 'rich_description', 'eligibility_requirement',
                 'learning_objectives', 'equipment_and_space',
                 'equipment_and_space_needs', 'guest_lectures',
@@ -746,7 +726,7 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary=program_cycle_vocabulary,
     )
 
-    widget(pretravel_dates=DataGridFieldFactory)
+    widget(pretravel_dates=BlockDataGridFieldFactory)
     pretravel_dates = schema.List(
         title=_(u'Pre-Travel Class & Orientation Dates'),
         description=_(
@@ -758,14 +738,14 @@ class IOIEStudyAbroadProgram(Interface):
         ),
     )
 
-    form.mode(travelDatesTransitionsAndDestinations='display')
+    mode(travelDatesTransitionsAndDestinations='display')
     travelDatesTransitionsAndDestinations = RichText(
         title=_(u'Travel Dates, Transitions & Destinations'),
         description=_(u'All transitions for this program are listed here.'),
         required=False,
         default=u'<em>There are currently no transitions</em>',
     )
-    form.mode(add_transition_link='display')
+    mode(add_transition_link='display')
     add_transition_link = RichText(
         required=False,
         default=u'<em>You can add transitions after saving this program</em>',
@@ -779,7 +759,7 @@ class IOIEStudyAbroadProgram(Interface):
         constraint=firstChoiceDatesFlexible_validator,
     )
 
-    widget('postTravelClassDates', DataGridFieldFactory)
+    widget('postTravelClassDates', BlockDataGridFieldFactory)
     postTravelClassDates = schema.List(
         title=_(u'Post-travel Class Dates'),
         description=_(
@@ -1206,14 +1186,14 @@ class IOIEStudyAbroadProgram(Interface):
     read_permission(add_course_link=V_COURSES_FS)
     write_permission(add_course_link=E_COURSES_FS)
 
-    form.mode(courses='display')
+    mode(courses='display')
     courses = RichText(
         title=u'UW Oshkosh Course Subject & Number',
         description=u'Include all courses that will be taught through this program.  Do not include courses that will be taught entirely at UWO, even when these courses are offered in preparation for the program away.  List existing courses only.  If the course you intend to use is not an existing course, your department must submit the course for formal approval through normal university channels prior to applying to use the course abroad/away.  Contact the OIE to add a course (abroad@uwosh.edu).',  # noqa
         required=False,
         default=u'<em>There are currently no courses</em>',
     )
-    form.mode(add_course_link='display')
+    mode(add_course_link='display')
     add_course_link = RichText(
         required=False,
         default=u'<em>You can add courses after saving this program</em>',
@@ -1230,7 +1210,7 @@ class IOIEStudyAbroadProgram(Interface):
     read_permission(contributing_entity=V_CONTRIBUTIONS_FS)
     write_permission(contributing_entity=E_CONTRIBUTIONS_FS)
 
-    form.mode(contributions_label='display')
+    mode(contributions_label='display')
     contributions_label = schema.TextLine(
         description=_(
             'If the College, Department, an external agency, external partner, or grant will contribute financially to the program, list the official name of the entity that is contributing, contributor contact details, and the amount of the contribution.'),  # noqa
@@ -1257,7 +1237,7 @@ class IOIEStudyAbroadProgram(Interface):
     read_permission(reviewer_emails=V_REVIEWERS_FS)
     write_permission(reviewer_emails=E_REVIEWERS_FS)
 
-    form.mode(reviewers_label='display')
+    mode(reviewers_label='display')
     reviewers_label = schema.TextLine(
         description=_(
             u'Type an email address for every Committee Chair, Department Chair and Dean: •  who supervises a Liaison, On-site Program Leader or On-site Program Co-leader listed in this application and/or •  is associated with a course offered through this program. Do not include email addresses for committee members who review applications.'),  # noqa
@@ -1378,7 +1358,7 @@ class IOIEStudyAbroadProgram(Interface):
         max_length=2500,
         required=False,
     )
-    form.mode(health_safety_security_documents='display')
+    mode(health_safety_security_documents='display')
     health_safety_security_documents = RichText(
         title=_(u'Health, Safety & Security Documents'),
         description=_(
@@ -1386,17 +1366,17 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
         default=u'<em>There are currently no documents</em>',
     )
-    form.mode(add_health_document_link='display')
+    mode(add_health_document_link='display')
     add_health_document_link = RichText(
         required=False,
         default=u'<em>You can add health documents after saving this program</em>',  # noqa
     )
-    form.mode(application_deadlines_label='display')
+    mode(application_deadlines_label='display')
     application_deadlines_label = schema.TextLine(
         description=_(u'Application Deadlines'),
         required=False,
     )
-    form.mode(application_items_label='display')
+    mode(application_items_label='display')
     application_items_label = schema.TextLine(
         title=_(u'Application Items - Internal Forms'),
         description=_(
@@ -1447,7 +1427,7 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary=yes_no_vocabulary,
         required=False,
     )
-    form.mode(application_items_travel_label='display')
+    mode(application_items_travel_label='display')
     application_items_travel_label = schema.TextLine(
         title=_(u'Application Items – Travel & Identification'),
         description=_(
@@ -1513,7 +1493,7 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary=yes_no_vocabulary,
         required=False,
     )
-    form.mode(application_items_background_label='display')
+    mode(application_items_background_label='display')
     application_items_background_label = schema.TextLine(
         title=_(u'Application Items – Background Check'),
         description=_(
@@ -1526,7 +1506,7 @@ class IOIEStudyAbroadProgram(Interface):
         vocabulary=yes_no_vocabulary,
         required=False,
    )
-    form.mode(application_items_other_label='display')
+    mode(application_items_other_label='display')
     application_items_other_label = schema.TextLine(
         title=_(u'Application Items – Other'),
         description=_(
@@ -1572,7 +1552,7 @@ class IOIEStudyAbroadProgram(Interface):
     read_permission(proposal_03=V_PROPOSALS_FS)
     write_permission(proposal_03=E_PROPOSALS_FS)
 
-    form.mode(proposals_label='display')
+    mode(proposals_label='display')
     proposals_label = schema.TextLine(
         description=_(u'Required prior to submitting for Liaison review'),
     )
@@ -1597,7 +1577,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_(u'Request for Proposals Due'),
         required=False,
     )
-    form.mode(provider_proposals_label='display')
+    mode(provider_proposals_label='display')
     provider_proposals_label = schema.TextLine(
         description=_(
             u'"Provider Proposals: At least 1 provider proposal must be selected and uploaded plus 1 flight proposal uploaded prior to using the ""Review Provider Proposal"" function. A yes/no contracting decision must be made for every provider and flight proposal prior to using the ""publish fee"" function.'),  # noqa
@@ -1753,7 +1733,7 @@ class IOIEStudyAbroadProgram(Interface):
     read_permission(close_account=V_FINANCES_FS)
     write_permission(close_account=E_FINANCES_FS)
 
-    form.mode(finances_label='display')
+    mode(finances_label='display')
     finances_label = schema.TextLine(
         description=_(u'Required to Determine Program Fee'),
     )
@@ -1782,7 +1762,7 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    form.mode(required_prior_to_publishing_initial_fee_label='display')
+    mode(required_prior_to_publishing_initial_fee_label='display')
     required_prior_to_publishing_initial_fee_label = schema.TextLine(
         description=_(u'Required Prior to Publishing Initial Fee'),
     )
@@ -1793,7 +1773,7 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    form.mode(required_prior_to_confirming_to_run_label='display')
+    mode(required_prior_to_confirming_to_run_label='display')
     required_prior_to_confirming_to_run_label = schema.TextLine(
         description=_(u'Required Prior to Confirming to Run'),
     )
@@ -1813,7 +1793,7 @@ class IOIEStudyAbroadProgram(Interface):
         #  access in student accounts.
     )
 
-    form.mode(required_prior_to_publishing_initial_fee_label_2='display')
+    mode(required_prior_to_publishing_initial_fee_label_2='display')
     required_prior_to_publishing_initial_fee_label_2 = schema.TextLine(
         description=_(
             u'Required Prior to Publishing Final Fee: Provider proposals and flight proposals on "Proposals" tab must also be complete.'),  # noqa
@@ -1834,7 +1814,7 @@ class IOIEStudyAbroadProgram(Interface):
         #  access in student accounts.
     )
 
-    form.mode(required_prior_to_confirming_ter_received_label='display')
+    mode(required_prior_to_confirming_ter_received_label='display')
     required_prior_to_confirming_ter_received_label = schema.TextLine(
         description=_(u'Required Prior to Confirming that the TER has been Received'),  # noqa
     )
@@ -1847,7 +1827,7 @@ class IOIEStudyAbroadProgram(Interface):
         #  Leader & Program Co-leader.
     )
 
-    form.mode(required_prior_to_processing_refunds_label='display')
+    mode(required_prior_to_processing_refunds_label='display')
     required_prior_to_processing_refunds_label = schema.TextLine(
         description=_(u'Required Prior to Processing Refunds'),
     )
@@ -1870,7 +1850,7 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    form.mode(required_prior_to_archiving_program_label='display')
+    mode(required_prior_to_archiving_program_label='display')
     required_prior_to_archiving_program_label = schema.TextLine(
         description=_(u'Required Prior to Archiving Program'),
     )
@@ -1942,7 +1922,7 @@ class IOIEStudyAbroadProgram(Interface):
     read_permission(other=V_PRE_DEPARTURE_FS)
     write_permission(other=E_PRE_DEPARTURE_FS)
 
-    form.mode(orientation_label='display')
+    mode(orientation_label='display')
     orientation_label = schema.TextLine(
         description=_(u'Orientation'),
     )
@@ -1957,7 +1937,7 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    form.mode(required_prior_to_confirming_program_to_run_label='display')
+    mode(required_prior_to_confirming_program_to_run_label='display')
     required_prior_to_confirming_program_to_run_label = schema.TextLine(
         description=_(u'Required Prior to Confirming Program to Run'),
     )
@@ -1967,7 +1947,7 @@ class IOIEStudyAbroadProgram(Interface):
         required=False,
     )
 
-    form.mode(proof_of_service_label='display')
+    mode(proof_of_service_label='display')
     proof_of_service_label = schema.TextLine(
         description=_(u'Required Prior to Scheduling the Operational Briefing'),  # noqa
     )

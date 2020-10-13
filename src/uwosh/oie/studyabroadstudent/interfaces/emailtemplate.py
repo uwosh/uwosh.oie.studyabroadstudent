@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from plone.app.textfield import RichText
-from plone.directives import form
+from plone.autoform.directives import mode
 from uwosh.oie.studyabroadstudent import _
 from zope import schema
 from zope.interface import Interface
 
 
 class IOIEProgramEmailTemplate(Interface):
-    form.mode(title='hidden')
+    mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Template Title'),
         required=True,

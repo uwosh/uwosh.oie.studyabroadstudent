@@ -1,6 +1,6 @@
 <div class="documentByLine"
      id="plone-document-byline"
-     i18n:domain="plone"
+     i18n:domain="uwosh.oie.studyabroadstudent"
      tal:condition="view/show">
   <tal:creator tal:define="creator_short_form view/creator;"
                tal:condition="creator_short_form">

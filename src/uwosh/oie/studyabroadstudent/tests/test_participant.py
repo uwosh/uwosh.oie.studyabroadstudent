@@ -26,31 +26,13 @@ class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):
         self.installer = api.portal.get_tool('portal_quickinstaller')
 
         # add calendar year
-        self.calendar_year = api.content.create(
-            container=self.portal,
-            type='OIECalendarYear',
-            id='2019',
-        )
-        self.calendar_year_uid = api.content.get_uuid(obj=self.calendar_year)
+        self.calendar_year, self.calendar_year_uid = self.get_calendar_year_and_uid()
 
         # add a sample program
-        self.program = api.content.create(
-            container=self.portal,
-            type='OIEStudyAbroadProgram',
-            id='sample-program',
-            calendar_year=self.calendar_year_uid,
-            term='1 Fall Interim',
-            college_or_unit='B College of Business',
-            countries=['Afghanistan'],
-        )
 
+        self.program = self.create_test_program()
         # add a sample participant
-        self.test_obj = api.content.create(
-            container=self.portal,
-            type='OIEStudyAbroadParticipant',
-            id='sample-participant',
-            programName=api.content.get_uuid(obj=self.program),
-        )
+        self.test_participant = self.create_test_participant()
 
     def test_schema(self):
         fti = queryUtility(IDexterityFTI, name='OIEStudyAbroadParticipant')
@@ -89,7 +71,7 @@ class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):
     #     logout()
     #     self.assertRaises(InvalidParameterError,
     #                       api.content.transition,
-    #                       obj=self.test_obj,
+    #                       obj=self.test_participant,
     #                       transition='submit')
     #
     # def test_can_transition_submit(self, fast=None):

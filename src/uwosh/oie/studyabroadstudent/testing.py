@@ -5,7 +5,7 @@ from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
-from plone.testing import z2
+from plone.testing.zope import ZSERVER_FIXTURE
 
 import uwosh.oie.studyabroadstudent
 
@@ -43,7 +43,7 @@ UWOSH_OIE_STUDYABROADSTUDENT_ACCEPTANCE_TESTING = FunctionalTesting(
     bases=(
         UWOSH_OIE_STUDYABROADSTUDENT_FIXTURE,
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
-        z2.ZSERVER_FIXTURE,
+        ZSERVER_FIXTURE,
     ),
     name='UwoshOieStudyabroadstudentLayer:AcceptanceTesting',
 )

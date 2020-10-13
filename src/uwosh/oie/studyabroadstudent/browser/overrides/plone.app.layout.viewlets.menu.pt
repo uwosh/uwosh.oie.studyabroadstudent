@@ -1,6 +1,6 @@
 <tal:contentviews tal:define="ploneview context/@@plone;"
                   tal:condition="ploneview/showToolbar"
-                  i18n:domain="plone">
+                  i18n:domain="uwosh.oie.studyabroadstudent">
   <tal:actions tal:repeat="action options/actions">
     <li tal:attributes="id string:contentview-${action/id};
                         class python: action.get('selected') and 'active' or ''"

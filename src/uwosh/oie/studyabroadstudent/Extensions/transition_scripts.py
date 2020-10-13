@@ -6,12 +6,12 @@ from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadProgram
 from uwosh.oie.studyabroadstudent.interfaces.directives import REQUIRED_IN_STATE_KEY  # noqa
 from uwosh.oie.studyabroadstudent.interfaces.directives import REQUIRED_VALUE_IN_STATE_KEY  # noqa
-from zLOG import ERROR
-from zLOG import INFO
-from zLOG import LOG
+import logging
+
+logger = logging.getLogger(__name__)
 
 
-DEFAULT_NOTIFICATION_FROM_ADDRESS = 'kyle.arthurs+oie@wildcardcorp.com'
+DEFAULT_NOTIFICATION_FROM_ADDRESS = 'brian.duncan+oie@wildcardcorp.com'
 PRE = 0
 POST = 1
 
@@ -75,7 +75,7 @@ def check_for_required_values_by_state(state_change, interface):
         field_title = field.title
         if not value:
             message = "The field '%s' is required for state '%s' but has no value" % (field_title, new_state_id)  # noqa
-            LOG('check_for_required_values_by_state', ERROR, message)
+            logger.error('check_for_required_values_by_state', 'ERROR', message)
             missingValues.append(
                 {
                     'expected': 'N/A',
@@ -121,7 +121,7 @@ def check_for_required_specific_values_by_state(state_change, interface):
             value = str(value)
         if value != must_be:
             message = "The field '%s' is required to have the value '%s' for state '%s' but has the value '%s'" % (field_title, must_be, new_state_id, value)  # noqa
-            LOG('check_for_required_values_by_state', ERROR, message)
+            logger.error('check_for_required_values_by_state', 'ERROR', message)
             missingValues.append(
                 {
                     'expected': must_be,
@@ -140,9 +140,9 @@ def sendTransitionMessage(state_change, interface):
     emailTemplate = getEmailMessageTemplate(state_change, interface)  # noqa
 
     if not emailTemplate:
-        LOG('sendTransitionMessage', INFO,
-            "Not sending transition email for transition %s" % (  # noqa
-            state_change.transition.id))
+        logger.info('sendTransitionMessage', 'INFO',
+            "Not sending transition email for transition %s. Was the Email Template created?" % (  # noqa
+                state_change.transition.id))
         return
 
     object = state_change.object
@@ -164,7 +164,7 @@ def sendTransitionMessage(state_change, interface):
     if old_state_id != new_state_id:
         state_msg = "Its state has changed from '" + old_state_id + "' to '" + new_state_id + "'.\n\n"  # noqa
 
-    LOG('sendTransitionMessage', INFO,
+    logger.info('sendTransitionMessage', 'INFO',
         "Sending email for transition %s to %s, subject '%s', emailTemplate = '%s'" % (  # noqa
         state_change.transition.id, mTo, mSubj, emailTemplate))  # noqa
     mMsg = assembleEmailMessage(object, emailTemplate)
@@ -180,11 +180,14 @@ def getEmailMessageTemplate(state_change, interface):
     }
     template_type = email_types[interface]
     catalog = api.portal.get_tool('portal_catalog')
-    templates = catalog({
-        'portal_type': template_type,
-        'transition': state_change.transition.id,
-        'sort_on': 'modified',
-    })
+    try:
+        templates = catalog({
+            'portal_type': template_type,
+            'transition': state_change.transition.id,
+            'sort_on': 'modified',
+        })
+    except AssertionError: # occurs when templates not created yet
+        return None
     template = None
     if templates:
         template = templates[0].getObject()  # using last modified
@@ -216,7 +219,7 @@ def getToAddresses(object, emailTemplate):
             try:
                 addresses.append(object.email)
             except Exception:
-                LOG('getToAddresses', INFO, 'Can''t get participant email')
+                logger.info('getToAddresses', 'INFO', 'Can''t get participant email')
 
     if emailTemplate.send_to_actor:
         actor = getActor(object)
@@ -230,7 +233,7 @@ def getToAddresses(object, emailTemplate):
             if leader.Title != '*Nobody':
                 addresses.append(leader.email)
         except Exception:
-            LOG('getToAddresses', INFO, 'Can''t get program leader email')
+            logger.info('getToAddresses', 'INFO', 'Can''t get program leader email')
 
     addresses.extend([addr.strip() for addr in emailTemplate.ccUsers.split(',')])  # noqa
 

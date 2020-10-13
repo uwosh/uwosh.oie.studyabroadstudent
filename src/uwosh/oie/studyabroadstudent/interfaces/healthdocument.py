@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from plone.directives import form
+from plone.autoform.directives import mode
 from plone.namedfile import field
 from uwosh.oie.studyabroadstudent import _
 from zope import schema
@@ -8,7 +8,7 @@ from zope.interface import Interface
 
 
 class IOIEHealthSafetySecurityDocument(Interface):
-    form.mode(title='hidden')
+    mode(title='hidden')
     title = schema.TextLine(
         title=_(u'Title'),
         required=False,

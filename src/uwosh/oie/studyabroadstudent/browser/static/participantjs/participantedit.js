@@ -1,5 +1,6 @@
-$(document).ready(function() {
-  if($('body').hasClass('template-edit') && $('body').hasClass('portaltype-oiestudyabroadparticipant')) {
+$(document).ready(function participantEdit() {
+  if (($('body').hasClass('template-edit') || $('body').hasClass('template-oiestudyabroadparticipant') )&& $('body').hasClass('portaltype-oiestudyabroadparticipant')) {
+    console.log('hi1');
     var baseURL = $('body').attr('data-base-url');
     var utilURL = baseURL + '/edit-util';
     var baseWidgetSelector = '#formfield-form-widgets-';
@@ -30,6 +31,28 @@ $(document).ready(function() {
       }
     }
 
+    function otherContactServiceChanged(event) {
+      event.target.value === '--NOVALUE--' ?
+        $('#formfield-form-widgets-otherContactID').show() :
+        $('#formfield-form-widgets-otherContactID').hide();
+    }
+
+    function emergencyFullNameChanged(event) {
+      const $targetEvent = $('#' + event.target);
+      console.log($targetEvent);
+      if (!$targetEvent.val()) {
+        
+      }
+      const emergencyGroupNumber = $targetEvent.attr('id')[18];
+      if (typeof (emergencyGroupNumber) === 'number') return;
+      
+      // $('#fieldset-emergency_contact').children().
+      
+      console.log($targetEvent.attr('id'));
+    }
+
+
+    
     $.ajax(utilURL, {
       success: function(data) {
         util_data = JSON.parse(data);
@@ -37,5 +60,8 @@ $(document).ready(function() {
         handleInterview();
       }
     });
+    this.otherContactServiceChanged = otherContactServiceChanged;
+    this.emergencyFullNameChanged = emergencyFullNameChanged;
+    this.setEmergencyContactFieldsDisplay();
   }
 });
