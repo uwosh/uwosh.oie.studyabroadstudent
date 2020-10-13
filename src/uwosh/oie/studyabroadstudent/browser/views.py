@@ -16,7 +16,6 @@ from z3c.form.field import Fields
 from plone.autoform.interfaces import OMITTED_KEY
 from zope.interface import Interface
 
-import base64
 import csv
 import json
 import logging
@@ -154,13 +153,14 @@ class ProgramView(DefaultView, FolderView):
         return set([l.accommodation for l in locations])
 
     def has_lead_image(self):
-        bdata = ILeadImage(self.context)
-        if (
-                getattr(bdata, 'image', None) and
-                bdata.image is not None and
-                bdata.image.size > 0
-        ):
-            return True
+        try:
+            if (
+                    getattr(self.context, 'image', None) and
+                    self.context.image.size > 0
+            ):
+                return True
+        except TypeError:
+            return False
 
     def get_detailed_view_link(self):
         return self.context.absolute_url() + '/manager_view'
@@ -189,12 +189,8 @@ class ProgramSearchView(BrowserView):
             except AttributeError:
                 logger.warn('Excluding program {0} from '
                             'search view, not all searchable fields were '
-                            'indexed.'.format(brain.Title))
-
-        string = json.dumps(programs, default=handle_missing)
-        encoded = base64.b64encode(string)
-        # import pdb; pdb.set_trace()
-        return encoded
+                            'indexed.'.format(brain.Title))       
+        return json.dumps(programs, default=handle_missing)
 
 
 class CooperatingPartnerView(DefaultView):

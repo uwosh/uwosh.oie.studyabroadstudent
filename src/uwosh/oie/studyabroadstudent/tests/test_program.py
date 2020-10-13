@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from . import OIEStudyAbroadContentBaseTest, TRANSITIONS, ROLES, STATES
+from AccessControl import getSecurityManager
 from AccessControl import Unauthorized
 from plone import api
 from plone.api.exc import InvalidParameterError

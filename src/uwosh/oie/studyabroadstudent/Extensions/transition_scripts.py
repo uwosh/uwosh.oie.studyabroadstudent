@@ -141,7 +141,7 @@ def sendTransitionMessage(state_change, interface):
 
     if not emailTemplate:
         logger.info('sendTransitionMessage', 'INFO',
-            "Not sending transition email for transition %s" % (  # noqa
+            "Not sending transition email for transition %s. Was the Email Template created?" % (  # noqa
                 state_change.transition.id))
         return
 
@@ -180,11 +180,14 @@ def getEmailMessageTemplate(state_change, interface):
     }
     template_type = email_types[interface]
     catalog = api.portal.get_tool('portal_catalog')
-    templates = catalog({
-        'portal_type': template_type,
-        'transition': state_change.transition.id,
-        'sort_on': 'modified',
-    })
+    try:
+        templates = catalog({
+            'portal_type': template_type,
+            'transition': state_change.transition.id,
+            'sort_on': 'modified',
+        })
+    except AssertionError: # occurs when templates not created yet
+        return None
     template = None
     if templates:
         template = templates[0].getObject()  # using last modified

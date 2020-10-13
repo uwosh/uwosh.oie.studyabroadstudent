@@ -49,6 +49,7 @@ setup(
         'currencies',
         'collective.dexteritytextindexer',
         'collective.z3cform.datagridfield',
+        # 'plone.app.workflowmanager',
         'collective.impersonate',
         'collective.easyform',
         'plone.app.controlpanel',

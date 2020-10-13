@@ -1,4 +1,4 @@
-<div i18n:domain="plone"
+<div i18n:domain="uwosh.oie.studyabroadstudent"
      tal:define="history view/fullHistory;"
      tal:omit-tag="">
      <div tal:condition="not: history">—</div>

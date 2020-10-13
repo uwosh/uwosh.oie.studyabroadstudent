@@ -440,7 +440,7 @@ class OIEStudyAbroadContentBaseTest(unittest.TestCase):
         found_expected_error = 'Invalid transition' in error_str
         self.assertTrue(found_expected_error)
         self.assertEqual(api.content.get_state(obj=obj), end_state)
-
+    
     def _switch_role(self, obj=None, role=None):
         self.assertIsNotNone(obj)
         self.assertIn(role, ROLES)
@@ -457,7 +457,6 @@ class OIEStudyAbroadContentBaseTest(unittest.TestCase):
         self._recursive_transition_to_state(obj, transition_steps)
         self.assertEqual(api.content.get_state(obj=obj), destination_state)
         return obj
-
     def _transition_to_initial(self, obj):
         if api.content.get_state(obj=obj) == 'initial':
             return obj

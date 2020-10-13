@@ -323,7 +323,7 @@ class ContactsVocabularyFactory(object):
             terms.append(SimpleTerm(
                 value=brain.UID,
                 token=token,
-                title=brain.Title.decode('utf8'),
+                title=brain.Title,
             ))
         return SimpleVocabulary(terms)
 
@@ -345,7 +345,7 @@ class CalendarYearVocabularyFactory(object):
             terms.append(SimpleTerm(
                 value=brain.UID,
                 token=token,
-                title=brain.Title.decode('utf8'),
+                title=brain.Title,
             ))
         return SimpleVocabulary(terms)
 
@@ -367,7 +367,7 @@ class CooperatingPartnerVocabularyFactory(object):
             terms.append(SimpleTerm(
                 value=brain.UID,
                 token=token,
-                title=brain.Title.decode('utf8'),
+                title=brain.Title,
             ))
         return SimpleVocabulary(terms)
 
@@ -389,7 +389,7 @@ class NewProgramsVocabularyFactory(object):
             terms.append(SimpleTerm(
                 value=brain.UID,
                 token=token,
-                title=brain.Title.decode('utf8'),
+                title=brain.Title,
             ))
         return SimpleVocabulary(terms)
 
@@ -411,7 +411,7 @@ class AirlineVocabularyFactory(object):
             terms.append(SimpleTerm(
                 value=brain.UID,
                 token=token,
-                title=brain.Title.decode('utf8'),
+                title=brain.Title,
             ))
         return SimpleVocabulary(terms)
 
@@ -433,7 +433,7 @@ class ProgramLeaderVocabularyFactory(object):
             terms.append(SimpleTerm(
                 value=brain.UID,
                 token=token,
-                title=brain.Title.decode('utf8'),
+                title=brain.Title,
             ))
         return SimpleVocabulary(terms)
 
@@ -455,7 +455,7 @@ class LiaisonVocabularyFactory(object):
             terms.append(SimpleTerm(
                 value=brain.UID,
                 token=token,
-                title=brain.Title.decode('utf8'),
+                title=brain.Title,
             ))
         return SimpleVocabulary(terms)
 
@@ -498,7 +498,7 @@ class ProviderVocabularyFactory(object):
             terms.append(SimpleTerm(
                 value=brain.UID,
                 token=token,
-                title=brain.Title.decode('utf8'),
+                title=brain.Title,
             ))
         return SimpleVocabulary(terms)
 
@@ -520,7 +520,7 @@ class FileVocabularyFactory(object):
             terms.append(SimpleTerm(
                 value=brain.UID,
                 token=token,
-                title=brain.Title.decode('utf8'),
+                title=brain.Title,
             ))
         return SimpleVocabulary(terms)
 
@@ -542,7 +542,7 @@ class ImageVocabularyFactory(object):
             terms.append(SimpleTerm(
                 value=brain.UID,
                 token=token,
-                title=brain.Title.decode('utf8'),
+                title=brain.Title,
             ))
         return SimpleVocabulary(terms)
 
@@ -556,7 +556,7 @@ class ProgramTransitionVocabularyFactory(object):
     def __call__(self, context):
         def getTitle(item):
             if item and len(item) > 0:
-                return item[1].title.decode('utf8')
+                return item[1].title
             return None
 
         pw = api.portal.get_tool('portal_workflow')
@@ -568,7 +568,7 @@ class ProgramTransitionVocabularyFactory(object):
             terms.append(SimpleTerm(
                 value=t_id,
                 token=t_id,
-                title=t_obj.title.decode('utf8'),
+                title=t_obj.title,
             ))
         return SimpleVocabulary(terms)
 
@@ -582,7 +582,7 @@ class ParticipantTransitionVocabularyFactory(object):
     def __call__(self, context):
         def getTitle(item):
             if item and len(item) > 0:
-                return item[1].title.decode('utf8')
+                return item[1].title
             return None
 
         pw = api.portal.get_tool('portal_workflow')
@@ -594,7 +594,7 @@ class ParticipantTransitionVocabularyFactory(object):
             terms.append(SimpleTerm(
                 value=t_id,
                 token=t_id,
-                title=t_obj.title.decode('utf8'),
+                title=t_obj.title,
             ))
         return SimpleVocabulary(terms)
 
