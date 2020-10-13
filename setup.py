@@ -42,7 +42,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'plone.api',
-        'Products.GenericSetup>=1.8.2',
+        'Products.GenericSetup',
         'setuptools',
         'z3c.jbot',
         'plone.app.dexterity',
@@ -52,7 +52,7 @@ setup(
         'collective.impersonate',
         'collective.easyform',
         'plone.app.controlpanel',
-        'Products.ContentWellPortlets',
+        # 'Products.ContentWellPortlets',
         'plone.app.iterate',
     ],
     extras_require={
@@ -62,7 +62,7 @@ setup(
             # Plone KGS does not use this version, because it would break
             # Remove if your package shall be part of coredev.
             # plone_coredev tests as of 2016-04-01.
-            'plone.testing[zope]',
+            'plone.testing',
             'plone.app.contenttypes',
             'plone.app.robotframework[debug]',
         ],
