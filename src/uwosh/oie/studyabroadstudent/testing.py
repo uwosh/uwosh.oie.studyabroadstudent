@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
-from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneSandboxLayer
 from plone.testing.z2 import ZSERVER_FIXTURE
+from plone.testing import Layer, zope, zodb
 
-import uwosh.oie.studyabroadstudent
 
 
 class UwoshOieStudyabroadstudentLayer(PloneSandboxLayer):
@@ -18,11 +17,22 @@ class UwoshOieStudyabroadstudentLayer(PloneSandboxLayer):
         # Load any other ZCML that is required for your tests.
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
+        import uwosh.oie.studyabroadstudent
         self.loadZCML(package=uwosh.oie.studyabroadstudent)
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, 'uwosh.oie.studyabroadstudent:default')
+        self.applyProfile(portal, 'uwosh.oie.studyabroadstudent:default')
 
+
+# from plone.app.testing import PloneWithPackageLayer
+# import my.addon
+
+# FIXTURE = PloneWithPackageLayer(
+#     zcml_package=my.addon,
+#     zcml_filename='configure.zcml',
+#     gs_profile_id='my.addon:default',
+#     name="MyAddonFixture"
+# )
 
 UWOSH_OIE_STUDYABROADSTUDENT_FIXTURE = UwoshOieStudyabroadstudentLayer()
 

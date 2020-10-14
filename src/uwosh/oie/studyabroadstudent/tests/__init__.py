@@ -299,14 +299,16 @@ class OIEStudyAbroadContentBaseTest(unittest.TestCase):
                 end_state=initial_state,
             )
 
-    def _verify_transition_by_all_roles(self,
-                                        obj=None,
-                                        initial_state=None,
-                                        authorized_roles=None,
-                                        unauthorized_roles=None,
-                                        transition=None,
-                                        destination_state=None,
-                                        end_state=None):
+    def _verify_transition_by_all_roles(
+        self,
+        obj=None,
+        initial_state=None,
+        authorized_roles=None,
+        unauthorized_roles=None,
+        transition=None,
+        destination_state=None,
+        end_state=None
+    ):
         self.assertIsNotNone(obj)
         self.assertIn(initial_state, STATES.keys())
         self.assertIn(role, ROLES)
@@ -342,17 +344,21 @@ class OIEStudyAbroadContentBaseTest(unittest.TestCase):
         # check if we have to get to the destination_state
         if api.content.get_state(obj=obj) != destination_state:
             self._switch_role(obj, 'Manager')
-            self._transition_to_state(obj,
-                                      transition=transition,
-                                      state=destination_state)
+            self._transition_to_state(
+                obj,
+                transition=transition,
+                state=destination_state
+            )
 
-    def _verify_allowed_transition_by_roles(self,
-                                            obj=None,
-                                            initial_state=None,
-                                            roles=None,
-                                            transition=None,
-                                            destination_state=None,
-                                            end_state=None):
+    def _verify_allowed_transition_by_roles(
+        self,
+        obj=None,
+        initial_state=None,
+        roles=None,
+        transition=None,
+        destination_state=None,
+        end_state=None
+    ):
         self.assertIsNotNone(obj)
         self.assertIn(initial_state, STATES.keys())
         self.assertIn(role, ROLES)
@@ -369,12 +375,14 @@ class OIEStudyAbroadContentBaseTest(unittest.TestCase):
                 end_state=end_state,
             )
 
-    def _verify_allowed_transition_by_role(self,
-                                           obj=None,
-                                           initial_state=None,
-                                           role=None, transition=None,
-                                           destination_state=None,
-                                           end_state=None):
+    def _verify_allowed_transition_by_role(
+        self,
+        obj=None,
+        initial_state=None,
+        role=None, transition=None,
+        destination_state=None,
+        end_state=None
+    ):
         self.assertIsNotNone(obj)
         self.assertIn(initial_state, STATES.keys())
         self.assertIn(role, ROLES)
@@ -388,12 +396,14 @@ class OIEStudyAbroadContentBaseTest(unittest.TestCase):
         # send it back to the end state
         self._transition_to_state(obj, destination_state=end_state)
 
-    def _verify_unauthorized_transition_by_roles(self,
-                                                 obj=None,
-                                                 initial_state=None,
-                                                 roles=None,
-                                                 transition=None,
-                                                 end_state=None):
+    def _verify_unauthorized_transition_by_roles(
+        self,
+        obj=None,
+        initial_state=None,
+        roles=None,
+        transition=None,
+        end_state=None
+    ):
         self.assertIsNotNone(obj)
         self.assertIn(initial_state, STATES.keys())
         self.assertIn(role, ROLES)
@@ -408,12 +418,14 @@ class OIEStudyAbroadContentBaseTest(unittest.TestCase):
                 end_state=end_state,
             )
 
-    def _verify_unauthorized_transition_by_role(self,
-                                                obj=None,
-                                                initial_state=None,
-                                                role=None,
-                                                transition=None,
-                                                end_state=None):
+    def _verify_unauthorized_transition_by_role(
+        self,
+        obj=None,
+        initial_state=None,
+        role=None,
+        transition=None,
+        end_state=None
+    ):
         self.assertIsNotNone(obj)
         self.assertIn(initial_state, STATES.keys())
         self.assertIn(role, ROLES)
@@ -421,14 +433,18 @@ class OIEStudyAbroadContentBaseTest(unittest.TestCase):
         self.assertIn(end_state, STATES.keys())
         self.assertEqual(api.content.get_state(obj=obj), initial_state)
         self._switch_role(obj, role)
-        self._attempt_invalid_transition(obj,
-                                         transition=transition,
-                                         end_state=end_state)
+        self._attempt_invalid_transition(
+            obj,
+            transition=transition,
+            end_state=end_state
+        )
 
-    def _attempt_invalid_transition(self,
-                                    obj=None,
-                                    transition=None,
-                                    end_state=None):
+    def _attempt_invalid_transition(
+        self,
+        obj=None,
+        transition=None,
+        end_state=None
+    ):
         self.assertIsNotNone(obj)
         self.assertIn(transition, TRANSITIONS)
         self.assertIn(end_state, STATES.keys())

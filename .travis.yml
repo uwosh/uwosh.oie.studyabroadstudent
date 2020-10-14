@@ -20,12 +20,12 @@ install:
 before_script:
 - firefox -v
 script:
-  - code-analysis
-  - test
+  - bin/code-analysis
+  - bin/test
 after_success:
-  - createcoverage
-  - pip install coveralls
-  - coveralls
+  - bin/createcoverage
+  - bin/pip install coveralls
+  - bin/coveralls
 notifications:
   email:
     - brian.duncan@wildcardcorp.com
