@@ -19,7 +19,7 @@ class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):
         """Custom shared utility setup for tests."""
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.installer = get_installer(self.context)
+        self.installer = get_installer(self.portal)
 
         # add calendar year
         self.calendar_year, self.calendar_year_uid = self.get_calendar_year_and_uid()  # noqa

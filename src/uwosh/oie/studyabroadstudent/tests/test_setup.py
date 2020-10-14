@@ -40,7 +40,7 @@ class TestUninstall(unittest.TestCase):
 
     def test_product_uninstalled(self):
         """Test if uwosh.oie.studyabroadstudent is cleanly uninstalled."""
-        is_installed = self.installer.isProductInstalled(oie_student)
+        is_installed = self.installer.is_product_installed(oie_student)
         self.assertFalse(is_installed)
 
     def test_browserlayer_removed(self):

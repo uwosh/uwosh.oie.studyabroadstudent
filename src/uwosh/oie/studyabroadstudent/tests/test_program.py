@@ -107,7 +107,7 @@ class OIEStudyAbroadProgramIntegrationTest(OIEStudyAbroadContentBaseTest):
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
-        self.installer = get_installer(self.context)
+        self.installer = get_installer(self.portal)
 
         self.calendar_year, self.calendar_year_uid = self.get_calendar_year_and_uid()  # noqa
         self.test_program = self.create_test_program()
@@ -127,7 +127,7 @@ class OIEStudyAbroadProgramIntegrationTest(OIEStudyAbroadContentBaseTest):
 
     def test_is_addon_installed(self):
         self.assertTrue(
-            self.installer.isProductInstalled('uwosh.oie.studyabroadstudent'),
+            self.installer.is_product_installed('uwosh.oie.studyabroadstudent'),
         )
 
     def test_schema(self):
@@ -174,8 +174,7 @@ class OIEStudyAbroadProgramIntegrationTest(OIEStudyAbroadContentBaseTest):
                 transition='this-transition-does-not-exist',
             )
         except InvalidParameterError as e:
-            error_str = e.message
-        self.assertTrue('Invalid transition' in error_str)
+            self.assertTrue('Invalid transition' in str(e))
 
     def test_cannot_transition_as_anonymous(self):
         login(self.portal, TEST_USER_NAME)

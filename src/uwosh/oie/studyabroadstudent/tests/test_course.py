@@ -20,7 +20,7 @@ class OIECourseIntegrationTest(unittest.TestCase):
         """Custom shared utility setup for tests."""
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.installer = get_installer(self.context)
+        self.installer = get_installer(self.portal)
 
     def test_schema(self):
         fti = queryUtility(IDexterityFTI, name='OIECourse')

@@ -10,6 +10,7 @@ from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_IN
 from zope.component import createObject
 from zope.component import queryUtility
 
+from os.path import dirname, join
 import unittest
 
 
@@ -21,7 +22,7 @@ class OIEHealthSafetySecurityDocumentIntegrationTest(unittest.TestCase):
         """Custom shared utility setup for tests."""
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.installer = get_installer(self.context)
+        self.installer = get_installer(self.portal)
 
     def test_schema(self):
         fti = queryUtility(IDexterityFTI,
@@ -42,11 +43,13 @@ class OIEHealthSafetySecurityDocumentIntegrationTest(unittest.TestCase):
         self.assertTrue(IOIEHealthSafetySecurityDocument.providedBy(obj))
 
     def test_adding(self):
-        file = getFile('notimage.doc')
-        obj = api.content.create(
-            container=self.portal,
-            type='OIEHealthSafetySecurityDocument',
-            id='OIEHealthSafetySecurityDocument',
-            file=file,
-        )
+        # file = getFile('notimage.doc')
+        path = join(dirname(__file__), 'notimage.doc')
+        with open(path) as file:
+            obj = api.content.create(
+                container=self.portal,
+                type='OIEHealthSafetySecurityDocument',
+                id='OIEHealthSafetySecurityDocument',
+                file=file,
+            )
         self.assertTrue(IOIEHealthSafetySecurityDocument.providedBy(obj))
