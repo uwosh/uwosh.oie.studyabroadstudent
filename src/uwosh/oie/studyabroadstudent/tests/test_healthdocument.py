@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
+from os.path import dirname
+from os.path import join
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
-from plone.namedfile.tests import getFile
 from Products.CMFPlone.utils import get_installer
-from uwosh.oie.studyabroadstudent.interfaces.healthdocument import IOIEHealthSafetySecurityDocument  # noqa
-from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.healthdocument import IOIEHealthSafetySecurityDocument  # noqa : E501
+from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING as test_layer  # noqa : E501
 from zope.component import createObject
 from zope.component import queryUtility
 
-from os.path import dirname, join
 import unittest
 
 
 class OIEHealthSafetySecurityDocumentIntegrationTest(unittest.TestCase):
 
-    layer = UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING
+    layer = test_layer
 
     def setUp(self):
         """Custom shared utility setup for tests."""
@@ -43,7 +43,6 @@ class OIEHealthSafetySecurityDocumentIntegrationTest(unittest.TestCase):
         self.assertTrue(IOIEHealthSafetySecurityDocument.providedBy(obj))
 
     def test_adding(self):
-        # file = getFile('notimage.doc')
         path = join(dirname(__file__), 'notimage.doc')
         with open(path) as file:
             obj = api.content.create(

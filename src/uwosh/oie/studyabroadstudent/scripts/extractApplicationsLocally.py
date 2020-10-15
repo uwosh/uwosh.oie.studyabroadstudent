@@ -3,10 +3,10 @@
 # bin/instance run extractApplicationsLocally.py > extractlocallyoutput.out
 
 from uwosh.oie.studyabroadstudent.listApplicationIDsoutput import application_ids  # noqa
+from xmlrpc.client import ServerProxy
 
 # get the localhost site Manager login credentials from environment variables
 import os
-from xmlrpc.client import ServerProxy
 
 
 local_user = os.environ['LOCALUSER']

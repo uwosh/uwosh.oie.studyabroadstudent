@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-from . import OIEStudyAbroadContentBaseTest, STATES
+from . import OIEStudyAbroadContentBaseTest
+from . import STATES
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import IOIEStudyAbroadProgram  # noqa
-from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING  # noqa
 
 
 def add_transition_tests(cls):
@@ -12,18 +11,18 @@ def add_transition_tests(cls):
         def do_create_test(self):
             self._transition_to_state(
                 obj=self.test_program,
-                destination_state=state
+                destination_state=state,
             )
             self.assertEqual(
                 api.content.get_state(self.test_program),
-                state
+                state,
             )
         return do_create_test
 
     def generate_tests(cls):
         for state in STATES.keys():
             test_method = create_transition_to_state_test(state=state)
-            test_name = 'test_transition_to_{}'.format(state)
+            test_name = f'test_transition_to_{state}'
             test_name = test_name.replace('-', '_')
             test_method.__name__ = test_name
             setattr(cls, test_method.__name__, test_method)
@@ -40,5 +39,5 @@ class TestingHelperFunctions(OIEStudyAbroadContentBaseTest):
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
-        self.calendar_year, self.calendar_year_uid = self.get_calendar_year_and_uid()  # noqa
+        self.calendar_year, self.calendar_year_uid = self.get_calendar_year_and_uid()  # noqa : E501
         self.test_program = self.create_test_program()

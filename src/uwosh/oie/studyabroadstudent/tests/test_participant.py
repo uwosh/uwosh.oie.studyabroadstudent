@@ -6,14 +6,11 @@ from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
 from Products.CMFPlone.utils import get_installer
 from uwosh.oie.studyabroadstudent.interfaces.participant import IOIEStudyAbroadParticipant  # noqa
-from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING  # noqa
 from zope.component import createObject
 from zope.component import queryUtility
 
 
 class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):
-
-    layer = UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING
 
     def setUp(self):
         """Custom shared utility setup for tests."""
@@ -31,16 +28,16 @@ class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):
         self.test_participant = self.create_test_participant()
 
     def test_schema(self):
-        fti = queryUtility(IDexterityFTI, name='OIEStudyAbroadParticipant')
+        fti = queryUtility(IDexterityFTI, name=self.participant_name)
         schema = fti.lookupSchema()
         self.assertEqual(IOIEStudyAbroadParticipant, schema)
 
     def test_fti(self):
-        fti = queryUtility(IDexterityFTI, name='OIEStudyAbroadParticipant')
+        fti = queryUtility(IDexterityFTI, name=self.participant_name)
         self.assertTrue(fti)
 
     def test_factory(self):
-        fti = queryUtility(IDexterityFTI, name='OIEStudyAbroadParticipant')
+        fti = queryUtility(IDexterityFTI, name=self.participant_name)
         factory = fti.factory
         obj = createObject(factory)
         self.assertTrue(IOIEStudyAbroadParticipant.providedBy(obj))
@@ -48,8 +45,8 @@ class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):
     def test_adding(self):
         obj = api.content.create(
             container=self.portal,
-            type='OIEStudyAbroadParticipant',
-            id='OIEStudyAbroadParticipant',
+            type=self.participant_name,
+            id=self.participant_name,
         )
         self.assertTrue(IOIEStudyAbroadParticipant.providedBy(obj))
 
@@ -57,7 +54,7 @@ class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):
         workflowTool = api.portal.get_tool('portal_workflow')
         chains = dict(workflowTool.listChainOverrides())
         defaultChain = workflowTool.getDefaultChain()
-        participantChain = chains.get('OIEStudyAbroadParticipant',
+        participantChain = chains.get(self.participant_name,
                                       defaultChain)
         self.assertEqual(participantChain, ('participant',))
 

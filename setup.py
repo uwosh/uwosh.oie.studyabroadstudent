@@ -65,6 +65,7 @@ setup(
             # 'mock',
         ],
     },
+    setup_requires=['flake8', 'isort'],
     entry_points="""
     [z3c.autoinclude.plugin]
     target = plone

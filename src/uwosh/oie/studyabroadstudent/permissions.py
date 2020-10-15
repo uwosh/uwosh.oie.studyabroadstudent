@@ -1,4 +1,4 @@
-from Products.CMFCore import permissions as CMFCorePermissions
+# -*- coding: utf-8 -*-
 from AccessControl.SecurityInfo import ModuleSecurityInfo
 from Products.CMFCore.permissions import setDefaultRoles
 
@@ -47,5 +47,5 @@ study_abroad_roles = [
 
 security = ModuleSecurityInfo('uwosh.oie.studyabroadstudent')
 for role in study_abroad_roles:
-    security.declarePublic(role)
+    security.declarePublic(role)  # noqa : D001
     setDefaultRoles(role, ())

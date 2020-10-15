@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
 from io import StringIO
 from plone import api
-from plone.app.contenttypes.behaviors.leadimage import ILeadImage
 from plone.app.contenttypes.browser.folder import FolderView
 from plone.app.uuid.utils import uuidToObject
+from plone.autoform.interfaces import OMITTED_KEY
 from plone.dexterity.browser.view import DefaultView
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.file import NamedImage
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five import BrowserView
-from uwosh.oie.studyabroadstudent.reporting import ReportUtil
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
+from uwosh.oie.studyabroadstudent.reporting import ReportUtil
 from zope.interface import alsoProvides
-from z3c.form.field import Fields
-from plone.autoform.interfaces import OMITTED_KEY
 from zope.interface import Interface
 
 import csv
@@ -21,7 +19,6 @@ import json
 import logging
 import Missing
 import os
-import copy
 
 
 logger = logging.getLogger('uwosh.oie.studyabroadstudent')
@@ -149,8 +146,8 @@ class ProgramView(DefaultView, FolderView):
     def housing(self):
         brains = api.content.find(context=self.context,
                                   portal_type='OIETransition')
-        locations = [b.getObject() for b in brains]
-        return set([l.accommodation for l in locations])
+        locations = [brain.getObject() for brain in brains]
+        return set([location.accommodation for location in locations])
 
     def has_lead_image(self):
         try:
@@ -187,9 +184,7 @@ class ProgramSearchView(BrowserView):
                            }
                 programs.append(program)
             except AttributeError:
-                logger.warn('Excluding program {0} from '
-                            'search view, not all searchable fields were '
-                            'indexed.'.format(brain.Title))       
+                logger.warn(f'Excluding program {brain.Title} from search view, not all searchable fields were indexed.')  # noqa : E501
         return json.dumps(programs, default=handle_missing)
 
 
@@ -220,26 +215,28 @@ class ParticipantView(DefaultView, FolderView):
 
     @property
     def permissions(self):
-        if not hasattr(self, '_permissions'):
-            self._permissions = self._get_permissions(self.user_roles, self.transition_state)
+        if not getattr(self, '_permissions', None):
+            self._permissions = self._get_permissions(
+                self.user_roles,
+                self.transition_state,
+            )
         return self._permissions
-    
+
     @property
     def transition_state(self):
-        if not hasattr(self, '_transition_state'):
+        if not getattr(self, '_transition_state', None):
             # try:
-                self._transition_state = api.content.get_state(self.context)
+            self._transition_state = api.content.get_state(self.context)
             # except KeyError:
-                # self._transition_state = None
+            #    self._transition_state = None
         return self._transition_state
 
     @property
     def user_roles(self):
-        if not hasattr(self, '_user_roles'):
-            # self._user_roles = api.user.get_current().getRoles()
+        if not getattr(self, '_user_roles', None):
+            # self._user_roles = api.user.get_current().getRoles()  # noqa : P001
             self._user_roles = []
         return self._user_roles
-
 
     def _get_permissions(self, user_roles, transition_state):
         relative_path = '../static/json/optimized_participant_permissions.json'
@@ -251,14 +248,16 @@ class ParticipantView(DefaultView, FolderView):
         # except Exception:
         #     return field_permissions
         for role in user_roles:
-            role_permissions = (permission_map[role]['default_permissions'], 
-                                permission_map[role][transition_state])
+            role_permissions = (
+                permission_map[role]['default_permissions'],
+                permission_map[role][transition_state],
+            )
             for permissions in role_permissions:
                 for read_write_none in permissions:
                     for field in permissions[read_write_none]:
-                        field_permissions[field] = self._get_highest_permission(
+                        field_permissions[field] = self._highest_permission(
                             field_permissions.get(field, None),
-                            read_write_none
+                            read_write_none,
                         )
         return field_permissions
 
@@ -268,31 +267,30 @@ class ParticipantView(DefaultView, FolderView):
     def updateFieldsFromSchemata(self):
         IOIEStudyAbroadParticipant.setTaggedValue(
             OMITTED_KEY,
-            [(Interface, field, 'true') for field in self.permissions if self.permissions[field] == 'none']
+            [(Interface, field, 'true') for field in self.permissions if self.permissions[field] == 'none']  # noqa : E501
         )
         super(ParticipantView, self).updateFieldsFromSchemata()
 
-    def _get_highest_permission(self, *permissions):
+    def _highest_permission(self, *permissions):
         ranked = [None, 'none', 'read', 'read_write']
-        tmp = {permission: ranked.index(permission) for permission in set(permissions)}
+        tmp = {permission: ranked.index(permission) for permission in set(permissions)}  # noqa : E501
         return max(tmp, key=tmp.get)
 
     def _get_show_these(self):
-        show_these = { 'fields': {}, 'groups': {} }
-        # import pdb; pdb.set_trace()
+        show_these = {'fields': {}, 'groups': {}}
         for group in self.groups:
             show_these['groups'][group.label] = False
             for widget in group.widgets.values():
                 if self.can_view_field(widget.label):
                     show_these['groups'][group.label] = True
                     break
-            
+
         for field in self.widgets.values():
             if self._can_view_field(field.label):
                 show_these['fields'][field.label] = True
             else:
                 show_these['fields'][field.label] = False
-                
+
         return show_these
 
     def _can_view_field(self, field_name):
@@ -300,11 +298,17 @@ class ParticipantView(DefaultView, FolderView):
                field_name in self.permissions['read_write']
 
     def show_widget(self, widget):
-        disallowed = ('IBasic.title', 'IBasic.description', 'title', 'description',)
+        disallowed = (
+            'IBasic.title',
+            'IBasic.description',
+            'title',
+            'description',
+        )
         # if not self._permissions:
         #     self.call()
         return widget.__name__ not in disallowed and \
             self._permissions['fields'][widget.label] in ('read', 'read_write')
+
 
 class ParticipantEditUtilView(DefaultView):
     def __call__(self):
@@ -408,7 +412,7 @@ class AttemptTransitionsPeriodicallyView(DefaultView):
         expressions before proceeding
         """
         logger = logging.getLogger(__class__)  # noqa
-        logger.info("'transition has been attempted")
+        logger.info('transition has been attempted')
 
 
 class ReportingView(DefaultView):

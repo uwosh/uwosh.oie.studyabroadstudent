@@ -2,12 +2,12 @@
 # invoke like this:
 # bin/instance run extractApplicationsRemotely.py > extractApplicationsRemotely-output-201708101325.out  # noqa
 
-from uwosh.oie.studyabroadstudent.listApplicationIDsoutput import application_ids  # noqa
+from uwosh.oie.studyabroadstudent.listApplicationIDsoutput import application_ids  # noqa : E501
+from xmlrpc.client import ServerProxy
 
 import argparse
 import logging
 import os
-from xmlrpc.client import ServerProxy
 
 
 logger = logging.getLogger(__name__)

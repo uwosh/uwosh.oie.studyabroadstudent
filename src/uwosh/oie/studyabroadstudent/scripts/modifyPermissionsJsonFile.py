@@ -1,17 +1,20 @@
-import json
-import os
+# -*- coding: utf-8 -*-
 from collections import defaultdict
 
+import json
+import os
+
+
 def parse_object_pairs(pairs):
-    
+
     pairs_str = str(pairs)
-    if "Participant_Admin" in pairs_str or u"Participant_Admin" in pairs_str:
+    if 'Participant_Admin' in pairs_str or u'Participant_Admin' in pairs_str:
         permissions = {}
         for pair in pairs:
             role, transition_permissions_list = pair
             if role not in permissions:
                 permissions[role] = {}
-            transition_name, transition_permissions = transition_permissions_list[0]
+            transition_name, transition_permissions = transition_permissions_list[0]  # noqa : E501
             permissions[role][transition_name] = transition_permissions
         return permissions
     elif isinstance(pairs[0][1], dict):
@@ -20,7 +23,7 @@ def parse_object_pairs(pairs):
         condensed_permissions = {
             'read': [],
             'read_write': [],
-            'none': []
+            'none': [],
         }
         for pair in pairs:
             field, permission = pair
@@ -39,45 +42,43 @@ def get_optimized_obj(obj):
             'default_permissions': {
                 'read': [],
                 'read_write': [],
-                'none': []
-            }
+                'none': [],
+            },
         }
 
         counts = {
             'read': defaultdict(int),
             'read_write': defaultdict(int),
-            'none': defaultdict(int)
+            'none': defaultdict(int),
         }
-        
+
         for transition in obj[user]:
             for permission in obj[user][transition]:
                 for field in obj[user][transition][permission]:
                     all_fields.add(field)
                     counts[permission][field] += 1
-        
+
         for field in all_fields:
-            most_common_permission = max(counts, key = lambda k: counts[k][field])
-            optimized_obj[user]['default_permissions'][most_common_permission].append(field)
+            most_common_permission = max(counts, key=lambda k: counts[k][field])  # noqa : E501
+            optimized_obj[user]['default_permissions'][most_common_permission].append(field)  # noqa : E501
 
         for transition in obj[user]:
-            if transition is 'default_permissions':
+            if transition == 'default_permissions':
                 continue
             optimized_obj[user][transition] = {}
             for permission in obj[user][transition]:
                 fields = obj[user][transition][permission]
+                optimized_fields = optimized_obj[user]['default_permissions'][permission]  # noqa : E501
                 optimized_obj[user][transition][permission] = \
-                    [f for f in fields if f not in optimized_obj[user]['default_permissions'][permission]]
+                    [f for f in fields if f not in optimized_fields]
     return optimized_obj
-    # import pdb; pdb.set_trace()
 
 
-
-script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+script_dir = os.path.dirname(__file__)  # <-- absolute dir the script is in
 input_rel_path = '../static/json/participant_permissions.json'
 output_rel_path = '../static/json/optimized_participant_permissions.json'
 abs_file_path = os.path.join(script_dir, input_rel_path)
 new_file_path = os.path.join(script_dir, output_rel_path)
-print(abs_file_path)
 with open(abs_file_path) as json_file:
     data = json_file.read().replace('\n', '')
     decoder = json.JSONDecoder(object_pairs_hook=parse_object_pairs)

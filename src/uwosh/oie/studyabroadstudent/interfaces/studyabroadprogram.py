@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from collective import dexteritytextindexer
-from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import BlockDataGridFieldFactory
+from collective.z3cform.datagridfield import DataGridFieldFactory
 from collective.z3cform.datagridfield import DictRow
 from plone.app.contenttypes.behaviors.tableofcontents import ITableOfContents
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
@@ -22,55 +22,53 @@ from plone.autoform.directives import write_permission
 from plone.autoform.interfaces import OMITTED_KEY
 from plone.namedfile import field
 from plone.supermodel import model
-from plone.supermodel.interfaces import FIELDSETS_KEY
-from plone.supermodel.model import Fieldset
 from Products.CMFPlone.RegistrationTool import checkEmailAddress
 from Products.CMFPlone.RegistrationTool import EmailAddressInvalid
 from uwosh.oie.studyabroadstudent import _
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_ACADEMIC_PROGRAM_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_CONTRIBUTIONS_FS  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_ACADEMIC_PROGRAM_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_CONTRIBUTIONS_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_COURSES_FS
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_DATES_DESTINATIONS_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_DEPARTURE_FLIGHT_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_DEPARTURE_FROM_OSHKOSH_FS  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_DATES_DESTINATIONS_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_DEPARTURE_FLIGHT_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_DEPARTURE_FROM_OSHKOSH_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_FINANCES_FS
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_LIAISON_AND_LEADERSHIP_FS  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_LIAISON_AND_LEADERSHIP_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_OIE_REVIEW_FS
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_PARTICIPANT_SELECTION_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_PRE_DEPARTURE_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_PROGRAM_CODE_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_PROGRAM_DATES_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_PROGRAM_DESCRIPTION  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_PARTICIPANT_SELECTION_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_PRE_DEPARTURE_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_PROGRAM_CODE_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_PROGRAM_DATES_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_PROGRAM_DESCRIPTION  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_PROPOSALS_FS
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_REPORTING_FS
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_RETURN_FLIGHT_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_RETURN_TO_OSHKOSH_FS  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_RETURN_FLIGHT_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_RETURN_TO_OSHKOSH_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_REVIEWERS_FS
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_SYLLABUS_AND_SUPPORTING_DOCS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import required_in_state  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import required_value_in_state  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_ACADEMIC_PROGRAM_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_CONTRIBUTIONS_FS  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.directives import E_SYLLABUS_AND_SUPPORTING_DOCS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import required_in_state  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import required_value_in_state  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import V_ACADEMIC_PROGRAM_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import V_CONTRIBUTIONS_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_COURSES_FS
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_DATES_DESTINATIONS_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_DEPARTURE_FLIGHT_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_DEPARTURE_FROM_OSHKOSH_FS  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.directives import V_DATES_DESTINATIONS_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import V_DEPARTURE_FLIGHT_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import V_DEPARTURE_FROM_OSHKOSH_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_FINANCES_FS
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_LIAISON_AND_LEADERSHIP_FS  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.directives import V_LIAISON_AND_LEADERSHIP_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_OIE_REVIEW_FS
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_PARTICIPANT_SELECTION_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_PRE_DEPARTURE_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_PROGRAM_CODE_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_PROGRAM_DATES_FS  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.directives import V_PARTICIPANT_SELECTION_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import V_PRE_DEPARTURE_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import V_PROGRAM_CODE_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import V_PROGRAM_DATES_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_PROPOSALS_FS
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_REPORTING_FS
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_RETURN_FLIGHT_FS  # noqa
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_RETURN_TO_OSHKOSH_FS  # noqa
+from uwosh.oie.studyabroadstudent.interfaces.directives import V_RETURN_FLIGHT_FS  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import V_RETURN_TO_OSHKOSH_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_REVIEWERS_FS
 from uwosh.oie.studyabroadstudent.vocabularies import program_cycle_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import seat_assignment_protocol
-from uwosh.oie.studyabroadstudent.vocabularies import selection_criteria_vocabulary  # noqa
+from uwosh.oie.studyabroadstudent.vocabularies import selection_criteria_vocabulary  # noqa : E501
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_na_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import yes_no_vocabulary
 from z3c.form.interfaces import IAddForm
@@ -447,11 +445,11 @@ class IOIEStudyAbroadProgram(Interface):
 
     image = field.NamedBlobImage(
         title=_(u'Academic Program Image'),
-        description=_(u'The image will display in application and listing views of this program'),
-        required=True
+        description=_(u'The image will display in application and listing views of this program'),  # noqa : E501
+        required=True,
     )
 
-    # TODO A custom indexer might be desired to add the content of this field to searchabletext. We cannot use dexteritytextindexer here, it errors on the fact that the value is not a text type.
+    # TODO A custom indexer might be desired to add the content of this field to searchabletext. We cannot use dexteritytextindexer here, it errors on the fact that the value is not a text type.  # noqa : E501
     rich_description = RichText(
         title=_(u'Rich Text Description'),
         description=_(
@@ -704,7 +702,7 @@ class IOIEStudyAbroadProgram(Interface):
                 'travelDatesTransitionsAndDestinations',
                 'add_transition_link', 'firstChoiceDatesFlexible',
                 'postTravelClassDates'],
-    ),
+    )
 
     read_permission(program_cycle=V_DATES_DESTINATIONS_FS)
     write_permission(program_cycle=E_DATES_DESTINATIONS_FS)
@@ -989,7 +987,7 @@ class IOIEStudyAbroadProgram(Interface):
                 'applicantQuestion3', 'applicantQuestion4',
                 'applicantQuestion5', 'cvRequired',
                 'letterOfMotivationRequired', 'otherRequired'],
-    ),
+    )
 
     read_permission(studentStatus=V_PARTICIPANT_SELECTION_FS)
     write_permission(studentStatus=E_PARTICIPANT_SELECTION_FS)
@@ -1434,12 +1432,12 @@ class IOIEStudyAbroadProgram(Interface):
             u'If checked "yes", the items below will appear in the Participant Portal as an application item.'),  # noqa
     )
     drivers_license_copy_for_india_visa_application = schema.Choice(
-        title=_(u'Driver\'s License or State Issued I.D. – Color Copy'),
+        title=_(u"Driver's License or State Issued I.D. – Color Copy"),
         description=_(
             u'Select ''yes'' if required by external partners or by the foreign consulate to apply for a visa.'),  # noqa
         vocabulary=yes_no_vocabulary,
         required=False,
-   )
+    )
     biographical_page_of_your_signed_passport = schema.Choice(
         title=_(u'Passport-Digital Copy of Biographical Page of Your SIGNED Passport'),  # noqa
         description=_(
@@ -1467,7 +1465,7 @@ class IOIEStudyAbroadProgram(Interface):
             u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are consistent with an official U.S. passport photo.'),  # noqa
         vocabulary=yes_no_vocabulary,
         required=False,
-   )
+    )
     passport_size_photo = schema.Choice(
         title=_(u'Photo: Paper'),
         description=_(u'Select ''yes'' if required by external partners or if required to apply for a visa with photo requirements that are not consistent with an official U.S. passport photo.'),  # noqa
@@ -1482,7 +1480,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
     visa_required_for_us_citizens = schema.Choice(
         title=_(u'Visa Application - All U.S. Citizens'),
-        description=_(u'Select ''yes'' if a visa is required of U.S. citizens.'),  # noqa
+        description=_(u"Select 'yes' if a visa is required of U.S. citizens."),  # noqa
         vocabulary=yes_no_vocabulary,
         required=False,
     )
@@ -1505,7 +1503,7 @@ class IOIEStudyAbroadProgram(Interface):
             u'Select ''yes'' if a foreign government requires this as part of the visa application process, if an external partner requires this as part of the visa application process, if participants will work with children who have not yet reached the age of majority in their home country, or if participants will work with children who are 17 years old or younger, whichever is the higher of the two ages. Use this option for a Criminal Background Check only when an FBI report is not specifically required.'),  # noqa
         vocabulary=yes_no_vocabulary,
         required=False,
-   )
+    )
     mode(application_items_other_label='display')
     application_items_other_label = schema.TextLine(
         title=_(u'Application Items – Other'),
