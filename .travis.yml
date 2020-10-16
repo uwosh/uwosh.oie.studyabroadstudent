@@ -14,18 +14,15 @@ services:
 install:
   - pip install -r requirements.txt
   - buildout
-  # - python bootstrap-buildout.py
-  # - bin/buildout -N buildout:download-cache=downloads annotate
-  # - bin/buildout -N buildout:download-cache=downloads
 before_script:
 - firefox -v
 script:
-  - code-analysis
-  - test
+  - bin/code-analysis
+  - bin/test
 after_success:
-  - createcoverage
-  - pip install coveralls
-  - coveralls
+  - bin/createcoverage
+  - bin/pip install coveralls
+  - bin/coveralls
 notifications:
   email:
     - brian.duncan@wildcardcorp.com

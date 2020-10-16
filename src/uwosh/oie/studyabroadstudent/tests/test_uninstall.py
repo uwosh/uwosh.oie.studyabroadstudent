@@ -9,23 +9,23 @@ import unittest
 student = 'uwosh.oie.studyabroadstudent'
 
 
-class TestSetup(unittest.TestCase):
-    f"""Test that {student} is properly installed."""
+class TestUninstall(unittest.TestCase):
 
     layer = test_layer
 
     def setUp(self):
-        """Custom shared utility setup for tests."""
         self.portal = self.layer['portal']
         self.installer = get_installer(self.portal)
+        self.installer.uninstallProducts([student])
 
-    def test_product_installed(self):
-        f"""Test if {student} is installed."""
-        self.assertTrue(self.installer.is_product_installed(student))
+    def test_product_uninstalled(self):
+        f"""Test if {student} is cleanly uninstalled."""
+        is_installed = self.installer.is_product_installed(student)
+        self.assertFalse(is_installed)
 
-    def test_browserlayer(self):
-        """Test that IUwoshOieStudyabroadstudentLayer is registered."""
+    def test_browserlayer_removed(self):
+        """Test that IUwoshOieStudyabroadstudentLayer is removed."""
         from uwosh.oie.studyabroadstudent.interfaces import \
             IUwoshOieStudyabroadstudentLayer as layer  # noqa : I001
         from plone.browserlayer import utils
-        self.assertIn(layer, utils.registered_layers())  # noqa : E501
+        self.assertNotIn(layer, utils.registered_layers())  # noqa : I005

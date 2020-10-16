@@ -42,7 +42,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'plone.api',
-        'Products.GenericSetup>=1.8.2',
+        'Products.GenericSetup',
         'setuptools',
         'z3c.jbot',
         'plone.app.dexterity',
@@ -52,22 +52,20 @@ setup(
         # 'plone.app.workflowmanager',
         'collective.impersonate',
         'collective.easyform',
-        'Products.ContentWellPortlets',
-        'webcouturier.dropdownmenu',
+        'plone.app.controlpanel',
+        # 'Products.ContentWellPortlets',
         'plone.app.iterate',
-        'uwosh.oie.studyabroadtheme',
     ],
     extras_require={
         'test': [
+            'collective.xmltestreport',
             'plone.app.testing',
-            # Plone KGS does not use this version, because it would break
-            # Remove if your package shall be part of coredev.
-            # plone_coredev tests as of 2016-04-01.
-            'plone.testing',
             'plone.app.contenttypes',
-            'plone.app.robotframework[debug]',
+            'plone.app.robotframework',
+            # 'mock',
         ],
     },
+    setup_requires=['flake8', 'isort'],
     entry_points="""
     [z3c.autoinclude.plugin]
     target = plone

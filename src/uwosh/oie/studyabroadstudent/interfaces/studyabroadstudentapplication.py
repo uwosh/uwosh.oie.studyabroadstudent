@@ -620,7 +620,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
                 'medicalRegistered_office',
                 'medicalRegistered_accommodations',
                 'medicalAccessOK'],
-    ),
+    )
 
     medicalHealthProblems = schema.Text(
         title=_(u'Health Problems'),

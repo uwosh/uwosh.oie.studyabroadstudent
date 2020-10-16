@@ -3,6 +3,7 @@ from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
+from Products.CMFPlone.utils import get_installer
 from uwosh.oie.studyabroadstudent.interfaces.contact import IOIEContact
 from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING  # noqa
 from zope.component import createObject
@@ -19,7 +20,7 @@ class OIEContactIntegrationTest(unittest.TestCase):
         """Custom shared utility setup for tests."""
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.installer = api.portal.get_tool('portal_quickinstaller')
+        self.installer = get_installer(self.portal)
 
     def test_schema(self):
         fti = queryUtility(IDexterityFTI, name='OIEContact')

@@ -176,7 +176,7 @@ class IOIEProgramLeader(Interface):
         fields=['load_or_overload', 'replacement_costs', 'paid_by',
                 'rate_or_lump_sum', 'lump_sum_amount',
                 'will_base_salary_change', 'salary_form_type'],
-    ),
+    )
     load_or_overload = schema.Choice(
         title=_(u'Load or Overload'),
         description=_(u'Choose whether payment is part of load or is overload'),  # noqa

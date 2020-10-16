@@ -3,8 +3,9 @@ from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
+from Products.CMFPlone.utils import get_installer
 from uwosh.oie.studyabroadstudent.interfaces.airline import IOIEAirline
-from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING  # noqa
+from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING as testing_layer  # noqa
 from zope.component import createObject
 from zope.component import queryUtility
 
@@ -13,13 +14,13 @@ import unittest
 
 class OIEAirlineIntegrationTest(unittest.TestCase):
 
-    layer = UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING
+    layer = testing_layer
 
     def setUp(self):
         """Custom shared utility setup for tests."""
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.installer = api.portal.get_tool('portal_quickinstaller')
+        self.installer = get_installer(self.portal)
 
     def test_schema(self):
         fti = queryUtility(IDexterityFTI, name='OIEAirline')

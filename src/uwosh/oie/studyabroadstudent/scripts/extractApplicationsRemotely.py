@@ -2,12 +2,12 @@
 # invoke like this:
 # bin/instance run extractApplicationsRemotely.py > extractApplicationsRemotely-output-201708101325.out  # noqa
 
-from uwosh.oie.studyabroadstudent.listApplicationIDsoutput import application_ids  # noqa
+from uwosh.oie.studyabroadstudent.listApplicationIDsoutput import application_ids  # noqa : E501
+from xmlrpc.client import ServerProxy
 
 import argparse
 import logging
 import os
-import xmlrpclib
 
 
 logger = logging.getLogger(__name__)
@@ -30,15 +30,15 @@ else:
     # if not provided on command line, get the remote site URL and Manager login credentials from environment variables  # noqa
     remote_user = os.environ['REMOTEUSER']
     if not remote_user:
-        print 'missing both command line argument and environment variable value ''REMOTEUSER'''  # noqa
+        print('missing both command line argument and environment variable value ''REMOTEUSER''')  # noqa
         exit(1)
     remote_passwd = os.environ['REMOTEPASSWD']
     if not remote_passwd:
-        print 'missing both command line argument and environment variable value ''REMOTEPASSWD'''  # noqa
+        print('missing both command line argument and environment variable value ''REMOTEPASSWD''')  # noqa
         exit(1)
     remote_server = os.environ['REMOTESERVER']
     if not remote_server:
-        print 'missing both command line argument and environment variable value ''REMOTESERVER'''  # noqa
+        print('missing both command line argument and environment variable value ''REMOTESERVER''')  # noqa
         exit(1)
 
 if args.http_ok != 'no':
@@ -55,7 +55,7 @@ if args.skip_ids != 'no':
             if line.startswith("['"):
                 application_id = line[2:(line.find("'", 2))]
                 already_read.append(application_id)
-        print 'read IDs file successfully, going to skip {0} contained IDs'.format(len(already_read))  # noqa
+        print(f'read IDs file successfully, going to skip {len(already_read)} contained IDs')  # noqa
         SKIP_IDS = True
     else:
         try:
@@ -63,7 +63,7 @@ if args.skip_ids != 'no':
             SKIP_IDS = True
         except Exception:
             SKIP_IDS = False
-            print 'Unable to read list of IDs to skip'  # noqa
+            print('Unable to read list of IDs to skip')  # noqa
             exit(1)
 else:
     SKIP_IDS = False
@@ -79,11 +79,11 @@ server_str = '{protocol}://{u}:{p}@{s}'.format(
     p=remote_passwd,
     s=remote_server,
 )
-server = xmlrpclib.ServerProxy(server_str)
+server = ServerProxy(server_str)
 
 for id in application_ids:
     if SKIP_IDS and id in already_read:
-        print 'skipping', id  # noqa
+        print('skipping', id)  # noqa
         pass
     else:
-        print server.extractApplication(id)  # noqa
+        print(server.extractApplication(id))  # noqa
