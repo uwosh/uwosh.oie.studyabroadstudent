@@ -184,7 +184,7 @@ class ProgramSearchView(BrowserView):
                            }
                 programs.append(program)
             except AttributeError:
-                logger.warn(f'Excluding program {brain.Title} from search view, not all searchable fields were indexed.')  # noqa : E501
+                logger.warn('Excluding program {} from search view, not all searchable fields were indexed.'.format(brain.Title))  # noqa : E501
         return json.dumps(programs, default=handle_missing)
 
 
