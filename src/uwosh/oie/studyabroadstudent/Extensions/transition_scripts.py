@@ -76,7 +76,7 @@ def check_for_required_values_by_state(state_change, interface):
         field = interface.get(f)
         field_title = field.title
         if not value:
-            message = f"The field '{field_title}' is required for state '{new_state_id}' but has no value"  # noqa : E501
+            message = "The field '{}' is required for state '{}' but has no value".format(field_title, new_state_id)  # noqa : E501
             logger.error(message)
             missingValues.append(
                 {
@@ -122,7 +122,7 @@ def check_for_required_specific_values_by_state(state_change, interface):
             # e.g., to handle DateTimes
             value = str(value)
         if value != must_be:
-            message = f"The field '{field_title}' is required to have the value '{must_be}' for state '{new_state_id}' but has the value '{value}'"  # noqa : E501
+            message = "The field '{}' is required to have the value '{}' for state '{}' but has the value '{}'".format(field_title, must_be, new_state_id, value)  # noqa : E501
             logger.error(message)
             missingValues.append(
                 {
@@ -142,9 +142,9 @@ def sendTransitionMessage(state_change, interface):
     emailTemplate = getEmailMessageTemplate(state_change, interface)  # noqa
 
     if not emailTemplate:
-        message = f'Not sending transition email for transition {state_change.transition.id}.'  # noqa : E501
+        message = 'Not sending transition email for transition {}.'.format(state_change.transition.id)  # noqa : E501
         question = 'Was the Email Template created?'
-        logger.info(f'{message} {question}')
+        logger.info('{} {}'.format(message, question))
         return
 
     object = state_change.object
@@ -160,17 +160,17 @@ def sendTransitionMessage(state_change, interface):
         IOIEStudyAbroadParticipant: 'Study Abroad Participant Application',
     }
 
-    mSubj = f'Your {update_text[interface]} Update (UW Oshkosh Office of International Education)'  # noqa : E501
+    mSubj = 'Your {} Update (UW Oshkosh Office of International Education)'.format(update_text[interface])  # noqa : E501
 
     state_msg = None
     if old_state_id != new_state_id:
-        state_msg = f"Its state has changed from '{old_state_id}' to '{new_state_id}'.\n\n"  # noqa : E501
+        state_msg = "Its state has changed from '{}' to '{}'.\n\n".format(old_state_id, new_state_id)  # noqa : E501
 
-    transition_message= f"Sending email for transition {state_change.transition.id} to {mTo}"  # noqa : E501
+    transition_message= "Sending email for transition {} to {}".format(state_change.transition.id, mTo)  # noqa : E501
     subject_message = "subject '{mSubj}'"
     email_template_message = "emailTemplate = '{emailTemplate}'"
-    logger.info(f'{transition_message}, {subject_message}, {email_template_message}')  # noqa : E501
-    mMsg = f'{assembleEmailMessage(object, emailTemplate)}\n\n{state_msg}'
+    logger.info('{}, {}, {}'.format(transition_message,subject_message,email_template_message))  # noqa : E501
+    mMsg = '{}\n\n{}'.format(assembleEmailMessage(object, emailTemplate), state_msg)
 
     mail_host = api.portal.get_tool(name='MailHost')
     mail_host.send(mMsg, mTo, mFrom, mSubj)
