@@ -61,40 +61,27 @@ class ProgramView(DefaultView, FolderView):
                 if country_url is None:
                     country_url_atag = '(missing country URL)'
                 else:
-                    country_url_atag = '<a href="{0}">{1}</a>'.format(
-                        country_url,
-                        country_name,
-                    )
+                    country_url_atag = f'<a href="{country_url}">{country_name}</a>'  # noqa : E501 
                 timezone_url = country.timezone_url
                 if timezone_url is None:
                     timezone_url_atag = '(missing timezone URL)'
                 else:
-                    timezone_url_atag = '<a href="{0}">time zone</a>'.format(
-                        timezone_url)
+                    timezone_url_atag = f'<a href="{timezone_url}">time zone</a>'  # noqa : E501 
                 cdc_info_url = country.cdc_info_url
                 if cdc_info_url is None:
                     cdc_info_url_atag = '(missing CDC URL)'
                 else:
-                    cdc_info_url_atag = '<a href="{0}">CDC</a>'.format(
-                        cdc_info_url,
-                    )
+                    cdc_info_url_atag = f'<a href="{cdc_info_url}">CDC</a>'
                 state_dept_info_url = country.state_dept_info_url
                 if state_dept_info_url is None:
                     state_dept_info_url_atag = '(missing State Dept URL)'
                 else:
-                    state_dept_info_url_atag = '<a href="{0}">State Dept.</a>'.format(  # noqa
-                        state_dept_info_url,
-                    )
+                    state_dept_info_url_atag = f'<a href="{state_dept_info_url}">State Dept.</a>'  # noqa : E501 
                 country_info_html += \
-                    '<dt>{0}</dt><dd>{1}, {2}, {3}</dd>'.format(
-                        country_url_atag,
-                        cdc_info_url_atag,
-                        state_dept_info_url_atag,
-                        timezone_url_atag)
+                    f'<dt>{country_url_atag}</dt><dd>{cdc_info_url_atag}, ' + \
+                    f'{state_dept_info_url_atag}, {timezone_url_atag}</dd>'
             else:
-                country_info_html += '<dt>{0} (missing country info)</dt>'.format(  # noqa
-                    country_name,
-                )
+                country_info_html += f'<dt>{country_name} (missing country info)</dt>'  # noqa : E501 
         country_info_html += '</dl>'
         return country_info_html
 
@@ -184,7 +171,7 @@ class ProgramSearchView(BrowserView):
                            }
                 programs.append(program)
             except AttributeError:
-                logger.warn('Excluding program {} from search view, not all searchable fields were indexed.'.format(brain.Title))  # noqa : E501
+                logger.warning(f'Excluding program {brain.Title} from search view, not all searchable fields were indexed.')  # noqa : E501
         return json.dumps(programs, default=handle_missing)
 
 
@@ -193,16 +180,15 @@ class CooperatingPartnerView(DefaultView):
         primary_contact = getattr(self.context, 'primary_contact', None)
         if primary_contact:
             contact = primary_contact.to_object
-            return '<a href="{url}">{title}, {job}, {tel}, {mob}, {email}, {serv} : {user}</a>'.format(  # noqa
-                url=contact.absolute_url(),
-                title=getattr(contact, 'title', None),
-                job=getattr(contact, 'job_title', None),
-                tel=getattr(contact, 'telephone', None),
-                mob=getattr(contact, 'mobile', None),
-                email=getattr(contact, 'email', None),
-                serv=getattr(contact, 'other_service', None),
-                user=getattr(contact, 'other_username', None),
-            )
+            url = contact.absolute_url()
+            title = getattr(contact, 'title', None)
+            job = getattr(contact, 'job_title', None)
+            tel = getattr(contact, 'telephone', None)
+            mob = getattr(contact, 'mobile', None)
+            email = getattr(contact, 'email', None)
+            serv = getattr(contact, 'other_service', None)
+            user = getattr(contact, 'other_username', None)
+            return f'<a href="{url}">{title}, {job}, {tel}, {mob}, {email}, {serv} : {user}</a>'  # noqa : E501 
         return ''
 
 
@@ -391,17 +377,13 @@ class CreatedView(DefaultView):
                     'email': email,
                     'programName': program_ID,
                 }
-                # import pdb; pdb.set_trace()
-                obj = api.content.create(
-                    type='OIEStudyAbroadParticipant',
-                    container=participants_folder,
-                    title='{0} {1}'.format(first, last),
-                    **data)
+                import pdb; pdb.set_trace()
+                obj = api.content.create(type='OIEStudyAbroadParticipant',container=participants_folder,title=f'{first} {last}',**data)
                 api.content.transition(obj, 'submit')  # go ahead to step I
-                return '{0}/edit'.format(obj.absolute_url())
+                return f'{obj.absolute_url()}/edit'
             except Exception as e:
-                logger.warn('Could not create partipant application.')
-                logger.warn(e)
+                logger.warning('Could not create partipant application.')
+                logger.warning(e)
         return False
 
 
@@ -443,9 +425,9 @@ class ReportingView(DefaultView):
                             util.other_graduate_count()])
 
             resp = self.request.response
-            filename = '{0}-report.csv'.format(self.context.Title())
-            resp.setHeader('Content-Disposition',
-                           'attachment; filename={0}'.format(filename))
+            filename = f'{self.context.Title()}-report.csv'
+            resp.setHeader(f'Content-Disposition',
+                           'attachment; filename={filename}')
             resp.setHeader('Content-Type', 'text/csv')
             output.seek(0)
             return output.read()
