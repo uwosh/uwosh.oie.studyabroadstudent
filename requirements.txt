@@ -2,3 +2,4 @@ cryptography==3.1.1
 setuptools==42.0.2
 zc.buildout==2.13.3
 wheel
+pep517==0.10.0
