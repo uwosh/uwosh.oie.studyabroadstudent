@@ -31,8 +31,8 @@ setup(
         'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
     ],
     keywords='Python Plone workflow study abroad',
-    author='T. Kim Nguyen',
-    author_email='kim.nguyen@wildcardcorp.com',
+    author='Wildcard Corp.',
+    author_email='support@wildcardcorp.com',
     url='https://github.com/uwosh/uwosh.oie.studyabroadstudent',
     license='GPL version 2',
     packages=find_packages('src', exclude=['ez_setup']),
@@ -49,7 +49,7 @@ setup(
         'currencies',
         'collective.dexteritytextindexer',
         'collective.z3cform.datagridfield',
-        # 'plone.app.workflowmanager',
+        # 'plone.app.workflowmanager',``
         'collective.impersonate',
         'collective.easyform',
         'plone.app.controlpanel',
@@ -62,10 +62,14 @@ setup(
             'plone.app.testing',
             'plone.app.contenttypes',
             'plone.app.robotframework',
+            'pep517',
             # 'mock',
         ],
     },
-    setup_requires=['flake8', 'isort'],
+    setup_requires=[
+        'flake8',
+        'isort',
+    ],
     entry_points="""
     [z3c.autoinclude.plugin]
     target = plone
