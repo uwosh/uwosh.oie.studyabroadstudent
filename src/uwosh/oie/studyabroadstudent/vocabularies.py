@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from currencies import Currency
 from plone import api
 from plone.app.vocabularies.terms import safe_simplevocabulary_from_values
@@ -6,10 +5,8 @@ from plone.i18n.normalizer.interfaces import IIDNormalizer
 from uwosh.oie.studyabroadstudent import _
 from zope.component import queryUtility
 from zope.interface import implementer
-from zope.schema.interfaces import IContextSourceBinder
-from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleTerm
-from zope.schema.vocabulary import SimpleVocabulary
+from zope.schema.interfaces import IContextSourceBinder, IVocabularyFactory
+from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 
 PROGRAMMANAGEMENT = 'programmanagement'

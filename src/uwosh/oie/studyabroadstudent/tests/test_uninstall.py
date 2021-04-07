@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 """Setup tests for this package."""
 from Products.CMFPlone.utils import get_installer
-from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING as test_layer  # noqa
+from uwosh.oie.studyabroadstudent.testing import \
+    UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING as test_layer
 
 import unittest
 
@@ -27,5 +27,5 @@ class TestUninstall(unittest.TestCase):
         """Test that IUwoshOieStudyabroadstudentLayer is removed."""
         from uwosh.oie.studyabroadstudent.interfaces import \
             IUwoshOieStudyabroadstudentLayer as layer  # noqa : I001
-        from plone.browserlayer import utils
-        self.assertNotIn(layer, utils.registered_layers())  # noqa : I005
+        from plone.browserlayer import utils  # noqa: I001
+        self.assertNotIn(layer, utils.registered_layers())

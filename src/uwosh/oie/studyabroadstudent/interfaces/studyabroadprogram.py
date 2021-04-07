@@ -1,82 +1,91 @@
-# -*- coding: utf-8 -*-
 
 from collective import dexteritytextindexer
-from collective.z3cform.datagridfield import BlockDataGridFieldFactory
-from collective.z3cform.datagridfield import DataGridFieldFactory
-from collective.z3cform.datagridfield import DictRow
+from collective.z3cform.datagridfield import (
+    BlockDataGridFieldFactory,
+    DataGridFieldFactory,
+    DictRow,
+)
 from plone.app.contenttypes.behaviors.tableofcontents import ITableOfContents
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.dexterity.behaviors.id import IShortName
-from plone.app.dexterity.behaviors.metadata import ICategorization
-from plone.app.dexterity.behaviors.metadata import IOwnership
-from plone.app.dexterity.behaviors.metadata import IPublication
+from plone.app.dexterity.behaviors.metadata import (
+    ICategorization,
+    IOwnership,
+    IPublication,
+)
 from plone.app.dexterity.behaviors.nextprevious import INextPreviousToggle
 from plone.app.relationfield.behavior import IRelatedItems
 from plone.app.textfield import RichText
 from plone.app.versioningbehavior.behaviors import IVersionable
-from plone.autoform.directives import mode
-from plone.autoform.directives import omitted
-from plone.autoform.directives import read_permission
-from plone.autoform.directives import widget
-from plone.autoform.directives import write_permission
+from plone.autoform.directives import (
+    mode,
+    omitted,
+    read_permission,
+    widget,
+    write_permission,
+)
 from plone.autoform.interfaces import OMITTED_KEY
 from plone.namedfile import field
 from plone.supermodel import model
-from Products.CMFPlone.RegistrationTool import checkEmailAddress
-from Products.CMFPlone.RegistrationTool import EmailAddressInvalid
+from Products.CMFPlone.RegistrationTool import EmailAddressInvalid, checkEmailAddress
 from uwosh.oie.studyabroadstudent import _
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_ACADEMIC_PROGRAM_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_CONTRIBUTIONS_FS  # noqa : E501
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_COURSES_FS
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_DATES_DESTINATIONS_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_DEPARTURE_FLIGHT_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_DEPARTURE_FROM_OSHKOSH_FS  # noqa : E501
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_FINANCES_FS
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_LIAISON_AND_LEADERSHIP_FS  # noqa : E501
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_OIE_REVIEW_FS
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_PARTICIPANT_SELECTION_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_PRE_DEPARTURE_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_PROGRAM_CODE_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_PROGRAM_DATES_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_PROGRAM_DESCRIPTION  # noqa : E501
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_PROPOSALS_FS
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_REPORTING_FS
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_RETURN_FLIGHT_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_RETURN_TO_OSHKOSH_FS  # noqa : E501
-from uwosh.oie.studyabroadstudent.interfaces.directives import E_REVIEWERS_FS
 from uwosh.oie.studyabroadstudent.interfaces.directives import E_SYLLABUS_AND_SUPPORTING_DOCS  # noqa : E501
-from uwosh.oie.studyabroadstudent.interfaces.directives import required_in_state  # noqa : E501
-from uwosh.oie.studyabroadstudent.interfaces.directives import required_value_in_state  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_ACADEMIC_PROGRAM_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_CONTRIBUTIONS_FS  # noqa : E501
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_COURSES_FS
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_DATES_DESTINATIONS_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_DEPARTURE_FLIGHT_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_DEPARTURE_FROM_OSHKOSH_FS  # noqa : E501
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_FINANCES_FS
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_LIAISON_AND_LEADERSHIP_FS  # noqa : E501
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_OIE_REVIEW_FS
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_PARTICIPANT_SELECTION_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_PRE_DEPARTURE_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_PROGRAM_CODE_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_PROGRAM_DATES_FS  # noqa : E501
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_PROPOSALS_FS
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_REPORTING_FS
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_RETURN_FLIGHT_FS  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import V_RETURN_TO_OSHKOSH_FS  # noqa : E501
-from uwosh.oie.studyabroadstudent.interfaces.directives import V_REVIEWERS_FS
-from uwosh.oie.studyabroadstudent.vocabularies import program_cycle_vocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import seat_assignment_protocol
+from uwosh.oie.studyabroadstudent.interfaces.directives import required_in_state  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import required_value_in_state  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import (
+    E_COURSES_FS,
+    E_FINANCES_FS,
+    E_OIE_REVIEW_FS,
+    E_PROPOSALS_FS,
+    E_REPORTING_FS,
+    E_REVIEWERS_FS,
+    V_COURSES_FS,
+    V_FINANCES_FS,
+    V_OIE_REVIEW_FS,
+    V_PROPOSALS_FS,
+    V_REPORTING_FS,
+    V_REVIEWERS_FS,
+)
 from uwosh.oie.studyabroadstudent.vocabularies import selection_criteria_vocabulary  # noqa : E501
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_na_vocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_vocabulary
-from z3c.form.interfaces import IAddForm
-from z3c.form.interfaces import IEditForm
+from uwosh.oie.studyabroadstudent.vocabularies import (
+    RegistryValueVocabulary,
+    program_cycle_vocabulary,
+    seat_assignment_protocol,
+    yes_no_na_vocabulary,
+    yes_no_vocabulary,
+)
+from z3c.form.interfaces import IAddForm, IEditForm
 from zope import schema
-from zope.interface import Interface
-from zope.interface import Invalid
-from zope.interface import invariant
+from zope.interface import (
+    Interface,
+    Invalid,
+    invariant,
+)
 from zope.schema import ValidationError
 
 

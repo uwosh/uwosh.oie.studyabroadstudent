@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
-from . import OIEStudyAbroadContentBaseTest
-from . import STATES
+from . import STATES, OIEStudyAbroadContentBaseTest
 from plone import api
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_ID, setRoles
 
 
 def add_transition_tests(cls):

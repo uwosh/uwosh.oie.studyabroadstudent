@@ -1,13 +1,10 @@
-# -*- coding: utf-8 -*-
 from plone import api
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_ID, setRoles
 from plone.dexterity.interfaces import IDexterityFTI
 from Products.CMFPlone.utils import get_installer
 from uwosh.oie.studyabroadstudent.interfaces.transition import IOIETransition
-from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING  # noqa
-from zope.component import createObject
-from zope.component import queryUtility
+from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING
+from zope.component import createObject, queryUtility
 
 import unittest
 

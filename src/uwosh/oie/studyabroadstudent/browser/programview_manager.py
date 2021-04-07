@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.dexterity.browser.view import DefaultView
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.dexterity.utils import getAdditionalSchemata

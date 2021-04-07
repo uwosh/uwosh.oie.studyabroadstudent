@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # useful for printing out the field values of one or more objects you
 # specify by ID
 #
@@ -32,129 +30,99 @@ for c in idstr:  # noqa
 if acc != '':
     ids.append(acc)
     acc = ''
-print('# len of ids is ', len(ids))  # noqa
-print('ids = ', ids)  # noqa
+print('# len of ids is ', len(ids))  # noqa: T001
+print('ids = ', ids)  # noqa: T001
 
 new_style = False  # set to False if looking at legacy site
 
-print('application_data = [')  # noqa
+print('application_data = [')  # noqa: T001
 for id in ids:  # noqa
     results = catalog.searchResults(portal_type='OIEStudentApplication', id=id)  # noqa
     if len(results) == 0:
         results = catalog.searchResults(portal_type='OIEStudyAbroadStudentApplication', id=id)  # noqa
         new_style = True
     if len(results) > 1:
-        print(f'too many catalog query results ({len(results)}) for ID {id}')  # noqa
-        return printed  # noqa
+        print(f'too many catalog query results ({len(results)}) for ID {id}')  # noqa: T001
+        return printed  # noqa: F706
     if len(results) != 1:
-        print(f'no catalog query results for ID {id}')  # noqa
-        return printed  # noqa
+        print(f'no catalog query results for ID {id}')  # noqa: T001
+        return printed  # noqa: F706
     r = results[0]
     o = r.getObject()
-    if not new_style:
-        (
-          created,
-          modified,
-          getDepartureDate,
-          getReturnDate,
-          getOrientationDate1,
-          getOrientationDate2,
-          getConflictDate,
-          getCompletionDate,
-        ) = (
-          o.created(),
-          o.modified(),
-          o.getDepartureDate(),
-          o.getReturnDate(),
-          o.getOrientationDate1(),
-          o.getOrientationDate2(),
-          o.getConflictDate(),
-          o.getCompletionDate(),
-        )
-    else:
-        (
-          created,
-          modified,
-          getDepartureDate,
-          getReturnDate,
-          getOrientationDate1,
-          getOrientationDate2,
-          getConflictDate,
-          getCompletionDate,
-        ) = (
-          o.created(),
-          o.modified(),
-          o.departureDate,
-          o.returnDate,
-          o.orientationDate1,
-          o.orientationDate2,
-          o.conflictDate,
-          o.completionDate,
-        )
+
+    created = o.created()
+    modified = o.modified()
+    getDepartureDate = o.departureDate if new_style else o.getDepartureDate()
+    getReturnDate = o.returnDate if new_style else o.getReturnDate()
+    getOrientationDate1 = o.orientationDate1 if new_style else o.getOrientationDate1()
+    getOrientationDate2 = o.orientationDate2 if new_style else o.getOrientationDate2()
+    getConflictDate = o.conflictDate if new_style else o.getConflictDate()
+    getCompletionDate = o.completionDate if new_style else o.getCompletionDate()
+
     if created is not None and created != '':
         created = (
-          getattr(created, 'ISO8601', None) and
-          created.ISO8601() or
-          created
+            getattr(created, 'ISO8601', None) and
+            created.ISO8601() or
+            created
         )
     if modified is not None and modified != '':
         modified = (
-          getattr(modified, 'ISO8601', None) and
-          modified.ISO8601() or
-          modified
+            getattr(modified, 'ISO8601', None) and
+            modified.ISO8601() or
+            modified
         )
     if getDepartureDate is not None and getDepartureDate != '':
         getDepartureDate = (
-          getattr(getDepartureDate, 'ISO8601', None) and
-          getDepartureDate.ISO8601() or
-          getDepartureDate
+            getattr(getDepartureDate, 'ISO8601', None) and
+            getDepartureDate.ISO8601() or
+            getDepartureDate
         )
     if getReturnDate is not None and getReturnDate != '':
         getReturnDate = (
-          getattr(getReturnDate, 'ISO8601', None) and
-          getReturnDate.ISO8601() or
-          getReturnDate
+            getattr(getReturnDate, 'ISO8601', None) and
+            getReturnDate.ISO8601() or
+            getReturnDate
         )
     if getOrientationDate1 is not None and getOrientationDate1 != '':
         getOrientationDate1 = (
-          getattr(getOrientationDate1, 'ISO8601', None) and
-          getOrientationDate1.ISO8601() or
-          getOrientationDate1
+            getattr(getOrientationDate1, 'ISO8601', None) and
+            getOrientationDate1.ISO8601() or
+            getOrientationDate1
         )
     if getOrientationDate2 is not None and getOrientationDate2 != '':
         getOrientationDate2 = (
-          getattr(getOrientationDate2, 'ISO8601', None) and
-          getOrientationDate2.ISO8601() or
-          getOrientationDate2
+            getattr(getOrientationDate2, 'ISO8601', None) and
+            getOrientationDate2.ISO8601() or
+            getOrientationDate2
         )
     if getConflictDate is not None and getConflictDate != '':
         getConflictDate = (
-          getattr(getConflictDate, 'ISO8601', None) and
-          getConflictDate.ISO8601() or
-          getConflictDate
+            getattr(getConflictDate, 'ISO8601', None) and
+            getConflictDate.ISO8601() or
+            getConflictDate
         )
     if getCompletionDate is not None and getCompletionDate != '':
         getCompletionDate = (
-          getattr(getCompletionDate, 'ISO8601', None) and
-          getCompletionDate.ISO8601() or
-          getCompletionDate
+            getattr(getCompletionDate, 'ISO8601', None) and
+            getCompletionDate.ISO8601() or
+            getCompletionDate
         )
     getProgramName = (
-      getattr(o, 'getProgramName', None) and
-      o.getProgramName() or
-      o.programName
+        getattr(o, 'getProgramName', None) and
+        o.getProgramName() or
+        o.programName
     )
     if getProgramName is not None and getProgramName != '':
         getProgramName = (
-          getattr(getProgramName, 'Title', None) and
-          getProgramName.Title() or
-          getProgramName
+            getattr(getProgramName, 'Title', None) and
+            getProgramName.Title() or
+            getProgramName
         )
     review_history = wtool.getInfoFor(o, 'review_history', [])  # noqa
     for h in review_history:
         h['time'] = h['time'].ISO8601()
     if not new_style:
-        print([o.id, r.review_state, o.Creators(), created, modified,  # noqa
+        print([o.id, r.review_state, o.Creators(), created, modified,  # noqa: T001
                o.getStudentID(), o.getFirstName(), o.getMiddleName(),
                o.getLastName(), o.getEmail(), o.getLocalAddr1(),
                o.getLocalAddr2(), o.getLocalCity(), o.getLocalState(),
@@ -256,7 +224,7 @@ for id in ids:  # noqa
                o.getNoMoreMaterials(), o.getProgramMaterials(),
                o.getProgramFee2(), review_history])
     else:
-        print([o.id, r.review_state, o.listCreators(), created,  # noqa
+        print([o.id, r.review_state, o.listCreators(), created,  # noqa: T001
                modified, o.studentID, o.firstName, o.middleName, o.lastName,
                o.email, o.localAddr1, o.localAddr2, o.localCity,
                o.localState, o.localZip, o.localCountry, o.localPhone,
@@ -336,6 +304,6 @@ for id in ids:  # noqa
                o.foreignCourse3, o.foreignCourse4, o.foreignCourse5,
                o.foreignCourse6, o.papersOK, o.noMoreMaterials,
                o.programMaterials, o.programFee2, review_history])
-    print(',')  # noqa
-print(']')  # noqa
-return printed  # noqa
+    print(',')  # noqa: T001
+print(']')  # noqa: T001
+return printed  # noqa: F706

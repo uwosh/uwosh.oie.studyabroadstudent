@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # - 2017-05-20 read ISO8601 dates, workflow state, and all workflow transitions
 #
 # expects the extractoutput.py file or symlink to be in the folder
@@ -11,8 +10,7 @@ from datetime import date
 from plone import api
 from Products.CMFPlone.utils import getToolByName
 from uwosh.oie.studyabroadstudent.extractoutput import app_data
-from zope.component.hooks import getSite
-from zope.component.hooks import setSite
+from zope.component.hooks import getSite, setSite
 
 import argparse
 import DateTime
@@ -369,7 +367,7 @@ with api.env.adopt_user(username='admin'):
                     1,
                 ),
             )
-        except Exception:
+        except Exception:  # noqa: B902
             import pdb;pdb.set_trace()  # noqa
 
         try:
@@ -377,7 +375,7 @@ with api.env.adopt_user(username='admin'):
                 int(
                     (
                         PassportExpDate_year is not None and
-                        PassportExpDate_year is not ''
+                        PassportExpDate_year != ''
                     ) and
                     PassportExpDate_year or
                     '1900',
@@ -399,14 +397,14 @@ with api.env.adopt_user(username='admin'):
                     PassportExpDate_day,
                 ),
             )
-        except Exception:
-            import pdb;pdb.set_trace()  # noqa
+        except Exception:  # noqa: B902
+            import pdb; pdb.set_trace()  # noqa: T100, E702
 
         if args.skip_existing:
             # try to look up an application by the same ID
             existing_apps = api.content.find(portal_type=PORTAL_TYPE, id=id)
             if len(existing_apps) > 0:
-                print 'Skipping existing application', id  # noqa
+                print('Skipping existing application', id)  # noqa: T001
         else:
             obj = api.content.create(
                 safe_id=True,

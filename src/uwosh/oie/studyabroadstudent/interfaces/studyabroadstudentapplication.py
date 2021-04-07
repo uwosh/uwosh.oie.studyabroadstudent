@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 # IOIEStudyAbroadStudentApplication: the legacy student application content
 #   type, written in Dexterity instead of Archetypes
@@ -7,19 +6,21 @@ from collective import dexteritytextindexer
 from plone.autoform.directives import mode
 from plone.supermodel import model
 from uwosh.oie.studyabroadstudent import _
-from uwosh.oie.studyabroadstudent.vocabularies import aware_vocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import bus_vocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import fly_vocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import hold_vocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import month_vocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import orientation_conflict_vocabulary  # noqa
-from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import room_type_vocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import semester_vocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import smoking_vocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import student_type_vocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_na_vocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_vocabulary
+from uwosh.oie.studyabroadstudent.vocabularies import (
+    RegistryValueVocabulary,
+    aware_vocabulary,
+    bus_vocabulary,
+    fly_vocabulary,
+    hold_vocabulary,
+    month_vocabulary,
+    room_type_vocabulary,
+    semester_vocabulary,
+    smoking_vocabulary,
+    student_type_vocabulary,
+    yes_no_na_vocabulary,
+    yes_no_vocabulary,
+)
 from zope import schema
 from zope.interface import Interface
 

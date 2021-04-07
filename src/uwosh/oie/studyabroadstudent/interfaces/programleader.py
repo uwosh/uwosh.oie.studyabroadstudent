@@ -1,19 +1,19 @@
-# -*- coding: utf-8 -*-
 from collective import dexteritytextindexer
 from plone.autoform.directives import mode
 from plone.namedfile import field
 from plone.supermodel import model
-from Products.CMFPlone.RegistrationTool import checkEmailAddress
-from Products.CMFPlone.RegistrationTool import EmailAddressInvalid
+from Products.CMFPlone.RegistrationTool import EmailAddressInvalid, checkEmailAddress
 from uwosh.oie.studyabroadstudent import _
-from uwosh.oie.studyabroadstudent.vocabularies import load_or_overload
-from uwosh.oie.studyabroadstudent.vocabularies import paid_by
-from uwosh.oie.studyabroadstudent.vocabularies import rate_or_lump_sum
-from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import replacement_costs
-from uwosh.oie.studyabroadstudent.vocabularies import salary_form
-from uwosh.oie.studyabroadstudent.vocabularies import socialmediaservice
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_vocabulary
+from uwosh.oie.studyabroadstudent.vocabularies import (
+    RegistryValueVocabulary,
+    load_or_overload,
+    paid_by,
+    rate_or_lump_sum,
+    replacement_costs,
+    salary_form,
+    socialmediaservice,
+    yes_no_vocabulary,
+)
 from zope import schema
 from zope.interface import Interface
 from zope.schema import ValidationError

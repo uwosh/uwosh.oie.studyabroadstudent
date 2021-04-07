@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from plone.autoform.directives import mode
 from plone.namedfile import field
 from uwosh.oie.studyabroadstudent import _

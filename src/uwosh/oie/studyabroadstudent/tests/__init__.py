@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
-# from AccessControl import getSecurityManager  # noqa : P001
 from plone.api import content
 from plone.api.exc import InvalidParameterError
 from plone.api.user import get_roles as get_user_roles
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_ID, setRoles
 from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING  # noqa
 from xml.etree import ElementTree
 
@@ -72,183 +69,183 @@ def get_transitions_and_states():
 ROLES = get_roles()
 TRANSITIONS, STATES = get_transitions_and_states()
 TRANSITIONS_FROM_INITIAL = {
-        'applicants-considering-change': {
-            'previous_state': 'cancelled',
-            'final_transition': 'manager-return-to-applicants-considering-change',  # noqa : E501
-            # 'transition_to_initial_next_step': 'cancel-after-change',
-        },
-        'application-intake-in-progress': {
-            'previous_state': None,
-            'final_transition': 'submit-non-sponsored-program',
-            # 'transition_to_initial_next_step': 'manager-return-to-initial',
-        },
-        'cancelled': {
-            'previous_state': None,
-            'final_transition': 'cancel',
-            # 'transition_to_initial_next_step': 'manager-return-to-initial',
-        },
-        'declined': {
-            'previous_state': 'pending-chair-review',
-            'final_transition': 'decline',
-            # 'transition_to_initial_next_step': 'manager-return-to-pending-chair-review',  # noqa : E501
-        },
-        'final-payment-billing-in-progress': {
-            'previous_state': 'cancelled',
-            'final_transition': 'manager-return-to-final-payment-billing-in-progress',  # noqa : E501
-            # 'transition_to_initial_next_step': 'cancel',
-        },
-        'final-program-accounting-in-progress': {
-            'previous_state': 'travel-expense-report-student-evaluations-due-to',  # noqa : E501
-            'final_transition': 'confirm-ter-received',
-            # 'transition_to_initial_next_step': 'manager-return-to-travel-expense-report-student-evaluations-due-to',  # noqa : E501
-        },
-        'incident-in-progress': {
-            'previous_state': 'program-in-progress',
-            'final_transition': 'report-incident',
-            # 'transition_to_initial_next_step': 'end-incident',
-        },
-        'initial': {
-            'previous_state': None,
-            'final_transition': None,
-            # 'transition_to_initial_next_step': None,
-        },
-        'initial-payment-billing-in-progress': {
-            'previous_state': 'cancelled',
-            'final_transition': 'manager-return-to-initial-payment-billing-in-progress',  # noqa : E501
-            # 'transition_to_initial_next_step': 'cancel',
-        },
-        'pending-arrival-abroad': {
-            'previous_state': 'pending-program-departure',
-            'final_transition': 'depart-sponsored-program',
-            # 'transition_to_initial_next_step': 'manager-return-to-pending-program-departure',  # noqa : E501
-        },
-        'pending-chair-review': {
-            'previous_state': None,
-            'final_transition': 'submit-to-chair',
-            # 'transition_to_initial_next_step': 'manager-return-to-initial',
-        },
-        'pending-dean-unit-director-review': {
-            'previous_state': None,
-            'final_transition': 'manager-return-to-pending-dean-unit-director-review',  # noqa : E501
-            # 'transition_to_initial_next_step': 'return-to-initial',
-        },
-        'pending-discussions-with-program-manager': {
-            'previous_state': None,
-            'final_transition': 'manager-return-to-pending-discussions-with-program-manager',  # noqa : E501
-            # 'transition_to_initial_next_step': 'return-to-initial',
-        },
-        'pending-final-program-fee': {
-            'previous_state': 'cancelled',
-            'final_transition': 'manager-return-to-pending-final-program-fee',  # noqa : E501
-            # 'transition_to_initial_next_step': 'cancel',
-        },
-        'pending-oie-review': {
-            'previous_state': None,
-            'final_transition': 'manager-return-to-pending-oie-review',
-            # 'transition_to_initial_next_step': 'return-to-initial',
-        },
-        'pending-program-departure': {
-            'previous_state': 'cancelled',
-            'final_transition': 'manager-return-to-pending-program-departure',
-            # 'transition_to_initial_next_step': 'cancel',
-        },
-        'pending-program-fee-determination-by-oie': {
-            'previous_state': None,
-            'final_transition': 'submit-sponsored-program',
-            # 'transition_to_initial_next_step': 'manager-return-to-initial',
-        },
-        'pending-program-leader-operational-briefing': {
-            'previous_state': 'cancelled',
-            'final_transition': 'manager-return-to-pending-program-leader-operational-briefing',  # noqa : E501
-            # 'transition_to_initial_next_step': 'cancel',
-        },
-        'pending-program-leader-orientation': {
-            'previous_state': 'cancelled',
-            'final_transition': 'manager-return-to-pending-program-leader-orientation',  # noqa : E501
-            # 'transition_to_initial_next_step': 'cancel',
-        },
-        'pending-provider-responses': {
-            'previous_state': 'cancelled',
-            'final_transition': 'manager-return-to-pending-provider-responses',
-            # 'transition_to_initial_next_step': 'cancel',
-        },
-        'pending-provost-review': {
-            'previous_state': 'pending-oie-review',
-            'final_transition': 'submit-to-provost',
-            # 'transition_to_initial_next_step': 'manager-return-to-pending-oie-review',  # noqa : E501
-        },
-        'pending-travel-advance': {
-            'previous_state': 'cancelled',
-            'final_transition': 'manager-return-to-pending-travel-advance',
-            # 'transition_to_initial_next_step': 'cancel',
-        },
-        'process-refunds-budget-transfers': {
-            'previous_state': 'final-program-accounting-in-progress',
-            'final_transition': 'process-refunds',
-            # 'transition_to_initial_next_step': 'manager-return-to-final-program-accounting-in-progress',  # noqa : E501
-        },
-        'program-completed': {
-            'previous_state': 'process-refunds-budget-transfers',
-            'final_transition': 'archive-program',
-            # 'transition_to_initial_next_step': 'manager-return-to-process-refunds-budget-transfers',  # noqa : E501
-        },
-        'program-fee-pending-publication': {
-            'previous_state': 'cancelled',
-            'final_transition': 'manager-return-to-program-fee-pending-publication',  # noqa : E501
-            # 'transition_to_initial_next_step': 'cancel',
-        },
-        'program-fee-under-liaison-review': {
-            'previous_state': 'cancelled',
-            'final_transition': 'manager-return-to-program-fee-under-liaison-review',  # noqa : E501
-            # 'transition_to_initial_next_step': 'cancel',
-        },
-        'program-in-progress': {
-            'previous_state': 'pending-arrival-abroad',
-            'final_transition': 'confirm-safe-arrival',
-            # 'transition_to_initial_next_step': 'manager-return-to-pending-arrival-abroad',  # noqa : E501
-        },
-        'provider-proposals-under-liaison-review': {
-            'previous_state': None,
-            'final_transition': 'manager-return-to-provider-proposals-under-liaison-review',  # noqa : E501
-            # 'transition_to_initial_next_step': 'cancel',
-            # 'to_initial_previous_state': 'cancelled',
-        },
-        'provider-proposals-under-oie-review': {
-            'previous_state': None,
-            'final_transition': 'manager-return-to-provider-proposals-under-oie-review',  # noqa : E501
-            # 'transition_to_initial_next_step': 'return-to-initial',
-        },
-        'request-for-proposals-under-development': {
-            'previous_state': None,
-            'final_transition': 'manager-return-to-request-for-proposals-under-development',  # noqa : E501
-            # 'transition_to_initial_next_step': 'return-to-initial',
-        },
-        'request-for-proposals-under-liaison-review': {
-            'previous_state': 'cancelled',
-            'final_transition': 'manager-return-to-request-for-proposals-under-liaison-review',  # noqa : E501
-            # 'transition_to_initial_next_step': 'cancel',
-        },
-        'reviewing-final-program-details': {
-            'previous_state': 'cancelled',
-            'final_transition': 'manager-return-to-reviewing-final-program-details',  # noqa : E501
-            # 'transition_to_initial_next_step': 'cancel',
-        },
-        'suspended': {
-            'previous_state': 'application-intake-in-progress',
-            'final_transition': 'suspend',
-            # 'transition_to_initial_next_step': 'manager-return-to-application-intake-in-progress',  # noqa : E501
-        },
-        'travel-expense-report-student-evaluations-due-to': {
-            'previous_state': 'program-in-progress',
-            'final_transition': 'confirm-return',
-            # 'transition_to_initial_next_step': 'manager-return-to-program-in-progress',  # noqa : E501
-        },
-        'withdrawn': {
-            'previous_state': None,
-            'final_transition': 'withdraw-application',
-            # 'transition_to_initial_next_step': 'manager-return-to-initial',
-        },
-    }
+    'applicants-considering-change': {
+        'previous_state': 'cancelled',
+        'final_transition': 'manager-return-to-applicants-considering-change',  # noqa : E501
+        # 'transition_to_initial_next_step': 'cancel-after-change',
+    },
+    'application-intake-in-progress': {
+        'previous_state': None,
+        'final_transition': 'submit-non-sponsored-program',
+        # 'transition_to_initial_next_step': 'manager-return-to-initial',
+    },
+    'cancelled': {
+        'previous_state': None,
+        'final_transition': 'cancel',
+        # 'transition_to_initial_next_step': 'manager-return-to-initial',
+    },
+    'declined': {
+        'previous_state': 'pending-chair-review',
+        'final_transition': 'decline',
+        # 'transition_to_initial_next_step': 'manager-return-to-pending-chair-review',  # noqa : E501
+    },
+    'final-payment-billing-in-progress': {
+        'previous_state': 'cancelled',
+        'final_transition': 'manager-return-to-final-payment-billing-in-progress',  # noqa : E501
+        # 'transition_to_initial_next_step': 'cancel',
+    },
+    'final-program-accounting-in-progress': {
+        'previous_state': 'travel-expense-report-student-evaluations-due-to',  # noqa : E501
+        'final_transition': 'confirm-ter-received',
+        # 'transition_to_initial_next_step': 'manager-return-to-travel-expense-report-student-evaluations-due-to',  # noqa : E501
+    },
+    'incident-in-progress': {
+        'previous_state': 'program-in-progress',
+        'final_transition': 'report-incident',
+        # 'transition_to_initial_next_step': 'end-incident',
+    },
+    'initial': {
+        'previous_state': None,
+        'final_transition': None,
+        # 'transition_to_initial_next_step': None,
+    },
+    'initial-payment-billing-in-progress': {
+        'previous_state': 'cancelled',
+        'final_transition': 'manager-return-to-initial-payment-billing-in-progress',  # noqa : E501
+        # 'transition_to_initial_next_step': 'cancel',
+    },
+    'pending-arrival-abroad': {
+        'previous_state': 'pending-program-departure',
+        'final_transition': 'depart-sponsored-program',
+        # 'transition_to_initial_next_step': 'manager-return-to-pending-program-departure',  # noqa : E501
+    },
+    'pending-chair-review': {
+        'previous_state': None,
+        'final_transition': 'submit-to-chair',
+        # 'transition_to_initial_next_step': 'manager-return-to-initial',
+    },
+    'pending-dean-unit-director-review': {
+        'previous_state': None,
+        'final_transition': 'manager-return-to-pending-dean-unit-director-review',  # noqa : E501
+        # 'transition_to_initial_next_step': 'return-to-initial',
+    },
+    'pending-discussions-with-program-manager': {
+        'previous_state': None,
+        'final_transition': 'manager-return-to-pending-discussions-with-program-manager',  # noqa : E501
+        # 'transition_to_initial_next_step': 'return-to-initial',
+    },
+    'pending-final-program-fee': {
+        'previous_state': 'cancelled',
+        'final_transition': 'manager-return-to-pending-final-program-fee',  # noqa : E501
+        # 'transition_to_initial_next_step': 'cancel',
+    },
+    'pending-oie-review': {
+        'previous_state': None,
+        'final_transition': 'manager-return-to-pending-oie-review',
+        # 'transition_to_initial_next_step': 'return-to-initial',
+    },
+    'pending-program-departure': {
+        'previous_state': 'cancelled',
+        'final_transition': 'manager-return-to-pending-program-departure',
+        # 'transition_to_initial_next_step': 'cancel',
+    },
+    'pending-program-fee-determination-by-oie': {
+        'previous_state': None,
+        'final_transition': 'submit-sponsored-program',
+        # 'transition_to_initial_next_step': 'manager-return-to-initial',
+    },
+    'pending-program-leader-operational-briefing': {
+        'previous_state': 'cancelled',
+        'final_transition': 'manager-return-to-pending-program-leader-operational-briefing',  # noqa : E501
+        # 'transition_to_initial_next_step': 'cancel',
+    },
+    'pending-program-leader-orientation': {
+        'previous_state': 'cancelled',
+        'final_transition': 'manager-return-to-pending-program-leader-orientation',  # noqa : E501
+        # 'transition_to_initial_next_step': 'cancel',
+    },
+    'pending-provider-responses': {
+        'previous_state': 'cancelled',
+        'final_transition': 'manager-return-to-pending-provider-responses',
+        # 'transition_to_initial_next_step': 'cancel',
+    },
+    'pending-provost-review': {
+        'previous_state': 'pending-oie-review',
+        'final_transition': 'submit-to-provost',
+        # 'transition_to_initial_next_step': 'manager-return-to-pending-oie-review',  # noqa : E501
+    },
+    'pending-travel-advance': {
+        'previous_state': 'cancelled',
+        'final_transition': 'manager-return-to-pending-travel-advance',
+        # 'transition_to_initial_next_step': 'cancel',
+    },
+    'process-refunds-budget-transfers': {
+        'previous_state': 'final-program-accounting-in-progress',
+        'final_transition': 'process-refunds',
+        # 'transition_to_initial_next_step': 'manager-return-to-final-program-accounting-in-progress',  # noqa : E501
+    },
+    'program-completed': {
+        'previous_state': 'process-refunds-budget-transfers',
+        'final_transition': 'archive-program',
+        # 'transition_to_initial_next_step': 'manager-return-to-process-refunds-budget-transfers',  # noqa : E501
+    },
+    'program-fee-pending-publication': {
+        'previous_state': 'cancelled',
+        'final_transition': 'manager-return-to-program-fee-pending-publication',  # noqa : E501
+        # 'transition_to_initial_next_step': 'cancel',
+    },
+    'program-fee-under-liaison-review': {
+        'previous_state': 'cancelled',
+        'final_transition': 'manager-return-to-program-fee-under-liaison-review',  # noqa : E501
+        # 'transition_to_initial_next_step': 'cancel',
+    },
+    'program-in-progress': {
+        'previous_state': 'pending-arrival-abroad',
+        'final_transition': 'confirm-safe-arrival',
+        # 'transition_to_initial_next_step': 'manager-return-to-pending-arrival-abroad',  # noqa : E501
+    },
+    'provider-proposals-under-liaison-review': {
+        'previous_state': None,
+        'final_transition': 'manager-return-to-provider-proposals-under-liaison-review',  # noqa : E501
+        # 'transition_to_initial_next_step': 'cancel',
+        # 'to_initial_previous_state': 'cancelled',
+    },
+    'provider-proposals-under-oie-review': {
+        'previous_state': None,
+        'final_transition': 'manager-return-to-provider-proposals-under-oie-review',  # noqa : E501
+        # 'transition_to_initial_next_step': 'return-to-initial',
+    },
+    'request-for-proposals-under-development': {
+        'previous_state': None,
+        'final_transition': 'manager-return-to-request-for-proposals-under-development',  # noqa : E501
+        # 'transition_to_initial_next_step': 'return-to-initial',
+    },
+    'request-for-proposals-under-liaison-review': {
+        'previous_state': 'cancelled',
+        'final_transition': 'manager-return-to-request-for-proposals-under-liaison-review',  # noqa : E501
+        # 'transition_to_initial_next_step': 'cancel',
+    },
+    'reviewing-final-program-details': {
+        'previous_state': 'cancelled',
+        'final_transition': 'manager-return-to-reviewing-final-program-details',  # noqa : E501
+        # 'transition_to_initial_next_step': 'cancel',
+    },
+    'suspended': {
+        'previous_state': 'application-intake-in-progress',
+        'final_transition': 'suspend',
+        # 'transition_to_initial_next_step': 'manager-return-to-application-intake-in-progress',  # noqa : E501
+    },
+    'travel-expense-report-student-evaluations-due-to': {
+        'previous_state': 'program-in-progress',
+        'final_transition': 'confirm-return',
+        # 'transition_to_initial_next_step': 'manager-return-to-program-in-progress',  # noqa : E501
+    },
+    'withdrawn': {
+        'previous_state': None,
+        'final_transition': 'withdraw-application',
+        # 'transition_to_initial_next_step': 'manager-return-to-initial',
+    },
+}
 
 
 class OIEStudyAbroadContentBaseTest(unittest.TestCase):

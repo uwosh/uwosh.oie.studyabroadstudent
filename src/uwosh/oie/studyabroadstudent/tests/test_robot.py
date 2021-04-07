@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.testing import ROBOT_TEST_LEVEL
 from plone.testing import layered
 from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_ACCEPTANCE_TESTING  # noqa

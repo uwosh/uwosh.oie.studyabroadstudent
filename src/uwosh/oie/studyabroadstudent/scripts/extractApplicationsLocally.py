@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # invoke like this:
 # bin/instance run extractApplicationsLocally.py > extractlocallyoutput.out
 

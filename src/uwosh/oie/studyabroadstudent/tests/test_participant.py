@@ -1,13 +1,10 @@
-# -*- coding: utf-8 -*-
 from . import OIEStudyAbroadContentBaseTest
 from plone import api
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_ID, setRoles
 from plone.dexterity.interfaces import IDexterityFTI
 from Products.CMFPlone.utils import get_installer
 from uwosh.oie.studyabroadstudent.interfaces.participant import IOIEStudyAbroadParticipant  # noqa
-from zope.component import createObject
-from zope.component import queryUtility
+from zope.component import createObject, queryUtility
 
 
 class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):

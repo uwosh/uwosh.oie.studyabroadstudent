@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Init and utils."""
 
 from uwosh.oie.studyabroadstudent import permissions  # noqa: F401

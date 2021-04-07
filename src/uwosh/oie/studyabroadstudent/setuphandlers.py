@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
 from plone import api
+from plone.api.exc import InvalidParameterError, MissingParameterError
 from plone.app.discussion.interfaces import IDiscussionSettings
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.registry.interfaces import IRegistry
-from Products.CMFPlone.interfaces import INonInstallable
-from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from Products.CMFPlone.interfaces import INonInstallable, ISelectableConstrainTypes
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadProgramsFolder  # noqa
 from zope.component import queryUtility
-from zope.interface import alsoProvides
-from zope.interface import implementer
+from zope.interface import alsoProvides, implementer
 
 import random
 import string
@@ -34,13 +32,15 @@ def constrain_types(folder, ftis):
     aspect.setImmediatelyAddableTypes(ftis)
 
 
-def create_toplevel_folder(portal,
-                           portal_ids,
-                           title,
-                           id,
-                           ftis,
-                           publish_but_exclude=False,
-                           also_provides=[]):
+def create_toplevel_folder(
+    portal,
+    portal_ids,
+    title,
+    id,
+    ftis,
+    publish_but_exclude=False,
+    also_provides=[],
+):
     if id not in portal_ids:
         folder = api.content.create(
             type='Folder',
@@ -182,7 +182,7 @@ def _create_account(email, username, roles, password=None):
                 password=password,
             )
             api.user.grant_roles(username=user.id, roles=roles)
-        except Exception:
+        except (InvalidParameterError, MissingParameterError):
             pass
 
 
@@ -234,32 +234,84 @@ def grant_permissions_toplevel_folders(portal):
 
 def populate_toplevel_folders(portal, portal_ids):
     # add folders and restrict addable types
-    create_toplevel_folder(portal, portal_ids, 'Legacy Applications',
-                           'legacy-applications',
-                           ['OIEStudyAbroadStudentApplication'])
-    create_toplevel_folder(portal, portal_ids, 'Countries', 'countries',
-                           ['OIECountry'], publish_but_exclude=True)
-    create_toplevel_folder(portal, portal_ids, 'Participants', 'participants',
-                           ['OIEStudyAbroadParticipant'],
-                           publish_but_exclude=True)
-    create_toplevel_folder(portal, portal_ids, 'Programs', 'programs',
-                           ['OIEStudyAbroadProgram'],
-                           publish_but_exclude=True,
-                           also_provides=[IOIEStudyAbroadProgramsFolder])
-    create_toplevel_folder(portal, portal_ids, 'People', 'people',
-                           ['OIEContact', 'OIELiaison', 'OIEProgramLeader'],
-                           publish_but_exclude=True)
-    create_toplevel_folder(portal, portal_ids, 'Partners', 'partners',
-                           ['OIECooperatingPartner'],
-                           publish_but_exclude=True)
-    create_toplevel_folder(portal, portal_ids, 'Years', 'years',
-                           ['OIECalendarYear'], publish_but_exclude=True)
-    create_toplevel_folder(portal, portal_ids, 'Airlines', 'airlines',
-                           ['OIEAirline'], publish_but_exclude=True)
-    create_toplevel_folder(portal, portal_ids, 'Forms', 'forms', ['File'])
-    create_toplevel_folder(portal, portal_ids, 'Email Templates',
-                           'email-templates', ['OIEProgramEmailTemplate',
-                                               'OIEParticipantEmailTemplate'])
+    create_toplevel_folder(
+        portal,
+        portal_ids,
+        'Legacy Applications',
+        'legacy-applications',
+        ['OIEStudyAbroadStudentApplication'],
+    )
+    create_toplevel_folder(
+        portal,
+        portal_ids,
+        'Countries',
+        'countries',
+        ['OIECountry'],
+        publish_but_exclude=True,
+    )
+    create_toplevel_folder(
+        portal,
+        portal_ids,
+        'Participants',
+        'participants',
+        ['OIEStudyAbroadParticipant'],
+        publish_but_exclude=True,
+    )
+    create_toplevel_folder(
+        portal,
+        portal_ids,
+        'Programs',
+        'programs',
+        ['OIEStudyAbroadProgram'],
+        publish_but_exclude=True,
+        also_provides=[IOIEStudyAbroadProgramsFolder],
+    )
+    create_toplevel_folder(
+        portal,
+        portal_ids,
+        'People',
+        'people',
+        ['OIEContact', 'OIELiaison', 'OIEProgramLeader'],
+        publish_but_exclude=True,
+    )
+    create_toplevel_folder(
+        portal,
+        portal_ids,
+        'Partners',
+        'partners',
+        ['OIECooperatingPartner'],
+        publish_but_exclude=True,
+    )
+    create_toplevel_folder(
+        portal,
+        portal_ids,
+        'Years',
+        'years',
+        ['OIECalendarYear'],
+        publish_but_exclude=True,
+    )
+    create_toplevel_folder(
+        portal,
+        portal_ids,
+        'Airlines',
+        'airlines',
+        ['OIEAirline'],
+        publish_but_exclude=True,
+    )
+    create_toplevel_folder(
+        portal,
+        portal_ids,
+        'Forms',
+        'forms',
+        ['File'],
+    )
+    create_toplevel_folder(
+        portal,
+        portal_ids,
+        'Email Templates',
+        'email-templates',
+        ['OIEProgramEmailTemplate', 'OIEParticipantEmailTemplate'],
+    )
 
 
 def enable_commenting():
@@ -785,8 +837,13 @@ def create_partner(name, folder):
                            title=name)
 
 
-def create_country(name, timezone_url, cdc_info_url, state_dept_info_url,
-                   folder):
+def create_country(
+    name,
+    timezone_url,
+    cdc_info_url,
+    state_dept_info_url,
+    folder,
+):
     util = queryUtility(IIDNormalizer)
     id = util.normalize(name)
     brains = api.content.find(portal_type='OIECountry', id=id)
