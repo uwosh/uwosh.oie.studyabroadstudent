@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # invoke like this:
 # bin/instance run extractApplicationsRemotely.py > extractApplicationsRemotely-output-201708101325.out  # noqa
 
@@ -61,7 +60,7 @@ if args.skip_ids != 'no':
         try:
             from uwosh.oie.studyabroadstudent.already_read import already_read
             SKIP_IDS = True
-        except Exception:
+        except ImportError:
             SKIP_IDS = False
             print('Unable to read list of IDs to skip')  # noqa
             exit(1)

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.textfield import RichText
 from plone.autoform.directives import mode
 from uwosh.oie.studyabroadstudent import _

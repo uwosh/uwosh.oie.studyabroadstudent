@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 
 from collective import dexteritytextindexer
 from plone.autoform.directives import mode
-from Products.CMFPlone.RegistrationTool import checkEmailAddress
-from Products.CMFPlone.RegistrationTool import EmailAddressInvalid
+from Products.CMFPlone.RegistrationTool import EmailAddressInvalid, checkEmailAddress
 from uwosh.oie.studyabroadstudent import _
 from uwosh.oie.studyabroadstudent.vocabularies import socialmediaservice
 from zope import schema

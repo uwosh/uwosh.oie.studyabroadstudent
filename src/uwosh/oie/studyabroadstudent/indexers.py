@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
 from plone.app.contenttypes import indexers
 from plone.app.uuid.utils import uuidToObject
 from plone.indexer import indexer as indexer_wrapper
 from plone.indexer.decorator import indexer
-from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
-from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadProgram
+from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant, IOIEStudyAbroadProgram
 
 import json
 
@@ -55,6 +53,6 @@ def image(program):
                 getattr(program, 'image', None) and
                 program.image.size > 0
         ):
-            return '{0}/@@images/image'.format(program.absolute_url())
+            return f'{program.absolute_url()}/@@images/image'
     except TypeError:
         return

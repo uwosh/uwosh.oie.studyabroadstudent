@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 # IOIEStudyAbroadParticipant: the new content type for participant applications
 
@@ -6,24 +5,24 @@ from collective import dexteritytextindexer
 from plone import api
 from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
-from plone.autoform.directives import omitted
-from plone.autoform.directives import widget
+from plone.autoform.directives import omitted, widget
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile import field
 from plone.namedfile.file import NamedFile
 from plone.supermodel import model
-from Products.CMFPlone.RegistrationTool import checkEmailAddress
-from Products.CMFPlone.RegistrationTool import EmailAddressInvalid
+from Products.CMFPlone.RegistrationTool import EmailAddressInvalid, checkEmailAddress
 from uwosh.oie.studyabroadstudent import _
-from uwosh.oie.studyabroadstudent.vocabularies import contactrelationship
 from uwosh.oie.studyabroadstudent.vocabularies import departure_mode_transportation_vocabulary  # noqa : E501
 from uwosh.oie.studyabroadstudent.vocabularies import departure_transfer_vocabulary  # noqa : E501
 from uwosh.oie.studyabroadstudent.vocabularies import graduation_month_vocabulary  # noqa : E501
-from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
 from uwosh.oie.studyabroadstudent.vocabularies import return_mode_transportation_vocabulary  # noqa : E501
 from uwosh.oie.studyabroadstudent.vocabularies import return_transfer_vocabulary  # noqa : E501
-from uwosh.oie.studyabroadstudent.vocabularies import socialmediaservice
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_vocabulary
+from uwosh.oie.studyabroadstudent.vocabularies import (
+    RegistryValueVocabulary,
+    contactrelationship,
+    socialmediaservice,
+    yes_no_vocabulary,
+)
 from zope import schema
 from zope.interface import Interface
 from zope.schema import ValidationError
@@ -731,7 +730,7 @@ class IOIEStudyAbroadParticipant(Interface):
             'returnModeOfTransportation',
             'airportTransferReturn',
             'requestToDeviateFromProgramDates',
-                ],
+        ],
     )
 
     interviewDate = schema.Date(

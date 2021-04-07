@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from datetime import timedelta
 from plone import api
 from plone.app.dexterity.behaviors.constrains import DISABLED
@@ -42,9 +41,7 @@ def program_created(o, event):
     # set the program code
     calendar_year_obj = api.content.get(UID=o.calendar_year)
     calendar_year = calendar_year_obj.title
-    program_code = (calendar_year)[2:4] + \
-                   (o.term)[0] + \
-                   (o.college_or_unit)[0]
+    program_code = f'{calendar_year[2:4]}{o.term[0]}{o.college_or_unit[0]}'
     for c in o.countries:
         program_code += c[0:3].upper()
     if o.program_code != program_code:
@@ -53,31 +50,34 @@ def program_created(o, event):
         normalizer = getUtility(IIDNormalizer)
         o.id = normalizer.normalize(o.title)
     # copy all dates from selected calendar year into the new Program object
-    for d in ['first_day_of_spring_semester_classes',
-              'last_day_of_spring_semester_classes',
-              'first_day_of_spring_interim_classes',
-              'last_day_of_spring_interim_classes',
-              'official_spring_graduation_date',
-              'first_day_of_summer_i_classes', 'last_day_of_summer_i_classes',
-              'first_day_of_summer_ii_classes',
-              'last_day_of_summer_ii_classes',
-              'official_summer_graduation_date',
-              'first_day_of_fall_semester_classes',
-              'last_day_of_fall_semester_classes',
-              'first_day_of_winter_interim_classes',
-              'last_day_of_winter_interim_classes',
-              'official_fall_graduation_date',
-              'spring_interim_summer_fall_semester_participant_orientation_deadline',  # noqa
-              'spring_interim_summer_fall_semester_in_person_orientation',
-              'winter_interim_spring_semester_participant_orientation_deadline',  # noqa
-              'winter_interim_spring_semester_in_person_orientation',
-              'spring_interim_summer_fall_semester_payment_deadline_1',
-              'spring_interim_payment_deadline_2',
-              'summer_payment_deadline_2', 'fall_semester_payment_deadline_2',
-              'winter_interim_spring_payment_deadline_1',
-              'winter_interim_spring_payment_deadline_2',
-              'request_for_proposals_due_date']:
-        setattr(o, d, getattr(calendar_year_obj, d))
+    special_days = [
+        'first_day_of_spring_semester_classes',
+        'last_day_of_spring_semester_classes',
+        'first_day_of_spring_interim_classes',
+        'last_day_of_spring_interim_classes',
+        'official_spring_graduation_date',
+        'first_day_of_summer_i_classes', 'last_day_of_summer_i_classes',
+        'first_day_of_summer_ii_classes',
+        'last_day_of_summer_ii_classes',
+        'official_summer_graduation_date',
+        'first_day_of_fall_semester_classes',
+        'last_day_of_fall_semester_classes',
+        'first_day_of_winter_interim_classes',
+        'last_day_of_winter_interim_classes',
+        'official_fall_graduation_date',
+        'spring_interim_summer_fall_semester_participant_orientation_deadline',  # noqa
+        'spring_interim_summer_fall_semester_in_person_orientation',
+        'winter_interim_spring_semester_participant_orientation_deadline',  # noqa
+        'winter_interim_spring_semester_in_person_orientation',
+        'spring_interim_summer_fall_semester_payment_deadline_1',
+        'spring_interim_payment_deadline_2',
+        'summer_payment_deadline_2', 'fall_semester_payment_deadline_2',
+        'winter_interim_spring_payment_deadline_1',
+        'winter_interim_spring_payment_deadline_2',
+        'request_for_proposals_due_date',
+    ]
+    for special_day in special_days:
+        setattr(o, special_day, getattr(calendar_year_obj, special_day))
     _update_contained_object_fields(o, event)
     _update_term_based_dates(o, event)
     _update_insurance_end_date(o, event)
@@ -88,8 +88,7 @@ def _update_insurance_end_date(o, event):
     start = o.arrivalAtDestinationAndInsuranceStartDate
     if arrival and start:
         duration = arrival - start
-        DURATIONS = [7, 14, 21, 35, 65, 95, 125, 155, 185, 215, 245, 275, 305,
-                     335, 365]
+        DURATIONS = [7, 14, 21, 35, 65, 95, 125, 155, 185, 215, 245, 275, 305, 335, 365]
         for d in DURATIONS:
             delta = timedelta(days=d)
             if duration <= delta:
@@ -217,8 +216,7 @@ def _participant_update(o, event, event_type=None):
     if program_uid:
         program = uuidToObject(program_uid)
         if program:
-            question_changed_str = 'This answer requires review because '\
-                                 'the question has changed: '
+            question_changed_str = 'This answer requires review because the question has changed: '
             programName = program.title
             program_assigned_or_changed = False
             if event_type == 'created':
@@ -232,43 +230,21 @@ def _participant_update(o, event, event_type=None):
                             program_assigned_or_changed = True
                             break
             if program_assigned_or_changed:
-                # copy questions from program object
-                o.applicant_question_text1 = program.applicantQuestion1
-                o.applicant_question_text2 = program.applicantQuestion2
-                o.applicant_question_text3 = program.applicantQuestion3
-                o.applicant_question_text4 = program.applicantQuestion4
-                o.applicant_question_text5 = program.applicantQuestion5
-                # if needed, mark the answer as being potentially out of date
-                if o.applicant_question_answer1 and not (
-                    o.applicant_question_answer1.startswith(
-                        question_changed_str)
-                ):
-                    o.applicant_question_answer1 = question_changed_str + \
-                                                   o.applicant_question_answer1
-                if o.applicant_question_answer2 and not (
-                    o.applicant_question_answer2.startswith(
-                        question_changed_str)
-                ):
-                    o.applicant_question_answer2 = question_changed_str + \
-                                                   o.applicant_question_answer2
-                if o.applicant_question_answer3 and not (
-                    o.applicant_question_answer3.startswith(
-                        question_changed_str)
-                ):
-                    o.applicant_question_answer3 = question_changed_str + \
-                                                   o.applicant_question_answer3
-                if o.applicant_question_answer4 and not (
-                    o.applicant_question_answer4.startswith(
-                        question_changed_str)
-                ):
-                    o.applicant_question_answer4 = question_changed_str + \
-                                                   o.applicant_question_answer4
-                if o.applicant_question_answer5 and not (
-                    o.applicant_question_answer5.startswith(
-                        question_changed_str)
-                ):
-                    o.applicant_question_answer5 = question_changed_str + \
-                                                   o.applicant_question_answer5
+                for index in range(1, 6):
+                    # copy questions from program object
+                    setattr(
+                        o,
+                        f'applicant_question_text{index}',
+                        getattr(program, f'applicantQuestion{index}', None),
+                    )
+                    # if needed, mark the answer as being potentially out of date
+                    answer = getattr(o, f'applicant_question_answer{index}', None)
+                    if answer and not answer.startswith(question_changed_str):
+                        setattr(
+                            o,
+                            f'applicant_question_answer{index}',
+                            question_changed_str + answer,
+                        )
             year_obj = uuidToObject(program.calendar_year)
             programYear = year_obj.title
             if o.middleName and o.middleName.strip() != '':
@@ -283,13 +259,7 @@ def _participant_update(o, event, event_type=None):
                     )
                 )
             else:
-                title = '{firstName} {lastName} {programName} {programYear}'.\
-                    format(
-                        firstName=o.firstName,
-                        lastName=o.lastName,
-                        programName=programName,
-                        programYear=programYear,
-                    )
+                title = f'{o.firstName} {o.lastName} {programName} {programYear}'
             if o.title != title:
                 o.title = title
 

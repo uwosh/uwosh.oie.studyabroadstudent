@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from collective import dexteritytextindexer
 from plone.autoform.directives import mode
 from uwosh.oie.studyabroadstudent import _

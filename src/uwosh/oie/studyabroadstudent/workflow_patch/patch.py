@@ -1,12 +1,7 @@
-# -*- coding: utf-8 -*-
-from Acquisition import aq_inner
-from Acquisition import aq_parent
-from Products.CMFCore.WorkflowCore import ObjectMoved
-from Products.CMFCore.WorkflowCore import WorkflowException
-from Products.DCWorkflow.events import AfterTransitionEvent
-from Products.DCWorkflow.events import BeforeTransitionEvent
-from Products.DCWorkflow.Expression import createExprContext
-from Products.DCWorkflow.Expression import StateChangeInfo
+from Acquisition import aq_inner, aq_parent
+from Products.CMFCore.WorkflowCore import ObjectMoved, WorkflowException
+from Products.DCWorkflow.events import AfterTransitionEvent, BeforeTransitionEvent
+from Products.DCWorkflow.Expression import StateChangeInfo, createExprContext
 from Products.DCWorkflow.utils import Message as _
 from uwosh.oie.studyabroadstudent.exceptions import StateError
 from zope.event import notify

@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 from collective import dexteritytextindexer
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform.directives import widget
-from Products.CMFPlone.RegistrationTool import checkEmailAddress
-from Products.CMFPlone.RegistrationTool import EmailAddressInvalid
+from Products.CMFPlone.RegistrationTool import EmailAddressInvalid, checkEmailAddress
 from uwosh.oie.studyabroadstudent import _
 from uwosh.oie.studyabroadstudent.vocabularies import socialmediaservice
 from z3c.relationfield.schema import RelationChoice

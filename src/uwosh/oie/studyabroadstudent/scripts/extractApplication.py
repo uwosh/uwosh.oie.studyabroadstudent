@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Prints out the attribute values of the OIEStudentApplication object
 # having the specified ID.  Invoked remotely via XML-RPC

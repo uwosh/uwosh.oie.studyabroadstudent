@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
 
 from plone.autoform.directives import mode
 from plone.namedfile import field
 from uwosh.oie.studyabroadstudent import _
 from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import validate_email  # noqa
-from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
-from uwosh.oie.studyabroadstudent.vocabularies import yes_no_vocabulary
+from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary, yes_no_vocabulary
 from zope import schema
 from zope.interface import Interface
 

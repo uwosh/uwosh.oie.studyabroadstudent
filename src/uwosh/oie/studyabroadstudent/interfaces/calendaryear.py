@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-from datetime import date
-from datetime import datetime
+from datetime import date, datetime
 from plone.supermodel import model
 from uwosh.oie.studyabroadstudent import _
 from zope import schema

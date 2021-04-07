@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
-from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper
-from plone.app.registry.browser.controlpanel import RegistryEditForm
+from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper, RegistryEditForm
 from plone.autoform.directives import widget
-from plone.formwidget.namedfile.widget import NamedFileFieldWidget
-from plone.formwidget.namedfile.widget import NamedImageFieldWidget
+from plone.formwidget.namedfile.widget import NamedFileFieldWidget, NamedImageFieldWidget
 from plone.supermodel import model
 from plone.z3cform import layout
 from uwosh.oie.studyabroadstudent import _
@@ -342,7 +339,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             u'Viessmann Internship Program in Schwandorf (summer)',
             u'Writing Across Cultures in Nicaragua',
             u'Youth Exchange Program in Japan',
-            ),
+        ),
         missing_value=None,
         required=True,
         value_type=schema.TextLine(),

@@ -1,24 +1,25 @@
-# -*- coding: utf-8 -*-
-from . import OIEStudyAbroadContentBaseTest
-from . import ROLES
-from . import STATES
-from . import TRANSITIONS
+from . import (
+    ROLES,
+    STATES,
+    TRANSITIONS,
+    OIEStudyAbroadContentBaseTest,
+)
 from AccessControl import Unauthorized
 from plone.api.content import delete as content_delete
 from plone.api.content import transition as content_transition
 from plone.api.exc import InvalidParameterError
 from plone.api.portal import get_tool
-from plone.app.testing import login
-from plone.app.testing import logout
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
+from plone.app.testing import (
+    TEST_USER_ID,
+    TEST_USER_NAME,
+    login,
+    logout,
+    setRoles,
+)
 from plone.dexterity.interfaces import IDexterityFTI
-# from Products.CMFCore.utils import getToolByName  # noqa : F401
 from Products.CMFPlone.utils import get_installer
-from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import IOIEStudyAbroadProgram as IProgram  # noqa : E501
-from zope.component import createObject
-from zope.component import queryUtility
+from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import IOIEStudyAbroadProgram as IProgram
+from zope.component import createObject, queryUtility
 
 
 def add_dynamic_tests(cls):
@@ -76,9 +77,9 @@ def add_dynamic_tests(cls):
                 end_state = transition['new_state']
                 if transition_name not in state_info['exit_transitions']:
                     test_method = create_invalid_transition_test(
-                                    start_state=start_state,
-                                    transition=transition_name,
-                                    end_state=end_state)
+                        start_state=start_state,
+                        transition=transition_name,
+                        end_state=end_state)
                     test_name = f'test_invalid_transition_{transition_name}_from_{start_state}_to_{end_state}'  # noqa
                     test_name = test_name.replace('-', '_')
                     test_method.__name__ = test_name
@@ -88,11 +89,11 @@ def add_dynamic_tests(cls):
                     for role in ROLES:
                         is_authorized = role in authorized_roles
                         test_method = create_transition_by_role_test(
-                                        start_state=start_state,
-                                        role=role,
-                                        transition=transition_name,
-                                        end_state=end_state,
-                                        is_authorized=is_authorized)
+                            start_state=start_state,
+                            role=role,
+                            transition=transition_name,
+                            end_state=end_state,
+                            is_authorized=is_authorized)
                         can_or_cannot = 'can' if role in authorized_roles else 'cannot'  # noqa
                         test_name = f'test_{role}_{can_or_cannot}_activate_{transition["transition_id"]}_from_state_{state_id}'  # noqa
                         test_name = test_name.replace('-', '_')

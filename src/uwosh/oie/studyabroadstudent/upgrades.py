@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
 from plone import api
-from plone.app.textfield import RichText
-from plone.app.textfield import RichTextValue
+from plone.app.textfield import RichText, RichTextValue
 from plone.app.textfield.interfaces import ITransformer
 
 import logging

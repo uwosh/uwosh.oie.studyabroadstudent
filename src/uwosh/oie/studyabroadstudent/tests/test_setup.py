@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 """Setup tests for this package."""
 from Products.CMFPlone.utils import get_installer
-from uwosh.oie.studyabroadstudent.testing import UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING as test_layer  # noqa
+from uwosh.oie.studyabroadstudent.testing import \
+    UWOSH_OIE_STUDYABROADSTUDENT_INTEGRATION_TESTING as test_layer
 
 import unittest
 
@@ -25,7 +25,7 @@ class TestSetup(unittest.TestCase):
 
     def test_browserlayer(self):
         """Test that IUwoshOieStudyabroadstudentLayer is registered."""
-        from uwosh.oie.studyabroadstudent.interfaces import \
-            IUwoshOieStudyabroadstudentLayer as layer  # noqa : I001
-        from plone.browserlayer import utils
-        self.assertIn(layer, utils.registered_layers())  # noqa : E501
+        from wosh.oie.studyabroadstudent.interfaces import \
+            IUwoshOieStudyabroadstudentLayer as layer  # noqa: I001
+        from plone.browserlayer.utils import registered_layers  # noqa: I001
+        self.assertIn(layer, registered_layers())

@@ -1,2 +1,1 @@
-# -*- coding: utf-8 -*-
-from .patch import _executeTransition  # noqa
+from .patch import _executeTransition  # noqa: F401

@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
 from plone import api
-from plone.dexterity.browser import add
-from plone.dexterity.browser import edit
+from plone.dexterity.browser import add, edit
 from Products.CMFPlone.resources import add_resource_on_request
 
 

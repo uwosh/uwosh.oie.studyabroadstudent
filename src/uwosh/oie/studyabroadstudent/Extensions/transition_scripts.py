@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 
 from plone import api
 from uwosh.oie.studyabroadstudent.exceptions import StateError
-from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
-from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadProgram
+from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant, IOIEStudyAbroadProgram
 from uwosh.oie.studyabroadstudent.interfaces.directives import REQUIRED_IN_STATE_KEY  # noqa : E501
 from uwosh.oie.studyabroadstudent.interfaces.directives import REQUIRED_VALUE_IN_STATE_KEY  # noqa : E501
 
@@ -144,7 +142,7 @@ def sendTransitionMessage(state_change, interface):
     if not emailTemplate:
         message = 'Not sending transition email for transition {}.'.format(state_change.transition.id)  # noqa : E501
         question = 'Was the Email Template created?'
-        logger.info('{} {}'.format(message, question))
+        logger.info(f'{message} {question}')
         return
 
     object = state_change.object
@@ -169,8 +167,8 @@ def sendTransitionMessage(state_change, interface):
     transition_message= "Sending email for transition {} to {}".format(state_change.transition.id, mTo)  # noqa : E501
     subject_message = "subject '{mSubj}'"
     email_template_message = "emailTemplate = '{emailTemplate}'"
-    logger.info('{}, {}, {}'.format(transition_message,subject_message,email_template_message))  # noqa : E501
-    mMsg = '{}\n\n{}'.format(assembleEmailMessage(object, emailTemplate), state_msg)
+    logger.info(f'{transition_message}, {subject_message}, {email_template_message}')
+    mMsg = f'{assembleEmailMessage(object, emailTemplate)}\n\n{state_msg}'
 
     mail_host = api.portal.get_tool(name='MailHost')
     mail_host.send(mMsg, mTo, mFrom, mSubj)
@@ -221,7 +219,7 @@ def getToAddresses(object, emailTemplate):
         if emailTemplate.send_to_participant:
             try:
                 addresses.append(object.email)
-            except Exception:
+            except (AttributeError, ValueError):
                 logger.info("Can't get participant email")
 
     if emailTemplate.send_to_actor:
@@ -235,7 +233,7 @@ def getToAddresses(object, emailTemplate):
             leader = api.content.get(UID=leader_id)
             if leader.Title != '*Nobody':
                 addresses.append(leader.email)
-        except Exception:
+        except (AttributeError, ValueError):
             logger.info("Can't get program leader email")
 
     addresses.extend([addr.strip() for addr in emailTemplate.ccUsers.split(',')])  # noqa
