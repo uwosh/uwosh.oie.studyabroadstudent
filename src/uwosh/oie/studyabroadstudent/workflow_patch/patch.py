@@ -29,7 +29,7 @@ def _executeTransition(self, ob, tdef=None, kwargs=None):
         former_status = self._getStatusOf(ob)
     new_sdef = self.states.get(new_state, None)
     if new_sdef is None:
-        msg = _(u'Destination state undefined: ${state_id}',
+        msg = _('Destination state undefined: ${state_id}',
                 mapping={'state_id': new_state})
         raise WorkflowException(msg)
 
@@ -50,7 +50,7 @@ def _executeTransition(self, ob, tdef=None, kwargs=None):
                 ob = moved_exc.getNewObject()
                 # Re-raise after transition
     except StateError as e:
-        msg = u'OIE: State Not Changed! {0}'.format(e.message)
+        msg = f'OIE: State Not Changed! {e.message}'
         ob.plone_utils.addPortalMessage(_(msg), type='error')
         return
 

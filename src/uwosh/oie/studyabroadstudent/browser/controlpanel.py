@@ -71,81 +71,81 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     majors = schema.Tuple(
-        title=_(u'Majors'),
+        title=_('Majors'),
         default=(
-            u'-- choose one --',
-            u'Accounting',
-            u'African American Studies',
-            u'Anthropology',
-            u'Art',
-            u'Biology',
-            u'Broadfield Natural Science',
-            u'Broadfield Social Science',
-            u'business-undeclared-prebus',
-            u'Canada and U.S. Studies',
-            u'Chemistry',
-            u'Communication',
-            u'Computer Science',
-            u'Criminal Justice',
-            u'Dual Early Childhood PK-3 and Special Education Birth through Age 8',  # noqa
-            u'Dual Elementary 1-6 and Special',
-            u'emba',
-            u'Earth Science',
-            u'Economics',
-            u'Education',
-            u'Elementary Education',
-            u'engineering-technology',
-            u'English',
-            u'English as a Second Language',
-            u'Environmental Studies',
-            u'Finance',
-            u'Fine Arts',
-            u'French',
-            u'Geography',
-            u'Geology',
-            u'German',
-            u'History',
-            u'Human Resources',
-            u'Human Services',
-            u'Individually Planned',
-            u'Interdisciplinary Studies',
-            u'International Studies',
-            u'japanese',
-            u'Journalism',
-            u'kinesiology',
-            u'Liberal Arts',
-            u'Liberal Studies',
-            u'MBA',
-            u'Management Information Systems (MIS)',
-            u'Marketing',
-            u'Mathematics',
-            u'Medical Technology',
-            u'Microbiology',
-            u'Military Science',
-            u'Music',
-            u'Music Education',
-            u'Music Therapy',
-            u'Nursing',
-            u'Operations Management',
-            u'Philosophy',
-            u'Physical Education',
-            u'Physics',
-            u'Political Science',
-            u'Pre-Professional Studies',
-            u'professional-counseling',
-            u'Psychology',
-            u'Public Affairs',
-            u'Radio TV Film (RTF)',
-            u'Religious Studies',
-            u'Secondary Education',
-            u'Social Work',
-            u'Sociology',
-            u'Spanish',
-            u'Special Education Cross-Categorical',
-            u'THEATRE ARTS',
-            u'Urban and Regional Studies',
-            u'Womens Studies',
-            u'pre-engineering',
+            '-- choose one --',
+            'Accounting',
+            'African American Studies',
+            'Anthropology',
+            'Art',
+            'Biology',
+            'Broadfield Natural Science',
+            'Broadfield Social Science',
+            'business-undeclared-prebus',
+            'Canada and U.S. Studies',
+            'Chemistry',
+            'Communication',
+            'Computer Science',
+            'Criminal Justice',
+            'Dual Early Childhood PK-3 and Special Education Birth through Age 8',  # noqa
+            'Dual Elementary 1-6 and Special',
+            'emba',
+            'Earth Science',
+            'Economics',
+            'Education',
+            'Elementary Education',
+            'engineering-technology',
+            'English',
+            'English as a Second Language',
+            'Environmental Studies',
+            'Finance',
+            'Fine Arts',
+            'French',
+            'Geography',
+            'Geology',
+            'German',
+            'History',
+            'Human Resources',
+            'Human Services',
+            'Individually Planned',
+            'Interdisciplinary Studies',
+            'International Studies',
+            'japanese',
+            'Journalism',
+            'kinesiology',
+            'Liberal Arts',
+            'Liberal Studies',
+            'MBA',
+            'Management Information Systems (MIS)',
+            'Marketing',
+            'Mathematics',
+            'Medical Technology',
+            'Microbiology',
+            'Military Science',
+            'Music',
+            'Music Education',
+            'Music Therapy',
+            'Nursing',
+            'Operations Management',
+            'Philosophy',
+            'Physical Education',
+            'Physics',
+            'Political Science',
+            'Pre-Professional Studies',
+            'professional-counseling',
+            'Psychology',
+            'Public Affairs',
+            'Radio TV Film (RTF)',
+            'Religious Studies',
+            'Secondary Education',
+            'Social Work',
+            'Sociology',
+            'Spanish',
+            'Special Education Cross-Categorical',
+            'THEATRE ARTS',
+            'Urban and Regional Studies',
+            'Womens Studies',
+            'pre-engineering',
         ),
         missing_value=None,
         required=True,
@@ -153,192 +153,192 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     programs = schema.Tuple(
-        title=_(u'Programs'),
+        title=_('Programs'),
         default=(
-            u'20th Century British Philosophy in Cambridge, UK',
-            u'20th Century Eastern Europe and the Holocaust',
-            u'3D Design, Art and Technology in Korea',
-            u'Activism, Resistance, and Visual Rhetoric in Germany',
-            u'American University of Rome, Italy (UW-Platteville)',
-            u'American Writers in Paris',
-            u'Animal Behavior Observation in Tanzania',
-            u'Applied Parasitology in Nicaragua and Costa Rica',
-            u'Applied Pharmacology',
-            u'Approaches to Resource Management of Tropical Ecosystems in Belize',  # noqa
-            u'Asia-Pacific TEFL Workshop',
-            u'AustraLearn - academic year',
-            u'AustraLearn - semester',
-            u'AustraLearn - short-term',
-            u'Black Howler Monkey Research in Belize',
-            u'British Politics and Political Thought',
-            u'Business & Economics in China',
-            u'Business & Economics in Peru',
-            u'Business in Fulda, Germany',
-            u'Business in India: Opportunities & Challenges (business participant)',  # noqa
-            u'Business in India: Opportunities & Challenges (student participants)',  # noqa
-            u'Camp Kyushu',
-            u'Challenge Australia: Leadership Development',
-            u'Challenge New Zealand: Leadership Development',
-            u'Communication, Social Justice, Women and Gender Studies in Tanzania',  # noqa
-            u'Comparative Criminal Justice Systems in Great Britain & France',
-            u'Coral Reefs and Geology of Bermuda',
-            u'Counseling, Culture and Spirituality in India',
-            u'Cross-Cultural Psychology Research in Brazil',
-            u'Culture & Community Change in Costa Rica',
-            u'Culture and Communication in Italy and Greece',
-            u'Culture and Style in England and Italy',
-            u'Czech Culture & Society in a Global Context',
-            u'EMBA Abroad',
-            u'Economics of the Carribean through Service Learning in Jamaica',
-            u'Educators Abroad Student Teaching',
-            u'Estonia, Russia and Eastern Europe in the 20th Century',
-            u'Estudio de Lectoescritura en Costa Rica',
-            u'Ethics & Community in Martha''s Vineyard, MA (USA)',
-            u'European Business Travel Seminar',
-            u'European Odyssey',
-            u'Experience Scotland',
-            u'Field Geology in China',
-            u'Harbin Institute of Technology-Summer Program',
-            u'Hessen - Frankfurt University of Applied Sciences - academic year',  # noqa
-            u'Hessen - Frankfurt University of Applied Sciences - semester',
-            u'Hessen - Hochschule Darmstadt - academic year',
-            u'Hessen - Hochschule Darmstadt - semester',
-            u'Hessen - Hochschule Fulda - academic year',
-            u'Hessen - Hochschule Fulda - semester',
-            u'Hessen - Hochschule RheinMain - academic year',
-            u'Hessen - Hochschule RheinMain - semester',
-            u'Hessen - Hochschule für Gestaltung Offenbach am Main - academic year',  # noqa
-            u'Hessen - Hochschule für Gestaltung Offenbach am Main - semester',
-            u'Hessen - Hochschule für Musik und Darstellende Kunst Frankfurt - academic year',  # noqa
-            u'Hessen - Hochschule für Musik und Darstellende Kunst Frankfurt - semester',  # noqa
-            u'Hessen - Johann Wolfgang Goethe-Universität Frankfurt - academic year',  # noqa
-            u'Hessen - Johann Wolfgang Goethe-Universität Frankfurt - semester',  # noqa
-            u'Hessen - Justus-Liebig-Universität Gießen - academic year',
-            u'Hessen - Justus-Liebig-Universität Gießen - semester',
-            u'Hessen - Philipps-Universität Marburg - IUSP',
-            u'Hessen - Philipps-Universität Marburg - academic year',
-            u'Hessen - Philipps-Universität Marburg - semester',
-            u'Hessen - Technische Hochschule Mittelhessen - academic year',
-            u'Hessen - Technische Hochschule Mittelhessen - semester',
-            u'Hessen - Technische Universität Darmstadt - academic year',
-            u'Hessen - Technische Universität Darmstadt - semester',
-            u'Hessen - Universität Kassel - academic year',
-            u'Hessen - Universität Kassel - semester',
-            u'Hessen, Germany Student Exchange - academic year',
-            u'Hessen, Germany Student Exchange - semester',
-            u'History of British Philosophy in Cambridge, England',
-            u'History of Styles',
-            u'Hochschule Osnabrueck - academic year',
-            u'Hochschule Osnabrueck - semester',
-            u'Intensive Spanish in Salamanca, Spain - CAPP',
-            u'Intensive Spanish in Salamanca, Spain - academic year',
-            u'Intensive Spanish in Salamanca, Spain - semester',
-            u'Intensive Spanish in Salamanca, Spain - short-term',
-            u'International Operations Management in Ireland',
-            u'International Summer University in Darmstadt, Germany',
-            u'International Summer University in Frankfurt, Germany',
-            u'International Summer University in Fulda, Germany',
-            u'International Summer University in Giessen, Germany',
-            u'International Summer University in Kassel, Germany',
-            u'International Summer University in Marburg, Germany',
-            u'International Winter University in Fulda, Germany',
-            u'International Winter University in Kassel, Germany',
-            u'Junior II Medical/Surgical Clinical in India',
-            u'Kookmin Univeristy - Summer Language Program',
-            u'Kookmin University - academic year',
-            u'Kookmin University - semester',
-            u'Language and Culture for Teachers (Costa Rica)',
-            u'Languages Open Doors (Chile)',
-            u'Leadership & Culture in Australia and New Zealand',
-            u'Leadership & Culture in Australia',
-            u'Lorenzo de'' Medici - Florence',
-            u'Lorenzo de'' Medici - Rome',
-            u'Lorenzo de'' Medici - Three Cities',
-            u'Lorenzo de'' Medici - Tuscania',
-            u'Los Angeles Connection (USA)',
-            u'MBA Healthcare in India',
-            u'MBA in China & Korea',
-            u'Mathematics Education in China',
-            u'Mathematics Education in Germany',
-            u'Mathematics Education in Peru',
-            u'Modern Democratic Politics in Europe',
-            u'Modern European Politics and the Rise and Fall of European Facism',  # noqa
-            u'Nagasaki Junior College - semester',
-            u'Nagasaki Junior College/USA Summer Camp Study & Internship Program',  # noqa
-            u'Nagasaki University of Foreign Studies, Japan (UW-Platteville academic year)',  # noqa
-            u'Nagasaki University of Foreign Studies, Japan (UW-Platteville semester)',  # noqa
-            u'National Student Exchange - academic year',
-            u'National Student Exchange - semester',
-            u'Nationalism and Internationalism in the Heart of Europe',
-            u'Nicaragua: Gender, Poverty, and Activism',
-            u'Ningbo University - academic year',
-            u'Ningbo University - semester',
-            u'Nursing Clinical Community & Families in Peru (Batch 1)',
-            u'Nursing Clinical Community & Families in Peru (Batch 2)',
-            u'Nursing Clinical Community and Families in Nicaragua',
-            u'Nursing Clinical Rotations AND Nursing & Health Care in India (combined programs)',  # noqa
-            u'Nursing Clinical Rotations in Uganda',
-            u'Nursing Community Health Clinical in India',
-            u'Peruvian Business Travel Seminar in Lima',
-            u'Politics and Political History in Great Britain',
-            u'Quest III Literary Landscapes: Ireland',
-            u'Quest III Migration, Culture, and Human Rights in the Americas in Nicaragua',  # noqa
-            u'Quest III in Panama',
-            u'Quest III: Culture & Community Change in Costa Rica',
-            u'Reading and Writing in Place: Ireland',
-            u'Reason & Religion in 18th Century Scotland',
-            u'Religious Studies in India & Nepal',
-            u'Ritsumeikan Asia Pacific University Student Exchange - academic year',  # noqa
-            u'Ritsumeikan Asia Pacific University Student Exchange - semester',
-            u'Seijo University Student Exchange (academic year)',
-            u'Seijo University Student Exchange (semester)',
-            u'Seminar on Globalization - Africas Experience in Kenya',
-            u'Service-Learning in Malaysia',
-            u'Social Work Study in Germany - Summer + Fall Semester',
-            u'Social Work Study in Germany - Summer',
-            u'Society and Culture in Greece & London',
-            u'South Central University for Nationalities, China (UW-Platteville)',  # noqa
-            u'Spanish Language & Culture in Guanajuato, Mexico',
-            u'Spanish and Economics Studies in Peru',
-            u'Spanish-American Institute of International Education, Spain (UW-Platteville)',  # noqa
-            u'Spring Interim in Rome',
-            u'St. Mary''s University College, England (academic year; UW-Platteville)',  # noqa
-            u'St. Mary''s University College, England (semester; UW-Platteville)',  # noqa
-            u'Student Consulting Practicum + European Business Travel Seminar',
-            u'Student Consulting Practicum + Peruvian Business Travel Seminar',
-            u'Student Consulting Practicum',
-            u'Study in Lille, France',
-            u'Study plus Intern or Teach in China',
-            u'Study plus Intern or Volunteer in Australia',
-            u'Summer Courses in Osnabrueck, Germany',
-            u'Summer in England and Scotland',
-            u'Survey of Special and Early Childhood Education in Belize',
-            u'Sustainability & Globalization - Africas Experience in Uganda',
-            u'THM Internship in Germany',
-            u'Teach in China',
-            u'Teacher Education in Korea',
-            u'The Intern Group',
-            u'The Jewish Question in European Politics in Poland and Germany',
-            u'Travel Writing in Nicaragua',
-            u'Travel and Documentary Photography in England',
-            u'Traveling Through Literary and Artistic England',
-            u'USA Summer Camp (Japan)',
-            u'Universidad Bernardo O''Higgins Student Exchange (academic year)',  # noqa
-            u'Universidad Bernardo O''Higgins Student Exchange (semester)',
-            u'Universidad Castilla-La Mancha (academic year)',
-            u'Universidad del Pacifico Student Exchange - academic year',
-            u'Universidad del Pacifico Student Exchange - semester',
-            u'University Honors Program',
-            u'University of Nagasaki Siebold - academic year',
-            u'University of Nagasaki Siebold - semester',
-            u'University of New Brunswick Student Exchange - academic year',
-            u'University of New Brunswick Student Exchange - semester',
-            u'University of Newcastle, Australia (UW-Platteville)',
-            u'Viessmann Academy - Student Seminar in Sustainability in Germany',  # noqa
-            u'Viessmann Internship Program in Allendorf (summer)',
-            u'Viessmann Internship Program in Schwandorf (summer)',
-            u'Writing Across Cultures in Nicaragua',
-            u'Youth Exchange Program in Japan',
+            '20th Century British Philosophy in Cambridge, UK',
+            '20th Century Eastern Europe and the Holocaust',
+            '3D Design, Art and Technology in Korea',
+            'Activism, Resistance, and Visual Rhetoric in Germany',
+            'American University of Rome, Italy (UW-Platteville)',
+            'American Writers in Paris',
+            'Animal Behavior Observation in Tanzania',
+            'Applied Parasitology in Nicaragua and Costa Rica',
+            'Applied Pharmacology',
+            'Approaches to Resource Management of Tropical Ecosystems in Belize',  # noqa
+            'Asia-Pacific TEFL Workshop',
+            'AustraLearn - academic year',
+            'AustraLearn - semester',
+            'AustraLearn - short-term',
+            'Black Howler Monkey Research in Belize',
+            'British Politics and Political Thought',
+            'Business & Economics in China',
+            'Business & Economics in Peru',
+            'Business in Fulda, Germany',
+            'Business in India: Opportunities & Challenges (business participant)',  # noqa
+            'Business in India: Opportunities & Challenges (student participants)',  # noqa
+            'Camp Kyushu',
+            'Challenge Australia: Leadership Development',
+            'Challenge New Zealand: Leadership Development',
+            'Communication, Social Justice, Women and Gender Studies in Tanzania',  # noqa
+            'Comparative Criminal Justice Systems in Great Britain & France',
+            'Coral Reefs and Geology of Bermuda',
+            'Counseling, Culture and Spirituality in India',
+            'Cross-Cultural Psychology Research in Brazil',
+            'Culture & Community Change in Costa Rica',
+            'Culture and Communication in Italy and Greece',
+            'Culture and Style in England and Italy',
+            'Czech Culture & Society in a Global Context',
+            'EMBA Abroad',
+            'Economics of the Carribean through Service Learning in Jamaica',
+            'Educators Abroad Student Teaching',
+            'Estonia, Russia and Eastern Europe in the 20th Century',
+            'Estudio de Lectoescritura en Costa Rica',
+            'Ethics & Community in Martha''s Vineyard, MA (USA)',
+            'European Business Travel Seminar',
+            'European Odyssey',
+            'Experience Scotland',
+            'Field Geology in China',
+            'Harbin Institute of Technology-Summer Program',
+            'Hessen - Frankfurt University of Applied Sciences - academic year',  # noqa
+            'Hessen - Frankfurt University of Applied Sciences - semester',
+            'Hessen - Hochschule Darmstadt - academic year',
+            'Hessen - Hochschule Darmstadt - semester',
+            'Hessen - Hochschule Fulda - academic year',
+            'Hessen - Hochschule Fulda - semester',
+            'Hessen - Hochschule RheinMain - academic year',
+            'Hessen - Hochschule RheinMain - semester',
+            'Hessen - Hochschule für Gestaltung Offenbach am Main - academic year',  # noqa
+            'Hessen - Hochschule für Gestaltung Offenbach am Main - semester',
+            'Hessen - Hochschule für Musik und Darstellende Kunst Frankfurt - academic year',  # noqa
+            'Hessen - Hochschule für Musik und Darstellende Kunst Frankfurt - semester',  # noqa
+            'Hessen - Johann Wolfgang Goethe-Universität Frankfurt - academic year',  # noqa
+            'Hessen - Johann Wolfgang Goethe-Universität Frankfurt - semester',  # noqa
+            'Hessen - Justus-Liebig-Universität Gießen - academic year',
+            'Hessen - Justus-Liebig-Universität Gießen - semester',
+            'Hessen - Philipps-Universität Marburg - IUSP',
+            'Hessen - Philipps-Universität Marburg - academic year',
+            'Hessen - Philipps-Universität Marburg - semester',
+            'Hessen - Technische Hochschule Mittelhessen - academic year',
+            'Hessen - Technische Hochschule Mittelhessen - semester',
+            'Hessen - Technische Universität Darmstadt - academic year',
+            'Hessen - Technische Universität Darmstadt - semester',
+            'Hessen - Universität Kassel - academic year',
+            'Hessen - Universität Kassel - semester',
+            'Hessen, Germany Student Exchange - academic year',
+            'Hessen, Germany Student Exchange - semester',
+            'History of British Philosophy in Cambridge, England',
+            'History of Styles',
+            'Hochschule Osnabrueck - academic year',
+            'Hochschule Osnabrueck - semester',
+            'Intensive Spanish in Salamanca, Spain - CAPP',
+            'Intensive Spanish in Salamanca, Spain - academic year',
+            'Intensive Spanish in Salamanca, Spain - semester',
+            'Intensive Spanish in Salamanca, Spain - short-term',
+            'International Operations Management in Ireland',
+            'International Summer University in Darmstadt, Germany',
+            'International Summer University in Frankfurt, Germany',
+            'International Summer University in Fulda, Germany',
+            'International Summer University in Giessen, Germany',
+            'International Summer University in Kassel, Germany',
+            'International Summer University in Marburg, Germany',
+            'International Winter University in Fulda, Germany',
+            'International Winter University in Kassel, Germany',
+            'Junior II Medical/Surgical Clinical in India',
+            'Kookmin Univeristy - Summer Language Program',
+            'Kookmin University - academic year',
+            'Kookmin University - semester',
+            'Language and Culture for Teachers (Costa Rica)',
+            'Languages Open Doors (Chile)',
+            'Leadership & Culture in Australia and New Zealand',
+            'Leadership & Culture in Australia',
+            'Lorenzo de'' Medici - Florence',
+            'Lorenzo de'' Medici - Rome',
+            'Lorenzo de'' Medici - Three Cities',
+            'Lorenzo de'' Medici - Tuscania',
+            'Los Angeles Connection (USA)',
+            'MBA Healthcare in India',
+            'MBA in China & Korea',
+            'Mathematics Education in China',
+            'Mathematics Education in Germany',
+            'Mathematics Education in Peru',
+            'Modern Democratic Politics in Europe',
+            'Modern European Politics and the Rise and Fall of European Facism',  # noqa
+            'Nagasaki Junior College - semester',
+            'Nagasaki Junior College/USA Summer Camp Study & Internship Program',  # noqa
+            'Nagasaki University of Foreign Studies, Japan (UW-Platteville academic year)',  # noqa
+            'Nagasaki University of Foreign Studies, Japan (UW-Platteville semester)',  # noqa
+            'National Student Exchange - academic year',
+            'National Student Exchange - semester',
+            'Nationalism and Internationalism in the Heart of Europe',
+            'Nicaragua: Gender, Poverty, and Activism',
+            'Ningbo University - academic year',
+            'Ningbo University - semester',
+            'Nursing Clinical Community & Families in Peru (Batch 1)',
+            'Nursing Clinical Community & Families in Peru (Batch 2)',
+            'Nursing Clinical Community and Families in Nicaragua',
+            'Nursing Clinical Rotations AND Nursing & Health Care in India (combined programs)',  # noqa
+            'Nursing Clinical Rotations in Uganda',
+            'Nursing Community Health Clinical in India',
+            'Peruvian Business Travel Seminar in Lima',
+            'Politics and Political History in Great Britain',
+            'Quest III Literary Landscapes: Ireland',
+            'Quest III Migration, Culture, and Human Rights in the Americas in Nicaragua',  # noqa
+            'Quest III in Panama',
+            'Quest III: Culture & Community Change in Costa Rica',
+            'Reading and Writing in Place: Ireland',
+            'Reason & Religion in 18th Century Scotland',
+            'Religious Studies in India & Nepal',
+            'Ritsumeikan Asia Pacific University Student Exchange - academic year',  # noqa
+            'Ritsumeikan Asia Pacific University Student Exchange - semester',
+            'Seijo University Student Exchange (academic year)',
+            'Seijo University Student Exchange (semester)',
+            'Seminar on Globalization - Africas Experience in Kenya',
+            'Service-Learning in Malaysia',
+            'Social Work Study in Germany - Summer + Fall Semester',
+            'Social Work Study in Germany - Summer',
+            'Society and Culture in Greece & London',
+            'South Central University for Nationalities, China (UW-Platteville)',  # noqa
+            'Spanish Language & Culture in Guanajuato, Mexico',
+            'Spanish and Economics Studies in Peru',
+            'Spanish-American Institute of International Education, Spain (UW-Platteville)',  # noqa
+            'Spring Interim in Rome',
+            'St. Mary''s University College, England (academic year; UW-Platteville)',  # noqa
+            'St. Mary''s University College, England (semester; UW-Platteville)',  # noqa
+            'Student Consulting Practicum + European Business Travel Seminar',
+            'Student Consulting Practicum + Peruvian Business Travel Seminar',
+            'Student Consulting Practicum',
+            'Study in Lille, France',
+            'Study plus Intern or Teach in China',
+            'Study plus Intern or Volunteer in Australia',
+            'Summer Courses in Osnabrueck, Germany',
+            'Summer in England and Scotland',
+            'Survey of Special and Early Childhood Education in Belize',
+            'Sustainability & Globalization - Africas Experience in Uganda',
+            'THM Internship in Germany',
+            'Teach in China',
+            'Teacher Education in Korea',
+            'The Intern Group',
+            'The Jewish Question in European Politics in Poland and Germany',
+            'Travel Writing in Nicaragua',
+            'Travel and Documentary Photography in England',
+            'Traveling Through Literary and Artistic England',
+            'USA Summer Camp (Japan)',
+            'Universidad Bernardo O''Higgins Student Exchange (academic year)',  # noqa
+            'Universidad Bernardo O''Higgins Student Exchange (semester)',
+            'Universidad Castilla-La Mancha (academic year)',
+            'Universidad del Pacifico Student Exchange - academic year',
+            'Universidad del Pacifico Student Exchange - semester',
+            'University Honors Program',
+            'University of Nagasaki Siebold - academic year',
+            'University of Nagasaki Siebold - semester',
+            'University of New Brunswick Student Exchange - academic year',
+            'University of New Brunswick Student Exchange - semester',
+            'University of Newcastle, Australia (UW-Platteville)',
+            'Viessmann Academy - Student Seminar in Sustainability in Germany',  # noqa
+            'Viessmann Internship Program in Allendorf (summer)',
+            'Viessmann Internship Program in Schwandorf (summer)',
+            'Writing Across Cultures in Nicaragua',
+            'Youth Exchange Program in Japan',
         ),
         missing_value=None,
         required=True,
@@ -346,87 +346,87 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     subjects = schema.Tuple(
-        title=_(u'Subjects'),
+        title=_('Subjects'),
         default=(
-            u'-- choose one --',
-            u'AF AM ST',
-            u'ANTHRO',
-            u'ARABIC',
-            u'ARAPAHO',
-            u'ART',
-            u'ASTRONY',
-            u'BIOLOGY',
-            u'BUSINESS',
-            u'CHEM',
-            u'COMM',
-            u'COMP SCI',
-            u'CRIM JUS',
-            u'DFLL',
-            u'ECON',
-            u'ED FOUND',
-            u'ED LDRSP',
-            u'ELEM ED',
-            u'eng-tech',
-            u'ENGLISH',
-            u'ENV STDS',
-            u'EXT STDS',
-            u'FL ELECT',
-            u'FR ABRD',
-            u'FRENCH',
-            u'GEN ELEC',
-            u'GEN STDS',
-            u'GEOG',
-            u'GEOLOGY',
-            u'GERMAN',
-            u'HEALTH',
-            u'HISTORY',
-            u'honors',
-            u'HU ELECT',
-            u'HUMAN SV',
-            u'INTRDSCP',
-            u'INTRNTL',
-            u'JAPANESE',
-            u'JOURNAL',
-            u'KINESIOL',
-            u'LIB SCI',
-            u'LIB STDS',
-            u'MATH',
-            u'MED TECH',
-            u'MIL SCI',
-            u'MPA',
-            u'MUSIC',
-            u'NS ELECT',
-            u'NURS-ACC',
-            u'NURS-CNP',
-            u'NURSING',
-            u'PBIS',
-            u'PHIL',
-            u'PHYS AST',
-            u'PHYS SCI',
-            u'POLI SCI',
-            u'PRAC ART',
-            u'PROF COUNSELING',
-            u'PRTGUESE',
-            u'PSYCH',
-            u'PUB ADM',
-            u'PhysicalEducation',
-            u'READING',
-            u'RELSTDS',
-            u'RUSSIAN',
-            u'radio-tv-film',
-            u'SEC ED',
-            u'SHOSHONE',
-            u'SOC WORK',
-            u'social-justice',
-            u'SOCIOLOGY',
-            u'SPANISH',
-            u'SPEC ED',
-            u'SRVC CRS',
-            u'SS ELECT',
-            u'TBIS',
-            u'THEATRE',
-            u'URB REG',
-            u'WOM STDS',
+            '-- choose one --',
+            'AF AM ST',
+            'ANTHRO',
+            'ARABIC',
+            'ARAPAHO',
+            'ART',
+            'ASTRONY',
+            'BIOLOGY',
+            'BUSINESS',
+            'CHEM',
+            'COMM',
+            'COMP SCI',
+            'CRIM JUS',
+            'DFLL',
+            'ECON',
+            'ED FOUND',
+            'ED LDRSP',
+            'ELEM ED',
+            'eng-tech',
+            'ENGLISH',
+            'ENV STDS',
+            'EXT STDS',
+            'FL ELECT',
+            'FR ABRD',
+            'FRENCH',
+            'GEN ELEC',
+            'GEN STDS',
+            'GEOG',
+            'GEOLOGY',
+            'GERMAN',
+            'HEALTH',
+            'HISTORY',
+            'honors',
+            'HU ELECT',
+            'HUMAN SV',
+            'INTRDSCP',
+            'INTRNTL',
+            'JAPANESE',
+            'JOURNAL',
+            'KINESIOL',
+            'LIB SCI',
+            'LIB STDS',
+            'MATH',
+            'MED TECH',
+            'MIL SCI',
+            'MPA',
+            'MUSIC',
+            'NS ELECT',
+            'NURS-ACC',
+            'NURS-CNP',
+            'NURSING',
+            'PBIS',
+            'PHIL',
+            'PHYS AST',
+            'PHYS SCI',
+            'POLI SCI',
+            'PRAC ART',
+            'PROF COUNSELING',
+            'PRTGUESE',
+            'PSYCH',
+            'PUB ADM',
+            'PhysicalEducation',
+            'READING',
+            'RELSTDS',
+            'RUSSIAN',
+            'radio-tv-film',
+            'SEC ED',
+            'SHOSHONE',
+            'SOC WORK',
+            'social-justice',
+            'SOCIOLOGY',
+            'SPANISH',
+            'SPEC ED',
+            'SRVC CRS',
+            'SS ELECT',
+            'TBIS',
+            'THEATRE',
+            'URB REG',
+            'WOM STDS',
         ),
         missing_value=None,
         required=True,
@@ -434,14 +434,14 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     ethnicities = schema.Tuple(
-        title=_(u'Ethnicities'),
+        title=_('Ethnicities'),
         default=(
-            u'no answer',
-            u'African-American',
-            u'Hispanic',
-            u'Native American',
-            u'Asian/Pacific Islander',
-            u'Other',
+            'no answer',
+            'African-American',
+            'Hispanic',
+            'Native American',
+            'Asian/Pacific Islander',
+            'Other',
         ),
         missing_value=None,
         required=True,
@@ -449,31 +449,31 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     marriage_statuses = schema.Tuple(
-        title=_(u'Marriage Statuses'),
-        default=(u'Married', u'Single'),
+        title=_('Marriage Statuses'),
+        default=('Married', 'Single'),
         missing_value=None,
         required=True,
         value_type=schema.TextLine(),
     )
 
     genders = schema.Tuple(
-        title=_(u'Genders'),
-        default=(u'Male', u'Female', u'Other'),
+        title=_('Genders'),
+        default=('Male', 'Female', 'Other'),
         missing_value=None,
         required=True,
         value_type=schema.TextLine(),
     )
 
     states_for_residency = schema.Tuple(
-        title=_(u'States for Residency'),
-        default=(u'Wisconsin', u'Minnesota', u'Other'),
+        title=_('States for Residency'),
+        default=('Wisconsin', 'Minnesota', 'Other'),
         missing_value=None,
         required=True,
         value_type=schema.TextLine(),
     )
 
     us_states_territories = schema.Tuple(
-        title=_(u'U.S. States and Territories'),
+        title=_('U.S. States and Territories'),
         default=(
             'Wisconsin',
             'Alaska',
@@ -540,23 +540,23 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     citizenship = schema.Tuple(
-        title=_(u'Citizenship'),
-        default=(u'U.S. Citizen', u'Permanent U.S. Resident', u'Other Citizenship'),  # noqa
+        title=_('Citizenship'),
+        default=('U.S. Citizen', 'Permanent U.S. Resident', 'Other Citizenship'),  # noqa
         missing_value=None,
         required=True,
         value_type=schema.TextLine(),
     )
 
     session_hours = schema.Tuple(
-        title=_(u'Session hours'),
-        default=(u'09:00-11:00', u'15:00-17:00'),
+        title=_('Session hours'),
+        default=('09:00-11:00', '15:00-17:00'),
         missing_value=None,
         required=True,
         value_type=schema.TextLine(),
     )
 
     countries = schema.Tuple(
-        title=_(u'Countries'),
+        title=_('Countries'),
         default=(
             'United States',
             'Abkhazia',
@@ -824,7 +824,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     program_type = schema.Tuple(
-        title=_(u'Program Type'),
+        title=_('Program Type'),
         default=(
             'Exchange-United States',
             'Exchange-International',
@@ -841,7 +841,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     program_component = schema.Tuple(
-        title=_(u'Program Component'),
+        title=_('Program Component'),
         default=(
             'none',
             'Clinicals',
@@ -857,7 +857,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     accommodation = schema.Tuple(
-        title=_(u'Accommodation'),
+        title=_('Accommodation'),
         default=(
             'Host Family',
             'Hostel',
@@ -874,7 +874,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     room_size = schema.Tuple(
-        title=_(u'Room Size'),
+        title=_('Room Size'),
         default=(
             'Single Rooms',
             'Double Rooms',
@@ -887,7 +887,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     locations = schema.Tuple(
-        title=_(u'Locations'),
+        title=_('Locations'),
         default=(
             'UW Oshkosh Parking Lot 6; corner of Osceola & Pearl Ave.',
             'Chicago O''Hare International Airport',
@@ -899,7 +899,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     airport = schema.Tuple(
-        title=_(u'Airports'),
+        title=_('Airports'),
         default=(
             'Milwaukee',
             'Appleton',
@@ -909,7 +909,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     credits = schema.Tuple(
-        title=_(u'Credits'),
+        title=_('Credits'),
         default=(
             '0',
             '1',
@@ -941,7 +941,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     travel_document = schema.Tuple(
-        title=_(u'Travel Document'),
+        title=_('Travel Document'),
         default=(
             'Passport',
             'Driver''s License',
@@ -952,7 +952,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     provider_type = schema.Tuple(
-        title=_(u'Provider Type'),
+        title=_('Provider Type'),
         default=(
             'Accommodation',
             'Air',
@@ -974,7 +974,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     course_subject = schema.Tuple(
-        title=_(u'Course Subject'),
+        title=_('Course Subject'),
         default=(
             'ACAD',
             'ACCT',
@@ -1059,7 +1059,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     tuition_and_fees = schema.Tuple(
-        title=_(u'Tuition and Fees'),
+        title=_('Tuition and Fees'),
         default=(
             '$0 Tuition; $0 Seg Fees',
             '$0 Tuition; $0 Seg Fees; relevant tuition equivalent to be charged',  # noqa
@@ -1090,7 +1090,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     flyer = schema.Tuple(
-        title=_(u'Flyer'),
+        title=_('Flyer'),
         default=(
             'Anthropology',
             'Art',
@@ -1145,7 +1145,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     oie_staff = schema.Tuple(
-        title=_(u'OIE Staff'),
+        title=_('OIE Staff'),
         default=(
             'Application Intake Specialist',
             'Director',
@@ -1164,7 +1164,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     payment_forms = schema.Tuple(
-        title=_(u'Payment Forms'),
+        title=_('Payment Forms'),
         default=(
             'Foundation',
             'PTF',
@@ -1179,7 +1179,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     salary_terms = schema.Tuple(
-        title=_(u'Salary Terms'),
+        title=_('Salary Terms'),
         default=(
             'Overload 1.25%',
             'Overload 10%',
@@ -1200,7 +1200,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     salary_form_type = schema.Tuple(
-        title=_(u'Salary Form Type'),
+        title=_('Salary Form Type'),
         default=(
             'Payment to Individual Form (PTF) - Direct Payment',
             'Transaction Transfer Request (TTR) - Replacement Costs',
@@ -1213,7 +1213,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     visa_delivery_options = schema.Tuple(
-        title=_(u'Visa Delivery Options'),
+        title=_('Visa Delivery Options'),
         default=(
             'OIE Mails',
             'OIE hand delivers',
@@ -1227,7 +1227,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     university = schema.Tuple(
-        title=_(u'University'),
+        title=_('University'),
         default=(
             'UW-Oshkosh',
             'UW–Baraboo/Sauk County',
@@ -1263,7 +1263,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     term = schema.Tuple(
-        title=_(u'Term'),
+        title=_('Term'),
         default=(
             '1 Fall Interim',
             '2 Spring Semester',
@@ -1278,7 +1278,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     sponsoring_unit_or_department = schema.Tuple(
-        title=_(u'Sponsoring Unit or Department'),
+        title=_('Sponsoring Unit or Department'),
         default=(
             'African American Studies',
             'Anthropology',
@@ -1346,7 +1346,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     college_or_unit = schema.Tuple(
-        title=_(u'College or Unit'),
+        title=_('College or Unit'),
         default=(
             'B College of Business',
             'L College of Letters & Science',
@@ -1364,7 +1364,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     language = schema.Tuple(
-        title=_(u'Language'),
+        title=_('Language'),
         default=(
             'American Sign Language',
             'Arabic',
@@ -1384,7 +1384,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     cooperating_partners = schema.Tuple(
-        title=_(u'Cooperating Partners'),
+        title=_('Cooperating Partners'),
         default=(
             'Academic Programs International (API)',
             'Accent International',
@@ -1428,7 +1428,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     course_subject_and_number = schema.Tuple(
-        title=_(u'Course Subject & Number'),
+        title=_('Course Subject & Number'),
         default=(
             'ANTHRO 362',
             'ANTHRO 394',
@@ -1681,7 +1681,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     requirements_met = schema.Tuple(
-        title=_(u'Requirements Met'),
+        title=_('Requirements Met'),
         default=(
             'CS',
             'Culture (XC)',
@@ -1710,7 +1710,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     course_enrollment_at = schema.Tuple(
-        title=_(u'Course Enrollment at'),
+        title=_('Course Enrollment at'),
         default=(
             'UW Oshkosh Only',
             'UW Oshkosh & Host (concurrent enrollment)',
@@ -1723,7 +1723,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     program_cycle = schema.Tuple(
-        title=_(u'Program Cycle'),
+        title=_('Program Cycle'),
         default=(
             'once',
             'annually',
@@ -1736,7 +1736,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     building = schema.Tuple(
-        title=_(u'Building'),
+        title=_('Building'),
         default=(
             'Albee Hall',
             'Alumni Welcome & Conference Center',
@@ -1769,7 +1769,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     transition_type = schema.Tuple(
-        title=_(u'Transition Type'),
+        title=_('Transition Type'),
         default=(
             'Arrival in first host city',
             'Day trip',
@@ -1782,7 +1782,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     leadership_role = schema.Tuple(
-        title=_(u'Leadership Role'),
+        title=_('Leadership Role'),
         default=(
             'On-site Program Leader',
             'On-site Program Co-leader',
@@ -1794,7 +1794,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     title = schema.Tuple(
-        title=_(u'Title'),
+        title=_('Title'),
         default=(
             'Dr.',
             'Professor',
@@ -1806,7 +1806,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     approving_as = schema.Tuple(
-        title=_(u'Approving as'),
+        title=_('Approving as'),
         default=(
             'Chair',
             'Dean',
@@ -1819,7 +1819,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     class_standing = schema.Tuple(
-        title=_(u'Class Standing'),
+        title=_('Class Standing'),
         default=(
             '0+ credits',
             '30+ credits',
@@ -1833,7 +1833,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     compensation_type = schema.Tuple(
-        title=_(u'Compensation Type'),
+        title=_('Compensation Type'),
         default=(
             'Part of load',
             'Overload',
@@ -1844,7 +1844,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     compensation_payment_or_replacement = schema.Tuple(
-        title=_(u'Compensation Payment or Replacement'),
+        title=_('Compensation Payment or Replacement'),
         default=(
             'No replacement costs due to the College',
             'Replacement costs due to the College',
@@ -1858,7 +1858,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     percentage_or_lump_sum = schema.Tuple(
-        title=_(u'Compensation Percentage or Lump Sum'),
+        title=_('Compensation Percentage or Lump Sum'),
         default=(
             '2.5% per credit (faculty rate)',
             '3.33% per credit (academic staff rate)',
@@ -1870,7 +1870,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     equipment_and_space = schema.Tuple(
-        title=_(u'Equipment & Space'),
+        title=_('Equipment & Space'),
         default=(
             'I do not need teaching space or equipment.',
             'I have the following space/equipment needs: (if checked, please describe).',  # noqa
@@ -1881,7 +1881,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     guest_lectures = schema.Tuple(
-        title=_(u'Guest Lectures'),
+        title=_('Guest Lectures'),
         default=(
             'I do not need guest lecturers.',
             'I do need guest lecturers and will include details within the daily itinerary in this application.',  # noqa
@@ -1892,7 +1892,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     immigration_status = schema.Tuple(
-        title=_(u'Immigration Status'),
+        title=_('Immigration Status'),
         default=(
             'N/A (US Citizen)'
             'Green Card Holder (US Permanent Resident)',
@@ -1965,7 +1965,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     eligibility_requirement = schema.Tuple(
-        title=_(u'Eligibility Requirement'),
+        title=_('Eligibility Requirement'),
         default=(
             'Undergraduate students must have a minimum G.P.A. of 2.0, be in good standing, and meet course prerequisites. As part of the application process, your disciplinary file will be reviewed. If you have a campus disciplinary file, this will be taken into consideration when determining your eligibility. Undergraduates who do not meet minimum GPA and course requirements should contact the program leader prior to applying to determine course eligibility.',  # noqa
             'Undergraduate students must have a minimum G.P.A. of 2.0, be in good standing, and meet course prerequisites. Undergraduate students who are required to complete a Quest III course to fulfill graduation requirements may apply. Students must have a minimum G.P.A. of 2.0, be in good standing, meet course prerequisites, and meet Quest III prerequisites. As part of the application process, your disciplinary file will be reviewed. If you have a campus disciplinary file, this will be taken into consideration when determining your eligibility. Undergraduates who are not required to complete a Quest III course to graduate are not eligible; however, they may apply for consideration on a space-available basis along with USP & instructor consent. Seats will be assigned to these applicants only after all applicants who are required to complete Quest III to graduate and who have met the STEP III deadline have been awarded a seat.',  # noqa
@@ -1977,7 +1977,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     education_level = schema.Tuple(
-        title=_(u'Education Levels'),
+        title=_('Education Levels'),
         default=(
             'High School Junior',
             'High School Senior',
@@ -1994,7 +1994,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     student_status = schema.Tuple(
-        title=_(u'Student Status'),
+        title=_('Student Status'),
         default=(
             '1) UWO students making progress toward a degree may apply.',
             '2) UW System students making progress toward a degree may apply.',
@@ -2007,7 +2007,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     program_of_study = schema.Tuple(
-        title=_(u'Program of Study'),
+        title=_('Program of Study'),
         default=(
             'Honors College',
             'College of Business',
@@ -2021,7 +2021,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     )
 
     enrollment_institution = schema.Tuple(
-        title=_(u'Course Enrollment Institutions'),
+        title=_('Course Enrollment Institutions'),
         default=(
             'UW Oshkosh only',
             'Foreign Cooperating Partner only',
@@ -2036,8 +2036,8 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         state_of_wisconsin_need_based_travel_grant_form=NamedFileFieldWidget,
     )
     state_of_wisconsin_need_based_travel_grant_form = schema.ASCII(
-        title=u'State of Wisconsin Need-based Travel Grant Form',
-        description=u'select the PDF for this form',
+        title='State of Wisconsin Need-based Travel Grant Form',
+        description='select the PDF for this form',
         required=False,
         missing_value=None,
         default=None,
@@ -2046,38 +2046,38 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         special_student_form_for_undergraduate_admissions=NamedFileFieldWidget,
     )
     special_student_form_for_undergraduate_admissions = schema.ASCII(
-        title=u'Special Student Form for Undergraduate Admissions',
-        description=u'select the PDF for this form',
+        title='Special Student Form for Undergraduate Admissions',
+        description='select the PDF for this form',
         required=False,
         missing_value=None,
         default=None,
     )
     widget(disciplinary_clearance_form=NamedFileFieldWidget)
     disciplinary_clearance_form = schema.ASCII(
-        title=u'Disciplinary Clearance Form',
-        description=u'select the PDF for this form',
+        title='Disciplinary Clearance Form',
+        description='select the PDF for this form',
         required=False,
         missing_value=None,
         default=None,
     )
     widget('uwo_logo', NamedImageFieldWidget)
     uwo_logo = schema.ASCII(
-        title=_(u'UWO Logo'),
-        description=_(u'will appear on program description view'),
+        title=_('UWO Logo'),
+        description=_('will appear on program description view'),
         required=False,
         missing_value=None,
         default=None,
     )
     widget('program_view_footer', klass='pat-tinymce')
     program_view_footer = schema.Text(
-        title=_(u'Program Footer Text'),
-        description=_(u'will appear at bottom of public program view'),
+        title=_('Program Footer Text'),
+        description=_('will appear at bottom of public program view'),
         required=False,
         missing_value=None,
         default=None,
     )
     airport_transfer = schema.Tuple(
-        title=_(u'Airport Transfer Modes'),
+        title=_('Airport Transfer Modes'),
         default=(
             'No US airport transfer provided',
             'School Bus',
@@ -2092,7 +2092,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
 class OIEStudyAbroadStudentControlPanelForm(RegistryEditForm):
     schema = IOIEStudyAbroadStudentControlPanel
     schema_prefix = 'oiestudyabroadstudent'
-    label = u'OIE Study Abroad Settings'
+    label = 'OIE Study Abroad Settings'
 
 
 OIEStudyAbroadStudentControlPanelView = layout.wrap_form(

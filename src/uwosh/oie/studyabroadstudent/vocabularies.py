@@ -29,259 +29,259 @@ yes_no_na_vocabulary = SimpleVocabulary(
 )
 
 month_vocabulary = SimpleVocabulary(
-    [SimpleTerm(value=u'01', title=_(u'January')),
-     SimpleTerm(value=u'02', title=_(u'February')),
-     SimpleTerm(value=u'03', title=_(u'March')),
-     SimpleTerm(value=u'04', title=_(u'April')),
-     SimpleTerm(value=u'05', title=_(u'May')),
-     SimpleTerm(value=u'06', title=_(u'June')),
-     SimpleTerm(value=u'07', title=_(u'July')),
-     SimpleTerm(value=u'08', title=_(u'August')),
-     SimpleTerm(value=u'09', title=_(u'September')),
-     SimpleTerm(value=u'10', title=_(u'October')),
-     SimpleTerm(value=u'11', title=_(u'November')),
-     SimpleTerm(value=u'12', title=_(u'December'))],
+    [SimpleTerm(value='01', title=_('January')),
+     SimpleTerm(value='02', title=_('February')),
+     SimpleTerm(value='03', title=_('March')),
+     SimpleTerm(value='04', title=_('April')),
+     SimpleTerm(value='05', title=_('May')),
+     SimpleTerm(value='06', title=_('June')),
+     SimpleTerm(value='07', title=_('July')),
+     SimpleTerm(value='08', title=_('August')),
+     SimpleTerm(value='09', title=_('September')),
+     SimpleTerm(value='10', title=_('October')),
+     SimpleTerm(value='11', title=_('November')),
+     SimpleTerm(value='12', title=_('December'))],
 )
 
 graduation_month_vocabulary = SimpleVocabulary(
-    [SimpleTerm(value=u'05', title=_(u'May')),
-     SimpleTerm(value=u'08', title=_(u'August')),
-     SimpleTerm(value=u'12', title=_(u'December'))],
+    [SimpleTerm(value='05', title=_('May')),
+     SimpleTerm(value='08', title=_('August')),
+     SimpleTerm(value='12', title=_('December'))],
 )
 
 dayofmonth_vocabulary = SimpleVocabulary(
-    [SimpleTerm(value=u'01'),
-     SimpleTerm(value=u'02'),
-     SimpleTerm(value=u'03'),
-     SimpleTerm(value=u'04'),
-     SimpleTerm(value=u'05'),
-     SimpleTerm(value=u'06'),
-     SimpleTerm(value=u'07'),
-     SimpleTerm(value=u'08'),
-     SimpleTerm(value=u'09'),
-     SimpleTerm(value=u'10'),
-     SimpleTerm(value=u'11'),
-     SimpleTerm(value=u'12'),
-     SimpleTerm(value=u'13'),
-     SimpleTerm(value=u'14'),
-     SimpleTerm(value=u'15'),
-     SimpleTerm(value=u'16'),
-     SimpleTerm(value=u'17'),
-     SimpleTerm(value=u'18'),
-     SimpleTerm(value=u'19'),
-     SimpleTerm(value=u'20'),
-     SimpleTerm(value=u'21'),
-     SimpleTerm(value=u'22'),
-     SimpleTerm(value=u'23'),
-     SimpleTerm(value=u'24'),
-     SimpleTerm(value=u'25'),
-     SimpleTerm(value=u'26'),
-     SimpleTerm(value=u'27'),
-     SimpleTerm(value=u'28'),
-     SimpleTerm(value=u'29'),
-     SimpleTerm(value=u'30'),
-     SimpleTerm(value=u'31'),
+    [SimpleTerm(value='01'),
+     SimpleTerm(value='02'),
+     SimpleTerm(value='03'),
+     SimpleTerm(value='04'),
+     SimpleTerm(value='05'),
+     SimpleTerm(value='06'),
+     SimpleTerm(value='07'),
+     SimpleTerm(value='08'),
+     SimpleTerm(value='09'),
+     SimpleTerm(value='10'),
+     SimpleTerm(value='11'),
+     SimpleTerm(value='12'),
+     SimpleTerm(value='13'),
+     SimpleTerm(value='14'),
+     SimpleTerm(value='15'),
+     SimpleTerm(value='16'),
+     SimpleTerm(value='17'),
+     SimpleTerm(value='18'),
+     SimpleTerm(value='19'),
+     SimpleTerm(value='20'),
+     SimpleTerm(value='21'),
+     SimpleTerm(value='22'),
+     SimpleTerm(value='23'),
+     SimpleTerm(value='24'),
+     SimpleTerm(value='25'),
+     SimpleTerm(value='26'),
+     SimpleTerm(value='27'),
+     SimpleTerm(value='28'),
+     SimpleTerm(value='29'),
+     SimpleTerm(value='30'),
+     SimpleTerm(value='31'),
      ],
 )
 
 room_type_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value=u'Single Room', title=_(u'Single Room')),
-        SimpleTerm(value=u'Double Room', title=_(u'Double Room')),
-        SimpleTerm(value=u'Triple Room', title=_(u'Triple Room')),
+        SimpleTerm(value='Single Room', title=_('Single Room')),
+        SimpleTerm(value='Double Room', title=_('Double Room')),
+        SimpleTerm(value='Triple Room', title=_('Triple Room')),
     ],
 )
 
 smoking_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value=u'Smoking', title=_(u'Smoking')),
-        SimpleTerm(value=u'Non-smoking', title=_(u'Non-smoking')),
-        SimpleTerm(value=u'No Preference', title=_(u'No Preference')),
+        SimpleTerm(value='Smoking', title=_('Smoking')),
+        SimpleTerm(value='Non-smoking', title=_('Non-smoking')),
+        SimpleTerm(value='No Preference', title=_('No Preference')),
     ],
 )
 
 semester_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value=u'Fall', title=_(u'Fall')),
-        SimpleTerm(value=u'Fall Interim', title=_(u'Fall Interim')),
-        SimpleTerm(value=u'Spring', title=_(u'Spring')),
-        SimpleTerm(value=u'Spring Interim', title=_(u'Spring Interim')),
-        SimpleTerm(value=u'Summer', title=_(u'Summer')),
+        SimpleTerm(value='Fall', title=_('Fall')),
+        SimpleTerm(value='Fall Interim', title=_('Fall Interim')),
+        SimpleTerm(value='Spring', title=_('Spring')),
+        SimpleTerm(value='Spring Interim', title=_('Spring Interim')),
+        SimpleTerm(value='Summer', title=_('Summer')),
     ],
 )
 
 student_type_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value=u'UW Oshkosh Freshman', title=_(u'UW Oshkosh Freshman')),  # noqa
-        SimpleTerm(value=u'UW Oshkosh Sophomore', title=_(u'UW Oshkosh Sophomore')),  # noqa
-        SimpleTerm(value=u'UW Oshkosh Junior', title=_(u'UW Oshkosh Junior')),
-        SimpleTerm(value=u'UW Oshkosh Senior', title=_(u'UW Oshkosh Senior')),
-        SimpleTerm(value=u'UW Oshkosh Graduate Student', title=_(u'UW Oshkosh Graduate Student')),  # noqa
-        SimpleTerm(value=u'Student at another University (please complete and submit the "Special Student" form)',  # noqa
-                   title=_(u'Student at another University (please complete and submit the "Special Student" form)')),  # noqa
-        SimpleTerm(value=u'I am not a Student (please complete and submit the "Special Student" form)',  # noqa
-                   title=_(u'I am not a Student (please complete and submit the "Special Student" form)')),  # noqa
+        SimpleTerm(value='UW Oshkosh Freshman', title=_('UW Oshkosh Freshman')),  # noqa
+        SimpleTerm(value='UW Oshkosh Sophomore', title=_('UW Oshkosh Sophomore')),  # noqa
+        SimpleTerm(value='UW Oshkosh Junior', title=_('UW Oshkosh Junior')),
+        SimpleTerm(value='UW Oshkosh Senior', title=_('UW Oshkosh Senior')),
+        SimpleTerm(value='UW Oshkosh Graduate Student', title=_('UW Oshkosh Graduate Student')),  # noqa
+        SimpleTerm(value='Student at another University (please complete and submit the "Special Student" form)',  # noqa
+                   title=_('Student at another University (please complete and submit the "Special Student" form)')),  # noqa
+        SimpleTerm(value='I am not a Student (please complete and submit the "Special Student" form)',  # noqa
+                   title=_('I am not a Student (please complete and submit the "Special Student" form)')),  # noqa
     ],
 )
 
 bus_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value=u'I will take the group bus from Oshkosh to the airport',  # noqa
-                   title=_(u'I will take the group bus from Oshkosh to the airport')),  # noqa
-        SimpleTerm(value=u'I will arrange for my own transportation from Oshkosh to the airport.',  # noqa
-                   title=_(u'I will arrange for my own transportation from Oshkosh to the airport.')),  # noqa
+        SimpleTerm(value='I will take the group bus from Oshkosh to the airport',  # noqa
+                   title=_('I will take the group bus from Oshkosh to the airport')),  # noqa
+        SimpleTerm(value='I will arrange for my own transportation from Oshkosh to the airport.',  # noqa
+                   title=_('I will arrange for my own transportation from Oshkosh to the airport.')),  # noqa
     ],
 )
 
 fly_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value=u'I will fly with the group', title=_(u'I will fly with the group')),  # noqa
-        SimpleTerm(value=u'I will deviate from the group itinerary',
-                   title=_(u'I will deviate from the group itinerary')),
+        SimpleTerm(value='I will fly with the group', title=_('I will fly with the group')),  # noqa
+        SimpleTerm(value='I will deviate from the group itinerary',
+                   title=_('I will deviate from the group itinerary')),
     ],
 )
 
 orientation_conflict_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value=u'No', title=_(u'No')),
-        SimpleTerm(value=u'Yes, I have a conflict on (enter the date next):',
-                   title=_(u'Yes, I have a conflict on (enter the date next):')),  # noqa
-        SimpleTerm(value=u'No dates are listed', title=_(u'No dates are listed')),  # noqa
+        SimpleTerm(value='No', title=_('No')),
+        SimpleTerm(value='Yes, I have a conflict on (enter the date next):',
+                   title=_('Yes, I have a conflict on (enter the date next):')),  # noqa
+        SimpleTerm(value='No dates are listed', title=_('No dates are listed')),  # noqa
     ],
 )
 
 hold_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value=u'HOLD', title=_(u'HOLD')),
-        SimpleTerm(value=u'PROCESS', title=_(u'PROCESS')),
+        SimpleTerm(value='HOLD', title=_('HOLD')),
+        SimpleTerm(value='PROCESS', title=_('PROCESS')),
     ],
 )
 
 aware_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(value=u'Yes, I am aware of the application requirements for my program',  # noqa
-                   title=_(u'Yes, I am aware of the application requirements for my program')),  # noqa
-        SimpleTerm(value=u'There are no additional application requirements for my program',  # noqa
-                   title=_(u'There are no additional application requirements for my program')),  # noqa
+        SimpleTerm(value='Yes, I am aware of the application requirements for my program',  # noqa
+                   title=_('Yes, I am aware of the application requirements for my program')),  # noqa
+        SimpleTerm(value='There are no additional application requirements for my program',  # noqa
+                   title=_('There are no additional application requirements for my program')),  # noqa
     ],
 )
 
 load_or_overload = SimpleVocabulary(
     [
-        SimpleTerm(value=u'Part of load', title=_(u'Part of load'), token='load'),  # noqa
-        SimpleTerm(value=u'Overload', title=_(u'Overload'), token='overload'),
+        SimpleTerm(value='Part of load', title=_('Part of load'), token='load'),  # noqa
+        SimpleTerm(value='Overload', title=_('Overload'), token='overload'),
     ],
 )
 
 replacement_costs = SimpleVocabulary(
     [
-        SimpleTerm(value=u'No replacement costs due to the College',
-                   title=_(u'No replacement costs due to the College'), token='not-due'),  # noqa
-        SimpleTerm(value=u'Replacement costs due to the College', title=_(u'Replacement costs due to the College'),  # noqa
+        SimpleTerm(value='No replacement costs due to the College',
+                   title=_('No replacement costs due to the College'), token='not-due'),  # noqa
+        SimpleTerm(value='Replacement costs due to the College', title=_('Replacement costs due to the College'),  # noqa
                    token='due'),
     ],
 )
 
 paid_by = SimpleVocabulary(
     [
-        SimpleTerm(value=u'Paid by the College', title=_(u'Paid by the College'), token='college'),  # noqa
-        SimpleTerm(value=u'Paid by external partner', title=_(u'Paid by external partner'), token='external'),  # noqa
-        SimpleTerm(value=u'Paid by study away students', title=_(u'Paid by study away students'), token='students'),  # noqa
+        SimpleTerm(value='Paid by the College', title=_('Paid by the College'), token='college'),  # noqa
+        SimpleTerm(value='Paid by external partner', title=_('Paid by external partner'), token='external'),  # noqa
+        SimpleTerm(value='Paid by study away students', title=_('Paid by study away students'), token='students'),  # noqa
     ],
 )
 
 rate_or_lump_sum = SimpleVocabulary(
     [
-        SimpleTerm(value=u'2.5% per credit (faculty rate)', title=_(u'2.5% per credit (faculty rate)'), token='2.5'),  # noqa
-        SimpleTerm(value=u'3.33% per credit (academic staff rate)', title=_(u'3.33% per credit (academic staff rate)'), token='3.33'),  # noqa
-        SimpleTerm(value=u'Lump sum', title=_(u'Lump sum'), token='lump-sum'),
+        SimpleTerm(value='2.5% per credit (faculty rate)', title=_('2.5% per credit (faculty rate)'), token='2.5'),  # noqa
+        SimpleTerm(value='3.33% per credit (academic staff rate)', title=_('3.33% per credit (academic staff rate)'), token='3.33'),  # noqa
+        SimpleTerm(value='Lump sum', title=_('Lump sum'), token='lump-sum'),
     ],
 )
 
 socialmediaservice = SimpleVocabulary(
     [
-        SimpleTerm(value=u'Skype', title=_(u'Skype'), token='skype'),
-        SimpleTerm(value=u'Viber', title=_(u'Viber'), token='viber'),
-        SimpleTerm(value=u'WeChat', title=_(u'WeChat'), token='wechat'),
-        SimpleTerm(value=u'WhatsApp', title=_(u'WhatsApp'), token='whatsapp'),
-        SimpleTerm(value=u'Facebook', title=_(u'Facebook'), token='facebook'),
-        SimpleTerm(value=u'Twitter', title=_(u'Twitter'), token='twitter'),
+        SimpleTerm(value='Skype', title=_('Skype'), token='skype'),
+        SimpleTerm(value='Viber', title=_('Viber'), token='viber'),
+        SimpleTerm(value='WeChat', title=_('WeChat'), token='wechat'),
+        SimpleTerm(value='WhatsApp', title=_('WhatsApp'), token='whatsapp'),
+        SimpleTerm(value='Facebook', title=_('Facebook'), token='facebook'),
+        SimpleTerm(value='Twitter', title=_('Twitter'), token='twitter'),
     ],
 )
 
 contactrelationship = SimpleVocabulary(
     [
-        SimpleTerm(value=u'father', title=_(u'father'), token='father'),
-        SimpleTerm(value=u'mother', title=_(u'mother'), token='mother'),
-        SimpleTerm(value=u'grandfather', title=_(u'grandfather'), token='grandfather'),  # noqa
-        SimpleTerm(value=u'grandmother', title=_(u'grandmother'), token='grandmother'),  # noqa
-        SimpleTerm(value=u'uncle', title=_(u'uncle'), token='uncle'),
-        SimpleTerm(value=u'aunt', title=_(u'aunt'), token='aunt'),
-        SimpleTerm(value=u'brother', title=_(u'brother'), token='brother'),
-        SimpleTerm(value=u'sister', title=_(u'sister'), token='sister'),
-        SimpleTerm(value=u'spouse', title=_(u'spouse'), token='spouse'),
-        SimpleTerm(value=u'adult child', title=_(u'adult child'), token='adult-child'),  # noqa
-        SimpleTerm(value=u'other relative', title=_(u'other relative'), token='other-relative'),  # noqa
+        SimpleTerm(value='father', title=_('father'), token='father'),
+        SimpleTerm(value='mother', title=_('mother'), token='mother'),
+        SimpleTerm(value='grandfather', title=_('grandfather'), token='grandfather'),  # noqa
+        SimpleTerm(value='grandmother', title=_('grandmother'), token='grandmother'),  # noqa
+        SimpleTerm(value='uncle', title=_('uncle'), token='uncle'),
+        SimpleTerm(value='aunt', title=_('aunt'), token='aunt'),
+        SimpleTerm(value='brother', title=_('brother'), token='brother'),
+        SimpleTerm(value='sister', title=_('sister'), token='sister'),
+        SimpleTerm(value='spouse', title=_('spouse'), token='spouse'),
+        SimpleTerm(value='adult child', title=_('adult child'), token='adult-child'),  # noqa
+        SimpleTerm(value='other relative', title=_('other relative'), token='other-relative'),  # noqa
     ],
 )
 
 departure_transfer_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(u'I will transfer from Oshkosh with the group.'),
-        SimpleTerm(u'I will transfer from Fond du Lac with the group.'),
-        SimpleTerm(u'I will transfer from Milwaukee with the group.'),
-        SimpleTerm(u'I will arrange my own transportation.'),
+        SimpleTerm('I will transfer from Oshkosh with the group.'),
+        SimpleTerm('I will transfer from Fond du Lac with the group.'),
+        SimpleTerm('I will transfer from Milwaukee with the group.'),
+        SimpleTerm('I will arrange my own transportation.'),
     ],
 )
 
 departure_mode_transportation_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(u'I will fly to and from my program site with the group.'),
-        SimpleTerm(u'I will fly with the group to my program site but will apply for permission to arrange an alternative flight home.'),  # noqa
-        SimpleTerm(u'I will apply for permission to fly to my program site on an alternative flight but will return from my program site with the group.'),  # noqa
-        SimpleTerm(u'I will apply for permission to fly to and from my program site on an alternative flight.'),  # noqa
+        SimpleTerm('I will fly to and from my program site with the group.'),
+        SimpleTerm('I will fly with the group to my program site but will apply for permission to arrange an alternative flight home.'),  # noqa
+        SimpleTerm('I will apply for permission to fly to my program site on an alternative flight but will return from my program site with the group.'),  # noqa
+        SimpleTerm('I will apply for permission to fly to and from my program site on an alternative flight.'),  # noqa
     ],
 )
 
 return_mode_transportation_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(u'I will fly with the group'),
-        SimpleTerm(u'I will apply for permission to arrange my own flight'),
-        SimpleTerm(u'I will drive back to my home at the end of my program (U.S. and Canada programs only)'),  # noqa
+        SimpleTerm('I will fly with the group'),
+        SimpleTerm('I will apply for permission to arrange my own flight'),
+        SimpleTerm('I will drive back to my home at the end of my program (U.S. and Canada programs only)'),  # noqa
     ],
 )
 
 return_transfer_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(u'I will transfer back to Oshkosh with the group.'),
-        SimpleTerm(u'I will transfer back to Fond du Lac with the group.'),
-        SimpleTerm(u'I will transfer back to Milwaukee with the group.'),
-        SimpleTerm(u'I will arrange my own transportation home.'),
+        SimpleTerm('I will transfer back to Oshkosh with the group.'),
+        SimpleTerm('I will transfer back to Fond du Lac with the group.'),
+        SimpleTerm('I will transfer back to Milwaukee with the group.'),
+        SimpleTerm('I will arrange my own transportation home.'),
     ],
 )
 
 program_cycle_vocabulary = SimpleVocabulary(
     [
-        SimpleTerm(token=u'once', value=u'once', title=_(u'once')),
-        SimpleTerm(token=u'annually', value=u'annually', title=_(u'annually')),
-        SimpleTerm(token=u'every-2-years', value=u'every 2 years', title=_(u'every 2 years')),  # noqa
-        SimpleTerm(token=u'every-3-years', value=u'every 3 years', title=_(u'every 3 years')),  # noqa
+        SimpleTerm(token='once', value='once', title=_('once')),
+        SimpleTerm(token='annually', value='annually', title=_('annually')),
+        SimpleTerm(token='every-2-years', value='every 2 years', title=_('every 2 years')),  # noqa
+        SimpleTerm(token='every-3-years', value='every 3 years', title=_('every 3 years')),  # noqa
     ],
 )
 
 seat_assignment_protocol = SimpleVocabulary(
     [
-        SimpleTerm(token=u'in-order', value=u'in-order', title=_(u'Seats are assigned in the order in which qualified applicants have completed STEPS I & II of the application process, provided STEP III has also been completed by the STEP III application deadline.  This means that you may be conditionally admitted following completion of steps I & II, but NOT receive a seat if you then fail to complete STEP III on time.  If you are on the waiting list, you may receive a seat if applicants who have been conditionally admitted have not completed STEP III by the deadline.  In the rare event that applications can be accepted after deadlines, seats are assigned in the order in which qualified applicants have completed all three steps.')),  # noqa
-        SimpleTerm(token=u'competitive', value=u'competitive', title=_(u'Seat assignments on this program are competitive.  Applicants who meet the STEP II application deadilne are placed in a pool for consideration.  Selections will take place just after the STEP II deadline & prior to the STEP III deadline.  Selection is conditional upon completion of STEP III by the STEP III application deadline.  This means that you may be conditionally selected following completion of steps I & II, but NOT receive a seat if you then fail to complete STEP III on time.  If you are on the waiting list, you may receive a seat if applicants who have been conditionally selected have not completed STEP III by the deadline.  In the rare event that applications can be accepted after deadlines, applicants are considered in the order in which they have completed all three steps.')),  # noqa
+        SimpleTerm(token='in-order', value='in-order', title=_('Seats are assigned in the order in which qualified applicants have completed STEPS I & II of the application process, provided STEP III has also been completed by the STEP III application deadline.  This means that you may be conditionally admitted following completion of steps I & II, but NOT receive a seat if you then fail to complete STEP III on time.  If you are on the waiting list, you may receive a seat if applicants who have been conditionally admitted have not completed STEP III by the deadline.  In the rare event that applications can be accepted after deadlines, seats are assigned in the order in which qualified applicants have completed all three steps.')),  # noqa
+        SimpleTerm(token='competitive', value='competitive', title=_('Seat assignments on this program are competitive.  Applicants who meet the STEP II application deadilne are placed in a pool for consideration.  Selections will take place just after the STEP II deadline & prior to the STEP III deadline.  Selection is conditional upon completion of STEP III by the STEP III application deadline.  This means that you may be conditionally selected following completion of steps I & II, but NOT receive a seat if you then fail to complete STEP III on time.  If you are on the waiting list, you may receive a seat if applicants who have been conditionally selected have not completed STEP III by the deadline.  In the rare event that applications can be accepted after deadlines, applicants are considered in the order in which they have completed all three steps.')),  # noqa
     ],
 )
 
 salary_form = SimpleVocabulary(
     [
-        SimpleTerm(u'Payment to Individual Form (PTF) - Direct Payment'),
-        SimpleTerm(u'Transaction Transfer Request (TTR) - Replacement Costs'),
-        SimpleTerm(u'Foundation'),
-        SimpleTerm(u'Not Applicable'),
+        SimpleTerm('Payment to Individual Form (PTF) - Direct Payment'),
+        SimpleTerm('Transaction Transfer Request (TTR) - Replacement Costs'),
+        SimpleTerm('Foundation'),
+        SimpleTerm('Not Applicable'),
     ],
 )
 

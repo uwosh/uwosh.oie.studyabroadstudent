@@ -25,56 +25,56 @@ class IOIEContact(Interface):
     dexteritytextindexer.searchable('title')
     mode(title='hidden')
     title = schema.TextLine(
-        title=_(u'Full Name'),
+        title=_('Full Name'),
         required=False,
-        default=_(u'will be auto-generated on save'),
+        default=_('will be auto-generated on save'),
     )
     dexteritytextindexer.searchable('first_name')
     first_name = schema.TextLine(
-        title=_(u'First Name'),
+        title=_('First Name'),
         required=True,
     )
     dexteritytextindexer.searchable('middle_name')
     middle_name = schema.TextLine(
-        title=_(u'Middle Name'),
+        title=_('Middle Name'),
         required=False,
     )
     dexteritytextindexer.searchable('last_name')
     last_name = schema.TextLine(
-        title=_(u'Last Name'),
+        title=_('Last Name'),
         required=True,
     )
     dexteritytextindexer.searchable('job_title')
     job_title = schema.TextLine(
-        title=_(u'Job Title'),
+        title=_('Job Title'),
         required=False,
     )
     dexteritytextindexer.searchable('phone')
     phone = schema.TextLine(
-        title=_(u'Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),  # noqa
+        title=_('Phone'),
+        description=_('Please include country code (if outside US) and area code'),  # noqa
         required=False,
     )
     dexteritytextindexer.searchable('mobile_phone')
     mobile_phone = schema.TextLine(
-        title=_(u'Mobile Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),  # noqa
+        title=_('Mobile Phone'),
+        description=_('Please include country code (if outside US) and area code'),  # noqa
         required=False,
     )
     dexteritytextindexer.searchable('email')
     email = schema.TextLine(
-        title=_(u'Email'),
+        title=_('Email'),
         required=False,
         constraint=validate_email,
     )
     dexteritytextindexer.searchable('other_service')
     other_service = schema.Choice(
-        title=_(u'e.g., Line, Skype, Viber, WeChat, WhatsApp'),
+        title=_('e.g., Line, Skype, Viber, WeChat, WhatsApp'),
         required=False,
         vocabulary=socialmediaservice,
     )
     dexteritytextindexer.searchable('other_username')
     other_username = schema.TextLine(
-        title=_(u'username or ID for the above service'),
+        title=_('username or ID for the above service'),
         required=False,
     )

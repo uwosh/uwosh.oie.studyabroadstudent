@@ -7,33 +7,40 @@ from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from zope.component import getUtility
 
 
+BLANK = ''
+
+
+def get_full_camelcase_name(o):
+    full_name = f'{o.firstName} {o.middleName or BLANK} {o.lastName}'
+    return full_name.replace('  ', ' ')
+
+
+def get_full_snakecase_name(o):
+    full_name = f'{o.first_name} {o.middle_name or BLANK} {o.last_name}'
+    return full_name.replace('  ', ' ')
+
+
+def set_application_title(o):
+    o.title = f'{get_full_camelcase_name(o)} {o.programName} {o.programYear}'
+
+
+def get_list_item(brain):
+    return f'<li><a href="{brain.getURL()}">{brain.Title}</a></li>'
+
+
+def get_unordered_list(brains):
+    list_items = [get_list_item(b) for b in brains]
+    return '<ul>' + ''.join(list_items) + '</ul>'
+###############################################################
 def application_created(o, event):
-    title = '{firstName} {middleName} {lastName} {programName} {programYear}'\
-        .format(
-            firstName=o.firstName,
-            middleName=o.middleName,
-            lastName=o.lastName,
-            programName=o.programName,
-            programYear=o.programYear,
-        )
-    if o.title != title:
-        o.title = title
+    set_application_title(o)
     if not o.id:
         normalizer = getUtility(IIDNormalizer)
         o.id = normalizer.normalize(o.title)
 
 
 def application_modified(o, event):
-    title = '{firstName} {middleName} {lastName} {programName} {programYear}'\
-        .format(
-            firstName=o.firstName,
-            middleName=o.middleName,
-            lastName=o.lastName,
-            programName=o.programName,
-            programYear=o.programYear,
-        )
-    if o.title != title:
-        o.title = title
+    set_application_title(o)
 
 
 ###############################################################
@@ -188,19 +195,7 @@ def _update_contained_object_fields(o, event):
 
 ###############################################################
 def contact_created(o, event):
-    if o.middle_name and o.middle_name.strip() != '':
-        title = '{first_name} {middle_name} {last_name}'.format(
-            first_name=o.first_name,
-            middle_name=o.middle_name,
-            last_name=o.last_name,
-        )
-    else:
-        title = '{first_name} {last_name}'.format(
-            first_name=o.first_name,
-            last_name=o.last_name,
-        )
-    if o.title != title:
-        o.title = title
+    o.title = get_full_name(o)
     if not o.id:
         normalizer = getUtility(IIDNormalizer)
         o.id = normalizer.normalize(o.title)
@@ -247,21 +242,7 @@ def _participant_update(o, event, event_type=None):
                         )
             year_obj = uuidToObject(program.calendar_year)
             programYear = year_obj.title
-            if o.middleName and o.middleName.strip() != '':
-                title = (
-                    '{firstName} {middleName} {lastName} '
-                    '{programName} {programYear}'.format(
-                        firstName=o.firstName,
-                        middleName=o.middleName,
-                        lastName=o.lastName,
-                        programName=programName,
-                        programYear=programYear,
-                    )
-                )
-            else:
-                title = f'{o.firstName} {o.lastName} {programName} {programYear}'
-            if o.title != title:
-                o.title = title
+            o.title = f'{get_full_camelcase_name(o)} {programName} {programYear}'
 
 
 def participant_created(o, event):
@@ -277,19 +258,7 @@ def participant_modified(o, event):
 
 ###############################################################
 def liaison_created(o, event):
-    if o.middle_name and o.middle_name.strip() != '':
-        title = '{f} {m} {ln}'.format(
-            f=o.first_name,
-            m=o.middle_name,
-            ln=o.last_name,
-        )
-    else:
-        title = '{f} {ln}'.format(
-            f=o.first_name,
-            ln=o.last_name,
-        )
-    if o.title != title:
-        o.title = title
+    o.title = get_full_snakecase_name(o)
 
 
 def liaison_modified(o, event):
@@ -304,19 +273,11 @@ def update_course_field(o):
         sort_on='sortable_title',
         sort_order='ascending',
     )
-    richtext = u'<ul>'
-    for b in brains:
-        richtext += '<li><a href="{url}">{title}</a></li>'.format(
-            url=b.getURL(),
-            title=b.Title,
-        )
-    richtext += u'</ul>'
-    if o.courses != richtext:
-        o.courses = richtext
+    o.courses = get_unordered_list(brains)
 
 
 def update_add_course_link(o):
-    richtext = u'<a href="{url}/++add++OIECourse" target="_blank">Add a course</a>'.format(url=o.absolute_url())  # noqa
+    richtext = f'<a href="{o.absolute_url()}/++add++OIECourse" target="_blank">Add a course</a>'
     if o.add_course_link != richtext:
         o.add_course_link = richtext
 
@@ -367,19 +328,11 @@ def update_transition_field(o):
         sort_on='sortable_title',
         sort_order='ascending',
     )
-    richtext = u'<ul>'
-    for b in brains:
-        richtext += '<li><a href="{url}">{title}</a></li>'.format(
-            url=b.getURL(),
-            title=b.Title,
-        )
-    richtext += u'</ul>'
-    if o.travelDatesTransitionsAndDestinations != richtext:
-        o.travelDatesTransitionsAndDestinations = richtext
+    o.travelDatesTransitionsAndDestinations = get_unordered_list(brains)
 
 
 def update_add_transition_link(o):
-    richtext = u'<a href="{url}/++add++OIETransition" target="_blank">Add a transition</a>'.format(url=o.absolute_url())  # noqa
+    richtext = f'<a href="{o.absolute_url()}/++add++OIETransition" target="_blank">Add a transition</a>'
     if o.add_transition_link != richtext:
         o.add_transition_link = richtext
 
@@ -394,10 +347,7 @@ def transition_added(o, event):
 
 
 def transition_created(o, event):
-    new_title = '{date} {city}'.format(
-        date=o.transitionDate,
-        city=o.destinationCity,
-    )
+    new_title = f'{o.transitionDate} {o.destinationCity}'
     if o.title != new_title:
         o.title = new_title
     # update containing Program's travelDatesTransitionsAndDestinations field
@@ -420,19 +370,11 @@ def update_health_document_field(o):
         sort_on='sortable_title',
         sort_order='ascending',
     )
-    richtext = u'<ul>'
-    for b in brains:
-        richtext += '<li><a href="{url}">{title}</a></li>'.format(
-            url=b.getURL(),
-            title=b.Title,
-        )
-    richtext += u'</ul>'
-    if o.health_safety_security_documents != richtext:
-        o.health_safety_security_documents = richtext
+    o.health_safety_security_documents = get_unordered_list(brains)
 
 
 def update_add_health_document_link(o):
-    richtext = u'<a href="{url}/++add++OIEHealthSafetySecurityDocument" target="_blank">Add a health document</a>'.format(url=o.absolute_url())  # noqa
+    richtext = f'<a href="{o.absolute_url()}/++add++OIEHealthSafetySecurityDocument" target="_blank">Add a health document</a>'  # noqa: E501
     if o.add_health_document_link != richtext:
         o.add_health_document_link = richtext
 
@@ -467,16 +409,7 @@ def health_document_modified(o, event):
 
 ###############################################################
 def program_leader_created(o, event):
-    if o.middle_name and o.middle_name.strip() != '':
-        title = '{f} {m} {ln}'.format(
-            f=o.first_name,
-            m=o.middle_name,
-            ln=o.last_name,
-        )
-    else:
-        title = '{f} {ln}'.format(f=o.first_name, ln=o.last_name)
-    if o.title != title:
-        o.title = title
+    o.title = get_full_snakecase_name(o)
 
 
 def program_leader_modified(o, event):

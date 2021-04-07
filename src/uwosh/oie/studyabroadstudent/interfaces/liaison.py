@@ -37,78 +37,74 @@ also teach one or more of the program courses.
 
     mode(title='hidden')
     title = schema.TextLine(
-        title=_(u'Full Name'),
+        title=_('Full Name'),
         required=False,
-        default=_(u'will be auto-generated on save'),
+        default=_('will be auto-generated on save'),
     )
     dexteritytextindexer.searchable('first_name')
     first_name = schema.TextLine(
-        title=_(u'First Name'),
+        title=_('First Name'),
         required=True,
     )
     dexteritytextindexer.searchable('middle_name')
     middle_name = schema.TextLine(
-        title=_(u'Middle Name'),
+        title=_('Middle Name'),
         required=False,
     )
     dexteritytextindexer.searchable('last_name')
     last_name = schema.TextLine(
-        title=_(u'Last Name'),
+        title=_('Last Name'),
         required=True,
     )
     dexteritytextindexer.searchable('job_title')
     job_title = schema.TextLine(
-        title=_(u'Job Title'),
+        title=_('Job Title'),
         required=True,
     )
     dexteritytextindexer.searchable('office_phone')
     office_phone = schema.TextLine(
-        title=_(u'Office Phone'),
-        description=_(
-            u'Please include country code (if outside US) and area code',
-        ),
+        title=_('Office Phone'),
+        description=_('Please include country code (if outside US) and area code'),
         required=True,
     )
     dexteritytextindexer.searchable('mobile_phone_us')
     mobile_phone_us = schema.TextLine(
-        title=_(u'Mobile Phone (US)'),
-        description=_(
-            u'Please include country code (if outside US) and area code',
-        ),
+        title=_('Mobile Phone (US)'),
+        description=_('Please include country code (if outside US) and area code'),
         required=True,
     )
     dexteritytextindexer.searchable('email')
     email = schema.TextLine(
-        title=_(u'Email'),
+        title=_('Email'),
         required=True,
         constraint=validate_email,
     )
     dexteritytextindexer.searchable('other_service')
     other_service = schema.Choice(
-        title=_(u'e.g., Line, Skype, Viber, WeChat, WhatsApp'),
+        title=_('e.g., Line, Skype, Viber, WeChat, WhatsApp'),
         required=False,
         vocabulary=socialmediaservice,
     )
     dexteritytextindexer.searchable('other_username')
     other_username = schema.TextLine(
-        title=_(u'username or ID for the above service'),
+        title=_('username or ID for the above service'),
         required=False,
     )
     dexteritytextindexer.searchable('office_building')
     office_building = schema.Choice(
-        title=_(u'Office Building'),
+        title=_('Office Building'),
         required=True,
         source=RegistryValueVocabulary('oiestudyabroadstudent.building'),
     )
     dexteritytextindexer.searchable('office_room')
     office_room = schema.TextLine(
-        title=_(u'Office Room'),
+        title=_('Office Room'),
         required=True,
     )
     dexteritytextindexer.searchable('college_or_unit')
     college_or_unit = schema.Choice(
-        title=_(u'College or Unit'),
-        description=_(u''),
+        title=_('College or Unit'),
+        description=_(''),
         required=True,
         source=RegistryValueVocabulary(
             'oiestudyabroadstudent.college_or_unit',
@@ -116,33 +112,40 @@ also teach one or more of the program courses.
     )
     role_and_responsibility = field.NamedFile(
         title=_('Role & Responsibility'),
-        description=_(
-            u'Upload a signed Program Liaison Role & Responsibilities form',
-        ),
+        description=_('Upload a signed Program Liaison Role & Responsibilities form'),
     )
     #######################################################
     model.fieldset(
         'Marketing Material',
-        label=_(u'Marketing Material'),
+        label=_('Marketing Material'),
         fields=['number_study_abroad_away_fair_flyers',
                 'number_study_abroad_away_fair_posters',
                 'number_study_abroad_away_fair_brochures'],
     )
     number_study_abroad_away_fair_flyers = schema.Int(
-        title=_(u'Number of Study Abroad/Away Fair Flyers'),
-        description=_(u'Indicate the number (max: 999) of flyers to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
+        title=_('Number of Study Abroad/Away Fair Flyers'),
+        description=_(
+            'Indicate the number (max: 999) of flyers to be sent to you at the beginning of '
+            'each semester. OIE can respond to additional requests for materials at any time'
+        ),
         min=0,
         max=999,
     )
     number_study_abroad_away_fair_posters = schema.Int(
-        title=_(u'Number of Study Abroad/Away Fair Posters'),
-        description=_(u'Indicate the number (max: 99) of posters to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
+        title=_('Number of Study Abroad/Away Fair Posters'),
+        description=_(
+            'Indicate the number (max: 99) of posters to be sent to you at the beginning of '
+            'each semester. OIE can respond to additional requests for materials at any time'
+        ),
         min=0,
         max=99,
     )
     number_study_abroad_away_fair_brochures = schema.Int(
-        title=_(u'Number of Study Abroad/Away Fair Brochures'),
-        description=_(u'Indicate the number (max: 999) of brochures to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
+        title=_('Number of Study Abroad/Away Fair Brochures'),
+        description=_(
+            'Indicate the number (max: 999) of brochures to be sent to you at the beginning of '
+            'each semester. OIE can respond to additional requests for materials at any time'
+        ),
         min=0,
         max=999,
     )
