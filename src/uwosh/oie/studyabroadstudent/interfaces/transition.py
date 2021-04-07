@@ -9,31 +9,31 @@ from zope.interface import Interface
 class IOIETransition(Interface):
     mode(title='hidden')
     title = schema.TextLine(
-        title=_(u'Transition Name'),
+        title=_('Transition Name'),
         required=False,
-        default=_(u'will be auto-generated on save'),
+        default=_('will be auto-generated on save'),
     )
 
     transitionDate = schema.Date(
-        title=_(u'Transition Date'),
+        title=_('Transition Date'),
         required=True,
     )
 
     dexteritytextindexer.searchable('destinationCity')
     destinationCity = schema.TextLine(
-        title=_(u'Destination City'),
+        title=_('Destination City'),
         required=True,
     )
 
     dexteritytextindexer.searchable('destinationCountry')
     destinationCountry = schema.Choice(
-        title=_(u'Destination Country'),
+        title=_('Destination Country'),
         required=True,
         source=RegistryValueVocabulary('oiestudyabroadstudent.countries'),
     )
 
     transitionType = schema.Choice(
-        title=_(u'Transition Type'),
+        title=_('Transition Type'),
         required=True,
         source=RegistryValueVocabulary(
             'oiestudyabroadstudent.transition_type',
@@ -41,12 +41,12 @@ class IOIETransition(Interface):
     )
 
     accommodation = schema.Choice(
-        title=_(u'Accommodation'),
+        title=_('Accommodation'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.accommodation'),
     )
 
     accommodationRoomSizes = schema.List(
-        title=_(u'Room Size(s)'),
+        title=_('Room Size(s)'),
         value_type=schema.Choice(
             source=RegistryValueVocabulary(
                 'oiestudyabroadstudent.room_size',

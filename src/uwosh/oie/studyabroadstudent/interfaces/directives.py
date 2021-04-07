@@ -2,8 +2,8 @@
 from plone.supermodel.directives import MetadataDictDirective
 
 
-REQUIRED_IN_STATE_KEY = u'uwosh.oie.studyabroadstudent.required-in-state'
-REQUIRED_VALUE_IN_STATE_KEY = u'uwosh.oie.studyabroadstudent.required-value-in-state'  # noqa
+REQUIRED_IN_STATE_KEY = 'uwosh.oie.studyabroadstudent.required-in-state'
+REQUIRED_VALUE_IN_STATE_KEY = 'uwosh.oie.studyabroadstudent.required-value-in-state'  # noqa
 V_PROGRAM_CODE_FS = 'uwosh.oie.studyabroadstudent.view.program_code_fieldset'
 E_PROGRAM_CODE_FS = 'uwosh.oie.studyabroadstudent.edit.program_code_fieldset'
 E_PROGRAM_DESCRIPTION = 'uwosh.oie.studyabroadstudent.edit.program_description'

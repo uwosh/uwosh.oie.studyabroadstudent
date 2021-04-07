@@ -7,7 +7,7 @@ import os
 def parse_object_pairs(pairs):
 
     pairs_str = str(pairs)
-    if 'Participant_Admin' in pairs_str or u'Participant_Admin' in pairs_str:
+    if 'Participant_Admin' in pairs_str:
         permissions = {}
         for pair in pairs:
             role, transition_permissions_list = pair

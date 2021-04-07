@@ -8,11 +8,11 @@ from zope.interface import Interface
 class IOIEHealthSafetySecurityDocument(Interface):
     mode(title='hidden')
     title = schema.TextLine(
-        title=_(u'Title'),
+        title=_('Title'),
         required=False,
-        default=_(u'will be auto-generated on save'),
+        default=_('will be auto-generated on save'),
     )
     file = field.NamedFile(
-        title=_(u'Health, Safety, Security Document'),
+        title=_('Health, Safety, Security Document'),
         required=True,
     )

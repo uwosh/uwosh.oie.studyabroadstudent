@@ -39,71 +39,71 @@ class IOIECooperatingPartner(Interface):
 
     dexteritytextindexer.searchable('website')
     website = schema.URI(
-        title=_(u'Partner Web Address'),
+        title=_('Partner Web Address'),
         required=True,
     )
     dexteritytextindexer.searchable('hq_address_1')
     hq_address_1 = schema.TextLine(
-        title=_(u'Address 1'),
-        description=_(u'must be a real address, not a post office box or similar'),  # noqa
+        title=_('Address 1'),
+        description=_('must be a real address, not a post office box or similar'),  # noqa
         required=True,
     )
     dexteritytextindexer.searchable('hq_address_2')
     hq_address_2 = schema.TextLine(
-        title=_(u'Address 2'),
-        description=_(u'must be a real address, not a post office box or similar'),  # noqa
+        title=_('Address 2'),
+        description=_('must be a real address, not a post office box or similar'),  # noqa
         required=False,
     )
     dexteritytextindexer.searchable('hq_city')
     hq_city = schema.TextLine(
-        title=_(u'City'),
-        description=_(u''),
+        title=_('City'),
+        description=_(''),
         required=True,
     )
     dexteritytextindexer.searchable('hq_state')
     hq_state = schema.TextLine(
-        title=_(u'State'),
-        description=_(u'(or province or equivalent)'),
+        title=_('State'),
+        description=_('(or province or equivalent)'),
         required=True,
     )
     dexteritytextindexer.searchable('hq_mailing_code')
     hq_mailing_code = schema.TextLine(
-        title=_(u'Mailing Code'),
-        description=_(u'Zip or Postal Code or equivalent'),
+        title=_('Mailing Code'),
+        description=_('Zip or Postal Code or equivalent'),
         required=True,
     )
     dexteritytextindexer.searchable('hq_country')
     hq_country = schema.TextLine(
-        title=_(u'Country'),
-        description=_(u''),
+        title=_('Country'),
+        description=_(''),
         required=True,
     )
     dexteritytextindexer.searchable('telephone')
     telephone = schema.TextLine(
-        title=_(u'Telephone'),
-        description=_(u'Please include country code (if outside US) and area code'),  # noqa
+        title=_('Telephone'),
+        description=_('Please include country code (if outside US) and area code'),  # noqa
         required=True,
     )
     dexteritytextindexer.searchable('mobile')
     mobile = schema.TextLine(
-        title=_(u'Mobile Phone'),
-        description=_(u'Please include country code (if outside US) and area code'),  # noqa
+        title=_('Mobile Phone'),
+        description=_('Please include country code (if outside US) and area code'),  # noqa
         required=True,
     )
     dexteritytextindexer.searchable('email')
     email = schema.TextLine(
-        title=_(u'Email'),
+        title=_('Email'),
         constraint=validate_email,
         required=True,
     )
     dexteritytextindexer.searchable('other_service')
     other_service = schema.Choice(
-        title=_(u'e.g., Line, Skype, Viber, WeChat, WhatsApp'),
+        title=_('e.g., Line, Skype, Viber, WeChat, WhatsApp'),
         required=False,
         vocabulary=socialmediaservice,
     )
     dexteritytextindexer.searchable('other_username')
     other_username = schema.TextLine(
-        title=_(u'username or ID for the above service'),
+        title=_('username or ID for the above service'),
         required=False,
     )
