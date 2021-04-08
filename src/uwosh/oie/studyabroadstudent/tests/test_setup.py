@@ -25,7 +25,7 @@ class TestSetup(unittest.TestCase):
 
     def test_browserlayer(self):
         """Test that IUwoshOieStudyabroadstudentLayer is registered."""
-        from wosh.oie.studyabroadstudent.interfaces import \
+        from uwosh.oie.studyabroadstudent.interfaces import \
             IUwoshOieStudyabroadstudentLayer as layer  # noqa: I001
         from plone.browserlayer.utils import registered_layers  # noqa: I001
         self.assertIn(layer, registered_layers())
