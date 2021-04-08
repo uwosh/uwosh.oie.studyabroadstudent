@@ -182,7 +182,7 @@ def _create_account(email, username, roles, password=None):
                 password=password,
             )
             api.user.grant_roles(username=user.id, roles=roles)
-        except (InvalidParameterError, MissingParameterError):
+        except (InvalidParameterError, MissingParameterError, ValueError):
             pass
 
 
