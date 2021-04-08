@@ -31,6 +31,8 @@ def get_list_item(brain):
 def get_unordered_list(brains):
     list_items = [get_list_item(b) for b in brains]
     return '<ul>' + ''.join(list_items) + '</ul>'
+
+
 ###############################################################
 def application_created(o, event):
     set_application_title(o)
@@ -195,7 +197,7 @@ def _update_contained_object_fields(o, event):
 
 ###############################################################
 def contact_created(o, event):
-    o.title = get_full_name(o)
+    o.title = get_full_snakecase_name(o)
     if not o.id:
         normalizer = getUtility(IIDNormalizer)
         o.id = normalizer.normalize(o.title)

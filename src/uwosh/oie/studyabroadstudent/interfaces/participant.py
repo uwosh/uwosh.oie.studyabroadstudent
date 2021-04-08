@@ -790,7 +790,7 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_('Program Departure Date'),
         description=_('will appear only when "transfer provided" is selected on the "program workflow"'),
         required=False,
-        # TODO insert date from program object when in transfer provided state
+        # noqa: T000  # TODO insert date from program object when in transfer provided state
     )
 
     airportTransferDeparture = schema.Choice(
@@ -798,7 +798,7 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_(''),
         vocabulary=departure_transfer_vocabulary,
         required=False,
-        # TODO this should appear only when "transfer provided" is selected
+        # noqa: T000  # TODO this should appear only when "transfer provided" is selected
         #  on the "program workflow"
     )
 
@@ -807,7 +807,7 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_(''),
         vocabulary=departure_mode_transportation_vocabulary,
         required=False,
-        # TODO this should appear only when "transfer provided" is selected
+        # noqa: T000  # TODO this should appear only when "transfer provided" is selected
         #  on the "program workflow"
     )
 
@@ -815,7 +815,7 @@ class IOIEStudyAbroadParticipant(Interface):
         title=_('Program Return Date'),
         description=_('will appear only when "transfer provided" is selected on the "program workflow"'),
         required=False,
-        # TODO insert date from program object when in transfer provided state
+        # noqa: T000  # TODO insert date from program object when in transfer provided state
     )
 
     returnModeOfTransportation = schema.Choice(
@@ -823,7 +823,7 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_('Choose one'),
         vocabulary=return_mode_transportation_vocabulary,
         required=False,
-        # TODO this should appear only when "transfer provided" is selected
+        # noqa: T000  # TODO this should appear only when "transfer provided" is selected
         #  on the "program workflow"
     )
 
@@ -832,7 +832,7 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_(''),
         vocabulary=return_transfer_vocabulary,
         required=False,
-        # TODO this should appear only when "transfer provided" is selected
+        # noqa: T000  # TODO this should appear only when "transfer provided" is selected
         #  on the "program workflow"
     )
 
