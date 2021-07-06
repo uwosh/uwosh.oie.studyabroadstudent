@@ -45,13 +45,13 @@ class IOIECooperatingPartner(Interface):
     dexteritytextindexer.searchable('hq_address_1')
     hq_address_1 = schema.TextLine(
         title=_('Address 1'),
-        description=_('must be a real address, not a post office box or similar'),  # noqa
+        description=_('must be a real address, not a post office box or similar'),
         required=True,
     )
     dexteritytextindexer.searchable('hq_address_2')
     hq_address_2 = schema.TextLine(
         title=_('Address 2'),
-        description=_('must be a real address, not a post office box or similar'),  # noqa
+        description=_('must be a real address, not a post office box or similar'),
         required=False,
     )
     dexteritytextindexer.searchable('hq_city')
@@ -81,13 +81,13 @@ class IOIECooperatingPartner(Interface):
     dexteritytextindexer.searchable('telephone')
     telephone = schema.TextLine(
         title=_('Telephone'),
-        description=_('Please include country code (if outside US) and area code'),  # noqa
+        description=_('Please include country code (if outside US) and area code'),
         required=True,
     )
     dexteritytextindexer.searchable('mobile')
     mobile = schema.TextLine(
         title=_('Mobile Phone'),
-        description=_('Please include country code (if outside US) and area code'),  # noqa
+        description=_('Please include country code (if outside US) and area code'),
         required=True,
     )
     dexteritytextindexer.searchable('email')

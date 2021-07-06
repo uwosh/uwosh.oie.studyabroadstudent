@@ -1,12 +1,14 @@
 from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper, RegistryEditForm
 from plone.autoform.directives import widget
 from plone.formwidget.namedfile.widget import NamedFileFieldWidget, NamedImageFieldWidget
+from plone.namedfile.field import NamedBlobImage, NamedBlobFile
 from plone.supermodel import model
 from plone.z3cform import layout
 from uwosh.oie.studyabroadstudent import _
+from uwosh.oie.studyabroadstudent.constants import DEFAULT_ELIGIBILITY_REQUIREMENTS
 from zope import schema
 from zope.interface import Interface
-
+from uwosh.oie.studyabroadstudent.constants import DEFAULT_TUITION_AND_FEES
 
 class IOIEStudyAbroadStudentControlPanel(Interface):
 
@@ -87,7 +89,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Communication',
             'Computer Science',
             'Criminal Justice',
-            'Dual Early Childhood PK-3 and Special Education Birth through Age 8',  # noqa
+            'Dual Early Childhood PK-3 and Special Education Birth through Age 8',
             'Dual Elementary 1-6 and Special',
             'emba',
             'Earth Science',
@@ -147,7 +149,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Womens Studies',
             'pre-engineering',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -164,7 +166,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Animal Behavior Observation in Tanzania',
             'Applied Parasitology in Nicaragua and Costa Rica',
             'Applied Pharmacology',
-            'Approaches to Resource Management of Tropical Ecosystems in Belize',  # noqa
+            'Approaches to Resource Management of Tropical Ecosystems in Belize',
             'Asia-Pacific TEFL Workshop',
             'AustraLearn - academic year',
             'AustraLearn - semester',
@@ -174,12 +176,12 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Business & Economics in China',
             'Business & Economics in Peru',
             'Business in Fulda, Germany',
-            'Business in India: Opportunities & Challenges (business participant)',  # noqa
-            'Business in India: Opportunities & Challenges (student participants)',  # noqa
+            'Business in India: Opportunities & Challenges (business participant)',
+            'Business in India: Opportunities & Challenges (student participants)',
             'Camp Kyushu',
             'Challenge Australia: Leadership Development',
             'Challenge New Zealand: Leadership Development',
-            'Communication, Social Justice, Women and Gender Studies in Tanzania',  # noqa
+            'Communication, Social Justice, Women and Gender Studies in Tanzania',
             'Comparative Criminal Justice Systems in Great Britain & France',
             'Coral Reefs and Geology of Bermuda',
             'Counseling, Culture and Spirituality in India',
@@ -193,13 +195,13 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Educators Abroad Student Teaching',
             'Estonia, Russia and Eastern Europe in the 20th Century',
             'Estudio de Lectoescritura en Costa Rica',
-            'Ethics & Community in Martha''s Vineyard, MA (USA)',
+            "Ethics & Community in Martha's Vineyard, MA (USA)",
             'European Business Travel Seminar',
             'European Odyssey',
             'Experience Scotland',
             'Field Geology in China',
             'Harbin Institute of Technology-Summer Program',
-            'Hessen - Frankfurt University of Applied Sciences - academic year',  # noqa
+            'Hessen - Frankfurt University of Applied Sciences - academic year',
             'Hessen - Frankfurt University of Applied Sciences - semester',
             'Hessen - Hochschule Darmstadt - academic year',
             'Hessen - Hochschule Darmstadt - semester',
@@ -207,12 +209,12 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Hessen - Hochschule Fulda - semester',
             'Hessen - Hochschule RheinMain - academic year',
             'Hessen - Hochschule RheinMain - semester',
-            'Hessen - Hochschule für Gestaltung Offenbach am Main - academic year',  # noqa
+            'Hessen - Hochschule für Gestaltung Offenbach am Main - academic year',
             'Hessen - Hochschule für Gestaltung Offenbach am Main - semester',
-            'Hessen - Hochschule für Musik und Darstellende Kunst Frankfurt - academic year',  # noqa
-            'Hessen - Hochschule für Musik und Darstellende Kunst Frankfurt - semester',  # noqa
-            'Hessen - Johann Wolfgang Goethe-Universität Frankfurt - academic year',  # noqa
-            'Hessen - Johann Wolfgang Goethe-Universität Frankfurt - semester',  # noqa
+            'Hessen - Hochschule für Musik und Darstellende Kunst Frankfurt - academic year',
+            'Hessen - Hochschule für Musik und Darstellende Kunst Frankfurt - semester',
+            'Hessen - Johann Wolfgang Goethe-Universität Frankfurt - academic year',
+            'Hessen - Johann Wolfgang Goethe-Universität Frankfurt - semester',
             'Hessen - Justus-Liebig-Universität Gießen - academic year',
             'Hessen - Justus-Liebig-Universität Gießen - semester',
             'Hessen - Philipps-Universität Marburg - IUSP',
@@ -251,10 +253,10 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Languages Open Doors (Chile)',
             'Leadership & Culture in Australia and New Zealand',
             'Leadership & Culture in Australia',
-            'Lorenzo de'' Medici - Florence',
-            'Lorenzo de'' Medici - Rome',
-            'Lorenzo de'' Medici - Three Cities',
-            'Lorenzo de'' Medici - Tuscania',
+            "Lorenzo de' Medici - Florence",
+            "Lorenzo de' Medici - Rome",
+            "Lorenzo de' Medici - Three Cities",
+            "Lorenzo de' Medici - Tuscania",
             'Los Angeles Connection (USA)',
             'MBA Healthcare in India',
             'MBA in China & Korea',
@@ -262,11 +264,11 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Mathematics Education in Germany',
             'Mathematics Education in Peru',
             'Modern Democratic Politics in Europe',
-            'Modern European Politics and the Rise and Fall of European Facism',  # noqa
+            'Modern European Politics and the Rise and Fall of European Facism',
             'Nagasaki Junior College - semester',
-            'Nagasaki Junior College/USA Summer Camp Study & Internship Program',  # noqa
-            'Nagasaki University of Foreign Studies, Japan (UW-Platteville academic year)',  # noqa
-            'Nagasaki University of Foreign Studies, Japan (UW-Platteville semester)',  # noqa
+            'Nagasaki Junior College/USA Summer Camp Study & Internship Program',
+            'Nagasaki University of Foreign Studies, Japan (UW-Platteville academic year)',
+            'Nagasaki University of Foreign Studies, Japan (UW-Platteville semester)',
             'National Student Exchange - academic year',
             'National Student Exchange - semester',
             'Nationalism and Internationalism in the Heart of Europe',
@@ -276,19 +278,19 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Nursing Clinical Community & Families in Peru (Batch 1)',
             'Nursing Clinical Community & Families in Peru (Batch 2)',
             'Nursing Clinical Community and Families in Nicaragua',
-            'Nursing Clinical Rotations AND Nursing & Health Care in India (combined programs)',  # noqa
+            'Nursing Clinical Rotations AND Nursing & Health Care in India (combined programs)',
             'Nursing Clinical Rotations in Uganda',
             'Nursing Community Health Clinical in India',
             'Peruvian Business Travel Seminar in Lima',
             'Politics and Political History in Great Britain',
             'Quest III Literary Landscapes: Ireland',
-            'Quest III Migration, Culture, and Human Rights in the Americas in Nicaragua',  # noqa
+            'Quest III Migration, Culture, and Human Rights in the Americas in Nicaragua',
             'Quest III in Panama',
             'Quest III: Culture & Community Change in Costa Rica',
             'Reading and Writing in Place: Ireland',
             'Reason & Religion in 18th Century Scotland',
             'Religious Studies in India & Nepal',
-            'Ritsumeikan Asia Pacific University Student Exchange - academic year',  # noqa
+            'Ritsumeikan Asia Pacific University Student Exchange - academic year',
             'Ritsumeikan Asia Pacific University Student Exchange - semester',
             'Seijo University Student Exchange (academic year)',
             'Seijo University Student Exchange (semester)',
@@ -297,13 +299,13 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Social Work Study in Germany - Summer + Fall Semester',
             'Social Work Study in Germany - Summer',
             'Society and Culture in Greece & London',
-            'South Central University for Nationalities, China (UW-Platteville)',  # noqa
+            'South Central University for Nationalities, China (UW-Platteville)',
             'Spanish Language & Culture in Guanajuato, Mexico',
             'Spanish and Economics Studies in Peru',
-            'Spanish-American Institute of International Education, Spain (UW-Platteville)',  # noqa
+            'Spanish-American Institute of International Education, Spain (UW-Platteville)',
             'Spring Interim in Rome',
-            'St. Mary''s University College, England (academic year; UW-Platteville)',  # noqa
-            'St. Mary''s University College, England (semester; UW-Platteville)',  # noqa
+            "St. Mary's University College, England (academic year; UW-Platteville)",
+            "St. Mary's University College, England (semester; UW-Platteville)",
             'Student Consulting Practicum + European Business Travel Seminar',
             'Student Consulting Practicum + Peruvian Business Travel Seminar',
             'Student Consulting Practicum',
@@ -323,8 +325,8 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Travel and Documentary Photography in England',
             'Traveling Through Literary and Artistic England',
             'USA Summer Camp (Japan)',
-            'Universidad Bernardo O''Higgins Student Exchange (academic year)',  # noqa
-            'Universidad Bernardo O''Higgins Student Exchange (semester)',
+            "Universidad Bernardo O'Higgins Student Exchange (academic year)",
+            "Universidad Bernardo O'Higgins Student Exchange (semester)",
             'Universidad Castilla-La Mancha (academic year)',
             'Universidad del Pacifico Student Exchange - academic year',
             'Universidad del Pacifico Student Exchange - semester',
@@ -334,13 +336,13 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'University of New Brunswick Student Exchange - academic year',
             'University of New Brunswick Student Exchange - semester',
             'University of Newcastle, Australia (UW-Platteville)',
-            'Viessmann Academy - Student Seminar in Sustainability in Germany',  # noqa
+            'Viessmann Academy - Student Seminar in Sustainability in Germany',
             'Viessmann Internship Program in Allendorf (summer)',
             'Viessmann Internship Program in Schwandorf (summer)',
             'Writing Across Cultures in Nicaragua',
             'Youth Exchange Program in Japan',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -428,7 +430,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'URB REG',
             'WOM STDS',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -443,7 +445,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Asian/Pacific Islander',
             'Other',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -451,7 +453,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     marriage_statuses = schema.Tuple(
         title=_('Marriage Statuses'),
         default=('Married', 'Single'),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -459,7 +461,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     genders = schema.Tuple(
         title=_('Genders'),
         default=('Male', 'Female', 'Other'),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -467,7 +469,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     states_for_residency = schema.Tuple(
         title=_('States for Residency'),
         default=('Wisconsin', 'Minnesota', 'Other'),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -534,15 +536,15 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Wyoming',
             'none',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
 
     citizenship = schema.Tuple(
         title=_('Citizenship'),
-        default=('U.S. Citizen', 'Permanent U.S. Resident', 'Other Citizenship'),  # noqa
-        missing_value=None,
+        default=('U.S. Citizen', 'Permanent U.S. Resident', 'Other Citizenship'),
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -550,7 +552,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     session_hours = schema.Tuple(
         title=_('Session hours'),
         default=('09:00-11:00', '15:00-17:00'),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -613,7 +615,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Congo, Rep.',
             'Cook Islands',
             'Costa Rica',
-            'Cote d''Ivoire',
+            "Cote d'Ivoire",
             'Croatia',
             'Cuba',
             'Cyprus',
@@ -818,7 +820,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Zambia',
             'Zimbabwe',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -835,7 +837,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Study Abroad',
             'Study/Internship',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -851,7 +853,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Research',
             'Service Learning',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -868,7 +870,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Shared Apartment',
             'Rustic',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -881,7 +883,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Triple Rooms',
             'Multi-bed Rooms',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -890,10 +892,10 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         title=_('Locations'),
         default=(
             'UW Oshkosh Parking Lot 6; corner of Osceola & Pearl Ave.',
-            'Chicago O''Hare International Airport',
+            "Chicago O'Hare International Airport",
             'Milwaukee General Mitchell Airport',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -903,7 +905,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         default=(
             'Milwaukee',
             'Appleton',
-            'O''Hare',
+            "O'Hare",
         ),
         value_type=schema.TextLine(),
     )
@@ -935,7 +937,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             '20',
             '21',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -944,9 +946,9 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         title=_('Travel Document'),
         default=(
             'Passport',
-            'Driver''s License',
+            "Driver's License",
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -968,7 +970,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'University',
             'Volunteer Organization',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1053,38 +1055,15 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'URB/REG ',
             'WM STUD',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
 
     tuition_and_fees = schema.Tuple(
         title=_('Tuition and Fees'),
-        default=(
-            '$0 Tuition; $0 Seg Fees',
-            '$0 Tuition; $0 Seg Fees; relevant tuition equivalent to be charged',  # noqa
-            'No Change to Course Tuition & Fees',
-            'Tuition Charged for 01 cr + related fees; charge outside of the tuition plateau',  # noqa
-            'Tuition Charged for 01 cr; Seg Fees Also Charged',
-            'Tuition Charged for 02 cr; Seg Fees Also Charged',
-            'Tuition Charged for 03 cr; $0 Seg Fees',
-            'Tuition Charged for 03 cr + related fees; charge outside of the tuition plateau',  # noqa
-            'Tuition Charged for 03 cr; Seg Fees Also Charged',
-            'Tuition Charged for 04 cr; Seg Fees Also Charged',
-            'Tuition Charged for 05 cr; Seg Fees Also Charged',
-            'Tuition Charged for 06 cr outside of the tuition plateau; $0 Seg Fees',  # noqa
-            'Tuition Charged for 06 cr; $0 Seg Fees',
-            'Tuition Charged for 06 cr; Seg Fees Also Charged',
-            'Tuition Charged for 07 cr; Seg Fees Also Charged',
-            'Tuition Charged for 08 cr; Seg Fees Also Charged',
-            'Tuition Charged for 09 cr; Seg Fees Also Charged',
-            'Tuition Charged for 1.5 cr; Seg Fees Also Charged',
-            'Tuition Charged for 10 cr; Seg Fees Also Charged',
-            'Tuition Charged for 11 cr; Seg Fees Also Charged',
-            'Tuition Charged for 12 cr; $0 Seg Fees',
-            'Tuition Charged for 12 cr; Seg Fees Also Charged',
-        ),
-        missing_value=None,
+        default=DEFAULT_TUITION_AND_FEES,
+        missing_value=tuple(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1137,9 +1116,9 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Teach',
             'Theatre',
             'USP',
-            'Womens'' Studies',
+            "Womens' Studies",
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1158,7 +1137,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Program Manager',
             'Study Abroad/Away Coordinator',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1173,7 +1152,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'TER',
             'PIR',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1194,7 +1173,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Part of Load/No Replacement',
             'Part of Load/Replacement',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1207,7 +1186,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Foundation',
             'Not Applicable',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1221,7 +1200,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Student Mails',
             'Travel Agency Secures',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1257,7 +1236,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'UW–Waukesha',
             'UW-Whitewater ',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1272,7 +1251,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             '5 Summer',
             '6 Fall Semester',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1338,9 +1317,9 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Theatre',
             'University Studies Program',
             'Urban Planning',
-            'Women''s and Gender Studies',
+            "Women's and Gender Studies",
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1358,7 +1337,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'QII Quest II',
             'QIII Quest III',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1378,7 +1357,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Russian',
             'Spanish',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1422,7 +1401,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'World Endeavors',
             'Worldstrides Capstone',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1669,13 +1648,13 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'THEATRE 663',
             'TNHSL 521',
             'TNHSL 522',
-            'WOMEN''S STUDIES 224',
-            'WOMEN''S STUDIES 303',
-            'WOMEN''S STUDIES 332',
-            'WOMEN''S STUDIES 366',
-            'WOMEN''S STUDIES 399',
+            "WOMEN'S STUDIES 224",
+            "WOMEN'S STUDIES 303",
+            "WOMEN'S STUDIES 332",
+            "WOMEN'S STUDIES 366",
+            "WOMEN'S STUDIES 399",
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1704,7 +1683,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'XK',
             'XL',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1717,7 +1696,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Host Only',
             'No Course Enrollment',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1730,7 +1709,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'every 2 years',
             'every 3 years',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1763,7 +1742,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Student Success Center',
             'Swart Hall',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1776,7 +1755,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Intercity transfer',
             'Arrival home',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1788,7 +1767,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'On-site Program Co-leader',
             'Individual external to the UW providing leadership support',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1800,7 +1779,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Professor',
             'None',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1813,7 +1792,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Committee Chair',
             'USP Reviewer',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1827,7 +1806,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             '90+ credits',
             'post-graduate',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1838,7 +1817,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Part of load',
             'Overload',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1852,7 +1831,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Paid by external partner',
             'Paid by study away students',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1864,7 +1843,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             '3.33% per credit (academic staff rate)',
             'Lump sum',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1873,9 +1852,9 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         title=_('Equipment & Space'),
         default=(
             'I do not need teaching space or equipment.',
-            'I have the following space/equipment needs: (if checked, please describe).',  # noqa
+            'I have the following space/equipment needs: (if checked, please describe).',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1884,9 +1863,10 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         title=_('Guest Lectures'),
         default=(
             'I do not need guest lecturers.',
-            'I do need guest lecturers and will include details within the daily itinerary in this application.',  # noqa
+            'I do need guest lecturers and will include details '
+            'within the daily itinerary in this application.',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1959,19 +1939,15 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'U',
             'V',
         ),
-        missing_value=None,
+        missing_value=(),
         required=False,
         value_type=schema.TextLine(),
     )
 
     eligibility_requirement = schema.Tuple(
         title=_('Eligibility Requirement'),
-        default=(
-            'Undergraduate students must have a minimum G.P.A. of 2.0, be in good standing, and meet course prerequisites. As part of the application process, your disciplinary file will be reviewed. If you have a campus disciplinary file, this will be taken into consideration when determining your eligibility. Undergraduates who do not meet minimum GPA and course requirements should contact the program leader prior to applying to determine course eligibility.',  # noqa
-            'Undergraduate students must have a minimum G.P.A. of 2.0, be in good standing, and meet course prerequisites. Undergraduate students who are required to complete a Quest III course to fulfill graduation requirements may apply. Students must have a minimum G.P.A. of 2.0, be in good standing, meet course prerequisites, and meet Quest III prerequisites. As part of the application process, your disciplinary file will be reviewed. If you have a campus disciplinary file, this will be taken into consideration when determining your eligibility. Undergraduates who are not required to complete a Quest III course to graduate are not eligible; however, they may apply for consideration on a space-available basis along with USP & instructor consent. Seats will be assigned to these applicants only after all applicants who are required to complete Quest III to graduate and who have met the STEP III deadline have been awarded a seat.',  # noqa
-            'Students must have a minimum G.P.A. of 3.25, be accepted into the Professional Counseling Graduate program, be in good standing, and meet course prerequisites. As part of the application process, your disciplinary file will be reviewed. If you have a campus disciplinary file, this will be taken into consideration when determining your eligibility. Undergraduates who do not meet minimum GPA and course requirements should contact the program leader prior to applying to determine course eligibility.',  # noqa
-        ),
-        missing_value=None,
+        default=DEFAULT_ELIGIBILITY_REQUIREMENTS,
+        missing_value=(),
         required=False,
         value_type=schema.TextLine(),
     )
@@ -1988,7 +1964,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'Graduate School',
             'I am not a student',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -1998,10 +1974,13 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         default=(
             '1) UWO students making progress toward a degree may apply.',
             '2) UW System students making progress toward a degree may apply.',
-            '3) Students making progress toward a degree at an institution of higher education may apply. (This includes exchange students and visiting students from abroad currently studying at UW Oshkosh.)',  # noqa
-            '4) Students making progress toward a degree at an institution of higher education and community members may apply.  Community members require approval by the Program Liaison."',  # noqa
+            '3) Students making progress toward a degree at an institution of higher education '
+            'may apply. (This includes exchange students and visiting students from abroad currently '
+            'studying at UW Oshkosh.)',
+            '4) Students making progress toward a degree at an institution of higher education and community '
+            'members may apply. Community members require approval by the Program Liaison.',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -2015,7 +1994,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'MBA - Executive Path',
             'MBA - Professional Path',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -2025,9 +2004,9 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         default=(
             'UW Oshkosh only',
             'Foreign Cooperating Partner only',
-            'Simultaneous enrollment at UW Oshkosh and Foreign Cooperating Partner',  # noqa
+            'Simultaneous enrollment at UW Oshkosh and Foreign Cooperating Partner',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -2035,7 +2014,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     widget(
         state_of_wisconsin_need_based_travel_grant_form=NamedFileFieldWidget,
     )
-    state_of_wisconsin_need_based_travel_grant_form = schema.ASCII(
+    state_of_wisconsin_need_based_travel_grant_form = schema.Bytes(
         title='State of Wisconsin Need-based Travel Grant Form',
         description='select the PDF for this form',
         required=False,
@@ -2045,23 +2024,27 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
     widget(
         special_student_form_for_undergraduate_admissions=NamedFileFieldWidget,
     )
-    special_student_form_for_undergraduate_admissions = schema.ASCII(
+    special_student_form_for_undergraduate_admissions = schema.Bytes(
         title='Special Student Form for Undergraduate Admissions',
         description='select the PDF for this form',
         required=False,
         missing_value=None,
         default=None,
     )
-    widget(disciplinary_clearance_form=NamedFileFieldWidget)
-    disciplinary_clearance_form = schema.ASCII(
+    widget(
+        disciplinary_clearance_form=NamedFileFieldWidget,
+    )
+    disciplinary_clearance_form = schema.Bytes(
         title='Disciplinary Clearance Form',
         description='select the PDF for this form',
         required=False,
         missing_value=None,
         default=None,
     )
-    widget('uwo_logo', NamedImageFieldWidget)
-    uwo_logo = schema.ASCII(
+    widget(
+        uwo_logo=NamedImageFieldWidget, 
+    )
+    uwo_logo = schema.Bytes(
         title=_('UWO Logo'),
         description=_('will appear on program description view'),
         required=False,
@@ -2083,7 +2066,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
             'School Bus',
             'Coach Bus',
         ),
-        missing_value=None,
+        missing_value=(),
         required=True,
         value_type=schema.TextLine(),
     )
@@ -2093,7 +2076,16 @@ class OIEStudyAbroadStudentControlPanelForm(RegistryEditForm):
     schema = IOIEStudyAbroadStudentControlPanel
     schema_prefix = 'oiestudyabroadstudent'
     label = 'OIE Study Abroad Settings'
-
+    
+    # def updateFields(self):
+        # super(OIEStudyAbroadStudentControlPanelForm, self).updateFields()
+        # import pdb; pdb.set_trace()
+        # oie_group = [group for group in self.groups if group.label == 'OIE'][0]
+        # forms_group = [group for group in self.groups if group.label == 'Forms'][0]
+        # oie_group.fields['uwo_logo'].widgetFactory = NamedImageFieldWidget
+        # forms_group.fields['state_of_wisconsin_need_based_travel_grant_form'].widgetFactory = NamedImageFieldWidget
+        # forms_group.fields['special_student_form_for_undergraduate_admissions'].widgetFactory = NamedImageFieldWidget
+        # forms_group.fields['disciplinary_clearance_form'].widgetFactory = NamedImageFieldWidget
 
 OIEStudyAbroadStudentControlPanelView = layout.wrap_form(
     OIEStudyAbroadStudentControlPanelForm, ControlPanelFormWrapper)

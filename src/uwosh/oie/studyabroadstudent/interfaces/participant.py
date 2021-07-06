@@ -12,17 +12,23 @@ from plone.namedfile.file import NamedFile
 from plone.supermodel import model
 from Products.CMFPlone.RegistrationTool import EmailAddressInvalid, checkEmailAddress
 from uwosh.oie.studyabroadstudent import _
-from uwosh.oie.studyabroadstudent.vocabularies import departure_mode_transportation_vocabulary  # noqa : E501
-from uwosh.oie.studyabroadstudent.vocabularies import departure_transfer_vocabulary  # noqa : E501
-from uwosh.oie.studyabroadstudent.vocabularies import graduation_month_vocabulary  # noqa : E501
-from uwosh.oie.studyabroadstudent.vocabularies import return_mode_transportation_vocabulary  # noqa : E501
-from uwosh.oie.studyabroadstudent.vocabularies import return_transfer_vocabulary  # noqa : E501
+from uwosh.oie.studyabroadstudent.constants import (
+    EMERGENCY_EMAIL_FIELD_DESCRIPTION,
+    EMERGENCY_PHONE_PRIMARY_DESCRIPTION,
+    EMERGENCY_PHONE_SECONDARY_DESCRIPTION,
+)
 from uwosh.oie.studyabroadstudent.vocabularies import (
     RegistryValueVocabulary,
     contactrelationship,
+    departure_mode_transportation_vocabulary,
+    departure_transfer_vocabulary,
+    graduation_month_vocabulary,
+    return_mode_transportation_vocabulary,
+    return_transfer_vocabulary,
     socialmediaservice,
     yes_no_vocabulary,
 )
+from uwosh.oie.studyabroadstudent.widgets import SundayStartDateWidget
 from zope import schema
 from zope.interface import Interface
 from zope.schema import ValidationError
@@ -57,7 +63,7 @@ def validate_student_id(value):
 
 def get_url_special_student_form():
     form = api.portal.get_registry_record(
-        'oiestudyabroadstudent.state_of_wisconsin_need_based_travel_grant_form',  # noqa : E501
+        'oiestudyabroadstudent.state_of_wisconsin_need_based_travel_grant_form',
     )
     if form is not None:
         filename, data = b64decode_file(form)
@@ -72,7 +78,10 @@ def get_url_special_student_form():
         return RichTextValue(html, 'text/html', 'text/html')
     else:
         return RichTextValue(
-            '<em>The Wisconsin need based travel grant form has not yet been specified by an administrator</em>',  # noqa : E501
+            (
+                '<em>The Wisconsin need based travel grant form has '
+                'not yet been specified by an administrator</em>'
+            ),
             'text/html',
             'text/html',
         )
@@ -80,7 +89,7 @@ def get_url_special_student_form():
 
 def get_url_special_student_form_for_undergraduate_admissions_form():
     form = api.portal.get_registry_record(
-        'oiestudyabroadstudent.special_student_form_for_undergraduate_admissions',  # noqa : E501
+        'oiestudyabroadstudent.special_student_form_for_undergraduate_admissions',
     )
     if form is not None:
         filename, data = b64decode_file(form)
@@ -95,7 +104,10 @@ def get_url_special_student_form_for_undergraduate_admissions_form():
         return RichTextValue(html, 'text/html', 'text/html')
     else:
         return RichTextValue(
-            '<em>The special student form for undergraduate admissions has not yet been specified by an administrator</em>',  # noqa : E501
+            (
+                '<em>The special student form for undergraduate admissions '
+                'has not yet been specified by an administrator</em>'
+            ),
             'text/html',
             'text/html',
         )
@@ -118,7 +130,7 @@ def get_url_disciplinary_clearance_form():
         return RichTextValue(html, 'text/html', 'text/html')
     else:
         return RichTextValue(
-            '<em>The disciplinary clearance form has not yet been specified by an administrator</em>',  # noqa : E501
+            '<em>The disciplinary clearance form has not yet been specified by an administrator</em>',
             'text/html',
             'text/html',
         )
@@ -126,7 +138,7 @@ def get_url_disciplinary_clearance_form():
 
 class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('title')
-    omitted('title')
+    # omitted('title')
     title = schema.TextLine(
         title=_('Title'),
         required=False,
@@ -175,16 +187,22 @@ class IOIEStudyAbroadParticipant(Interface):
 
     seatNumber = schema.TextLine(
         title=_('Seat Number'),
-        description=_('auto generate using STEP II date/time stamp and min/max participant fields from "program development" workflow'), # noqa : E501
+        description=_(
+            'auto generate using STEP II date/time stamp and min/max '
+            'participant fields from "program development" workflow'
+        ),
         #  TODO (BD) - verify this functionality  # noqa : T000
-        # required=False,
+        required=False,
     )
 
     waitlistNumber = schema.TextLine(
         title=_('Waitlist Number'),
-        description=_('auto generate using STEP II date/time stamp and min/max participant fields from "program development" workflow'), # noqa : E501
+        description=_(
+            'auto generate using STEP II date/time stamp and min/max '
+            'participant fields from "program development" workflow'
+        ),
         #  TODO (BD) - verify this functionality  # noqa : T000
-        # required=False,
+        required=False,
     )
 
     #######################################################
@@ -203,7 +221,9 @@ class IOIEStudyAbroadParticipant(Interface):
     email = schema.TextLine(
         title=_('Email Address'),
         description=_(
-            'UW Oshkosh students must use a @uwosh.edu email address.  Acceptable email addresses for other applicants include school and company addresses.'),  # noqa : E501
+            'UW Oshkosh students must use a @uwosh.edu email address. Acceptable email '
+            'addresses for other applicants include school and company addresses.'
+        ),
         constraint=validate_email,
         # TODO - write test_validate_email  # noqa : T000
         required=True,
@@ -212,7 +232,10 @@ class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('programName')
     programName = schema.Choice(
         title=_('Program Name (first choice)'),
-        description=_('The courses listed for this program choice will appear in your Courses tab; you must indicate there which courses you wish to enroll in.'),  # noqa : E501
+        description=_(
+            'The courses listed for this program choice will appear in your Courses tab; '
+            'you must indicate there which courses you wish to enroll in.'
+        ),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.newprograms',
         required=True,
     )
@@ -241,7 +264,10 @@ class IOIEStudyAbroadParticipant(Interface):
     dexteritytextindexer.searchable('studentID')
     studentID = schema.TextLine(
         title=_('UW Oshkosh Student ID'),
-        description=_('Do not include the initial "W" in the UW Oshkosh ID.  If you do not have a UW Oshkosh ID (current or past), leave this blank.'),  # noqa : E501
+        description=_(
+            'Do not include the initial "W" in the UW Oshkosh ID. If you do not have '
+            'a UW Oshkosh ID (current or past), leave this blank.'
+        ),
         required=False,
         constraint=validate_student_id,
         # TODO - write test_validate_student_id  # noqa : T000
@@ -272,13 +298,13 @@ class IOIEStudyAbroadParticipant(Interface):
 
     mainPhone = schema.TextLine(
         title=_('Main phone'),
-        description=_('Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa : E501
+        description=_(EMERGENCY_PHONE_SECONDARY_DESCRIPTION),
         required=True,
     )
 
     otherPhone = schema.TextLine(
         title=_('Other phone'),
-        description=_('Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa : E501
+        description=_(EMERGENCY_PHONE_SECONDARY_DESCRIPTION),
         required=False,
     )
 
@@ -298,7 +324,7 @@ class IOIEStudyAbroadParticipant(Interface):
 
     otherContactID = schema.TextLine(
         title=_('Other contact service username or ID'),
-        description=_('Enter your username or ID for the service you chose above.'),  # noqa : E501
+        description=_('Enter your username or ID for the service you chose above.'),
         required=False,
     )
 
@@ -412,27 +438,27 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg1mail_personal = schema.TextLine(
         title=_('1 Main Email'),
-        description=_('Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),  # noqa : E501
+        description=_(EMERGENCY_EMAIL_FIELD_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg1mail_work = schema.TextLine(
         title=_('1 Other Email'),
-        description=_('Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),  # noqa : E501
+        description=_(EMERGENCY_EMAIL_FIELD_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg1phone_main = schema.TextLine(
         title=_('1 Main Phone'),
-        description=_('Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa : E501
+        description=_(EMERGENCY_PHONE_PRIMARY_DESCRIPTION),
         required=False,
     )
 
     emerg1phone_other = schema.TextLine(
         title=_('1 Other Phone'),
-        description=_('Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa : E501
+        description=_(EMERGENCY_PHONE_SECONDARY_DESCRIPTION),
         required=False,
     )
 
@@ -452,27 +478,27 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg2mail_personal = schema.TextLine(
         title=_('2 Main Email'),
-        description=_('Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),  # noqa : E501
+        description=_(EMERGENCY_EMAIL_FIELD_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg2mail_work = schema.TextLine(
         title=_('2 Other Email'),
-        description=_('Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),  # noqa : E501
+        description=_(EMERGENCY_EMAIL_FIELD_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg2phone_main = schema.TextLine(
         title=_('2 Main Phone'),
-        description=_('Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa : E501
+        description=_(EMERGENCY_PHONE_PRIMARY_DESCRIPTION),
         required=False,
     )
 
     emerg2phone_other = schema.TextLine(
         title=_('2 Other Phone'),
-        description=_('Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa : E501
+        description=_(EMERGENCY_PHONE_SECONDARY_DESCRIPTION),
         required=False,
     )
 
@@ -492,27 +518,27 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg3mail_personal = schema.TextLine(
         title=_('3 Main Email'),
-        description=_('Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),  # noqa : E501
+        description=_(EMERGENCY_EMAIL_FIELD_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg3mail_work = schema.TextLine(
         title=_('3 Other Email'),
-        description=_('Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),  # noqa : E501
+        description=_(EMERGENCY_EMAIL_FIELD_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg3phone_main = schema.TextLine(
         title=_('3 Main Phone'),
-        description=_('Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa : E501
+        description=_(EMERGENCY_PHONE_PRIMARY_DESCRIPTION),
         required=False,
     )
 
     emerg3phone_other = schema.TextLine(
         title=_('3 Other Phone'),
-        description=_('Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa : E501
+        description=_(EMERGENCY_PHONE_SECONDARY_DESCRIPTION),
         required=False,
     )
 
@@ -532,27 +558,27 @@ class IOIEStudyAbroadParticipant(Interface):
 
     emerg4mail_personal = schema.TextLine(
         title=_('4 Main Email'),
-        description=_('Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),  # noqa : E501
+        description=_(EMERGENCY_EMAIL_FIELD_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg4mail_work = schema.TextLine(
         title=_('4 Other Email'),
-        description=_('Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),  # noqa : E501
+        description=_(EMERGENCY_EMAIL_FIELD_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg4phone_main = schema.TextLine(
         title=_('4 Main Phone'),
-        description=_('Strongly recommended.  Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa : E501
+        description=_(EMERGENCY_PHONE_PRIMARY_DESCRIPTION),
         required=False,
     )
 
     emerg4phone_other = schema.TextLine(
         title=_('4 Other Phone'),
-        description=_('Include area code (and country code if the phone does not have a U.S. phone number).'),  # noqa : E501
+        description=_(EMERGENCY_PHONE_SECONDARY_DESCRIPTION),
         required=False,
     )
 
@@ -580,7 +606,7 @@ class IOIEStudyAbroadParticipant(Interface):
 
     ethnicityOther = schema.TextLine(
         title=_('Ethnicity: Other'),
-        description=_('Enter your ethnicity only if you selected "other" above.'),  # noqa : E501
+        description=_('Enter your ethnicity only if you selected "other" above.'),
         required=False,
     )
 
@@ -613,6 +639,7 @@ class IOIEStudyAbroadParticipant(Interface):
         required=True,
     )
 
+    widget('dateOfBirth', SundayStartDateWidget)
     dateOfBirth = schema.Date(
         title=_('Date of Birth'),
         required=True,
@@ -651,34 +678,45 @@ class IOIEStudyAbroadParticipant(Interface):
     )
 
     universityEnrolledOther = schema.TextLine(
-        title=_('If "School" is "OTHER"'),
-        description=_('Type the official name of the school you are attending now only if you chose "No" above.'),  # noqa : E501
+        title=_(' If "Are you enrolled at UW Oshkosh" is "no"'),
+        description=_(
+            'Type the official name of the school you are attending now only if you chose "No" above.'
+        ),
         required=False,
     )
 
     major1 = schema.Choice(
         title=_('First Major'),
-        description=_('This must match the intended major on your STAR report.'),  # noqa : E501
+        description=_('This must match the intended major on your STAR report.'),
         required=False,
         source=RegistryValueVocabulary('oiestudyabroadstudent.majors'),
     )
 
     major2 = schema.Choice(
         title=_('Second Major'),
-        description=_('This must match the intended major on your STAR report.  If you don\'t have a second major, leave this blank.'),  # noqa : E501
+        description=_(
+            'This must match the intended major on your STAR report. '
+            "If you don't have a second major, leave this blank."
+        ),
         required=False,
         source=RegistryValueVocabulary('oiestudyabroadstudent.majors'),
     )
 
     minor1 = schema.TextLine(
         title=_('First Minor'),
-        description=_('This must match the intended minor on your STAR report.  If you don\'t have a minor, leave this blank.'),  # noqa : E501
+        description=_(
+            'This must match the intended minor on your STAR report. '
+            "If you don't have a minor, leave this blank."
+        ),
         required=False,
     )
 
     minor2 = schema.TextLine(
         title=_('Second Minor'),
-        description=_('This must match the intended minor on your STAR report.  If you don\'t have a minor, leave this blank.'),  # noqa : E501
+        description=_(
+            'This must match the intended minor on your STAR report. '
+            "If you don't have a minor, leave this blank."
+        ),
         required=False,
     )
 
@@ -692,7 +730,7 @@ class IOIEStudyAbroadParticipant(Interface):
 
     graduationMonth = schema.Choice(
         title=_('Graduation: Anticipated Month'),
-        description=_('Select the month that corresponds to your official graduation date.'),  # noqa : E501
+        description=_('Select the month that corresponds to your official graduation date.'),
         vocabulary=graduation_month_vocabulary,
         required=False,
     )
@@ -706,7 +744,9 @@ class IOIEStudyAbroadParticipant(Interface):
 
     courses = schema.List(
         title=_('Course Selection'),
-        description=_('Request enrollment in study away courses.  Your selection must match advertised course options.'),  # noqa : E501
+        description=_(
+            'Request enrollment in study away courses.  Your selection must match advertised course options.'
+        ),
         value_type=schema.Choice(
             source=RegistryValueVocabulary(
                 'oiestudyabroadstudent.course_subject_and_number',
@@ -733,6 +773,7 @@ class IOIEStudyAbroadParticipant(Interface):
         ],
     )
 
+    widget('interviewDate', SundayStartDateWidget)
     interviewDate = schema.Date(
         title=_('Interview Date'),
         description=_(
@@ -747,12 +788,13 @@ class IOIEStudyAbroadParticipant(Interface):
     prePostTravelClassDates = schema.Choice(
         title=_('Confirm Attendance at Pre- & Post-travel Program-specific Sessions'),
         description=_(
-            'Select ''Yes'' to confirm that you will attend all advertised pre- or post-travel '
-            'sessions.  Select ''No'' if you have a conflict on one or more dates.'
+            'Select "Yes" to confirm that you will attend all advertised pre- or post-travel '
+            'sessions.  Select "No" if you have a conflict on one or more dates.'
         ),
         vocabulary=yes_no_vocabulary,
         required=True,
-        # TODO insert date from program object; Displays only if there are dates in "Pretravel Class & Orientation Dates" or "Post-travel Class Dates" in the MGMT PORTAL.  # noqa : E501
+        # TODO insert date from program object; Displays only if there are dates in  # noqa: T000
+        # "Pretravel Class & Orientation Dates" or "Post-travel Class Dates" in the MGMT PORTAL.
     )
 
     orientationDeadline = schema.Choice(
@@ -786,11 +828,12 @@ class IOIEStudyAbroadParticipant(Interface):
         required=True,
     )
 
+    widget('departureDate', SundayStartDateWidget)
     departureDate = schema.Date(
         title=_('Program Departure Date'),
         description=_('will appear only when "transfer provided" is selected on the "program workflow"'),
         required=False,
-        # noqa: T000  # TODO insert date from program object when in transfer provided state
+        # TODO insert date from program object when in transfer provided state  # noqa: T000
     )
 
     airportTransferDeparture = schema.Choice(
@@ -798,7 +841,7 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_(''),
         vocabulary=departure_transfer_vocabulary,
         required=False,
-        # noqa: T000  # TODO this should appear only when "transfer provided" is selected
+        # TODO this should appear only when "transfer provided" is selected  # noqa: T000
         #  on the "program workflow"
     )
 
@@ -807,15 +850,16 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_(''),
         vocabulary=departure_mode_transportation_vocabulary,
         required=False,
-        # noqa: T000  # TODO this should appear only when "transfer provided" is selected
+        # TODO this should appear only when "transfer provided" is selected  # noqa: T000
         #  on the "program workflow"
     )
 
+    widget('returnDepartureDate', SundayStartDateWidget)
     returnDepartureDate = schema.Date(
         title=_('Program Return Date'),
         description=_('will appear only when "transfer provided" is selected on the "program workflow"'),
         required=False,
-        # noqa: T000  # TODO insert date from program object when in transfer provided state
+        # TODO insert date from program object when in transfer provided state  # noqa: T000
     )
 
     returnModeOfTransportation = schema.Choice(
@@ -823,7 +867,7 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_('Choose one'),
         vocabulary=return_mode_transportation_vocabulary,
         required=False,
-        # noqa: T000  # TODO this should appear only when "transfer provided" is selected
+        # TODO this should appear only when "transfer provided" is selected  # noqa: T000
         #  on the "program workflow"
     )
 
@@ -832,16 +876,20 @@ class IOIEStudyAbroadParticipant(Interface):
         description=_(''),
         vocabulary=return_transfer_vocabulary,
         required=False,
-        # noqa: T000  # TODO this should appear only when "transfer provided" is selected
+        # TODO this should appear only when "transfer provided" is selected  # noqa: T000
         #  on the "program workflow"
     )
 
     requestToDeviateFromProgramDates = schema.Choice(
-        title=_('Request to Deviate from Program Dates'),
-        description=_('Select ''Yes'' once you have printed, read, signed and uploaded this PDF'),
+        title=_('I will Apply for Permission to Follow an Alternative Travel Schedule'),
+        description=_(
+            'Select "Yes" if you will not travel to and/or return from your program site with '
+            'your group.  Complete the appropriate Application for Permission to Follow an '
+            'Alternative Schedule form in STEP II of this application process.'
+        ),
         vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO need link to the PDF document  # noqa : E501
+        # TODO need link to the PDF document  # noqa: T000
         # currently 'https://www.uwosh.edu/oie/away/documents/deviationletter.pdf/view'
     )
 
@@ -872,8 +920,11 @@ class IOIEStudyAbroadParticipant(Interface):
 
     applicant_question_text1 = schema.Text(
         title='Applicant Question 1',
-        description='',
-        default='If this help text appears, you may skip this question. This program does not require a response.',  # noqa : E501
+        description=_(''),
+        default=(
+            'If this help text appears, you may skip this question. '
+            'This program does not require a response.'
+        ),
         required=False,
     )
 
@@ -885,8 +936,11 @@ class IOIEStudyAbroadParticipant(Interface):
 
     applicant_question_text2 = schema.Text(
         title='Applicant Question 2',
-        description='',
-        default='If this help text appears, you may skip this question. This program does not require a response.',  # noqa : E501
+        description=_(''),
+        default=(
+            'If this help text appears, you may skip this question. '
+            'This program does not require a response.'
+        ),
         required=False,
     )
 
@@ -898,38 +952,47 @@ class IOIEStudyAbroadParticipant(Interface):
 
     applicant_question_text3 = schema.Text(
         title='Applicant Question 3',
-        description='',
-        default='If this help text appears, you may skip this question. This program does not require a response.',  # noqa : E501
+        description=_(''),
+        default=(
+            'If this help text appears, you may skip this question. '
+            'This program does not require a response.'
+        ),
         required=False,
     )
     applicant_question_answer3 = schema.Text(
         title='Answer 3',
-        description='If a question appears under Applicant Question 3 above, type your response here.',  # noqa : E501
+        description='If a question appears under Applicant Question 3 above, type your response here.',
         required=False,
     )
 
     applicant_question_text4 = schema.Text(
         title='Applicant Question 4',
-        description='',
-        default='If this help text appears, you may skip this question. This program does not require a response.',  # noqa : E501
+        description=_(''),
+        default=(
+            'If this help text appears, you may skip this question. '
+            'This program does not require a response.'
+        ),
         required=False,
     )
 
     applicant_question_answer4 = schema.Text(
         title='Answer 4',
-        description='If a question appears under Applicant Question 4 above, type your response here.',  # noqa : E501
+        description='If a question appears under Applicant Question 4 above, type your response here.',
         required=False,
     )
     applicant_question_text5 = schema.Text(
         title='Applicant Question 5',
-        description='',
-        default='If this help text appears, you may skip this question. This program does not require a response.',  # noqa : E501
+        description=_(''),
+        default=(
+            'If this help text appears, you may skip this question. '
+            'This program does not require a response.'
+        ),
         required=False,
     )
 
     applicant_question_answer5 = schema.Text(
         title='Answer 5',
-        description='If a question appears under Applicant Question 5 above, type your response here.',  # noqa : E501
+        description='If a question appears under Applicant Question 5 above, type your response here.',
         required=False,
     )
     #######################################################
@@ -937,7 +1000,11 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'background',
         label=_('Background'),
-        description=_('If you are required to apply for advance permission (a visa) to enter one or more of your host countries, your visa application may require you to disclose citations, convictions and/or arrests in a criminal record.'),  # noqa : E501
+        description=_(
+            'If you are required to apply for advance permission (a visa) to enter one or more of '
+            'your host countries, your visa application may require you to disclose citations, '
+            'convictions and/or arrests in a criminal record.'
+        ),
         fields=[],
     )
     #######################################################
@@ -955,7 +1022,10 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'forms',
         label=_('STEP II Forms'),
-        description=_('To complete STEP II, print relevant documents, clearly print your responses, sign forms by hand where indicated, and follow instructions below.  Signatures cannot be typed.'),  # noqa : E501
+        description=_(
+            'To complete STEP II, print relevant documents, clearly print your responses, sign forms '
+            'by hand where indicated, and follow instructions below.  Signatures cannot be typed.'
+        ),
         fields=[
             'applicationFeeOK',
             'disciplinary_clearance_form_link',
@@ -1004,8 +1074,8 @@ class IOIEStudyAbroadParticipant(Interface):
         title='Special/Non-degree Registration-Undergraduate Level',
         description='Download this form, fill it out, and upload it below.',
         required=False,
-        defaultFactory=get_url_special_student_form_for_undergraduate_admissions_form,  # noqa : E501
-        # TODO appears when "Special/Non-Degree Registration-Graduate Level"  # noqa : E501
+        defaultFactory=get_url_special_student_form_for_undergraduate_admissions_form,
+        # TODO appears when "Special/Non-Degree Registration-Graduate Level"  # noqa : T000
         #  is checked "yes" in the MGMT PORTAL
         #   AND
         #   "Current Education Level" is NOT "graduate school"
@@ -1024,14 +1094,16 @@ class IOIEStudyAbroadParticipant(Interface):
 
     special_student_form_for_undergraduate_admissions_uploaded_file = \
         field.NamedFile(
-            title='Special/Non-degree Registration-Undergraduate Level Submission',  # noqa : E501
+            title='Special/Non-degree Registration-Undergraduate Level Submission',
             description='Upload your completed form.',
             required=False,
         )
 
     cumulativeGPA = schema.Float(
         title=_('Cumulative GPA'),
-        description=_('Type the applicant''s CURRENT CUMULATIVE GPA exactly as it appears on the unofficial transcript.'),  # noqa : E501
+        description=_(
+            "Type the applicant's CURRENT CUMULATIVE GPA exactly as it appears on the unofficial transcript."
+        ),
         required=False,
     )
 
@@ -1051,7 +1123,10 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'stepiii_identification',
         label=_('Step 3 Identification'),
-        description=_('Complete the following using information from your unexpired passport (required for international travel) or with your unexpired driver\'s license (for domestic travel only).'),  # noqa : E501
+        description=_(
+            'Complete the following using information from your unexpired passport (required for '
+            "international travel) or with your unexpired driver's license (for domestic travel only)."
+        ),
         fields=[
             'travelDocLast',
             'travelDocFirst',
@@ -1154,7 +1229,11 @@ class IOIEStudyAbroadParticipant(Interface):
     model.fieldset(
         'stepiii_roommate',
         label=_('STEP III Roommate'),
-        description=_('If you are not traveling with a UW Oshkosh student group, do not list a roommate choice.  If you are traveling on a group program, list your first and second choice roommates here.  Any roommate you request must list you on his/her application in return.'),  # noqa : E501
+        description=_(
+            'If you are not traveling with a UW Oshkosh student group, do not list a roommate choice. '
+            'If you are traveling on a group program, list your first and second choice roommates here. '
+            'Any roommate you request must list you on his/her application in return.'
+        ),
         fields=[
             'roommateName1',
             'roommateName2',
@@ -1207,12 +1286,12 @@ class IOIEStudyAbroadParticipant(Interface):
 
     # flightDeparture_label = schema.TextLine(
     #     title=_('Departure Flight'),
-    #     # TODO appears if "Application for Permission to follow an Alternative  # noqa : E501
+    #     # TODO appears if "Application for Permission to follow an Alternative  # noqa : T000
     #     #   Schedule on the Outbound Flight Only or on my Roundtrip Flights"
-    #     #   is "yes" in the MGMT PORTAL AND one of the following selections has  # noqa : E501
+    #     #   is "yes" in the MGMT PORTAL AND one of the following selections has
     #     #   been made above:  --I will apply for permission to fly to my
     #     #   program site on an alternative flight but will return from my
-    #     #   program site with the group.  --I will apply for permission to fly  # noqa : E501
+    #     #   program site with the group.  --I will apply for permission to fly
     #     #   to and from my program site on an alternative flight.  OR
     #     #   appears if "Application for Permission to follow an Alternative
     #     #   Schedule on the Outbound Flight Only or on my Roundtrip Flights"
@@ -1227,9 +1306,9 @@ class IOIEStudyAbroadParticipant(Interface):
 
     # flightReturn_label = schema.TextLine(
     #     title=_('Return Flight'),
-    #     # TODO appears if "Application for Permission to follow an Alternative  # noqa : E501
-    #     #   Schedule on the Return Flight Only" is "yes" or if "Application for  # noqa : E501
-    #     #   Permission to follow an Alternative Schedule on the Outbound Flight  # noqa : E501
+    #     # TODO appears if "Application for Permission to follow an Alternative  # noqa : T000
+    #     #   Schedule on the Return Flight Only" is "yes" or if "Application for
+    #     #   Permission to follow an Alternative Schedule on the Outbound Flight
     #     #   Only or on my Roundtrip Flights" is "yes"in the MGMT PO
     # )
 
@@ -1243,12 +1322,18 @@ class IOIEStudyAbroadParticipant(Interface):
 
     # programChanges_label = schema.TextLine(
     #     title=_('Program Changes'),
-    #     description=_('Please review information provided to you by the OIE carefully and contact the OIE with questions, if needed, prior to making your decision.'),  # noqa : E501
+    #     description=_(
+    #         'Please review information provided to you by the OIE carefully and contact the OIE with '
+    #         'questions, if needed, prior to making your decision.'
+    #     ),
     # )
 
     # agreements_label = schema.TextLine(
     #     title=_('Agreements'),
-    #     description=_('Please review information provided to you by the OIE carefully and contact the OIE with questions, if needed, prior to making your decision.'),  # noqa : E501
+    #     description=_(
+    #         'Please review information provided to you by the OIE carefully and contact the OIE with '
+    #         'questions, if needed, prior to making your decision.'
+    #     ),
     # )
 
     # nonSponsoredTravel_label = schema.TextLine(

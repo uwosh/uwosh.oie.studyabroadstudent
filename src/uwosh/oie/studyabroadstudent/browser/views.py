@@ -8,6 +8,7 @@ from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.file import NamedImage
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five import BrowserView
+from time import time
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
 from uwosh.oie.studyabroadstudent.reporting import ReportUtil
 from zope.interface import Interface, alsoProvides
@@ -42,9 +43,7 @@ class ProgramView(DefaultView, FolderView):
             return False
         current = api.user.get_current()
         roles = api.user.get_roles(username=current.id)
-        if 'Manager' in roles or 'Site Administrator' in roles:
-            return True
-        return False
+        return 'Manager' in roles or 'Site Administrator' in roles
 
     def country_info(self):
         """Retrieve info for all countries associated with the program"""
@@ -61,12 +60,12 @@ class ProgramView(DefaultView, FolderView):
                 if country_url is None:
                     country_url_atag = '(missing country URL)'
                 else:
-                    country_url_atag = f'<a href="{country_url}">{country_name}</a>'  # noqa : E501 
+                    country_url_atag = f'<a href="{country_url}">{country_name}</a>'
                 timezone_url = country.timezone_url
                 if timezone_url is None:
                     timezone_url_atag = '(missing timezone URL)'
                 else:
-                    timezone_url_atag = f'<a href="{timezone_url}">time zone</a>'  # noqa : E501 
+                    timezone_url_atag = f'<a href="{timezone_url}">time zone</a>'
                 cdc_info_url = country.cdc_info_url
                 if cdc_info_url is None:
                     cdc_info_url_atag = '(missing CDC URL)'
@@ -76,12 +75,12 @@ class ProgramView(DefaultView, FolderView):
                 if state_dept_info_url is None:
                     state_dept_info_url_atag = '(missing State Dept URL)'
                 else:
-                    state_dept_info_url_atag = f'<a href="{state_dept_info_url}">State Dept.</a>'  # noqa : E501 
+                    state_dept_info_url_atag = f'<a href="{state_dept_info_url}">State Dept.</a>'
                 country_info_html += \
                     f'<dt>{country_url_atag}</dt><dd>{cdc_info_url_atag}, ' + \
                     f'{state_dept_info_url_atag}, {timezone_url_atag}</dd>'
             else:
-                country_info_html += f'<dt>{country_name} (missing country info)</dt>'  # noqa : E501 
+                country_info_html += f'<dt>{country_name} (missing country info)</dt>'
         country_info_html += '</dl>'
         return country_info_html
 
@@ -178,7 +177,10 @@ class ProgramSearchView(BrowserView):
                 }
                 programs.append(program)
             except AttributeError:
-                logger.warning(f'Excluding program {brain.Title} from search view, not all searchable fields were indexed.')  # noqa : E501
+                logger.warning(
+                    f'Excluding program {brain.Title} from search view, '
+                    'not all searchable fields were indexed.'
+                )
         return json.dumps(programs, default=handle_missing)
 
 
@@ -260,13 +262,20 @@ class ParticipantView(DefaultView, FolderView):
     def updateFieldsFromSchemata(self):
         IOIEStudyAbroadParticipant.setTaggedValue(
             OMITTED_KEY,
-            [(Interface, field, 'true') for field in self.permissions if self.permissions[field] == 'none']  # noqa : E501
+            [
+                (Interface, field, 'true')
+                for field in self.permissions
+                if self.permissions[field] == 'none'
+            ]
         )
-        super(ParticipantView, self).updateFieldsFromSchemata()
+        super().updateFieldsFromSchemata()
 
     def _highest_permission(self, *permissions):
         ranked = [None, 'none', 'read', 'read_write']
-        tmp = {permission: ranked.index(permission) for permission in set(permissions)}  # noqa : E501
+        tmp = {
+            permission: ranked.index(permission)
+            for permission in set(permissions)
+        }
         return max(tmp, key=tmp.get)
 
     def _get_show_these(self):
@@ -303,52 +312,55 @@ class ParticipantView(DefaultView, FolderView):
 
 
 class ParticipantEditUtilView(DefaultView):
+    def _get_payment_deadlines(self, program):
+        return [
+            {
+                'label': 'Spring Interim, Summer & Fall Semester Payment Deadline 1',
+                'date': str(program.spring_interim_summer_fall_semester_payment_deadline_1),
+            },
+            {
+                'label': 'Spring Interim Payment Deadline 2',
+                'date': str(program.spring_interim_payment_deadline_2),
+            },
+            {
+                'label': 'Summer Payment Deadline 2',
+                'date': str(program.summer_payment_deadline_2),
+            },
+            {
+                'label': 'Fall Semester Payment Deadline 2',
+                'date': str(program.fall_semester_payment_deadline_2),
+            },
+            {
+                'label': 'Winter Interim & Spring Semester Payment Deadline 1',
+                'date': str(program.winter_interim_spring_payment_deadline_1),
+            },
+            {
+                'label': 'Winter Interim & Spring Semester Payment Deadline 2',
+                'date': str(program.winter_interim_spring_payment_deadline_2),
+            },
+        ]
+
+    def _get_orientation_deadlines(self, program):
+        return [
+            {
+                'label': 'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',
+                'date': str(program.spring_interim_summer_fall_semester_participant_orientation_deadline),
+            },
+            {
+                'label': 'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',
+                'date': str(program.winter_interim_spring_semester_participant_orientation_deadline),
+            },
+        ]
+
     def __call__(self):
         program = uuidToObject(self.context.programName)
-        util_data = {}
-        util_data['pretravelStart'] = str(program.pretravel_dates[0]['pretravel_start_datetime'])
-        util_data['pretravelEnd'] = str(program.pretravel_dates[0]['pretravel_end_datetime'])
-        payment_deadlines = []
-        payment_deadlines.append({
-            'label': 'Spring Interim, Summer & Fall Semester Payment Deadline 1',
-            'date': str(program.spring_interim_summer_fall_semester_payment_deadline_1),
-        })
-        payment_deadlines.append({
-            'label': 'Spring Interim Payment Deadline 2',
-            'date': str(program.spring_interim_payment_deadline_2),
-        })
-        payment_deadlines.append({
-            'label': 'Summer Payment Deadline 2',
-            'date': str(program.summer_payment_deadline_2),
-        })
-        payment_deadlines.append({
-            'label': 'Fall Semester Payment Deadline 2',
-            'date': str(program.fall_semester_payment_deadline_2),
-        })
-        payment_deadlines.append({
-            'label': 'Winter Interim & Spring Semester Payment Deadline 1',
-            'date': str(program.winter_interim_spring_payment_deadline_1),
-        })
-        payment_deadlines.append({
-            'label': 'Winter Interim & Spring Semester Payment Deadline 2',
-            'date': str(program.winter_interim_spring_payment_deadline_2),
-        })
-        util_data['paymentDeadlines'] = payment_deadlines
-        orientation_deadlines = []
-        orientation_deadlines.append({
-            'label': 'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',
-            'date': str(program.spring_interim_summer_fall_semester_participant_orientation_deadline),
-        })
-        orientation_deadlines.append({
-            'label': 'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',
-            'date': str(program.winter_interim_spring_semester_participant_orientation_deadline),
-        })
-        util_data['orientationDeadlines'] = orientation_deadlines
-        # paymentDeadlines, programReturnDate
-
-        util_data['individualInterview'] = program.individualInterview
-
-        return json.dumps(util_data)
+        return {
+            'individualInterview': program.individualInterview,
+            'orientationDeadlines': self._get_orientation_deadlines(program),
+            'paymentDeadlines': self._get_payment_deadlines(program),
+            'pretravelStart': str(program.pretravel_dates[0]['pretravel_start_datetime']),
+            'pretravelEnd': str(program.pretravel_dates[0]['pretravel_end_datetime']),
+        }
 
 
 class ApplyView(DefaultView):
@@ -365,7 +377,7 @@ class CreatedView(DefaultView):
             self.created = self.create_participant()
             if not self.created:
                 pass  # Show some error message
-        return super(CreatedView, self).__call__()
+        return super().__call__()
 
     def create_participant(self):
         program_ID = self.context.UID()
@@ -383,15 +395,18 @@ class CreatedView(DefaultView):
                     'email': email,
                     'programName': program_ID,
                 }
-                obj = api.content.create(
-                    type='OIEStudyAbroadParticipant',
-                    container=participants_folder,
-                    title=f'{first} {last}',
-                    **data,
-                )
-                api.content.transition(obj, 'submit')  # go ahead to step I
+                with api.env.adopt_roles(roles='Manager'):
+                    obj = api.content.create(
+                        type='OIEStudyAbroadParticipant',
+                        container=participants_folder,
+                        title=f'{first} {last}',
+                        **data,
+                    )
+                    api.content.transition(obj, 'submit')  # go ahead to step I
+                    breakpoint()
                 return f'{obj.absolute_url()}/edit'
             except Exception as e:  # noqa: B902
+                import pdb; pdb.set_trace()
                 logger.warning('Could not create partipant application.')
                 logger.warning(e)
         return False
@@ -416,23 +431,42 @@ class ReportingView(DefaultView):
             output = StringIO()
             writer = csv.writer(output)
 
-            writer.writerow(['Participant Type', 'Count for this Program'])
-            writer.writerow(['High School Participants',
-                             util.high_school_count()])
-            writer.writerow(['UWO Freshman Participants',
-                             util.uwo_freshman_count()])
-            writer.writerow(['UWO Sophomore Participants',
-                            util.uwo_sophomore_count()])
-            writer.writerow(['UWO Junior Participants',
-                             util.uwo_junior_count()])
-            writer.writerow(['UWO Senior Participants',
-                             util.uwo_senior_count()])
-            writer.writerow(['UWO Graduate Participants',
-                             util.uwo_graduate_count()])
-            writer.writerow(['Other Undergraduate Participants',
-                            util.other_undergrad_count()])
-            writer.writerow(['Other Graduate Participants',
-                            util.other_graduate_count()])
+            writer.writerow([
+                'Participant Type',
+                'Count for this Program',
+            ])
+            writer.writerow([
+                'High School Participants',
+                util.high_school_count(),
+            ])
+            writer.writerow([
+                'UWO Freshman Participants',
+                util.uwo_freshman_count(),
+            ])
+            writer.writerow([
+                'UWO Sophomore Participants',
+                til.uwo_sophomore_count(),
+            ])
+            writer.writerow([
+                'UWO Junior Participants',
+                util.uwo_junior_count(),
+            ])
+            writer.writerow([
+                'UWO Senior Participants',
+                util.uwo_senior_count(),
+            ])
+            writer.writerow([
+                'UWO Graduate Participants',
+                util.uwo_graduate_count(),
+            ])
+            writer.writerow([
+                'Other Undergraduate Participants',
+                til.other_undergrad_count(),
+            ])
+            writer.writerow([
+                'Other Graduate Participants',
+                til.other_graduate_count(),
+            ])
 
             resp = self.request.response
             filename = f'{self.context.Title()}-report.csv'
@@ -444,7 +478,7 @@ class ReportingView(DefaultView):
             output.seek(0)
             return output.read()
         else:
-            return super(ReportingView, self).__call__()
+            return super().__call__()
 
     def getReportUtil(self):
         return ReportUtil(self.context)

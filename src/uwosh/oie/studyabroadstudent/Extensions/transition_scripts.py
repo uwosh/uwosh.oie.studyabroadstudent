@@ -2,8 +2,10 @@
 from plone import api
 from uwosh.oie.studyabroadstudent.exceptions import StateError
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant, IOIEStudyAbroadProgram
-from uwosh.oie.studyabroadstudent.interfaces.directives import REQUIRED_IN_STATE_KEY  # noqa : E501
-from uwosh.oie.studyabroadstudent.interfaces.directives import REQUIRED_VALUE_IN_STATE_KEY  # noqa : E501
+from uwosh.oie.studyabroadstudent.interfaces.directives import (
+    REQUIRED_IN_STATE_KEY,
+    REQUIRED_VALUE_IN_STATE_KEY,
+)
 
 import logging
 
@@ -50,15 +52,14 @@ def afterTransition(state_change, interface):
 
 
 def check_for_required_values_by_state(state_change, interface):
-    """Find all fields that must have values before
-       we can move into the new state"""
+    """Find all fields that must have values before we can move into the new state"""
     obj = state_change.object
     new_state_id = state_change.new_state.id
 
     requiredFields = []
     missingValues = []
 
-    required_in_state = interface.queryTaggedValue(REQUIRED_IN_STATE_KEY)  # noqa
+    required_in_state = interface.queryTaggedValue(REQUIRED_IN_STATE_KEY)
     if required_in_state:
         required_fields = required_in_state.keys()
     else:
@@ -74,7 +75,7 @@ def check_for_required_values_by_state(state_change, interface):
         field = interface.get(f)
         field_title = field.title
         if not value:
-            message = "The field '{}' is required for state '{}' but has no value".format(field_title, new_state_id)  # noqa : E501
+            message = f"The field '{field_title}' is required for state '{new_state_id}' but has no value"
             logger.error(message)
             missingValues.append(
                 {
@@ -88,15 +89,14 @@ def check_for_required_values_by_state(state_change, interface):
 
 
 def check_for_required_specific_values_by_state(state_change, interface):
-    """Find all fields that must have specific values before
-       we can move into the new state"""
+    """Find all fields that must have specific values before we can move into the new state"""
     obj = state_change.object
     new_state_id = state_change.new_state.id
 
     missingValues = []
 
     requiredValueFields = []
-    required_value_in_state = interface.queryTaggedValue(REQUIRED_VALUE_IN_STATE_KEY)  # noqa
+    required_value_in_state = interface.queryTaggedValue(REQUIRED_VALUE_IN_STATE_KEY)
     if required_value_in_state:
         required_value_fields = required_value_in_state.keys()
     else:
@@ -120,7 +120,10 @@ def check_for_required_specific_values_by_state(state_change, interface):
             # e.g., to handle DateTimes
             value = str(value)
         if value != must_be:
-            message = "The field '{}' is required to have the value '{}' for state '{}' but has the value '{}'".format(field_title, must_be, new_state_id, value)  # noqa : E501
+            message = (
+                f"The field '{field_title}' is required to have the value '{must_be}' "
+                f"for state '{new_state_id}' but has the value '{value}'"
+            )
             logger.error(message)
             missingValues.append(
                 {
@@ -137,10 +140,10 @@ def check_for_required_specific_values_by_state(state_change, interface):
 
 def sendTransitionMessage(state_change, interface):
 
-    emailTemplate = getEmailMessageTemplate(state_change, interface)  # noqa
+    emailTemplate = getEmailMessageTemplate(state_change, interface)
 
     if not emailTemplate:
-        message = 'Not sending transition email for transition {}.'.format(state_change.transition.id)  # noqa : E501
+        message = f'Not sending transition email for transition {state_change.transition.id}.'
         question = 'Was the Email Template created?'
         logger.info(f'{message} {question}')
         return
@@ -158,14 +161,14 @@ def sendTransitionMessage(state_change, interface):
         IOIEStudyAbroadParticipant: 'Study Abroad Participant Application',
     }
 
-    mSubj = 'Your {} Update (UW Oshkosh Office of International Education)'.format(update_text[interface])  # noqa : E501
+    mSubj = f'Your {update_text[interface]} Update (UW Oshkosh Office of International Education)'
 
     state_msg = None
     if old_state_id != new_state_id:
-        state_msg = "Its state has changed from '{}' to '{}'.\n\n".format(old_state_id, new_state_id)  # noqa : E501
+        state_msg = f"Its state has changed from '{old_state_id}' to '{new_state_id}'.\n\n"
 
-    transition_message= "Sending email for transition {} to {}".format(state_change.transition.id, mTo)  # noqa : E501
-    subject_message = "subject '{mSubj}'"
+    transition_message = f'Sending email for transition {state_change.transition.id} to {mTo}'
+    subject_message = f"subject '{mSubj}'"
     email_template_message = "emailTemplate = '{emailTemplate}'"
     logger.info(f'{transition_message}, {subject_message}, {email_template_message}')
     mMsg = f'{assembleEmailMessage(object, emailTemplate)}\n\n{state_msg}'
@@ -236,38 +239,23 @@ def getToAddresses(object, emailTemplate):
         except (AttributeError, ValueError):
             logger.info("Can't get program leader email")
 
-    addresses.extend([addr.strip() for addr in emailTemplate.ccUsers.split(',')])  # noqa
+    addresses.extend([addr.strip() for addr in emailTemplate.ccUsers.split(',')])
 
     return addresses
 
 
 def assembleEmailMessage(object, emailTemplate):
-    # Name: %s
-    # Program Name: %s
-    # Program Year: %s
-
     wftool = api.portal.get_tool('portal_workflow')
-
-    mMsg = """
+    return f"""
 
 Your UW Oshkosh Office of International Education study abroad program has been updated.
 
-%s
+{emailTemplate.emailText}
 
-You can view your program here: %s
+You can view your program here: {object.absolute_url()}
 
-Comment: %s
-""" % (  # noqa
-        # application.getFirstName() + ' ' + application.getLastName(),
-        # application.getProgramNameAsString(),
-        # application.getProgramYear(),
-        emailTemplate.emailText,
-        object.absolute_url(),
-        wftool.getInfoFor(object, 'comments'),  # noqa
-        # getAssembledErrorMessage(onFailure),
-    )
-
-    return mMsg
+Comment: {wftool.getInfoFor(object, 'comments')}  # noqa: P001
+"""
 
 
 def getAssembledErrorMessage(errorMessage):
@@ -275,13 +263,9 @@ def getAssembledErrorMessage(errorMessage):
 
         message = ''
         for key in errorMessage.keys():
-            message += '\n\n Section: ' + key + '\n'
+            message += f'\n\n Section: {key}\n'
             for error in errorMessage[key]:
-                message += 'Field: ' \
-                           + error['field'] \
-                           + ',\tExplanation: ' \
-                           + error['message'] \
-                           + '\n'
+                message += f'Field: {error["field"]},\tExplanation: {error["message"]}\n'
 
         return message
 
@@ -300,7 +284,7 @@ def chair_dean_review(state_change):
             email = reviewer.get('reviewer_email_row', None)
             if email:
                 addresses.append(email)
-            # TODO need template for chair/dean reviews and to send the message here # noqa
+            # TODO need template for chair/dean reviews and to send the message here # noqa: T000
 
 
 special_program_transitions = {

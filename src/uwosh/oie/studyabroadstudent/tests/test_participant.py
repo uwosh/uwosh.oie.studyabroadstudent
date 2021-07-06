@@ -80,4 +80,4 @@ class OIEStudyAbroadParticipantIntegrationTest(OIEStudyAbroadContentBaseTest):
     #                                        authorized_roles)
 
     def test_transition_with_email_template(self):
-        pass  # TODO # noqa
+        pass  # TODO # noqa: T000

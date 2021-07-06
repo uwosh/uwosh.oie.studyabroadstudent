@@ -411,13 +411,7 @@ with api.env.adopt_user(username='admin'):
                 container=folder,
                 type=PORTAL_TYPE,
                 id=id,
-                title='{f} {m} {ln} {pn} {py}'.format(
-                    f=FirstName,
-                    m=MiddleName,
-                    ln=LastName,
-                    pn=ProgramName,
-                    py=ProgramYear,
-                ),
+                title=f'{FirstName} {MiddleName} {LastName} {ProgramName} {ProgramYear}',
                 studentID=StudentID,
                 firstName=FirstName,
                 middleName=MiddleName,
@@ -469,25 +463,25 @@ with api.env.adopt_user(username='admin'):
                 maxWalkingDistance=MaxWalkingDistance,
                 medicalReadStatement=MedicalReadStatement,
                 medicalHealthProblems=MedicalHealthProblems,
-                medicalHealthProblems_takenMedication=MedicalHealthProblems_takenMedication,  # noqa
-                medicalHealthProblems_medications=MedicalHealthProblems_medications,  # noqa
+                medicalHealthProblems_takenMedication=MedicalHealthProblems_takenMedication,
+                medicalHealthProblems_medications=MedicalHealthProblems_medications,
                 medicalHealthProblems_stable=MedicalHealthProblems_stable,
-                medicalHealthProblems_underCare=MedicalHealthProblems_underCare,  # noqa
-                medicalHealthProblems_whatCondition=MedicalHealthProblems_whatCondition,  # noqa
-                medicalHealthProblems_willingToPrescribe=MedicalHealthProblems_willingToPrescribe,  # noqa
-                medicalHealthProblems_additionalInfo=MedicalHealthProblems_additionalInfo,  # noqa
+                medicalHealthProblems_underCare=MedicalHealthProblems_underCare,
+                medicalHealthProblems_whatCondition=MedicalHealthProblems_whatCondition,
+                medicalHealthProblems_willingToPrescribe=MedicalHealthProblems_willingToPrescribe,
+                medicalHealthProblems_additionalInfo=MedicalHealthProblems_additionalInfo,
                 medicalMentalProblems=MedicalMentalProblems,
-                medicalMentalProblems_takenMedication=MedicalMentalProblems_takenMedication,  # noqa
-                medicalMentalProblems_medications=MedicalMentalProblems_medications,  # noqa
-                medicalMentalProblems_currentDose=MedicalMentalProblems_currentDose,  # noqa
+                medicalMentalProblems_takenMedication=MedicalMentalProblems_takenMedication,
+                medicalMentalProblems_medications=MedicalMentalProblems_medications,
+                medicalMentalProblems_currentDose=MedicalMentalProblems_currentDose,
                 medicalMentalProblems_stable=MedicalMentalProblems_stable,
-                medicalMentalProblems_underCare=MedicalMentalProblems_underCare,  # noqa
-                medicalMentalProblems_condition=MedicalMentalProblems_condition,  # noqa
-                medicalMentalProblems_enoughMedication=MedicalMentalProblems_enoughMedication,  # noqa
-                medicalMentalProblems_additionalInfo=MedicalMentalProblems_additionalInfo,  # noqa
+                medicalMentalProblems_underCare=MedicalMentalProblems_underCare,
+                medicalMentalProblems_condition=MedicalMentalProblems_condition,
+                medicalMentalProblems_enoughMedication=MedicalMentalProblems_enoughMedication,
+                medicalMentalProblems_additionalInfo=MedicalMentalProblems_additionalInfo,
                 medicalRegistered=MedicalRegistered,
                 medicalRegistered_office=MedicalRegistered_office,
-                medicalRegistered_accommodations=MedicalRegistered_accommodations,  # noqa
+                medicalRegistered_accommodations=MedicalRegistered_accommodations,
                 medicalAccessOK=MedicalAccessOK,
                 smokingPreferred=SmokingPreferred,
                 isVegetarian=IsVegetarian,
@@ -588,7 +582,7 @@ with api.env.adopt_user(username='admin'):
                 UWOshkoshStatementOK=_UWOshkoshStatementOK,
                 withdrawalRefund=WithdrawalRefund,
                 transcriptsOK=TranscriptsOK,
-                programSpecificMaterialsRequired=ProgramSpecificMaterialsRequired,  # noqa
+                programSpecificMaterialsRequired=ProgramSpecificMaterialsRequired,
                 programSpecificMaterialsOK=ProgramSpecificMaterialsOK,
                 specialStudentFormRequired=SpecialStudentFormRequired,
                 specialStudentFormOK=SpecialStudentFormOK,
@@ -598,8 +592,8 @@ with api.env.adopt_user(username='admin'):
                 medicalForm=MedicalForm,
                 passportOK=PassportOK,
                 metPassportDeadline=MetPassportDeadline,
-                programSpecificMaterialsRequiredStepIII=ProgramSpecificMaterialsRequiredStepIII,  # noqa
-                programSpecificMaterialsOKStepIII=ProgramSpecificMaterialsOKStepIII,  # noqa
+                programSpecificMaterialsRequiredStepIII=ProgramSpecificMaterialsRequiredStepIII,
+                programSpecificMaterialsOKStepIII=ProgramSpecificMaterialsOKStepIII,
                 attendedOrientation=AttendedOrientation,
                 cisiDates=CisiDates,
                 cisiNumberOfMonths=CisiNumberOfMonths,
@@ -636,26 +630,27 @@ with api.env.adopt_user(username='admin'):
 
             counter += 1
             if counter >= MAX_COUNT:
-                print('Stopping after reaching MAX_COUNT ', MAX_COUNT)  # noqa
+                print('Stopping after reaching MAX_COUNT ', MAX_COUNT)  # noqa: T001
                 break
 
         # commit every 100 objects
         if counter % 100 == 0:
-            print(counter)  # noqa
+            print(counter)  # noqa: T001
             # Commit transaction
             transaction.commit()
             # Perform ZEO client synchronization (if running in clustered mode)
-            app._p_jar.sync()  # noqa
+            app._p_jar.sync()  # noqa: F821
 
-print(counter)  # noqa
+print(counter)  # noqa: T001
 # final commit transaction
 transaction.commit()
 # Perform ZEO client synchronization (if running in clustered mode)
-app._p_jar.sync()  # noqa
+app._p_jar.sync()  # noqa: F821
 
-print('Rebuilding the catalog to update for modified dates, creation dates, and creators. Will take a few minutes:')  # noqa
-catalog = getToolByName(site, 'portal_catalog', None)  # noqa
+print('Rebuilding the catalog to update for modified dates, \
+    creation dates, and creators. Will take a few minutes:')  # noqa: T001
+catalog = getToolByName(site, 'portal_catalog', None)  # noqa: P001
 if catalog:
     catalog.manage_catalogRebuild()
-print('Catalog rebuild is done.')  # noqa
-print('Import is complete.')  # noqa
+print('Catalog rebuild is done.')  # noqa: T001
+print('Import is complete.')  # noqa: T001

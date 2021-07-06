@@ -1,7 +1,7 @@
 # invoke like this:
-# bin/instance run extractApplicationsRemotely.py > extractApplicationsRemotely-output-201708101325.out  # noqa
+# bin/instance run extractApplicationsRemotely.py > extractApplicationsRemotely-output-201708101325.out
 
-from uwosh.oie.studyabroadstudent.listApplicationIDsoutput import application_ids  # noqa : E501
+from uwosh.oie.studyabroadstudent.listApplicationIDsoutput import application_ids
 from xmlrpc.client import ServerProxy
 
 import argparse
@@ -13,12 +13,48 @@ logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser(
     description='...')
-parser.add_argument('--remote-user', dest='remoteuser', help='specify the username to use to log into the remote site')  # noqa
-parser.add_argument('--remote-password', dest='remotepassword', help='specify the password to use to log into the remote site')  # noqa
-parser.add_argument('--remote-server', dest='remoteserver', help='specify the URL of the remote site, without the leading http:// or https://, but optionally including the port')  # noqa
-parser.add_argument('--http-ok', dest='http_ok', default='no', help='specify yes if you think it is safe to use HTTP, otherwise will default to using HTTPS')  # noqa
-parser.add_argument('--skip-ids', dest='skip_ids', default='no', help='specify yes to skip extracting IDs that have already been extracted, otherwise extracts all IDs listed in application_ids.py')  # noqa
-parser.add_argument('--id-file', dest='id_file', default='', help='specify the filename to read that contains previous output of this script to skip extracting IDs that have already been extracted')  # noqa
+parser.add_argument(
+    '--remote-user',
+    dest='remoteuser',
+    help='specify the username to use to log into the remote site',
+)
+parser.add_argument(
+    '--remote-password',
+    dest='remotepassword',
+    help='specify the password to use to log into the remote site',
+)
+parser.add_argument(
+    '--remote-server',
+    dest='remoteserver',
+    help=(
+        'specify the URL of the remote site, without the leading http:// '
+        'or https://, but optionally including the port'
+    ),
+)
+parser.add_argument(
+    '--http-ok',
+    dest='http_ok',
+    default='no',
+    help='specify yes if you think it is safe to use HTTP, otherwise will default to using HTTPS',
+)
+parser.add_argument(
+    '--skip-ids',
+    dest='skip_ids',
+    default='no',
+    help=(
+        'specify yes to skip extracting IDs that have already been extracted, '
+        'otherwise extracts all IDs listed in application_ids.py'
+    ),
+)
+parser.add_argument(
+    '--id-file',
+    dest='id_file',
+    default='',
+    help=(
+        'specify the filename to read that contains previous output of '
+        'this script to skip extracting IDs that have already been extracted'
+    ),
+)
 args, _ = parser.parse_known_args()
 
 if args.remoteuser or args.remotepassword or args.remoteserver:
@@ -26,18 +62,19 @@ if args.remoteuser or args.remotepassword or args.remoteserver:
     remote_passwd = args.remotepassword
     remote_server = args.remoteserver
 else:
-    # if not provided on command line, get the remote site URL and Manager login credentials from environment variables  # noqa
+    # if not provided on command line, get the remote site URL
+    #  and Manager login credentials from environment variables
     remote_user = os.environ['REMOTEUSER']
     if not remote_user:
-        print('missing both command line argument and environment variable value ''REMOTEUSER''')  # noqa
+        print('missing both command line argument and environment variable value "REMOTEUSER"')  # noqa: T001
         exit(1)
     remote_passwd = os.environ['REMOTEPASSWD']
     if not remote_passwd:
-        print('missing both command line argument and environment variable value ''REMOTEPASSWD''')  # noqa
+        print('missing both command line argument and environment variable value "REMOTEPASSWD"')  # noqa: T001, E501
         exit(1)
     remote_server = os.environ['REMOTESERVER']
     if not remote_server:
-        print('missing both command line argument and environment variable value ''REMOTESERVER''')  # noqa
+        print('missing both command line argument and environment variable value "REMOTESERVER"')  # noqa: T001, E501
         exit(1)
 
 if args.http_ok != 'no':
@@ -54,7 +91,7 @@ if args.skip_ids != 'no':
             if line.startswith("['"):
                 application_id = line[2:(line.find("'", 2))]
                 already_read.append(application_id)
-        print(f'read IDs file successfully, going to skip {len(already_read)} contained IDs')  # noqa
+        print(f'read IDs file successfully, going to skip {len(already_read)} contained IDs')  # noqa: T001
         SKIP_IDS = True
     else:
         try:
@@ -62,7 +99,7 @@ if args.skip_ids != 'no':
             SKIP_IDS = True
         except ImportError:
             SKIP_IDS = False
-            print('Unable to read list of IDs to skip')  # noqa
+            print('Unable to read list of IDs to skip')  # noqa: T001
             exit(1)
 else:
     SKIP_IDS = False
@@ -82,7 +119,7 @@ server = ServerProxy(server_str)
 
 for id in application_ids:
     if SKIP_IDS and id in already_read:
-        print('skipping', id)  # noqa
+        print('skipping', id)  # noqa: T001
         pass
     else:
-        print(server.extractApplication(id))  # noqa
+        print(server.extractApplication(id))  # noqa: T001

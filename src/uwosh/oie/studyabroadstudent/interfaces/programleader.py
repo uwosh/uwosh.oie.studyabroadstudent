@@ -1,5 +1,5 @@
 from collective import dexteritytextindexer
-from plone.autoform.directives import mode
+from plone.autoform.directives import mode, widget
 from plone.namedfile import field
 from plone.supermodel import model
 from Products.CMFPlone.RegistrationTool import EmailAddressInvalid, checkEmailAddress
@@ -14,12 +14,13 @@ from uwosh.oie.studyabroadstudent.vocabularies import (
     socialmediaservice,
     yes_no_vocabulary,
 )
+from uwosh.oie.studyabroadstudent.widgets import SundayStartDateWidget
 from zope import schema
 from zope.interface import Interface
 from zope.schema import ValidationError
 
 
-class InvalidEmailAddress(ValidationError):
+class InvalidEmailAddress(ValidationError):  # noqa: E303
     """Invalid email address"""
 
 
@@ -37,15 +38,15 @@ class IOIEProgramLeader(Interface):
     Program Leader may also teach one or more of the program courses.
     """
 
-    # TODO "There may be only one Program Leader.  Most of the data fields  # noqa
+    # TODO "There may be only one Program Leader.  Most of the data fields  # noqa: T000
     #   associated with the Program Leader are the same fields used for the
     #   Program Liaison and Program Co-leader/s.  Can the same fields be
     #   used for all three leadership roles?
 
-    # TODO The Program Leader may also be the Program Liaison or one of  # noqa
+    # TODO The Program Leader may also be the Program Liaison or one of  # noqa: T000
     #   the Program Co-leaders.
 
-    # TODO Some of these fields also need to be matched to "participant"  # noqa
+    # TODO Some of these fields also need to be matched to "participant"  # noqa: T000
     #   fields so that we can pull a roster that includes all participants,
     #   leaders and co-leaders. "
     dexteritytextindexer.searchable('title')
@@ -83,19 +84,19 @@ class IOIEProgramLeader(Interface):
     dexteritytextindexer.searchable('office_phone')
     office_phone = schema.TextLine(
         title=_('Office Phone'),
-        description=_('Please include country code (if outside US) and area code'),  # noqa
+        description=_('Please include country code (if outside US) and area code'),
         required=True,
     )
     dexteritytextindexer.searchable('mobile_phone_us')
     mobile_phone_us = schema.TextLine(
         title=_('Mobile Phone (US)'),
-        description=_('Please include country code (if outside US) and area code'),  # noqa
+        description=_('Please include country code (if outside US) and area code'),
         required=True,
     )
     dexteritytextindexer.searchable('mobile_phone_int')
     mobile_phone_int = schema.TextLine(
         title=_('Mobile Phone (abroad)'),
-        description=_('Please include country code (if outside US) and area code'),  # noqa
+        description=_('Please include country code (if outside US) and area code'),
         required=True,
     )
     dexteritytextindexer.searchable('email')
@@ -131,11 +132,11 @@ class IOIEProgramLeader(Interface):
         title=_('College or Unit'),
         description=_(''),
         required=True,
-        source=RegistryValueVocabulary('oiestudyabroadstudent.college_or_unit'),  # noqa
+        source=RegistryValueVocabulary('oiestudyabroadstudent.college_or_unit'),
     )
     role_and_responsibility = field.NamedFile(
         title=_('Role & Responsibility'),
-        description=_('Upload a signed Program Liaison Role & Responsibilities form'),  # noqa
+        description=_('Upload a signed Program Liaison Role & Responsibilities form'),
     )
     dexteritytextindexer.searchable('emergency_contact_name')
     emergency_contact_name = schema.TextLine(
@@ -150,13 +151,13 @@ class IOIEProgramLeader(Interface):
     dexteritytextindexer.searchable('emergency_contact_mobile_phone')
     emergency_contact_mobile_phone = schema.TextLine(
         title=_('Emergency Contact Mobile Phone'),
-        description=_('Please include country code (if outside US) and area code'),  # noqa
+        description=_('Please include country code (if outside US) and area code'),
         required=True,
     )
     dexteritytextindexer.searchable('emergency_contact_other_phone')
     emergency_contact_other_phone = schema.TextLine(
         title=_('Emergency Contact Other Phone'),
-        description=_('Please include country code (if outside US) and area code'),  # noqa
+        description=_('Please include country code (if outside US) and area code'),
         required=True,
     )
     dexteritytextindexer.searchable('emergency_contact_email')
@@ -167,7 +168,7 @@ class IOIEProgramLeader(Interface):
     )
 
     #######################################################
-    # TODO move JavaScript over for compensation fields  # noqa
+    # TODO move JavaScript over for compensation fields  # noqa: T000
     # this appears to be the contents of programedit.js
     # which is currently set to load on the program rather than leader type
     model.fieldset(
@@ -179,7 +180,7 @@ class IOIEProgramLeader(Interface):
     )
     load_or_overload = schema.Choice(
         title=_('Load or Overload'),
-        description=_('Choose whether payment is part of load or is overload'),  # noqa
+        description=_('Choose whether payment is part of load or is overload'),
         required=True,
         vocabulary=load_or_overload,
     )
@@ -207,14 +208,20 @@ class IOIEProgramLeader(Interface):
         required=False,
     )
     will_base_salary_change = schema.Choice(
-        title=_('Will this person''s base salary change prior to the date on which this program is scheduled to end?'),  # noqa
-        description=_('If you check ''no'' and the base salary changes, any compensation due for this program will be calculated using the current base salary.'),  # noqa
+        title=_(
+            "Will this person's base salary change prior to "
+            'the date on which this program is scheduled to end?'
+        ),
+        description=_(
+            'If you check "no" and the base salary changes, any compensation '
+            'due for this program will be calculated using the current base salary.'
+        ),
         vocabulary=yes_no_vocabulary,
     )
     salary_form_type = schema.Choice(
         title=_('Salary Form Type'),
         vocabulary=salary_form,
-        # TODO Applicant should not see this field.  This is for OIE.  It  # noqa
+        # TODO Applicant should not see this field.  This is for OIE.  It  # noqa: T000
         #   would be better to put this on the "Program Finances" tab, but this
         #   field is specific to each Program Leader rather than to the
         #   program.
@@ -229,27 +236,36 @@ class IOIEProgramLeader(Interface):
     )
     number_study_abroad_away_fair_flyers = schema.Int(
         title=_('Number of Study Abroad/Away Fair Flyers'),
-        description=_('Indicate the number (max: 999) of flyers, posters and brochures to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
+        description=_(
+            'Indicate the number (max: 999) of flyers, posters and brochures to be sent to you at the '
+            'beginning of each semester. OIE can respond to additional requests for materials at any time'
+        ),
         min=0,
         max=999,
         default=0,
     )
     number_study_abroad_away_fair_posters = schema.Int(
         title=_('Number of Study Abroad/Away Fair Posters'),
-        description=_('Indicate the number (max: 99) of posters, posters and brochures to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
+        description=_(
+            'Indicate the number (max: 99) of posters, posters and brochures to be sent to you at the '
+            'beginning of each semester. OIE can respond to additional requests for materials at any time'
+        ),
         min=0,
         max=99,
         default=0,
     )
     number_study_abroad_away_fair_brochures = schema.Int(
         title=_('Number of Study Abroad/Away Fair Brochures'),
-        description=_('Indicate the number (max: 999) of brochures, posters and brochures to be sent to you at the beginning of each semester. OIE can respond to additional requests for materials at any time'),  # noqa
+        description=_(
+            'Indicate the number (max: 999) of brochures, posters and brochures to be sent to you at the '
+            'beginning of each semester. OIE can respond to additional requests for materials at any time'
+        ),
         min=0,
         max=999,
         default=0,
     )
     #######################################################
-    # TODO Either "passport" or "driver's license" should appear in place  # noqa
+    # TODO Either "passport" or "driver's license" should appear in place  # noqa: T000
     #   of "See Comment" depending on the list of "countries" associated
     #   with the applicant's program.  (If the document name can't be
     #   generated based on other data in the system, add this text below
@@ -267,26 +283,48 @@ class IOIEProgramLeader(Interface):
     )
     travel_document_first_name = schema.TextLine(
         title=_('Travel Document: First Name'),
-        description=_('If you are flying to your destination, the name on your airline ticket must match the name on your ID exactly.  Type your first name exactly as it Appears on the ID.  IF MULTIPLE FIRST NAMES APPEAR ON THE ID, type all first names that appear on the ID in this field.  If typed incorrectly, you will be responsible for any name change fee charged by the airline or by the travel agency.'),  # noqa
+        description=_(
+            'If you are flying to your destination, the name on your airline ticket must match the '
+            'name on your ID exactly.  Type your first name exactly as it Appears on the ID. '
+            'IF MULTIPLE FIRST NAMES APPEAR ON THE ID, type all first names that '
+            'appear on the ID in this field.  If typed incorrectly, you will be responsible for any '
+            'name change fee charged by the airline or by the travel agency.'
+        ),
         required=True,
     )
     travel_document_middle_name = schema.TextLine(
         title=_('Travel Document: Middle Name'),
-        description=_('If you are flying to your destination, the name on your airline ticket must match the name on your ID exactly.  IF YOUR MIDDLE NAME APPEARS ON YOUR ID, you must type your middle name in this field exactly as it appears on the ID.  IF YOUR MIDDLE INITIAL APPEARS ON YOUR ID, you must type only your middle initial in this field.  IF MULTIPLE MIDDLE NAMES APPEAR ON YOUR ID, you must type all middle names that appear on your ID in this field.  IF YOUR MIDDLE NAME DOES NOT APPEAR ON YOUR ID, do not include your middle name in this field.  If typed incorrectly, you will be responsible for any name change fee charged by the airline or by the travel agency.'),  # noqa
+        description=_(
+            'If you are flying to your destination, the name on your airline ticket must match the '
+            'name on your ID exactly.  IF YOUR MIDDLE NAME APPEARS ON YOUR ID, you must type your '
+            'middle name in this field exactly as it appears on the ID. IF YOUR MIDDLE INITIAL '
+            'APPEARS ON YOUR ID, you must type only your middle initial in this field. '
+            'IF MULTIPLE MIDDLE NAMES APPEAR ON YOUR ID, you must type all middle names that '
+            'appear on your ID in this field. IF YOUR MIDDLE NAME DOES NOT APPEAR ON YOUR ID, '
+            'do not include your middle name in this field.  If typed incorrectly, you will be '
+            'responsible for any name change fee charged by the airline or by the travel agency.'
+        ),
         required=False,
     )
     travel_document_last_name = schema.TextLine(
         title=_('Travel Document: Last Name'),
-        description=_('If you are flying to your destination, the name on your airline ticket must match the name on your ID exactly.  Type your last name exactly as it Appears on the ID.  IF MULTIPLE LAST NAMES APPEAR ON THE ID, type all last names that appear on the ID in this field.  If typed incorrectly, you will be responsible for any name change fee charged by the airline or by the travel agency.  '),  # noqa
+        description=_(
+            'If you are flying to your destination, the name on your airline ticket must match the '
+            'name on your ID exactly. Type your last name exactly as it Appears on the ID. '
+            'IF MULTIPLE LAST NAMES APPEAR ON THE ID, type all last names that appear on the ID in '
+            'this field. If typed incorrectly, you will be responsible for any name change fee charged '
+            'by the airline or by the travel agency.'
+        ),
         required=True,
     )
+    widget('date_of_birth', SundayStartDateWidget)
     date_of_birth = schema.Date(
         title=_('Travel Document: Date of Birth'),
         required=True,
     )
     gender = schema.Choice(
         title=_('Travel Document: Gender (Sex)'),
-        description=_('Select the sex that is listed on your travel document.'),  # noqa
+        description=_('Select the sex that is listed on your travel document.'),
         source=RegistryValueVocabulary('oiestudyabroadstudent.genders'),
         required=True,
     )
@@ -295,13 +333,18 @@ class IOIEProgramLeader(Interface):
         description=_(''),
         required=True,
     )
+    widget('document_expiry_date', SundayStartDateWidget)
     document_expiry_date = schema.Date(
         title=_('Travel Document: Expiry Date'),
-        description=_('You may not enter details for a document that is expired or for a document that will expire prior to the final travel return date for your program.'),  # noqa
+        description=_(
+            'You may not enter details for a document that is expired or for a document that will '
+            'expire prior to the final travel return date for your program.'
+        ),
         required=True,
     )
     #######################################################
-    # TODO this fieldset should be hidden from the person adding their Leader profile.  Who is allowed to see it?  # noqa
+    # TODO this fieldset should be hidden from the person adding  # noqa: T000
+    # their Leader profile.  Who is allowed to see it?
     model.fieldset(
         'Office Use Only',
         label=_('Office Use Only'),
@@ -310,6 +353,7 @@ class IOIEProgramLeader(Interface):
                 'administrative_services_review_ok',
                 'equal_opportunity_review_ok'],
     )
+    widget('orientation_completed_date', SundayStartDateWidget)
     orientation_completed_date = schema.Date(
         title=_('Program Leader Orientation Completed'),
         description=_('Confirm attendance at orientation'),
@@ -320,29 +364,39 @@ class IOIEProgramLeader(Interface):
         description=_('Upload the signed Cash Advance Form'),
         required=False,
     )
+    widget('cash_advance_distribution', SundayStartDateWidget)
     cash_advance_distribution = schema.Date(
         title=_('Cash Advance Distribution'),
-        description=_('Enter the date on which the cash advance was distributed to the Program Leader/Program Co-leader'),  # noqa
+        description=_(
+            'Enter the date on which the cash advance was '
+            'distributed to the Program Leader/Program Co-leader'
+        ),
         required=False,
     )
     hr_review_ok = schema.Choice(
         title=_('HR Review'),
-        description=_('There are no actions pending that may affect the Provost''s decision to approve this applicant as a Leader or Co-leader for a study abroad/away program'),  # noqa
+        description=_(
+            "There are no actions pending that may affect the Provost's decision to approve this "
+            'applicant as a Leader or Co-leader for a study abroad/away program'
+        ),
         vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO Or, is this its own workflow?  # noqa
+        # TODO Or, is this its own workflow?  # noqa: T000
     )
     administrative_services_review_ok = schema.Choice(
         title=_('Administrative Services Review'),
-        description=_('This applicant does not have any past due travel or cash advances'),  # noqa
+        description=_('This applicant does not have any past due travel or cash advances'),
         vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO Or, is this its own workflow?  # noqa
+        # TODO Or, is this its own workflow?  # noqa: T000
     )
     equal_opportunity_review_ok = schema.Choice(
         title=_('Office of Equal Opportunity & Access Review'),
-        description=_('There are no actions pending that may affect the Provost''s decision to approve this applicant as a Leader or Co-leader for a study abroad/away program.'),  # noqa
+        description=_(
+            "There are no actions pending that may affect the Provost's decision to approve this "
+            'applicant as a Leader or Co-leader for a study abroad/away program.'
+        ),
         vocabulary=yes_no_vocabulary,
         required=False,
-        # TODO Or, is this its own workflow?  # noqa
+        # TODO Or, is this its own workflow?  # noqa: T000
     )

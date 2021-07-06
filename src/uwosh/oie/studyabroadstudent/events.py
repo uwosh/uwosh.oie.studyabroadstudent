@@ -4,19 +4,17 @@ from plone.app.dexterity.behaviors.constrains import DISABLED
 from plone.app.uuid.utils import uuidToObject
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
+from uwosh.oie.studyabroadstudent.constants import DURATIONS, SPECIAL_DAYS
 from zope.component import getUtility
 
 
-BLANK = ''
-
-
 def get_full_camelcase_name(o):
-    full_name = f'{o.firstName} {o.middleName or BLANK} {o.lastName}'
+    full_name = f'{o.firstName} {o.middleName or ""} {o.lastName}'
     return full_name.replace('  ', ' ')
 
 
 def get_full_snakecase_name(o):
-    full_name = f'{o.first_name} {o.middle_name or BLANK} {o.last_name}'
+    full_name = f'{o.first_name} {o.middle_name or ""} {o.last_name}'
     return full_name.replace('  ', ' ')
 
 
@@ -59,33 +57,7 @@ def program_created(o, event):
         normalizer = getUtility(IIDNormalizer)
         o.id = normalizer.normalize(o.title)
     # copy all dates from selected calendar year into the new Program object
-    special_days = [
-        'first_day_of_spring_semester_classes',
-        'last_day_of_spring_semester_classes',
-        'first_day_of_spring_interim_classes',
-        'last_day_of_spring_interim_classes',
-        'official_spring_graduation_date',
-        'first_day_of_summer_i_classes', 'last_day_of_summer_i_classes',
-        'first_day_of_summer_ii_classes',
-        'last_day_of_summer_ii_classes',
-        'official_summer_graduation_date',
-        'first_day_of_fall_semester_classes',
-        'last_day_of_fall_semester_classes',
-        'first_day_of_winter_interim_classes',
-        'last_day_of_winter_interim_classes',
-        'official_fall_graduation_date',
-        'spring_interim_summer_fall_semester_participant_orientation_deadline',  # noqa
-        'spring_interim_summer_fall_semester_in_person_orientation',
-        'winter_interim_spring_semester_participant_orientation_deadline',  # noqa
-        'winter_interim_spring_semester_in_person_orientation',
-        'spring_interim_summer_fall_semester_payment_deadline_1',
-        'spring_interim_payment_deadline_2',
-        'summer_payment_deadline_2', 'fall_semester_payment_deadline_2',
-        'winter_interim_spring_payment_deadline_1',
-        'winter_interim_spring_payment_deadline_2',
-        'request_for_proposals_due_date',
-    ]
-    for special_day in special_days:
+    for special_day in SPECIAL_DAYS:
         setattr(o, special_day, getattr(calendar_year_obj, special_day))
     _update_contained_object_fields(o, event)
     _update_term_based_dates(o, event)
@@ -97,7 +69,6 @@ def _update_insurance_end_date(o, event):
     start = o.arrivalAtDestinationAndInsuranceStartDate
     if arrival and start:
         duration = arrival - start
-        DURATIONS = [7, 14, 21, 35, 65, 95, 125, 155, 185, 215, 245, 275, 305, 335, 365]
         for d in DURATIONS:
             delta = timedelta(days=d)
             if duration <= delta:
@@ -113,61 +84,26 @@ def _update_term_based_dates(o, event):
     #
     term = o.term
     year = uuidToObject(o.calendar_year)
-    if term == '1 Fall Interim':
-        o.step_1_and_2_application_deadline = \
-            year.step_1_and_2_application_deadline_fi
-        o.step_3_application_deadline = year.step_3_application_deadline_fi
-        o.step_4_application_deadline = year.step_4_application_deadline_fi
-        o.request_for_proposal_due_date = \
-            year.fall_interim_request_for_proposals_deadline_date
-        o.application_deadline = year.fall_interim_application_deadline
-    elif term == '2 Spring Semester':
-        o.step_1_and_2_application_deadline = \
-            year.step_1_and_2_application_deadline_ss
-        o.step_3_application_deadline = year.step_3_application_deadline_ss
-        o.step_4_application_deadline = year.step_4_application_deadline_ss
-        o.request_for_proposal_due_date = \
-            year.spring_semester_request_for_proposals_deadline_date
-        o.application_deadline = year.spring_semester_application_deadline
-    elif term == '3 Spring Break':
-        o.step_1_and_2_application_deadline = \
-            year.step_1_and_2_application_deadline_sb
-        o.step_3_application_deadline = year.step_3_application_deadline_sb
-        o.step_4_application_deadline = year.step_4_application_deadline_sb
-        o.request_for_proposal_due_date = \
-            year.spring_break_request_for_proposals_deadline_date
-        o.application_deadline = year.spring_break_application_deadline
-    elif term == '4 Spring Interim':
-        o.step_1_and_2_application_deadline = \
-            year.step_1_and_2_application_deadline_si
-        o.step_3_application_deadline = year.step_3_application_deadline_si
-        o.step_4_application_deadline = year.step_4_application_deadline_si
-        o.request_for_proposal_due_date = \
-            year.spring_interim_request_for_proposals_deadline_date
-        o.application_deadline = year.spring_interim_application_deadline
-    elif term == '5 Summer':
-        o.step_1_and_2_application_deadline = \
-            year.step_1_and_2_application_deadline_s
-        o.step_3_application_deadline = year.step_3_application_deadline_s
-        o.step_4_application_deadline = year.step_4_application_deadline_s
-        o.request_for_proposal_due_date = \
-            year.summer_request_for_proposals_deadline_date
-        o.application_deadline = year.summer_application_deadline
-    elif term == '6 Fall Semester':
-        o.step_1_and_2_application_deadline = \
-            year.step_1_and_2_application_deadline_f
-        o.step_3_application_deadline = year.step_3_application_deadline_f
-        o.step_4_application_deadline = year.step_4_application_deadline_f
-        o.request_for_proposal_due_date = \
-            year.fall_semester_request_for_proposals_deadline_date
-        o.application_deadline = year.fall_semester_application_deadline
+    prefix = term[2:].lower().replace(' ', '_')
+    suffix = ''.join([
+        first_letter
+        for first_letter in 
+        map(lambda x: x[0], prefix.split('_'))
+    ])
+    o.step_1_and_2_application_deadline = getattr(year, f'step_1_and_2_application_deadline_{suffix}', None)
+    o.step_3_application_deadline = getattr(year, f'step_3_application_deadline_{suffix}', None)
+    o.step_4_application_deadline = getattr(year, f'step_4_application_deadline_{suffix}', None)
+    o.request_for_proposal_due_date = getattr(year, f'{prefix}_request_for_proposals_deadline_date', None)
+    o.application_deadline = getattr(year, f'{prefix}_application_deadline', None)
 
 
-def program_added(o, event):
+def program_added(program, event):
     # doesn't work in the IObjectCreatedEvent
     # fix which types can be contained in a Program
-    aspect = ISelectableConstrainTypes(o)
+    aspect = ISelectableConstrainTypes(program)
     aspect.setConstrainTypesMode(DISABLED)
+    portal = api.portal.get()
+    api.content.move(program, portal['programs'])
 
 
 def program_modified(o, event):
@@ -196,6 +132,12 @@ def _update_contained_object_fields(o, event):
 
 
 ###############################################################
+def calendar_year_created(calendar_year, event):
+    portal = api.portal.get()
+    api.content.move(calendar_year, portal['years'])
+
+
+###############################################################
 def contact_created(o, event):
     o.title = get_full_snakecase_name(o)
     if not o.id:
@@ -208,8 +150,9 @@ def contact_modified(o, event):
 
 
 ###############################################################
-def _participant_update(o, event, event_type=None):
-    program_uid = o.programName
+def _participant_update(participant, event, event_type=None):
+    return
+    program_uid = participant.programName
     if program_uid:
         program = uuidToObject(program_uid)
         if program:
@@ -230,32 +173,39 @@ def _participant_update(o, event, event_type=None):
                 for index in range(1, 6):
                     # copy questions from program object
                     setattr(
-                        o,
+                        participant,
                         f'applicant_question_text{index}',
                         getattr(program, f'applicantQuestion{index}', None),
                     )
                     # if needed, mark the answer as being potentially out of date
-                    answer = getattr(o, f'applicant_question_answer{index}', None)
+                    answer = getattr(participant, f'applicant_question_answer{index}', None)
                     if answer and not answer.startswith(question_changed_str):
                         setattr(
-                            o,
+                            participant,
                             f'applicant_question_answer{index}',
                             question_changed_str + answer,
                         )
             year_obj = uuidToObject(program.calendar_year)
             programYear = year_obj.title
-            o.title = f'{get_full_camelcase_name(o)} {programName} {programYear}'
+            participant.title = f'{get_full_camelcase_name(participant)} {programName} {programYear}'
 
 
-def participant_created(o, event):
-    _participant_update(o, event, event_type='created')
-    if not o.id:
+def participant_created(participant, event):
+    return
+    _participant_update(participant, event, event_type='created')
+    if not getattr(participant, 'title', None):
+        first_name = f'{getattr(participant, "firstName", "first")}'
+        last_name = f'{getattr(participant, "lastName", "last")}'
+        title = f'{first_name} {last_name}'
+        participant.title = title
+    if not getattr(participant, 'id', None):
         normalizer = getUtility(IIDNormalizer)
-        o.id = normalizer.normalize(o.title)
+        participant.id = normalizer.normalize(participant.title)
 
 
-def participant_modified(o, event):
-    _participant_update(o, event, event_type='updated')
+def participant_modified(participant, event):
+    return
+    _participant_update(participant, event, event_type='updated')
 
 
 ###############################################################
@@ -376,7 +326,10 @@ def update_health_document_field(o):
 
 
 def update_add_health_document_link(o):
-    richtext = f'<a href="{o.absolute_url()}/++add++OIEHealthSafetySecurityDocument" target="_blank">Add a health document</a>'  # noqa: E501
+    richtext = (
+        f'<a href="{o.absolute_url()}/++add++OIEHealthSafetySecurityDocument" '
+        'target="_blank">Add the OIE Risk Assessment and health, safety and security documents</a>'
+    )
     if o.add_health_document_link != richtext:
         o.add_health_document_link = richtext
 

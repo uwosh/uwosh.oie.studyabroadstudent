@@ -52,13 +52,13 @@ class IOIEContact(Interface):
     dexteritytextindexer.searchable('phone')
     phone = schema.TextLine(
         title=_('Phone'),
-        description=_('Please include country code (if outside US) and area code'),  # noqa
+        description=_('Please include country code (if outside US) and area code'),
         required=False,
     )
     dexteritytextindexer.searchable('mobile_phone')
     mobile_phone = schema.TextLine(
         title=_('Mobile Phone'),
-        description=_('Please include country code (if outside US) and area code'),  # noqa
+        description=_('Please include country code (if outside US) and area code'),
         required=False,
     )
     dexteritytextindexer.searchable('email')

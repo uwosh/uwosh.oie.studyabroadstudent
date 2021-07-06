@@ -1,7 +1,8 @@
 from collective import dexteritytextindexer
-from plone.autoform.directives import mode
+from plone.autoform.directives import mode, widget
 from uwosh.oie.studyabroadstudent import _
 from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary
+from uwosh.oie.studyabroadstudent.widgets import SundayStartDateWidget
 from zope import schema
 from zope.interface import Interface
 
@@ -14,6 +15,7 @@ class IOIETransition(Interface):
         default=_('will be auto-generated on save'),
     )
 
+    widget('transitionDate', SundayStartDateWidget)
     transitionDate = schema.Date(
         title=_('Transition Date'),
         required=True,

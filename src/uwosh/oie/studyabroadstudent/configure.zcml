@@ -4,7 +4,6 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="uwosh.oie.studyabroadstudent">
 
-
   <i18n:registerTranslations directory="locales" />
 
   <includeDependencies package="." />
@@ -12,6 +11,8 @@
   <include file="permissions.zcml" />
   <include file="indexers.zcml" />
   <include file="patches.zcml" />
+  <include file="vocabularies.zcml" />
+  <include file="subscribers.zcml" />
   <include package=".browser" />
 
   <genericsetup:registerProfile
@@ -32,222 +33,12 @@
       post_handler=".setuphandlers.uninstall"
       />
 
-  <!-- event subscribers, to auto-generate field values -->
-
-  <subscriber
-    for=".interfaces.studyabroadstudentapplication.IOIEStudyAbroadStudentApplication
-         zope.lifecycleevent.IObjectCreatedEvent"
-    handler=".events.application_created"
-    />
-
-  <subscriber
-    for=".interfaces.studyabroadstudentapplication.IOIEStudyAbroadStudentApplication
-         zope.lifecycleevent.IObjectModifiedEvent"
-    handler=".events.application_modified"
-    />
-
-  <subscriber
-    for=".interfaces.studyabroadprogram.IOIEStudyAbroadProgram
-         zope.lifecycleevent.IObjectCreatedEvent"
-    handler=".events.program_created"
-    />
-
-  <subscriber
-    for=".interfaces.studyabroadprogram.IOIEStudyAbroadProgram
-         zope.lifecycleevent.IObjectAddedEvent"
-    handler=".events.program_added"
-    />
-
-  <subscriber
-    for=".interfaces.studyabroadprogram.IOIEStudyAbroadProgram
-         zope.lifecycleevent.IObjectModifiedEvent"
-    handler=".events.program_modified"
-    />
-
-  <subscriber
-    for=".interfaces.contact.IOIEContact
-         zope.lifecycleevent.IObjectCreatedEvent"
-    handler=".events.contact_created"
-    />
-
-  <subscriber
-    for=".interfaces.contact.IOIEContact
-         zope.lifecycleevent.IObjectModifiedEvent"
-    handler=".events.contact_modified"
-    />
-
-  <subscriber
-    for=".interfaces.participant.IOIEStudyAbroadParticipant
-         zope.lifecycleevent.IObjectCreatedEvent"
-    handler=".events.participant_created"
-    />
-
-  <subscriber
-    for=".interfaces.participant.IOIEStudyAbroadParticipant
-         zope.lifecycleevent.IObjectModifiedEvent"
-    handler=".events.participant_modified"
-    />
-
-  <subscriber
-    for=".interfaces.liaison.IOIELiaison
-         zope.lifecycleevent.IObjectCreatedEvent"
-    handler=".events.liaison_created"
-    />
-
-  <subscriber
-    for=".interfaces.liaison.IOIELiaison
-         zope.lifecycleevent.IObjectModifiedEvent"
-    handler=".events.liaison_modified"
-    />
-
-  <subscriber
-    for=".interfaces.course.IOIECourse
-         zope.lifecycleevent.IObjectAddedEvent"
-    handler=".events.course_added"
-    />
-
-  <subscriber
-    for=".interfaces.course.IOIECourse
-         zope.lifecycleevent.IObjectCreatedEvent"
-    handler=".events.course_created"
-    />
-
-  <subscriber
-    for=".interfaces.course.IOIECourse
-         zope.lifecycleevent.IObjectModifiedEvent"
-    handler=".events.course_modified"
-    />
-
-  <subscriber
-    for=".interfaces.emailtemplate.IOIEProgramEmailTemplate
-         zope.lifecycleevent.IObjectCreatedEvent"
-    handler=".events.emailtemplate_created"
-    />
-
-  <subscriber
-    for=".interfaces.emailtemplate.IOIEProgramEmailTemplate
-         zope.lifecycleevent.IObjectModifiedEvent"
-    handler=".events.emailtemplate_modified"
-    />
-
-    <subscriber
-      for=".interfaces.emailtemplate.IOIEParticipantEmailTemplate
-           zope.lifecycleevent.IObjectCreatedEvent"
-      handler=".events.emailtemplate_created"
-      />
-
-    <subscriber
-      for=".interfaces.emailtemplate.IOIEParticipantEmailTemplate
-           zope.lifecycleevent.IObjectModifiedEvent"
-      handler=".events.emailtemplate_modified"
-      />
-
-  <subscriber
-    for=".interfaces.transition.IOIETransition
-         zope.lifecycleevent.IObjectAddedEvent"
-    handler=".events.transition_added"
-    />
-
-  <subscriber
-    for=".interfaces.transition.IOIETransition
-         zope.lifecycleevent.IObjectCreatedEvent"
-    handler=".events.transition_created"
-    />
-
-  <subscriber
-    for=".interfaces.transition.IOIETransition
-         zope.lifecycleevent.IObjectModifiedEvent"
-    handler=".events.transition_modified"
-    />
-
-  <subscriber
-    for=".interfaces.healthdocument.IOIEHealthSafetySecurityDocument
-         zope.lifecycleevent.IObjectAddedEvent"
-    handler=".events.health_document_added"
-    />
-
-  <subscriber
-    for=".interfaces.healthdocument.IOIEHealthSafetySecurityDocument
-         zope.lifecycleevent.IObjectCreatedEvent"
-    handler=".events.health_document_created"
-    />
-
-  <subscriber
-    for=".interfaces.healthdocument.IOIEHealthSafetySecurityDocument
-         zope.lifecycleevent.IObjectModifiedEvent"
-    handler=".events.health_document_modified"
-    />
-
-  <subscriber
-    for=".interfaces.programleader.IOIEProgramLeader
-         zope.lifecycleevent.IObjectCreatedEvent"
-    handler=".events.program_leader_created"
-    />
-
-  <subscriber
-    for=".interfaces.programleader.IOIEProgramLeader
-         zope.lifecycleevent.IObjectModifiedEvent"
-    handler=".events.program_leader_modified"
-    />
 
   <utility
       factory=".setuphandlers.HiddenProfiles"
       name="uwosh.oie.studyabroadstudent-hiddenprofiles" />
 
-  <!-- vocabularies for field values  -->
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.contacts"
-    component="uwosh.oie.studyabroadstudent.vocabularies.ContactsVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.calendar_year"
-    component="uwosh.oie.studyabroadstudent.vocabularies.CalendarYearVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.cooperatingpartner"
-    component="uwosh.oie.studyabroadstudent.vocabularies.CooperatingPartnerVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.newprograms"
-    component="uwosh.oie.studyabroadstudent.vocabularies.NewProgramsVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.airline"
-    component="uwosh.oie.studyabroadstudent.vocabularies.AirlineVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.program_leader"
-    component="uwosh.oie.studyabroadstudent.vocabularies.ProgramLeaderVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.liaison"
-    component="uwosh.oie.studyabroadstudent.vocabularies.LiaisonVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.currency"
-    component="uwosh.oie.studyabroadstudent.vocabularies.CurrencyVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.provider"
-    component="uwosh.oie.studyabroadstudent.vocabularies.ProviderVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.file"
-    component="uwosh.oie.studyabroadstudent.vocabularies.FileVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.image"
-    component="uwosh.oie.studyabroadstudent.vocabularies.ImageVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.program_transition"
-    component="uwosh.oie.studyabroadstudent.vocabularies.ProgramTransitionVocabulary" />
-
-  <utility
-    name="uwosh.oie.studyabroadstudent.vocabularies.participant_transition"
-    component="uwosh.oie.studyabroadstudent.vocabularies.ParticipantTransitionVocabulary" />
-
+  
   <genericsetup:upgradeStep
       title="Reset some data grid fields to empty rich text fields"
       description="Some data grid fields were replaced by a rich text field showing new contained objects"
@@ -266,6 +57,24 @@
       handler="uwosh.oie.studyabroadstudent.upgrades.handle_richtext_description"
       sortkey="1"
       profile="uwosh.oie.studyabroadstudent:default"
+      />
+
+ <!-- <genericsetup:registerProfile
+      name="1_0_3"
+      title="uwosh.oie.studyabroadstudent upgrade to 1.0.3 profile"
+      directory="profiles/1003"
+      description="1003 fixes file and image widgets"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler=".upgradehandlers.migrate_control_panel_files_from_ascii_to_bytes"
+      /> -->
+  <genericsetup:upgradeStep
+      title="Upgrade OIE Study Abroad Student to 1.0.3"
+      description="Fixes file and image widgets"
+      source="*"
+      destination="1003"
+      handler="uwosh.oie.studyabroadstudent.upgrades.handle_files_upgrade"
+      profile="uwosh.oie.studyabroadstudent:default"
+      sortkey="1"
       />
 
 </configure>

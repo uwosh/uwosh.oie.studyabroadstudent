@@ -12,9 +12,9 @@ class ParticipantEditForm(edit.DefaultEditForm):
         if 'Participant_Applicant' in roles:
             owner = self.context.getOwner()
             if not current_user.getId() == owner.getId():
-                msg = "You cannot edit an OIE Participant Application which you do not own."  # noqa
+                msg = 'You cannot edit an OIE Participant Application which you do not own.'
                 return msg
-        return super(ParticipantEditForm, self).__call__(*args, **kwargs)
+        return super().__call__(*args, **kwargs)
 
 
 class ParticipantAddForm(add.DefaultAddForm):
@@ -22,7 +22,7 @@ class ParticipantAddForm(add.DefaultAddForm):
 
     def __call__(self, *args, **kw):
         add_resource_on_request(self.request, 'untitled-js')
-        super(ParticipantAddForm, self).__call__(*args, **kw)
+        super().__call__(*args, **kw)
         # current_user = api.user.get_current()
 
 

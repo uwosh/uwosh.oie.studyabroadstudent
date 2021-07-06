@@ -4,15 +4,13 @@ from plone.app.discussion.interfaces import IDiscussionSettings
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.registry.interfaces import IRegistry
 from Products.CMFPlone.interfaces import INonInstallable, ISelectableConstrainTypes
-from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadProgramsFolder  # noqa
+from uwosh.oie.studyabroadstudent.constants import PASSWORD_LENGTH
+from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadProgramsFolder
 from zope.component import queryUtility
 from zope.interface import alsoProvides, implementer
 
 import random
 import string
-
-
-PASSWORD_LENGTH = 50
 
 
 @implementer(INonInstallable)
@@ -132,7 +130,7 @@ def create_generic_accounts(portal):
                     'Participant_Coordinator', ['Participant_Coordinator'])
     _create_account('brian.duncan+Participant_Financial@wildcardcorp.com',
                     'Participant_Financial', ['Participant_Financial'])
-    _create_account('brian.duncan+Participant_OIEProfessional@wildcardcorp.com', # noqa
+    _create_account('brian.duncan+Participant_OIEProfessional@wildcardcorp.com',
                     'Participant_OIEProfessional',
                     ['Participant_OIEProfessional'])
     _create_account('brian.duncan+Participant_Intern@wildcardcorp.com',
@@ -150,7 +148,7 @@ def create_generic_accounts(portal):
                     ['Participant_DeanOfStudents'])
     _create_account('brian.duncan+Participant_Health@wildcardcorp.com',
                     'Participant_Health', ['Participant_Health'])
-    _create_account('brian.duncan+Participant_StudentAccounts@wildcardcorp.com', # noqa
+    _create_account('brian.duncan+Participant_StudentAccounts@wildcardcorp.com',
                     'Participant_StudentAccounts',
                     ['Participant_StudentAccounts'])
     _create_account('brian.duncan+Participant_Reference@wildcardcorp.com',
@@ -317,7 +315,7 @@ def populate_toplevel_folders(portal, portal_ids):
 def enable_commenting():
     # enable commenting/discussion
     registry = queryUtility(IRegistry)
-    settings = registry.forInterface(IDiscussionSettings, check=False)  # noqa
+    settings = registry.forInterface(IDiscussionSettings, check=False)
     if not settings.globally_enabled:
         settings.globally_enabled = True
     if not settings.moderation_enabled:
@@ -605,14 +603,14 @@ def populate_countries(portal):
         'Costa Rica',
         'https://www.timeanddate.com/worldclock/costa-rica',
         'https://wwwnc.cdc.gov/travel/destinations/traveler/none/costa-rica',
-        'https://travel.state.gov/content/passports/en/country/costa-rica.html',  # noqa
+        'https://travel.state.gov/content/passports/en/country/costa-rica.html',
         country_folder,
     )
     create_country(
         'Czech Rep.',
         'https://www.timeanddate.com/worldclock/czech-republic',
-        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/czech-republic',  # noqa
-        'https://travel.state.gov/content/passports/en/country/czech-republic.html',  # noqa
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/czech-republic',
+        'https://travel.state.gov/content/passports/en/country/czech-republic.html',
         country_folder,
     )
     create_country(
@@ -646,7 +644,7 @@ def populate_countries(portal):
     create_country(
         'Hong Kong, China',
         'https://www.timeanddate.com/worldclock/hong-kong',
-        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/hong-kong-sar',  # noqa
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/hong-kong-sar',
         'https://travel.state.gov/content/passports/en/country/hongkong.html',
         country_folder,
     )
@@ -703,7 +701,7 @@ def populate_countries(portal):
         'Korea, Rep.',
         'https://www.timeanddate.com/worldclock/south-korea',
         'https://wwwnc.cdc.gov/travel/destinations/traveler/none/south-korea',
-        'https://travel.state.gov/content/passports/en/country/korea-south.html',  # noqa
+        'https://travel.state.gov/content/passports/en/country/korea-south.html',
         country_folder,
     )
     create_country(
@@ -717,14 +715,14 @@ def populate_countries(portal):
         'Netherlands',
         'https://www.timeanddate.com/worldclock/netherlands',
         'https://wwwnc.cdc.gov/travel/destinations/traveler/none/netherlands',
-        'https://travel.state.gov/content/passports/en/country/netherlands.html',  # noqa
+        'https://travel.state.gov/content/passports/en/country/netherlands.html',
         country_folder,
     )
     create_country(
         'New Zealand',
         'https://www.timeanddate.com/worldclock/new-zealand',
         'https://wwwnc.cdc.gov/travel/destinations/traveler/none/new-zealand',
-        'https://travel.state.gov/content/passports/en/country/new-zealand.html',  # noqa
+        'https://travel.state.gov/content/passports/en/country/new-zealand.html',
         country_folder,
     )
     create_country(
@@ -780,7 +778,7 @@ def populate_countries(portal):
         'Switzerland',
         'https://www.timeanddate.com/worldclock/switzerland',
         'https://wwwnc.cdc.gov/travel/destinations/traveler/none/switzerland',
-        'https://travel.state.gov/content/passports/en/country/switzerland-and-liechtenstein.html',  # noqa
+        'https://travel.state.gov/content/passports/en/country/switzerland-and-liechtenstein.html',
         country_folder,
     )
     create_country(
@@ -800,21 +798,21 @@ def populate_countries(portal):
     create_country(
         'United Kingdom',
         'https://www.timeanddate.com/worldclock/uk',
-        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-kingdom',  # noqa
-        'https://travel.state.gov/content/passports/en/country/united-kingdom.html',  # noqa
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-kingdom',
+        'https://travel.state.gov/content/passports/en/country/united-kingdom.html',
         country_folder,
     )
     create_country(
         'United States',
         'https://www.timeanddate.com/worldclock/usa',
-        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-states',  # noqa
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/united-states',
         '',
         country_folder,
     )
     create_country(
         'Virgin Islands (U.S.)',
         'https://www.timeanddate.com/worldclock/us-virgin',
-        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/usvirgin-islands',  # noqa
+        'https://wwwnc.cdc.gov/travel/destinations/traveler/none/usvirgin-islands',
         '',
         country_folder,
     )
