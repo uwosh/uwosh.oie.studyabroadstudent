@@ -3,10 +3,14 @@
 #   type, written in Dexterity instead of Archetypes
 
 from collective import dexteritytextindexer
-from plone.autoform.directives import mode
+from plone.autoform.directives import mode, widget
 from plone.supermodel import model
 from uwosh.oie.studyabroadstudent import _
-from uwosh.oie.studyabroadstudent.vocabularies import orientation_conflict_vocabulary  # noqa
+from uwosh.oie.studyabroadstudent.constants import (
+    EMERGENCY_EMAIL_FIELD_DESCRIPTION,
+    EMERGENCY_PHONE_PRIMARY_DESCRIPTION,
+    EMERGENCY_PHONE_SECONDARY_DESCRIPTION,
+)
 from uwosh.oie.studyabroadstudent.vocabularies import (
     RegistryValueVocabulary,
     aware_vocabulary,
@@ -14,6 +18,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import (
     fly_vocabulary,
     hold_vocabulary,
     month_vocabulary,
+    orientation_conflict_vocabulary,
     room_type_vocabulary,
     semester_vocabulary,
     smoking_vocabulary,
@@ -21,6 +26,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import (
     yes_no_na_vocabulary,
     yes_no_vocabulary,
 )
+from uwosh.oie.studyabroadstudent.widgets import SundayStartDateWidget
 from zope import schema
 from zope.interface import Interface
 
@@ -45,7 +51,10 @@ class IOIEStudyAbroadStudentApplication(Interface):
     dexteritytextindexer.searchable('studentID')
     studentID = schema.TextLine(
         title=_('UW Oshkosh Student ID'),
-        description=_('Do not include the initial "W" in the UW Oshkosh ID.  If you do not have a UW Oshkosh ID (current or past), leave this blank.'),  # noqa
+        description=_(
+            'Do not include the initial "W" in the UW Oshkosh ID. '
+            'If you do not have a UW Oshkosh ID (current or past), leave this blank.'
+        ),
         required=False,
     )
 
@@ -70,25 +79,28 @@ class IOIEStudyAbroadStudentApplication(Interface):
     dexteritytextindexer.searchable('email')
     email = schema.TextLine(
         title=_('Email Address'),
-        description=_('UW Oshkosh students must use a @uwosh.edu email address.  Acceptable email addresses for other applicants include school and company addresses.'),  # noqa
+        description=_(
+            'UW Oshkosh students must use a @uwosh.edu email address. '
+            'Acceptable email addresses for other applicants include school and company addresses.'
+        ),
         required=True,
     )
 
     mobilePhone = schema.TextLine(
         title=_('Mobile (cell) Phone'),
-        description=_('Include area code and country code (if outside the U.S.).'),  # noqa
+        description=_(EMERGENCY_PHONE_SECONDARY_DESCRIPTION),
         required=False,
     )
 
     homePhone = schema.TextLine(
         title=_('Home Telephone'),
-        description=_('Include area code and country code (if outside the U.S.).'),  # noqa
+        description=_(EMERGENCY_PHONE_SECONDARY_DESCRIPTION),
         required=True,
     )
 
     localPhone = schema.TextLine(
         title=_('Other Phone'),
-        description=_('Include area code and country code (if outside the U.S.).'),  # noqa
+        description=_(EMERGENCY_PHONE_SECONDARY_DESCRIPTION),
         required=True,
     )
 
@@ -185,7 +197,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     stateResidency = schema.Choice(
         title=_('State Residency'),
         description=_(''),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.states_for_residency'),  # noqa
+        source=RegistryValueVocabulary('oiestudyabroadstudent.states_for_residency'),
         required=True,
     )
 
@@ -207,6 +219,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=False,
     )
 
+    widget('dateOfBirth', SundayStartDateWidget)
     dateOfBirth = schema.Date(
         title=_('Date of Birth'),
         required=True,
@@ -246,27 +259,27 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     emerg1email = schema.TextLine(
         title=_('Emergency Contact 1: Email'),
-        description=_('Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),  # noqa
+        description=_(EMERGENCY_EMAIL_FIELD_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg1mobilePhone = schema.TextLine(
         title=_('Emergency Contact 1: Mobile Phone'),
-        description=_('Strongly recommended.  Include area code and country code (if outside the U.S.).'),  # noqa
+        description=_(EMERGENCY_PHONE_PRIMARY_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg1homePhone = schema.TextLine(
         title=_('Emergency Contact 1: Home Phone'),
-        description=_('Include area code and country code (if outside the U.S.).'),  # noqa
+        description=_(EMERGENCY_PHONE_SECONDARY_DESCRIPTION),
         required=False,
     )
 
     emerg1workPhone = schema.TextLine(
         title=_('Emergency Contact 1: Work Phone'),
-        description=_('Strongly recommended.  Include area code and country code (if outside the U.S.).'),  # noqa
+        description=_(EMERGENCY_PHONE_PRIMARY_DESCRIPTION),
         # write_permission="UWOshOIE: Modify revisable fields",
         required=False,
     )
@@ -310,28 +323,28 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     emerg2email = schema.TextLine(
         title=_('Emergency Contact 2: Email'),
-        description=_('Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),  # noqa
+        description=_(EMERGENCY_EMAIL_FIELD_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg2mobilePhone = schema.TextLine(
         title=_('Emergency Contact 2: Mobile Phone'),
-        description=_('Strongly Recommended.  Include area code and country code (if outside the U.S.).'),  # noqa
+        description=_(EMERGENCY_PHONE_PRIMARY_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg2homePhone = schema.TextLine(
         title=_('Emergency Contact 2: Home Phone'),
-        description=_('Include area code and country code (if outside the U.S.).'),  # noqa
+        description=_(EMERGENCY_PHONE_SECONDARY_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg2workPhone = schema.TextLine(
         title=_('Emergency Contact 2: Work Phone'),
-        description=_('Strongly Recommended.  Include area code and country code (if outside the U.S.).'),  # noqa
+        description=_(EMERGENCY_PHONE_PRIMARY_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
@@ -380,28 +393,28 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     emerg3email = schema.TextLine(
         title=_('Emergency Contact 3: Email'),
-        description=_('Strongly recommended.  By typing in an email address here, you permit the UWO OIE to send non-emergency messages intended to update contacts about significant unanticipated events that have occurred or may occur and which have involved or may involve an increase in program risk.'),  # noqa
+        description=_(EMERGENCY_EMAIL_FIELD_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg3mobilePhone = schema.TextLine(
         title=_('Emergency Contact 3: Mobile Phone'),
-        description=_('Strongly Recommended.  Include area code and country code (if outside the U.S.).'),  # noqa
+        description=_(EMERGENCY_PHONE_PRIMARY_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg3homePhone = schema.TextLine(
         title=_('Emergency Contact 3: Home Phone'),
-        description=_('Include area code and country code (if outside the U.S.).'),  # noqa
+        description=_(EMERGENCY_PHONE_SECONDARY_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
 
     emerg3workPhone = schema.TextLine(
         title=_('Emergency Contact 3: Work Phone'),
-        description=_('Strongly Recommended.  Include area code and country code (if outside the U.S.).'),  # noqa
+        description=_(EMERGENCY_PHONE_PRIMARY_DESCRIPTION),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
     )
@@ -446,7 +459,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     marriageStatus = schema.Choice(
         title=_('Marital Status'),
         description=_(''),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.marriage_statuses'),  # noqa
+        source=RegistryValueVocabulary('oiestudyabroadstudent.marriage_statuses'),
         required=False,
     )
 
@@ -459,7 +472,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     passportName = schema.TextLine(
         title=_('Passport Full Name'),
-        description=_('Enter your full name EXACTLY as it appears on your passport or passport application'),  # noqa
+        description=_('Enter your full name EXACTLY as it appears on your passport or passport application'),
         required=False,
     )
 
@@ -475,6 +488,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=False,
     )
 
+    widget('passportExpDate', SundayStartDateWidget)
     passportExpDate = schema.Date(
         title=_('Passport Expiry'),
         required=True,
@@ -491,37 +505,55 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     questionAcadCareerPlan = schema.Text(
         title=_('Academic and Career Plan'),
-        description=_('a) Briefly, what are your short- and long-term academic and career goals? <br> b) Why would you like to participate in this program? <br> c) What do you expect to gain from your experience?'),  # noqa
+        description=_(
+            'a) Briefly, what are your short- and long-term academic and career goals? <br> '
+            'b) Why would you like to participate in this program? <br> '
+            'c) What do you expect to gain from your experience?'
+        ),
         required=False,
     )
 
     questionLangCulturalSkills = schema.Text(
         title=_('Language and Cultural Skills'),
-        description=_('a) Have you studied a foreign language? If so, what is your level of fluency? <br> b) Have you completed any University-level courses on the culture or history of your destination? If so, explain. <br> c) Have you ever been immersed in a language and/or culture abroad? If so, please explain. <br> d) Do you plan to use a foreign language in a professional setting? If yes, please explain.'),  # noqa
+        description=_(
+            'a) Have you studied a foreign language? If so, what is your level of fluency? <br> '
+            'b) Have you completed any University-level courses on the culture or history of your '
+            'destination? If so, explain. <br> c) Have you ever been immersed in a language and/or '
+            'culture abroad? If so, please explain. <br> d) Do you plan to use a foreign language in '
+            'a professional setting? If yes, please explain.'
+        ),
         required=False,
     )
 
     questionPrevTravel = schema.Text(
         title=_('Previous Travel Experience'),
-        description=_('Have you traveled abroad? If so, list the places to which you have traveled along with the dates and purpose.'),  # noqa
+        description=_(
+            'Have you traveled abroad? If so, list the places to which you '
+            'have traveled along with the dates and purpose.'
+        ),
         required=False,
     )
 
     questionWorkExp = schema.Text(
         title=_('Work Experience'),
-        description=_('a) Who is your current employer? <br> b) If relevant to your study abroad program, list and describe your responsibilities from current and previous jobs.'),  # noqa
+        description=_(
+            'a) Who is your current employer? <br> b) If relevant to your study abroad program, '
+            'list and describe your responsibilities from current and previous jobs.'
+        ),
         required=False,
     )
 
     questionEuroBizTravSem = schema.Text(
         title=_('European Business Travel Seminar Only'),
-        description=_('Include the name of the company(ies) you are currently working for and your title(s).'),  # noqa
+        description=_(
+            'Include the name of the company(ies) you are currently working for and your title(s).'
+        ),
         required=False,
     )
 
     questionStuExchComp = schema.Text(
         title=_('Student Exchange and Competitive Programs Only'),
-        description=_('Add anything else you think we should consider when reviewing your application.'),  # noqa
+        description=_('Add anything else you think we should consider when reviewing your application.'),
         required=False,
     )
 
@@ -545,8 +577,8 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     doctorPhone = schema.TextLine(
-        title=_('Doctor''s Phone Number'),
-        description=_('Please include country code (if outside US) and area code'),  # noqa
+        title=_("Doctor's Phone Number"),
+        description=_('Please include country code (if outside US) and area code'),
         required=False,
     )
 
@@ -573,14 +605,14 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     hasDifficultyWalking = schema.Choice(
         title=_('Difficulty Walking'),
-        description=_('Do you have a condition which would make it difficult to walk long distances?'),  # noqa
+        description=_('Do you have a condition which would make it difficult to walk long distances?'),
         vocabulary=yes_no_vocabulary,
         required=False,
     )
 
     maxWalkingDistance = schema.TextLine(
         title=_('Max Walking Distance'),
-        description=_('If so, what is the maximum number of minutes you can walk?'),  # noqa
+        description=_('If so, what is the maximum number of minutes you can walk?'),
         required=False,
     )
 
@@ -592,7 +624,25 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     medicalReadStatement = schema.Choice(
         title=_('I have read the statement below and understand.'),
-        description=_('""Pre-existing medical and mental health conditions are often intensified by travel to or living in a foreign environment.  Before committing to a study abroad program, consider how your new environment may affect your personal health both physically and mentally.  For example, your new environment may introduce you to new diseases, such as malaria or yellow fever, or new stresses which may cause additional complications for a person with a preexisting condition.<br> <br> The OIE strongly recommends that you have a physical, talk with a medical provider about any preexisting conditions and recommended and/or required immunizations, talk with a psychiatrist or counselor about any preexisting conditions and take care of any dental work before departure.<br> <br> If you choose not to complete this section before program acceptance, you must forward information related to the following to the OIE within one week of the application deadline for your program.  Failure to disclose medical or mental health conditions will make it extremely difficult for staff at UW Oshkosh and abroad to assist you in an emergency and may cause health professionals abroad to take actions which could lead to serious medical consequences, including death.<br> <br> NOTE ON MEDICATIONS: You are responsible for ensuring that your medications can be carried into the foreign country.  If your medical status changes after completing this application, you must inform the OIE.""'),  # noqa
+        description=_(
+            '""Pre-existing medical and mental health conditions are often intensified by travel to '
+            'or living in a foreign environment.  Before committing to a study abroad program, '
+            'consider how your new environment may affect your personal health both physically '
+            'and mentally.  For example, your new environment may introduce you to new diseases, '
+            'such as malaria or yellow fever, or new stresses which may cause additional complications '
+            'for a person with a preexisting condition.<br> <br> The OIE strongly recommends that '
+            'you have a physical, talk with a medical provider about any preexisting conditions and '
+            'recommended and/or required immunizations, talk with a psychiatrist or counselor about '
+            'any preexisting conditions and take care of any dental work before departure.<br> <br> '
+            'If you choose not to complete this section before program acceptance, you must forward '
+            'information related to the following to the OIE within one week of the application deadline '
+            'for your program. Failure to disclose medical or mental health conditions will make it '
+            'extremely difficult for staff at UW Oshkosh and abroad to assist you in an emergency '
+            'and may cause health professionals abroad to take actions which could lead to serious '
+            'medical consequences, including death.<br> <br> NOTE ON MEDICATIONS: You are '
+            'responsible for ensuring that your medications can be carried into the foreign country. '
+            'If your medical status changes after completing this application, you must inform the OIE.""'
+        ),
         vocabulary=yes_no_vocabulary,
         required=False,
     )
@@ -625,20 +675,30 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     medicalHealthProblems = schema.Text(
         title=_('Health Problems'),
-        description=_('List and describe any recent (within the past five years) or continuing health problems, including physical disabilities or medical conditions; learning disabilities; drug, plant, food, animal, or insect sting allergies (include information pertaining to reactions); and/or surgeries that should be brought to the attention of the lead faculty members, liaison abroad and/or host family abroad. Complete this section now or by the Friday following the application deadline.  Write ''n/a'' in blanks where appropriate.'),  # noqa
+        description=_(
+            'List and describe any recent (within the past five years) or continuing health problems, '
+            'including physical disabilities or medical conditions; learning disabilities; drug, plant, '
+            'food, animal, or insect sting allergies (include information pertaining to reactions); '
+            'and/or surgeries that should be brought to the attention of the lead faculty members, '
+            'liaison abroad and/or host family abroad. Complete this section now or by the Friday '
+            'following the application deadline.  Write "n/a" in blanks where appropriate.'
+        ),
         required=False,
     )
 
     medicalHealthProblems_takenMedication = schema.Choice(
         title=_('Has Taken Medication'),
-        description=_('Are you taking or have you ever taken medication related to your physical health?'),  # noqa
+        description=_('Are you taking or have you ever taken medication related to your physical health?'),
         vocabulary=yes_no_vocabulary,
         required=False,
     )
 
     medicalHealthProblems_medications = schema.Text(
         title=_('Medication List'),
-        description=_('If so, list the medications you have taken over the past year. Write ''n/a'' in blanks where appropriate.'),  # noqa
+        description=_(
+            'If so, list the medications you have taken over the past year. '
+            'Write "n/a" in blanks where appropriate.'
+        ),
         required=False,
     )
 
@@ -649,51 +709,69 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     medicalHealthProblems_underCare = schema.Choice(
-        title=_('Are you currently under the care of a doctor or other health care professional?'),  # noqa
+        title=_('Are you currently under the care of a doctor or other health care professional?'),
         vocabulary=yes_no_vocabulary,
         required=False,
     )
 
     medicalHealthProblems_whatCondition = schema.Text(
         title=_('Medical Conditions'),
-        description=_('If you are currently under the care of a doctor or other health care professional, for what condition? Write ''n/a'' in blanks where appropriate.'),  # noqa
+        description=_(
+            'If you are currently under the care of a doctor or other health care professional, '
+            'for what condition? Write "n/a" in blanks where appropriate.'
+        ),
         required=False,
     )
 
     medicalHealthProblems_willingToPrescribe = schema.Choice(
         title=_('Enough Medication'),
-        description=_('Is your current physician willing to prescribe enough medication to last throughout your planned program abroad?'),  # noqa
+        description=_(
+            'Is your current physician willing to prescribe enough medication '
+            'to last throughout your planned program abroad?'
+        ),
         vocabulary=yes_no_na_vocabulary,
         required=False,
     )
 
     medicalHealthProblems_additionalInfo = schema.Text(
         title=_('Additional Health Info'),
-        description=_('Is there any additional information related to your physical health which may be helpful for program organizers, liaisons and host families to know? Write ''none'' in blank if appropriate.'),  # noqa
+        description=_(
+            'Is there any additional information related to your physical health which may be helpful for '
+            'program organizers, liaisons and host families to know? Write "none" in blank if appropriate.'
+        ),
         required=False,
     )
 
     medicalMentalProblems = schema.Text(
         title=_('Mental Health Problems'),
-        description=_('List and describe any recent or continuing mental health problems, including anxiety, depression, bipolar disorder, substance abuse (alcohol or drugs), eating disorders (anorexia/bulimia), etc. that should be brought to the attention of the lead faculty members, liaison abroad and/or host family abroad.  Include the following information: diagnosis, dates of treatment, names & locations of treating professionals, and recovery status.'),  # noqa
+        description=_(
+            'List and describe any recent or continuing mental health problems, including anxiety, '
+            'depression, bipolar disorder, substance abuse (alcohol or drugs), eating disorders '
+            '(anorexia/bulimia), etc. that should be brought to the attention of the lead faculty '
+            'members, liaison abroad and/or host family abroad.  Include the following information: '
+            'diagnosis, dates of treatment, names & locations of treating professionals, and recovery status.'
+        ),
         required=False,
     )
 
     medicalMentalProblems_takenMedication = schema.Choice(
-        title=_('Are you taking/have you ever taken medication related to your mental health?  '),  # noqa
+        title=_('Are you taking/have you ever taken medication related to your mental health?  '),
         vocabulary=yes_no_vocabulary,
         required=False,
     )
 
     medicalMentalProblems_medications = schema.Text(
         title=_('Mental Health Medications'),
-        description=_('If so, list the medications taken over the past year. Write ''n/a'' in blanks where appropriate.'),  # noqa
+        description=_(
+            'If so, list the medications taken over the past year. '
+            'Write "n/a" in blanks where appropriate.'
+        ),
         required=False,
     )
 
     medicalMentalProblems_currentDose = schema.Text(
         title=_('Mental Health Medications Dosage'),
-        description=_('What is the current dose? Write ''n/a'' in text area when appropriate.'),  # noqa
+        description=_('What is the current dose? Write "n/a" in text area when appropriate.'),
         required=False,
     )
 
@@ -705,52 +783,77 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     medicalMentalProblems_underCare = schema.Choice(
         title=_('Mental Health Care'),
-        description=_('Are you currently or have you ever been under the care of a psychiatrist or other medical provider, substance abuse counselor or other mental health professional?'),  # noqa
+        description=_(
+            'Are you currently or have you ever been under the care of a psychiatrist or other '
+            'medical provider, substance abuse counselor or other mental health professional?'
+        ),
         vocabulary=yes_no_vocabulary,
         required=False,
     )
 
     medicalMentalProblems_condition = schema.Text(
         title=_('Mental Health Care Conditions'),
-        description=_('If yes, for what condition? Write ''n/a'' in text area when appropriate.'),  # noqa
+        description=_('If yes, for what condition? Write "n/a" in text area when appropriate.'),
         required=False,
     )
 
     medicalMentalProblems_enoughMedication = schema.Choice(
         title=_('Sufficient Mental Health Medication'),
-        description=_('Is your current medical provider willing to prescribe enough medication to last for the duration of your planned program abroad?'),  # noqa
+        description=_(
+            'Is your current medical provider willing to prescribe enough medication '
+            'to last for the duration of your planned program abroad?'
+        ),
         vocabulary=yes_no_na_vocabulary,
         required=False,
     )
 
     medicalMentalProblems_additionalInfo = schema.Text(
         title=_('Mental Health Additional Information'),
-        description=_('Is there any additional information related to your mental health which may be helpful for program organizers, liaisons and host families to know? Write ''none'' in text area if there isn''t any.'),  # noqa
+        description=_(
+            'Is there any additional information related to your mental health '
+            'which may be helpful for program organizers, liaisons and host families '
+            'to know? Write "none" in text area if there isn\'t any.'
+        ),
         required=False,
     )
 
     medicalRegistered = schema.Choice(
         title=_('Registered with UW Oshkosh for Accommodations'),
-        description=_('Are you currently registered with the University of Wisconsin Oshkosh (with offices such as the Dean of Students office or Project Success) or with your university for medical or mental-health related accommodations?'),  # noqa
+        description=_(
+            'Are you currently registered with the University of Wisconsin Oshkosh (with offices '
+            'such as the Dean of Students office or Project Success) or with your university for '
+            'medical or mental-health related accommodations?'
+        ),
         vocabulary=yes_no_vocabulary,
         required=False,
     )
 
     medicalRegistered_office = schema.TextLine(
         title=_('UW Oshkosh Office Accommodations'),
-        description=_('If so, with which office have you registered? Write ''none'' in text area if you have not registered.'),  # noqa
+        description=_(
+            'If so, with which office have you registered? '
+            'Write "none" in text area if you have not registered.'
+        ),
         required=False,
     )
 
     medicalRegistered_accommodations = schema.Text(
         title=_('Medical Authorized Accommodations'),
-        description=_('What accommodations have been authorized for you? Write ''n/a'' in text area when appropriate.'),  # noqa
+        description=_(
+            'What accommodations have been authorized for you? '
+            'Write "n/a" in text area when appropriate.'
+        ),
         required=False,
     )
 
     medicalAccessOK = schema.Choice(
         title=_('Medical Access Granted'),
-        description=_('""I understand and agree that this information will be accessed by the following people: faculty leader(s) (for faculty-led programs), exchange liaison(s) abroad (for student exchange programs), program organizers outside of UW Oshkosh, my host family, staff in the OIE, and staff in the Dean of Students Office.""'),  # noqa
+        description=_(
+            '""I understand and agree that this information will be accessed by the following people: '
+            'faculty leader(s) (for faculty-led programs), exchange liaison(s) abroad (for student '
+            'exchange programs), program organizers outside of UW Oshkosh, my host family, '
+            'staff in the OIE, and staff in the Dean of Students Office.""'
+        ),
         vocabulary=yes_no_vocabulary,
         required=False,
     )
@@ -777,7 +880,10 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     additionalNeeds = schema.Text(
         title=_('Additional Needs'),
-        description=_('Is there anything else your host families or the OIE should know about your accommodation needs?'),  # noqa
+        description=_(
+            'Is there anything else your host families or the OIE '
+            'should know about your accommodation needs?'
+        ),
         required=False,
     )
 
@@ -792,7 +898,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
     dexteritytextindexer.searchable('programYear')
     programYear = schema.TextLine(
         title=_('Program Year'),
-        description=_('Enter the year you will actually be attending the program (YYYY)'),  # noqa
+        description=_('Enter the year you will actually be attending the program (YYYY)'),
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -835,7 +941,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     graduationYear = schema.TextLine(
         title=_('Expected Graduation Year'),
-        description=_('YYYY (use ''0000'' if not a student)'),
+        description=_('YYYY (use "0000" if not a student)'),
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -894,7 +1000,10 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     willTakeBus = schema.Choice(
         title=_('Bus'),
-        description=_('Please note: while a group bus is an option for most programs, not all programs offer this option.'),  # noqa
+        description=_(
+            'Please note: while a group bus is an option for '
+            'most programs, not all programs offer this option.'
+        ),
         required=False,
         # write_permission="UWOshOIE: Modify revisable fields",
         vocabulary=bus_vocabulary,
@@ -907,23 +1016,29 @@ class IOIEStudyAbroadStudentApplication(Interface):
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
+    widget('departureDate', SundayStartDateWidget)
     departureDate = schema.Date(
         title=_('Planned Departure Date'),
-        description=_('Specify if you are deviating from the group itinerary.'),  # noqa
+        description=_('Specify if you are deviating from the group itinerary.'),
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
+    widget('returnDate', SundayStartDateWidget)
     returnDate = schema.Date(
         title=_('Planned Return Date'),
-        description=_('Specify if you are deviating from the group itinerary.'),  # noqa
+        description=_('Specify if you are deviating from the group itinerary.'),
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     agreeToCosts = schema.TextLine(
         title=_('Agree to Costs'),
-        description=_('I understand that if I choose not to fly on dates recommended by the OIE or by my hosts abroad, I remain responsible for the full program cost, regardless of whether I participate in all events or make use of all services. Enter your initials'),  # noqa
+        description=_(
+            'I understand that if I choose not to fly on dates recommended by the OIE or by my hosts '
+            'abroad, I remain responsible for the full program cost, regardless of whether I participate '
+            'in all events or make use of all services. Enter your initials'
+        ),
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -936,9 +1051,13 @@ class IOIEStudyAbroadStudentApplication(Interface):
                 'conflictDate'],
     )
 
+    widget('orientationDate1', SundayStartDateWidget)
     orientationDate1 = schema.Date(
         title=_('I will attend the family orientation on'),
-        description=_('Enter one date and time for the four-hour session, or enter two dates and times for the two-hour sessions'),  # noqa
+        description=_(
+            'Enter one date and time for the four-hour session, '
+            'or enter two dates and times for the two-hour sessions'
+        ),
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -951,6 +1070,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
+    widget('orientationDate2', SundayStartDateWidget)
     orientationDate2 = schema.Date(
         title=_('Orientation Session part 2 (Date)'),
         description=_('if applicable'),
@@ -974,12 +1094,15 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     orientationConflict = schema.Choice(
         title=_('Schedule Conflict'),
-        description=_('Do you have a conflict with any of the other pre-travel academic and/or orientation sessions?'),  # noqa
+        description=_(
+            'Do you have a conflict with any of the other pre-travel academic and/or orientation sessions?'
+        ),
         required=False,
         vocabulary=orientation_conflict_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
+    widget('conflictDate', SundayStartDateWidget)
     conflictDate = schema.Date(
         title=_('Date of your conflict'),
         description=_('if you selected Yes above'),
@@ -1113,14 +1236,14 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     readSyllabus = schema.Bool(
         title=_('Has Read Syllabus'),
-        description=_('I have read the syllabus for the one-credit course International Studies 333'),  # noqa
+        description=_('I have read the syllabus for the one-credit course International Studies 333'),
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
 
     enrolledIS333 = schema.Bool(
         title=_('Enroll me in International Studies 333'),
-        description=_('You will only be enrolled if you have read the syllabus'),  # noqa
+        description=_('You will only be enrolled if you have read the syllabus'),
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -1133,7 +1256,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     applyForAid = schema.Choice(
         title=_('Are you applying for financial aid?'),
-        description=_('If you are not applying for financial aid, skip to the next section.'),  # noqa
+        description=_('If you are not applying for financial aid, skip to the next section.'),
         required=False,
         vocabulary=yes_no_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1141,7 +1264,13 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     holdApplication = schema.Choice(
         title=_('Should the OIE hold or process your application?'),
-        description=_('HOLD your Study Abroad Application (i.e. you will only study abroad IF financial aid is available; at this point the application fee is still refundable but the OIE is not reserving a seat for you), or PROCESS your Study Abroad Applciation (i.e. you will study abroad regardless of your aid package; at this point the application fee is non-refundable and the OIE will reserve your seat.'),  # noqa
+        description=_(
+            'HOLD your Study Abroad Application (i.e. you will only study abroad IF financial aid is '
+            'available; at this point the application fee is still refundable but the OIE is not reserving a '
+            'seat for you), or PROCESS your Study Abroad Applciation (i.e. you will study abroad '
+            'regardless of your aid package; at this point the application fee is non-refundable and the '
+            'OIE will reserve your seat.'
+        ),
         required=False,
         vocabulary=hold_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1187,7 +1316,11 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     questionExpectations = schema.Text(
         title=_('Your Expectations For'),
-        description=_('a) this program as a whole? <br> b) the pre-travel general orientation session? <br> c) the pre-travel academic sessions? <br> d) your hosts (host institution, family, etc.) in the foreign country (if applicable)?'),  # noqa
+        description=_(
+            'a) this program as a whole? <br> b) the pre-travel general orientation session? <br> '
+            'c) the pre-travel academic sessions? <br> d) your hosts (host institution, family, etc.) '
+            'in the foreign country (if applicable)?'
+        ),
         required=False,
         # write_permission="UWOshOIE: Modify normal fields",
     )
@@ -1199,8 +1332,11 @@ class IOIEStudyAbroadStudentApplication(Interface):
     )
 
     awareOfAllMaterials = schema.Choice(
-        title=_('Are you aware of the application requirements for your program?'),  # noqa
-        description=_('Additional application requirements for select programs are listed on individual program web pages.  Not all programs have additional requirements.'),  # noqa
+        title=_('Are you aware of the application requirements for your program?'),
+        description=_(
+            'Additional application requirements for select programs are listed on individual '
+            'program web pages.  Not all programs have additional requirements.'
+        ),
         required=False,
         vocabulary=aware_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1208,7 +1344,12 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     UWOshkoshRelease = schema.Choice(
         title=_('Release of Liability'),
-        description=_('I hereby agree to hold harmless and indemnify the Board of Regents of the University of Wisconsin System and the University of Wisconsin Oshkosh, their officers, agents and employees, from any and all liability, loss, damages, costs or expenses which are sustained, incurred or required arising out of my actions.'),  # noqa
+        description=_(
+            'I hereby agree to hold harmless and indemnify the Board of Regents of the University '
+            'of Wisconsin System and the University of Wisconsin Oshkosh, their officers, agents '
+            'and employees, from any and all liability, loss, damages, costs or expenses which are '
+            'sustained, incurred or required arising out of my actions.'
+        ),
         required=False,
         vocabulary=yes_no_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1216,7 +1357,12 @@ class IOIEStudyAbroadStudentApplication(Interface):
 
     certification = schema.Choice(
         title=_('Certification'),
-        description=_('I certify that the information stated above is true and correct.  If accepted to the program, I agree to follow all payment and withdrawal policies and to regularly check my UW Oshkosh email account for program information beginning today.  If I am a non-UW Oshkosh student, I will use and submit an email address that I check regularly.'),  # noqa
+        description=_(
+            'I certify that the information stated above is true and correct.  If accepted to the program, '
+            'I agree to follow all payment and withdrawal policies and to regularly check my UW Oshkosh '
+            'email account for program information beginning today.  If I am a non-UW Oshkosh student, '
+            'I will use and submit an email address that I check regularly.'
+        ),
         required=False,
         vocabulary=yes_no_vocabulary,
         # write_permission="UWOshOIE: Modify normal fields",
@@ -1254,6 +1400,7 @@ class IOIEStudyAbroadStudentApplication(Interface):
         required=False,
     )
 
+    widget('completionDate', SundayStartDateWidget)
     completionDate = schema.Date(
         title=_('Date Application Was Completed'),
         description=_('This is the date in which the application was completed.'),

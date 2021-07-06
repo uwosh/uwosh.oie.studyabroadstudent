@@ -1,0 +1,77 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+  xmlns:i18n="http://namespaces.zope.org/i18n"
+  i18n_domain="uwosh.oie.studyabroadstudent"
+>
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.contacts"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ContactsVocabulary"
+  />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.calendar_year"
+    component="uwosh.oie.studyabroadstudent.vocabularies.CalendarYearVocabulary"
+  />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.cooperatingpartner"
+    component="uwosh.oie.studyabroadstudent.vocabularies.CooperatingPartnerVocabulary"
+  />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.newprograms"
+    component="uwosh.oie.studyabroadstudent.vocabularies.NewProgramsVocabulary"
+  />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.airline"
+    component="uwosh.oie.studyabroadstudent.vocabularies.AirlineVocabulary"
+  />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.program_leader"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ProgramLeaderVocabulary"
+  />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.liaison"
+    component="uwosh.oie.studyabroadstudent.vocabularies.LiaisonVocabulary"
+  />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.currency"
+    component="uwosh.oie.studyabroadstudent.vocabularies.CurrencyVocabulary"
+  />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.provider"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ProviderVocabulary"
+  />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.file"
+    component="uwosh.oie.studyabroadstudent.vocabularies.FileVocabulary"
+  />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.image"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ImageVocabulary"
+  />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.program_transition"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ProgramTransitionVocabulary"
+  />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.participant_transition"
+    component="uwosh.oie.studyabroadstudent.vocabularies.ParticipantTransitionVocabulary"
+  />
+
+  <utility
+    name="uwosh.oie.studyabroadstudent.vocabularies.tuition_and_fees"
+    component="uwosh.oie.studyabroadstudent.vocabularies.TuitionAndFeesVocabulary"
+  />
+
+</configure>

@@ -15,8 +15,10 @@ class ReportUtil(object):
     def __init__(self, program):
         cat = api.portal.get_tool('portal_catalog')
         self.program = program
-        self.pbrains = cat(portal_type='OIEStudyAbroadParticipant',
-                           programName=self.program.UID)
+        self.pbrains = cat(
+            portal_type='OIEStudyAbroadParticipant',
+            programName=self.program.UID,
+        )
         self.high_school = 0
         self.uwo_freshman = 0
         self.uwo_sophomore = 0

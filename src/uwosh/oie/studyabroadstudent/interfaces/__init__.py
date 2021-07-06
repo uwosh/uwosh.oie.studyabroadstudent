@@ -6,16 +6,20 @@ from uwosh.oie.studyabroadstudent.interfaces.contact import IOIEContact  # noqa:
 from uwosh.oie.studyabroadstudent.interfaces.cooperatingpartner import IOIECooperatingPartner  # noqa: F401
 from uwosh.oie.studyabroadstudent.interfaces.country import IOIECountry  # noqa: F401
 from uwosh.oie.studyabroadstudent.interfaces.course import IOIECourse  # noqa: F401
-from uwosh.oie.studyabroadstudent.interfaces.emailtemplate import IOIEParticipantEmailTemplate  # noqa: F401
-from uwosh.oie.studyabroadstudent.interfaces.emailtemplate import IOIEProgramEmailTemplate  # noqa: F401
+from uwosh.oie.studyabroadstudent.interfaces.emailtemplate import (  # noqa: F401
+    IOIEParticipantEmailTemplate,
+    IOIEProgramEmailTemplate,
+)
 from uwosh.oie.studyabroadstudent.interfaces.liaison import IOIELiaison  # noqa: F401
 from uwosh.oie.studyabroadstudent.interfaces.participant import IOIEStudyAbroadParticipant  # noqa: F401
 from uwosh.oie.studyabroadstudent.interfaces.programleader import IOIEProgramLeader  # noqa: F401
-from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import IOIEStudyAbroadProgram  # noqa: F401
-from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import \
-    IOIEStudyAbroadProgramsFolder  # noqa: F401
-from uwosh.oie.studyabroadstudent.interfaces.studyabroadstudentapplication import \
-    IOIEStudyAbroadStudentApplication  # noqa: F401
+from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import (  # noqa: F401
+    IOIEStudyAbroadProgram,
+    IOIEStudyAbroadProgramsFolder,
+)
+from uwosh.oie.studyabroadstudent.interfaces.studyabroadstudentapplication import (  # noqa: F401
+    IOIEStudyAbroadStudentApplication,
+)
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 

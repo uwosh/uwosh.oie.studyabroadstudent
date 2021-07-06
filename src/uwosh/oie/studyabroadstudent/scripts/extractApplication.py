@@ -7,7 +7,7 @@
 
 wtool = context.portal_workflow  # noqa
 catalog = context.portal_catalog  # noqa
-results = catalog.searchResults(portal_type='OIEStudentApplication', id=id)  # noqa
+results = catalog.searchResults(portal_type='OIEStudentApplication', id=id)  # noqa: P001
 for r in results:
     o = r.getObject()
     (
@@ -48,7 +48,7 @@ for r in results:
     getProgramName = o.getProgramName()
     if getProgramName is not None and getProgramName != '':
         getProgramName = getProgramName.Title()
-    review_history = wtool.getInfoFor(o, 'review_history', [])  # noqa
+    review_history = wtool.getInfoFor(o, 'review_history', [])  # noqa: P001
     for h in review_history:
         h['time'] = h['time'].HTML4()
     print ([  # noqa
@@ -263,4 +263,4 @@ for r in results:
         o.getProgramFee2(),
         review_history,
     ])
-return printed  # noqa
+return printed  # noqa: F706

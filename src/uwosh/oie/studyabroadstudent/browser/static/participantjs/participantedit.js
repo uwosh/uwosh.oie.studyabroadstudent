@@ -1,6 +1,11 @@
 $(document).ready(function participantEdit() {
-  if (($('body').hasClass('template-edit') || $('body').hasClass('template-oiestudyabroadparticipant') )&& $('body').hasClass('portaltype-oiestudyabroadparticipant')) {
-    console.log('hi1');
+  const bodyHasSome = (classes) => classes.some(
+    klass=>$('body').hasClass(klass)
+  );
+  if (
+    bodyHasSome(['template-edit', 'template-oiestudyabroadparticipant'])
+    && $('body').hasClass('portaltype-oiestudyabroadparticipant')
+    ) {
     var baseURL = $('body').attr('data-base-url');
     var utilURL = baseURL + '/edit-util';
     var baseWidgetSelector = '#formfield-form-widgets-';
@@ -39,7 +44,6 @@ $(document).ready(function participantEdit() {
 
     function emergencyFullNameChanged(event) {
       const $targetEvent = $('#' + event.target);
-      console.log($targetEvent);
       if (!$targetEvent.val()) {
         
       }
@@ -48,7 +52,6 @@ $(document).ready(function participantEdit() {
       
       // $('#fieldset-emergency_contact').children().
       
-      console.log($targetEvent.attr('id'));
     }
 
 

@@ -23,15 +23,12 @@ def validate_email(value):
 
 
 class IOIELiaison(Interface):
-    """The Liaison to the OIE communicates decisions related to program
-development and delivery to the Program Manager in the OIE and
-communicates program changes and updates to his/her unit administration.
-There is only one Liaison per program;  all decision-making at the
-unit level must be communicated to the OIE through the designated
-liaison. The Liaison may also include the OIE Program Manager and/or
-other OIE staff in conversations or seek input when appropriate.
-The Liaison may also serve as the On-site Program Leader and may
-also teach one or more of the program courses.
+    """The Liaison to the OIE communicates decisions related to program development and delivery
+to the Program Manager in the OIE and communicates program changes and updates to his/her unit
+administration. There is only one Liaison per program;  all decision-making at the unit level must
+be communicated to the OIE through the designated liaison. The Liaison may also include the OIE
+Program Manager and/or other OIE staff in conversations or seek input when appropriate. The Liaison
+may also serve as the On-site Program Leader and mayalso teach one or more of the program courses.
 """
     dexteritytextindexer.searchable('title')
 

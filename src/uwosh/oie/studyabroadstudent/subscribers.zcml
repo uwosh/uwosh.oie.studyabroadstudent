@@ -1,0 +1,169 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+  xmlns:i18n="http://namespaces.zope.org/i18n"
+  i18n_domain="uwosh.oie.studyabroadstudent"
+>
+  <subscriber
+    for=".interfaces.studyabroadstudentapplication.IOIEStudyAbroadStudentApplication
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.application_created"
+  />
+
+  <subscriber
+    for=".interfaces.studyabroadstudentapplication.IOIEStudyAbroadStudentApplication
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.application_modified"
+  />
+
+  <subscriber
+    for=".interfaces.studyabroadprogram.IOIEStudyAbroadProgram
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.program_created"
+  />
+
+  <subscriber
+    for=".interfaces.studyabroadprogram.IOIEStudyAbroadProgram
+         zope.lifecycleevent.IObjectAddedEvent"
+    handler=".events.program_added"
+  />
+
+  <subscriber
+    for=".interfaces.studyabroadprogram.IOIEStudyAbroadProgram
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.program_modified"
+  />
+
+  <subscriber
+    for=".interfaces.contact.IOIEContact
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.contact_created"
+  />
+
+  <subscriber
+    for=".interfaces.contact.IOIEContact
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.contact_modified"
+  />
+
+  <subscriber
+    for=".interfaces.participant.IOIEStudyAbroadParticipant
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.participant_created"
+  />
+
+  <subscriber
+    for=".interfaces.participant.IOIEStudyAbroadParticipant
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.participant_modified"
+  />
+
+  <subscriber
+    for=".interfaces.liaison.IOIELiaison
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.liaison_created"
+  />
+
+  <subscriber
+    for=".interfaces.liaison.IOIELiaison
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.liaison_modified"
+  />
+
+  <subscriber
+    for=".interfaces.course.IOIECourse
+         zope.lifecycleevent.IObjectAddedEvent"
+    handler=".events.course_added"
+  />
+
+  <subscriber
+    for=".interfaces.course.IOIECourse
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.course_created"
+  />
+
+  <subscriber
+    for=".interfaces.course.IOIECourse
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.course_modified"
+  />
+
+  <subscriber
+    for=".interfaces.emailtemplate.IOIEProgramEmailTemplate
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.emailtemplate_created"
+  />
+
+  <subscriber
+    for=".interfaces.emailtemplate.IOIEProgramEmailTemplate
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.emailtemplate_modified"
+  />
+
+  <subscriber
+    for=".interfaces.emailtemplate.IOIEParticipantEmailTemplate
+          zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.emailtemplate_created"
+  />
+
+  <subscriber
+    for=".interfaces.emailtemplate.IOIEParticipantEmailTemplate
+          zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.emailtemplate_modified"
+  />
+
+  <subscriber
+    for=".interfaces.transition.IOIETransition
+         zope.lifecycleevent.IObjectAddedEvent"
+    handler=".events.transition_added"
+  />
+
+  <subscriber
+    for=".interfaces.transition.IOIETransition
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.transition_created"
+  />
+
+  <subscriber
+    for=".interfaces.transition.IOIETransition
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.transition_modified"
+  />
+
+  <subscriber
+    for=".interfaces.healthdocument.IOIEHealthSafetySecurityDocument
+         zope.lifecycleevent.IObjectAddedEvent"
+    handler=".events.health_document_added"
+  />
+
+  <subscriber
+    for=".interfaces.healthdocument.IOIEHealthSafetySecurityDocument
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.health_document_created"
+  />
+
+  <subscriber
+    for=".interfaces.healthdocument.IOIEHealthSafetySecurityDocument
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.health_document_modified"
+  />
+
+  <subscriber
+    for=".interfaces.programleader.IOIEProgramLeader
+         zope.lifecycleevent.IObjectCreatedEvent"
+    handler=".events.program_leader_created"
+  />
+
+  <subscriber
+    for=".interfaces.calendaryear.IOIECalendarYear
+         zope.lifecycleevent.interfaces.IObjectAddedEvent"
+    handler=".events.calendar_year_created"
+  />
+
+  <subscriber
+    for=".interfaces.programleader.IOIEProgramLeader
+         zope.lifecycleevent.IObjectModifiedEvent"
+    handler=".events.program_leader_modified"
+  />
+
+</configure>

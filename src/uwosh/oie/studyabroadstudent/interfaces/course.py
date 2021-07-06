@@ -1,9 +1,10 @@
 
-from plone.autoform.directives import mode
+from plone.autoform.directives import mode, widget
 from plone.namedfile import field
 from uwosh.oie.studyabroadstudent import _
 from uwosh.oie.studyabroadstudent.interfaces.studyabroadprogram import validate_email  # noqa
 from uwosh.oie.studyabroadstudent.vocabularies import RegistryValueVocabulary, yes_no_vocabulary
+from uwosh.oie.studyabroadstudent.widgets import SundayStartDateWidget
 from zope import schema
 from zope.interface import Interface
 
@@ -24,7 +25,7 @@ class IOIECourse(Interface):
             'taught entirely at UWO, even when these courses are offered '
             'in preparation for the program away.  Contact the OIE to add '
             'a course (abroad@uwosh.edu).'),
-        source=RegistryValueVocabulary('oiestudyabroadstudent.course_subject_and_number'),  # noqa
+        source=RegistryValueVocabulary('oiestudyabroadstudent.course_subject_and_number'),
     )
     credits_earned = schema.Int(
         title=_('UW Oshkosh Credits Earned'),
@@ -36,14 +37,16 @@ class IOIECourse(Interface):
             'times, giving the course a different credit value each time '
             'that you enter it.'),
     )
+    widget('class_start_date', SundayStartDateWidget)
     class_start_date = schema.Date(
         title=_('Class Start Date'),
-        # TODO Auto-generate the first day of the term in which this program  # noqa
+        # TODO Auto-generate the first day of the term in which this program  # noqa: T000
         #  runs from the calendar?????  Maybe this isn't possible.
     )
+    widget('class_end_date', SundayStartDateWidget)
     class_end_date = schema.Date(
         title=_('Class End Date'),
-        # TODO If the "PeopleSoft Class End Date" is AFTER the Official  # noqa
+        # TODO If the "PeopleSoft Class End Date" is AFTER the Official  # noqa: T000
         #  Graduation Date, prompt the coursebuilder to complete the
         #  "Course End Date Extension Form".
     )
@@ -120,9 +123,9 @@ class IOIECourse(Interface):
     foreign_institution = schema.Choice(
         title=_('Foreign Institution Name'),
         description=_(''),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.cooperatingpartner',  # noqa
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.cooperatingpartner',
         required=True,
-        # TODO Oshkosh must be the first option on this dropdown list  # noqa
+        # TODO Oshkosh must be the first option on this dropdown list  # noqa: T000
     )
     foreign_course_number = schema.Text(
         title=_('Foreign Course Number'),
@@ -134,6 +137,7 @@ class IOIECourse(Interface):
         min=0,
         max=99,
     )
+    widget('foreign_course_review_date', SundayStartDateWidget)
     foreign_course_review_date = schema.Date(
         title=_('Foreign Course Date of Most Recent Review'),
         description=_(''),
@@ -156,11 +160,11 @@ class IOIECourse(Interface):
             'field.'
         ),
         constraint=validate_email,
-        # TODO "A message should be generated to the course builder email  # noqa
+        # TODO "A message should be generated to the course builder email  # noqa: T000
         #  addresses associated with each course.  Course builders should have
         #  access to all ""Course Subject & Number"" related fields and must
         #  have permission to edit greyed out fields in this section only.
-        # TODO Course builders may request instructions on how to build study  # noqa
+        # TODO Course builders may request instructions on how to build study  # noqa: T000
         #  abroad/away sections in PeopleSoft by emailing OIE@uwosh.edu.
         #  Course builders enter the data requested below; Financial Services
         #  uses this data to properly set tuition & fees for each course."
@@ -181,19 +185,20 @@ class IOIECourse(Interface):
         title=_('PeopleSoft Course Section Letter'),
         # TODO dropdown?  # noqa
     )
+    widget('ps_grade_by_date', SundayStartDateWidget)
     ps_grade_by_date = schema.Date(
         title=_('PeopleSoft "grade by" date'),
-        # TODO Autogenerate the "PeopleSoft 'grade by' date" by adding 5  # noqa
+        # TODO Autogenerate the "PeopleSoft 'grade by' date" by adding 5  # noqa: T000
         #  calendar days to the "PeopleSoft Class End Date".
     )
     tuition_and_fees = schema.Choice(
         title=_('Tuition & Fees'),
-        vocabulary='oiestudyabroadstudent.tuition_and_fees',
+        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.tuition_and_fees',
     )
     ext_studies_graded = schema.Choice(
         title=_('External Studies Courses'),
-        description=_('Confirm that any External Studies Courses have been graded.'),  # noqa
+        description=_('Confirm that any External Studies Courses have been graded.'),
         vocabulary=yes_no_vocabulary,
-        # TODO This field must be associated with each Ext Studies Course  # noqa
+        # TODO This field must be associated with each Ext Studies Course  # noqa: T000
         #  listed in "Course Subject & Number".
     )

@@ -20,7 +20,7 @@ include/
 lib/
 local/
 parts/
-src/*
+# src/*
 test.plone_addon/
 var/
 # files
@@ -39,5 +39,5 @@ report.html
 !.gitignore
 !.gitkeep
 !.travis.yml
-!src/uwosh
+# !src/uwosh
 .python-version
