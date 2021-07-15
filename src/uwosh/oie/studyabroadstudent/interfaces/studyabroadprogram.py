@@ -1714,12 +1714,13 @@ class IOIEStudyAbroadProgram(Interface):
     request_for_proposal = field.NamedFile(
         title=_('Request for Proposals (RFP)'),
         description=_(
+            '(Required prior to submitting for Liaison review) '
             'Upload a draft RFP for review.  Replace draft with updated RFPs until the review process '
             'is completed.  The RFP in place as of the "Pending Receipt of Provider Proposals" state '
             'will be the one shared with providers in the formal Request for Proposals.  Therefore, '
             'do not replace the final RFP after the review process has ended.'
         ),
-        required=False,
+        required=True,
         # TODO Project Phase XXX: we would like to be able to upload the RFP  # noqa: T000
         #   here, type in the names & email addresses of the vendors to whom
         #   the proposal will be sent, and require that the vendors upload
@@ -1748,6 +1749,12 @@ class IOIEStudyAbroadProgram(Interface):
     )
     provider_01 = schema.Choice(
         title=_('Provider 01'),
+        description=_(
+            'Provider Proposals: At least 1 provider proposal must be selected and uploaded plus '
+            '1 flight proposal uploaded prior to using the "Review Provider Proposal" function. '
+            'A yes/no contracting decision must be made for every provider and flight proposal '
+            'prior to using the "publish fee" function.'
+        ),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.provider',
         required=False,
         # TODO NOTE: in order to "add new" provider, OIE must  # noqa: T000
