@@ -1206,6 +1206,11 @@ class IOIEStudyAbroadProgram(Interface):
 
     otherRequired = schema.Text(
         title=_('Other'),
+        description=_(
+            'Type in the name of the additional application requirement. Write instructions '
+            'to applicants for the requirement and/or include information about what the required '
+            'information will be used for. Instructions will appear in the applicant portal '
+            'exactly as you type them here.'),
         required=False,
     )
 
@@ -1316,7 +1321,11 @@ class IOIEStudyAbroadProgram(Interface):
     )
     widget('contributing_entity', DataGridFieldFactory)
     contributing_entity = schema.List(
-        title=_('Specify Contributing Entity or Entities'),
+        title=_(
+            'Specify Contributing Entity or Entities If the College, Department, an external '
+            'agency, external partner, or grant will contribute financially to the program, list '
+            'the official name of the entity that is contributing, contributor contact details, '
+            'and the amount of the contribution.'),
         description=_('(max: 5)'),
         required=False,
         value_type=DictRow(
@@ -1338,10 +1347,12 @@ class IOIEStudyAbroadProgram(Interface):
 
     mode(reviewers_label='display')
     reviewers_label = schema.TextLine(
+        title=_('Reviewers'),
         description=_(
-            'Type an email address for every Committee Chair, Department Chair and Dean: •  who '
-            'supervises a Liaison, On-site Program Leader or On-site Program Co-leader listed in this '
-            'application and/or •  is associated with a course offered through this program. Do not '
+            'Type an email address for every Committee Chair, Department Chair and Dean who: '
+            '• supervises a Liaison, On-site Program Leader or On-site Program Co-leader listed in this '
+            'application and/or • approves offering a course listed in this program application '
+            '• approves group international or global programs Do not '
             'include email addresses for committee members who review applications.'
         ),
     )
@@ -1632,10 +1643,9 @@ class IOIEStudyAbroadProgram(Interface):
     yellow_fever_vaccination_certificate = schema.Choice(
         title=_('Yellow Fever Vaccination Certificate'),
         description=_(
-            'Required ONLY IF you will have traveled to any of the countries listed on this website '
-            'within 90 days of departure to your program site abroad.  A copy of the certificate should'
-            'be sent in with your visa application as a precaution against visa denial. '
-            'wwwnc.cdc.gov/travel/yellowbook/2016/infectious-diseases-related-to-travel/yellow-fever'
+            "Select 'yes' if this may be required for one or more participants to apply for an "
+            "entry visa or if this may be required for one or more participants to enter one or "
+            "more of the destination countries."
         ),
         vocabulary=yes_no_vocabulary,
         required=False,
@@ -1707,10 +1717,6 @@ class IOIEStudyAbroadProgram(Interface):
     read_permission(proposal_03=V_PROPOSALS_FS)
     write_permission(proposal_03=E_PROPOSALS_FS)
 
-    mode(proposals_label='display')
-    proposals_label = schema.TextLine(
-        description=_('Required prior to submitting for Liaison review'),
-    )
     request_for_proposal = field.NamedFile(
         title=_('Request for Proposals (RFP)'),
         description=_(
@@ -1737,15 +1743,6 @@ class IOIEStudyAbroadProgram(Interface):
     request_for_proposal_due_date = schema.Date(
         title=_('Request for Proposals Due'),
         required=False,
-    )
-    mode(provider_proposals_label='display')
-    provider_proposals_label = schema.TextLine(
-        description=_(
-            '"Provider Proposals: At least 1 provider proposal must be selected and uploaded plus '
-            '1 flight proposal uploaded prior to using the ""Review Provider Proposal"" function. '
-            'A yes/no contracting decision must be made for every provider and flight proposal '
-            'prior to using the ""publish fee"" function.'
-        ),
     )
     provider_01 = schema.Choice(
         title=_('Provider 01'),
@@ -1910,10 +1907,6 @@ class IOIEStudyAbroadProgram(Interface):
     read_permission(close_account=V_FINANCES_FS)
     write_permission(close_account=E_FINANCES_FS)
 
-    mode(finances_label='display')
-    finances_label = schema.TextLine(
-        description=_('Required to Determine Program Fee'),
-    )
     anticipated_number_of_applicants_min = schema.Int(
         title=_('Anticipated Number of Applicants (Minimum)'),
         description=_('(Required to Determine Program Fee)'),
@@ -1950,13 +1943,10 @@ class IOIEStudyAbroadProgram(Interface):
         required=True,
     )
 
-    mode(required_prior_to_publishing_initial_fee_label='display')
-    required_prior_to_publishing_initial_fee_label = schema.TextLine(
-        description=_('Required Prior to Publishing Initial Fee'),
-    )
     program_fee = schema.Text(
         title=_('Full Estimated Cost of Participation'),
         description=_(
+            '(Required Prior to Publishing Initial Fee) '
             'Add the official Full Estimated Cost of Participation from the FECOP '
             '($XXXX based on a minimum of XX participants).  If the official estimate '  # noqa: T000
             'on the FECOP is a fee range, the fee at the top end of the range must be used here. '
@@ -1964,13 +1954,9 @@ class IOIEStudyAbroadProgram(Interface):
             'on the OIE website upon transition to "Application Intake in Progress".'
         ),
         default='TBA',
-        required=False,
+        required=True,
     )
 
-    mode(required_prior_to_confirming_to_run_label='display')
-    required_prior_to_confirming_to_run_label = schema.TextLine(
-        description=_('Required Prior to Confirming to Run'),
-    )
     first_participant_fee_statement_ = field.NamedFile(
         title=_('First Participant Fee Statement'),
         description=_(
@@ -1993,13 +1979,6 @@ class IOIEStudyAbroadProgram(Interface):
         #  access in student accounts.
     )
 
-    mode(required_prior_to_publishing_initial_fee_label_2='display')
-    required_prior_to_publishing_initial_fee_label_2 = schema.TextLine(
-        description=_(
-            'Required Prior to Publishing Final Fee: Provider proposals and '
-            'flight proposals on "Proposals" tab must also be complete.'
-        ),
-    )
     final_participant_fee_statement = field.NamedFile(
         title=_('Final Participant Fee Statement'),
         description=_(
@@ -2023,10 +2002,6 @@ class IOIEStudyAbroadProgram(Interface):
         #  access in student accounts.
     )
 
-    mode(required_prior_to_confirming_ter_received_label='display')
-    required_prior_to_confirming_ter_received_label = schema.TextLine(
-        description=_('Required Prior to Confirming that the TER has been Received'),
-    )
     travel_expense_report = field.NamedFile(
         title=_('Travel Expense Report'),
         description=_(
@@ -2040,10 +2015,6 @@ class IOIEStudyAbroadProgram(Interface):
         #  Leader & Program Co-leader.
     )
 
-    mode(required_prior_to_processing_refunds_label='display')
-    required_prior_to_processing_refunds_label = schema.TextLine(
-        description=_('Required Prior to Processing Refunds'),
-    )
     participant_fees_paid_in_full = schema.Choice(
         title=_('Participant Fees Paid in Full'),
         description=_('(Required Prior to Processing Refunds)'),
@@ -2068,11 +2039,6 @@ class IOIEStudyAbroadProgram(Interface):
             'by student accounts for account adjustment purposes.'
         ),
         required=False,
-    )
-
-    mode(required_prior_to_archiving_program_label='display')
-    required_prior_to_archiving_program_label = schema.TextLine(
-        description=_('Required Prior to Archiving Program'),
     )
     account_transfers = schema.Choice(
         title=_('Account Transfers'),
@@ -2149,7 +2115,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     mode(orientation_label='display')
     orientation_label = schema.TextLine(
-        description=_('Orientation'),
+        title=_('Orientation'),
     )
     program_leader_orientation_packet = field.NamedFile(
         title=_('Program Leader Orientation Packet'),
@@ -2163,28 +2129,21 @@ class IOIEStudyAbroadProgram(Interface):
         ),
         required=False,
     )
-
-    mode(required_prior_to_confirming_program_to_run_label='display')
-    required_prior_to_confirming_program_to_run_label = schema.TextLine(
-        description=_('Required Prior to Confirming Program to Run'),
-    )
     participant_orientation_url = schema.URI(
         title=_('Participant Orientation'),
         description=_(
+            '(Required Prior to Confirming Program to Run) '
             'Add detail on how to complete orientation.  Detail will show '
             'as participant instructions in the Participant Portal.'
         ),
-        required=False,
-    )
-
-    mode(proof_of_service_label='display')
-    proof_of_service_label = schema.TextLine(
-        description=_('Required Prior to Scheduling the Operational Briefing'),
+        required=True,
     )
     final_itinerary = field.NamedFile(
         title=_('Final Itinerary'),
-        description=_('Upload a clean copy of the official, final program itinerary.'),
-        required=False,
+        description=_(
+            '(Required Prior to Scheduling the Operational Briefing) '
+            'Upload a clean copy of the official, final program itinerary.'),
+        required=True,
     )
     bus_contract_departure = field.NamedFile(
         title=_('Bus Contract (departure)'),
