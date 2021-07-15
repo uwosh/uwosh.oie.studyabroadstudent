@@ -549,8 +549,8 @@ ImageVocabularyFactory = get_calendar_vocabulary_factory('Image')
 ImageVocabulary = ImageVocabularyFactory()
 
 
-# @implementer(ISource, IContextSourceBinder)
-@implementer(IVocabularyFactory)
+@implementer(ISource, IContextSourceBinder)
+# @implementer(IVocabularyFactory)
 class RegistryValueVocabulary(object):
 
     def __init__(self, value_name):
@@ -558,7 +558,11 @@ class RegistryValueVocabulary(object):
 
     def __call__(self, context):
         values = api.portal.get_registry_record(self.value_name, default=False) or []
-        return safe_simplevocabulary_from_values(values) # if values else SimpleVocabulary([])
+        return safe_simplevocabulary_from_values(values)  # if values else SimpleVocabulary([])
+
+    def __contains__(self, value):
+        return value in self()
+
 
 @implementer(IVocabularyFactory)
 class CurrencyVocabularyFactory(object):

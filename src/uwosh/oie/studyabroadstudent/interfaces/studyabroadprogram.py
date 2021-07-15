@@ -1909,9 +1909,10 @@ class IOIEStudyAbroadProgram(Interface):
     )
     anticipated_number_of_applicants_min = schema.Int(
         title=_('Anticipated Number of Applicants (Minimum)'),
+        description=_('(Required to Determine Program Fee)'),
         min=0,
         max=999,
-        required=False,
+        required=True,
     )
     anticipated_number_of_applicants_max = schema.Int(
         title=_('Anticipated Number of Applicants (Maximum)'),
@@ -1933,12 +1934,13 @@ class IOIEStudyAbroadProgram(Interface):
     fecop_worksheet = field.NamedFile(
         title=_('Full Estimated Cost of Participation (FECOP) Worksheet'),
         description=_(
-            'Upload a draft FECOP worksheet for review.  Replace this draft with updated FECOPs '
-            'until the review process is complete.  The FECOP in place as of the "Application Intake '
-            'in Progress" state will be the one shared with participants for application purposes. '
-            'Therefore, do not replace this FECOP after the review process has ended.'
+            '(Required Prior to Publishing Initial Fee) Upload a draft FECOP worksheet for review.  '
+            'Replace this draft with updated FECOPs until the review process is complete.  The FECOP '
+            'in place as of the "Application Intake in Progress" state will be the one shared with '
+            'participants for application purposes. Therefore, do not replace this FECOP after the '
+            'review process has ended.'
         ),
-        required=False,
+        required=True,
     )
 
     mode(required_prior_to_publishing_initial_fee_label='display')
@@ -1965,11 +1967,12 @@ class IOIEStudyAbroadProgram(Interface):
     first_participant_fee_statement_ = field.NamedFile(
         title=_('First Participant Fee Statement'),
         description=_(
-            'Upload the first fee statement for participants.  This statement will display in the '
-            'participant portal upon transition to "Pending Final Program Fee".  Participants '
-            'deviating from the advertised program may require an alternative fee statement.'
+            '(Required Prior to Confirming to Run) Upload the first fee statement for participants. '
+            'This statement will display in the participant portal upon transition to "Pending Final '
+            'Program Fee".  Participants deviating from the advertised program may require an '
+            'alternative fee statement.'
         ),
-        required=False,
+        required=True,
         # TODO Display this fee statement in the participant portal.  # noqa: T000
     )
     first_participant_fee_spreadsheet = field.NamedFile(
@@ -1993,11 +1996,13 @@ class IOIEStudyAbroadProgram(Interface):
     final_participant_fee_statement = field.NamedFile(
         title=_('Final Participant Fee Statement'),
         description=_(
-            'Upload the final fee statement for participants.  This statement will display in the '
-            'participant portal upon transition to "Final Payment Billing in Progress". Participants '
+            '(Required Prior to Publishing Final Fee) Provider proposals and flight proposals on "Proposals" '
+            'tab must also be complete. Upload the final fee statement for '
+            'participants. This statement will display in the participant portal upon '
+            'transition to "Final Payment Billing in Progress". Participants '
             'deviating from the advertised program may require an alternative fee statement.'
         ),
-        required=False,
+        required=True,
         # TODO Display this fee statement in the participant portal.  # noqa: T000
     )
     final_participant_fee_spreadsheet = field.NamedFile(
@@ -2018,11 +2023,12 @@ class IOIEStudyAbroadProgram(Interface):
     travel_expense_report = field.NamedFile(
         title=_('Travel Expense Report'),
         description=_(
-            'Upload a digital copy of OIE Travel Expense Report Accounting forms plus all related '
+            '(Required Prior to Confirming that TER has been Received) Upload a digital '
+            'copy of OIE Travel Expense Report Accounting forms plus all related '
             'receipts.  Receipts must be numbered to match line items on the accounting form '
             'and must be organized in number order.'
         ),
-        required=False,
+        required=True,
         # TODO This field must be associated with each individual Program  # noqa: T000
         #  Leader & Program Co-leader.
     )
@@ -2033,8 +2039,9 @@ class IOIEStudyAbroadProgram(Interface):
     )
     participant_fees_paid_in_full = schema.Choice(
         title=_('Participant Fees Paid in Full'),
+        description=_('(Required Prior to Processing Refunds)'),
         vocabulary=yes_no_vocabulary,
-        required=False,
+        required=True,
     )
     compensation_paperwork = field.NamedFile(
         title=_('Compensation Paperwork'),
@@ -2062,9 +2069,10 @@ class IOIEStudyAbroadProgram(Interface):
     )
     account_transfers = schema.Choice(
         title=_('Account Transfers'),
-        description=_('Confirm that all transfers into and out of the account are complete.'),
+        description=_('(Required Prior to Archiving Program) '
+                      'Confirm that all transfers into and out of the account are complete.'),
         vocabulary=yes_no_vocabulary,
-        required=False,
+        required=True,
     )
     program_revenue = schema.Choice(
         title=_('Program Revenue'),
