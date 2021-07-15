@@ -1726,7 +1726,7 @@ class IOIEStudyAbroadProgram(Interface):
             'will be the one shared with providers in the formal Request for Proposals.  Therefore, '
             'do not replace the final RFP after the review process has ended.'
         ),
-        required=False,
+        required=True,
         # TODO Project Phase XXX: we would like to be able to upload the RFP  # noqa: T000
         #   here, type in the names & email addresses of the vendors to whom
         #   the proposal will be sent, and require that the vendors upload
