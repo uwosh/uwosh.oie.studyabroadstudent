@@ -1954,7 +1954,7 @@ class IOIEStudyAbroadProgram(Interface):
             'on the OIE website upon transition to "Application Intake in Progress".'
         ),
         default='TBA',
-        required=False,
+        required=True,
     )
 
     first_participant_fee_statement_ = field.NamedFile(
