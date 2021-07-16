@@ -16,6 +16,15 @@ class ParticipantEditForm(edit.DefaultEditForm):
                 return msg
         return super().__call__(*args, **kwargs)
 
+    @property
+    def label(self):
+        first_name = self.context.firstName
+        last_name = self.context.lastName
+        program = self.context.programName
+        courses = self.context.courses
+        formatted_courses = ", ".join([f"{c}" for c in courses])
+        return (f'Edit {first_name} {last_name} | Program: {program} | Course(s): {formatted_courses}')
+
 
 class ParticipantAddForm(add.DefaultAddForm):
     portal_type = 'OIEStudyAbroadParticipant'
