@@ -757,7 +757,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_('Program Cycle'),
         description=_(
             'How often will this program be offered? This information will display in some marketing '
-            'materials. If it isn\'t possible to predict, leave this blank select "once".'
+            'materials. If it isn\'t possible to predict, select "once".'
         ),
         vocabulary=program_cycle_vocabulary,
     )
