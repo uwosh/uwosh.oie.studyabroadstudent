@@ -420,6 +420,7 @@ class IOIEStudyAbroadProgram(Interface):
     )
 
     dexteritytextindexer.searchable('title')
+    widget('title', maxlength=45)
     title = schema.TextLine(
         title=_('Program Title'),
         description=_(
@@ -446,7 +447,8 @@ class IOIEStudyAbroadProgram(Interface):
             raise Invalid(_('You must specify a description'))
 
     dexteritytextindexer.searchable('description')
-    description = schema.Text(
+    widget('description', maxlength=100)
+    description = schema.TextLine(
         title=_('Description'),
         description=_(
             'A brief description that will show up in search results '
@@ -474,7 +476,7 @@ class IOIEStudyAbroadProgram(Interface):
         ),
         default_mime_type='text/plain',
         allowed_mime_types=('text/plain', 'text/html'),
-        max_length=1000,
+        max_length=600,
         required=True,
     )
 
