@@ -13,9 +13,6 @@
     <permission id="uwosh.oie.studyabroadstudent.edit.academic_program_fieldset"
                 title="OIE: Edit academic program fieldset">
     </permission>
-    <permission id="uwosh.oie.studyabroadstudent.edit.syllabus_and_supporting_docs"
-                title="OIE: Edit syllabus and supporting docs">
-    </permission>
     <permission id="uwosh.oie.studyabroadstudent.edit.program_description"
                 title="OIE: Edit program description">
     </permission>

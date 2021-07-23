@@ -68,6 +68,7 @@ from uwosh.oie.studyabroadstudent.interfaces.directives import (
     V_RETURN_FLIGHT_FS,
     V_RETURN_TO_OSHKOSH_FS,
     V_REVIEWERS_FS,
+    required_in_state,
 )
 from uwosh.oie.studyabroadstudent.vocabularies import (
     RegistryValueVocabulary,
@@ -163,6 +164,7 @@ class IContributingEntityRowSchema(Interface):
     )
     contributing_entity_contact_phone_other = schema.TextLine(
         title=_('Contact Tel (other)'),
+        required=False,
     )
     contributing_entity_contact_email = schema.TextLine(
         title=_('Contact Email'),
@@ -1368,6 +1370,9 @@ class IOIEStudyAbroadProgram(Interface):
             schema=IReviewerEmailRowSchema,
         ),
     )
+
+    required_in_state(dean_emails='pending-chair-review')
+    required_in_state(chair_emails='pending-chair-review')
 
     #######################################################
     model.fieldset(
