@@ -90,11 +90,32 @@ def _update_term_based_dates(o, event):
         for first_letter in 
         map(lambda x: x[0], prefix.split('_'))
     ])
-    o.step_1_and_2_application_deadline = getattr(year, f'step_1_and_2_application_deadline_{suffix}', None)
-    o.step_3_application_deadline = getattr(year, f'step_3_application_deadline_{suffix}', None)
-    o.step_4_application_deadline = getattr(year, f'step_4_application_deadline_{suffix}', None)
-    o.request_for_proposal_due_date = getattr(year, f'{prefix}_request_for_proposals_deadline_date', None)
-    o.application_deadline = getattr(year, f'{prefix}_application_deadline', None)
+
+    if o.step_1_and_2_application_deadline is None:
+        o.step_1_and_2_application_deadline = getattr(
+            year,
+            f'step_1_and_2_application_deadline_{suffix}',
+            None)
+    if o.step_3_application_deadline is None:
+        o.step_3_application_deadline = getattr(
+            year,
+            f'step_3_application_deadline_{suffix}',
+            None)
+    if o.step_4_application_deadline is None:
+        o.step_4_application_deadline = getattr(
+            year,
+            f'step_4_application_deadline_{suffix}',
+            None)
+    if o.request_for_proposal_due_date is None:
+        o.request_for_proposal_due_date = getattr(
+            year,
+            f'{prefix}_request_for_proposals_deadline_date',
+            None)
+    if o.application_deadline is None:
+        o.application_deadline = getattr(
+            year,
+            f'{prefix}_application_deadline',
+            None)
 
 
 def program_added(program, event):
