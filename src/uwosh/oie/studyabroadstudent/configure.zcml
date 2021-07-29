@@ -6,6 +6,9 @@
 
   <i18n:registerTranslations directory="locales" />
 
+  <adapter factory="uwosh.oie.studyabroadstudent.interfaces.participant.SeatNumberRequiredValidator" />
+  <adapter factory="uwosh.oie.studyabroadstudent.interfaces.participant.WaitlistNumberRequiredValidator" />
+
   <includeDependencies package="." />
 
   <include file="permissions.zcml" />

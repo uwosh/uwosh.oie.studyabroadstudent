@@ -29,6 +29,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import (
     yes_no_vocabulary,
 )
 from uwosh.oie.studyabroadstudent.widgets import SundayStartDateWidget
+from z3c.form import validator
 from zope import schema
 from zope.interface import Interface
 from zope.schema import ValidationError
@@ -42,6 +43,26 @@ class InvalidEmailAddress(ValidationError):
 
 class InvalidStudentID(ValidationError):
     """Invalid UW Oshkosh student ID format"""
+
+
+class InvalidRequiredInState(ValidationError):
+    """Field is required in current workflow state"""
+
+
+class SeatNumberRequiredValidator(validator.SimpleFieldValidator):
+    def validate(self, value):
+        state = api.content.get_state(obj=self.context)
+        if state == 'step-ii':
+            if not value or not value.strip():
+                raise InvalidRequiredInState(_(u'Field is required in state "%s"' % state))
+
+
+class WaitlistNumberRequiredValidator(validator.SimpleFieldValidator):
+    def validate(self, value):
+        state = api.content.get_state(obj=self.context)
+        if state == 'step-ii':
+            if not value or not value.strip():
+                raise InvalidRequiredInState(_(u'Field is required in state "%s"' % state))
 
 
 def validate_email(value):
@@ -1339,3 +1360,9 @@ class IOIEStudyAbroadParticipant(Interface):
     # nonSponsoredTravel_label = schema.TextLine(
     #     title=_('Non-sponsored Out-of-Country (or out-of-state) Travel'),
     # )
+
+
+validator.WidgetValidatorDiscriminators(SeatNumberRequiredValidator,
+                                        field=IOIEStudyAbroadParticipant['seatNumber'])
+validator.WidgetValidatorDiscriminators(WaitlistNumberRequiredValidator,
+                                        field=IOIEStudyAbroadParticipant['waitlistNumber'])
