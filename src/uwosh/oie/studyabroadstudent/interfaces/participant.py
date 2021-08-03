@@ -236,21 +236,21 @@ class IOIEStudyAbroadParticipant(Interface):
             'The courses listed for this program choice will appear in your Courses tab; '
             'you must indicate there which courses you wish to enroll in.'
         ),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.newprograms',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.programs'),
         required=True,
     )
 
     dexteritytextindexer.searchable('programName2')
     programName2 = schema.Choice(
         title=_('Program Name (second choice)'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.newprograms',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.programs'),
         required=False,
     )
 
     dexteritytextindexer.searchable('programName3')
     programName3 = schema.Choice(
         title=_('Program Name (third choice)'),
-        vocabulary='uwosh.oie.studyabroadstudent.vocabularies.newprograms',
+        source=RegistryValueVocabulary('oiestudyabroadstudent.programs'),
         required=False,
     )
 
