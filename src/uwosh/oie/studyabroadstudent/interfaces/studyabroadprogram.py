@@ -2143,7 +2143,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_(
             '(Required Prior to Scheduling the Operational Briefing) '
             'Upload a clean copy of the official, final program itinerary.'),
-        required=True,
+        required=False,
     )
     bus_contract_departure = field.NamedFile(
         title=_('Bus Contract (departure)'),

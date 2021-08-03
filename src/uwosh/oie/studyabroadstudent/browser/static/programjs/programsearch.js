@@ -90,8 +90,8 @@ require([
         }, '--Select a Program Type--')];
         for (var i=0;i<this.state.types.length;i++) {
           types.push(D.option({
-            value: this.state.types[i][0]
-          }, this.state.types[i][1]));
+            value: this.state.types[i]
+          }, this.state.types[i]));
         }
 
         var typeField = D.select({
