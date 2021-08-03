@@ -1726,7 +1726,7 @@ class IOIEStudyAbroadProgram(Interface):
             'will be the one shared with providers in the formal Request for Proposals.  Therefore, '
             'do not replace the final RFP after the review process has ended.'
         ),
-        required=True,
+        required=False,
         # TODO Project Phase XXX: we would like to be able to upload the RFP  # noqa: T000
         #   here, type in the names & email addresses of the vendors to whom
         #   the proposal will be sent, and require that the vendors upload
@@ -1912,7 +1912,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_('(Required to Determine Program Fee)'),
         min=0,
         max=999,
-        required=True,
+        required=False,
     )
     anticipated_number_of_applicants_max = schema.Int(
         title=_('Anticipated Number of Applicants (Maximum)'),
@@ -1940,7 +1940,7 @@ class IOIEStudyAbroadProgram(Interface):
             'participants for application purposes. Therefore, do not replace this FECOP after the '
             'review process has ended.'
         ),
-        required=True,
+        required=False,
     )
 
     program_fee = schema.Text(
@@ -1954,7 +1954,7 @@ class IOIEStudyAbroadProgram(Interface):
             'on the OIE website upon transition to "Application Intake in Progress".'
         ),
         default='TBA',
-        required=True,
+        required=False,
     )
 
     first_participant_fee_statement_ = field.NamedFile(
@@ -1965,7 +1965,7 @@ class IOIEStudyAbroadProgram(Interface):
             'Program Fee".  Participants deviating from the advertised program may require an '
             'alternative fee statement.'
         ),
-        required=True,
+        required=False,
         # TODO Display this fee statement in the participant portal.  # noqa: T000
     )
     first_participant_fee_spreadsheet = field.NamedFile(
@@ -1988,7 +1988,7 @@ class IOIEStudyAbroadProgram(Interface):
             'transition to "Final Payment Billing in Progress". Participants '
             'deviating from the advertised program may require an alternative fee statement.'
         ),
-        required=True,
+        required=False,
         # TODO Display this fee statement in the participant portal.  # noqa: T000
     )
     final_participant_fee_spreadsheet = field.NamedFile(
@@ -2010,7 +2010,7 @@ class IOIEStudyAbroadProgram(Interface):
             'receipts.  Receipts must be numbered to match line items on the accounting form '
             'and must be organized in number order.'
         ),
-        required=True,
+        required=False,
         # TODO This field must be associated with each individual Program  # noqa: T000
         #  Leader & Program Co-leader.
     )
@@ -2019,7 +2019,7 @@ class IOIEStudyAbroadProgram(Interface):
         title=_('Participant Fees Paid in Full'),
         description=_('(Required Prior to Processing Refunds)'),
         vocabulary=yes_no_vocabulary,
-        required=True,
+        required=False,
     )
     compensation_paperwork = field.NamedFile(
         title=_('Compensation Paperwork'),
@@ -2045,7 +2045,7 @@ class IOIEStudyAbroadProgram(Interface):
         description=_('(Required Prior to Archiving Program) '
                       'Confirm that all transfers into and out of the account are complete.'),
         vocabulary=yes_no_vocabulary,
-        required=True,
+        required=False,
     )
     program_revenue = schema.Choice(
         title=_('Program Revenue'),
@@ -2136,14 +2136,14 @@ class IOIEStudyAbroadProgram(Interface):
             'Add detail on how to complete orientation.  Detail will show '
             'as participant instructions in the Participant Portal.'
         ),
-        required=True,
+        required=False,
     )
     final_itinerary = field.NamedFile(
         title=_('Final Itinerary'),
         description=_(
             '(Required Prior to Scheduling the Operational Briefing) '
             'Upload a clean copy of the official, final program itinerary.'),
-        required=True,
+        required=False,
     )
     bus_contract_departure = field.NamedFile(
         title=_('Bus Contract (departure)'),
