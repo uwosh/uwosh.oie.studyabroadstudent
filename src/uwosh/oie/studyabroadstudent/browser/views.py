@@ -403,10 +403,8 @@ class CreatedView(DefaultView):
                         **data,
                     )
                     api.content.transition(obj, 'submit')  # go ahead to step I
-                    breakpoint()
                 return f'{obj.absolute_url()}/edit'
             except Exception as e:  # noqa: B902
-                import pdb; pdb.set_trace()
                 logger.warning('Could not create partipant application.')
                 logger.warning(e)
         return False
