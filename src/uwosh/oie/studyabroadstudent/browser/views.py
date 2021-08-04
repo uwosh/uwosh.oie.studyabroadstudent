@@ -380,11 +380,11 @@ class CreatedView(DefaultView):
         return super().__call__()
 
     def create_participant(self):
-        program_ID = self.context.UID()
+        program_name = self.context.title
         first = self.request.get('first', None)
         last = self.request.get('last', None)
         email = self.request.get('email', None)
-        fields = [program_ID, first, last, email]
+        fields = [program_name, first, last, email]
         if all(fields):
             try:
                 site = api.portal.get()
@@ -393,7 +393,7 @@ class CreatedView(DefaultView):
                     'firstName': first,
                     'lastName': last,
                     'email': email,
-                    'programName': program_ID,
+                    'programName': program_name,
                 }
                 with api.env.adopt_roles(roles='Manager'):
                     obj = api.content.create(
@@ -443,7 +443,7 @@ class ReportingView(DefaultView):
             ])
             writer.writerow([
                 'UWO Sophomore Participants',
-                til.uwo_sophomore_count(),
+                util.uwo_sophomore_count(),
             ])
             writer.writerow([
                 'UWO Junior Participants',
@@ -459,11 +459,11 @@ class ReportingView(DefaultView):
             ])
             writer.writerow([
                 'Other Undergraduate Participants',
-                til.other_undergrad_count(),
+                util.other_undergrad_count(),
             ])
             writer.writerow([
                 'Other Graduate Participants',
-                til.other_graduate_count(),
+                util.other_graduate_count(),
             ])
 
             resp = self.request.response

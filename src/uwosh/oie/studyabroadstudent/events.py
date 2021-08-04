@@ -44,26 +44,6 @@ def application_modified(o, event):
 
 
 ###############################################################
-def program_created(o, event):
-    # set the program code
-    calendar_year_obj = api.content.get(UID=o.calendar_year)
-    calendar_year = calendar_year_obj.title
-    program_code = f'{calendar_year[2:4]}{o.term[0]}{o.college_or_unit[0]}'
-    for c in o.countries:
-        program_code += c[0:3].upper()
-    if o.program_code != program_code:
-        o.program_code = program_code
-    if not o.id:
-        normalizer = getUtility(IIDNormalizer)
-        o.id = normalizer.normalize(o.title)
-    # copy all dates from selected calendar year into the new Program object
-    for special_day in SPECIAL_DAYS:
-        setattr(o, special_day, getattr(calendar_year_obj, special_day))
-    _update_contained_object_fields(o, event)
-    _update_term_based_dates(o, event)
-    _update_insurance_end_date(o, event)
-
-
 def _update_insurance_end_date(o, event):
     arrival = o.arrivalInWisconsinDate
     start = o.arrivalAtDestinationAndInsuranceStartDate
@@ -87,7 +67,7 @@ def _update_term_based_dates(o, event):
     prefix = term[2:].lower().replace(' ', '_')
     suffix = ''.join([
         first_letter
-        for first_letter in 
+        for first_letter in
         map(lambda x: x[0], prefix.split('_'))
     ])
 
@@ -117,6 +97,53 @@ def _update_term_based_dates(o, event):
             f'{prefix}_application_deadline',
             None)
 
+def _update_contained_object_fields(o, event):
+    # update fields that show contained objects
+    # and related 'add object' link fields
+    update_course_field(o)
+    update_add_course_link(o)
+    update_health_document_field(o)
+    update_add_health_document_link(o)
+    update_transition_field(o)
+    update_add_transition_link(o)
+
+def program_created(o, event):
+    # set the program code
+    calendar_year_obj = api.content.get(UID=o.calendar_year)
+    calendar_year = calendar_year_obj.title
+    program_code = f'{calendar_year[2:4]}{o.term[0]}{o.college_or_unit[0]}'
+    for c in o.countries:
+        program_code += c[0:3].upper()
+    if o.program_code != program_code:
+        o.program_code = program_code
+    if not o.id:
+        normalizer = getUtility(IIDNormalizer)
+        o.id = normalizer.normalize(o.title)
+    # copy all dates from selected calendar year into the new Program object
+    for special_day in SPECIAL_DAYS:
+        setattr(o, special_day, getattr(calendar_year_obj, special_day))
+    _update_contained_object_fields(o, event)
+    _update_term_based_dates(o, event)
+    _update_insurance_end_date(o, event)
+
+def program_transitioned(o, event):
+    if event.new_state.id != 'application-intake-in-progress':
+        return
+    program_title = o.title
+    if program_title:
+        programs = api.portal.get_registry_record('oiestudyabroadstudent.programs', default=[])
+        if program_title not in programs:
+            api.portal.set_registry_record(
+                'oiestudyabroadstudent.programs',
+                tuple(
+                    sorted({
+                        *programs,
+                        program_title,
+                    })
+                )
+            )
+
+
 
 def program_added(program, event):
     # doesn't work in the IObjectCreatedEvent
@@ -141,16 +168,6 @@ def program_modified(o, event):
     _update_insurance_end_date(o, event)
 
 
-def _update_contained_object_fields(o, event):
-    # update fields that show contained objects
-    # and related 'add object' link fields
-    update_course_field(o)
-    update_add_course_link(o)
-    update_health_document_field(o)
-    update_add_health_document_link(o)
-    update_transition_field(o)
-    update_add_transition_link(o)
-
 
 ###############################################################
 def calendar_year_created(calendar_year, event):
@@ -172,7 +189,6 @@ def contact_modified(o, event):
 
 ###############################################################
 def _participant_update(participant, event, event_type=None):
-    return
     program_uid = participant.programName
     if program_uid:
         program = uuidToObject(program_uid)
@@ -212,7 +228,6 @@ def _participant_update(participant, event, event_type=None):
 
 
 def participant_created(participant, event):
-    return
     _participant_update(participant, event, event_type='created')
     if not getattr(participant, 'title', None):
         first_name = f'{getattr(participant, "firstName", "first")}'
@@ -225,7 +240,6 @@ def participant_created(participant, event):
 
 
 def participant_modified(participant, event):
-    return
     _participant_update(participant, event, event_type='updated')
 
 
