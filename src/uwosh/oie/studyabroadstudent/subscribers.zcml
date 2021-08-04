@@ -35,6 +35,12 @@
   />
 
   <subscriber
+    for=".interfaces.studyabroadprogram.IOIEStudyAbroadProgram
+         Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+    handler=".events.program_transitioned"
+  />
+
+  <subscriber
     for=".interfaces.contact.IOIEContact
          zope.lifecycleevent.IObjectCreatedEvent"
     handler=".events.contact_created"

@@ -17,7 +17,7 @@ class ReportUtil(object):
         self.program = program
         self.pbrains = cat(
             portal_type='OIEStudyAbroadParticipant',
-            programName=self.program.UID,
+            programName=self.program.title,
         )
         self.high_school = 0
         self.uwo_freshman = 0
