@@ -78,6 +78,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import (
     yes_no_na_vocabulary,
     yes_no_vocabulary,
 )
+from uwosh.oie.studyabroadstudent.constants import CALENDAR_YEAR_DESCRIPTION
 from uwosh.oie.studyabroadstudent.widgets import SundayStartDateWidget
 from z3c.form.browser.radio import RadioFieldWidget
 from z3c.form.interfaces import IAddForm, IEditForm
@@ -504,13 +505,7 @@ class IOIEStudyAbroadProgram(Interface):
 
     calendar_year = schema.Choice(
         title=_('Calendar Year'),
-        description=_(
-            'Select the calendar year during which the program will run. '
-            'This is not the year associated with the term of study. '
-            'For example, a January interim program running from Jan 2-28, 2019 '
-            'will be associated with "2019". A program running Dec 28, 2018-Jan 28, 2019 '
-            'will also be associated with "2019".'
-        ),
+        description=_(CALENDAR_YEAR_DESCRIPTION),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.calendar_year',
         required=True,
     )
@@ -625,11 +620,11 @@ class IOIEStudyAbroadProgram(Interface):
         ),
         default=None,
     )
-    widget(eligibility_requirement=RadioFieldWidget)
+    widget('eligibility_requirement', RadioFieldWidget,  klass="YOYOYO")
     eligibility_requirement = schema.Choice(
         title='Eligibility Requirement',
         description='Select the eligibility requirement for this program',
-        required=False,
+        required=True,
         source=RegistryValueVocabulary(
             'oiestudyabroadstudent.eligibility_requirement',
         ),
@@ -1085,6 +1080,7 @@ class IOIEStudyAbroadProgram(Interface):
     read_permission(otherRequired=V_PARTICIPANT_SELECTION_FS)
     write_permission(otherRequired=E_PARTICIPANT_SELECTION_FS)
 
+    widget(studentStatus=RadioFieldWidget)
     studentStatus = schema.Choice(
         title=_('Student Status'),
         description=_('Choose one'),
@@ -1092,6 +1088,7 @@ class IOIEStudyAbroadProgram(Interface):
         required=True,
     )
 
+    widget('seatAssignmentProtocol', RadioFieldWidget)
     seatAssignmentProtocol = schema.Choice(
         title=_('Seat Assignment Protocol'),
         vocabulary=seat_assignment_protocol,

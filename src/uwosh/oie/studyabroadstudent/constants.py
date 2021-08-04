@@ -1,3 +1,8 @@
+from datetime import date
+
+CURRENT_YEAR = date.today().year
+NEXT_YEAR = CURRENT_YEAR + 1
+
 DURATIONS = [
     7,
     14,
@@ -145,4 +150,13 @@ DEFAULT_TUITION_AND_FEES = (
     'Tuition Charged for 11 cr; Seg Fees Also Charged',
     'Tuition Charged for 12 cr; $0 Seg Fees',
     'Tuition Charged for 12 cr; Seg Fees Also Charged',
+)
+
+
+CALENDAR_YEAR_DESCRIPTION = (
+    'Select the calendar year during which the program will run. '
+    'This is not the year associated with the term of study. '
+    f'For example, a January interim program running from Jan 2-28, {NEXT_YEAR} '
+    f'will be associated with "{NEXT_YEAR}". A program running Dec 28, {CURRENT_YEAR}-Jan 28, {NEXT_YEAR} '
+    f'will also be associated with "{NEXT_YEAR}".'
 )
