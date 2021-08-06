@@ -452,6 +452,7 @@
    <permission-role>Mgmt_AdminServices</permission-role>
    <permission-role>Mgmt_CourseBuilder</permission-role>
    <permission-role>Mgmt_Emergency</permission-role>
+   <permission-role>Participant_Applicant</permission-role>
   </permission-map>
 
   <permission-map name="OIE: Edit program code fieldset" acquired="False">
