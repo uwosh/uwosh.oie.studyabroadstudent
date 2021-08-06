@@ -344,22 +344,22 @@ class ParticipantEditUtilView(DefaultView):
         return [
             {
                 'label': 'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',
-                'date': str(program.spring_interim_summer_fall_semester_participant_orientation_deadline),
+                'date': str(getattr(program, 'spring_interim_summer_fall_semester_participant_orientation_deadline', '')),
             },
             {
                 'label': 'Spring Interim, Summer & Fall Semester Participant Orientation Deadline',
-                'date': str(program.winter_interim_spring_semester_participant_orientation_deadline),
+                'date': str(getattr(program, 'winter_interim_spring_semester_participant_orientation_deadline', '')),
             },
         ]
 
     def __call__(self):
-        program = uuidToObject(self.context.programName)
+        program = uuidToObject(self.context.UID())
         return {
-            'individualInterview': program.individualInterview,
+            'individualInterview': getattr(program, 'individualInterview', None),
             'orientationDeadlines': self._get_orientation_deadlines(program),
             'paymentDeadlines': self._get_payment_deadlines(program),
-            'pretravelStart': str(program.pretravel_dates[0]['pretravel_start_datetime']),
-            'pretravelEnd': str(program.pretravel_dates[0]['pretravel_end_datetime']),
+            'pretravelStart': str(getattr(program, 'pretravel_dates', [{'pretravel_start_datetime': ''}])[0]['pretravel_start_datetime']),
+            'pretravelEnd': str(getattr(program, 'pretravel_dates', [{'pretravel_end_datetime': ''}])[0]['pretravel_end_datetime']),
         }
 
 
