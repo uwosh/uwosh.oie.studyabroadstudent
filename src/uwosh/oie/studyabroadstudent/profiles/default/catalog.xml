@@ -4,15 +4,27 @@
   <index name="program_type" meta_type="FieldIndex">
     <indexed_attr value="program_type"/>
   </index>
+  <index name="term" meta_type="FieldIndex">
+    <indexed_attr value="term"/>
+  </index>
   <index name="calendar_year" meta_type="FieldIndex">
     <indexed_attr value="calendar_year"/>
+  </index>
+  <index name="college_or_unit" meta_type="FieldIndex">
+    <indexed_attr value="college_or_unit"/>
+  </index>
+  <index name="program_leader" meta_type="FieldIndex">
+    <indexed_attr value="program_leader"/>
   </index>
   <index name="countries" meta_type="FieldIndex">
     <indexed_attr value="countries"/>
   </index>
-  <column value="program_type" />
-  <column value="calendar_year" />
   <column value="countries" />
+  <column value="program_type" />
+  <column value="college_or_unit" />
+  <column value="term" />
+  <column value="calendar_year" />
+  <column value="program_leader" />
   <column value="image" />
 
   <!--Participant Indices-->
