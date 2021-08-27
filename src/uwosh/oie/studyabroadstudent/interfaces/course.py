@@ -58,6 +58,7 @@ class IOIECourse(Interface):
         ),
         min=0,
         max=999,
+        required=False,
     )
     gpa = schema.Int(
         title=_('Course Prerequisites: GPA'),
@@ -67,6 +68,7 @@ class IOIECourse(Interface):
         ),
         min=0,
         max=999,
+        required=False,
     )
     completed_courses = schema.Text(
         title=_('Course Prerequisites: completed courses'),
@@ -75,6 +77,7 @@ class IOIECourse(Interface):
             'that a particular grade be earned in an earlier course, prior '
             'to the course start date, indicate this here.'
         ),
+        required=False,
     )
     program_of_study = schema.Choice(
         title=_('Course Prerequisites: program of study'),
@@ -85,15 +88,13 @@ class IOIECourse(Interface):
         source=RegistryValueVocabulary(
             'oiestudyabroadstudent.program_of_study',
         ),
+        required=False,
     )
     instruction_provided_by_host = schema.Choice(
         title=_('Instruction Provided by Host?'),
         description=_(
-            'Select the name of the person who will teach the course, if the '
-            'course is to be taught by a UW Oshkosh professor.  Select '
-            '"host" when instruction is provided by a partner.  Do not '
-            'select the name of the "instructor-of-record" at UW Oshkosh '
-            'when instruction is provided by a partner.'
+            'If the course is to be taught by a UW Oshkosh professor, select “NO”. '
+            'If the course is to be provided by a partner, select “YES”.'
         ),
         vocabulary=yes_no_vocabulary,
     )
@@ -124,31 +125,36 @@ class IOIECourse(Interface):
         title=_('Foreign Institution Name'),
         description=_(''),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.cooperatingpartner',
-        required=True,
+        required=False,
         # TODO Oshkosh must be the first option on this dropdown list  # noqa: T000
     )
     foreign_course_number = schema.Text(
         title=_('Foreign Course Number'),
         description=_(''),
+        required=False,
     )
     foreign_course_credits = schema.Int(
         title=_('Foreign Course Number of Credits'),
         description=_('max: 2 digits'),
         min=0,
         max=99,
+        required=False,
     )
     widget('foreign_course_review_date', SundayStartDateWidget)
     foreign_course_review_date = schema.Date(
         title=_('Foreign Course Date of Most Recent Review'),
         description=_(''),
+        required=False,
     )
     foreign_course_reviewer_info = schema.TextLine(
         title=_('Foreign Course Reviewer Name, Title & College'),
         description=_(''),
+        required=False,
     )
     foreign_course_syllabus = field.NamedFile(
         title=_('Foreign Course Syllabus'),
         description=_('Upload the syllabus that corresponds to the most recent date of review'),
+        required=False,
     )
     foreign_course_builder_email = schema.TextLine(
         title=_('PeopleSoft Course Builder'),
@@ -172,33 +178,40 @@ class IOIECourse(Interface):
     ps_course_id = schema.Int(
         title=_('PeopleSoft Course ID'),
         min=0,
+        required=False,
     )
     ps_class_id = schema.Int(
         title=_('PeopleSoft Class Number'),
         min=0,
+        required=False,
     )
     ps_section_id = schema.Int(
         title=_('PeopleSoft Course Section Number'),
         min=0,
+        required=False,
     )
     ps_section_letter = schema.TextLine(
         title=_('PeopleSoft Course Section Letter'),
-        # TODO dropdown?  # noqa
+        required=False,
+        # TODO dropdown?  # noqa: T000
     )
     widget('ps_grade_by_date', SundayStartDateWidget)
     ps_grade_by_date = schema.Date(
         title=_('PeopleSoft "grade by" date'),
+        required=False,
         # TODO Autogenerate the "PeopleSoft 'grade by' date" by adding 5  # noqa: T000
         #  calendar days to the "PeopleSoft Class End Date".
     )
     tuition_and_fees = schema.Choice(
         title=_('Tuition & Fees'),
         vocabulary='uwosh.oie.studyabroadstudent.vocabularies.tuition_and_fees',
+        required=False,
     )
     ext_studies_graded = schema.Choice(
         title=_('External Studies Courses'),
         description=_('Confirm that any External Studies Courses have been graded.'),
         vocabulary=yes_no_vocabulary,
+        required=False,
         # TODO This field must be associated with each Ext Studies Course  # noqa: T000
         #  listed in "Course Subject & Number".
     )
