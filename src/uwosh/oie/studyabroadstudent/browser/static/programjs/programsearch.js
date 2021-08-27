@@ -18,8 +18,6 @@ require([
         const el = document.getElementById('oie-search');
         const program_data = el.getAttribute('oie-program-data');
         const programs = JSON.parse(program_data);
-        console.log('programs')
-        console.log(programs)
         const titles = [
           ...new Set(
             programs.map(program=>program.title)
@@ -225,7 +223,6 @@ require([
 
       handler: function(event){
         event.preventDefault();
-        console.log(event)
         const {checked, value, name, type} = event.target;
         const actualValue = type === 'checkbox' ? checked : value;
         const filters = {
@@ -244,7 +241,6 @@ require([
       },
 
       resetSearchFields: function(event){
-        console.log(event)
         event.preventDefault();
         this.getForm().reset();
         const filters = {...this.props.defaultFilters};
@@ -262,8 +258,6 @@ require([
           ){
           return true;
         }
-        console.log('typeof filterValue')
-        console.log(typeof filterValue)
         switch(typeof filterValue){
           case 'boolean':
             return filterValue === false || this.props.trueValues.includes(actualValue); //this might be a mistake?
