@@ -148,20 +148,20 @@
 
   <browser:page
     name="discover"
-    for="uwosh.oie.studyabroadstudent.interfaces.IOIEStudyAbroadProgramsFolder"
-    class="uwosh.oie.studyabroadstudent.browser.views.ProgramSearchView"
-    template="uwosh.oie.studyabroadstudent.browser.templates/programsearch.pt"
+    for="..interfaces.IOIEStudyAbroadProgramsFolder"
+    class=".views.ProgramSearchView"
+    template="templates/programsearch.pt"
     permission="zope2.View"
-    layer="uwosh.oie.studyabroadstudent.interfaces.interfaces.IUwoshOieStudyabroadstudentLayer"
-  />
+    layer="..interfaces.IUwoshOieStudyabroadstudentLayer"
+    />
 
-  <browser:page
+    <browser:page
     name="discover"
-    for="uwosh.oie.studyabroadstudent.interfaces.IOIEHomePage"
-    class="uwosh.oie.studyabroadstudent.browser.views.ProgramSearchView"
-    template="uwosh.oie.studyabroadstudent.browser.templates/programsearch.pt"
+    for="..interfaces.IOIEHomePage"
+    class=".views.ProgramSearchView"
+    template="templates/programsearch.pt"
     permission="zope2.View"
-    layer="uwosh.oie.studyabroadstudent.interfaces.interfaces.IUwoshOieStudyabroadstudentLayer"
+    layer="..interfaces.IUwoshOieStudyabroadstudentLayer"
   />
 
 </configure>
