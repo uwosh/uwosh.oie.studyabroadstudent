@@ -9,6 +9,7 @@ from plone.namedfile.file import NamedImage
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five import BrowserView
 from time import time
+from uwosh.oie.studyabroadstudent.constants import STATES_FOR_DISPLAYING_PROGRAMS
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
 from uwosh.oie.studyabroadstudent.reporting import ReportUtil
 from zope.interface import Interface, alsoProvides
@@ -161,7 +162,7 @@ class ProgramSearchView(BrowserView):
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(
             portal_type='OIEStudyAbroadProgram',
-            review_state='application-intake-in-progress',
+            review_state=STATES_FOR_DISPLAYING_PROGRAMS,
         )
         for brain in brains:
             try:
@@ -171,6 +172,9 @@ class ProgramSearchView(BrowserView):
                     'uid': brain.UID,
                     'url': brain.getURL(),
                     'type': brain.program_type,
+                    'term': brain.term,
+                    'college': brain.college_or_unit,
+                    'leader': brain.program_leader,
                     'calendarYear': brain.calendar_year,
                     'countries': json.loads(brain.countries),
                     'image': brain.image,
