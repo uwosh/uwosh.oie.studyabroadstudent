@@ -6,6 +6,7 @@ from plone.i18n.normalizer.interfaces import IIDNormalizer
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from uwosh.oie.studyabroadstudent.constants import DURATIONS, SPECIAL_DAYS
 from zope.component import getUtility
+from uwosh.oie.studyabroadstudent.constants import STATES_FOR_DISPLAYING_PROGRAMS
 
 
 def get_full_camelcase_name(o):
@@ -127,7 +128,7 @@ def program_created(o, event):
     _update_insurance_end_date(o, event)
 
 def program_transitioned(o, event):
-    if event.new_state.id != 'application-intake-in-progress':
+    if event.new_state.id not in STATES_FOR_DISPLAYING_PROGRAMS:
         return
     program_title = o.title
     if program_title:
