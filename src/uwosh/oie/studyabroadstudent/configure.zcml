@@ -41,7 +41,7 @@
       factory=".setuphandlers.HiddenProfiles"
       name="uwosh.oie.studyabroadstudent-hiddenprofiles" />
 
-  
+
   <genericsetup:upgradeStep
       title="Reset some data grid fields to empty rich text fields"
       description="Some data grid fields were replaced by a rich text field showing new contained objects"
@@ -62,15 +62,7 @@
       profile="uwosh.oie.studyabroadstudent:default"
       />
 
- <!-- <genericsetup:registerProfile
-      name="1_0_3"
-      title="uwosh.oie.studyabroadstudent upgrade to 1.0.3 profile"
-      directory="profiles/1003"
-      description="1003 fixes file and image widgets"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".upgradehandlers.migrate_control_panel_files_from_ascii_to_bytes"
-      /> -->
-  <genericsetup:upgradeStep
+      <genericsetup:upgradeStep
       title="Upgrade OIE Study Abroad Student to 1.0.3"
       description="Fixes file and image widgets"
       source="*"
@@ -79,5 +71,21 @@
       profile="uwosh.oie.studyabroadstudent:default"
       sortkey="1"
       />
+  <genericsetup:registerProfile
+    name="1_0_4"
+    title="uwosh.oie.studyabroadstudent 1.0.4 profile"
+    directory="profiles/1004"
+    description="1004 adds some indices"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+  <genericsetup:upgradeStep
+    title="Upgrade OIE Study Abroad Student to 1.0.4"
+    description="Adds some program indices"
+    source="*"
+    destination="1004"
+    profile="uwosh.oie.studyabroadstudent:default"
+    handler="uwosh.oie.studyabroadstudent.upgrades.upgrade_to_1004"
+    sortkey="1"
+    />
 
 </configure>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<object name="portal_catalog" purge="False">
+  <!--Program Indices-->
+  <index name="term" meta_type="FieldIndex">
+    <indexed_attr value="term"/>
+  </index>
+  <index name="program_leader" meta_type="FieldIndex">
+    <indexed_attr value="program_leader"/>
+  </index>
+  <index name="college_or_unit" meta_type="FieldIndex">
+    <indexed_attr value="college_or_unit"/>
+  </index>
+  <column value="term" />
+  <column value="program_leader" />
+  <column value="college_or_unit" />
+
+</object>

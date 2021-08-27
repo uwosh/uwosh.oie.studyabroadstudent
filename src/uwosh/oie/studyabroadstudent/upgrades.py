@@ -6,10 +6,10 @@ import logging
 
 
 from plone.registry.interfaces import IRegistry
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IMarkupSchema
 from Products.CMFPlone.interfaces import ISiteSchema
-from Products.CMFPlone.utils import safe_unicode
+from Products.CMFPlone.resources.browser.cook import cookWhenChangingSettings
+from Products.CMFCore.utils import getToolByName
 from zope.component import getUtility
 
 import six
@@ -112,7 +112,7 @@ def handle_files_upgrade(context, logger=None):
         'state_of_wisconsin_need_based_travel_grant_form',
         'special_student_form_for_undergraduate_admissions',
         'disciplinary_clearance_form',
-        'uwo_logo', 
+        'uwo_logo',
     ]:
         record_key = f'{OIE_PREFIX}.{file_title}'
         record = registry.records[record_key]
@@ -143,3 +143,23 @@ def handle_files_upgrade(context, logger=None):
         # Save the new value.
         new_record.value = new_value
         logger.info(f'Replaced {record_key} ASCII (native string) field with Bytes field.')
+
+
+def upgrade_to_1004(context, logger=None):
+    PROFILE_ID = 'profile-uwosh.oie.studyabroadstudent:1_0_4'
+    setup = getToolByName(context, 'portal_setup')
+    setup.runAllImportStepsFromProfile(PROFILE_ID)
+    catalog = api.portal.get_tool('portal_catalog')
+    for brain in catalog(portal_type='OIEStudyAbroadProgram'):
+        catalog.reindexObject(brain.getObject())
+    home_page = api.content.create(
+        type='OIEHomePage',
+        title='Discover Programs Home Page',
+        description='This page shows the discover programs page at the site root',
+        container=api.portal.get(),
+    )
+    api.content.transition(
+        obj=home_page,
+        to_state='published'
+    )
+
