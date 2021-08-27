@@ -160,3 +160,17 @@ CALENDAR_YEAR_DESCRIPTION = (
     f'will be associated with "{NEXT_YEAR}". A program running Dec 28, {CURRENT_YEAR}-Jan 28, {NEXT_YEAR} '
     f'will also be associated with "{NEXT_YEAR}".'
 )
+
+STATES_FOR_DISPLAYING_PROGRAMS = (
+    'pending-discussions-with-program-manager',
+    'request-for-proposals-under-development',
+    'request-for-proposals-under-liaison-review',
+    'pending-provider-responses',
+    'provider-proposals-under-oie-review',
+    'provider-proposals-under-liaison-review',
+    'pending-program-fee-determination-by-oie',
+    'program-fee-under-liaison-review',
+    'program-fee-pending-publication',
+    'applicants-considering-change',
+    'application-intake-in-progress',
+)
