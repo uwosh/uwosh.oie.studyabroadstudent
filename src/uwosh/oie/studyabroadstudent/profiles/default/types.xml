@@ -9,6 +9,7 @@
   <object name="OIEProgramEmailTemplate" meta_type="Dexterity FTI"/>
   <object name="OIEParticipantEmailTemplate" meta_type="Dexterity FTI"/>
   <object name="OIEHealthSafetySecurityDocument" meta_type="Dexterity FTI"/>
+  <object name="OIEHomePage" meta_type="Dexterity FTI"/>
   <object name="OIELiaison" meta_type="Dexterity FTI"/>
   <object name="OIEProgramLeader" meta_type="Dexterity FTI"/>
   <object name="OIETransition" meta_type="Dexterity FTI"/>

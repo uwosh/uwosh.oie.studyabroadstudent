@@ -1,5 +1,6 @@
 """Module where all interfaces, events and exceptions live."""
 
+from uwosh.oie.studyabroadstudent.interfaces.homepage import IOIEHomePage  # noqa: F401
 from uwosh.oie.studyabroadstudent.interfaces.airline import IOIEAirline  # noqa: F401
 from uwosh.oie.studyabroadstudent.interfaces.calendaryear import IOIECalendarYear  # noqa: F401
 from uwosh.oie.studyabroadstudent.interfaces.contact import IOIEContact  # noqa: F401
