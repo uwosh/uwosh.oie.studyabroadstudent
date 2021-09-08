@@ -8,7 +8,6 @@ from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.file import NamedImage
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five import BrowserView
-from time import time
 from uwosh.oie.studyabroadstudent.constants import STATES_FOR_DISPLAYING_PROGRAMS
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
 from uwosh.oie.studyabroadstudent.reporting import ReportUtil
@@ -127,11 +126,12 @@ class ProgramView(DefaultView, FolderView):
         return coleaders
 
     def calendar_year(self):
-        year_uid = self.context.calendar_year
-        if year_uid:
-            year = api.content.get(UID=year_uid)
-            if year:
-                return year
+        with api.env.adopt_roles(["Manager"]):
+            year_uid = self.context.calendar_year
+            if year_uid:
+                year = api.content.get(UID=year_uid)
+                if year:
+                    return year
 
     def housing(self):
         brains = api.content.find(
