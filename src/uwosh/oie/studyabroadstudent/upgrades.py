@@ -3,6 +3,7 @@ from plone.app.textfield import RichText, RichTextValue
 from plone.app.textfield.interfaces import ITransformer
 
 import logging
+from uwosh.oie.studyabroadstudent.setuphandlers import _create_account
 
 
 from plone.registry.interfaces import IRegistry
@@ -162,4 +163,15 @@ def upgrade_to_1004(context, logger=None):
         obj=home_page,
         to_state='published'
     )
+
+def upgrade_to_1005(context, logger=None):
+    PROFILE_ID = 'profile-uwosh.oie.studyabroadstudent:1_0_5'
+    setup = getToolByName(context, 'portal_setup')
+    setup.runAllImportStepsFromProfile(PROFILE_ID)
+    _create_account(
+        'brian.duncan+Anonymous@wildcardcorp.com',
+        'Anonymous_User',
+        ['Anonymous'],
+    )
+
 
