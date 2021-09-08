@@ -86,8 +86,8 @@
   </permission-map>
 
   <permission-map name="View" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
@@ -435,8 +435,8 @@
   </permission-map>
 
   <permission-map name="View" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
@@ -4268,8 +4268,8 @@
   <exit-transition transition_id="pending-provider-proposal" />
   <exit-transition transition_id="manager-return-to-pending-provost-review" />
   <permission-map name="Access contents information" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
+   <!-- <permission-role>Anonymous</permission-role> -->
+   <!-- <permission-role>Authenticated</permission-role> -->
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
@@ -4294,8 +4294,8 @@
   </permission-map>
 
   <permission-map name="View" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
@@ -5683,8 +5683,8 @@
   </permission-map>
 
   <permission-map name="View" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
@@ -6748,8 +6748,8 @@
   </permission-map>
 
   <permission-map name="View" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
@@ -8506,8 +8506,8 @@
   </permission-map>
 
   <permission-map name="View" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
@@ -8811,7 +8811,7 @@
    <permission-role>Mgmt_Financial</permission-role>
    <permission-role>Mgmt_ProgramLeader</permission-role>
    <permission-role>Mgmt_OIEProfessional</permission-role>
-</permission-map>
+  </permission-map>
 
   <permission-map name="OIE: Edit program dates fieldset" acquired="False">
    <permission-role>Manager</permission-role>
@@ -8853,8 +8853,8 @@
   </permission-map>
 
   <permission-map name="View" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
@@ -9563,8 +9563,8 @@
   </permission-map>
 
   <permission-map name="View" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
@@ -9914,8 +9914,8 @@
   </permission-map>
 
   <permission-map name="View" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
@@ -10235,8 +10235,8 @@
   <exit-transition transition_id="manager-return-to-pending-discussions-with-program-manager" />
   <exit-transition transition_id="manager-return-to-request-for-proposals-under-liaison-review" />
   <permission-map name="Access contents information" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
+   <!-- <permission-role>Anonymous</permission-role> -->
+   <!-- <permission-role>Authenticated</permission-role> -->
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
@@ -10261,8 +10261,8 @@
   </permission-map>
 
   <permission-map name="View" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
@@ -10608,8 +10608,8 @@
   </permission-map>
 
   <permission-map name="View" acquired="True">
-   <!--<permission-role>Anonymous</permission-role>-->
-   <!--<permission-role>Authenticated</permission-role>-->
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
    <permission-role>Site Administrator</permission-role>
    <permission-role>Mgmt_Manager</permission-role>
    <permission-role>Mgmt_Coordinator</permission-role>
