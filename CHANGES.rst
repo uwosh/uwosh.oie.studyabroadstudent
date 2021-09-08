@@ -5,7 +5,8 @@ Changelog
 1.0.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Made permission changes for programs in discoverable state to be able to be viewd anonymously
+- Upgrade step and create anonymous user for impersonator
 
 
 1.0.4 (2021-08-27)
