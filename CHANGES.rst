@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.5 (unreleased)
+1.0.5 (2021-09-08)
 ------------------
 
 - Made permission changes for programs in discoverable state to be able to be viewd anonymously
