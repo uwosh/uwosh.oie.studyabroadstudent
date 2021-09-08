@@ -158,6 +158,10 @@ def create_generic_accounts(portal):
     _create_account('brian.duncan+Participant_Applicant@wildcardcorp.com',
                     'Participant_Applicant', ['Participant_Applicant'])
 
+    # generic
+    _create_account('brian.duncan+Anonymous@wildcardcorp.com',
+                    'Anonymous_User', ['Anonymous'])
+
 
 def _generatePassword(length):
     return ''.join(

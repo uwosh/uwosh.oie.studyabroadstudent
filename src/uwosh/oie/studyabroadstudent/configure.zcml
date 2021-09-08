@@ -48,7 +48,7 @@
       source="1000"
       destination="1001"
       handler="uwosh.oie.studyabroadstudent.upgrades.reset_datagridfields"
-      sortkey="1"
+      sortkey="1001"
       profile="uwosh.oie.studyabroadstudent:default"
       />
 
@@ -58,7 +58,7 @@
       source="1001"
       destination="1002"
       handler="uwosh.oie.studyabroadstudent.upgrades.handle_richtext_description"
-      sortkey="1"
+      sortkey="1002"
       profile="uwosh.oie.studyabroadstudent:default"
       />
 
@@ -69,7 +69,7 @@
       destination="1003"
       handler="uwosh.oie.studyabroadstudent.upgrades.handle_files_upgrade"
       profile="uwosh.oie.studyabroadstudent:default"
-      sortkey="1"
+      sortkey="1003"
       />
   <genericsetup:registerProfile
     name="1_0_4"
@@ -84,8 +84,24 @@
     source="*"
     destination="1004"
     profile="uwosh.oie.studyabroadstudent:default"
-    handler="uwosh.oie.studyabroadstudent.upgrades.upgrade_to_1004"
-    sortkey="1"
+    handler=".upgrades.upgrade_to_1004"
+    sortkey="1004"
+    />
+  <genericsetup:registerProfile
+    name="1_0_5"
+    title="uwosh.oie.studyabroadstudent 1.0.5 profile"
+    directory="profiles/1005"
+    description="1005 updates some permissions to allow searchable programs to be viewed anonymously"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+  <genericsetup:upgradeStep
+    title="Upgrade OIE Study Abroad Student to 1.0.5"
+    description="updates some permissions to allow searchable programs to be viewed anonymously"
+    source="*"
+    destination="1005"
+    profile="uwosh.oie.studyabroadstudent:default"
+    handler=".upgrades.upgrade_to_1004"
+    sortkey="1005"
     />
 
 </configure>

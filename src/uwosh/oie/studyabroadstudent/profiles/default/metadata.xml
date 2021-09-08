@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <version>1004</version>
+  <version>1005</version>
   <dependencies>
     <dependency>profile-plone.app.dexterity:default</dependency>
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
     <dependency>profile-collective.easyform:default</dependency>
-    <!-- <dependency>profile-Products.ContentWellPortlets:default</dependency> -->
     <dependency>profile-plone.app.iterate:default</dependency>
-    <!-- <dependency>profile-plone.app.workflowmanager:default</dependency> -->
     <dependency>profile-collective.impersonate:default</dependency>
   </dependencies>
 </metadata>
