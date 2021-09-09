@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.6 (unreleased)
+1.0.6 (2021-09-09)
 ------------------
 
 - change program_leader on discoverprograms to be a last name instead of UID
