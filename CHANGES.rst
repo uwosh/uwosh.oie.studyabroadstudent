@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.7 (unreleased)
+1.0.7 (2021-09-09)
 ------------------
 
 - fix programsearch typo
