@@ -1,55 +1,70 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      lang="en"
-      metal:use-macro="context/main_template/macros/master"
-      i18n:domain="uwosh.oie.studyabroadstudent">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xml:lang="en"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  lang="en"
+  metal:use-macro="context/main_template/macros/master"
+  i18n:domain="uwosh.oie.studyabroadstudent"
+>
+
 <body>
 
-<metal:main fill-slot="main">
+  <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
-        <div tal:replace="structure provider:plone.abovecontenttitle" />
-        <h1 class="documentFirstHeading" tal:content="context/title" />
-        <div tal:replace="structure provider:plone.belowcontenttitle" />
-        <p class="documentDescription" tal:content="context/description" />
-        <div tal:replace="structure provider:plone.abovecontentbody" />
+      <div tal:replace="structure provider:plone.abovecontenttitle" />
+      <h1
+        class="documentFirstHeading"
+        tal:content="context/title"
+      />
+      <div tal:replace="structure provider:plone.belowcontenttitle" />
+      <p
+        class="documentDescription"
+        tal:content="context/description"
+      />
+      <div tal:replace="structure provider:plone.abovecontentbody" />
 
-	<tal:block repeat="widget view/widgets/values">
-	    <div class="field" tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description', 'primary_contact',)">
-		<label tal:content="widget/label" />
-		:
-		<span tal:content="structure widget/render" />
-	    </div>
+      <tal:block repeat="widget view/widgets/values">
+        <div
+          class="field"
+          tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description', 'primary_contact',)"
+        >
+          <label tal:content="widget/label" />
+          :
+          <span tal:content="structure widget/render" />
+        </div>
 
-	    <div class="field" tal:condition="python:widget.__name__ in ('primary_contact',)">
-		<label tal:content="widget/label" />
-		:
-		<span tal:content="structure view/primary_contact" />
-	    </div>
+        <div
+          class="field"
+          tal:condition="python:widget.__name__ in ('primary_contact',)"
+        >
+          <label tal:content="widget/label" />
+          :
+          <span tal:content="structure view/primary_contact" />
+        </div>
 
-	</tal:block>
+      </tal:block>
 
-	<fieldset tal:repeat="group view/groups"
-		  tal:attributes="id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')">
-	    <legend tal:content="group/label" />
-	    <div class="field" tal:repeat="widget group/widgets/values">
-		<label tal:content="widget/label" />
-		:
-		<div tal:content="structure widget/render" />
-	    </div>
-	</fieldset>
+      <fieldset
+        tal:repeat="group view/groups"
+        tal:attributes="id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')"
+      >
+        <legend tal:content="group/label" />
+        <div
+          class="field"
+          tal:repeat="widget group/widgets/values"
+        >
+          <label tal:content="widget/label" />
+          :
+          <div tal:content="structure widget/render" />
+        </div>
+      </fieldset>
 
-	<fieldset id="folder-listing">
-	    <legend>Contents</legend>
-	    <tal:block define="listing_macro context/folder_listing/macros/listing">
-		<metal:use_macro use-macro="listing_macro" />
-	    </tal:block>
-	</fieldset>
-
-	      <div tal:replace="structure provider:plone.belowcontentbody" />
-	  </tal:main-macro>
-      </metal:main>
+      <div tal:replace="structure provider:plone.belowcontentbody" />
+    </tal:main-macro>
+  </metal:main>
 
 </body>
+
 </html>
