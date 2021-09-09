@@ -173,5 +173,3 @@ def upgrade_to_1005(context, logger=None):
         'Anonymous_User',
         ['Anonymous'],
     )
-
-
