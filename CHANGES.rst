@@ -5,7 +5,9 @@ Changelog
 1.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- change program_leader on discoverprograms to be a last name instead of UID
+- remove pt reference to folder_listing for cooperatingpartnerview and reformat
+- change default site title
 
 
 1.0.5 (2021-09-08)
