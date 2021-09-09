@@ -5,7 +5,7 @@ Changelog
 1.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- fix programsearch typo
 
 
 1.0.6 (2021-09-09)

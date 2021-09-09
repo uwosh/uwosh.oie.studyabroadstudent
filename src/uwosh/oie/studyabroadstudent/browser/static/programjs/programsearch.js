@@ -341,15 +341,23 @@ require([
 
       renderPrograms: function(){
         const activeProgramCount = this.getActiveProgramCount();
-        if (activeProgramCount === 0) {
-          return this.props.noMatchingPrograms;
+        let programsFoundText = '';
+        switch(activeProgramCount){
+          case 0:
+            return this.props.noMatchingPrograms;
+          case 1:
+            programsFoundText = '1 program found';
+            break;
+          default:
+            programsFoundText = `${activeProgramCount} programs found`;
+            break;
         }
         return D.div(
           { className: 'program-listing' },
           [
              D.span(
               { className: 'oie-search-counter col-xs-12' },
-              `${activeProgramCount} programs(s) found`,
+              programsFoundText,
             ),
             this.getProgramViews(),
             this.renderPaging(),
