@@ -1,5 +1,6 @@
 from io import StringIO
 from plone import api
+from plone.api.exc import MissingParameterError
 from plone.app.contenttypes.browser.folder import FolderView
 from plone.app.uuid.utils import uuidToObject
 from plone.autoform.interfaces import OMITTED_KEY
@@ -174,13 +175,13 @@ class ProgramSearchView(BrowserView):
                     'type': brain.program_type,
                     'term': brain.term,
                     'college': brain.college_or_unit,
-                    'leader': brain.program_leader,
+                    'leader': api.content.get(UID=brain.program_leader).last_name,
                     'calendarYear': brain.calendar_year,
                     'countries': json.loads(brain.countries),
                     'image': brain.image,
                 }
                 programs.append(program)
-            except AttributeError:
+            except (AttributeError, MissingParameterError):
                 logger.warning(
                     f'Excluding program {brain.Title} from search view, '
                     'not all searchable fields were indexed.'
