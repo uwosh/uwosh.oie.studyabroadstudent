@@ -165,27 +165,28 @@ class ProgramSearchView(BrowserView):
             portal_type='OIEStudyAbroadProgram',
             review_state=STATES_FOR_DISPLAYING_PROGRAMS,
         )
-        for brain in brains:
-            try:
-                program = {
-                    'title': brain.Title,
-                    'description': brain.Description,
-                    'uid': brain.UID,
-                    'url': brain.getURL(),
-                    'type': brain.program_type,
-                    'term': brain.term,
-                    'college': brain.college_or_unit,
-                    'leader': api.content.get(UID=brain.program_leader).last_name,
-                    'calendarYear': brain.calendar_year,
-                    'countries': json.loads(brain.countries),
-                    'image': brain.image,
-                }
-                programs.append(program)
-            except (AttributeError, MissingParameterError):
-                logger.warning(
-                    f'Excluding program {brain.Title} from search view, '
-                    'not all searchable fields were indexed.'
-                )
+        with api.env.adopt_roles(['Manager']):
+            for brain in brains:
+                try:
+                    program = {
+                        'title': brain.Title,
+                        'description': brain.Description,
+                        'uid': brain.UID,
+                        'url': brain.getURL(),
+                        'type': brain.program_type,
+                        'term': brain.term,
+                        'college': brain.college_or_unit,
+                        'leader': api.content.get(UID=brain.program_leader).last_name,
+                        'calendarYear': brain.calendar_year,
+                        'countries': json.loads(brain.countries),
+                        'image': brain.image,
+                    }
+                    programs.append(program)
+                except (AttributeError, MissingParameterError):
+                    logger.warning(
+                        f'Excluding program {brain.Title} from search view, '
+                        'not all searchable fields were indexed.'
+                    )
         return json.dumps(programs, default=handle_missing)
 
 
@@ -400,7 +401,7 @@ class CreatedView(DefaultView):
                     'email': email,
                     'programName': program_name,
                 }
-                with api.env.adopt_roles(roles='Manager'):
+                with api.env.adopt_roles(roles=['Manager']):
                     obj = api.content.create(
                         type='OIEStudyAbroadParticipant',
                         container=participants_folder,
