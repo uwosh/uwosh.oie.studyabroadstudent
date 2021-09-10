@@ -169,28 +169,43 @@
 
       <div class="program-contacts col-md-9">
         <h4>Program Contact:</h4>
-        <div class="liaison" tal:define="contact view/liaison" tal:condition="view/liaison">
-          <b><a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact name]</a></b>
-          <span tal:content="contact/office_building">[office building]</span>
-          <span tal:content="contact/office_room">[office room]</span>;
-          <span tal:content="contact/email">[email]</span>
+        <div class="liaison" tal:define="liaison view/liaison" tal:condition="liaison">
+          <b
+            tal:define="absolute_url liaison/absolute_url|nothing;
+                        title liaison/title|nothing;"
+            tal:condition="python: absolute_url and title"
+            >
+            <a tal:attributes="href absolute_url" tal:content="title">[liaison name]</a>
+          </b>
+          <span tal:content="python: getattr(liaison, 'office_building', '')">[office building]</span>
+          <span tal:content="python: getattr(liaison, 'office_room', '')">[office room]</span>;
+          <span tal:content="python: getattr(liaison, 'email', '')">[email]</span>
           (liaison)
         </div>
-        <div class="leader" tal:define="contact view/leader" tal:condition="view/leader">
-          <b><a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact name]</a></b>
-          <span tal:content="contact/office_building">[office building]</span>
-          <span tal:content="contact/office_room">[office room]</span>;
-          <span tal:content="contact/email">[email]</span>
+        <div class="leader" tal:define="leader view/leader" tal:condition="leader">
+          <b
+            tal:define="absolute_url leader/absolute_url|nothing;
+                        title leader/title|nothing;"
+            tal:condition="python: absolute_url and title"
+          ><a tal:attributes="href absolute_url" tal:content="title">[leader name]</a></b>
+          <span tal:content="python: getattr(leader, 'office_building', '')">[office building]</span>
+          <span tal:content="python: getattr(leader, 'office_room', '')">[office room]</span>;
+          <span tal:content="python: getattr(leader, 'email', '')">[email]</span>
           (leader)
         </div>
-        <div class="coleaders" tal:repeat="contact view/coleaders" tal:condition="view/coleaders">
-          <div tal:condition="python: contact.title != '*Nobody'">
-            <b><a tal:attributes="href contact/absolute_url" tal:content="contact/title">[contact
-              name]</a></b>
-            <span tal:content="contact/office_building">[office building]</span>
-            <span tal:content="contact/office_room">[office room]</span>;
-            <span tal:content="contact/email">[email]</span>
-            (coleader)
+        <div class="coleaders" tal:repeat="coleader view/coleaders" tal:condition="view/coleaders">
+          <div
+            tal:define="absolute_url coleader/absolute_url|nothing;
+                        title coleader/title|nothing;"
+            tal:condition="title != '*Nobody'"
+          >
+            <b tal:condition="python: absolute_url and title">
+              <a tal:attributes="href absolute_url" tal:content="title">[coleader name]</a>
+            </b>
+            <span tal:content="python: getattr(coleader, 'office_building', '')">[office building]</span>
+            <span tal:content="python: getattr(coleader, 'office_room', '')">[office room]</span>;
+            <span tal:content="python: getattr(coleader, 'email', '')">[email]</span>
+          (coleader)
           </div>
         </div>
       </div>
