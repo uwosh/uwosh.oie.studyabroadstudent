@@ -12,6 +12,7 @@ from Products.Five import BrowserView
 from uwosh.oie.studyabroadstudent.constants import STATES_FOR_DISPLAYING_PROGRAMS
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
 from uwosh.oie.studyabroadstudent.reporting import ReportUtil
+from uwosh.oie.studyabroadstudent.utils import with_manager_permissions
 from zope.interface import Interface, alsoProvides
 
 import csv
@@ -19,7 +20,6 @@ import json
 import logging
 import Missing
 import os
-
 
 logger = logging.getLogger('uwosh.oie.studyabroadstudent')
 
@@ -46,11 +46,11 @@ class ProgramView(DefaultView, FolderView):
         roles = api.user.get_roles(username=current.id)
         return 'Manager' in roles or 'Site Administrator' in roles
 
+    @with_manager_permissions
     def country_info(self):
         """Retrieve info for all countries associated with the program"""
-        country_info_html = '<dl>'
-        countries = self.context.countries
-        for country_name in countries:
+        country_info_html = ''
+        for country_name in self.context.countries:
             brains = api.content.find(
                 portal_type='OIECountry',
                 Title=country_name,
@@ -58,32 +58,35 @@ class ProgramView(DefaultView, FolderView):
             if brains:
                 country = brains[0].getObject()
                 country_url = country.absolute_url()
-                if country_url is None:
-                    country_url_atag = '(missing country URL)'
-                else:
-                    country_url_atag = f'<a href="{country_url}">{country_name}</a>'
                 timezone_url = country.timezone_url
-                if timezone_url is None:
-                    timezone_url_atag = '(missing timezone URL)'
-                else:
-                    timezone_url_atag = f'<a href="{timezone_url}">time zone</a>'
                 cdc_info_url = country.cdc_info_url
-                if cdc_info_url is None:
-                    cdc_info_url_atag = '(missing CDC URL)'
-                else:
-                    cdc_info_url_atag = f'<a href="{cdc_info_url}">CDC</a>'
                 state_dept_info_url = country.state_dept_info_url
-                if state_dept_info_url is None:
-                    state_dept_info_url_atag = '(missing State Dept URL)'
-                else:
-                    state_dept_info_url_atag = f'<a href="{state_dept_info_url}">State Dept.</a>'
+                country_url_atag = (
+                    f'<a href="{country_url}">{country_name}</a>'
+                    if country_url
+                    else '(missing country URL)'
+                )
+                timezone_url_atag = (
+                    f'<a href="{timezone_url}">time zone</a>'
+                    if timezone_url
+                    else '(missing timezone URL)'
+                )
+                cdc_info_url_atag = (
+                    f'<a href="{cdc_info_url}">CDC</a>'
+                    if cdc_info_url
+                    else '(missing CDC URL)'
+                )
+                state_dept_info_url_atag = (
+                    f'<a href="{state_dept_info_url}">State Dept.</a>'
+                    if state_dept_info_url
+                    else '(missing State Dept URL)'
+                )
                 country_info_html += \
                     f'<dt>{country_url_atag}</dt><dd>{cdc_info_url_atag}, ' + \
                     f'{state_dept_info_url_atag}, {timezone_url_atag}</dd>'
             else:
                 country_info_html += f'<dt>{country_name} (missing country info)</dt>'
-        country_info_html += '</dl>'
-        return country_info_html
+        return f'<dl>{country_info_html}</dl>'
 
     def uwo_logo(self):
         uwo_logo_data = api.portal.get_registry_record(
@@ -101,54 +104,48 @@ class ProgramView(DefaultView, FolderView):
         )
         return footer_text
 
+    @with_manager_permissions
     def liaison(self):
-        liaison = None
-        if self.context.liaison:
-            liaison = uuidToObject(self.context.liaison)
-        return liaison
+        liaison = getattr(self.context, 'liaison', None)
+        return None if not liaison else uuidToObject(liaison)
 
+    @with_manager_permissions
     def leader(self):
-        leader = None
-        if self.context.program_leader:
-            leader = uuidToObject(self.context.program_leader)
-        return leader
+        leader = getattr(self.context, 'program_leader', None)
+        return None if not leader else uuidToObject(leader)
 
+    @with_manager_permissions
     def coleaders(self):
-        coleaders = []
-        if (
-            self.context.program_coleaders and
-            len(self.context.program_coleaders) > 0
-        ):
-            coleaders = [
-                uuidToObject(coleader['coleader'])
-                for coleader
-                in self.context.program_coleaders
-            ]
-        return coleaders
+        coleaders = getattr(self.context, 'program_coleaders', [])
+        return [
+            uuidToObject(coleader['coleader'])
+            for coleader
+            in coleaders
+        ]
 
+    @with_manager_permissions
     def calendar_year(self):
-        with api.env.adopt_roles(["Manager"]):
-            year_uid = self.context.calendar_year
-            if year_uid:
-                year = api.content.get(UID=year_uid)
-                if year:
-                    return year
+        year_uid = getattr(self.context, 'calendar_year', 'wont-be-found')
+        return api.content.get(UID=year_uid)
 
+    @with_manager_permissions
     def housing(self):
         brains = api.content.find(
             context=self.context,
             portal_type='OIETransition',
         )
-        locations = [brain.getObject() for brain in brains]
-        return set([location.accommodation for location in locations])
+        return set([
+            brain.getObject().accomodation
+            for brain in brains
+            if brain.getObject().accomodation
+        ])
 
     def has_lead_image(self):
         try:
-            if (
+            return (
                 getattr(self.context, 'image', None) and
                 self.context.image.size > 0
-            ):
-                return True
+            )
         except TypeError:
             return False
 
@@ -158,6 +155,7 @@ class ProgramView(DefaultView, FolderView):
 
 class ProgramSearchView(BrowserView):
 
+    @with_manager_permissions
     def get_program_data(self):
         programs = []
         catalog = api.portal.get_tool('portal_catalog')
@@ -165,28 +163,27 @@ class ProgramSearchView(BrowserView):
             portal_type='OIEStudyAbroadProgram',
             review_state=STATES_FOR_DISPLAYING_PROGRAMS,
         )
-        with api.env.adopt_roles(['Manager']):
-            for brain in brains:
-                try:
-                    program = {
-                        'title': brain.Title,
-                        'description': brain.Description,
-                        'uid': brain.UID,
-                        'url': brain.getURL(),
-                        'type': brain.program_type,
-                        'term': brain.term,
-                        'college': brain.college_or_unit,
-                        'leader': api.content.get(UID=brain.program_leader).last_name,
-                        'calendarYear': brain.calendar_year,
-                        'countries': json.loads(brain.countries),
-                        'image': brain.image,
-                    }
-                    programs.append(program)
-                except (AttributeError, MissingParameterError):
-                    logger.warning(
-                        f'Excluding program {brain.Title} from search view, '
-                        'not all searchable fields were indexed.'
-                    )
+        for brain in brains:
+            try:
+                program = {
+                    'title': brain.Title,
+                    'description': brain.Description,
+                    'uid': brain.UID,
+                    'url': brain.getURL(),
+                    'type': brain.program_type,
+                    'term': brain.term,
+                    'college': brain.college_or_unit,
+                    'leader': api.content.get(UID=brain.program_leader).last_name,
+                    'calendarYear': brain.calendar_year,
+                    'countries': json.loads(brain.countries),
+                    'image': brain.image,
+                }
+                programs.append(program)
+            except (AttributeError, MissingParameterError):
+                logger.warning(
+                    f'Excluding program {brain.Title} from search view, '
+                    'not all searchable fields were indexed.'
+                )
         return json.dumps(programs, default=handle_missing)
 
 
@@ -385,6 +382,7 @@ class CreatedView(DefaultView):
                 pass  # Show some error message
         return super().__call__()
 
+    @with_manager_permissions
     def create_participant(self):
         program_name = self.context.title
         first = self.request.get('first', None)
@@ -401,14 +399,13 @@ class CreatedView(DefaultView):
                     'email': email,
                     'programName': program_name,
                 }
-                with api.env.adopt_roles(roles=['Manager']):
-                    obj = api.content.create(
-                        type='OIEStudyAbroadParticipant',
-                        container=participants_folder,
-                        title=f'{first} {last}',
-                        **data,
-                    )
-                    api.content.transition(obj, 'submit')  # go ahead to step I
+                obj = api.content.create(
+                    type='OIEStudyAbroadParticipant',
+                    container=participants_folder,
+                    title=f'{first} {last}',
+                    **data,
+                )
+                api.content.transition(obj, 'submit')  # go ahead to step I
                 return f'{obj.absolute_url()}/edit'
             except Exception as e:  # noqa: B902
                 logger.warning('Could not create partipant application.')
