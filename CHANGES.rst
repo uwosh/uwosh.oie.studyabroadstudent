@@ -5,7 +5,8 @@ Changelog
 1.0.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- additional manager-role permission for associated program view content items
+- with_manager_permissions util decorator
 
 
 1.0.8 (2021-09-09)
