@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.8 (unreleased)
+1.0.8 (2021-09-09)
 ------------------
 
 - fix permissions for loading programsearch details while anonymous

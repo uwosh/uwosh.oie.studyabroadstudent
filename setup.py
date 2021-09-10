@@ -13,7 +13,7 @@ long_description = '\n\n'.join([
 
 setup(
     name='uwosh.oie.studyabroadstudent',
-    version='1.0.8.dev0',
+    version='1.0.8',
     description='Dexterity content type for study abroad programs and student '
                 'applications for the University of Wisconsin Oshkosh Office '
                 'of International Education',
