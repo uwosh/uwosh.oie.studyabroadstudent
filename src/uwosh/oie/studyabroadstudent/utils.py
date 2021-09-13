@@ -3,7 +3,6 @@ from plone import api
 
 
 def get_object_from_uid(uid='wont_be_found'):
-    print(uid)
     one = uuidToObject(uid)
     return (
         one
