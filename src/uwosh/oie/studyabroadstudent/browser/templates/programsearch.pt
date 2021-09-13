@@ -10,7 +10,7 @@
   </metal:javascript>
   <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
-      <div id="oie-search" tal:attributes="oie-program-data view/get_program_data">
+      <div id="oie-search" tal:attributes="oie-discoverable-program-data-url string:${portal_url|nothing}/@@discoverable-program-data">
         <div id="oie-search-component"/>
       </div>
     </tal:main-macro>

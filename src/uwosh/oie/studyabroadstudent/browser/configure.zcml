@@ -155,7 +155,7 @@
     layer="..interfaces.IUwoshOieStudyabroadstudentLayer"
     />
 
-    <browser:page
+  <browser:page
     name="discover"
     for="..interfaces.IOIEHomePage"
     class=".views.ProgramSearchView"
@@ -163,5 +163,14 @@
     permission="zope2.View"
     layer="..interfaces.IUwoshOieStudyabroadstudentLayer"
   />
+
+  <browser:page
+    name="discoverable-program-data"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".views.ProgramSearchData"
+    layer="..interfaces.IUwoshOieStudyabroadstudentLayer"
+    permission="zope2.View"
+  />
+
 
 </configure>
