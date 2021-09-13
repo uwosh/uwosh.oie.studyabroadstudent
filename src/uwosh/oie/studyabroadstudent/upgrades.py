@@ -68,10 +68,10 @@ def reset_datagridfields(context, logger=None):
                 RichTextValue(
                     raw='<em>You can add transitions after saving this program</em>',  # noqa
                 )
-        logger.info('updated rich text fields for {0}'.format(obj.title))
+        logger.info(f'updated rich text fields for {obj.title}')
         count += 1
 
-    logger.info('{0} items migrated'.format(count))
+    logger.info(f'{count} items migrated')
 
 
 def handle_richtext_description(context, logger=None):
@@ -90,9 +90,9 @@ def handle_richtext_description(context, logger=None):
             obj.rich_description = description
             transformer = ITransformer(obj)
             obj.description = transformer(obj.description, 'text/plain')
-        logger.info('converted rich description for {0}'.format(obj.title))
+        logger.info(f'converted rich description for {obj.title}')
         count += 1
-    logger.info('{0} items migrated'.format(count))
+    logger.info(f'{count} items migrated')
 
 
 def handle_files_upgrade(context, logger=None):
@@ -173,3 +173,17 @@ def upgrade_to_1005(context, logger=None):
         'Anonymous_User',
         ['Anonymous'],
     )
+
+
+def reindex_programs(context, logger=None):
+    if logger is None:
+        # Called as upgrade step: define our own logger.
+        logger = logging.getLogger('uwosh.oie.studyabroadstudent')
+    catalog = api.portal.get_tool('portal_catalog')
+    programs = [
+        brain.getObject()
+        for brain in catalog(portal_type='OIEStudyAbroadProgram')
+    ]
+    for program in programs:
+        logger.info(f'Reindexing {program.title}')
+        program.reindexObject()

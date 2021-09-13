@@ -19,22 +19,22 @@
   <include package=".browser" />
 
   <genericsetup:registerProfile
-      name="default"
-      title="uwosh.oie.studyabroadstudent"
-      directory="profiles/default"
-      description="Installs the uwosh.oie.studyabroadstudent add-on."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.post_install"
-      />
+    name="default"
+    title="uwosh.oie.studyabroadstudent"
+    directory="profiles/default"
+    description="Installs the uwosh.oie.studyabroadstudent add-on."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    post_handler=".setuphandlers.post_install"
+  />
 
   <genericsetup:registerProfile
-      name="uninstall"
-      title="uwosh.oie.studyabroadstudent (uninstall)"
-      directory="profiles/uninstall"
-      description="Uninstalls the uwosh.oie.studyabroadstudent add-on."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.uninstall"
-      />
+    name="uninstall"
+    title="uwosh.oie.studyabroadstudent (uninstall)"
+    directory="profiles/uninstall"
+    description="Uninstalls the uwosh.oie.studyabroadstudent add-on."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    post_handler=".setuphandlers.uninstall"
+  />
 
 
   <utility
@@ -43,41 +43,41 @@
 
 
   <genericsetup:upgradeStep
-      title="Reset some data grid fields to empty rich text fields"
-      description="Some data grid fields were replaced by a rich text field showing new contained objects"
-      source="1000"
-      destination="1001"
-      handler="uwosh.oie.studyabroadstudent.upgrades.reset_datagridfields"
-      sortkey="1001"
-      profile="uwosh.oie.studyabroadstudent:default"
-      />
+    title="Reset some data grid fields to empty rich text fields"
+    description="Some data grid fields were replaced by a rich text field showing new contained objects"
+    source="1000"
+    destination="1001"
+    handler="uwosh.oie.studyabroadstudent.upgrades.reset_datagridfields"
+    sortkey="1001"
+    profile="uwosh.oie.studyabroadstudent:default"
+  />
 
   <genericsetup:upgradeStep
-      title="Convert richtext Dublin Core description in Program type"
-      description="Convert richtext description field to text, and move the rich text value to the new rich_description field"
-      source="1001"
-      destination="1002"
-      handler="uwosh.oie.studyabroadstudent.upgrades.handle_richtext_description"
-      sortkey="1002"
-      profile="uwosh.oie.studyabroadstudent:default"
-      />
+    title="Convert richtext Dublin Core description in Program type"
+    description="Convert richtext description field to text, and move the rich text value to the new rich_description field"
+    source="1001"
+    destination="1002"
+    handler="uwosh.oie.studyabroadstudent.upgrades.handle_richtext_description"
+    sortkey="1002"
+    profile="uwosh.oie.studyabroadstudent:default"
+  />
 
-      <genericsetup:upgradeStep
-      title="Upgrade OIE Study Abroad Student to 1.0.3"
-      description="Fixes file and image widgets"
-      source="*"
-      destination="1003"
-      handler="uwosh.oie.studyabroadstudent.upgrades.handle_files_upgrade"
-      profile="uwosh.oie.studyabroadstudent:default"
-      sortkey="1003"
-      />
+  <genericsetup:upgradeStep
+    title="Upgrade OIE Study Abroad Student to 1.0.3"
+    description="Fixes file and image widgets"
+    source="*"
+    destination="1003"
+    handler="uwosh.oie.studyabroadstudent.upgrades.handle_files_upgrade"
+    profile="uwosh.oie.studyabroadstudent:default"
+    sortkey="1003"
+  />
   <genericsetup:registerProfile
     name="1_0_4"
     title="uwosh.oie.studyabroadstudent 1.0.4 profile"
     directory="profiles/1004"
     description="1004 adds some indices"
     provides="Products.GenericSetup.interfaces.EXTENSION"
-    />
+  />
   <genericsetup:upgradeStep
     title="Upgrade OIE Study Abroad Student to 1.0.4"
     description="Adds some program indices"
@@ -86,14 +86,14 @@
     profile="uwosh.oie.studyabroadstudent:default"
     handler=".upgrades.upgrade_to_1004"
     sortkey="1004"
-    />
+  />
   <genericsetup:registerProfile
     name="1_0_5"
     title="uwosh.oie.studyabroadstudent 1.0.5 profile"
     directory="profiles/1005"
     description="1005 updates some permissions to allow searchable programs to be viewed anonymously"
     provides="Products.GenericSetup.interfaces.EXTENSION"
-    />
+  />
   <genericsetup:upgradeStep
     title="Upgrade OIE Study Abroad Student to 1.0.5"
     description="updates some permissions to allow searchable programs to be viewed anonymously"
@@ -102,6 +102,15 @@
     profile="uwosh.oie.studyabroadstudent:default"
     handler=".upgrades.upgrade_to_1004"
     sortkey="1005"
-    />
+  />
+  <genericsetup:upgradeStep
+    title="Reindex all programs"
+    description="Some custom indexers get out of sync. This should update them for now."
+    source="1005"
+    destination="1006"
+    handler="uwosh.oie.studyabroadstudent.upgrades.reindex_programs"
+    sortkey="1006"
+    profile="uwosh.oie.studyabroadstudent:default"
+  />
 
 </configure>
