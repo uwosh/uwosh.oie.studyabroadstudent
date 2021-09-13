@@ -3,6 +3,7 @@ from plone.app.uuid.utils import uuidToObject
 from plone.indexer import indexer as indexer_wrapper
 from plone.indexer.decorator import indexer
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant, IOIEStudyAbroadProgram
+from uwosh.oie.studyabroadstudent.utils import get_object_from_uid
 
 import json
 
@@ -37,7 +38,7 @@ program_type = programIndexer(IndexerFactory('program_type'))
 
 @indexer(IOIEStudyAbroadProgram)
 def calendar_year(program):
-    cal = uuidToObject(program.calendar_year)
+    cal = get_object_from_uid(program.calendar_year)
     return cal.title
 
 

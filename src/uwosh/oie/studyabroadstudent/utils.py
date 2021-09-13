@@ -1,10 +1,12 @@
-from functools import wraps
-from plone.api.env import adopt_roles
+from plone.app.uuid.utils import uuidToObject
+from plone import api
 
 
-def with_manager_permissions(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        with adopt_roles(['Manager']):
-            func(*args, **kwargs)
-    return wrapper
+def get_object_from_uid(uid='wont_be_found'):
+    print(uid)
+    one = uuidToObject(uid)
+    return (
+        one
+        if one
+        else api.content.get(UID=uid)
+    )
