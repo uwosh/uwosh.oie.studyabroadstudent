@@ -5,7 +5,7 @@ Changelog
 1.0.11 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Discover programs view changes to simplify semantics and use css grid
 
 
 1.0.10 (2021-09-13)

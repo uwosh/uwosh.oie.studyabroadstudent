@@ -320,39 +320,33 @@ require([
       getProgramViews: function() {
         const views = this.state.activePrograms
           .slice(...this.getPagingIndices())
-          .map(program => {
+          .map((program,index) => {
             const imgSrc = program.image || '/oie/++theme++oie-study-abroad-theme/img/logo.png';
             const title = D.div(
-              {className: 'search-program-title'},
+              {className: `search-program-title search-program-title-${index + 1}`},
               D.a({href: program.url}, program.title),
             );
-          const programImage = D.div(
-            {className: 'image-container'},
-            [D.img({
-                className: 'search-program-image focuspoint',
-                alt: '',
-                src: imgSrc
-              })]
-            );
+            const programImage = D.img({
+              className: `search-program-image search-program-image-${index + 1} focuspoint`,
+              alt: '',
+              src: imgSrc,
+            });
             const description = D.p(
-              {className: 'search-program-description'},
+              {className: `search-program-description search-program-description-${index + 1}`},
               program.description,
             );
             const more = D.a(
-              { className: 'search-program-link', href: program.url },
+              { className: `search-program-link search-program-link-${index + 1}`, href: program.url },
             'More...',
             );
             return D.div(
-              { className: 'search-program-view col-lg-2 col-md-3 col-sm-4' },
-              D.div(
-                { className: 'program-margin' },
-                [
-                  title,
-                  programImage,
-                  description,
-                  more,
-                ],
-              ),
+              { className: 'search-program-view' },
+              [
+                title,
+                programImage,
+                description,
+                more,
+              ],
             );
           });
         return D.div(
