@@ -5,7 +5,14 @@ Changelog
 1.0.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- changes to allow unauthenticated users to view necessary info associated with,
+  but not directly contained within discoverable programs (via a uid linking to another object)
+- start using get_object_from_uid
+- refactor discover programs form to fetch data from endpoint
+- discover programs paging tweak
+- various and multiple formatting changes
+- upgrade step to reindex programs
+- reset currentPage of discover programs form if out of bounds after updating filter
 
 
 1.0.9 (2021-09-10)
