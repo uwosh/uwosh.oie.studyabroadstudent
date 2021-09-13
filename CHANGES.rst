@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.10 (unreleased)
+1.0.10 (2021-09-13)
 -------------------
 
 - changes to allow unauthenticated users to view necessary info associated with,
