@@ -1,101 +1,117 @@
+
+
 require([
   '++plone++uwosh.oie.studyabroadstudent/libs/react/react.min',
 ], function(R) {
-  var D = R.DOM;
+  const D = R.DOM;
+  const ProgramSearchComponent = R.createClass({
 
-  var ProgramSearchComponent = R.createClass({
-      getInitialState: function(){
-        return {
-          filters: {...this.props.defaultFilters},
-          markers: [],
-          currentPage: 1,
-          perPage: 12,
-          activePrograms: [...this.props.programs],
-        };
-      },
+    getInitialState: function(){
+      const defaultFilters = {
+        type: false,
+        title: null,
+        calendarYear: false,
+        countries: false,
+        term: false,
+        college: false,
+        leader: false,
+      };
+      const noMatchingPrograms = D.div(
+        {},
+        [ D.span({}, ['No Matching Programs'])]
+      );
+      return {
+        noMatchingPrograms,
+        defaultFilters,
+        filters: {...defaultFilters},
+        currentPage: 1,
+        perPage: 12,
+        titles: [],
+        years: [],
+        terms: [],
+        leaders: [],
+        colleges: [],
+        types: [],
+        countries: [],
+        programs: [],
+        activePrograms: [],
+        nullValues: [
+          null,
+          'null',
+          'N/A',
+          'n/a',
+          'na',
+          ''
+        ],
+        trueValues: [
+          true,
+          'true',
+          'True',
+          'Yes',
+          'yes',
+          'Y',
+          'y'
+        ],
+      };
+    },
 
-      getDefaultProps: function(){
-        const el = document.getElementById('oie-search');
-        const program_data = el.getAttribute('oie-program-data');
-        const programs = JSON.parse(program_data);
-        const titles = [
-          ...new Set(
-            programs.map(program=>program.title)
-          )
-        ];
-        const years = [
-          ...new Set(
-            programs.map(program=>program.calendarYear)
-          )
-        ];
-        const types = [
-          ...new Set(
-            programs.map(program=>program.type)
-          )
-        ];
-        const countries = [
-          ...new Set(
-            programs.flatMap(program=>program.countries)
-          )
-        ];
-        const terms = [
-          ...new Set(
-            programs.flatMap(program=>program.term)
-          )
-        ];
-        const colleges = [
-          ...new Set(
-            programs.flatMap(program=>program.college)
-          )
-        ];
-        const leaders = [
-          ...new Set(
-            programs.flatMap(program=>program.leader)
-          )
-        ];
-        const noMatchingPrograms = D.div(
-          {},
-          [ D.span({}, ['No Matching Programs'])]
-        );
-        return {
-          programs,
-          titles,
-          years,
-          terms,
-          leaders,
-          colleges,
-          types,
-          countries,
-          noMatchingPrograms,
-          portal_url: document.body.getAttribute('data-portal-url'),
-          defaultFilters: {
-            type: false,
-            title: null,
-            calendarYear: false,
-            countries: false,
-            term: false,
-            college: false,
-            leader: false,
-          },
-          nullValues: [
-            null,
-            'null',
-            'N/A',
-            'n/a',
-            'na',
-            ''
-          ],
-          trueValues: [
-            true,
-            'true',
-            'True',
-            'Yes',
-            'yes',
-            'Y',
-            'y'
-          ],
-        };
-      },
+    componentDidMount: async function(){
+      const portalUrl = document.body.getAttribute('data-portal-url');
+      const programDataUrl = `${portalUrl}/@@discoverable-program-data`
+      const response = await fetch(programDataUrl)
+      const programsJson = await response.json()
+      console.log(programsJson)
+      const programs = Array.from(programsJson)
+      const titles = [
+        ...new Set(
+          programs.map(program=>program.title)
+        )
+      ];
+      const years = [
+        ...new Set(
+          programs.map(program=>program.calendarYear)
+        )
+      ];
+      const types = [
+        ...new Set(
+          programs.map(program=>program.type)
+        )
+      ];
+      const countries = [
+        ...new Set(
+          programs.flatMap(program=>program.countries)
+        )
+      ];
+      const terms = [
+        ...new Set(
+          programs.flatMap(program=>program.term)
+        )
+      ];
+      const colleges = [
+        ...new Set(
+          programs.flatMap(program=>program.college)
+        )
+      ];
+      const leaders = [
+        ...new Set(
+          programs.flatMap(program=>program.leader)
+        )
+      ];
+      this.setState({
+        programs,
+        activePrograms: [...programs],
+        titles,
+        years,
+        terms,
+        leaders,
+        colleges,
+        types,
+        countries,
+        portalUrl,
+      });
+    },
+
+
 
       getActiveProgramCount: function(){
         return this.state.activePrograms.length;
@@ -132,7 +148,7 @@ require([
         return [
           this.getDefaultOption(optionsName),
           ...optionsList
-            .filter(value => !this.props.nullValues.includes(value))
+            .filter(value => !this.state.nullValues.includes(value))
             .map(value => D.option(
             { value },
             value,
@@ -155,7 +171,7 @@ require([
             name: 'countries',
             onChange: this.handler.bind(this),
           },
-          this.getOptions(this.props.countries, 'Program Country')
+          this.getOptions(this.state.countries, 'Program Country')
         );
 
         const typeField = D.select(
@@ -164,7 +180,7 @@ require([
             name: 'type',
             onChange: this.handler.bind(this),
           },
-          this.getOptions(this.props.types, 'Program Type'),
+          this.getOptions(this.state.types, 'Program Type'),
         );
 
         const collegeField = D.select(
@@ -173,7 +189,7 @@ require([
             name: 'college',
             onChange: this.handler.bind(this),
           },
-          this.getOptions(this.props.colleges, 'Program College'),
+          this.getOptions(this.state.colleges, 'Program College'),
         );
 
         const termField = D.select(
@@ -182,7 +198,7 @@ require([
             name: 'term',
             onChange: this.handler.bind(this),
           },
-          this.getOptions(this.props.terms, 'Program Term')
+          this.getOptions(this.state.terms, 'Program Term')
         );
 
         const yearField = D.select(
@@ -191,7 +207,7 @@ require([
             name: 'calendarYear',
             onChange: this.handler.bind(this),
           },
-          this.getOptions(this.props.years, 'Program Year')
+          this.getOptions(this.state.years, 'Program Year')
         );
 
         const leaderField = D.select(
@@ -200,7 +216,7 @@ require([
             name: 'leader',
             onChange: this.handler.bind(this),
           },
-          this.getOptions(this.props.leaders, 'Program Leader')
+          this.getOptions(this.state.leaders, 'Program Leader')
         );
 
 
@@ -243,7 +259,7 @@ require([
       resetSearchFields: function(event){
         event.preventDefault();
         this.getForm().reset();
-        const filters = {...this.props.defaultFilters};
+        const filters = {...this.state.defaultFilters};
         this.setState({
           filters,
           activePrograms: this.getFilteredResults(filters),
@@ -253,14 +269,14 @@ require([
       filtersMatch: function(filterName, filterValue, program){
         const actualValue = program[filterName];
         if(
-          this.props.nullValues.includes(filterValue) ||
-          this.props.nullValues.includes(actualValue)
+          this.state.nullValues.includes(filterValue) ||
+          this.state.nullValues.includes(actualValue)
           ){
           return true;
         }
         switch(typeof filterValue){
           case 'boolean':
-            return filterValue === false || this.props.trueValues.includes(actualValue); //this might be a mistake?
+            return filterValue === false || this.state.trueValues.includes(actualValue); //this might be a mistake?
           case 'string':
             const searchValue = filterValue.toLowerCase().trim();
             const actualValues = [actualValue].flatMap(el=>el);
@@ -280,7 +296,7 @@ require([
                 program => this.filtersMatch(filterName, filterValue, program)
               );
             },
-            this.props.programs,
+            this.state.programs,
           );
       },
 
@@ -344,7 +360,7 @@ require([
         let programsFoundText = '';
         switch(activeProgramCount){
           case 0:
-            return this.props.noMatchingPrograms;
+            return this.state.noMatchingPrograms;
           case 1:
             programsFoundText = '1 program found';
             break;
@@ -370,11 +386,16 @@ require([
       },
 
       onPageClick: function(event) {
+        console.log(event)
+        console.log(event.target)
+        console.log(event.target.target)
+        console.log(this.getPageCount())
         event.preventDefault();
         const page = parseInt(event.target.target)
         if (page > 0 && page <= this.getPageCount()){
-          this.setState({ page });
+          this.setState({ currentPage: page });
         }
+        console.log(this.state)
       },
 
       renderPage: function(number, label) {
@@ -426,5 +447,11 @@ require([
       },
     });
 
-  R.render(R.createElement(ProgramSearchComponent, {}), document.getElementById('oie-search-component'));
+  R.render(
+    R.createElement(
+      ProgramSearchComponent,
+      {},
+    ),
+    document.getElementById('oie-search-component'),
+  );
 });
