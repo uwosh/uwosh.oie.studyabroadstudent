@@ -1,13 +1,12 @@
 from datetime import timedelta
 from plone import api
 from plone.app.dexterity.behaviors.constrains import DISABLED
-from plone.app.uuid.utils import uuidToObject
 from plone.i18n.normalizer.interfaces import IIDNormalizer
 from Products.CMFPlone.interfaces import ISelectableConstrainTypes
 from uwosh.oie.studyabroadstudent.constants import DURATIONS, SPECIAL_DAYS
 from zope.component import getUtility
 from uwosh.oie.studyabroadstudent.constants import STATES_FOR_DISPLAYING_PROGRAMS
-
+from uwosh.oie.studyabroadstudent.utils import get_object_from_uid
 
 def get_full_camelcase_name(o):
     full_name = f'{o.firstName} {o.middleName or ""} {o.lastName}'
@@ -64,7 +63,7 @@ def _update_term_based_dates(o, event):
     #   - application deadline
     #
     term = o.term
-    year = uuidToObject(o.calendar_year)
+    year = get_object_from_uid(o.calendar_year)
     prefix = term[2:].lower().replace(' ', '_')
     suffix = ''.join([
         first_letter
@@ -110,7 +109,7 @@ def _update_contained_object_fields(o, event):
 
 def program_created(o, event):
     # set the program code
-    calendar_year_obj = api.content.get(UID=o.calendar_year)
+    calendar_year_obj = get_object_from_uid(o.calendar_year)
     calendar_year = calendar_year_obj.title
     program_code = f'{calendar_year[2:4]}{o.term[0]}{o.college_or_unit[0]}'
     for c in o.countries:
@@ -157,7 +156,7 @@ def program_added(program, event):
 
 def program_modified(o, event):
     # update the program code if needed
-    calendar_year_obj = api.content.get(UID=o.calendar_year)
+    calendar_year_obj = get_object_from_uid(o.calendar_year)
     calendar_year = calendar_year_obj.title
     program_code = (calendar_year)[2:4] + (o.term)[0] + (o.college_or_unit)[0]
     for c in o.countries:
@@ -192,7 +191,7 @@ def contact_modified(o, event):
 def _participant_update(participant, event, event_type=None):
     program_uid = participant.programName
     if program_uid:
-        program = uuidToObject(program_uid)
+        program = get_object_from_uid(program_uid)
         if program:
             question_changed_str = 'This answer requires review because the question has changed: '
             programName = program.title
@@ -223,7 +222,7 @@ def _participant_update(participant, event, event_type=None):
                             f'applicant_question_answer{index}',
                             question_changed_str + answer,
                         )
-            year_obj = uuidToObject(program.calendar_year)
+            year_obj = get_object_from_uid(program.calendar_year)
             programYear = year_obj.title
             participant.title = f'{get_full_camelcase_name(participant)} {programName} {programYear}'
 
