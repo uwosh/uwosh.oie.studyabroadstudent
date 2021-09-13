@@ -144,7 +144,6 @@ def program_transitioned(o, event):
             )
 
 
-
 def program_added(program, event):
     # doesn't work in the IObjectCreatedEvent
     # fix which types can be contained in a Program
@@ -404,3 +403,6 @@ def program_leader_created(o, event):
 
 def program_leader_modified(o, event):
     program_leader_created(o, event)
+
+# TODO - we might need to write a couple methods to reindex a program  # noqa: T000
+# when associated dexterity types that are used in custom indexers are changed.
