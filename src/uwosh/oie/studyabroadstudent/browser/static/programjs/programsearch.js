@@ -60,7 +60,6 @@ require([
       const programDataUrl = `${portalUrl}/@@discoverable-program-data`
       const response = await fetch(programDataUrl)
       const programsJson = await response.json()
-      console.log(programsJson)
       const programs = Array.from(programsJson)
       const titles = [
         ...new Set(
@@ -237,6 +236,10 @@ require([
         ];
       },
 
+      currentPageWillBeOutOfBounds: function(activePrograms){
+        return (this.state.currentPage - 1) * this.state.perPage >= activePrograms.length;
+      },
+
       handler: function(event){
         event.preventDefault();
         const {checked, value, name, type} = event.target;
@@ -250,6 +253,9 @@ require([
           filters,
           activePrograms,
         });
+        if(this.currentPageWillBeOutOfBounds(activePrograms)){
+          this.setState({currentPage: 1});
+        }
       },
 
       getForm: function() {
@@ -386,16 +392,11 @@ require([
       },
 
       onPageClick: function(event) {
-        console.log(event)
-        console.log(event.target)
-        console.log(event.target.target)
-        console.log(this.getPageCount())
         event.preventDefault();
         const page = parseInt(event.target.target)
         if (page > 0 && page <= this.getPageCount()){
           this.setState({ currentPage: page });
         }
-        console.log(this.state)
       },
 
       renderPage: function(number, label) {
