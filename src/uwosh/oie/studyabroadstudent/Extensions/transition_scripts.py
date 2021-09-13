@@ -6,6 +6,7 @@ from uwosh.oie.studyabroadstudent.interfaces.directives import (
     REQUIRED_IN_STATE_KEY,
     REQUIRED_VALUE_IN_STATE_KEY,
 )
+from uwosh.oie.studyabroadstudent.utils import get_object_from_uid
 
 import logging
 
@@ -233,7 +234,7 @@ def getToAddresses(object, emailTemplate):
     if emailTemplate.send_to_program_leader:
         try:
             leader_id = object.program_leader
-            leader = api.content.get(UID=leader_id)
+            leader = get_object_from_uid(leader_id)
             if leader.Title != '*Nobody':
                 addresses.append(leader.email)
         except (AttributeError, ValueError):
