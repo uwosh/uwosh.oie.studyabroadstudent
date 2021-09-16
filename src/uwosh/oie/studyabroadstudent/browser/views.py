@@ -244,7 +244,9 @@ class ContactView(DefaultView):
 
 
 class ParticipantView(DefaultView, FolderView):
+    # ParticipantView should really be called ApplicationView
     # This can be the view for reviewers/etc of the application
+    # But is also the view for participants to edit their application
 
     @property
     def permissions(self):
@@ -402,7 +404,67 @@ class ParticipantEditUtilView(DefaultView):
 
 
 class ApplyView(DefaultView):
-    pass
+
+    def is_anonymous(self):
+        return api.user.is_anonymous()
+
+    @property
+    def user_full_name(self):
+        return api.user.get_current().getUserName()
+
+
+class ExpressInterestData(ApplyView):
+    def __call__(self):
+        self.request.response.setHeader('Content-Type', 'application/json')
+        is_logged_in = not self.is_anonymous()
+        login_url = (
+            None
+            if is_logged_in
+            else f'{api.portal.get().absolute_url()}/login'
+        )
+        return json.dumps(
+            {
+                'loginUrl': login_url,
+                'cameFrom': self.context.absolute_url(),
+                'isLoggedIn': is_logged_in,
+                'userFullName': self.user_full_name,
+                'programTitle': self.context.title,
+            }
+        )
+
+
+class ExpressInterestData(ApplyView):
+    def __call__(self):
+        self.request.response.setHeader('Content-Type', 'application/json')
+        is_logged_in = not self.is_anonymous()
+        portal_url = api.portal.get().absolute_url()
+        context_url = self.context.absolute_url()
+        login_url = (
+            None
+            if is_logged_in
+            else f'{portal_url}/login'
+        )
+        signup_url = (
+            None
+            if is_logged_in
+            else f'{portal_url}/signup'
+        )
+        return json.dumps(
+            {
+                'loginUrl': f'{login_url}?came_from={context_url}/apply',
+                'signupUrl': f'{signup_url}?came_from={context_url}/apply',
+                'isLoggedIn': is_logged_in,
+                'userFullName': self.user_full_name,
+                'programTitle': self.context.title,
+                'createdUrl': f'{context_url}/submit'
+            }
+        )
+
+
+class SignUpView(ApplyView):
+    def __call__(self):
+        self.request.response.setHeader('Content-Type', 'application/json')
+        return json.dumps(None)
 
 
 class CreatedView(DefaultView):

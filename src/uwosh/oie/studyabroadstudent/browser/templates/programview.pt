@@ -157,7 +157,7 @@
           <h4 style="background-color: orange; color: white; padding: 5px">Academics</h4>
           <ul>
             <li tal:define="is_richtext python: hasattr(context.courses, 'output')">
-              Required Courses:
+              Courses:
               <span tal:condition="is_richtext" tal:content="structure here/courses/output">[courses]</span>
               <span tal:condition="not: is_richtext" tal:content="structure here/courses">[courses]</span>
             </li>
