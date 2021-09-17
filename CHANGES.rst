@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.12 (unreleased)
+1.0.12 (2021-09-17)
 -------------------
 
 - Fix Participant permissions
