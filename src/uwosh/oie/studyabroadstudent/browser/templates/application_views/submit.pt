@@ -8,10 +8,16 @@
 <body>
   <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
-      <div tal:condition="nocall:view/created">
-        Your application to the Office of International Education program (<strong tal:content="context/Title"/>) has been created.
-        To continue working on your application, <a href="#" tal:attributes="href view/created">edit it here</a>
-      </div>
+      <dl
+        tal:condition="nocall:view/created"
+        class="portalMessage info"
+      >
+        <dt>Congrats!</dt>
+        <dd>
+          Your application to the Office of International Education program (<strong>${context/Title}</strong>) has been created.
+          To continue working on your application, <a href="${view/created}">edit it here</a>, or click on "My Applications" above.
+        </dd>
+      </dl>
       <div tal:condition="not:nocall:view/created">
         <span>There was a problem creating your application to the Office of International Education program (<strong tal:content="context/Title"/>)</span>
       </div>
