@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.13 (unreleased)
+1.0.13 (2021-09-17)
 -------------------
 
 - serve minimized react
