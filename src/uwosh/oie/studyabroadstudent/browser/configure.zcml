@@ -181,13 +181,12 @@
   />
 
   <browser:page
-    name="signup"
+    name="my-applications"
     for="*"
-    class=".views.SignUpView"
-    template="templates/signup.pt"
-    layer="..interfaces.IUwoshOieStudyabroadstudentLayer"
+    class=".views.ParticipantFolderView"
     permission="zope2.View"
   />
+
 
 
 </configure>
