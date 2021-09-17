@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<object name="portal_actions"
+  meta_type="Plone Actions Tool"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  purge="False">
+
+  <object name="portal_tabs"
+    meta_type="CMF Action Category">
+    <property name="title">Portal tabs</property>
+    <object name="index_html"
+      meta_type="CMF Action"
+      i18n:domain="plone">
+      <property name="title"
+        i18n:translate="">Explore Programs</property>
+      <property name="url_expr">string:${here/portal_url}</property>
+      <property name="link_target"></property>
+      <property name="icon_expr"></property>
+      <property name="permissions">
+        <element value="View" />
+      </property>
+      <property name="visible">True</property>
+    </object>
+    <object name="Home"
+      meta_type="CMF Action"
+      i18n:domain="plone">
+      <property name="title"
+        i18n:translate="">Home</property>
+      <property name="url_expr">string:http://uwosh.edu/study-abroad</property>
+      <property name="link_target"></property>
+      <property name="icon_expr"></property>
+      <property name="permissions">
+        <element value="View" />
+      </property>
+      <property name="visible">True</property>
+    </object>
+    <object name="Our Staff"
+      meta_type="CMF Action"
+      i18n:domain="plone">
+      <property name="title"
+        i18n:translate="">Our Staff</property>
+      <property name="url_expr">string:http://uwosh.edu/oie/staff</property>
+      <property name="link_target"></property>
+      <property name="icon_expr"></property>
+      <property name="permissions">
+        <element value="View" />
+      </property>
+      <property name="visible">True</property>
+    </object>
+    <object name="oie-login"
+      meta_type="CMF Action"
+      i18n:domain="plone">
+      <property name="title"
+        i18n:translate="">Log In</property>
+      <property name="url_expr">string:${portal_url}/login?came_from=${object_url}</property>
+      <property name="link_target"></property>
+      <property name="icon_expr"></property>
+      <property name="available_expr">context/@@plone_portal_state/anonymous</property>
+      <property name="permissions">
+        <element value="View" />
+      </property>
+      <property name="visible">True</property>
+    </object>
+    <object name="oie-logout"
+      meta_type="CMF Action"
+      i18n:domain="plone">
+      <property name="title"
+        i18n:translate="">Logout</property>
+      <property name="url_expr">string:${portal_url}/logout</property>
+      <property name="link_target"></property>
+      <property name="icon_expr"></property>
+      <property name="available_expr">python: not object.restrictedTraverse('@@plone_portal_state').anonymous()</property>
+      <property name="permissions">
+        <element value="View" />
+      </property>
+      <property name="visible">True</property>
+    </object>
+    <object name="my-applications"
+      meta_type="CMF Action"
+      i18n:domain="plone">
+      <property name="title"
+        i18n:translate="">My Applications</property>
+      <property name="url_expr">string:${portal_url}/applications</property>
+      <property name="link_target"></property>
+      <property name="icon_expr"></property>
+      <property name="available_expr">portal/my-applications/has_applications</property>
+      <property name="permissions">
+        <element value="View" />
+      </property>
+      <property name="visible">True</property>
+    </object>
+  </object>
+</object>
