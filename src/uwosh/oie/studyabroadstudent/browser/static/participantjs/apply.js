@@ -1,5 +1,5 @@
 require([
-  '++plone++uwosh.oie.studyabroadstudent/libs/react/react', // FIX THIS!!!!!!!
+  '++plone++uwosh.oie.studyabroadstudent/libs/react/react.min',
 ], function(R) {
   const D = R.DOM;
 

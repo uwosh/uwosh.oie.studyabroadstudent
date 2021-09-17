@@ -5,7 +5,7 @@ Changelog
 1.0.13 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- serve minimized react
 
 
 1.0.12 (2021-09-17)
