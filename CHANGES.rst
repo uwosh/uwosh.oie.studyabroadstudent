@@ -5,7 +5,10 @@ Changelog
 1.0.12 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix Participant permissions
+- Get functioning ux for applying with login and register
+- add my applications portal tab functionality
+- bring portal tabs into code
 
 
 1.0.11 (2021-09-13)
