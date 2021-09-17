@@ -172,5 +172,21 @@
     permission="zope2.View"
   />
 
+  <browser:page
+    name="express-interest-data"
+    for="*"
+    class=".views.ExpressInterestData"
+    layer="..interfaces.IUwoshOieStudyabroadstudentLayer"
+    permission="zope2.View"
+  />
+
+  <browser:page
+    name="my-applications"
+    for="*"
+    class=".views.ParticipantFolderView"
+    permission="zope2.View"
+  />
+
+
 
 </configure>

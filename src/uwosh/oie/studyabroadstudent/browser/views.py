@@ -1,3 +1,5 @@
+from AccessControl.unauthorized import Unauthorized
+from Products.Five import BrowserView
 from io import StringIO
 from plone import api
 from plone.api.exc import MissingParameterError
@@ -7,7 +9,6 @@ from plone.dexterity.browser.view import DefaultView
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.file import NamedImage
 from plone.protect.interfaces import IDisableCSRFProtection
-from Products.Five import BrowserView
 from uwosh.oie.studyabroadstudent.constants import STATES_FOR_DISPLAYING_PROGRAMS
 from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
 from uwosh.oie.studyabroadstudent.reporting import ReportUtil
@@ -19,6 +20,7 @@ import json
 import logging
 import Missing
 import os
+
 
 logger = logging.getLogger('uwosh.oie.studyabroadstudent')
 
@@ -185,6 +187,14 @@ class ProgramView(DefaultView, FolderView):
 
 class ProgramSearchView(BrowserView):
 
+    def __call__(self, *args, **kwargs):
+        api.portal.show_message(
+            message='The Study Abroad application is back online',
+            request=self.request,
+            type='info',
+        )
+        return super(ProgramSearchView, self).__call__(*args, **kwargs)
+
     def get_program_data(self):
         with api.env.adopt_roles(['Manager']):
             programs = []
@@ -243,8 +253,19 @@ class ContactView(DefaultView):
     pass
 
 
+class ParticipantFolderView(DefaultView):
+    @property
+    def has_applications(self):
+        try:
+            return len(api.portal.get()['participants'].listFolderContents()) > 0
+        except Exception:
+            return False
 class ParticipantView(DefaultView, FolderView):
+    # ParticipantView should really be called ApplicationView
     # This can be the view for reviewers/etc of the application
+    # But is also the view for participants to edit their application
+
+
 
     @property
     def permissions(self):
@@ -402,7 +423,61 @@ class ParticipantEditUtilView(DefaultView):
 
 
 class ApplyView(DefaultView):
-    pass
+
+    def is_anonymous(self):
+        return api.user.is_anonymous()
+
+    @property
+    def user_full_name(self):
+        return api.user.get_current().getUserName()
+
+
+class ExpressInterestData(ApplyView):
+    def __call__(self):
+        self.request.response.setHeader('Content-Type', 'application/json')
+        is_logged_in = not self.is_anonymous()
+        login_url = (
+            None
+            if is_logged_in
+            else f'{api.portal.get().absolute_url()}/login'
+        )
+        return json.dumps(
+            {
+                'loginUrl': login_url,
+                'cameFrom': self.context.absolute_url(),
+                'isLoggedIn': is_logged_in,
+                'userFullName': self.user_full_name,
+                'programTitle': self.context.title,
+            }
+        )
+
+
+class ExpressInterestData(ApplyView):
+    def __call__(self):
+        self.request.response.setHeader('Content-Type', 'application/json')
+        is_logged_in = not self.is_anonymous()
+        portal_url = api.portal.get().absolute_url()
+        context_url = self.context.absolute_url()
+        login_url = (
+            None
+            if is_logged_in
+            else f'{portal_url}/login'
+        )
+        signup_url = (
+            None
+            if is_logged_in
+            else f'{portal_url}/signup'
+        )
+        return json.dumps(
+            {
+                'loginUrl': f'{login_url}?came_from={context_url}/apply',
+                'registerUrl': f'{portal_url}/register',
+                'isLoggedIn': is_logged_in,
+                'userFullName': self.user_full_name,
+                'programTitle': self.context.title,
+                'createdUrl': f'{context_url}/submit'
+            }
+        )
 
 
 class CreatedView(DefaultView):
@@ -418,6 +493,7 @@ class CreatedView(DefaultView):
         return super().__call__()
 
     def create_participant(self):
+        current_user = api.user.get_current()
         with api.env.adopt_roles(['Manager']):
             return_value = False
             program_name = self.context.title
@@ -435,14 +511,16 @@ class CreatedView(DefaultView):
                         'email': email,
                         'programName': program_name,
                     }
-                    obj = api.content.create(
+                    participant = api.content.create(
                         type='OIEStudyAbroadParticipant',
                         container=participants_folder,
-                        title=f'{first} {last}',
+                        title=f'{program_name} - {first} {last}',
                         **data,
                     )
-                    api.content.transition(obj, 'submit')  # go ahead to step I
-                    return_value = f'{obj.absolute_url()}/edit'
+                    api.content.transition(participant, 'submit')  # go ahead to step I
+                    return_value = f'{participant.absolute_url()}/edit'
+                    api.user.grant_roles(user=current_user, obj=participant, roles=['Participant_Applicant'])
+                    participant.reindexObjectSecurity()
                 except Exception as e:  # noqa: B902
                     logger.warning('Could not create partipant application.')
                     logger.warning(e)

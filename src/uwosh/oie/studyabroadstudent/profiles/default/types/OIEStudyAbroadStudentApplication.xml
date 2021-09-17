@@ -11,7 +11,7 @@
       name="title">Study Away Student Application</property>
   <property
       i18n:translate=""
-      name="description"></property>
+      name="description">A single student's application for one of the Study Abroad Programs</property>
 
   <property name="allow_discussion">False</property>
   <property name="factory">OIEStudyAbroadStudentApplication</property>

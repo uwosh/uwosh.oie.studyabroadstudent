@@ -100,17 +100,33 @@
     source="*"
     destination="1005"
     profile="uwosh.oie.studyabroadstudent:default"
-    handler=".upgrades.upgrade_to_1004"
+    handler=".upgrades.upgrade_to_1005"
     sortkey="1005"
   />
-  <genericsetup:upgradeStep
+  <!-- <genericsetup:upgradeStep
     title="Reindex all programs"
     description="Some custom indexers get out of sync. This should update them for now."
-    source="1005"
+    source="*"
     destination="1006"
     handler="uwosh.oie.studyabroadstudent.upgrades.reindex_programs"
     sortkey="1006"
     profile="uwosh.oie.studyabroadstudent:default"
+  /> -->
+  <genericsetup:registerProfile
+    name="1_0_6"
+    title="uwosh.oie.studyabroadstudent 1.0.6 profile"
+    directory="profiles/1006"
+    description="1006 clamps down on participant permissions"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+  />
+  <genericsetup:upgradeStep
+    title="Upgrade OIE Study Abroad Student to 1.0.6"
+    description="clamp down on accessibility of participant permissions"
+    source="*"
+    destination="1006"
+    profile="uwosh.oie.studyabroadstudent:default"
+    handler=".upgrades.upgrade_to_1006"
+    sortkey="1006"
   />
 
 </configure>
