@@ -1,38 +1,44 @@
 require([
-  '++plone++uwosh.oie.studyabroadstudent/libs/react/react', // FIX THIS!!!!!!
+  '++plone++uwosh.oie.studyabroadstudent/libs/react/react', // FIX THIS!!!!!!!
 ], function(R) {
   const D = R.DOM;
 
   const ApplyFormComponent = R.createClass({
     getInitialState: function(){
       const globalStatusMessageElement = document.getElementById('global_statusmessage');
+      const fakeElement = document.createElement('span');
+      fakeElement.id = 'fake-element';
       return {
         loginUrl: null,
+        registerUrl: null,
         isLoggedIn: false,
         programTitle: null,
         globalStatusMessageElement,
         emptyDiv: Array.from(globalStatusMessageElement.children).reverse()[0],
-        signupMessage: null,
-        loggedOutMessage: null,
-        loggedInMessage: null,
+        loggedOutMessage: fakeElement,
+        loggedInMessage: fakeElement,
         componentMounted: false,
-      }
+      };
     },
 
     getLoggedOutMessage: function() {
-      const messageBody = `You aren't logged in.
-        If you have a UWosh general account or a Study Abroad site account,
-        <a href="${this.state.loginUrl}">click here</a> to log in and continue.`;
+      const messageBody = `You must log in with your UWosh login or a Study Abroad site account
+       if you already have one, or register below.`;
       return this.createMessage('Warning', messageBody, 'logged-out-message');
     },
 
-    getSignupMessage: function() {
-      console.log('this.state')
-      console.log(this.state)
-      const messageBody = `If you don't already have a UWosh general account or a Study Abroad site account,
-        <a href="${this.state.signupUrl}">click here</a> to create one now`;
-      return this.createMessage('Info', messageBody, 'signup-message');
+    componentDidMount: async function(){
+      const loginDataUrl = window.location.href.replace('apply', '@@express-interest-data');
+      const response = await fetch(loginDataUrl)
+      const loginData = await response.json();
+      this.setState(loginData);
+      this.setState({
+        loggedInMessage: this.getLoggedInMessage(),
+        loggedOutMessage: this.getLoggedOutMessage(),
+        componentMounted: true,
+      });
     },
+
 
     getLoggedInMessage: function() {
       const messageBody = `You are logged in as ${this.state.userFullName}.
@@ -48,61 +54,72 @@ require([
       return message;
     },
 
-    componentDidMount: async function(){
-      const loginDataUrl = window.location.href.replace('apply', '@@express-interest-data');
-      const response = await fetch(loginDataUrl)
-      const loginData = await response.json();
-      this.setState(loginData);
-      this.setState({
-        loggedOutMessage: this.getLoggedOutMessage(),
-        signupMessage: this.getSignupMessage(),
-        componentMounted: true,
-      });
+
+    rederLoginAndRegisterButtons: function() {
+        const loginButton = D.button(
+          {
+            onClick: this.login,
+            type: 'button',
+            className: 'btn btn-primary login-button'
+          },
+          'Log In',
+        );
+        const registerButton = D.button(
+          {
+            onClick: this.register,
+            type: 'button',
+            className: 'btn btn-secondary register-button'
+          },
+          'Sign Up',
+        );
+        return D.div(
+          {
+            className: 'buttons'
+          },
+          [
+            loginButton,
+            registerButton,
+          ],
+        )
     },
 
     render: function(){
-      return this.state.isLoggedIn ?
-      this.renderSubmitForm() :
       this.renderMessages();
+      return this.state.isLoggedIn ?
+        this.renderSubmitForm() :
+        this.rederLoginAndRegisterButtons();
     },
 
     login: function(){
         window.location = this.state.loginUrl;
     },
-    signup: function(){
-        window.location = this.state.signupUrl;
+    register: function(){
+        window.location = this.state.registerUrl;
     },
 
-    renderLoginMessage: function() {
-      const shouldRender = (
-        this.state.loggedOutMessage &&
-        !document.querySelector('.logged-out-message')
-      )
-      if(shouldRender){
+    setLoginStatusMessage: function() {
+      const { isLoggedIn } = this.state;
+      const incorrectSelector = `logged-${ isLoggedIn ? 'out' : 'in' }-message`;
+      const correctSelector = `logged-${ isLoggedIn ? 'in' : 'out' }-message`;
+      const incorrectElement = document.querySelector(incorrectSelector);
+      const correctElement = document.querySelector(correctSelector);
+      const message = this.state[`logged${ isLoggedIn ? 'In' : 'Out' }Message`];
+      incorrectElement?.remove();
+      if(!correctElement && message){
+        document.querySelector('#fake-element')?.remove();
         this.state.globalStatusMessageElement.insertBefore(
-          this.state.loggedOutMessage,
-          this.state.emptyDiv,
-          );
-        }
-      },
-
-    renderSignUpMessage: function() {
-      const shouldRender = (
-        this.state.signupMessage &&
-        !document.querySelector('.signup-message')
-      )
-      if(shouldRender){
-        this.state.globalStatusMessageElement.insertBefore(
-          this.state.signupMessage,
+          message,
           this.state.emptyDiv,
         );
       }
     },
 
+
     renderMessages: function(){
-      console.log(this.state)
-      this.renderLoginMessage();
-      this.renderSignUpMessage();
+      this.setLoginStatusMessage();
+    },
+
+    rederEmptyElement: function() {
       return D.div();
     },
 
@@ -134,7 +151,7 @@ require([
       const lastNameLabel = D.label({
         className: 'label',
         for: 'last-name',
-      },'First Name');
+      },'Last Name');
       const lastNameField = D.input({
         className: fieldClass,
         id: 'last-name',
@@ -194,7 +211,6 @@ require([
       if ( this.validate(event) !== true) {
         event.preventDefault();
       }
-      console.log(this.state)
     },
 
   });
