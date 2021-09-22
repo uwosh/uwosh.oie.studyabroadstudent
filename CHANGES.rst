@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.16 (unreleased)
+1.0.16 (2021-09-22)
 -------------------
 
 - bump metadata.xml
