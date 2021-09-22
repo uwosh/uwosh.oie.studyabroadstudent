@@ -5,7 +5,8 @@ Changelog
 1.0.15 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- adjust participant view action
+- adjust show toolbar permission
 
 
 1.0.14 (2021-09-22)

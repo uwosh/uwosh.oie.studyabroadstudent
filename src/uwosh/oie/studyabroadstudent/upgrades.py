@@ -193,3 +193,8 @@ def upgrade_to_1006(context, logger=None):
     PROFILE_ID = 'profile-uwosh.oie.studyabroadstudent:1_0_6'
     setup = getToolByName(context, 'portal_setup')
     setup.runAllImportStepsFromProfile(PROFILE_ID)
+
+def upgrade_to_1007(context, logger=None):
+    PROFILE_ID = 'profile-uwosh.oie.studyabroadstudent:1_0_7'
+    setup = getToolByName(context, 'portal_setup')
+    setup.runAllImportStepsFromProfile(PROFILE_ID)

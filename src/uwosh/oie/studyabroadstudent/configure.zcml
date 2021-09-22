@@ -128,5 +128,21 @@
     handler=".upgrades.upgrade_to_1006"
     sortkey="1006"
   />
+  <genericsetup:registerProfile
+    name="1_0_7"
+    title="uwosh.oie.studyabroadstudent 1.0.7 profile"
+    directory="profiles/1007"
+    description="1007 adjusts participant view action and toolbar permission"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+  />
+  <genericsetup:upgradeStep
+    title="Upgrade OIE Study Abroad Student to 1.0.7"
+    description="Adjust participant view action and toolbar permission"
+    source="*"
+    destination="1007"
+    profile="uwosh.oie.studyabroadstudent:default"
+    handler=".upgrades.upgrade_to_1007"
+    sortkey="1007"
+  />
 
 </configure>

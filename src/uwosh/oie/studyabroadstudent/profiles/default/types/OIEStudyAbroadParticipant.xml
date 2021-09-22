@@ -75,7 +75,7 @@
   />
   <alias
       from="view"
-      to="(selected layout)"
+      to="@@view"
   />
 
   <!-- Actions -->
@@ -86,7 +86,7 @@
       description=""
       i18n:attributes="title description"
       title="View"
-      url_expr="string:${object_url}"
+      url_expr="string:${object_url}/view"
       visible="True">
     <permission value="View" />
   </action>
