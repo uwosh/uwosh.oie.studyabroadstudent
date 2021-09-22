@@ -5,7 +5,7 @@ Changelog
 1.0.16 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- bump metadata.xml
 
 
 1.0.15 (2021-09-22)
