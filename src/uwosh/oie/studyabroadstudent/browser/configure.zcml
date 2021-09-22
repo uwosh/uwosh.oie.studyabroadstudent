@@ -187,6 +187,26 @@
     permission="zope2.View"
   />
 
+  <browser:page
+    name="disciplinary-clearance-form"
+    for="*"
+    class=".files.DisciplinaryClearanceFormDownload"
+    permission="zope.Public"
+  />
+
+  <browser:page
+    name="need-based-travel-grant-form"
+    for="*"
+    class=".files.NeedBasedTravelGrantFormDownload"
+    permission="zope.Public"
+  />
+
+  <browser:page
+    name="special-student-undergraduate-admissions-form"
+    for="*"
+    class=".files.SpecialStudentUndergraduateAdmissionsFormDownload"
+    permission="zope.Public"
+  />
 
 
 </configure>

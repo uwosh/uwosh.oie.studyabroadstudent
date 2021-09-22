@@ -5,7 +5,8 @@ Changelog
 1.0.14 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Changes to download form link rendering
+- minor role permission change
 
 
 1.0.13 (2021-09-17)

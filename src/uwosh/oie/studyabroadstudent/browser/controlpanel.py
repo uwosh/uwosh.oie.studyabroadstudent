@@ -1,7 +1,6 @@
 from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper, RegistryEditForm
 from plone.autoform.directives import widget
 from plone.formwidget.namedfile.widget import NamedFileFieldWidget, NamedImageFieldWidget
-from plone.namedfile.field import NamedBlobImage, NamedBlobFile
 from plone.supermodel import model
 from plone.z3cform import layout
 from uwosh.oie.studyabroadstudent import _
@@ -2042,7 +2041,7 @@ class IOIEStudyAbroadStudentControlPanel(Interface):
         default=None,
     )
     widget(
-        uwo_logo=NamedImageFieldWidget, 
+        uwo_logo=NamedImageFieldWidget,
     )
     uwo_logo = schema.Bytes(
         title=_('UWO Logo'),
@@ -2076,7 +2075,7 @@ class OIEStudyAbroadStudentControlPanelForm(RegistryEditForm):
     schema = IOIEStudyAbroadStudentControlPanel
     schema_prefix = 'oiestudyabroadstudent'
     label = 'OIE Study Abroad Settings'
-    
+
     # def updateFields(self):
         # super(OIEStudyAbroadStudentControlPanelForm, self).updateFields()
         # import pdb; pdb.set_trace()

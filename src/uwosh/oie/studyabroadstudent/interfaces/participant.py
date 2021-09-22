@@ -1,14 +1,10 @@
-
-# IOIEStudyAbroadParticipant: the new content type for participant applications
-
 from collective import dexteritytextindexer
 from plone import api
 from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
 from plone.autoform.directives import omitted, widget
 from plone.formwidget.namedfile.converter import b64decode_file
-from plone.namedfile import field
-from plone.namedfile.file import NamedFile
+from plone.namedfile.field import NamedFile
 from plone.supermodel import model
 from Products.CMFPlone.RegistrationTool import EmailAddressInvalid, checkEmailAddress
 from uwosh.oie.studyabroadstudent import _
@@ -82,82 +78,8 @@ def validate_student_id(value):
     return True
 
 
-def get_url_special_student_form():
-    form = api.portal.get_registry_record(
-        'oiestudyabroadstudent.state_of_wisconsin_need_based_travel_grant_form',
-    )
-    if form is not None:
-        filename, data = b64decode_file(form)
-        file = NamedFile(data=data, filename=filename)
-        url = 'data:{0};base64, {1}'.format(
-            file.contentType,
-            file.data.encode('base64'),
-        )
-        html = '<a target="_blank" href="{0}">Download this form</a>'.format(
-            url,
-        )
-        return RichTextValue(html, 'text/html', 'text/html')
-    else:
-        return RichTextValue(
-            (
-                '<em>The Wisconsin need based travel grant form has '
-                'not yet been specified by an administrator</em>'
-            ),
-            'text/html',
-            'text/html',
-        )
-
-
-def get_url_special_student_form_for_undergraduate_admissions_form():
-    form = api.portal.get_registry_record(
-        'oiestudyabroadstudent.special_student_form_for_undergraduate_admissions',
-    )
-    if form is not None:
-        filename, data = b64decode_file(form)
-        file = NamedFile(data=data, filename=filename)
-        url = 'data:{0};base64, {1}'.format(
-            file.contentType,
-            file.data.encode('base64'),
-        )
-        html = '<a target="_blank" href="{0}">Download this form</a>'.format(
-            url,
-        )
-        return RichTextValue(html, 'text/html', 'text/html')
-    else:
-        return RichTextValue(
-            (
-                '<em>The special student form for undergraduate admissions '
-                'has not yet been specified by an administrator</em>'
-            ),
-            'text/html',
-            'text/html',
-        )
-
-
-def get_url_disciplinary_clearance_form():
-    form = api.portal.get_registry_record(
-        'oiestudyabroadstudent.disciplinary_clearance_form',
-    )
-    if form is not None:
-        filename, data = b64decode_file(form)
-        file = NamedFile(data=data, filename=filename)
-        url = 'data:{0};base64, {1}'.format(
-            file.contentType,
-            file.data.encode('base64'),
-        )
-        html = '<a target="_blank" href="{0}">Download this form</a>'.format(
-            url,
-        )
-        return RichTextValue(html, 'text/html', 'text/html')
-    else:
-        return RichTextValue(
-            '<em>The disciplinary clearance form has not yet been specified by an administrator</em>',
-            'text/html',
-            'text/html',
-        )
-
-
 class IOIEStudyAbroadParticipant(Interface):
+    # IOIEStudyAbroadParticipant: the new content type for participant applications
     dexteritytextindexer.searchable('title')
     # omitted('title')
     title = schema.TextLine(
@@ -1049,12 +971,9 @@ class IOIEStudyAbroadParticipant(Interface):
         ),
         fields=[
             'applicationFeeOK',
-            'disciplinary_clearance_form_link',
             'disciplinary_clearance_form_uploaded_file',
             'specialStudentFormOK',
-            'state_of_wisconsin_need_based_travel_grant_form_link',
             'state_of_wisconsin_need_based_travel_grant_form_uploaded_file',
-            'special_student_form_for_undergraduate_admissions_form_link',
             'special_student_form_for_undergraduate_admissions_uploaded_file',
             'transcriptsOK',
             'UWOshkoshStatementOK',
@@ -1064,61 +983,25 @@ class IOIEStudyAbroadParticipant(Interface):
         ],
     )
 
-    disciplinary_clearance_form_link = RichText(
+
+    disciplinary_clearance_form_uploaded_file = NamedFile(
         title='Disciplinary Clearance Form',
-        description='Download this PDF, fill it out, and upload it below',
-        required=False,
-        defaultFactory=get_url_disciplinary_clearance_form,
-    )
-
-    disciplinary_clearance_form_uploaded_file = field.NamedFile(
-        title='Disciplinary Clearance Form',
-        description='Upload your filled-out copy of the form',
+        description=f'Upload your completed copy of <a href="disciplinary-clearance-form">this form</a>',
         required=False,
     )
 
-    state_of_wisconsin_need_based_travel_grant_form_link = RichText(
-        title='State of Wisconsin Need-based Travel Grant Form',
-        description='Download this PDF, fill it out, and upload it below',
+
+    state_of_wisconsin_need_based_travel_grant_form_uploaded_file = NamedFile(
+        title='State of Wisconsin Need-based Travel Grant Submission',
+        description=f'Upload your completed copy of <a href="need-based-travel-grant-form">this form</a>',
         required=False,
-        defaultFactory=get_url_special_student_form,
     )
 
-    state_of_wisconsin_need_based_travel_grant_form_uploaded_file = \
-        field.NamedFile(
-            title='State of Wisconsin Need-based Travel Grant Submission',
-            description='Upload your completed form.',
-            required=False,
-        )
-
-    special_student_form_for_undergraduate_admissions_form_link = RichText(
-        title='Special/Non-degree Registration-Undergraduate Level',
-        description='Download this form, fill it out, and upload it below.',
+    special_student_form_for_undergraduate_admissions_uploaded_file = NamedFile(
+        title='Special/Non-degree Registration-Undergraduate Level Submission',
+        description=f'Upload your completed copy of <a href="special-student-undergraduate-admissions-form">this form</a>',
         required=False,
-        defaultFactory=get_url_special_student_form_for_undergraduate_admissions_form,
-        # TODO appears when "Special/Non-Degree Registration-Graduate Level"  # noqa : T000
-        #  is checked "yes" in the MGMT PORTAL
-        #   AND
-        #   "Current Education Level" is NOT "graduate school"
-        #   AND
-        #   the course request in the PART PORTAL includes at least one course
-        #   numbered 500-799.
-        #   OR
-        #   appears when "Special/Non-Degree Registration-Graduate Level" is
-        #   checked "yes" in the MGMT PORTAL
-        #   AND
-        #   "Current Education Level" IS "graduate school"
-        #   AND
-        #   the course request in the PART PORTAL includes at least one course
-        #   numbered 100-499.
     )
-
-    special_student_form_for_undergraduate_admissions_uploaded_file = \
-        field.NamedFile(
-            title='Special/Non-degree Registration-Undergraduate Level Submission',
-            description='Upload your completed form.',
-            required=False,
-        )
 
     cumulativeGPA = schema.Float(
         title=_('Cumulative GPA'),
