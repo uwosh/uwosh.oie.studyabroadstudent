@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.15 (unreleased)
+1.0.15 (2021-09-22)
 -------------------
 
 - adjust participant view action
