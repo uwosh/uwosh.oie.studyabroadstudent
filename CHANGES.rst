@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.14 (unreleased)
+1.0.14 (2021-09-22)
 -------------------
 
 - Changes to download form link rendering
