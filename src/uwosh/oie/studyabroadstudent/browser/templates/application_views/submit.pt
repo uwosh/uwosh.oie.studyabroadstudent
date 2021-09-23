@@ -1,10 +1,14 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      lang="en"
-      metal:use-macro="context/main_template/macros/master"
-      i18n:domain="uwosh.oie.studyabroadstudent">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xml:lang="en"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  lang="en"
+  metal:use-macro="context/main_template/macros/master"
+  i18n:domain="uwosh.oie.studyabroadstudent"
+>
+
 <body>
   <metal:main fill-slot="main">
     <tal:main-macro metal:define-macro="main">
@@ -12,16 +16,30 @@
         tal:condition="nocall:view/created"
         class="portalMessage info"
       >
-        <dt>Congrats!</dt>
-        <dd>
-          Your application to the Office of International Education program (<strong>${context/Title}</strong>) has been created.
-          To continue working on your application, <a href="${view/created}">edit it here</a>, or click on "My Applications" above.
+        <dt class="bigger-dt">Congrats!</dt>
+        <dd class="bigger-dd">
+
+          Your interest in the Office of International Education program (Digital Communication in Darmstadt) has been recorded. You can now <a
+            href="${view/created}"
+            class="bold-anchor"
+          >click here</a>, wait a few
+          seconds for your application form to load, and start an application for this program.
         </dd>
+        <br>
+        <br>
+        <p>
+          <dd class="bigger-dd">
+            Use the tabs in the application form to navigate from section to section. Use the save button within each section to highlight required data fields. After you complete the form, the save
+            button will
+            transition your application to show you your responses.
+          </dd>
+        </p>
       </dl>
       <div tal:condition="not:nocall:view/created">
-        <span>There was a problem creating your application to the Office of International Education program (<strong tal:content="context/Title"/>)</span>
+        <span>There was a problem creating your application to the Office of International Education program (<strong tal:content="context/Title" />)</span>
       </div>
     </tal:main-macro>
   </metal:main>
 </body>
+
 </html>

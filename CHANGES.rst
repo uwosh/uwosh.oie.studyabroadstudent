@@ -5,7 +5,7 @@ Changelog
 1.0.17 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- change submit message
 
 
 1.0.16 (2021-09-22)
