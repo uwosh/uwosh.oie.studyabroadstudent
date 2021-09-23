@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.17 (unreleased)
+1.0.17 (2021-09-23)
 -------------------
 
 - change submit message
