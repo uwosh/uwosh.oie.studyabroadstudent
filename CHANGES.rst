@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.18 (unreleased)
+1.0.18 (2021-10-14)
 -------------------
 
 - Fixed airport_transfer typo
