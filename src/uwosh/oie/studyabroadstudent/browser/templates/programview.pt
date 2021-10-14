@@ -122,7 +122,7 @@
           tal:define="airport_transfer here/transportationFromOshkoshToDepartureAirport"
         >
           <h4>Airport Transfer:</h4>
-          <span tal:condition="airport_transfer">${airport transfer}</span>
+          <span tal:condition="airport_transfer">${airport_transfer}</span>
           <span tal:condition="not: airport_transfer">TBA</span>
         </div>
 

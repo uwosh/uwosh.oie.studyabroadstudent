@@ -5,7 +5,7 @@ Changelog
 1.0.18 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fixed airport_transfer typo
 
 
 1.0.17 (2021-09-23)
