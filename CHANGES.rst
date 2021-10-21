@@ -5,7 +5,9 @@ Changelog
 1.0.19 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- tweak state transition error message
+- alterations and additions to participant workflow
+- upgrade stuff for 1008
 
 
 1.0.18 (2021-10-14)
