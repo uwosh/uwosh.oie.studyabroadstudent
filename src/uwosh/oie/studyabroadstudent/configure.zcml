@@ -144,5 +144,21 @@
     handler=".upgrades.upgrade_to_1007"
     sortkey="1007"
   />
+  <genericsetup:registerProfile
+    name="1_0_8"
+    title="uwosh.oie.studyabroadstudent 1.0.8 profile"
+    directory="profiles/1008"
+    description="1008 makes significant changes to participant transitions and states"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+  />
+  <genericsetup:upgradeStep
+    title="Upgrade OIE Study Abroad Student to 1.0.8"
+    description="Significant changes to participant transitions and states"
+    source="*"
+    destination="1008"
+    profile="uwosh.oie.studyabroadstudent:default"
+    handler=".upgrades.upgrade_to_1008"
+    sortkey="1008"
+  />
 
 </configure>
