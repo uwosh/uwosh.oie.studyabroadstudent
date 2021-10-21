@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.0.19 (unreleased)
--------------------
+2.0.0 (2021-10-21)
+------------------
 
 - tweak state transition error message
 - alterations and additions to participant workflow
