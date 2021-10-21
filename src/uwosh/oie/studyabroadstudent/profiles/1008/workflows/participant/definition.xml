@@ -28519,6 +28519,7 @@
   <guard>
    <guard-role>Participant_Applicant</guard-role>
   </guard>
+
  </transition>
 
  <transition transition_id="i-will-apply-for-the-visa" title="I will apply for the visa" new_state="step-ii" trigger="USER" before_script="pre_transition" after_script="post_transition" >
@@ -28526,6 +28527,7 @@
   <guard>
    <guard-role>Participant_Applicant</guard-role>
   </guard>
+
  </transition>
 
  <transition transition_id="i-will-choose-an-existing-course" title="I will choose an existing course" new_state="step-i" trigger="USER" before_script="pre_transition" after_script="post_transition" >

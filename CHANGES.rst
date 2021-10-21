@@ -2,10 +2,18 @@ Changelog
 =========
 
 
-1.0.19 (unreleased)
--------------------
+2.0.1 (unreleased)
+------------------
 
 - Nothing changed yet.
+
+
+2.0.0 (2021-10-21)
+------------------
+
+- tweak state transition error message
+- alterations and additions to participant workflow
+- upgrade stuff for 1008
 
 
 1.0.18 (2021-10-14)

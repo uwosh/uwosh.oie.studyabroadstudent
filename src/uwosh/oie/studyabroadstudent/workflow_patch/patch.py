@@ -29,8 +29,7 @@ def _executeTransition(self, ob, tdef=None, kwargs=None):
         former_status = self._getStatusOf(ob)
     new_sdef = self.states.get(new_state, None)
     if new_sdef is None:
-        msg = _('Destination state undefined: ${state_id}',
-                mapping={'state_id': new_state})
+        msg = _(f'Destination state undefined: {new_state}')
         raise WorkflowException(msg)
 
     try:

@@ -198,3 +198,18 @@ def upgrade_to_1007(context, logger=None):
     PROFILE_ID = 'profile-uwosh.oie.studyabroadstudent:1_0_7'
     setup = getToolByName(context, 'portal_setup')
     setup.runAllImportStepsFromProfile(PROFILE_ID)
+
+def upgrade_to_1008(context, logger=None):
+    PROFILE_ID = 'profile-uwosh.oie.studyabroadstudent:1_0_8'
+    workflow_tool = getToolByName(context, 'portal_workflow')
+    workflow_tool.participant.transitions.deleteTransitions([
+        'request-agreement',
+        'application-complete',
+        'agreement-submitted',
+        'move-to-step-iii-check-for-application',
+        'move-to-step-iii-conditionally-admitted',
+        'move-to-step-iii-pending-materials-review',
+    ])
+
+    setup = getToolByName(context, 'portal_setup')
+    setup.runAllImportStepsFromProfile(PROFILE_ID)
