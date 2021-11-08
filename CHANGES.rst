@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.0.1 (unreleased)
+2.0.1 (2021-11-08)
 ------------------
 
 - rename transition 'omit-special-student-status-application' to 'do-not-require-a-special-student-status-application'
