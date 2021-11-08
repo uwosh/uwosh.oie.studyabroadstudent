@@ -160,5 +160,14 @@
     handler=".upgrades.upgrade_to_1008"
     sortkey="1008"
   />
+  <genericsetup:upgradeStep
+    title="Upgrade OIE Study Abroad Student to 1.0.9"
+    description="Tweak participant workflow transitions related to Special Student Status"
+    source="*"
+    destination="1009"
+    profile="uwosh.oie.studyabroadstudent:default"
+    handler=".upgrades.upgrade_to_1009"
+    sortkey="1009"
+  />
 
 </configure>

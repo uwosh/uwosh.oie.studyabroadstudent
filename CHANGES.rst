@@ -5,7 +5,10 @@ Changelog
 2.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- rename transition 'omit-special-student-status-application' to 'do-not-require-a-special-student-status-application'
+- add the exit-transitions 'pending-special-student-status-graduate' and 'do-not-require-a-special-student-status-application' to the state 'checking-for-special-student-status'
+- remove the exit transition 'apply-for-special-student-status-graduate' from the state 'pending-special-student-status-undergraduate'
+- remove the exit transition 'omit-special-student-status-application' from the state 'pending-special-student-status-graduate'
 
 
 2.0.0 (2021-10-21)

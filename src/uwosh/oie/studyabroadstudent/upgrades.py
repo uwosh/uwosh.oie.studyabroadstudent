@@ -209,7 +209,48 @@ def upgrade_to_1008(context, logger=None):
         'move-to-step-iii-check-for-application',
         'move-to-step-iii-conditionally-admitted',
         'move-to-step-iii-pending-materials-review',
+        'confirm-alternate-schedule',
+        'request-alternate-flight',
+    ])
+    workflow_tool.participant.states.deleteStates([
+        'addressing-site-health,-safety-or-security-incident',
     ])
 
     setup = getToolByName(context, 'portal_setup')
     setup.runAllImportStepsFromProfile(PROFILE_ID)
+
+
+def upgrade_to_1009(context, logger=None):
+    workflow_tool = getToolByName(context, 'portal_workflow')
+    if workflow_tool.participant.transitions.get('omit-special-student-status-application'):
+        workflow_tool.participant.transitions.deleteTransitions([
+            'omit-special-student-status-application',
+        ])
+    if not workflow_tool.participant.transitions.get('do-not-require-a-special-student-status-application'):
+        workflow_tool.participant.transitions.addTransition('do-not-require-a-special-student-status-application')
+    transition_definition = workflow_tool.participant.transitions['do-not-require-a-special-student-status-application']
+    transition_definition.setProperties(
+        title='Do Not Require a Special Student Status Application',
+        new_state_id='background-check',
+        actbox_name='Do Not Require a Special Student Status Application',
+        actbox_url='%(content_url)s/content_status_modify?workflow_action=do-not-require-a-special-student-status-application',
+    )
+    exit_transitions = {
+        'checking-for-special-student-status': (
+            'apply-for-special-student-status-graduate',
+            'apply-for-special-student-status-undergraduate',
+            'do-not-require-a-special-student-status-application',
+        ),
+        'pending-special-student-status-undergraduate': (
+            'confirm-special-student-status-undergraduate',
+            'decline-special-student-status-undergraduate',
+            'withdraw',
+        ),
+        'pending-special-student-status-graduate': (
+            'confirm-special-student-status-graduate',
+            'decline-special-student-status-graduate',
+            'withdraw',
+        )
+    }
+    for key, value in exit_transitions.items():
+        workflow_tool.participant.states.get(key).transitions = value
