@@ -10935,6 +10935,8 @@
 
  <state state_id="checking-for-special-student-status" title="Checking for Special Student Status" >
   <exit-transition transition_id="apply-for-special-student-status-undergraduate" />
+  <exit-transition transition_id="apply-for-special-student-status-graduate" />
+  <exit-transition transition_id="do-not-require-a-special-student-status-application" />
 
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Site Administrator</permission-role>
@@ -11391,7 +11393,6 @@
   <exit-transition transition_id="confirm-special-student-status-undergraduate" />
   <exit-transition transition_id="decline-special-student-status-undergraduate" />
   <exit-transition transition_id="withdraw" />
-  <exit-transition transition_id="apply-for-special-student-status-graduate" />
 
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Site Administrator</permission-role>
@@ -11848,7 +11849,6 @@
   <exit-transition transition_id="confirm-special-student-status-graduate" />
   <exit-transition transition_id="decline-special-student-status-graduate" />
   <exit-transition transition_id="withdraw" />
-  <exit-transition transition_id="omit-special-student-status-application" />
 
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Site Administrator</permission-role>
@@ -28427,12 +28427,6 @@
    <guard-role>Participant_Admin</guard-role>
    <guard-role>Participant_Director</guard-role>
   </guard>
-
- </transition>
-
- <transition transition_id="confirm-alternate-schedule" title="Confirm Alternative Schedule" new_state="step-ii-check-for-application-completeness" trigger="USER" before_script="pre_transition" after_script="post_transition" >
-  <action url="%(content_url)s/content_status_modify?workflow_action=confirm-alternate-schedule" category="workflow" icon="">Confirm Alternative Schedule</action>
-  <guard></guard>
  </transition>
 
  <transition transition_id="confirm-no-special-entry-requirements" title="Confirm No Special Entry Requirements" new_state="step-ii" trigger="USER" before_script="pre_transition" after_script="post_transition" >
@@ -28568,11 +28562,6 @@
   <guard>
    <guard-role>Participant_Applicant</guard-role>
   </guard>
- </transition>
-
- <transition transition_id="request-alternate-flight" title="Request Alternate Flight" new_state="pending-decision-on-alternate-flight" trigger="USER" before_script="pre_transition" after_script="post_transition" >
-  <action url="%(content_url)s/content_status_modify?workflow_action=request-alternate-flight" category="workflow" icon="">Request Alternate Flight</action>
-    <guard></guard>
  </transition>
 
  <transition transition_id="request-behavior-agreement" title="Request Behavior Agreement" new_state="pending-signed-behavior-agreement" trigger="USER" before_script="pre_transition" after_script="post_transition" >
@@ -28817,8 +28806,8 @@
     <guard></guard>
  </transition>
 
- <transition transition_id="omit-special-student-status-application" title="Omit Special Student Status Application" new_state="background-check" trigger="USER" before_script="pre_transition" after_script="post_transition" >
-  <action url="%(content_url)s/content_status_modify?workflow_action=omit-special-student-status-application" category="workflow" icon="">Omit Special Student Status Application</action>
+ <transition transition_id="do-not-require-a-special-student-status-application" title="Do Not Require a Special Student Status Application" new_state="background-check" trigger="USER" before_script="pre_transition" after_script="post_transition" >
+  <action url="%(content_url)s/content_status_modify?workflow_action=do-not-require-a-special-student-status-application" category="workflow" icon="">Do Not Require a Special Student Status Application</action>
     <guard></guard>
  </transition>
 
