@@ -5,7 +5,9 @@ Changelog
 2.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added IntNoFormatFieldWidget to not format years (ex: 2,021 should be 2021)
+- changed participant graduationYear to use this widget
+- constrained graduationYear to CURRENT_YEAR+10
 
 
 2.0.1 (2021-11-08)

@@ -12,6 +12,7 @@ from uwosh.oie.studyabroadstudent.constants import (
     EMERGENCY_EMAIL_FIELD_DESCRIPTION,
     EMERGENCY_PHONE_PRIMARY_DESCRIPTION,
     EMERGENCY_PHONE_SECONDARY_DESCRIPTION,
+    CURRENT_YEAR,
 )
 from uwosh.oie.studyabroadstudent.vocabularies import (
     RegistryValueVocabulary,
@@ -24,7 +25,7 @@ from uwosh.oie.studyabroadstudent.vocabularies import (
     socialmediaservice,
     yes_no_vocabulary,
 )
-from uwosh.oie.studyabroadstudent.widgets import SundayStartDateWidget
+from uwosh.oie.studyabroadstudent.widgets import SundayStartDateWidget, IntNoFormatFieldWidget
 from z3c.form import validator
 from zope import schema
 from zope.interface import Interface
@@ -663,11 +664,12 @@ class IOIEStudyAbroadParticipant(Interface):
         required=False,
     )
 
+    widget('graduationYear', IntNoFormatFieldWidget)
     graduationYear = schema.Int(
         title=_('Graduation: Anticipated Year'),
         description=_('Enter the full 4-digit year.'),
         min=2018,
-        max=2100,
+        max=CURRENT_YEAR+10,
         required=False,
     )
 
