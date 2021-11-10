@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.0.2 (unreleased)
+2.0.2 (2021-11-10)
 ------------------
 
 - Added IntNoFormatFieldWidget to not format years (ex: 2,021 should be 2021)
