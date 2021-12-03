@@ -80,7 +80,7 @@ month_values = {
 with api.env.adopt_user(username='admin'):
     # You're now posing as admin!
 
-    wtool = site.portal_workflow
+    workflow_tool = site.portal_workflow
     folder = app.unrestrictedTraverse("{0}/{1}".format(site_id, folder_id))  # noqa
 
     for values in app_data:  # noqa
@@ -616,7 +616,7 @@ with api.env.adopt_user(username='admin'):
 
             # set review_state and review_history
             for h in review_history:
-                wtool.setStatusOf(workflow_id, obj, h)
+                workflow_tool.setStatusOf(workflow_id, obj, h)
 
             print('    ', id, Email)  # noqa
 

@@ -201,9 +201,9 @@ def getEmailMessageTemplate(state_change, interface):
 
 def getActor(object):
     pmtool = api.portal.get_tool('portal_membership')
-    wftool = api.portal.get_tool('portal_workflow')
+    workflow_tool = api.portal.get_tool('portal_workflow')
 
-    memberid = wftool.getInfoFor(object, 'actor')  # noqa
+    memberid = workflow_tool.getInfoFor(object, 'actor')  # noqa
     member = pmtool.getMemberById(memberid)  # noqa
 
     actor = {
@@ -246,16 +246,16 @@ def getToAddresses(object, emailTemplate):
 
 
 def assembleEmailMessage(object, emailTemplate):
-    wftool = api.portal.get_tool('portal_workflow')
+    workflow_tool = api.portal.get_tool('portal_workflow')
     return f"""
 
 Your UW Oshkosh Office of International Education study abroad program has been updated.
 
-{emailTemplate.emailText}
+{emailTemplate.emailText.output}
 
-You can view your program here: {object.absolute_url()}
+You can view your application here: {object.absolute_url()}
 
-Comment: {wftool.getInfoFor(object, 'comments')}  # noqa: P001
+Comment: {workflow_tool.getInfoFor(object, 'comments')}
 """
 
 
