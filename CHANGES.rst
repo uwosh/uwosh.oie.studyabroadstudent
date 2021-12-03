@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.0.3 (unreleased)
+2.0.3 (2021-12-03)
 ------------------
 
 - omit correct fields for participant view and edit forms
