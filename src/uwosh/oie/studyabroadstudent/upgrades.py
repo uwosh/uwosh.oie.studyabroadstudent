@@ -4,7 +4,7 @@ from plone.app.textfield.interfaces import ITransformer
 
 import logging
 from uwosh.oie.studyabroadstudent.setuphandlers import _create_account
-
+from uwosh.oie.studyabroadstudent.browser.controlpanel import IOIEStudyAbroadStudentControlPanel
 
 from plone.registry.interfaces import IRegistry
 from Products.CMFPlone.interfaces import IMarkupSchema
@@ -14,17 +14,19 @@ from Products.CMFCore.utils import getToolByName
 from zope.component import getUtility
 
 import six
-PROFILE_ID = 'profile-convert_datagridfields:default'
+
+OIE_PREFIX = 'oiestudyabroadstudent'
+LOGGER = logging.getLogger('uwosh.oie.studyabroadstudent')
 
 
-def reset_datagridfields(context, logger=None):
+def reset_datagridfields(context, logger=LOGGER):
     """Reset some data grid fields to empty rich text fields.
     Some data grid fields were replaced by a rich text field showing new
     contained objects. """
 
-    if logger is None:
-        # Called as upgrade step: define our own logger.
-        logger = logging.getLogger('uwosh.oie.studyabroadstudent')
+    # if logger is None:
+    #     # Called as upgrade step: define our own logger.
+    #     logger = logging.getLogger('uwosh.oie.studyabroadstudent')
 
     catalog = api.portal.get_tool('portal_catalog')
     brains = catalog(portal_type='OIEStudyAbroadProgram')
@@ -74,12 +76,9 @@ def reset_datagridfields(context, logger=None):
     logger.info(f'{count} items migrated')
 
 
-def handle_richtext_description(context, logger=None):
+def handle_richtext_description(context, logger=LOGGER):
     """Convert old Program richtext description fields to regular text, and
     move their value to the new rich_description field"""
-    if logger is None:
-        # Called as upgrade step: define our own logger.
-        logger = logging.getLogger('uwosh.oie.studyabroadstudent')
     catalog = api.portal.get_tool('portal_catalog')
     brains = catalog(portal_type='OIEStudyAbroadProgram')
     count = 0
@@ -95,18 +94,13 @@ def handle_richtext_description(context, logger=None):
     logger.info(f'{count} items migrated')
 
 
-def handle_files_upgrade(context, logger=None):
+def handle_files_upgrade(context, logger=LOGGER):
     """zope.schema.ASCII inherits from NativeString.
     With Python 2 this is the same as Bytes, but with Python 3 not:
     you get a WrongType error when saving the site-controlpanel.
     """
-    if logger is None:
-        # Called as upgrade step: define our own logger.
-        logger = logging.getLogger('uwosh.oie.studyabroadstudent')
-    OIE_PREFIX = 'oiestudyabroadstudent'
 
-    from plone.registry import field
-    from plone.registry import Record
+    from plone.registry import field, Record
 
     registry = getUtility(IRegistry)
     for file_title in [
@@ -254,3 +248,8 @@ def upgrade_to_1009(context, logger=None):
     }
     for key, value in exit_transitions.items():
         workflow_tool.participant.states.get(key).transitions = value
+
+
+def update_controlpanel_schema(context, logger=LOGGER):
+    registry = getUtility(IRegistry)
+    registry.registerInterface(IOIEStudyAbroadStudentControlPanel, prefix=OIE_PREFIX)
