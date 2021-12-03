@@ -5,7 +5,7 @@ from plone.app.textfield.value import RichTextValue
 from plone.autoform.directives import omitted, widget
 from plone.formwidget.namedfile.converter import b64decode_file
 from plone.namedfile.field import NamedFile
-from plone.supermodel import model
+from plone.supermodel import directives, model
 from Products.CMFPlone.RegistrationTool import EmailAddressInvalid, checkEmailAddress
 from uwosh.oie.studyabroadstudent import _
 from uwosh.oie.studyabroadstudent.constants import (
@@ -30,9 +30,29 @@ from z3c.form import validator
 from zope import schema
 from zope.interface import Interface
 from zope.schema import ValidationError
+from z3c.form.browser.radio import RadioFieldWidget
 
-import re
 
+from re import compile as re_compile
+
+UNDER_18_SIGNATURE_NOTE = 'If you are 17 years old or younger on the date that you sign the form, your parent or guardian must also sign and date the form by hand'  # noqa: E501
+PUNCTUATION_MARKS = [';', '.', '?', ':', '!']
+NOT_TYPED = 'Signatures cannot be typed'
+
+def get_html_description(directions=None, bullet_points=[]):
+    description = ''
+    if directions:
+        description += f'<p>{directions}'
+        if bullet_points and description[-1] not in PUNCTUATION_MARKS:
+            description += ':'
+        description += '</p>'
+    if bullet_points:
+        description += '<ul><li>' + '</li><li>'.join(bullet_points) + '</li></ul>'
+    return description
+
+
+def get_a_element(text, href, text_before='Upload your completed', text_after=''):
+    return f'{text_before}{" " if text_before else ""}<a href="{href}">{text}</a>{text_after}{" " if text_after else ""}'
 
 class InvalidEmailAddress(ValidationError):
     """Invalid email address"""
@@ -70,11 +90,11 @@ def validate_email(value):
     return True
 
 
-STUDENT_ID_RE = re.compile(r'^\d\d\d\d\d\d\d$')
+STUDENT_ID_PATTERN = re_compile(r'^\d{7}$')
 
 
 def validate_student_id(value):
-    if len(value) != 7 or not STUDENT_ID_RE.match(value):
+    if len(value) != 7 or not STUDENT_ID_PATTERN.match(value):
         raise InvalidStudentID(value)
     return True
 
@@ -969,7 +989,7 @@ class IOIEStudyAbroadParticipant(Interface):
         label=_('STEP II Forms'),
         description=_(
             'To complete STEP II, print relevant documents, clearly print your responses, sign forms '
-            'by hand where indicated, and follow instructions below.  Signatures cannot be typed.'
+            f'by hand where indicated, and follow instructions below. {NOT_TYPED}.'
         ),
         fields=[
             'applicationFeeOK',
@@ -977,12 +997,294 @@ class IOIEStudyAbroadParticipant(Interface):
             'specialStudentFormOK',
             'state_of_wisconsin_need_based_travel_grant_form_uploaded_file',
             'special_student_form_for_undergraduate_admissions_uploaded_file',
-            'transcriptsOK',
+            'unofficial_transcript_upload',
+            'unofficial_transcript_submitted',
             'UWOshkoshStatementOK',
             'UWSystemStatementOK',
-            'withdrawalRefund',
             'cumulativeGPA',
+            'oshkosh_uniform_statement_of_responsibility_form',
+            'oshkosh_uniform_statement_of_responsibility_form_submitted',
+            'oshkosh_uniform_statement_of_responsibility_form_parent_signature',
+            'uw_system_uniform_statement_of_responsibility_form',
+            'uw_system_uniform_statement_of_responsibility_form_submitted',
+            'uw_system_uniform_statement_of_responsibility_form_parent_signature',
+            'withdrawl_and_refund_policy_form',
+            'withdrawl_and_refund_policy_form_submitted',
+            'withdrawl_and_refund_policy_form_parent_signature',
+            'withdrawl_and_refund_policy_exchange_form',
+            'withdrawl_and_refund_policy_exchange_form_submitted',
+            'withdrawl_and_refund_policy_exchange_form_parent_signature',
+            'health_disclosure_form',
+            'health_disclosure_form_needs_further_review',
         ],
+    )
+
+
+    unofficial_transcript_upload = NamedFile(
+        title='Transcript (Unofficial)',
+        description=get_html_description(
+            directions='Print and upload a pdf of your unofficial transcript',
+            bullet_points=[
+                'Use TitanWeb if you are a current UW Oshkosh student',
+                'Use the electronic system used at your home campus if '
+                'you are a current student at another institution',
+                'Your unofficial transcript must include your cumulative GPA UNLESS '
+                'you are in your first year at a university or college.',
+                get_html_description(
+                    directions=(
+                        'If your transcript does not include a cumulative GPA, '
+                        'and you are not in your first year of university or college, '
+                        'you must upload, assembled into one document'
+                    ),
+                    bullet_points=[
+                        'a transcript from your current institution',
+                        'a transcript from the institution you attended prior to your current institution.'
+                    ]
+                ),
+                'Do NOT upload your UW Oshkosh STAR report.',
+            ],
+        ),
+        required=False,
+    )
+
+    unofficial_transcript_submitted = schema.Bool(
+        title=_('Transcripts Submitted'),
+        description=get_html_description(
+            directions='All of the following conditions must be met before checking this item in',
+            bullet_points=[
+                "The transcript must include the applicant's name & student ID",
+                'The transcript must be from the CURRENT school as indicated in this application',
+                'The transcript must include all terms of attendance',
+                'There may be no pages missing',
+                'The transcript must include the CUMULATIVE GPA',
+                'The transcript may NOT be replaced by the UW Oshkosh STAR report',
+                get_html_description(
+                    directions=(
+                        'If your transcript does not include a cumulative GPA, '
+                        'and you are not in your first year of university or college, '
+                        'you must upload, assembled into one document'
+                    ),
+                    bullet_points=[
+                        'a transcript from your current institution',
+                        'a transcript from the institution you attended prior to your current institution.',
+                    ]
+                ),
+            ],
+        ),
+        required=False,
+    )
+
+
+    oshkosh_uniform_statement_of_responsibility_form = NamedFile(
+        title='UW Oshkosh Uniform Statement of Responsibility',
+        description=get_html_description(
+            directions=get_a_element(
+                href='oshkosh-uniform-statement-of-responsibility-form',
+                text='UW Oshkosh Uniform Statement of Responsibility form',
+            ),
+            bullet_points=[
+                'Clearly PRINT your full name',
+                'Sign and date the form by hand',
+                UNDER_18_SIGNATURE_NOTE,
+                NOT_TYPED,
+            ],
+        ),
+        required=False,
+    )
+    # TODO - get a blank copy of this file for the site^^^
+
+
+    oshkosh_uniform_statement_of_responsibility_form_submitted = schema.Bool(
+        title='UW Oshkosh Uniform Statement of Responsibility Submitted',
+        description=get_html_description(
+            directions='Both of the following conditions must be met before checking this item in',
+            bullet_points=[
+                "Is the applicant's full name clearly printed on the form?",
+                f'Has the form been signed and dated by hand? ({NOT_TYPED})',
+            ],
+        ),
+        required=False,
+    )
+
+    oshkosh_uniform_statement_of_responsibility_form_parent_signature = schema.Bool(
+        title='UW Oshkosh Uniform Statement of Responsibility - Parent Signature',
+        description=get_html_description(
+            directions='Has a parent or guardian also signed and dated the form by hand?',
+            bullet_points=[
+                NOT_TYPED,
+                'A parent or guardian must sign the form if the applicant is 17 years old or younger',
+            ]
+        ),
+        required=False,
+    )
+
+    uw_system_uniform_statement_of_responsibility_form = NamedFile(
+        title='UW System Uniform Statement of Responsibility',
+        description=get_html_description(
+            directions=(
+                get_a_element(
+                    text_before='Upload your completed',
+                    text='UW System Uniform Statement of Responsibility form',
+                    href='uw-system-uniform-statement-of-responsibility-form',
+                )
+            ),
+            bullet_points = [
+                'Clearly PRINT your full name',
+                'Clearly PRINT your official program name',
+                'Clearly PRINT the months & years corresponding to your participation dates',
+                'You do not need to include the exact dates',
+                'Sign and date the form by hand',
+                UNDER_18_SIGNATURE_NOTE,
+                NOT_TYPED,
+            ],
+        ),
+        required=False,
+    )
+    # TODO - get a blank copy of this file for the site^^^
+
+
+    uw_system_uniform_statement_of_responsibility_form_submitted = schema.Bool(
+        title='UW System Uniform Statement of Responsibility Submitted',
+        description=get_html_description(
+
+            directions='All of the following conditions must be met before checking this item in',
+            bullet_points=[
+                "Is the applicant's full name clearly printed on the form?",
+                'Does the form include the official program name?',
+                'Does the form include the CORRECT dates of participation (months & years only)?',
+                f'Has the form been signed and dated by hand? ({NOT_TYPED})',
+            ],
+        ),
+        required=False,
+    )
+
+    uw_system_uniform_statement_of_responsibility_form_parent_signature = schema.Bool(
+        title='UW System Uniform Statement of Responsibility - Parent Signature',
+        description=get_html_description(
+            bullet_points=[
+                'Has a parent or guardian also signed and dated the form by hand?',
+                f'{NOT_TYPED}.',
+                'A parent or guardian must sign the form if the applicant is 17 years old or younger.',
+            ],
+        ),
+        required=False,
+    )
+
+
+
+    withdrawl_and_refund_policy_form = NamedFile(
+        title='Withdrawal & Refund Policy',
+        description=get_html_description(
+            directions=get_a_element(
+                text_before='Upload your completed',
+                href='withdrawl-and-refund-policy-form',
+                text='Withdrawal & Refund form',
+                # text_after='.',
+            ),
+            bullet_points=[
+                'Clearly PRINT your full name.',
+                'Sign and date the form by hand.',
+                UNDER_18_SIGNATURE_NOTE,
+                NOT_TYPED,
+            ],
+        ),
+        required=False,
+    )
+    # TODO - get a blank copy of this file for the site^^^
+
+    withdrawl_and_refund_policy_form_submitted = schema.Bool(
+        title='Withdrawal & Refund Policy Submitted',
+        description=get_html_description(
+            directions='Both of the following conditions must be met before checking this item in',
+            bullet_points=[
+                "Is the applicant's full name clearly printed on the form?",
+                f'Has the form been signed and dated by hand? ({NOT_TYPED})',
+            ]
+        ),
+        required=False,
+    )
+
+    withdrawl_and_refund_policy_form_parent_signature = schema.Bool(
+        title='Withdrawal & Refund Policy - Parent Signature',
+        description=get_html_description(
+            bullet_points=[
+                'Has a parent or guardian also signed and dated the form by hand?',
+                f'{NOT_TYPED}.',
+                'A parent or guardian must sign the form if the applicant is 17 years old or younger.',
+            ],
+        ),
+        required=False,
+    )
+
+    withdrawl_and_refund_policy_exchange_form = NamedFile(
+        title='Withdrawal & Refund Policy (exchange)',
+        description=get_html_description(
+            directions=get_a_element(
+                text_before='Upload your completed ',
+                href="withdrawl-and-refund-policy-exchange-form",
+                text='Withdrawal & Refund form',
+            ),
+            bullet_points=[
+                'Clearly PRINT your full name.',
+                'Sign and date the form by hand.',
+                f'{UNDER_18_SIGNATURE_NOTE}.',
+                f'{NOT_TYPED}.',
+            ],
+        ),
+        required=False,
+    )
+    # TODO - get a blank copy of this file for the site^^^
+
+    withdrawl_and_refund_policy_exchange_form_submitted = schema.Bool(
+        title='Withdrawal & Refund Policy (exchange) Submitted',
+        description=get_html_description(
+            directions='Both of the following conditions must be met before checking this item in',
+            bullet_points=[
+                "Is the applicant's full name clearly printed on the form?",
+                f'Has the form been signed and dated by hand? ({NOT_TYPED})',
+            ],
+        ),
+        required=False,
+    )
+
+    withdrawl_and_refund_policy_exchange_form_parent_signature = schema.Bool(
+        title='Withdrawal & Refund Policy (exchange) - Parent Signature',
+        description=get_html_description(
+            directions='Has a parent or guardian also signed and dated the form by hand?',
+            bullet_points=[
+                f'{NOT_TYPED}.',
+                'A parent or guardian must sign the form if the applicant is 17 years old or younger.',
+            ],
+        ),
+        required=False,
+    )
+
+    health_disclosure_form = NamedFile(
+        title='Health Disclosure',
+        description=get_html_description(
+            directions=get_a_element(
+                text_before='Upload your completed',
+                href='health-disclosure-form',
+                text='Health Disclosure',
+                # text_after='.',
+            ),
+            bullet_points=[
+                'Clearly PRINT your full name.',
+                'Sign and date the form by hand.',
+                f'{UNDER_18_SIGNATURE_NOTE}.',
+                f'{NOT_TYPED}.',
+            ],
+        ),
+        required=False,
+    )
+    # TODO - get a blank copy of this file for the site^^^
+
+    widget('health_disclosure_form_needs_further_review', RadioFieldWidget)
+    health_disclosure_form_needs_further_review = schema.Choice(
+        title=_('Health Disclosure Indicates a Need for Further Review'),
+        description=_('If one or more responses on this form is “YES”, select “Yes”.  Otherwise, select “No”.'),
+        vocabulary=yes_no_vocabulary,
+        required=False,
     )
 
 
@@ -995,7 +1297,7 @@ class IOIEStudyAbroadParticipant(Interface):
 
     state_of_wisconsin_need_based_travel_grant_form_uploaded_file = NamedFile(
         title='State of Wisconsin Need-based Travel Grant Submission',
-        description=f'Upload your completed copy of <a href="need-based-travel-grant-form">this form</a>',
+        description='Upload your completed copy of <a href="need-based-travel-grant-form">this form</a>',
         required=False,
     )
 
@@ -1247,7 +1549,11 @@ class IOIEStudyAbroadParticipant(Interface):
     # )
 
 
-validator.WidgetValidatorDiscriminators(SeatNumberRequiredValidator,
-                                        field=IOIEStudyAbroadParticipant['seatNumber'])
-validator.WidgetValidatorDiscriminators(WaitlistNumberRequiredValidator,
-                                        field=IOIEStudyAbroadParticipant['waitlistNumber'])
+validator.WidgetValidatorDiscriminators(
+    SeatNumberRequiredValidator,
+    field=IOIEStudyAbroadParticipant['seatNumber'],
+)
+validator.WidgetValidatorDiscriminators(
+    WaitlistNumberRequiredValidator,
+    field=IOIEStudyAbroadParticipant['waitlistNumber'],
+)

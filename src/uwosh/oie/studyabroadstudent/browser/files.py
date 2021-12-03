@@ -25,7 +25,7 @@ class DownloadablePDF(Download):
             return None
 
     @property
-    def NotFound():
+    def NotFound(self):
         return NotFound(
             self,
             self.fieldname,
@@ -69,3 +69,27 @@ class NeedBasedTravelGrantFormDownload(DownloadablePDF):
 class SpecialStudentUndergraduateAdmissionsFormDownload(DownloadablePDF):
     filename = 'SpecialStudentFormForUndergraduateAdmissions'
     form_key = 'special_student_form_for_undergraduate_admissions'
+
+
+class OshkoshUniformStatementOfResponsibilityFormDownload(DownloadablePDF):
+    filename = 'OshkoshUniformStatementOfResponsibilityForm'
+    form_key = 'oshkosh_uniform_statement_of_responsibility_form'
+
+
+class UWSystemUniformStatementOfResponsibilityFormDownload(DownloadablePDF):
+    filename = 'UWSystemUniformStatementOfResponsibilityForm'
+    form_key = 'uw_system_uniform_statement_of_responsibility_form'
+
+
+class WithdrawlAndRefundPolicyFormDownload(DownloadablePDF):
+    filename = 'WithdrawlAndRefundPolicyForm'
+    form_key = 'withdrawl_and_refund_policy_form'
+
+class WithdrawlAndRefundPolicyExchangeFormDownload(DownloadablePDF):
+    filename = 'WithdrawlAndRefundPolicyExchangeForm'
+    form_key = 'withdrawl_and_refund_policy_exchange_form'
+
+
+class HealthDisclosureFormDownload(DownloadablePDF):
+    filename = 'HealthDisclosureForm'
+    form_key = 'health_disclosure_form'

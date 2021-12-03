@@ -208,5 +208,41 @@
     permission="zope.Public"
   />
 
+  <browser:page
+    name="oshkosh-uniform-statement-of-responsibility-form"
+    for="*"
+    class=".files.OshkoshUniformStatementOfResponsibilityFormDownload"
+    permission="zope.Public"
+  />
+
+  <browser:page
+    name="uw-system-uniform-statement-of-responsibility-form"
+    for="*"
+    class=".files.UWSystemUniformStatementOfResponsibilityFormDownload"
+    permission="zope.Public"
+  />
+
+  <browser:page
+    name="withdrawl-and-refund-policy-form"
+    for="*"
+    class=".files.WithdrawlAndRefundPolicyFormDownload"
+    permission="zope.Public"
+  />
+
+
+  <browser:page
+    name="withdrawl-and-refund-policy-exchange-form"
+    for="*"
+    class=".files.WithdrawlAndRefundPolicyExchangeFormDownload"
+    permission="zope.Public"
+  />
+
+  <browser:page
+    name="health-disclosure-form"
+    for="*"
+    class=".files.HealthDisclosureFormDownload"
+    permission="zope.Public"
+  />
+
 
 </configure>
