@@ -5,7 +5,7 @@
 # Using the Management Interface, save the contents of this script as
 # a Script (Python) in the portal_skins/custom of the site.
 
-wtool = context.portal_workflow  # noqa
+workflow_tool = context.portal_workflow  # noqa
 catalog = context.portal_catalog  # noqa
 results = catalog.searchResults(portal_type='OIEStudentApplication', id=id)  # noqa: P001
 for r in results:
@@ -48,7 +48,7 @@ for r in results:
     getProgramName = o.getProgramName()
     if getProgramName is not None and getProgramName != '':
         getProgramName = getProgramName.Title()
-    review_history = wtool.getInfoFor(o, 'review_history', [])  # noqa: P001
+    review_history = workflow_tool.getInfoFor(o, 'review_history', [])  # noqa: P001
     for h in review_history:
         h['time'] = h['time'].HTML4()
     print ([  # noqa

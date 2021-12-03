@@ -3,8 +3,10 @@ from plone.dexterity.browser import add, edit
 from Products.CMFPlone.resources import add_resource_on_request
 
 
-class ParticipantEditForm(edit.DefaultEditForm):
-    # if role is Participant_Student, make sure they are the owner of this form
+class ParticipantEditForm(ParticipantPermissionsMixin, edit.DefaultEditForm):
+    _participant_form_mode = 'input'
+
+    # if role is Participant_Applicant, make sure they are the owner of this form
     def __call__(self, *args, **kwargs):
         add_resource_on_request(self.request, 'untitled-js')
         current_user = api.user.get_current()

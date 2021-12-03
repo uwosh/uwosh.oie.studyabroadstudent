@@ -2,10 +2,20 @@ Changelog
 =========
 
 
-2.0.3 (unreleased)
+2.0.4 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+2.0.3 (2021-12-03)
+------------------
+
+- omit correct fields for participant view and edit forms
+- fix needless abbreviation, fix email template
+- add new forms / organize control panel
+- control panel schema refresh upgrade step
+- remove old uneeded json files
 
 
 2.0.2 (2021-11-10)

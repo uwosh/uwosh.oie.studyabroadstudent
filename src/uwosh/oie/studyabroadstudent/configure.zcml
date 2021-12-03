@@ -169,5 +169,14 @@
     handler=".upgrades.upgrade_to_1009"
     sortkey="1009"
   />
+ <genericsetup:upgradeStep
+    title="Refresh Control Panel Schema"
+    description="Adds any control panel fields to the registry that don't yet exist"
+    source="*"
+    destination="*"
+    handler="uwosh.oie.studyabroadstudent.upgrades.update_controlpanel_schema"
+    sortkey="1010"
+    profile="uwosh.oie.studyabroadstudent:default" />
+
 
 </configure>

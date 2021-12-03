@@ -14,7 +14,21 @@ from uwosh.oie.studyabroadstudent.interfaces import IOIEStudyAbroadParticipant
 from uwosh.oie.studyabroadstudent.reporting import ReportUtil
 from uwosh.oie.studyabroadstudent.utils import get_object_from_uid
 from zope.interface import Interface, alsoProvides
+from functools import reduce
+from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
+from plone.app.versioningbehavior.behaviors import IVersionable
 
+from plone.app.dexterity.behaviors.metadata import (
+    IBasic,
+    ICategorization,
+    IPublication,
+    IOwnership,
+)
+from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
+from plone.app.dexterity.behaviors.nextprevious import INextPreviousToggle
+from plone.app.relationfield.behavior import IRelatedItems
+
+from plone.app.contenttypes.behaviors.tableofcontents import ITableOfContents
 import csv
 import json
 import logging
@@ -23,6 +37,21 @@ import os
 
 
 logger = logging.getLogger('uwosh.oie.studyabroadstudent')
+
+
+EXCLUDED_APPLICANT_FIELDS = {
+    IExcludeFromNavigation: ['exclude_from_nav'],
+    INextPreviousToggle: ['nextPreviousEnabled'],
+    IVersionable: ['changeNote', 'versioning_enabled'],
+    ITableOfContents: ['table_of_contents'],
+    ICategorization: ['subjects', 'language'],
+    IRelatedItems: ['relatedItems'],
+    IPublication: ['effective', 'expires'],
+    IOwnership: ['rights', 'contributors', 'creators'],
+}
+
+
+
 
 
 def handle_missing(obj):
@@ -253,91 +282,152 @@ class ContactView(DefaultView):
     pass
 
 
-class ParticipantFolderView(DefaultView):
+EMPTY_PERMISSIONS={
+    'read':[],
+    'read_write':[],
+    'none':[],
+}
+class ParticipantPermissionsMixin:
     @property
-    def has_applications(self):
-        try:
-            return len(api.portal.get()['participants'].listFolderContents()) > 0
-        except Exception:
-            return False
-class ParticipantView(DefaultView, FolderView):
-    # ParticipantView should really be called ApplicationView
-    # This can be the view for reviewers/etc of the application
-    # But is also the view for participants to edit their application
-
-
-
-    @property
-    def permissions(self):
-        if not getattr(self, '_permissions', None):
-            self._permissions = self._get_permissions(
-                self.user_roles,
-                self.transition_state,
+    def omitted_permissions(self):
+        if not getattr(self, '_omitted_permissions', None):
+            highest_permissions_to_omit = { 'display': ['none'], 'input': ['read', 'none'] }
+            self._omitted_permissions = highest_permissions_to_omit.get(
+                self.participant_form_mode,
+                ['read_write', 'read', 'none']
             )
-        return self._permissions
+        return self._omitted_permissions
+
+
+    @property
+    def participant_form_mode(self):
+        return getattr(self, '_participant_form_mode', 'display')
+
+    @property
+    def highest_permissions(self):
+        if not getattr(self, '_highest_permissions', None):
+            self._highest_permissions = self._get_highest_permissions()
+        return self._highest_permissions
 
     @property
     def transition_state(self):
         if not getattr(self, '_transition_state', None):
-            # try:
             self._transition_state = api.content.get_state(self.context)
-            # except KeyError:
-            #    self._transition_state = None
         return self._transition_state
 
     @property
     def user_roles(self):
         if not getattr(self, '_user_roles', None):
-            # self._user_roles = api.user.get_current().getRoles()  # noqa : P001
-            self._user_roles = []
+            try:
+                user_roles = list(set(
+                    api.user.get_current().getRoles() +
+                    api.user.get_current().getRolesInContext(self.context)
+                ))
+            except Exception:
+                user_roles = []
+            self._user_roles = user_roles
         return self._user_roles
 
-    def _get_permissions(self, user_roles, transition_state):
-        relative_path = '../static/json/optimized_participant_permissions.json'
-        absolute_path = os.path.join(os.path.dirname(__file__), relative_path)
-        field_permissions = {}
-        # try:
-        with open(absolute_path, 'r') as infile:
-            permission_map = json.load(infile)
-        # except Exception:
-        #     return field_permissions
-        for role in user_roles:
-            role_permissions = (
-                permission_map[role]['default_permissions'],
-                permission_map[role][transition_state],
-            )
-            for permissions in role_permissions:
-                for read_write_none in permissions:
-                    for field in permissions[read_write_none]:
-                        field_permissions[field] = self._highest_permission(
-                            field_permissions.get(field, None),
-                            read_write_none,
-                        )
-        return field_permissions
+    @property
+    def is_only_applicant(self):
+        user_oie_roles = set(self.user_roles).intersection(self.all_roles)
+        return list(user_oie_roles) == ['Participant_Applicant']
 
-    def show_error_page(self):
-        return False
+    @property
+    def json_permissions(self):
+        if not getattr(self, '_json_permissions', None):
+            relative_path = '../static/json/optimized_participant_permissions.json'
+            absolute_path = os.path.join(os.path.dirname(__file__), relative_path)
+            with open(absolute_path, 'r') as infile:
+                self._json_permissions = json.load(infile)
+        return self._json_permissions
 
-    def updateFieldsFromSchemata(self):
-        IOIEStudyAbroadParticipant.setTaggedValue(
-            OMITTED_KEY,
+
+    @property
+    def all_roles(self):
+        if not getattr(self, '_all_roles', None):
+            self._all_roles = self.json_permissions.keys()
+        return self._all_roles
+
+    def _get_highest_permissions(self):
+        return self.merge_permission_sets(
             [
-                (Interface, field, 'true')
-                for field in self.permissions
-                if self.permissions[field] == 'none'
+                self._get_role_permission_set(role)
+                for role in self.user_roles
             ]
         )
-        super().updateFieldsFromSchemata()
 
-    def _highest_permission(self, *permissions):
-        ranked = [None, 'none', 'read', 'read_write']
-        tmp = {
-            permission: ranked.index(permission)
-            for permission in set(permissions)
+
+    def _get_role_permission_set(self, role):
+        '''takes a role and returns a dict of {field_name: permission} for
+        all field names explicitly specified in optimized_participant_permissions
+        for the supplied user role in the current transition state'''
+        applicable_permission_keys = ['default_permissions', self.transition_state]
+        role_permissions = self.json_permissions.get(role, {})
+        default_permissions = role_permissions.get('default_permissions', EMPTY_PERMISSIONS)
+        transition_permissions = role_permissions.get(self.transition_state, EMPTY_PERMISSIONS)
+        return {
+            **self.get_field_permissions(default_permissions),
+            **self.get_field_permissions(transition_permissions),
         }
-        return max(tmp, key=tmp.get)
+
+
+    def merge_permission_sets(self, permission_sets):
+        '''takes in a list of permission set objects of form {field: read_write_none}
+        and returns a merged permission set dict'''
+        fields = reduce(set.union, [set(permission_set.keys()) for permission_set in permission_sets])
+        return {
+            field: self.get_highest_permission(
+                [permission_set.get(field, 'none') for permission_set in permission_sets]
+            )
+            for field in fields
+        }
+
+
+
+    def get_field_permissions(self, read_write_none_dict):
+        '''Takes in a permission set dict with 'read', 'read_write', and 'none' keys
+        and a list of field names as values
+        Returns a dict of {field:name: permission} for every field name found in any of the dicts
+        If any field name happens to appear in multiple lists, the precedence is:
+        none > read_write > read'''
+        # for permission_type in ['read', 'read_write', 'none']:
+        #     for field in sets[permission_type]:
+        #         obj[field] = permission_type
+        return {
+            field: read_write_none
+            for read_write_none in ['read', 'read_write', 'none']
+            for field in read_write_none_dict[read_write_none]
+        }
+
+
+    def get_highest_permission(self, permissions):
+        '''takes a list of permissions and returns the value of the
+        highest permission in the list'''
+        ranked_permissions = ['none', 'read', 'read_write']
+        permission_indices = [
+            ranked_permissions.index(permission)
+            if permission in ranked_permissions else 0
+            for permission in permissions
+        ]
+        max_index = max(permission_indices)
+        return ranked_permissions[max_index]
+
+    # def _get_higher_permission(self, *permissions):
+    #     ranked_permissions = [
+    #         None: 0,
+    #         'none': 1,
+    #         'read': 2,
+    #         'read_write': 3,
+    #     ]
+    #     tmp = {
+    #         permission: ranked_permissions
+    #         for permission in set(permissions)
+    #     }
+    #     return max(tmp, key=tmp.get)
 
     def _get_show_these(self):
+        '''maybe not being used and can be removed?'''
         show_these = {'fields': {}, 'groups': {}}
         for group in self.groups:
             show_these['groups'][group.label] = False
@@ -354,20 +444,74 @@ class ParticipantView(DefaultView, FolderView):
 
         return show_these
 
-    def _can_view_field(self, field_name):
-        return field_name in self.permissions['read'] + self.permissions['read_write']
+    def should_omit(self, field):
+        return self.highest_permissions[field] in self.omitted_permissions
+
+    @property
+    def is_edit_form(self):
+        return self.participant_form_mode == 'input'
+
+    @property
+    def is_display_form(self):
+        return self.participant_form_mode == 'display'
+
+    def updateFieldsFromSchemata(self):
+        IOIEStudyAbroadParticipant.setTaggedValue(
+            OMITTED_KEY,
+            [
+                (Interface, field, True)
+                for field in self.highest_permissions
+                if self.should_omit(field)
+            ]
+        )
+        if self.is_only_applicant:
+            for interface, field_names in EXCLUDED_APPLICANT_FIELDS.items():
+                interface.setTaggedValue(
+                    OMITTED_KEY,
+                    [
+                        (Interface, field_name, True)
+                        for field_name in field_names
+                    ]
+                )
+        super().updateFieldsFromSchemata()
 
     def show_widget(self, widget):
+        '''maybe not being used and can be removed?'''
         disallowed = (
             'IBasic.title',
             'IBasic.description',
             'title',
             'description',
         )
-        # if not self._permissions:
-        #     self.call()
-        return widget.__name__ not in disallowed and \
-            self._permissions['fields'][widget.label] in ('read', 'read_write')
+        if widget.__name__ in disallowed:
+            return False
+        allowed_permissions = {'display': ['read', 'read_write'], 'input': ['read_write']}
+        return self.highest_permissions['fields'][widget.label] in allowed_permissions[self.participant_form_mode]
+
+    def _can_view_field(self, field_name):
+        '''maybe not being used and can be removed?'''
+        return field_name in set(self.highest_permissions['read'] + self.highest_permissions['read_write'])
+
+    def _can_edit_field(self, field_name):
+        '''maybe not being used and can be removed?'''
+        return field_name in self.highest_permissions['read_write']
+
+
+class ParticipantFolderView(DefaultView):
+    @property
+    def has_applications(self):
+        try:
+            return len(api.portal.get()['participants'].listFolderContents()) > 0
+        except Exception:
+            return False
+
+
+class ParticipantView(ParticipantPermissionsMixin, DefaultView, FolderView):
+    _participant_form_mode = 'display'
+    # ParticipantView should really be called ApplicationView
+    # This can be the view for reviewers/etc of the application
+    def show_error_page(self):
+        return False
 
 
 class ParticipantEditUtilView(DefaultView):
@@ -417,8 +561,20 @@ class ParticipantEditUtilView(DefaultView):
             'individualInterview': getattr(program, 'individualInterview', None),
             'orientationDeadlines': self._get_orientation_deadlines(program),
             'paymentDeadlines': self._get_payment_deadlines(program),
-            'pretravelStart': str(getattr(program, 'pretravel_dates', [{'pretravel_start_datetime': ''}])[0]['pretravel_start_datetime']),
-            'pretravelEnd': str(getattr(program, 'pretravel_dates', [{'pretravel_end_datetime': ''}])[0]['pretravel_end_datetime']),
+            'pretravelStart': str(
+                getattr(
+                    program,
+                    'pretravel_dates',
+                    [{'pretravel_start_datetime': ''}],
+                )[0]['pretravel_start_datetime']
+            ),
+            'pretravelEnd': str(
+                getattr(
+                    program,
+                    'pretravel_dates',
+                    [{'pretravel_end_datetime': ''}],
+                )[0]['pretravel_end_datetime']
+            ),
         }
 
 
