@@ -1,7 +1,7 @@
 from plone import api
 from plone.dexterity.browser import add, edit
 from Products.CMFPlone.resources import add_resource_on_request
-
+from uwosh.oie.studyabroadstudent.browser.views import ParticipantPermissionsMixin
 
 class ParticipantEditForm(ParticipantPermissionsMixin, edit.DefaultEditForm):
     _participant_form_mode = 'input'
